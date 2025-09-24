@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized Rights - Empowering Humanity Through Blockchain</title>
+    <meta name="description" content="Decentralized Rights Platform - Using blockchain technology to protect and advance human rights globally">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMDAwMDAwIi8+CjxwYXRoIGQ9Ik0xNiA4QzE5LjMxMzcgOCAyMiAxMC42ODYzIDIyIDE0VjE4QzIyIDIxLjMxMzcgMTkuMzEzNyAyNCAxNiAyNEMxMi42ODYzIDI0IDEwIDIxLjMxMzcgMTAgMThWMTRDMTAgMTAuNjg2MyAxMi42ODYzIDggMTYgOFoiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIiBzdHJva2U9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTE0IDEySDE4VjE2SDE0VjEyWiIgZmlsbD0idXJsKCNncmFkaWVudDFfbGluZWFyXzFfMSkiLz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhcl8xXzEiIHgxPSI4IiB5MT0iOCIgeDI9IjI0IiB5Mj0iMjQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGNDAwMCIvPgo8c3RvcCBvZmZzZXQ9IjAuMzMiIHN0b3AtY29sb3I9IiNGRkZGMDAiLz4KPHN0b3Agb2Zmc2V0PSIwLjY2IiBzdG9wLWNvbG9yPSIjMDBGRjAwIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzAwMDBGRiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MV9saW5lYXJfMV8xIiB4MT0iMTQiIHkxPSIxMiIgeDI9IjE4IiB5Mj0iMTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGNDAwMCIvPgo8c3RvcCBvZmZzZXQ9IjAuMzMiIHN0b3AtY29sb3I9IiNGRkZGMDAiLz4KPHN0b3Agb2Zmc2V0PSIwLjY2IiBzdG9wLWNvbG9yPSIjMDBGRjAwIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzAwMDBGRiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=">
+    <link rel="icon" type="image/png" sizes="16x16" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjMDAwMDAwIi8+CjxwYXRoIGQ9Ik04IDRDOS4xMDQ1NyA0IDEwIDQuODk1NDMgMTAgNlY5QzEwIDEwLjEwNDYgOS4xMDQ1NyAxMSA4IDExQzYuODk1NDMgMTEgNiAxMC4xMDQ2IDYgOVY2QzYgNC44OTU0MyA2Ljg5NTQzIDQgOCA0WiIgZmlsbD0idXJsKCNncmFkaWVudDBfbGluZWFyXzFfMSkiIHN0cm9rZT0idXJsKCNncmFkaWVudDBfbGluZWFyXzFfMSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8cGF0aCBkPSJNNyA2SDlWOEg3VjZaIiBmaWxsPSJ1cmwoI2dyYWRpZW50MV9saW5lYXJfMV8xKSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjQiIHkxPSI0IiB4Mj0iMTIiIHkyPSIxMiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjRkY0MDAwIi8+CjxzdG9wIG9mZnNldD0iMC4zMyIgc3RvcC1jb2xvcj0iI0ZGRkYwMCIvPgo8c3RvcCBvZmZzZXQ9IjAuNjYiIHN0b3AtY29sb3I9IiMwMEZGMDAiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDAwMEZGIi8+CjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQxX2xpbmVhcl8xXzEiIHgxPSI3IiB5MT0iNiIgeDI9IjkiIHkyPSI4IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGRjQwMDAiLz4KPHN0b3Agb2Zmc2V0PSIwLjMzIiBzdG9wLWNvbG9yPSIjRkZGRjAwIi8+CjxzdG9wIG9mZnNldD0iMC42NiIgc3RvcC1jb2xvcj0iIzAwRkYwMCIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwMDAwRkYiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K">
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiBmaWxsPSIjMDAwMDAwIi8+CjxwYXRoIGQ9Ik05MCA0NUMyMy4yNTY5IDQ1IDQ1IDY2Ljc0MzEgNDUgOTBWMTE1QzQ1IDEzOS4yNTcgNjYuNzQzMSAxNjAgOTAgMTYwQzExMy4yNTcgMTYwIDEzNSAxMzkuMjU3IDEzNSAxMTVWOTBDMTM1IDY2Ljc0MzEgMTEzLjI1NyA0NSA5MCA0NVoiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIiBzdHJva2U9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIiBzdHJva2Utd2lkdGg9IjEwIi8+CjxwYXRoIGQ9Ik03OCA2N0gxMDJWOTNINzhaIiBmaWxsPSJ1cmwoI2dyYWRpZW50MV9saW5lYXJfMV8xKSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjQ1IiB5MT0iNDUiIHgyPSIxMzUiIHkyPSIxMzUiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI0ZGNDAwMCIvPgo8c3RvcCBvZmZzZXQ9IjAuMzMiIHN0b3AtY29sb3I9IiNGRkZGMDAiLz4KPHN0b3Agb2Zmc2V0PSIwLjY2IiBzdG9wLWNvbG9yPSIjMDBGRjAwIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzAwMDBGRiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MV9saW5lYXJfMV8xIiB4MT0iNzgiIHkxPSI2NyIgeDI9IjEwMiIgeTI9IjkzIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNGRjQwMDAiLz4KPHN0b3Agb2Zmc2V0PSIwLjMzIiBzdG9wLWNvbG9yPSIjRkZGRjAwIi8+CjxzdG9wIG9mZnNldD0iMC42NiIgc3RvcC1jb2xvcj0iIzAwRkYwMCIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwMDAwRkYiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../public/DRP.png" alt="DRP Logo" class="logo-img">
+                <span>Decentralized Rights</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#mission">Mission</a></li>
+                <li><a href="#technology">Technology</a></li>
+                <li><a href="#token-economy">Token Economy</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <canvas id="blockchain-canvas"></canvas>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Decentralized Rights</span>
+                    <br>Empowering Humanity Through Blockchain
+                </h1>
+                <p class="hero-description">
+                    We're building a decentralized platform that uses blockchain technology to protect, 
+                    verify, and advance human rights globally. Join us in creating a more just and 
+                    transparent world.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Join the Movement
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-play"></i>
+                        Watch Our Story
+                    </button>
+                    <a href="../public/whitepaper_v0.5.pdf" download="Decentralized_Rights_Whitepaper_v0.5.pdf" class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Download Whitepaper
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-elements">
+                    <div class="floating-block block-1"></div>
+                    <div class="floating-block block-2"></div>
+                    <div class="floating-block block-3"></div>
+                    <div class="floating-block block-4"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="mission">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Humanitarian Mission</h2>
+                <p class="section-subtitle">Using technology to protect and advance human rights worldwide</p>
+            </div>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>Global Impact</h3>
+                    <p>Creating decentralized solutions that work across borders, cultures, and political systems to protect human rights.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Transparency</h3>
+                    <p>Blockchain technology ensures immutable records and transparent processes that can't be manipulated or censored.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Driven</h3>
+                    <p>Empowering communities to take control of their rights through decentralized governance and collective action.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Justice</h3>
+                    <p>Providing tools and platforms that ensure fair access to justice and legal representation for all.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="technology">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Blockchain Technology</h2>
+                <p class="section-subtitle">Cutting-edge technology serving humanitarian causes</p>
+            </div>
+            <div class="tech-showcase">
+                <div class="tech-visual">
+                    <div class="blockchain-animation">
+                        <div class="blockchain-node node-1"></div>
+                        <div class="blockchain-node node-2"></div>
+                        <div class="blockchain-node node-3"></div>
+                        <div class="blockchain-node node-4"></div>
+                        <div class="blockchain-node node-5"></div>
+                        <div class="blockchain-connection"></div>
+                    </div>
+                </div>
+                <div class="tech-content">
+                    <div class="tech-feature">
+                        <h3><i class="fas fa-lock"></i> Immutable Records</h3>
+                        <p>Once recorded on the blockchain, human rights violations and legal documents cannot be altered or deleted.</p>
+                    </div>
+                    <div class="tech-feature">
+                        <h3><i class="fas fa-network-wired"></i> Decentralized Network</h3>
+                        <p>No single point of failure or control, ensuring the platform remains accessible even in authoritarian regimes.</p>
+                    </div>
+                    <div class="tech-feature">
+                        <h3><i class="fas fa-eye"></i> Transparent Processes</h3>
+                        <p>All transactions and decisions are publicly verifiable, promoting accountability and trust.</p>
+                    </div>
+                    <div class="tech-feature">
+                        <h3><i class="fas fa-mobile-alt"></i> Accessible Technology</h3>
+                        <p>Mobile-first design ensures access even in areas with limited internet connectivity.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="whitepaper-section">
+                <div class="whitepaper-card">
+                    <div class="whitepaper-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="whitepaper-content">
+                        <h3>Read Our Whitepaper</h3>
+                        <p>Dive deep into our technical architecture, tokenomics, and roadmap for building a decentralized human rights platform.</p>
+                        <a href="../public/whitepaper_v0.5.pdf" download="Decentralized_Rights_Whitepaper_v0.5.pdf" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download Whitepaper v0.5
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Token Economy Section -->
+    <section id="token-economy" class="token-economy">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Token Economy</h2>
+                <p class="section-subtitle">Dual-token system powering the decentralized human rights ecosystem</p>
+            </div>
+            <div class="token-grid">
+                <div class="token-card">
+                    <div class="token-icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3>$RIGHTS Token</h3>
+                    <p class="token-symbol">Governance & Utility Token</p>
+                    <div class="token-features">
+                        <div class="feature">
+                            <i class="fas fa-vote-yea"></i>
+                            <span>Governance Rights</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lock"></i>
+                            <span>Staking Rewards</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-handshake"></i>
+                            <span>Platform Access</span>
+                        </div>
+                    </div>
+                    <div class="token-stats">
+                        <div class="stat">
+                            <span class="stat-label">Total Supply</span>
+                            <span class="stat-value">1B $RIGHTS</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Initial Distribution</span>
+                            <span class="stat-value">40% Community</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="token-card">
+                    <div class="token-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>$DeRi Token</h3>
+                    <p class="token-symbol">Human Rights Impact Token</p>
+                    <div class="token-features">
+                        <div class="feature">
+                            <i class="fas fa-heart"></i>
+                            <span>Impact Rewards</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <span>Community Incentives</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-award"></i>
+                            <span>Recognition System</span>
+                        </div>
+                    </div>
+                    <div class="token-stats">
+                        <div class="stat">
+                            <span class="stat-label">Earned Through</span>
+                            <span class="stat-value">Human Rights Actions</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Utility</span>
+                            <span class="stat-value">Platform Benefits</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="token-mechanics">
+                <h3>Token Mechanics</h3>
+                <div class="mechanics-grid">
+                    <div class="mechanic-card">
+                        <i class="fas fa-coins"></i>
+                        <h4>Staking & Rewards</h4>
+                        <p>Stake $RIGHTS tokens to earn rewards and participate in governance decisions.</p>
+                    </div>
+                    <div class="mechanic-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Deflationary Model</h4>
+                        <p>Built-in burn mechanisms reduce token supply over time, increasing scarcity.</p>
+                    </div>
+                    <div class="mechanic-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h4>Governance</h4>
+                        <p>Token holders vote on platform upgrades, funding decisions, and policy changes.</p>
+                    </div>
+                    <div class="mechanic-card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h4>Impact Rewards</h4>
+                        <p>Earn $DeRi tokens by contributing to human rights initiatives and community building.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Key Features</h2>
+                <p class="section-subtitle">Cutting-edge technology for human rights protection</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3>Quantum Safe</h3>
+                    <p>Post-quantum cryptography ensures your data remains secure even against future quantum computers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Human Rights Focus</h3>
+                    <p>Built specifically to protect and advance human rights through decentralized technology.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h3>SDGs Alignment</h3>
+                    <p>Aligned with UN Sustainable Development Goals to create positive global impact.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <h3>Decentralized Security</h3>
+                    <p>No single point of failure. Your rights are protected by a distributed network.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile First</h3>
+                    <p>Accessible on any device, anywhere in the world, even with limited connectivity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3>Community Driven</h3>
+                    <p>Governed by the community, for the community. Your voice matters in every decision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="impact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Impact</h2>
+                <p class="section-subtitle">Real change happening around the world</p>
+            </div>
+            <div class="impact-stats">
+                <div class="stat-card">
+                    <div class="stat-number" data-target="50000">0</div>
+                    <div class="stat-label">Lives Protected</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="150">0</div>
+                    <div class="stat-label">Countries Reached</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="1000000">0</div>
+                    <div class="stat-label">Documents Secured</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="25000">0</div>
+                    <div class="stat-label">Community Members</div>
+                </div>
+            </div>
+            <div class="impact-stories">
+                <div class="story-card">
+                    <div class="story-image">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Legal Aid Platform</h3>
+                    <p>Connecting refugees with legal representation through our decentralized platform, ensuring access to justice regardless of location.</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-image">
+                        <i class="fas fa-vote-yea"></i>
+                    </div>
+                    <h3>Democratic Participation</h3>
+                    <p>Enabling secure, verifiable voting systems for marginalized communities to participate in democratic processes.</p>
+                </div>
+                <div class="story-card">
+                    <div class="story-image">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>Identity Protection</h3>
+                    <p>Providing secure, self-sovereign identity solutions for individuals without official documentation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="community">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Join Our Community</h2>
+                <p class="section-subtitle">Be part of the movement for decentralized human rights</p>
+            </div>
+            <div class="community-content">
+                <div class="community-text">
+                    <h3>Together We Can Make a Difference</h3>
+                    <p>Our community is made up of activists, developers, lawyers, and concerned citizens from around the world. We believe that technology should serve humanity, not the other way around.</p>
+                    <div class="community-features">
+                        <div class="feature">
+                            <i class="fas fa-code"></i>
+                            <span>Open Source Development</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-comments"></i>
+                            <span>Active Discord Community</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-calendar"></i>
+                            <span>Regular Meetups & Events</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Educational Resources</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="community-visual">
+                    <div class="community-avatar-grid">
+                        <div class="avatar avatar-1"></div>
+                        <div class="avatar avatar-2"></div>
+                        <div class="avatar avatar-3"></div>
+                        <div class="avatar avatar-4"></div>
+                        <div class="avatar avatar-5"></div>
+                        <div class="avatar avatar-6"></div>
+                        <div class="avatar avatar-7"></div>
+                        <div class="avatar avatar-8"></div>
+                        <div class="avatar avatar-9"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get Involved</h2>
+                <p class="section-subtitle">Ready to make a difference? Let's connect.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>contact@decentralizedrights.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-discord"></i>
+                        <div>
+                            <h4>Join Discord</h4>
+                            <p>Connect with our community</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-twitter"></i>
+                        <div>
+                            <h4>Follow Us</h4>
+                            <p>@DecentralizedRights</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">How would you like to help?</option>
+                                <option value="developer">Development</option>
+                                <option value="legal">Legal Expertise</option>
+                                <option value="community">Community Building</option>
+                                <option value="donation">Donation</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Tell us about yourself and how you'd like to contribute" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../public/DRP.png" alt="DRP Logo" class="logo-img">
+                    <span>Decentralized Rights</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="../public/whitepaper_v0.5.pdf" download="Decentralized_Rights_Whitepaper_v0.5.pdf">Whitepaper</a>
+                    <a href="#github">GitHub</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://x.com/De_Rights" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="https://discord.gg/zbWg92AnQQ" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
+                    <a href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/company/decentralized-rights-protocol" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Decentralized Rights. All rights reserved. Built with ❤️ for humanity.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
