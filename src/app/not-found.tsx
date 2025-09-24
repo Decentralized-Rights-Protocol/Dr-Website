@@ -1,110 +1,138 @@
-'use client'
-
-import { useEffect, useRef } from 'react'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import Navigation from '@/components/Navigation'
-
-// Dynamically import Three.js to avoid SSR issues
-const ErrorAnimation = dynamic(() => import('@/components/ErrorAnimation'), {
-  ssr: false,
-  loading: () => <div className="w-full h-full bg-gradient-to-br from-red-500/20 to-orange-500/20 animate-pulse" />
-})
+import { motion } from 'framer-motion'
+import { Home, ArrowLeft, Search } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-dark-bg via-darker-bg to-dark-bg relative overflow-hidden">
-      <Navigation />
-      
-      {/* Background Animation */}
-      <div className="absolute inset-0 z-0">
-        <ErrorAnimation />
-      </div>
-      
-      {/* Floating Particles */}
-      <div className="absolute inset-0 pointer-events-none z-10">
-        {[...Array(9)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-primary rounded-full animate-particle-float"
-            style={{
-              left: `${10 + i * 10}%`,
-              animationDelay: `${i * 0.5}s`,
-            }}
-          />
-        ))}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-drp-blue via-neutral-900 to-drp-blue relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-32 h-32 border border-purple-400/20 rounded-full"
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="absolute top-1/3 right-1/4 w-24 h-24 border border-teal-400/20"
+          style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
+          animate={{
+            rotate: [360, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-1/3 w-20 h-20 border border-purple-400/30 rounded-lg"
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
       </div>
 
-      <div className="relative z-20 flex items-center justify-center min-h-screen px-4">
-        <div className="text-center max-w-4xl">
-          {/* Error Code */}
-          <div className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-6 animate-glitch">
-            404
-          </div>
-          
-          {/* Error Title */}
-          <h1 className="text-3xl md:text-4xl font-semibold text-text-primary mb-6">
-            Block Not Found
-          </h1>
-          
-          {/* Error Description */}
-          <p className="text-lg md:text-xl text-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
-            The block you're looking for doesn't exist in our blockchain network.<br />
-            It might have been mined elsewhere or never existed in the first place.
-          </p>
+      <div className="text-center relative z-10 max-w-2xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* 404 Animation */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-8"
+          >
+            <h1 className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
+              404
+            </h1>
+          </motion.div>
 
-          {/* Blockchain Animation */}
-          <div className="flex justify-center items-center gap-3 mb-12 flex-wrap">
-            {['0x1', '0x2', '?', '0x4', '0x5'].map((block, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white font-bold text-sm animate-float"
-                       style={{ animationDelay: `${index * 0.5}s` }}>
-                    {block}
-                  </div>
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-primary via-secondary to-accent rounded-lg opacity-75 animate-border-glow -z-10"></div>
-                </div>
-                {index < 4 && (
-                  <span className="text-accent font-mono text-sm">→</span>
-                )}
-              </div>
-            ))}
-          </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
+          >
+            Page Not Found
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-xl text-gray-300 mb-8 leading-relaxed"
+          >
+            The page you're looking for seems to have vanished into the blockchain void. 
+            Don't worry, even the best protocols have missing blocks sometimes.
+          </motion.p>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-full hover:shadow-primary hover:-translate-y-1 transition-all duration-300"
-            >
-              <i className="fas fa-home"></i>
-              Return to Main Network
-            </Link>
-            <Link
-              href="/#contact"
-              className="inline-flex items-center gap-3 px-8 py-4 border-2 border-border-color text-text-primary font-semibold rounded-full hover:border-primary hover:bg-card-bg hover:-translate-y-1 transition-all duration-300"
-            >
-              <i className="fas fa-bug"></i>
-              Report Missing Block
-            </Link>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 text-white border-0">
+              <Link href="/" className="flex items-center gap-2">
+                <Home className="h-5 w-5" />
+                Go Home
+              </Link>
+            </Button>
+            
+            <Button asChild variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10">
+              <Link href="/" className="flex items-center gap-2">
+                <ArrowLeft className="h-5 w-5" />
+                Go Back
+              </Link>
+            </Button>
+          </motion.div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary mb-2">99.9%</div>
-              <div className="text-sm text-text-secondary">Uptime</div>
+          {/* Search Suggestion */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="mt-12 p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10"
+          >
+            <div className="flex items-center justify-center mb-4">
+              <Search className="h-6 w-6 text-purple-400 mr-2" />
+              <h3 className="text-lg font-semibold text-white">Looking for something specific?</h3>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-              <div className="text-sm text-text-secondary">Monitoring</div>
+            <p className="text-gray-300 text-sm mb-4">
+              Try these popular pages:
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {['About', 'Whitepaper', 'Roadmap', 'Community'].map((page) => (
+                <Link
+                  key={page}
+                  href={`/${page.toLowerCase()}`}
+                  className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-sm text-white transition-colors duration-300"
+                >
+                  {page}
+                </Link>
+              ))}
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary mb-2">∞</div>
-              <div className="text-sm text-text-secondary">Possibilities</div>
-            </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   )

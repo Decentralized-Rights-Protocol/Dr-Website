@@ -211,7 +211,7 @@ The Decentralized Rights Protocol is building a decentralized platform that uses
 
 ## 📞 Contact
 
-- **Email**: hello@decentralizedrights.com
+- **Email**: dev@decentralizedrights.com
 - **Website**: [decentralizedrights.com](https://decentralizedrights.com)
 - **Community**: [Discord](https://discord.gg/zbWg92AnQQ)
 

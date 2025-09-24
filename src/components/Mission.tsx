@@ -1,65 +1,113 @@
-'use client'
+"use client"
 
-export default function Mission() {
-  const missionCards = [
-    {
-      icon: 'fas fa-globe-americas',
-      title: 'Global Impact',
-      description: 'Creating decentralized solutions that work across borders, cultures, and political systems to protect human rights.'
-    },
-    {
-      icon: 'fas fa-shield-alt',
-      title: 'Transparency',
-      description: 'Blockchain technology ensures immutable records and transparent processes that can\'t be manipulated or censored.'
-    },
-    {
-      icon: 'fas fa-users',
-      title: 'Community Driven',
-      description: 'Empowering communities to take control of their rights through decentralized governance and collective action.'
-    },
-    {
-      icon: 'fas fa-balance-scale',
-      title: 'Justice',
-      description: 'Providing tools and platforms that ensure fair access to justice and legal representation for all.'
-    }
-  ]
+import * as React from "react"
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer"
+import { Shield, Globe, Users, Heart } from "lucide-react"
+
+const missionPoints = [
+  {
+    icon: Shield,
+    title: "Quantum-Safe Security",
+    description: "Advanced cryptographic protocols that protect against future quantum computing threats, ensuring long-term security for human rights data."
+  },
+  {
+    icon: Globe,
+    title: "Global Accessibility",
+    description: "Decentralized infrastructure that works anywhere in the world, even in regions with limited internet connectivity or restrictive governments."
+  },
+  {
+    icon: Users,
+    title: "Community-Driven",
+    description: "Governed by the community through our dual-token system, ensuring decisions are made by those who understand the needs best."
+  },
+  {
+    icon: Heart,
+    title: "Human Rights Focus",
+    description: "Every feature and decision is guided by our core mission to protect, verify, and advance human rights globally."
+  }
+]
+
+export function Mission() {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  })
 
   return (
-    <section id="mission" className="py-20 bg-darker-bg">
+    <section ref={ref} className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Our Humanitarian Mission
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Our Mission:{" "}
+            <span className="bg-gradient-to-r from-purple-500 to-teal-500 bg-clip-text text-transparent">
+              Protecting Human Rights
+            </span>
           </h2>
-          <p className="text-lg text-text-secondary max-w-3xl mx-auto">
-            Using technology to protect and advance human rights worldwide
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            The Decentralized Rights Protocol is building the infrastructure for a more just and transparent world. 
+            We believe that blockchain technology can be a powerful force for good when applied to protecting human rights.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {missionCards.map((card, index) => (
-            <div
-              key={index}
-              className="bg-card-bg border border-border-color rounded-2xl p-8 text-center hover:border-primary hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {missionPoints.map((point, index) => (
+            <motion.div
+              key={point.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              className="text-center group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              <div className="relative z-10">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <i className={`${card.icon} text-2xl text-white`}></i>
-                </div>
-                
-                <h3 className="text-xl font-semibold mb-4 text-text-primary">
-                  {card.title}
-                </h3>
-                
-                <p className="text-text-secondary leading-relaxed">
-                  {card.description}
-                </p>
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/10 to-teal-500/10 border border-purple-500/20 mb-6 group-hover:scale-110 transition-transform duration-300">
+                <point.icon className="h-8 w-8 text-purple-500" />
               </div>
-            </div>
+              <h3 className="text-xl font-semibold mb-4">{point.title}</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {point.description}
+              </p>
+            </motion.div>
           ))}
         </div>
+
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="text-center mt-16"
+        >
+          <div className="bg-gradient-to-r from-purple-500/10 to-teal-500/10 rounded-2xl p-8 border border-purple-500/20">
+            <h3 className="text-2xl font-bold mb-4">
+              Join the Movement for Human Rights
+            </h3>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              Be part of the first blockchain protocol dedicated to protecting human rights. 
+              Together, we can build a more just and transparent world.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-gradient-to-r from-purple-500 to-teal-500 text-white rounded-lg font-semibold hover:from-purple-600 hover:to-teal-600 transition-all duration-300"
+              >
+                Join Waitlist
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 border border-purple-500/30 text-purple-500 rounded-lg font-semibold hover:bg-purple-500/10 transition-all duration-300"
+              >
+                Read Whitepaper
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
