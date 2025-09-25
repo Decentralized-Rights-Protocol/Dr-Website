@@ -71,20 +71,20 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
           >
             <Link
               href="/whitepaper"
-              className="group inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-secondary-600 to-accent-600 rounded-xl hover:from-secondary-700 hover:to-accent-700 transition-all duration-300 hover:scale-105 shadow-2xl"
+              className="group inline-flex items-center px-10 py-4 text-lg font-bold text-white bg-gradient-to-r from-secondary-600 to-accent-600 rounded-2xl hover:from-secondary-700 hover:to-accent-700 transition-all duration-300 hover:scale-105 shadow-2xl hover:shadow-3xl"
             >
               Read Whitepaper
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="ml-3 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
             <Link
               href="/whitepaper"
-              className="group inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
+              className="group inline-flex items-center px-10 py-4 text-lg font-semibold text-white border-2 border-white/40 rounded-2xl hover:bg-white/20 hover:border-white/60 transition-all duration-300 backdrop-blur-sm hover:scale-105"
             >
-              <Download className="mr-2 h-5 w-5" />
+              <Download className="mr-3 h-5 w-5" />
               Download PDF
             </Link>
           </motion.div>
@@ -94,7 +94,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto"
           >
             {stats.map((stat, index) => (
               <motion.div
@@ -102,13 +102,13 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
-                className="text-center"
+                className="text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-3">
-                  <stat.icon className="h-6 w-6 text-white" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-secondary-600/20 to-accent-600/20 backdrop-blur-sm border border-white/20 mb-4">
+                  <stat.icon className="h-8 w-8 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-neutral-300">{stat.label}</div>
+                <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
+                <div className="text-sm text-neutral-300 font-medium">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>

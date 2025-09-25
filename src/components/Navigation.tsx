@@ -62,8 +62,8 @@ export function Navigation() {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative w-8 h-8 lg:w-10 lg:h-10">
+          <Link href="/" className="flex items-center group">
+            <div className="relative w-10 h-10 lg:w-12 lg:h-12">
               <Image
                 src="/DRP.png"
                 alt="Decentralized Rights Protocol"
@@ -72,26 +72,18 @@ export function Navigation() {
                 priority
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg lg:text-xl font-bold text-neutral-900 dark:text-white">
-                DRP
-              </span>
-              <span className="text-xs text-neutral-600 dark:text-neutral-400 -mt-1">
-                Protocol
-              </span>
-            </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-10">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  'relative text-sm font-medium transition-colors duration-200 hover:text-primary-600 dark:hover:text-primary-400',
+                  'relative text-sm font-medium transition-all duration-200 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800',
                   pathname === item.href
-                    ? 'text-primary-600 dark:text-primary-400'
+                    ? 'text-primary-600 dark:text-primary-400 bg-neutral-100 dark:bg-neutral-800'
                     : 'text-neutral-700 dark:text-neutral-300'
                 )}
               >
@@ -123,7 +115,7 @@ export function Navigation() {
             {/* CTA Button */}
             <Link
               href="/whitepaper"
-              className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-secondary-600 to-accent-600 rounded-lg hover:from-secondary-700 hover:to-accent-700 transition-all duration-200 hover:scale-105"
+              className="hidden sm:inline-flex items-center px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-secondary-600 to-accent-600 rounded-xl hover:from-secondary-700 hover:to-accent-700 transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Read Whitepaper
             </Link>
@@ -170,7 +162,7 @@ export function Navigation() {
                 <Link
                   href="/whitepaper"
                   onClick={() => setIsOpen(false)}
-                  className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-secondary-600 to-accent-600 rounded-lg hover:from-secondary-700 hover:to-accent-700 transition-all duration-200 mt-4"
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-secondary-600 to-accent-600 rounded-xl hover:from-secondary-700 hover:to-accent-700 transition-all duration-200 mt-4 shadow-lg"
                 >
                   Read Whitepaper
                 </Link>
