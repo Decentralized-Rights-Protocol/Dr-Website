@@ -1,8 +1,22 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
+import { Navigation } from '@/components/navigation'
+import { Footer } from '@/components/footer'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const ibmPlexMono = IBM_Plex_Mono({ 
+  subsets: ['latin'],
+  variable: '--font-ibm-plex-mono',
+  weight: ['300', '400', '500', '600'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Decentralized Rights Protocol - Protecting Human Rights with Blockchain',
@@ -74,8 +88,19 @@ export default function RootLayout({
         <meta name="theme-color" content="#0D1B2A" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className={inter.className}>
-        {children}
+      <body className={`${inter.variable} ${ibmPlexMono.variable} font-sans antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="relative flex min-h-screen flex-col">
+            <Navigation />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   )

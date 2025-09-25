@@ -1,19 +1,15 @@
-import { Navigation } from '@/components/Navigation'
-import { Hero } from '@/components/Hero'
-import { Mission } from '@/components/Mission'
-import { TokenEconomy } from '@/components/TokenEconomy'
-import { Features } from '@/components/Features'
-import { Footer } from '@/components/Footer'
+import { Hero } from '@/components/hero'
+import { ImpactHighlights } from '@/components/impact-highlights'
+import { RoadmapTimeline } from '@/components/roadmap-timeline'
+import { NewsletterSignup } from '@/components/newsletter-signup'
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <Navigation />
+    <>
       <Hero />
-      <Mission />
-      <TokenEconomy />
-      <Features />
-      <Footer />
-    </main>
+      <ImpactHighlights />
+      <RoadmapTimeline />
+      <NewsletterSignup />
+    </>
   )
 }

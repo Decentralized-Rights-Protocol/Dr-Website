@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { motion } from "framer-motion"
+import * as React from 'react'
+import { motion } from 'framer-motion'
 
 interface Particle {
   id: number
@@ -39,7 +39,7 @@ export function ParticleAnimation() {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-gradient-to-r from-purple-400/20 to-teal-400/20"
+          className="absolute rounded-full bg-gradient-to-r from-secondary-400/20 to-accent-400/20"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -55,14 +55,14 @@ export function ParticleAnimation() {
             duration: particle.duration,
             delay: particle.delay,
             repeat: Infinity,
-            ease: "linear",
+            ease: 'linear',
           }}
         />
       ))}
       
       {/* Floating geometric shapes */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-20 h-20 border border-purple-400/30 rounded-lg"
+        className="absolute top-1/4 left-1/4 w-32 h-32 border border-white/10 rounded-lg"
         animate={{
           rotate: [0, 360],
           scale: [1, 1.1, 1],
@@ -70,34 +70,31 @@ export function ParticleAnimation() {
         transition={{
           duration: 20,
           repeat: Infinity,
-          ease: "linear",
+          ease: 'linear',
         }}
       />
-      
       <motion.div
-        className="absolute top-1/3 right-1/4 w-16 h-16 border border-teal-400/30 rounded-full"
+        className="absolute top-3/4 right-1/4 w-24 h-24 border border-white/10 rounded-full"
         animate={{
           rotate: [360, 0],
-          scale: [1, 1.2, 1],
+          scale: [1, 0.9, 1],
         }}
         transition={{
           duration: 15,
           repeat: Infinity,
-          ease: "linear",
+          ease: 'linear',
         }}
       />
-      
       <motion.div
-        className="absolute bottom-1/4 left-1/3 w-12 h-12 border border-purple-400/20"
-        style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
+        className="absolute top-1/2 right-1/3 w-16 h-16 border border-white/10"
         animate={{
-          rotate: [0, 360],
-          y: [0, -20, 0],
+          rotate: [0, 180, 360],
+          scale: [1, 1.2, 1],
         }}
         transition={{
           duration: 12,
           repeat: Infinity,
-          ease: "linear",
+          ease: 'linear',
         }}
       />
     </div>
