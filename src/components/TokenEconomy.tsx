@@ -1,6 +1,6 @@
 'use client'
 
-export default function TokenEconomy() {
+export function TokenEconomy() {
   const tokenCards = [
     {
       icon: 'fas fa-shield-halved',

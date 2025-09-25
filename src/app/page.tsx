@@ -1,9 +1,9 @@
-import { Navigation } from '@/components/navigation'
-import { Hero } from '@/components/hero'
-import { Mission } from '@/components/mission'
-import { TokenEconomy } from '@/components/token-economy'
-import { Features } from '@/components/features'
-import { Footer } from '@/components/footer'
+import { Navigation } from '@/components/Navigation'
+import { Hero } from '@/components/Hero'
+import { Mission } from '@/components/Mission'
+import { TokenEconomy } from '@/components/TokenEconomy'
+import { Features } from '@/components/Features'
+import { Footer } from '@/components/Footer'
 
 export default function Home() {
   return (
