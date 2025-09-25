@@ -2,7 +2,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Twitter, Github, Linkedin, Mail, ExternalLink } from 'lucide-react'
 
-const footerLinks = {
+interface FooterLink {
+  name: string
+  href: string
+  external?: boolean
+}
+
+const footerLinks: Record<string, FooterLink[]> = {
   Protocol: [
     { name: 'About', href: '/about' },
     { name: 'Whitepaper', href: '/whitepaper' },
