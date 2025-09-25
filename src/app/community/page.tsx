@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { motion } from 'framer-motion'
-import { Discord, Twitter, Github, Linkedin, Mail, Users, MessageCircle, Calendar, BookOpen } from 'lucide-react'
+import { MessageSquare, Twitter, Github, Linkedin, Mail, Users, MessageCircle, Calendar, BookOpen } from 'lucide-react'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ const socialLinks = [
   {
     name: 'Discord',
     href: 'https://discord.gg/drp',
-    icon: Discord,
+    icon: MessageSquare,
     description: 'Join our Discord server for real-time discussions, updates, and community events.',
     color: 'from-indigo-500 to-purple-500',
     members: '2.5K+',
