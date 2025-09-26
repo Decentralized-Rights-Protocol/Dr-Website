@@ -135,6 +135,12 @@ const waysToContribute = [
 ]
 
 export default function CommunityPage() {
+  // Validate data to prevent build errors
+  const safeSocialLinks = socialLinks || []
+  const safeCommunityFeatures = communityFeatures || []
+  const safeUpcomingEvents = upcomingEvents || []
+  const safeWaysToContribute = waysToContribute || []
+
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
@@ -182,7 +188,7 @@ export default function CommunityPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {socialLinks.map((social, index) => (
+            {safeSocialLinks.map((social, index) => (
               <motion.a
                 key={social.name}
                 href={social.href}
@@ -231,7 +237,7 @@ export default function CommunityPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {communityFeatures.map((feature, index) => (
+            {safeCommunityFeatures.map((feature, index) => (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -277,7 +283,7 @@ export default function CommunityPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {upcomingEvents.map((event, index) => (
+            {safeUpcomingEvents.map((event, index) => (
               <motion.div
                 key={event.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -299,7 +305,17 @@ export default function CommunityPage() {
                     {event.type}
                   </span>
                   <div className="text-sm text-neutral-500 dark:text-neutral-400">
-                    {new Date(event.date).toLocaleDateString()}
+                    {(() => {
+                      try {
+                        return new Date(event.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })
+                      } catch (error) {
+                        return event.date
+                      }
+                    })()}
                   </div>
                 </div>
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
@@ -336,7 +352,7 @@ export default function CommunityPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {waysToContribute.map((way, index) => (
+            {safeWaysToContribute.map((way, index) => (
               <motion.div
                 key={way.title}
                 initial={{ opacity: 0, y: 20 }}
