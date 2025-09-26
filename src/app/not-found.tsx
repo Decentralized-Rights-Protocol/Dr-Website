@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Home, ArrowLeft, Search } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 
 export default function NotFound() {
   return (
@@ -91,19 +90,21 @@ export default function NotFound() {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Button asChild size="lg" className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 text-white border-0">
-              <Link href="/" className="flex items-center gap-2">
-                <Home className="h-5 w-5" />
-                Go Home
-              </Link>
-            </Button>
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105"
+            >
+              <Home className="h-5 w-5" />
+              Go Home
+            </Link>
             
-            <Button asChild variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10">
-              <Link href="/" className="flex items-center gap-2">
-                <ArrowLeft className="h-5 w-5" />
-                Go Back
-              </Link>
-            </Button>
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 px-8 py-3 border border-white/20 text-white hover:bg-white/10 rounded-lg font-semibold transition-all duration-300"
+            >
+              <ArrowLeft className="h-5 w-5" />
+              Go Back
+            </Link>
           </motion.div>
 
           {/* Search Suggestion */}
