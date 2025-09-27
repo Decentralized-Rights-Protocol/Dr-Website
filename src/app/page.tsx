@@ -1,15 +1,13 @@
-import { Hero } from '@/components/Hero'
-import { ImpactHighlights } from '@/components/impact-highlights'
-import { RoadmapTimeline } from '@/components/roadmap-timeline'
-import { NewsletterSignup } from '@/components/newsletter-signup'
+import { HeroSection } from '@/components/hero-section'
+import { MissionSection } from '@/components/mission-section'
+import { QuickLinks } from '@/components/quick-links'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <>
-      <Hero />
-      <ImpactHighlights />
-      <RoadmapTimeline />
-      <NewsletterSignup />
-    </>
+    <div className="flex flex-col">
+      <HeroSection />
+      <MissionSection />
+      <QuickLinks />
+    </div>
   )
 }

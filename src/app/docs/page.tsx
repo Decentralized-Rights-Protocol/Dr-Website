@@ -1,0 +1,185 @@
+import { Metadata } from 'next'
+import Link from 'next/link'
+import { BookOpen, Code, Zap, Users, ArrowRight } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'DRP Documentation - Developer Resources',
+  description: 'Comprehensive documentation for the Decentralized Rights Protocol (DRP) including API references, SDK guides, and integration examples.',
+  openGraph: {
+    title: 'DRP Documentation - Developer Resources',
+    description: 'Comprehensive documentation for the Decentralized Rights Protocol (DRP) including API references, SDK guides, and integration examples.',
+  },
+}
+
+const docSections = [
+  {
+    title: 'Getting Started',
+    description: 'Learn the basics of DRP and set up your development environment',
+    href: '/docs/getting-started',
+    icon: BookOpen,
+    color: 'bg-primary-600',
+    topics: ['Installation', 'Quick Start', 'Basic Concepts', 'First Steps'],
+  },
+  {
+    title: 'Architecture',
+    description: 'Understand the technical architecture and design principles',
+    href: '/docs/architecture',
+    icon: Code,
+    color: 'bg-secondary-600',
+    topics: ['System Overview', 'Consensus Mechanism', 'Storage Layer', 'Security Model'],
+  },
+  {
+    title: 'API Reference',
+    description: 'Complete API documentation with examples and endpoints',
+    href: '/docs/api',
+    icon: Zap,
+    color: 'bg-accent-600',
+    topics: ['REST API', 'GraphQL', 'WebSocket', 'Authentication'],
+  },
+  {
+    title: 'SDK & Libraries',
+    description: 'Official SDKs and client libraries for various languages',
+    href: '/docs/sdk',
+    icon: Code,
+    color: 'bg-primary-600',
+    topics: ['JavaScript SDK', 'Python SDK', 'Go SDK', 'Mobile SDKs'],
+  },
+  {
+    title: 'Examples',
+    description: 'Practical examples and tutorials for common use cases',
+    href: '/docs/examples',
+    icon: BookOpen,
+    color: 'bg-secondary-600',
+    topics: ['Basic Integration', 'Advanced Features', 'Best Practices', 'Troubleshooting'],
+  },
+  {
+    title: 'Community',
+    description: 'Join the developer community and contribute to DRP',
+    href: '/docs/community',
+    icon: Users,
+    color: 'bg-accent-600',
+    topics: ['Contributing', 'Discord', 'GitHub', 'Events'],
+  },
+]
+
+export default function DocsPage() {
+  return (
+    <div className="py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Header */}
+        <div className="mx-auto max-w-2xl text-center mb-16">
+          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+            DRP Documentation
+          </h1>
+          <p className="mt-4 text-xl text-neutral-600 dark:text-neutral-400">
+            Everything you need to build with the Decentralized Rights Protocol
+          </p>
+        </div>
+
+        {/* Quick Start */}
+        <div className="mb-16 p-8 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-white">
+          <h2 className="text-2xl font-bold mb-4">Quick Start</h2>
+          <p className="text-primary-100 mb-6">
+            Get up and running with DRP in minutes. Install our SDK and start building.
+          </p>
+          <div className="bg-neutral-900/50 p-4 rounded-lg font-mono text-sm mb-6">
+            <div className="text-neutral-400"># Install the DRP SDK</div>
+            <div className="text-green-400">npm install @drp/sdk</div>
+            <div className="text-neutral-400 mt-2"># Initialize the client</div>
+            <div className="text-blue-400">import {`{`} DRPClient {`}`} from '@drp/sdk'</div>
+            <div className="text-blue-400">const client = new DRPClient()</div>
+          </div>
+          <Link
+            href="/docs/getting-started"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors"
+          >
+            Get Started
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </div>
+
+        {/* Documentation Sections */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {docSections.map((section) => (
+            <Link
+              key={section.title}
+              href={section.href}
+              className="group relative rounded-2xl bg-white dark:bg-neutral-900 p-8 shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-700 hover:ring-primary-600 dark:hover:ring-primary-400 transition-all duration-200 hover:shadow-lg"
+            >
+              <div className="flex items-center gap-x-4 mb-4">
+                <div className={`${section.color} p-3 rounded-lg`}>
+                  <section.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                </div>
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                  {section.title}
+                </h3>
+              </div>
+              <p className="text-neutral-600 dark:text-neutral-400 mb-4">
+                {section.description}
+              </p>
+              <div className="space-y-1">
+                {section.topics.map((topic) => (
+                  <div key={topic} className="text-sm text-neutral-500 dark:text-neutral-500">
+                    • {topic}
+                  </div>
+                ))}
+              </div>
+              <ArrowRight className="absolute top-8 right-8 h-5 w-5 text-neutral-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" />
+            </Link>
+          ))}
+        </div>
+
+        {/* Additional Resources */}
+        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div className="rounded-2xl bg-neutral-50 dark:bg-neutral-800 p-8">
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
+              Need Help?
+            </h3>
+            <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+              Our community is here to help you succeed. Join our Discord server or check out our FAQ.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/community"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+              >
+                Join Discord
+              </Link>
+              <Link
+                href="/docs/faq"
+                className="inline-flex items-center px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-sm font-medium rounded-md text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
+              >
+                View FAQ
+              </Link>
+            </div>
+          </div>
+
+          <div className="rounded-2xl bg-neutral-50 dark:bg-neutral-800 p-8">
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
+              Contribute
+            </h3>
+            <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+              Help improve our documentation and make DRP more accessible to developers worldwide.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="https://github.com/drp-protocol/docs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-secondary-600 hover:bg-secondary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500 transition-colors"
+              >
+                Edit on GitHub
+              </Link>
+              <Link
+                href="/docs/contributing"
+                className="inline-flex items-center px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-sm font-medium rounded-md text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500 transition-colors"
+              >
+                Contributing Guide
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

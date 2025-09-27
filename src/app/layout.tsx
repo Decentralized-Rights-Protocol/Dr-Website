@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { Inter, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
-import { Navigation } from '@/components/Navigation'
-import { Footer } from '@/components/Footer'
+import { Navigation } from '@/components/navigation'
+import { Footer } from '@/components/footer'
 
 const inter = Inter({ 
   subsets: ['latin'],
