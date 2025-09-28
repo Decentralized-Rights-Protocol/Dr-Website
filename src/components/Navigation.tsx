@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -34,10 +35,14 @@ export function Navigation() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">DRP</span>
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">DRP</span>
-              </div>
+            <div className="flex items-center space-x-3">
+              <Image
+                src="/DRP.png"
+                alt="DRP Logo"
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-lg"
+              />
               <span className="text-xl font-bold text-neutral-900 dark:text-white">
                 Decentralized Rights Protocol
               </span>
@@ -133,10 +138,14 @@ export function Navigation() {
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">DRP</span>
-                <div className="flex items-center space-x-2">
-                  <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">DRP</span>
-                  </div>
+                <div className="flex items-center space-x-3">
+                  <Image
+                    src="/DRP.png"
+                    alt="DRP Logo"
+                    width={32}
+                    height={32}
+                    className="h-8 w-8 rounded-lg"
+                  />
                   <span className="text-xl font-bold text-neutral-900 dark:text-white">
                     DRP
                   </span>

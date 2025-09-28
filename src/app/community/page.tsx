@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Github, Twitter, MessageCircle, Mail, Users, MessageSquare, Calendar, BookOpen } from 'lucide-react'
+import { Github, Twitter, MessageCircle, Mail, Users, MessageSquare, Calendar, BookOpen, Linkedin } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'DRP Community - Join the Movement',
@@ -14,7 +14,7 @@ const socialLinks = [
   {
     name: 'Discord',
     description: 'Join our active Discord community for real-time discussions',
-    href: 'https://discord.gg/drp-protocol',
+    href: 'https://discord.gg/k8auUAqF',
     icon: MessageCircle,
     color: 'bg-indigo-600',
     members: '2,500+',
@@ -22,7 +22,7 @@ const socialLinks = [
   {
     name: 'GitHub',
     description: 'Contribute to our open-source codebase and documentation',
-    href: 'https://github.com/drp-protocol',
+    href: 'https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain',
     icon: Github,
     color: 'bg-neutral-800',
     members: '500+',
@@ -30,18 +30,18 @@ const socialLinks = [
   {
     name: 'Twitter',
     description: 'Follow us for the latest updates and announcements',
-    href: 'https://twitter.com/drp_protocol',
+    href: 'https://twitter.com/De_Rights',
     icon: Twitter,
     color: 'bg-blue-500',
     members: '10K+',
   },
   {
-    name: 'Newsletter',
-    description: 'Get weekly updates delivered to your inbox',
-    href: 'mailto:newsletter@drp-protocol.org',
-    icon: Mail,
-    color: 'bg-red-600',
-    members: '5K+',
+    name: 'LinkedIn',
+    description: 'Connect with our professional network',
+    href: 'https://linkedin.com/company/drp-protocol',
+    icon: Linkedin,
+    color: 'bg-blue-700',
+    members: '1K+',
   },
 ]
 

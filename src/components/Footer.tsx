@@ -16,7 +16,7 @@ const navigation = {
     },
     {
       name: 'Twitter',
-      href: 'https://x.com/De_Rights',
+      href: 'https://twitter.com/De_Rights',
       icon: Twitter,
     },
     {
@@ -26,7 +26,7 @@ const navigation = {
     },
     {
       name: 'LinkedIn',
-      href: 'https://linkedin.com/company/drp-protocol',
+      href: 'https://linkedin.com/company/Decentralized-Rights-Protocol',
       icon: Linkedin,
     },
     {
