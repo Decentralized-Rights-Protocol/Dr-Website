@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { ScrollToTop } from '@/components/scroll-to-top'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -19,11 +20,11 @@ const ibmPlexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Decentralized Rights Protocol - Protecting Human Rights with Blockchain',
+  title: 'Decentralized Rights-Protecting Human Rights with Blockchain',
   description: 'The Decentralized Rights Protocol (DRP) is building a quantum-safe, transparent platform to protect, verify, and advance human rights globally using blockchain technology.',
   keywords: ['blockchain', 'human rights', 'decentralized', 'quantum safe', 'cryptography', 'governance', 'transparency', 'DRP', 'RIGHTS token', 'DeRi token'],
   authors: [{ name: 'Decentralized Rights Protocol Team' }],
-  creator: 'Decentralized Rights Protocol',
+  creator: 'NeonTechnoX',
   publisher: 'Decentralized Rights Protocol',
   formatDetection: {
     email: false,
@@ -95,11 +96,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col">
-            <Navigation />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+                  <div className="relative flex min-h-screen flex-col">
+                    <Navigation />
+                    <main className="flex-1">{children}</main>
+                    <Footer />
+                    <ScrollToTop />
+                  </div>
         </ThemeProvider>
       </body>
     </html>

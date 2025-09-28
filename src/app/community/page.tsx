@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import { Github, Twitter, MessageCircle, Mail, Users, MessageSquare, Calendar, BookOpen, Linkedin } from 'lucide-react'
+import { Github, Mail, Users, MessageSquare, Calendar, BookOpen, Linkedin, Instagram } from 'lucide-react'
+import { XIcon, DiscordIcon } from '@/components/custom-icons'
 
 export const metadata: Metadata = {
   title: 'DRP Community - Join the Movement',
@@ -15,7 +16,7 @@ const socialLinks = [
     name: 'Discord',
     description: 'Join our active Discord community for real-time discussions',
     href: 'https://discord.gg/k8auUAqF',
-    icon: MessageCircle,
+    icon: DiscordIcon,
     color: 'bg-indigo-600',
     members: '2,500+',
   },
@@ -28,12 +29,20 @@ const socialLinks = [
     members: '500+',
   },
   {
-    name: 'Twitter',
+    name: 'X (Twitter)',
     description: 'Follow us for the latest updates and announcements',
     href: 'https://twitter.com/De_Rights',
-    icon: Twitter,
-    color: 'bg-blue-500',
+    icon: XIcon,
+    color: 'bg-black',
     members: '10K+',
+  },
+  {
+    name: 'Instagram',
+    description: 'Follow our visual journey and behind-the-scenes content',
+    href: 'https://instagram.com/decentralized_rights',
+    icon: Instagram,
+    color: 'bg-gradient-to-r from-purple-500 to-pink-500',
+    members: '5K+',
   },
   {
     name: 'LinkedIn',
@@ -246,7 +255,7 @@ export default function CommunityPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://discord.gg/drp-protocol"
+              href="https://discord.gg/k8auUAqF"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
@@ -254,7 +263,7 @@ export default function CommunityPage() {
               Join Discord
             </a>
             <a
-              href="https://github.com/drp-protocol"
+              href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 border border-neutral-300 dark:border-neutral-600 text-base font-medium rounded-md text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"

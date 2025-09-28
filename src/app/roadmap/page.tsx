@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const roadmapItems = [
   {
-    quarter: 'Q1 2024',
+    quarter: 'Q4 2025',
     title: 'Foundation Phase',
     status: 'completed',
     description: 'Core protocol development and initial testing',
@@ -28,7 +28,7 @@ const roadmapItems = [
     bgColor: 'bg-green-50 dark:bg-green-900/20',
   },
   {
-    quarter: 'Q2 2024',
+    quarter: 'Q1 2026',
     title: 'Testnet Launch',
     status: 'completed',
     description: 'Public testnet launch and community feedback',
@@ -44,7 +44,7 @@ const roadmapItems = [
     bgColor: 'bg-green-50 dark:bg-green-900/20',
   },
   {
-    quarter: 'Q3 2024',
+    quarter: 'Q1 2026',
     title: 'Mainnet Preparation',
     status: 'current',
     description: 'Final preparations for mainnet launch',
@@ -60,7 +60,7 @@ const roadmapItems = [
     bgColor: 'bg-blue-50 dark:bg-blue-900/20',
   },
   {
-    quarter: 'Q4 2024',
+    quarter: 'Q2 2026',
     title: 'Mainnet Launch',
     status: 'upcoming',
     description: 'Mainnet launch and initial partnerships',
@@ -76,7 +76,7 @@ const roadmapItems = [
     bgColor: 'bg-purple-50 dark:bg-purple-900/20',
   },
   {
-    quarter: 'Q1 2025',
+    quarter: 'Q2 2026',
     title: 'Ecosystem Growth',
     status: 'upcoming',
     description: 'Expanding the DRP ecosystem and partnerships',
@@ -92,7 +92,7 @@ const roadmapItems = [
     bgColor: 'bg-purple-50 dark:bg-purple-900/20',
   },
   {
-    quarter: 'Q2 2025',
+    quarter: 'Q3 2026',
     title: 'Global Expansion',
     status: 'upcoming',
     description: 'Scaling globally and adding advanced features',
@@ -113,22 +113,22 @@ const upcomingFeatures = [
   {
     title: 'Mobile SDK',
     description: 'Native mobile SDKs for iOS and Android development',
-    timeline: 'Q1 2025',
+    timeline: 'Q1 2026',
   },
   {
     title: 'Cross-Chain Bridge',
     description: 'Interoperability with other blockchain networks',
-    timeline: 'Q2 2025',
+    timeline: 'Q1 2026',
   },
   {
     title: 'AI Verification',
     description: 'Machine learning-powered content verification',
-    timeline: 'Q3 2025',
+    timeline: 'Q2 2026',
   },
   {
     title: 'Privacy Layer',
     description: 'Advanced zero-knowledge proof implementation',
-    timeline: 'Q4 2025',
+    timeline: 'Q2 2026',
   },
 ]
 
@@ -228,7 +228,7 @@ export default function RoadmapPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://discord.gg/drp-protocol"
+                href="https://discord.gg/k8auUAqF"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors"
@@ -236,7 +236,7 @@ export default function RoadmapPage() {
                 Join Discord
               </a>
               <a
-                href="https://github.com/drp-protocol"
+                href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-white hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors"

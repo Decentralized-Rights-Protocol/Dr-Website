@@ -164,7 +164,7 @@ export default function DocsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="https://github.com/drp-protocol/docs"
+                href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain/docs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-secondary-600 hover:bg-secondary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500 transition-colors"

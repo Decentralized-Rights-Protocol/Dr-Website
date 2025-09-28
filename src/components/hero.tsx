@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { ArrowRight, Download, Users, Shield, Globe } from 'lucide-react'
+import { ParticleBackground } from './particle-background'
 
 const stats = [
   { label: 'Active Users', value: '10K+', icon: Users },
@@ -16,6 +17,7 @@ export function Hero() {
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-950/50 via-transparent to-secondary-900/50" />
+        <ParticleBackground />
       </div>
 
       {/* Content */}

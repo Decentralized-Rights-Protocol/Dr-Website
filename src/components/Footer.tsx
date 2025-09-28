@@ -1,5 +1,7 @@
 import Link from 'next/link'
-import { Github, Twitter, MessageCircle, Mail, Linkedin } from 'lucide-react'
+import Image from 'next/image'
+import { Github, Mail, Linkedin, Instagram } from 'lucide-react'
+import { XIcon, DiscordIcon } from '@/components/custom-icons'
 
 const navigation = {
   main: [
@@ -15,14 +17,19 @@ const navigation = {
       icon: Github,
     },
     {
-      name: 'Twitter',
+      name: 'X (Twitter)',
       href: 'https://twitter.com/De_Rights',
-      icon: Twitter,
+      icon: XIcon,
     },
     {
       name: 'Discord',
       href: 'https://discord.gg/k8auUAqF',
-      icon: MessageCircle,
+      icon: DiscordIcon,
+    },
+    {
+      name: 'Instagram',
+      href: 'https://instagram.com/decentralized_rights',
+      icon: Instagram,
     },
     {
       name: 'LinkedIn',
@@ -57,10 +64,14 @@ export function Footer() {
         </div>
         <div className="mt-8 md:order-1 md:mt-0">
           <div className="flex flex-col items-center md:items-start">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">DRP</span>
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <Image
+                src="/DRP.png"
+                alt="DRP Logo"
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-lg object-contain"
+              />
               <span className="text-lg font-bold text-neutral-900 dark:text-white">
                 Decentralized Rights Protocol
               </span>
