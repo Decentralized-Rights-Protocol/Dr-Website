@@ -54,12 +54,6 @@ const communityStats = [
 
 const events = [
   {
-    title: 'DRP Developer Workshop',
-    date: 'March 15, 2024',
-    type: 'Workshop',
-    description: 'Learn how to build on DRP with hands-on coding sessions',
-  },
-  {
     title: 'Human Rights & Blockchain Summit',
     date: 'April 20, 2024',
     type: 'Conference',

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Github, Twitter, MessageCircle, Mail } from 'lucide-react'
+import { Github, Twitter, MessageCircle, Mail, Linkedin } from 'lucide-react'
 
 const navigation = {
   main: [
@@ -11,22 +11,27 @@ const navigation = {
   social: [
     {
       name: 'GitHub',
-      href: 'https://github.com/drp-protocol',
+      href: 'https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain',
       icon: Github,
     },
     {
       name: 'Twitter',
-      href: 'https://twitter.com/drp_protocol',
+      href: 'https://x.com/De_Rights',
       icon: Twitter,
     },
     {
       name: 'Discord',
-      href: 'https://discord.gg/drp-protocol',
+      href: 'https://discord.gg/k8auUAqF',
       icon: MessageCircle,
     },
     {
+      name: 'LinkedIn',
+      href: 'https://linkedin.com/company/drp-protocol',
+      icon: Linkedin,
+    },
+    {
       name: 'Email',
-      href: 'mailto:hello@drp-protocol.org',
+      href: 'mailto:contact@decentralizedrights.com',
       icon: Mail,
     },
   ],
@@ -88,16 +93,14 @@ export function Footer() {
             <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 max-w-md">
               Get the latest updates on protocol development, community events, and human rights initiatives.
             </p>
-            <div className="flex w-full max-w-md gap-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 px-3 py-2 text-sm text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
-              />
-              <button className="rounded-md bg-primary-600 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors">
-                Subscribe
-              </button>
-            </div>
+            <button 
+              data-tally-open="3xKMro" 
+              data-tally-emoji-text="👋" 
+              data-tally-emoji-animation="wave"
+              className="rounded-md bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"
+            >
+              Subscribe to Newsletter
+            </button>
           </div>
         </div>
       </div>

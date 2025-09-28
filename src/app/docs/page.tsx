@@ -18,39 +18,39 @@ const docSections = [
     href: '/docs/getting-started',
     icon: BookOpen,
     color: 'bg-primary-600',
-    topics: ['Installation', 'Quick Start', 'Basic Concepts', 'First Steps'],
+    topics: ['Python 3.10+ Setup', 'Testnet Node', 'Basic P2P Networking', 'First Steps'],
   },
   {
-    title: 'Architecture',
-    description: 'Understand the technical architecture and design principles',
-    href: '/docs/architecture',
+    title: 'Consensus & AI',
+    description: 'Understand Proof of Status, Proof of Activities, and AI verification',
+    href: '/docs/consensus',
     icon: Code,
     color: 'bg-secondary-600',
-    topics: ['System Overview', 'Consensus Mechanism', 'Storage Layer', 'Security Model'],
+    topics: ['Proof of Status (PoS)', 'Proof of Activities (PoA)', 'AI Elders', 'Verification System'],
   },
   {
-    title: 'API Reference',
-    description: 'Complete API documentation with examples and endpoints',
-    href: '/docs/api',
+    title: 'Post-Quantum Security',
+    description: 'Quantum-resistant cryptography and security features',
+    href: '/docs/security',
     icon: Zap,
     color: 'bg-accent-600',
-    topics: ['REST API', 'GraphQL', 'WebSocket', 'Authentication'],
+    topics: ['CRYSTALS-Kyber', 'CRYSTALS-Dilithium', 'Key Management', 'Quantum Resistance'],
   },
   {
-    title: 'SDK & Libraries',
-    description: 'Official SDKs and client libraries for various languages',
-    href: '/docs/sdk',
+    title: 'Repository Structure',
+    description: 'Explore the Dr-Blockchain codebase and modules',
+    href: '/docs/repository',
     icon: Code,
     color: 'bg-primary-600',
-    topics: ['JavaScript SDK', 'Python SDK', 'Go SDK', 'Mobile SDKs'],
+    topics: ['Source Code', 'Tests', 'Examples', 'Scripts'],
   },
   {
-    title: 'Examples',
-    description: 'Practical examples and tutorials for common use cases',
+    title: 'Examples & Demos',
+    description: 'Practical examples and post-quantum security demos',
     href: '/docs/examples',
     icon: BookOpen,
     color: 'bg-secondary-600',
-    topics: ['Basic Integration', 'Advanced Features', 'Best Practices', 'Troubleshooting'],
+    topics: ['Post-Quantum Demo', 'Testnet Examples', 'AI Verification', 'Best Practices'],
   },
   {
     title: 'Community',
@@ -58,7 +58,7 @@ const docSections = [
     href: '/docs/community',
     icon: Users,
     color: 'bg-accent-600',
-    topics: ['Contributing', 'Discord', 'GitHub', 'Events'],
+    topics: ['Contributing', 'Discord', 'GitHub', 'Research'],
   },
 ]
 
@@ -80,14 +80,15 @@ export default function DocsPage() {
         <div className="mb-16 p-8 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-white">
           <h2 className="text-2xl font-bold mb-4">Quick Start</h2>
           <p className="text-primary-100 mb-6">
-            Get up and running with DRP in minutes. Install our SDK and start building.
+            Get up and running with DRP in minutes. Clone the repository and start building on our testnet.
           </p>
           <div className="bg-neutral-900/50 p-4 rounded-lg font-mono text-sm mb-6">
-            <div className="text-neutral-400"># Install the DRP SDK</div>
-            <div className="text-green-400">npm install @drp/sdk</div>
-            <div className="text-neutral-400 mt-2"># Initialize the client</div>
-            <div className="text-blue-400">import {`{`} DRPClient {`}`} from '@drp/sdk'</div>
-            <div className="text-blue-400">const client = new DRPClient()</div>
+            <div className="text-neutral-400"># Clone the DRP Blockchain repository</div>
+            <div className="text-green-400">git clone https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain.git</div>
+            <div className="text-neutral-400 mt-2"># Install dependencies</div>
+            <div className="text-green-400">pip install -r requirements.txt</div>
+            <div className="text-neutral-400 mt-2"># Run the testnet node</div>
+            <div className="text-blue-400">python src/node.py</div>
           </div>
           <Link
             href="/docs/getting-started"
