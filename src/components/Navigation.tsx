@@ -47,7 +47,7 @@ export function Navigation() {
                 height={40}
                 className="h-10 w-10 rounded-lg object-contain"
               />
-              <span className="text-xl font-bold text-neutral-900 dark:text-white">
+              <span className="text-lg md:text-xl font-bold text-neutral-900 dark:text-white">
                 Decentralized Rights Protocol
               </span>
             </div>
@@ -123,15 +123,9 @@ export function Navigation() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-4">
-          <LanguageToggle />
           <ThemeToggle />
+          <LanguageToggle compact />
           <WalletConnectButton />
-          <Link
-            href="/whitepaper"
-            className="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors"
-          >
-            Get Started
-          </Link>
         </div>
       </nav>
       
