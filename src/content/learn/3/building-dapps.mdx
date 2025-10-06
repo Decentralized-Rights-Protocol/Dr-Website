@@ -1,0 +1,280 @@
+---
+title: "Building DApps on DRP"
+description: "Learn to build decentralized applications using DRP infrastructure"
+duration: 40
+reward: 35
+level: 3
+module: "building-dapps"
+---
+
+# Building DApps on DRP
+
+Decentralized Applications (DApps) are the future of web development. In this lesson, you'll learn how to build powerful DApps using DRP's infrastructure and tools.
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+- Understand DApp architecture and components
+- Set up a DRP development environment
+- Build a simple DApp using DRP SDK
+- Deploy and interact with smart contracts
+- Implement user authentication and data management
+
+## What are DApps?
+
+**Decentralized Applications (DApps)** are applications that run on a decentralized network rather than a single computer. They combine:
+
+- **Frontend**: User interface (React, Vue, Angular)
+- **Smart Contracts**: Backend logic on blockchain
+- **Blockchain Network**: Decentralized infrastructure
+- **Web3 Integration**: Wallet connections and transactions
+
+## DApp Architecture
+
+### Traditional Web App
+```
+User → Frontend → Backend API → Database
+```
+
+### DApp Architecture
+```
+User → Frontend → Smart Contracts → Blockchain
+     ↓
+   Web3 Wallet
+```
+
+## DRP Development Kit
+
+The DRP SDK provides tools for building DApps:
+
+### Core Components
+- **DRP Client**: Connect to DRP network
+- **Smart Contract Interface**: Interact with contracts
+- **Wallet Integration**: Connect user wallets
+- **Data Management**: Handle on-chain data
+
+### Installation
+```bash
+npm install @drp/sdk
+npm install @drp/contracts
+npm install ethers
+```
+
+## Building Your First DApp
+
+### 1. Project Setup
+```bash
+npx create-react-app my-dapp
+cd my-dapp
+npm install @drp/sdk ethers
+```
+
+### 2. DRP Client Configuration
+```javascript
+import { DRPClient } from '@drp/sdk';
+
+const drpClient = new DRPClient({
+  network: 'mainnet', // or 'testnet'
+  rpcUrl: 'https://rpc.drp.network',
+  chainId: 137
+});
+```
+
+### 3. Wallet Connection
+```javascript
+import { ethers } from 'ethers';
+
+const connectWallet = async () => {
+  if (window.ethereum) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const address = await signer.getAddress();
+    return { provider, signer, address };
+  }
+};
+```
+
+### 4. Smart Contract Interaction
+```javascript
+import { DRPContract } from '@drp/contracts';
+
+const contract = new DRPContract({
+  address: '0x...',
+  abi: contractABI,
+  signer: signer
+});
+
+// Call contract methods
+const result = await contract.methods.getData();
+```
+
+## DApp Development Best Practices
+
+### Security
+- **Input Validation**: Validate all user inputs
+- **Access Control**: Implement proper permissions
+- **Error Handling**: Handle contract call failures
+- **Gas Optimization**: Optimize for gas efficiency
+
+### User Experience
+- **Loading States**: Show progress indicators
+- **Error Messages**: Provide clear error feedback
+- **Transaction Status**: Track transaction progress
+- **Mobile Responsive**: Ensure mobile compatibility
+
+### Performance
+- **Lazy Loading**: Load components on demand
+- **Caching**: Cache contract data
+- **Batch Operations**: Group multiple transactions
+- **Optimistic Updates**: Update UI before confirmation
+
+## Real-World DApp Examples
+
+### 1. Decentralized Marketplace
+- **Features**: Buy/sell digital assets
+- **Smart Contracts**: Escrow, payment processing
+- **DRP Integration**: Rights management, royalties
+
+### 2. Content Creator Platform
+- **Features**: Upload, monetize content
+- **Smart Contracts**: Copyright protection, revenue sharing
+- **DRP Integration**: Digital rights, licensing
+
+### 3. Supply Chain Tracker
+- **Features**: Track product journey
+- **Smart Contracts**: Verification, compliance
+- **DRP Integration**: Authenticity proofs
+
+## DRP-Specific Features
+
+### Digital Rights Management
+```javascript
+// Create digital rights
+const rights = await drpClient.createRights({
+  contentHash: '0x...',
+  owner: userAddress,
+  royaltyRate: 5 // 5%
+});
+
+// Transfer rights
+await drpClient.transferRights(rightsId, newOwner);
+```
+
+### Activity Proofs
+```javascript
+// Generate activity proof
+const proof = await drpClient.generateProof({
+  activity: 'content_creation',
+  timestamp: Date.now(),
+  metadata: { type: 'image', size: '2MB' }
+});
+
+// Verify proof
+const isValid = await drpClient.verifyProof(proof);
+```
+
+### Elder Quorum Integration
+```javascript
+// Submit governance proposal
+const proposal = await drpClient.submitProposal({
+  title: 'Update protocol parameters',
+  description: 'Increase block size limit',
+  type: 'parameter_change'
+});
+
+// Vote on proposal
+await drpClient.vote(proposalId, true);
+```
+
+## Testing DApps
+
+### Unit Testing
+```javascript
+import { DRPClient } from '@drp/sdk';
+
+describe('DRP Client', () => {
+  it('should connect to network', async () => {
+    const client = new DRPClient({ network: 'testnet' });
+    const isConnected = await client.isConnected();
+    expect(isConnected).toBe(true);
+  });
+});
+```
+
+### Integration Testing
+```javascript
+describe('DApp Integration', () => {
+  it('should create and transfer rights', async () => {
+    const rights = await createRights();
+    await transferRights(rights.id, newOwner);
+    const owner = await getRightsOwner(rights.id);
+    expect(owner).toBe(newOwner);
+  });
+});
+```
+
+## Deployment
+
+### Smart Contract Deployment
+```bash
+# Compile contracts
+npx hardhat compile
+
+# Deploy to testnet
+npx hardhat run scripts/deploy.js --network sepolia
+
+# Verify on Etherscan
+npx hardhat verify --network sepolia <contract-address>
+```
+
+### Frontend Deployment
+```bash
+# Build for production
+npm run build
+
+# Deploy to Vercel
+vercel --prod
+
+# Deploy to IPFS
+npx ipfs-deploy dist
+```
+
+## Monitoring and Analytics
+
+### Contract Events
+```javascript
+// Listen to contract events
+contract.on('RightsCreated', (event) => {
+  console.log('New rights created:', event);
+});
+
+// Query past events
+const events = await contract.queryFilter('RightsCreated', fromBlock, toBlock);
+```
+
+### User Analytics
+```javascript
+// Track user interactions
+const analytics = {
+  walletConnected: true,
+  transactionsCount: 5,
+  gasUsed: '0.1 ETH',
+  lastActivity: Date.now()
+};
+```
+
+## Key Takeaways
+
+- DApps combine frontend, smart contracts, and blockchain
+- DRP SDK provides powerful tools for DApp development
+- Security and user experience are crucial for DApp success
+- Testing and monitoring ensure reliable operation
+- DRP's unique features enable innovative applications
+
+## Next Steps
+
+In the next lesson, you'll learn about contributing to the DRP ecosystem and becoming an active community member.
+
+---
+
+**Ready for the quiz?** Test your DApp development knowledge and earn $DeRi tokens!

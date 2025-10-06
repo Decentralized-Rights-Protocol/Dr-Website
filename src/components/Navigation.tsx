@@ -7,9 +7,12 @@ import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
+import { LanguageToggle } from './language-toggle'
+import { WalletConnect } from './wallet-connect'
 
 const navigation = [
   { name: 'Home', href: '/' },
+  { name: 'Learn', href: '/learn' },
   { name: 'Whitepaper', href: '/whitepaper' },
   { name: 'Docs', href: '/docs' },
   { name: 'Roadmap', href: '/roadmap' },
@@ -120,7 +123,9 @@ export function Navigation() {
         </div>
         
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-4">
+          <LanguageToggle />
           <ThemeToggle />
+          <WalletConnect />
           <Link
             href="/whitepaper"
             className="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors"
@@ -179,11 +184,17 @@ export function Navigation() {
                     </Link>
                   ))}
                 </div>
-                <div className="py-6 flex items-center justify-between">
-                  <ThemeToggle />
+                <div className="py-6 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-x-4">
+                      <LanguageToggle />
+                      <ThemeToggle />
+                    </div>
+                    <WalletConnect />
+                  </div>
                   <Link
                     href="/whitepaper"
-                    className="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors"
+                    className="w-full rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors text-center block"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Get Started
