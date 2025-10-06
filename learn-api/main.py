@@ -8,6 +8,7 @@ import os
 from datetime import datetime, timedelta
 import hashlib
 import uuid
+from reward_service import RewardService, RewardRequest, RewardResponse, get_reward_service
 
 # Database setup
 DB_PATH = os.getenv("LEARN_DB_PATH", "learn_progress.db")
@@ -438,6 +439,57 @@ async def get_user_achievements(wallet_address: str):
         }
         for ach in achievements
     ]
+
+# Reward System Endpoints
+@app.post("/api/reward")
+async def distribute_reward(request: RewardRequest, reward_service: RewardService = Depends(get_reward_service)):
+    """Distribute testnet $DeRi tokens as rewards"""
+    return await reward_service.distribute_reward(request)
+
+@app.get("/api/reward/balance/{wallet_address}")
+async def get_user_balance(wallet_address: str, reward_service: RewardService = Depends(get_reward_service)):
+    """Get user's DeRi token balance"""
+    return await reward_service.get_user_balance(wallet_address)
+
+@app.get("/api/reward/history/{wallet_address}")
+async def get_reward_history(
+    wallet_address: str, 
+    limit: int = Query(10, ge=1, le=100),
+    reward_service: RewardService = Depends(get_reward_service)
+):
+    """Get user's reward history"""
+    return await reward_service.get_reward_history(wallet_address, limit)
+
+@app.post("/api/reward/lesson-complete")
+async def reward_lesson_completion(
+    wallet_address: str,
+    lesson_id: str,
+    score: int,
+    reward_service: RewardService = Depends(get_reward_service)
+):
+    """Reward user for lesson completion"""
+    request = RewardRequest(
+        wallet_address=wallet_address,
+        activity_type="lesson_completion",
+        lesson_id=lesson_id,
+        score=score,
+        metadata={"timestamp": datetime.now().isoformat()}
+    )
+    return await reward_service.distribute_reward(request)
+
+@app.post("/api/reward/achievement-unlock")
+async def reward_achievement_unlock(
+    wallet_address: str,
+    achievement_id: str,
+    reward_service: RewardService = Depends(get_reward_service)
+):
+    """Reward user for achievement unlock"""
+    request = RewardRequest(
+        wallet_address=wallet_address,
+        activity_type="achievement_unlock",
+        metadata={"achievement_id": achievement_id, "timestamp": datetime.now().isoformat()}
+    )
+    return await reward_service.distribute_reward(request)
 
 if __name__ == "__main__":
     import uvicorn

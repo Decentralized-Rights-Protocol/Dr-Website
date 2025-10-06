@@ -98,12 +98,17 @@ export function LanguageToggle() {
     <div className="relative">
       <button
         type="button"
-        className="flex items-center gap-x-2 rounded-md px-3 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+        className="group flex items-center gap-x-2 rounded-full px-4 py-2.5 text-sm font-medium text-neutral-700 dark:text-neutral-300 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 transition-all duration-300 hover:scale-105 hover:shadow-lg border border-blue-200/50 dark:border-blue-700/50 hover:border-blue-300 dark:hover:border-blue-600"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <Globe className="h-4 w-4" />
-        <span className="hidden sm:inline">{currentLang.flag}</span>
-        <span className="hidden md:inline">{currentLang.name}</span>
+        <div className="relative">
+          <Globe className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
+          <div className="absolute -top-1 -right-1 w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+        </div>
+        <span className="hidden sm:inline text-lg transition-transform duration-300 group-hover:scale-110">{currentLang.flag}</span>
+        <span className="hidden md:inline font-semibold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+          {currentLang.name}
+        </span>
       </button>
 
       {isOpen && (

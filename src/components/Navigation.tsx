@@ -8,7 +8,7 @@ import { Menu, X, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
 import { LanguageToggle } from './language-toggle'
-import { WalletConnect } from './wallet-connect'
+import { WalletConnectButton } from './wallet/WalletConnectButton'
 import { DRPLogo } from './drp-logo'
 
 const navigation = [
@@ -39,8 +39,14 @@ export function Navigation() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">DRP</span>
-            <div className="flex items-center space-x-3">
-              <DRPLogo variant="vertical" size="md" />
+            <div className="flex items-center space-x-4">
+              <Image
+                src="/DRP.png"
+                alt="DRP Logo"
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-lg object-contain"
+              />
               <span className="text-xl font-bold text-neutral-900 dark:text-white">
                 Decentralized Rights Protocol
               </span>
@@ -117,10 +123,10 @@ export function Navigation() {
           ))}
         </div>
         
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-4">
-          <LanguageToggle />
-          <ThemeToggle />
-          <WalletConnect />
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-4">
+            <LanguageToggle />
+            <ThemeToggle />
+            <WalletConnectButton />
           <Link
             href="/whitepaper"
             className="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors"
@@ -138,12 +144,9 @@ export function Navigation() {
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">DRP</span>
-                <div className="flex items-center space-x-2">
-                  <DRPLogo variant="horizontal" size="sm" />
-                  <span className="text-lg font-bold text-neutral-900 dark:text-white">
-                    DRP
-                  </span>
-                </div>
+                <span className="text-xl font-bold text-neutral-900 dark:text-white">
+                  DRP
+                </span>
               </Link>
               <button
                 type="button"
@@ -180,7 +183,7 @@ export function Navigation() {
                       <ThemeToggle />
                     </div>
                     <div className="flex justify-center">
-                      <WalletConnect />
+                      <WalletConnectButton />
                     </div>
                   </div>
                   <Link
