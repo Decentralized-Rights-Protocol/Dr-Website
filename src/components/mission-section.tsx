@@ -8,7 +8,7 @@ const values = [
   },
   {
     name: 'Security',
-    description: 'Quantum-safe cryptography and robust security measures to protect sensitive human rights data and information.',
+    description: 'Quantum-safe cryptography and robust security measures to protect sensitive human rights data.',
     icon: Shield,
   },
   {
