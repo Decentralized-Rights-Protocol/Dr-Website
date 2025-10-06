@@ -22,16 +22,65 @@ const languages = [
 export function LanguageToggle() {
   const [currentLanguage, setCurrentLanguage] = React.useState('en')
   const [isOpen, setIsOpen] = React.useState(false)
+  const [isGoogleTranslateLoaded, setIsGoogleTranslateLoaded] = React.useState(false)
 
   const currentLang = languages.find(lang => lang.code === currentLanguage) || languages[0]
+
+  // Load Google Translate
+  React.useEffect(() => {
+    const loadGoogleTranslate = () => {
+      if (window.google && window.google.translate) {
+        setIsGoogleTranslateLoaded(true)
+        return
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
+      script.async = true
+      document.head.appendChild(script)
+
+      window.googleTranslateElementInit = () => {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'en,es,fr,de,zh,ja,ko,pt,ru,ar,hi,it',
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+          },
+          'google_translate_element'
+        )
+        setIsGoogleTranslateLoaded(true)
+      }
+    }
+
+    loadGoogleTranslate()
+  }, [])
 
   const handleLanguageChange = (langCode: string) => {
     setCurrentLanguage(langCode)
     setIsOpen(false)
-    // Here you would typically implement actual language switching logic
-    // For now, we'll just update the state
-    console.log(`Language changed to: ${langCode}`)
+    
+    // Use Google Translate to translate the page
+    if (isGoogleTranslateLoaded && window.google && window.google.translate) {
+      const selectElement = document.querySelector('.goog-te-combo')
+      if (selectElement) {
+        const event = new Event('change', { bubbles: true })
+        selectElement.value = langCode
+        selectElement.dispatchEvent(event)
+      }
+    }
+    
+    // Store language preference
+    localStorage.setItem('preferred-language', langCode)
   }
+
+  // Load saved language preference
+  React.useEffect(() => {
+    const savedLanguage = localStorage.getItem('preferred-language')
+    if (savedLanguage && languages.find(lang => lang.code === savedLanguage)) {
+      setCurrentLanguage(savedLanguage)
+    }
+  }, [])
 
   return (
     <div className="relative">

@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
 import { LanguageToggle } from './language-toggle'
 import { WalletConnect } from './wallet-connect'
+import { DRPLogo } from './drp-logo'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -39,13 +40,7 @@ export function Navigation() {
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">DRP</span>
             <div className="flex items-center space-x-3">
-              <Image
-                src="/DRP.png"
-                alt="DRP Logo"
-                width={40}
-                height={40}
-                className="h-10 w-10 rounded-lg object-contain"
-              />
+              <DRPLogo variant="vertical" size="md" />
               <span className="text-xl font-bold text-neutral-900 dark:text-white">
                 Decentralized Rights Protocol
               </span>
@@ -64,7 +59,7 @@ export function Navigation() {
           </button>
         </div>
         
-        <div className="hidden lg:flex lg:gap-x-8">
+        <div className="hidden lg:flex lg:gap-x-8 lg:items-center">
           {navigation.map((item) => (
             <div key={item.name} className="relative">
               {item.name === 'Docs' ? (
@@ -72,10 +67,10 @@ export function Navigation() {
                   <button
                     type="button"
                     className={cn(
-                      'flex items-center gap-x-1 text-sm font-semibold leading-6 transition-colors',
+                      'flex items-center gap-x-1 text-sm font-semibold leading-6 transition-colors px-3 py-2 rounded-md',
                       pathname.startsWith('/docs')
-                        ? 'text-primary-600 dark:text-primary-400'
-                        : 'text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400'
+                        ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
+                        : 'text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-50 dark:hover:bg-neutral-800'
                     )}
                     onClick={() => setDocsMenuOpen(!docsMenuOpen)}
                   >
@@ -109,10 +104,10 @@ export function Navigation() {
                 <Link
                   href={item.href}
                   className={cn(
-                    'text-sm font-semibold leading-6 transition-colors',
+                    'text-sm font-semibold leading-6 transition-colors px-3 py-2 rounded-md',
                     pathname === item.href
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400'
+                      ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
+                      : 'text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-50 dark:hover:bg-neutral-800'
                   )}
                 >
                   {item.name}
@@ -143,15 +138,9 @@ export function Navigation() {
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">DRP</span>
-                <div className="flex items-center space-x-3">
-                  <Image
-                    src="/DRP.png"
-                    alt="DRP Logo"
-                    width={32}
-                    height={32}
-                    className="h-8 w-8 rounded-lg object-contain"
-                  />
-                  <span className="text-xl font-bold text-neutral-900 dark:text-white">
+                <div className="flex items-center space-x-2">
+                  <DRPLogo variant="horizontal" size="sm" />
+                  <span className="text-lg font-bold text-neutral-900 dark:text-white">
                     DRP
                   </span>
                 </div>
@@ -167,15 +156,15 @@ export function Navigation() {
             </div>
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-neutral-500/10 dark:divide-neutral-400/10">
-                <div className="space-y-2 py-6">
+                <div className="space-y-1 py-6">
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
                       className={cn(
-                        '-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors',
+                        'block rounded-lg px-4 py-3 text-base font-semibold leading-7 transition-colors',
                         pathname === item.href
-                          ? 'text-primary-600 dark:text-primary-400 bg-neutral-50 dark:bg-neutral-800'
+                          ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
                           : 'text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800'
                       )}
                       onClick={() => setMobileMenuOpen(false)}
@@ -185,16 +174,18 @@ export function Navigation() {
                   ))}
                 </div>
                 <div className="py-6 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-x-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-center gap-x-4">
                       <LanguageToggle />
                       <ThemeToggle />
                     </div>
-                    <WalletConnect />
+                    <div className="flex justify-center">
+                      <WalletConnect />
+                    </div>
                   </div>
                   <Link
                     href="/whitepaper"
-                    className="w-full rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors text-center block"
+                    className="w-full rounded-md bg-primary-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors text-center block"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Get Started
