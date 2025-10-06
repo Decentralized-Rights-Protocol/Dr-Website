@@ -74,7 +74,7 @@ export function LanguageToggle() {
     
     // Use Google Translate to translate the page
     if (isGoogleTranslateLoaded && window.google && window.google.translate) {
-      const selectElement = document.querySelector('.goog-te-combo')
+      const selectElement = document.querySelector('.goog-te-combo') as HTMLSelectElement
       if (selectElement) {
         const event = new Event('change', { bubbles: true })
         selectElement.value = langCode
