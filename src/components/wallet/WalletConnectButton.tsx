@@ -89,6 +89,11 @@ export function WalletConnectButton() {
         networkName
       });
 
+      // Persist for reward flows
+      try {
+        localStorage.setItem('connectedWallet', accounts[0]);
+      } catch {}
+
       // Listen for account changes
       window.ethereum.on("accountsChanged", handleAccountsChanged);
       window.ethereum.on("chainChanged", handleChainChanged);
@@ -126,6 +131,9 @@ export function WalletConnectButton() {
       disconnectWallet();
     } else {
       setWalletState(prev => ({ ...prev, address: accounts[0] }));
+      try {
+        localStorage.setItem('connectedWallet', accounts[0]);
+      } catch {}
     }
   };
 
@@ -148,6 +156,7 @@ export function WalletConnectButton() {
     });
     setDeriBalance(null);
     setShowDropdown(false);
+    try { localStorage.removeItem('connectedWallet'); } catch {}
     
     // Remove event listeners
     if (window.ethereum) {

@@ -36,22 +36,11 @@ export function Navigation() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-        <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">DRP</span>
-            <div className="flex items-center space-x-4">
-              <Image
-                src="/DRP.png"
-                alt="DRP Logo"
-                width={40}
-                height={40}
-                className="h-10 w-10 rounded-lg object-contain"
-              />
-              <span className="text-xl font-bold text-neutral-900 dark:text-white">
-                Decentralized Rights Protocol
-              </span>
-            </div>
-          </Link>
+        {/* Left: Controls (Desktop) */}
+        <div className="hidden lg:flex lg:flex-1 lg:justify-start lg:items-center lg:gap-x-4">
+          <LanguageToggle />
+          <ThemeToggle />
+          <WalletConnectButton />
         </div>
         
         <div className="flex lg:hidden">
@@ -65,6 +54,7 @@ export function Navigation() {
           </button>
         </div>
         
+        {/* Center: Primary Navigation (Desktop) */}
         <div className="hidden lg:flex lg:gap-x-8 lg:items-center">
           {navigation.map((item) => (
             <div key={item.name} className="relative">
@@ -122,16 +112,23 @@ export function Navigation() {
             </div>
           ))}
         </div>
-        
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-4">
-            <LanguageToggle />
-            <ThemeToggle />
-            <WalletConnectButton />
-          <Link
-            href="/whitepaper"
-            className="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 transition-colors"
-          >
-            Get Started
+
+        {/* Right: Logo + Title (Desktop) */}
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <Link href="/" className="-m-1.5 p-1.5">
+            <span className="sr-only">DRP</span>
+            <div className="flex items-center space-x-4">
+              <Image
+                src="/DRP.png"
+                alt="DRP Logo"
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-lg object-contain"
+              />
+              <span className="text-xl font-bold text-neutral-900 dark:text-white">
+                Decentralized Rights Protocol
+              </span>
+            </div>
           </Link>
         </div>
       </nav>
