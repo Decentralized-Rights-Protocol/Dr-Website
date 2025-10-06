@@ -4,6 +4,18 @@ import * as React from 'react'
 import { Globe, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+// Extend Window interface for Google Translate
+declare global {
+  interface Window {
+    google: {
+      translate: {
+        TranslateElement: any
+      }
+    }
+    googleTranslateElementInit: () => void
+  }
+}
+
 const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
