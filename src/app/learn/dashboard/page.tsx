@@ -9,7 +9,8 @@ import {
   ChartBarIcon,
   UserIcon,
   FireIcon,
-  AcademicCapIcon
+  AcademicCapIcon,
+  CheckCircleIcon
 } from "@heroicons/react/24/outline";
 
 interface UserStats {

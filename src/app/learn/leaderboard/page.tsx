@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { 
   TrophyIcon, 
-  MedalIcon, 
-  CrownIcon,
   UserIcon,
   FireIcon,
   StarIcon,
@@ -96,11 +94,11 @@ export default function LeaderboardPage() {
   const getRankIcon = (rank: number) => {
     switch (rank) {
       case 1:
-        return <CrownIcon className="h-6 w-6 text-yellow-500" />;
+        return <TrophyIcon className="h-6 w-6 text-yellow-500" />;
       case 2:
-        return <MedalIcon className="h-6 w-6 text-gray-400" />;
+        return <TrophyIcon className="h-6 w-6 text-gray-400" />;
       case 3:
-        return <MedalIcon className="h-6 w-6 text-amber-600" />;
+        return <TrophyIcon className="h-6 w-6 text-amber-600" />;
       default:
         return <span className="text-lg font-bold text-gray-600 dark:text-gray-300">#{rank}</span>;
     }
