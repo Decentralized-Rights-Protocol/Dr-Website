@@ -21,11 +21,8 @@ const navigation = [
 ]
 
 const docsNavigation = [
-  { name: 'Getting Started', href: '/docs/getting-started' },
-  { name: 'Architecture', href: '/docs/architecture' },
-  { name: 'API Reference', href: '/docs/api' },
-  { name: 'SDK', href: '/docs/sdk' },
-  { name: 'Examples', href: '/docs/examples' },
+  { name: 'Overview', href: '/docs' },
+  { name: 'Protocol', href: '/docs/protocol' },
 ]
 
 export function Navigation() {
