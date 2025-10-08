@@ -4,23 +4,23 @@ import { ArrowRight, Download, Shield, Users, Globe, Zap } from 'lucide-react'
 const features = [
   {
     icon: Shield,
-    title: 'Quantum-Safe Security',
-    description: 'Advanced cryptography protecting human rights data from future threats',
+    title: 'AI-Powered Governance',
+    description: 'Ethical AI models govern protocol decisions with bias detection and transparent decision-making',
   },
   {
     icon: Users,
-    title: 'Community Governance',
-    description: 'Decentralized decision-making ensuring protocol serves global needs',
+    title: 'Zero-Trust Security',
+    description: 'Post-quantum cryptography with multi-party computation and privacy-preserving verification',
   },
   {
     icon: Globe,
-    title: 'Global Impact',
-    description: 'Cross-border solutions working across cultures and legal systems',
+    title: 'SDG Integration',
+    description: 'Education credentialing, sustainable agriculture, renewable energy, and healthcare verification',
   },
   {
     icon: Zap,
-    title: 'Real-time Verification',
-    description: 'Instant verification and documentation of human rights violations',
+    title: 'Dual-Token Economy',
+    description: '$RIGHTS for governance and $DeRi for transactions with sustainable reward mechanisms',
   },
 ]
 
@@ -32,28 +32,33 @@ export function HeroSection() {
       
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl text-center">
+          <div className="mb-6">
+            <span className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-3 py-1 text-sm font-medium text-white border border-white/20">
+              🚀 DRP v0.6 - Now Live
+            </span>
+          </div>
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            Protecting Human Rights
+            Decentralized Rights Protocol
             <span className="block bg-gradient-to-r from-secondary-400 to-accent-400 bg-clip-text text-transparent">
-              Through Blockchain
+              AI-Powered Blockchain
             </span>
           </h1>
           <p className="mt-6 text-lg leading-8 text-neutral-300">
-            The Decentralized Rights Protocol (DRP) is building a quantum-safe, transparent platform 
-            to protect, verify, and advance human rights globally using cutting-edge blockchain technology.
+            Next-generation blockchain combining AI-verified consensus, IoT sensor validation, and dual-token economics 
+            to accelerate UN Sustainable Development Goals while protecting human rights through decentralized governance.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link
-              href="/whitepaper"
+              href="/explorer"
               className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-primary-600 shadow-sm hover:bg-neutral-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors"
             >
-              Read Whitepaper
+              Explore Blockchain
             </Link>
             <Link
-              href="/docs"
+              href="/learn"
               className="text-sm font-semibold leading-6 text-white hover:text-neutral-300 transition-colors"
             >
-              View Documentation <span aria-hidden="true">→</span>
+              Learn & Earn <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
