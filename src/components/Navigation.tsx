@@ -14,6 +14,7 @@ import { DRPLogo } from './drp-logo'
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Learn', href: '/learn' },
+  { name: 'Explorer', href: '/explorer' },
   { name: 'Whitepaper', href: '/whitepaper' },
   { name: 'Docs', href: '/docs' },
   { name: 'Roadmap', href: '/roadmap' },
