@@ -90,22 +90,6 @@ export default function RootLayout({
         <meta name="theme-color" content="#0D1B2A" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script async src="https://tally.so/widgets/embed.js"></script>
-        <script async src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              function googleTranslateElementInit() {
-                new google.translate.TranslateElement({
-                  pageLanguage: 'en',
-                  includedLanguages: 'en,es,fr,de,zh,ja,ko,pt,ru,ar,hi,it',
-                  layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                  autoDisplay: false,
-                }, 'google_translate_element');
-              }
-            `,
-          }}
-        />
-        <div id="google_translate_element" style={{ display: 'none' }}></div>
       </head>
       <body className={`${inter.variable} ${ibmPlexMono.variable} font-sans antialiased`}>
         <ThemeProvider
