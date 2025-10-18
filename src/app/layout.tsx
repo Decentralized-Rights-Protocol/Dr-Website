@@ -22,8 +22,8 @@ const ibmPlexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Decentralized Rights-Protecting Human Rights with Blockchain',
-  description: 'The Decentralized Rights Protocol (DRP) is building a quantum-safe, transparent platform to protect, verify, and advance human rights globally using blockchain technology.',
+  title: 'Decentralized Rights Protocol (DRP)',
+  description: 'Building a human-rights-centered blockchain powered by Proof of Status and Proof of Activity.',
   keywords: ['blockchain', 'human rights', 'decentralized', 'quantum safe', 'cryptography', 'governance', 'transparency', 'DRP', 'RIGHTS token', 'DeRi token'],
   authors: [{ name: 'Decentralized Rights Protocol Team' }],
   creator: 'NeonTechnoX',
@@ -38,16 +38,16 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Decentralized Rights Protocol - Protecting Human Rights with Blockchain',
-    description: 'The Decentralized Rights Protocol (DRP) is building a quantum-safe, transparent platform to protect, verify, and advance human rights globally using blockchain technology.',
+    title: 'Decentralized Rights Protocol (DRP)',
+    description: 'Building a human-rights-centered blockchain powered by Proof of Status and Proof of Activity.',
     url: 'https://decentralizedrights.com',
     siteName: 'Decentralized Rights Protocol',
     images: [
       {
-        url: '/og-image.png',
+        url: '/earth-flag.jpg',
         width: 1200,
         height: 630,
-        alt: 'Decentralized Rights Protocol - Protecting Human Rights with Blockchain',
+        alt: 'Flag of Planet Earth representing unity and global rights',
       },
     ],
     locale: 'en_US',
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Decentralized Rights Protocol - Protecting Human Rights with Blockchain',
-    description: 'The Decentralized Rights Protocol (DRP) is building a quantum-safe, transparent platform to protect, verify, and advance human rights globally using blockchain technology.',
-    images: ['/og-image.png'],
+    title: 'Decentralized Rights Protocol (DRP)',
+    description: 'Building a human-rights-centered blockchain powered by Proof of Status and Proof of Activity.',
+    images: ['/earth-flag.jpg'],
     creator: '@De_Rights',
   },
   robots: {

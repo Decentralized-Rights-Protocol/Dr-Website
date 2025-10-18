@@ -38,22 +38,17 @@ export function HeroSection() {
       
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="mb-6 animate-fade-in-up">
-            <span className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white border border-white/20">
-              🚀 DRP v0.6 - Now Live
-            </span>
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl animate-fade-in-up delay-200">
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl animate-fade-in-up">
             Protecting Human Rights
             <span className="block bg-gradient-to-r from-secondary-400 to-accent-400 bg-clip-text text-transparent animate-gradient-x">
               Through Blockchain
             </span>
           </h1>
-          <p className="mt-6 text-lg leading-8 text-neutral-300 animate-fade-in-up delay-300">
+          <p className="mt-6 text-lg leading-8 text-neutral-300 animate-fade-in-up delay-200">
             The Decentralized Rights Protocol (DRP) is building a quantum-safe, transparent platform 
             to protect, verify, and advance human rights globally using cutting-edge blockchain technology.
           </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6 animate-fade-in-up delay-400">
+          <div className="mt-10 flex items-center justify-center gap-x-6 animate-fade-in-up delay-300">
             <Link
               href="/whitepaper"
               className="group rounded-md bg-white px-6 py-3 text-sm font-semibold text-primary-600 shadow-lg hover:bg-neutral-50 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 transform hover:scale-105"
@@ -76,7 +71,7 @@ export function HeroSection() {
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
             {features.map((feature, index) => (
-              <div key={feature.title} className="group flex flex-col animate-fade-in-up" style={{ animationDelay: `${500 + index * 100}ms` }}>
+              <div key={feature.title} className="group flex flex-col animate-fade-in-up" style={{ animationDelay: `${400 + index * 100}ms` }}>
                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-white group-hover:text-secondary-300 transition-colors duration-300">
                   <div className="p-2 rounded-lg bg-white/10 group-hover:bg-white/20 transition-colors duration-300">
                     <feature.icon className="h-5 w-5 flex-none text-secondary-400 group-hover:text-secondary-300 transition-colors duration-300" aria-hidden="true" />

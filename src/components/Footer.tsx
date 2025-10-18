@@ -87,6 +87,19 @@ export function Footer() {
                 </Link>
               ))}
             </div>
+            {/* Flag of Planet Earth */}
+            <div className="mt-6 flex flex-col items-center">
+              <Image
+                src="/earth-flag.jpg"
+                alt="Flag of Planet Earth representing unity and global rights"
+                width={60}
+                height={40}
+                className="h-10 w-auto object-contain rounded-sm shadow-sm"
+              />
+              <p className="mt-2 text-xs text-neutral-400 dark:text-neutral-500 text-center max-w-xs">
+                Flag of Planet Earth © Oskar Pernefeldt — used with attribution for educational and humanitarian purposes.
+              </p>
+            </div>
             <p className="mt-4 text-xs text-neutral-500 dark:text-neutral-400">
               &copy; {new Date().getFullYear()} Decentralized Rights Protocol. All rights reserved.
             </p>

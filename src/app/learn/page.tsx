@@ -126,19 +126,31 @@ export default function LearnPage() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-400/5 rounded-full blur-3xl animate-pulse delay-500"></div>
+      </div>
+      
+      <div className="relative container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="mb-6 animate-fade-in-up">
+            <span className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-300 border border-blue-200/50 dark:border-blue-700/50">
+              🎓 Learn • Earn • Contribute
+            </span>
+          </div>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in-up delay-200">
             DRP Learn-to-Earn
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 animate-fade-in-up delay-300">
             Master blockchain, DRP, and AI governance while earning $DeRi rewards
           </p>
           
           {/* Progress Overview */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-xl border border-white/20 dark:border-gray-700/50 p-6 max-w-2xl mx-auto animate-fade-in-up delay-400">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
@@ -178,7 +190,7 @@ export default function LearnPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <Link 
             href="/learn/dashboard" 
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow"
+            className="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up delay-500"
           >
             <div className="flex items-center space-x-4">
               <UserIcon className="h-8 w-8 text-blue-500" />
@@ -191,7 +203,7 @@ export default function LearnPage() {
           
           <Link 
             href="/learn/leaderboard" 
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow"
+            className="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up delay-600"
           >
             <div className="flex items-center space-x-4">
               <TrophyIcon className="h-8 w-8 text-yellow-500" />
@@ -204,7 +216,7 @@ export default function LearnPage() {
           
           <Link 
             href="/learn/ai-tutor" 
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow"
+            className="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up delay-700"
           >
             <div className="flex items-center space-x-4">
               <StarIcon className="h-8 w-8 text-purple-500" />
@@ -218,16 +230,17 @@ export default function LearnPage() {
 
         {/* Curriculum Levels */}
         <div className="space-y-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8 animate-fade-in-up delay-800">
             Curriculum Levels
           </h2>
           
-          {curriculumLevels.map((level) => (
+          {curriculumLevels.map((level, index) => (
             <div 
               key={level.id}
-              className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden ${
+              className={`group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 dark:border-gray-700/50 overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] animate-fade-in-up ${
                 level.id <= userProgress.currentLevel ? 'opacity-100' : 'opacity-60'
               }`}
+              style={{ animationDelay: `${900 + index * 100}ms` }}
             >
               <div className={`${level.color} p-6 text-white`}>
                 <div className="flex items-center justify-between">
