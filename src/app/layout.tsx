@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteName: 'Decentralized Rights Protocol',
     images: [
       {
-        url: '/earth-flag.jpg',
+        url: '/08_IFOPE_20x30.jpg',
         width: 1200,
         height: 630,
         alt: 'Flag of Planet Earth representing unity and global rights',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Decentralized Rights Protocol (DRP)',
     description: 'Building a human-rights-centered blockchain powered by Proof of Status and Proof of Activity.',
-    images: ['/earth-flag.jpg'],
+    images: ['/08_IFOPE_20x30.jpg'],
     creator: '@De_Rights',
   },
   robots: {

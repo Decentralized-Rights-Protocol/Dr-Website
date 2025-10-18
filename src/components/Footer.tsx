@@ -90,7 +90,7 @@ export function Footer() {
             {/* Flag of Planet Earth */}
             <div className="mt-6 flex flex-col items-center">
               <Image
-                src="/earth-flag.jpg"
+                src="/08_IFOPE_20x30.jpg"
                 alt="Flag of Planet Earth representing unity and global rights"
                 width={60}
                 height={40}
