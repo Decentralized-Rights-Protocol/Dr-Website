@@ -36,7 +36,7 @@ export async function GET(
     // Return a successful response with default values instead of 500 error
     return NextResponse.json({
       balance: 0,
-      balance_formatted: '0.00',
+      balance_formatted: 0.00, // Return as number, not string
       symbol: 'DeRi-TEST',
       network: 'testnet',
       message: 'Balance service temporarily unavailable'

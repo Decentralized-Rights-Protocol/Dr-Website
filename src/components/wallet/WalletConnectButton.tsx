@@ -230,7 +230,7 @@ export function WalletConnectButton() {
         {deriBalance && (
           <div className="flex items-center gap-x-1 text-xs text-green-600 dark:text-green-400">
             <Coins className="h-3 w-3" />
-            <span>{deriBalance.balance_formatted.toFixed(2)}</span>
+            <span>{typeof deriBalance.balance_formatted === 'number' ? deriBalance.balance_formatted.toFixed(2) : deriBalance.balance_formatted}</span>
           </div>
         )}
       </button>
@@ -289,7 +289,7 @@ export function WalletConnectButton() {
                     <div className="flex items-center gap-x-2">
                       <Coins className="h-4 w-4 text-blue-500" />
                       <span className="text-sm font-semibold text-neutral-900 dark:text-white">
-                        {deriBalance.balance_formatted.toFixed(2)} {deriBalance.symbol}
+                        {typeof deriBalance.balance_formatted === 'number' ? deriBalance.balance_formatted.toFixed(2) : deriBalance.balance_formatted} {deriBalance.symbol}
                       </span>
                     </div>
                     {deriBalance.error && (
