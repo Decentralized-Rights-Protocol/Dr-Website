@@ -33,14 +33,13 @@ export async function GET(
 
   } catch (error) {
     console.error('Error fetching user balance:', error);
-    return NextResponse.json(
-      { 
-        balance: 0, 
-        balance_formatted: 0, 
-        symbol: 'DeRi-TEST',
-        error: 'Failed to fetch balance' 
-      },
-      { status: 500 }
-    );
+    // Return a successful response with default values instead of 500 error
+    return NextResponse.json({
+      balance: 0,
+      balance_formatted: '0.00',
+      symbol: 'DeRi-TEST',
+      network: 'testnet',
+      message: 'Balance service temporarily unavailable'
+    });
   }
 }

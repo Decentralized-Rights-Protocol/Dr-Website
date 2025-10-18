@@ -19,12 +19,12 @@ const nextConfig = {
   async headers() {
     const csp = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://translate.google.com https://translate.googleapis.com https://vercel.live",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://translate.google.com https://translate.googleapis.com https://vercel.live https://tally.so",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: https://*.vercel.app https://vercel.com https://www.googletagmanager.com https://www.google-analytics.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "connect-src 'self' https://*.vercel.app https://vercel.com https://www.google-analytics.com https://vitals.vercel-insights.com",
-      "frame-src 'self' https://translate.google.com",
+      "connect-src 'self' https://*.vercel.app https://vercel.com https://www.google-analytics.com https://vitals.vercel-insights.com https://infragrid.v.network",
+      "frame-src 'self' https://translate.google.com https://vercel.live",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",

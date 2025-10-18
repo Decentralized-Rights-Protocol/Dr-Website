@@ -34,6 +34,8 @@ export function HeroSection() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-secondary-400/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-400/10 rounded-full blur-2xl animate-bounce delay-500"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-purple-400/15 rounded-full blur-xl animate-pulse delay-700"></div>
       </div>
       
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
@@ -71,10 +73,10 @@ export function HeroSection() {
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
             {features.map((feature, index) => (
-              <div key={feature.title} className="group flex flex-col animate-fade-in-up" style={{ animationDelay: `${400 + index * 100}ms` }}>
+              <div key={feature.title} className="group flex flex-col animate-fade-in-up hover:scale-105 transition-transform duration-300" style={{ animationDelay: `${400 + index * 100}ms` }}>
                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-white group-hover:text-secondary-300 transition-colors duration-300">
-                  <div className="p-2 rounded-lg bg-white/10 group-hover:bg-white/20 transition-colors duration-300">
-                    <feature.icon className="h-5 w-5 flex-none text-secondary-400 group-hover:text-secondary-300 transition-colors duration-300" aria-hidden="true" />
+                  <div className="p-3 rounded-xl bg-white/10 group-hover:bg-white/20 group-hover:shadow-lg transition-all duration-300">
+                    <feature.icon className="h-6 w-6 flex-none text-secondary-400 group-hover:text-secondary-300 group-hover:scale-110 transition-all duration-300" aria-hidden="true" />
                   </div>
                   {feature.title}
                 </dt>

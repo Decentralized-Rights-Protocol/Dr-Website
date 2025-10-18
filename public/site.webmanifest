@@ -1,0 +1,27 @@
+{
+  "name": "Decentralized Rights Protocol",
+  "short_name": "DRP",
+  "description": "Building a human-rights-centered blockchain powered by Proof of Status and Proof of Activity",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D1B2A",
+  "theme_color": "#0D1B2A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/DRP.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/DRP.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["blockchain", "human rights", "technology", "education"],
+  "lang": "en",
+  "dir": "ltr"
+}
