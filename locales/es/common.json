@@ -1,0 +1,91 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "learn": "Aprender",
+    "whitepaper": "Libro Blanco",
+    "docs": "Documentación",
+    "roadmap": "Hoja de Ruta",
+    "community": "Comunidad",
+    "explorer": "Explorador"
+  },
+  "hero": {
+    "title": "Protegiendo los Derechos Humanos",
+    "subtitle": "A Través de la Blockchain",
+    "description": "El Protocolo de Derechos Descentralizados (DRP) está construyendo una plataforma cuántica-segura y transparente para proteger, verificar y avanzar los derechos humanos globalmente usando tecnología blockchain de vanguardia.",
+    "cta_whitepaper": "Leer Libro Blanco",
+    "cta_docs": "Ver Documentación"
+  },
+  "features": {
+    "quantum_security": {
+      "title": "Seguridad Cuántica",
+      "description": "Criptografía avanzada protegiendo datos de derechos humanos de amenazas futuras"
+    },
+    "community_governance": {
+      "title": "Gobernanza Comunitaria",
+      "description": "Toma de decisiones descentralizada asegurando que el protocolo sirva a las necesidades globales"
+    },
+    "global_impact": {
+      "title": "Impacto Global",
+      "description": "Soluciones transfronterizas funcionando a través de culturas y sistemas legales"
+    },
+    "real_time_verification": {
+      "title": "Verificación en Tiempo Real",
+      "description": "Verificación instantánea y documentación de violaciones de derechos humanos"
+    }
+  },
+  "learn": {
+    "title": "DRP Aprende-Para-Ganar",
+    "subtitle": "Domina blockchain, DRP y gobernanza IA mientras ganas recompensas $DeRi",
+    "badge": "Aprender • Ganar • Contribuir",
+    "dashboard": "Panel de Control",
+    "leaderboard": "Tabla de Posiciones",
+    "ai_tutor": "Tutor IA",
+    "view_progress": "Ver tu progreso",
+    "see_top_learners": "Ver mejores estudiantes",
+    "get_help": "Obtener ayuda y respuestas",
+    "curriculum_levels": "Niveles del Currículo",
+    "lessons": "Lecciones",
+    "current_level": "Nivel Actual",
+    "complete": "Completo"
+  },
+  "footer": {
+    "newsletter_title": "Mantente actualizado con DRP",
+    "newsletter_description": "Recibe las últimas actualizaciones sobre desarrollo del protocolo, eventos comunitarios e iniciativas de derechos humanos.",
+    "subscribe": "Suscribirse al Boletín",
+    "copyright": "Protocolo de Derechos Descentralizados. Todos los derechos reservados.",
+    "earth_flag_attribution": "Bandera del Planeta Tierra © Oskar Pernefeldt — usado con atribución para propósitos educativos y humanitarios."
+  },
+  "comparison": {
+    "title": "¿Por qué DRP? Un Nuevo Estándar para Confianza, Equidad y Sostenibilidad",
+    "subtitle": "DRP redefine lo que una blockchain puede lograr — combinando IA, ética y descentralización para empoderar a cada ser humano.",
+    "cta_whitepaper": "Leer el Libro Blanco Completo de DRP",
+    "view_table": "Vista de Tabla",
+    "view_chart": "Vista de Gráfico",
+    "features": {
+      "consensus": "Consenso",
+      "energy_use": "Uso de Energía",
+      "transaction_speed": "Velocidad de Transacción",
+      "governance": "Gobernanza",
+      "smart_contracts": "Contratos Inteligentes",
+      "ai_integration": "Integración IA",
+      "focus": "Enfoque",
+      "quantum_resistance": "Resistencia Cuántica",
+      "data_layer": "Capa de Datos",
+      "social_impact": "Impacto Social",
+      "interoperability": "Interoperabilidad"
+    },
+    "blockchains": {
+      "bitcoin": "Bitcoin",
+      "ethereum": "Ethereum",
+      "polkadot": "Polkadot",
+      "solana": "Solana",
+      "cardano": "Cardano",
+      "drp": "DRP"
+    }
+  },
+  "language": {
+    "select": "Seleccionar Idioma",
+    "auto_translate": "Traducción Automática",
+    "translate_page": "Traducir esta página"
+  }
+}

@@ -12,6 +12,11 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
+  i18n: {
+    locales: ['en', 'fr', 'es', 'ar', 'sw', 'zh', 'zh-TW', 'hi', 'pt', 'ru', 'de', 'ko', 'ja', 'it'],
+    defaultLocale: 'en',
+    localeDetection: true,
+  },
   images: {
     domains: ['localhost', 'vercel.app'],
     formats: ['image/webp', 'image/avif'],
