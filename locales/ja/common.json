@@ -1,0 +1,32 @@
+{
+  "home": "ホーム",
+  "learn": "学習",
+  "explorer": "エクスプローラー",
+  "whitepaper": "ホワイトペーパー",
+  "docs": "ドキュメント",
+  "roadmap": "ロードマップ",
+  "community": "コミュニティ",
+  "why_drp": "なぜDRPなのか",
+  "get_started": "始める",
+  "read_whitepaper": "ホワイトペーパーを読む",
+  "view_documentation": "ドキュメントを見る",
+  "protecting_human_rights": "人権の保護",
+  "through_blockchain": "ブロックチェーンを通じて",
+  "hero_description": "分散権利プロトコル（DRP）は、最先端のブロックチェーン技術を使用して、人権を世界的に保護、検証、推進するための量子安全で透明なプラットフォームを構築しています。",
+  "quantum_safe_security_title": "量子安全セキュリティ",
+  "quantum_safe_security_description": "将来の脅威から人権データを保護する高度な暗号化",
+  "community_governance_title": "コミュニティガバナンス",
+  "community_governance_description": "プロトコルがグローバルなニーズに応えることを保証する分散意思決定",
+  "global_impact_title": "グローバルインパクト",
+  "global_impact_description": "文化と法制度を越えて機能する国境を越えたソリューション",
+  "real_time_verification_title": "リアルタイム検証",
+  "real_time_verification_description": "人権侵害の即座の検証と文書化",
+  "footer_copyright": "分散権利プロトコル。全権利所有。",
+  "footer_newsletter_title": "DRPで最新情報を維持",
+  "footer_newsletter_description": "プロトコル開発、コミュニティイベント、人権イニシアチブに関する最新の更新を受け取ります。",
+  "subscribe_newsletter": "ニュースレターを購読",
+  "flag_attribution": "地球の旗 © Oskar Pernefeldt — 教育および人道的目的で使用。"
+}
+
+
+

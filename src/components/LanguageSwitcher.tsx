@@ -36,8 +36,6 @@ export function LanguageSwitcher({
   const router = useRouter()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = React.useState(false)
-  const [isTranslating, setIsTranslating] = React.useState(false)
-  const [autoTranslate, setAutoTranslate] = React.useState(false)
   const [currentLocale, setCurrentLocale] = React.useState('en')
 
   const currentLanguage = languages.find(lang => lang.code === currentLocale) || languages[0]
@@ -46,91 +44,56 @@ export function LanguageSwitcher({
   const rtlLanguages = ['ar', 'he']
   const isRTL = rtlLanguages.includes(currentLocale)
 
-  const handleLanguageChange = async (langCode: string) => {
+  const handleLanguageChange = (langCode: string) => {
     setIsOpen(false)
-    setIsTranslating(true)
     
-    try {
-      // Update current locale
-      setCurrentLocale(langCode)
-      
-      // Store language preference
+    // Update current locale
+    setCurrentLocale(langCode)
+
+    // Store language preference
+    if (typeof window !== 'undefined') {
       localStorage.setItem('preferred-language', langCode)
-      
-      // Apply RTL if needed
-      if (rtlLanguages.includes(langCode)) {
-        document.documentElement.dir = 'rtl'
-        document.documentElement.lang = langCode
-      } else {
-        document.documentElement.dir = 'ltr'
-        document.documentElement.lang = langCode
-      }
-      
-      // Trigger Google Translate if auto-translate is enabled
-      if (autoTranslate && langCode !== 'en') {
-        await triggerGoogleTranslate(langCode)
-      }
-      
-    } catch (error) {
-      console.error('Error changing language:', error)
-    } finally {
-      setIsTranslating(false)
     }
-  }
 
-  const triggerGoogleTranslate = async (targetLang: string) => {
-    return new Promise((resolve) => {
-      if (typeof window !== 'undefined' && window.google && window.google.translate) {
-        const selectElement = document.querySelector('.goog-te-combo') as HTMLSelectElement
-        if (selectElement) {
-          const event = new Event('change', { bubbles: true })
-          selectElement.value = targetLang
-          selectElement.dispatchEvent(event)
-        }
-        resolve(true)
-      } else {
-        // Load Google Translate if not already loaded
-        const script = document.createElement('script')
-        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
-        script.async = true
-        document.head.appendChild(script)
-
-        window.googleTranslateElementInit = () => {
-          new window.google.translate.TranslateElement(
-            {
-              pageLanguage: 'en',
-              includedLanguages: languages.map(l => l.code).join(','),
-              layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-              autoDisplay: false,
-            },
-            'google_translate_element'
-          )
-          resolve(true)
-        }
-      }
-    })
-  }
-
-  // Load saved preferences
-  React.useEffect(() => {
-    const savedLanguage = localStorage.getItem('preferred-language')
-    const savedAutoTranslate = localStorage.getItem('auto-translate') === 'true'
-    
-    if (savedLanguage && languages.find(lang => lang.code === savedLanguage)) {
-      // Language will be set by Next.js i18n
-    }
-    
-    setAutoTranslate(savedAutoTranslate)
-  }, [])
-
-  // Apply RTL on mount
-  React.useEffect(() => {
-    if (isRTL) {
+    // Apply RTL if needed
+    if (rtlLanguages.includes(langCode)) {
       document.documentElement.dir = 'rtl'
+      document.documentElement.lang = langCode
     } else {
       document.documentElement.dir = 'ltr'
+      document.documentElement.lang = langCode
     }
-  }, [isRTL])
+
+    // Navigate to the new locale
+    const segments = pathname.split('/')
+    segments[1] = langCode
+    const newPath = segments.join('/')
+    router.push(newPath)
+  }
+
+  // Load saved language preference and detect browser language on mount
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const savedLanguage = localStorage.getItem('preferred-language')
+    const browserLanguage = navigator.language.split('-')[0] // e.g., "en-US" -> "en"
+
+    let initialLang = 'en'
+    if (savedLanguage && languages.some(lang => lang.code === savedLanguage)) {
+      initialLang = savedLanguage
+    } else if (languages.some(lang => lang.code === browserLanguage)) {
+      initialLang = browserLanguage
+    }
+
+    setCurrentLocale(initialLang)
+    if (rtlLanguages.includes(initialLang)) {
+      document.documentElement.dir = 'rtl'
+      document.documentElement.lang = initialLang
+    } else {
+      document.documentElement.dir = 'ltr'
+      document.documentElement.lang = initialLang
+    }
+  }, [])
 
   return (
     <div className={cn("relative", className)}>
@@ -140,16 +103,13 @@ export function LanguageSwitcher({
           "group flex items-center gap-x-2 rounded-full text-sm font-medium transition-all duration-300",
           compact
             ? "px-3 py-2 bg-white/10 dark:bg-neutral-800/50 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-neutral-700/50 border border-white/20 dark:border-neutral-700/50"
-            : "px-4 py-2.5 bg-gradient-to-r from-blue-50/80 to-purple-50/80 dark:from-blue-900/20 dark:to-purple-900/20 hover:from-blue-100/80 hover:to-purple-100/80 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 hover:scale-105 hover:shadow-lg border border-blue-200/50 dark:border-blue-700/50 hover:border-blue-300 dark:hover:border-blue-600 backdrop-blur-sm",
-          isTranslating && "opacity-50 cursor-not-allowed"
+            : "px-4 py-2.5 bg-gradient-to-r from-blue-50/80 to-purple-50/80 dark:from-blue-900/20 dark:to-purple-900/20 hover:from-blue-100/80 hover:to-purple-100/80 dark:hover:from-blue-800/30 dark:hover:to-purple-800/30 hover:scale-105 hover:shadow-lg border border-blue-200/50 dark:border-blue-700/50 hover:border-blue-300 dark:hover:border-blue-600 backdrop-blur-sm"
         )}
         onClick={() => setIsOpen(!isOpen)}
-        disabled={isTranslating}
       >
         <Globe className={cn(
           "h-4 w-4 transition-transform duration-300", 
-          compact ? "" : "group-hover:rotate-12",
-          isTranslating && "animate-spin"
+          compact ? "" : "group-hover:rotate-12"
         )} />
         
         {!compact && (
@@ -176,30 +136,6 @@ export function LanguageSwitcher({
           isRTL && "right-auto left-0"
         )}>
           <div className="p-2">
-            {/* Auto Translate Toggle */}
-            <div className="flex items-center justify-between px-3 py-2 mb-2 rounded-lg bg-neutral-50 dark:bg-neutral-700/50">
-              <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                Auto Translate
-              </span>
-              <button
-                onClick={() => {
-                  setAutoTranslate(!autoTranslate)
-                  localStorage.setItem('auto-translate', (!autoTranslate).toString())
-                }}
-                className={cn(
-                  "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
-                  autoTranslate ? "bg-blue-600" : "bg-neutral-300 dark:bg-neutral-600"
-                )}
-              >
-                <span
-                  className={cn(
-                    "inline-block h-4 w-4 transform rounded-full bg-white transition-transform",
-                    autoTranslate ? "translate-x-6" : "translate-x-1"
-                  )}
-                />
-              </button>
-            </div>
-
             {/* Language List */}
             <div className="max-h-64 overflow-y-auto">
               {languages.map((language) => (

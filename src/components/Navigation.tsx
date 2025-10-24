@@ -7,13 +7,14 @@ import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
-import { LanguageToggle } from './language-toggle'
+import { LanguageSwitcher } from './LanguageSwitcher'
 import { WalletConnectButton } from './wallet/WalletConnectButton'
 import { DRPLogo } from './drp-logo'
 
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Learn', href: '/learn' },
+  { name: 'Why DRP', href: '/why-drp' },
   { name: 'Whitepaper', href: '/whitepaper' },
   { name: 'Docs', href: '/docs' },
   { name: 'Roadmap', href: '/roadmap' },
@@ -121,7 +122,7 @@ export function Navigation() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-4">
           <ThemeToggle />
-          <LanguageToggle compact />
+            <LanguageSwitcher compact />
           <WalletConnectButton />
         </div>
       </nav>
@@ -169,7 +170,7 @@ export function Navigation() {
                 <div className="py-6 space-y-4">
                   <div className="space-y-3">
                     <div className="flex items-center justify-center gap-x-4">
-                      <LanguageToggle />
+                      <LanguageSwitcher />
                       <ThemeToggle />
                     </div>
                     <div className="flex justify-center">

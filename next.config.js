@@ -15,7 +15,7 @@ const nextConfig = {
   i18n: {
     locales: ['en', 'fr', 'es', 'ar', 'sw', 'zh', 'zh-TW', 'hi', 'pt', 'ru', 'de', 'ko', 'ja', 'it'],
     defaultLocale: 'en',
-    localeDetection: true,
+    localeDetection: false,
   },
   images: {
     domains: ['localhost', 'vercel.app'],
