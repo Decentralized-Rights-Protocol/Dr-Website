@@ -1,6 +1,6 @@
 'use client';
 
-import React, { state, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { Menu, X, Sun, Moon } from 'lucide-react';
@@ -8,8 +8,8 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import { WalletConnect } from './wallet-connect';
 
 export function Navigation() {
-  const [isOpen, setIsOpen] = state(false);
-  const [mounted, setMounted] = state(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -55,5 +55,47 @@ export function Navigation() {
 
           {/* Right Actions */}
           <div className="flex items-center space-x-4">
-  
-                                            
+            {mounted && (
+              <>
+                <LanguageSwitcher compact showFlags={false} className="hidden sm:inline-flex" />
+                <button
+                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  className="p-2 hover:bg-accent rounded-md transition-colors"
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                </button>
+                <WalletConnect />
+                <button
+                  onClick={toggleMenu}
+                  className="md:hidden p-2 hover:bg-accent rounded-md"
+                  aria-label="Toggle menu"
+                >
+                  {isOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden border-t border-border/40">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block px-3 py-2 rounded-md text-base font-medium hover:bg-accent text-foreground/70 hover:text-foreground transition-all duration-200"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+}
