@@ -1,32 +1,28 @@
-import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
-import Navigation from '@/components/Navigation'
-import Footer from '@/components/footer'
-import ScrollToTop from '@/components/scroll-to-top'
-import { Analytics } from '@vercel/analytics/react'
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
+import "./globals.css";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/footer";
+import ScrollToTop from "@/components/scroll-to-top";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: 'Decentralized Rights Protocol',
-  description: 'Building a secure, transparent, and equitable blockchain ecosystem for human rights protection',
-}
+  title: "Decentralized Rights Protocol",
+  description: "Blockchain-based rights management and verification system",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <Navigation />
-          <main>{children}</main>
-          <Footer />
-          <ScrollToTop />
-          <Analytics />
-        </ThemeProvider>
+        <Navigation />
+        {children}
+        <ScrollToTop />
+        <Footer />
       </body>
     </html>
-  )
+  );
 }
