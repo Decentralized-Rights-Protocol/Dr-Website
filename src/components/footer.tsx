@@ -1,104 +1,133 @@
-import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
+import Link from 'next/link'
+import Image from 'next/image'
+import { Github, Mail, Linkedin, Instagram } from 'lucide-react'
+import { XIcon, DiscordIcon } from '@/components/custom-icons'
 
-export default function Footer() {
-  const { t } = useTranslation();
-  const currentYear = new Date().getFullYear();
+const navigation = {
+  main: [
+    { name: 'Whitepaper', href: '/whitepaper' },
+    { name: 'Docs', href: '/docs' },
+    { name: 'Roadmap', href: '/roadmap' },
+    { name: 'Community', href: '/community' },
+  ],
+  social: [
+    {
+      name: 'GitHub',
+      href: 'https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain',
+      icon: Github,
+    },
+    {
+      name: 'X (Twitter)',
+      href: 'https://twitter.com/De_Rights',
+      icon: XIcon,
+    },
+    {
+      name: 'Discord',
+      href: 'https://discord.gg/k8auUAqF',
+      icon: DiscordIcon,
+    },
+    {
+      name: 'Instagram',
+      href: 'https://instagram.com/decentralized_rights',
+      icon: Instagram,
+    },
+    {
+      name: 'LinkedIn',
+      href: 'https://linkedin.com/company/Decentralized-Rights-Protocol',
+      icon: Linkedin,
+    },
+    {
+      name: 'Email',
+      href: 'mailto:contact@decentralizedrights.com',
+      icon: Mail,
+    },
+  ],
+}
 
+export function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12 mt-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* About */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">DRP</h3>
-            <p className="text-gray-400 text-sm">
-              Decentralized Rights Protocol - Building a secure, transparent, and equitable blockchain ecosystem.
+    <footer className="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
+      <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
+        <div className="flex justify-center space-x-6 md:order-2">
+          {navigation.social.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-400 hover:text-neutral-500 dark:hover:text-neutral-300 transition-colors"
+            >
+              <span className="sr-only">{item.name}</span>
+              <item.icon className="h-6 w-6" aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+        <div className="mt-8 md:order-1 md:mt-0">
+          <div className="flex flex-col items-center md:items-start">
+            <div className="flex items-center space-x-3 mb-4">
+              <Image
+                src="/DRP.png"
+                alt="DRP Logo"
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-lg object-contain"
+              />
+              <span className="text-lg font-bold text-neutral-900 dark:text-white">
+                Decentralized Rights Protocol
+              </span>
+            </div>
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2">
+              {navigation.main.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+            {/* Flag of Planet Earth */}
+            <div className="mt-6 flex flex-col items-center">
+              <Image
+                src="/08_IFOPE_20x30.jpg"
+                alt="Flag of Planet Earth representing unity and global rights"
+                width={60}
+                height={40}
+                className="h-10 w-auto object-contain rounded-sm shadow-sm"
+              />
+              <p className="mt-2 text-xs text-neutral-400 dark:text-neutral-500 text-center max-w-xs">
+                Flag of Planet Earth © Oskar Pernefeldt — used with attribution for educational and humanitarian purposes.
+              </p>
+            </div>
+            <p className="mt-4 text-xs text-neutral-500 dark:text-neutral-400">
+              &copy; {new Date().getFullYear()} Decentralized Rights Protocol. All rights reserved.
             </p>
           </div>
-
-          {/* Resources */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">{t('common.resources', 'Resources')}</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>
-                <Link href="/learn" className="hover:text-white transition">
-                  {t('common.learn', 'Learn')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/explorer" className="hover:text-white transition">
-                  {t('common.explorer', 'Explorer')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/whitepaper" className="hover:text-white transition">
-                  {t('common.whitepaper', 'Whitepaper')}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Community */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">{t('common.community', 'Community')}</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>
-                <a href="https://discord.gg/drp" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
-                  Discord
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/DRProtocol" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
-                  Twitter
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/Decentralized-Rights-Protocol" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
-                  GitHub
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">{t('common.legal', 'Legal')}</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>
-                <Link href="/privacy" className="hover:text-white transition">
-                  {t('common.privacy', 'Privacy')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-white transition">
-                  {t('common.terms', 'Terms')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition">
-                  {t('common.contact', 'Contact')}
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
-            &copy; {currentYear} Decentralized Rights Protocol. All rights reserved.
-          </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="https://github.com/Decentralized-Rights-Protocol" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">
-              GitHub
-            </a>
-            <a href="https://discord.gg/drp" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition">
-              Discord
-            </a>
+      </div>
+      
+      {/* Newsletter Section */}
+      <div className="border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-800/50">
+        <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
+          <div className="flex flex-col items-center text-center">
+            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+              Stay updated with DRP
+            </h3>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 max-w-md">
+              Get the latest updates on protocol development, community events, and human rights initiatives.
+            </p>
+            <button 
+              data-tally-open="3xKMro" 
+              data-tally-emoji-text="👋" 
+              data-tally-emoji-animation="wave"
+              className="rounded-md bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"
+            >
+              Subscribe to Newsletter
+            </button>
           </div>
         </div>
       </div>
     </footer>
-  );
+  )
 }
