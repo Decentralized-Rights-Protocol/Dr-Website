@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import { Footer } from "@/components/footer";
 import ScrollToTop from "@/components/scroll-to-top";
 import { ReactNode } from "react";
 

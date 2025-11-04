@@ -1,102 +1,113 @@
-<<<<<<< HEAD
-'use client';
-=======
-Request ID: b0799be4-2051-44c9-8644-52b0e4a73a0e
-"{\"error\":\"ERROR_RATE_LIMITED_CHANGEABLE\",\"details\":{\"title\":\"You've hit your usage limit\",\"detail\":\"Get Cursor Pro for more Agent usage, unlimited Tab, and more.\",\"isRetryable\":false,\"showRequestId\":false,\"additionalInfo\":{\"fallbackModel\":\"\",\"spendLimitHit\":\"false\",\"chatMessage\":\"\",\"spendLimits\":\"[50,100,200]\"},\"buttons\":[{\"label\":\"Upgrade to Pro\",\"upgrade\":{\"membershipToUpgradeTo\":\"pro\",\"allowTrial\":false}}],\"planChoices\":[{\"label\":\"Pro\",\"sublabel\":\"$20/mo\",\"description\":\"$20 usage credits\",\"value\":\"pro\"},{\"label\":\"Pro+\",\"sublabel\":\"$60/mo\",\"description\":\"$70 usage credits\",\"value\":\"pro_plus\"},{\"label\":\"Ultra\",\"sublabel\":\"$200/mo\",\"description\":\"$400 usage credits\",\"value\":\"ultra\"}]},\"isExpected\":true}"
-ConnectError: [resource_exhausted] Error
-    at ZWl.$endAiConnectTransportReportError (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:7337:375028)
-    at TMr._doInvokeHandler (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:35946)
-    at TMr._invokeHandler (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:35688)
-    at TMr._receiveRequest (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:34453)
-    at TMr._receiveOneMessage (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:33275)
-    at lEt.value (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:31369)
-    at _e._deliver (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:49:2962)
-    at _e.fire (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:49:3283)
-    at ldt.fire (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:7322:12154)
-    at MessagePort.<anonymous> (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:9402:18292)'use client'
->>>>>>> e5762fe4 (feat(legal): add DRP & ElderCore legal pages with MDX content, hero sections, cross-links, and SEO metadata)
+'use client'
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import * as React from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
+import { Menu, X } from 'lucide-react'
+import { ThemeToggle } from '@/components/theme-toggle'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { WalletConnectButton } from '@/components/wallet/WalletConnectButton'
+
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'Learn', href: '/learn' },
+  { name: 'Why DRP', href: '/why-drp' },
+  { name: 'Whitepaper', href: '/whitepaper' },
+  { name: 'Docs', href: '/docs' },
+  { name: 'Roadmap', href: '/roadmap' },
+  { name: 'Community', href: '/community' },
+]
 
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
+  const [isOpen, setIsOpen] = React.useState(false)
+  const pathname = usePathname()
 
   const isActive = (href: string) => {
-    return pathname === href || pathname.startsWith(href + '/');
-  };
-
-  const navItems = [
-    { href: '/learn', label: 'Learn' },
-    { href: '/earn', label: 'Earn Rewards' },
-    { href: '/explore', label: 'Explore' },
-    { href: '/about', label: 'About' },
-  ];
+    if (href === '/') {
+      return pathname === '/'
+    }
+    return pathname?.startsWith(href) ?? false
+  }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-neutral-200/60 dark:border-neutral-800/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
-            <Link href="/" className="text-2xl font-bold text-blue-600">
-              DRP
+          <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/DRP.png"
+                alt="DRP Logo"
+                width={32}
+                height={32}
+                className="h-8 w-8"
+              />
+              <span className="text-lg font-semibold text-neutral-900 dark:text-white hidden sm:inline">
+                Decentralized Rights Protocol
+              </span>
             </Link>
           </div>
 
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+          <div className="hidden lg:flex lg:items-center lg:gap-x-6">
+            {navigation.map((item) => (
               <Link
-                key={item.href}
+                key={item.name}
                 href={item.href}
                 className={`text-sm font-medium transition-colors ${
                   isActive(item.href)
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-gray-700 hover:text-blue-600'
+                    ? 'text-primary-600 dark:text-primary-400'
+                    : 'text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400'
                 }`}
               >
-                {item.label}
+                {item.name}
               </Link>
             ))}
           </div>
 
-          <div className="md:hidden">
+          <div className="flex items-center gap-x-2">
+            <div className="hidden lg:flex lg:items-center lg:gap-x-2">
+              <ThemeToggle />
+              <LanguageSwitcher compact />
+              <WalletConnectButton />
+            </div>
+
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none"
+              className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none"
+              aria-label="Toggle menu"
             >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-white border-b border-gray-200">
+        <div className="lg:hidden bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            {navItems.map((item) => (
+            {navigation.map((item) => (
               <Link
-                key={item.href}
+                key={item.name}
                 href={item.href}
-                className={`block px-3 py-2 rounded-md text-base font-medium ${
-                  isActive(item.href)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                }`}
                 onClick={() => setIsOpen(false)}
+                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  isActive(item.href)
+                    ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
+                    : 'text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-50 dark:hover:bg-neutral-800'
+                }`}
               >
-                {item.label}
+                {item.name}
               </Link>
             ))}
+            <div className="px-3 py-2 flex items-center gap-2 border-t border-neutral-200 dark:border-neutral-800 mt-2">
+              <ThemeToggle />
+              <LanguageSwitcher compact />
+              <WalletConnectButton />
+            </div>
           </div>
         </div>
       )}
     </nav>
-  );
+  )
 }
