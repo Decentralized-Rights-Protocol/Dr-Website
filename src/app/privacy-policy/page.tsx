@@ -1,64 +1,53 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import ReactMarkdown from 'react-markdown';
+import * as React from 'react'
+import Link from 'next/link'
+import { Shield, FileText } from 'lucide-react'
+import PrivacyContent from '../../../legal/privacy-policy.mdx'
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Privacy Policy | Decentralized Rights Protocol',
-  description: 'Privacy Policy outlining how DRP collects, uses, and protects your personal information.',
-  openGraph; {
-    title: 'Privacy Policy | DRP',
-    description: 'Our commitment to protecting your privacy and data',
+  description:
+    'Privacy Policy for Decentralized Rights Protocol (DRP) explaining data handling, security, and user rights.',
+  openGraph: {
+    title: 'Privacy Policy | Decentralized Rights Protocol',
+    description:
+      'Privacy Policy for Decentralized Rights Protocol (DRP) explaining data handling, security, and user rights.',
     images: ['/DRP.png'],
   },
-};
+}
 
 export default function PrivacyPolicyPage() {
-  const content = readFileSync(join(process.cwd(), 'legal', 'privacy-policy.mdx'), 'utf-8');
-  
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-            Privacy Policy
-          </h1>
-          <p className="text-muted-foreground text-lg">
-            Decentralized Rights Protocol
-          </p>
-          <p className="text-sm text-muted-foreground mt-2">
-            Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </p>
-        </div>
-
-        {/* Content */}
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          <ReactMarkdown>{content}</ReactMarkdown>
-        </div>
-
-        {/* Cross-links */}
-        <div className="mt-12 pt-8 border-t border-border">
-          <h2 className="text-xl font-semibold mb-4">Related Documents</h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Link
-              href="/terms-of-service"
-              className="p-4 rounded-lg border border-border hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">Terms of Service</h3>
-              <p className="text-sm text-muted-foreground">Platform usage terms</p>
-            </Link>
-            <Link
-              href="/eldercore-privacy"
-              className="p-4 rounded-lg border border-border hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">ElderCore Privacy</h3>
-              <p className="text-sm text-muted-foreground">ElderCore privacy policy</p>
-            </Link>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <section className="mb-10 text-center">
+          <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg">
+            <Shield className="h-8 w-8" />
           </div>
-        </div>
+          <h1 className="text-4xl font-bold text-neutral-900 dark:text-white">Privacy Policy</h1>
+          <p className="mt-3 text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
+            How DRP collects, uses, and protects information across our websites, applications, and services.
+          </p>
+        </section>
+
+        <article className="prose prose-neutral prose-lg dark:prose-invert max-w-none bg-white/80 dark:bg-neutral-900/60 backdrop-blur-sm rounded-xl p-6 border border-neutral-200/60 dark:border-neutral-800/60 shadow-md">
+          {/* @ts-expect-error MDX component */}
+          <PrivacyContent />
+        </article>
+
+        <nav className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <Link href="/terms-of-service" className="flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+            <FileText className="h-5 w-5" /> DRP Terms of Service
+          </Link>
+          <Link href="/eldercore-terms" className="flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+            <FileText className="h-5 w-5" /> ElderCore Terms of Service
+          </Link>
+          <Link href="/eldercore-privacy" className="flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+            <FileText className="h-5 w-5" /> ElderCore Privacy Policy
+          </Link>
+        </nav>
       </div>
     </div>
-  );
+  )
 }
+
+

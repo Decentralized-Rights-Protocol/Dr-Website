@@ -256,10 +256,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🆘 Support
 
-- **Documentation**: [docs.drp.learn](https://docs.drp.learn)
-- **Discord**: [DRP Community](https://discord.gg/drp)
-- **Email**: support@drp.learn
-- **GitHub Issues**: [Report bugs](https://github.com/drp/learn/issues)
+- **Documentation**: [docs.drp.learn](https://decentralizedrights.com/learn)
+- **Discord**: [DRP Community](https://discord.gg/zbWg92AnQQ)
+- **Email**: contact@decentralizedrights.com
+- **GitHub Issues**: [Report bugs](hub.com/Decentralized-Rights-Protocol/Dr-Blockchain)
 
 ## 🎉 Acknowledgments
 
