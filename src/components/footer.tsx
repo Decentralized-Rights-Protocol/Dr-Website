@@ -46,7 +46,7 @@ const navigation = {
 
 export function Footer() {
   return (
-    <footer className="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
+    <footer className="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-t border-neutral-200/60 dark:border-neutral-800/60">
       <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
           {navigation.social.map((item) => (
@@ -55,7 +55,7 @@ export function Footer() {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-neutral-400 hover:text-neutral-500 dark:hover:text-neutral-300 transition-colors"
+              className="text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors transform hover:scale-110"
             >
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />
@@ -86,6 +86,12 @@ export function Footer() {
                   {item.name}
                 </Link>
               ))}
+              <Link
+                href="/learn"
+                className="text-sm font-semibold text-white bg-primary-600 hover:bg-primary-500 dark:bg-primary-500 dark:hover:bg-primary-400 px-4 py-1.5 rounded-full transition-colors shadow-sm"
+              >
+                Learn
+              </Link>
             </div>
             {/* Flag of Planet Earth */}
             <div className="mt-6 flex flex-col items-center">

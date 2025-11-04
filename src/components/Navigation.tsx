@@ -1,4 +1,20 @@
-'use client'
+<<<<<<< HEAD
+'use client';
+=======
+Request ID: b0799be4-2051-44c9-8644-52b0e4a73a0e
+"{\"error\":\"ERROR_RATE_LIMITED_CHANGEABLE\",\"details\":{\"title\":\"You've hit your usage limit\",\"detail\":\"Get Cursor Pro for more Agent usage, unlimited Tab, and more.\",\"isRetryable\":false,\"showRequestId\":false,\"additionalInfo\":{\"fallbackModel\":\"\",\"spendLimitHit\":\"false\",\"chatMessage\":\"\",\"spendLimits\":\"[50,100,200]\"},\"buttons\":[{\"label\":\"Upgrade to Pro\",\"upgrade\":{\"membershipToUpgradeTo\":\"pro\",\"allowTrial\":false}}],\"planChoices\":[{\"label\":\"Pro\",\"sublabel\":\"$20/mo\",\"description\":\"$20 usage credits\",\"value\":\"pro\"},{\"label\":\"Pro+\",\"sublabel\":\"$60/mo\",\"description\":\"$70 usage credits\",\"value\":\"pro_plus\"},{\"label\":\"Ultra\",\"sublabel\":\"$200/mo\",\"description\":\"$400 usage credits\",\"value\":\"ultra\"}]},\"isExpected\":true}"
+ConnectError: [resource_exhausted] Error
+    at ZWl.$endAiConnectTransportReportError (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:7337:375028)
+    at TMr._doInvokeHandler (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:35946)
+    at TMr._invokeHandler (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:35688)
+    at TMr._receiveRequest (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:34453)
+    at TMr._receiveOneMessage (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:33275)
+    at lEt.value (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:489:31369)
+    at _e._deliver (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:49:2962)
+    at _e.fire (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:49:3283)
+    at ldt.fire (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:7322:12154)
+    at MessagePort.<anonymous> (vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/workbench/workbench.desktop.main.js:9402:18292)'use client'
+>>>>>>> e5762fe4 (feat(legal): add DRP & ElderCore legal pages with MDX content, hero sections, cross-links, and SEO metadata)
 
 import React, { useState } from 'react';
 import Link from 'next/link';
