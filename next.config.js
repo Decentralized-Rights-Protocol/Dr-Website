@@ -47,6 +47,14 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
+  async redirects() {
+    return [
+      { source: '/privacy-policy', destination: '/legal/privacy-policy', permanent: true },
+      { source: '/terms-of-service', destination: '/legal/terms-of-service', permanent: true },
+      { source: '/eldercore-terms', destination: '/legal/eldercore-terms', permanent: true },
+      { source: '/eldercore-privacy', destination: '/legal/eldercore-privacy', permanent: true },
+    ]
+  },
 };
 
 module.exports = nextConfig;
