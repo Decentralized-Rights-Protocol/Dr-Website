@@ -20,10 +20,28 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   compress: true,
   async headers() {
+    const csp = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://translate.google.com https://translate.googleapis.com https://vercel.live https://tally.so",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "img-src 'self' data: https:",
+      "font-src 'self' https://fonts.gstatic.com data:",
+      "connect-src 'self' https://*.vercel.app https://vercel.com https://www.google-analytics.com https://vitals.vercel-insights.com https://translate.google.com https://translate.googleapis.com",
+      "frame-src 'self' https://translate.google.com https://vercel.live https://tally.so",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "upgrade-insecure-requests"
+    ].join('; ')
+
     return [
       {
         source: '/:path*',
         headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
@@ -39,6 +57,10 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: csp,
           },
         ],
       },

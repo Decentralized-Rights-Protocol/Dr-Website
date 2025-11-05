@@ -45,7 +45,6 @@ const navigation = {
 }
 
 export function Footer() {
-  const tallyId = process.env.NEXT_PUBLIC_TALLY_FORM_ID
   return (
     <footer className="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-t border-neutral-200/60 dark:border-neutral-800/60">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
@@ -53,7 +52,14 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <Image src="/DRP.png" alt="DRP Logo" width={40} height={40} className="h-10 w-10" />
+              <Image 
+                src="/DRP.png" 
+                alt="DRP Logo" 
+                width={40} 
+                height={40} 
+                className="h-10 w-10 object-contain"
+                style={{ aspectRatio: '1/1' }}
+              />
               <span className="text-lg font-bold text-neutral-900 dark:text-white">Decentralized Rights Protocol</span>
             </div>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-sm">
@@ -102,28 +108,16 @@ export function Footer() {
         <div className="mt-10 rounded-xl border border-neutral-200/60 dark:border-neutral-800/60 bg-neutral-50/80 dark:bg-neutral-900/40 p-6 text-center">
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Stay updated with DRP</h3>
           <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 max-w-2xl mx-auto">Get the latest updates on protocol development, community events, and human rights initiatives.</p>
-          {tallyId ? (
-            <button
-              data-tally-open={tallyId}
-              data-tally-layout="modal"
-              data-tally-align-left="1"
-              data-tally-hide-title="1"
-              data-tally-overlay="1"
-              data-tally-emoji-text="👋"
-              data-tally-emoji-animation="wave"
-              className="rounded-md bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"
-            >
-              Subscribe to Newsletter
-            </button>
-          ) : (
-            <Link
-              href="https://tally.so"
-              target="_blank"
-              className="rounded-md bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"
-            >
-              Subscribe to Newsletter
-            </Link>
-          )}
+          <button
+            data-tally-open="3xKMro"
+            data-tally-hide-title="1"
+            data-tally-overlay="1"
+            data-tally-emoji-text="👋"
+            data-tally-emoji-animation="wave"
+            className="rounded-md bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"
+          >
+            Subscribe to Newsletter
+          </button>
         </div>
 
         {/* Footer small print */}
