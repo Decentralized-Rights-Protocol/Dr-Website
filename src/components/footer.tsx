@@ -106,6 +106,9 @@ export function Footer() {
             <button
               data-tally-open={tallyId}
               data-tally-layout="modal"
+              data-tally-align-left="1"
+              data-tally-hide-title="1"
+              data-tally-overlay="1"
               data-tally-emoji-text="👋"
               data-tally-emoji-animation="wave"
               className="rounded-md bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"

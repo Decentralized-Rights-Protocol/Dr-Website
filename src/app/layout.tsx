@@ -7,8 +7,31 @@ import { ReactNode } from "react";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Decentralized Rights Protocol",
-  description: "Blockchain-based rights management and verification system",
+  title: 'Decentralized Rights Protocol (DRP)',
+  description: 'Building a human-rights-centered blockchain powered by Proof of Status and Proof of Activity.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://dr-website.vercel.app'),
+  openGraph: {
+    title: 'Decentralized Rights Protocol (DRP)',
+    description:
+      'Building a human-rights-centered blockchain powered by Proof of Status and Proof of Activity.',
+    images: [
+      {
+        url: '/08_IFOPE_20x30.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Flag of Planet Earth representing unity and global rights',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Decentralized Rights Protocol (DRP)',
+    description:
+      'Building a human-rights-centered blockchain powered by Proof of Status and Proof of Activity.',
+    images: ['/08_IFOPE_20x30.jpg'],
+    creator: '@De_Rights',
+  },
 };
 
 export default function RootLayout({
