@@ -31,7 +31,7 @@ export default function NotFound() {
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
-      {/* Earth Flag Background */}
+      {/* Earth Flag Background - STEAM Theme */}
       <div 
         className="absolute inset-0 opacity-10 dark:opacity-5"
         style={{
@@ -77,10 +77,10 @@ export default function NotFound() {
         <div className="mb-8">
           <AlertCircle className="mx-auto h-16 w-16 text-primary-600 dark:text-primary-400 mb-4 animate-bounce" />
           <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-            Block Not Found
+            Page Not Found
           </h2>
           <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            The page you're looking for doesn't exist in our blockchain. It may have been moved, deleted, or never existed.
+            The block you are looking for doesn't exist. It may have been moved, deleted, or never existed.
           </p>
         </div>
 
@@ -119,7 +119,7 @@ export default function NotFound() {
             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
           >
             <Home className="h-5 w-5" />
-            Go Home
+            Return Home
           </Link>
           <Link
             href="/docs"

@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+  reactStrictMode: true,
   swcMinify: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -19,6 +22,10 @@ const nextConfig = {
   },
   productionBrowserSourceMaps: false,
   compress: true,
+  experimental: {
+    appDir: true,
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
+  },
   async headers() {
     const csp = [
       "default-src 'self'",

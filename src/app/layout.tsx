@@ -62,8 +62,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" type="image/png" href="/DRP.png" />
-        <link rel="apple-touch-icon" href="/DRP.png" />
+        <link rel="icon" type="image/png" href="/site-icon.png" />
+        <link rel="apple-touch-icon" href="/site-icon.png" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="theme-color" content="#0D1B2A" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Tally embed script */}
