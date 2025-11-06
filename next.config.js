@@ -78,6 +78,26 @@ const nextConfig = {
       { source: '/terms-of-service', destination: '/legal/terms-of-service', permanent: true },
       { source: '/eldercore-terms', destination: '/legal/eldercore-terms', permanent: true },
       { source: '/eldercore-privacy', destination: '/legal/eldercore-privacy', permanent: true },
+      {
+        source: '/explorer',
+        destination: 'https://explorer.decentralizedrights.com',
+        permanent: false,
+      },
+      {
+        source: '/explorer/:path*',
+        destination: 'https://explorer.decentralizedrights.com/:path*',
+        permanent: false,
+      },
+      {
+        source: '/api/:path*',
+        destination: 'https://api.decentralizedrights.com/:path*',
+        permanent: false,
+      },
+      {
+        source: '/app/:path*',
+        destination: 'https://app.decentralizedrights.com/:path*',
+        permanent: false,
+      },
     ]
   },
 };

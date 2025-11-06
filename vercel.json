@@ -1,20 +1,5 @@
 {
-  "redirects": [
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.decentralizedrights.com" }], "destination": "https://decentralizedrights.com/$1", "permanent": true }
-  ],
-  "rewrites": [
-    { "source": "/404", "destination": "/not-found" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "no-referrer-when-downgrade" }
-      ]
-    }
+  "routes": [
+    { "src": "/.*", "dest": "/" }
   ]
 }
-
