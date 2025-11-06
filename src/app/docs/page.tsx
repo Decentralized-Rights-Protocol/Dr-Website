@@ -177,6 +177,12 @@ export default function DocsPage() {
               >
                 Contributing Guide
               </Link>
+              <Link
+                href="/docs/faq"
+                className="inline-flex items-center px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-sm font-medium rounded-md text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500 transition-colors"
+              >
+                View FAQ
+              </Link>
             </div>
           </div>
         </div>

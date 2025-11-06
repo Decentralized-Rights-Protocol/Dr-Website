@@ -2,6 +2,9 @@
   "redirects": [
     { "source": "/(.*)", "has": [{ "type": "host", "value": "www.decentralizedrights.com" }], "destination": "https://decentralizedrights.com/$1", "permanent": true }
   ],
+  "rewrites": [
+    { "source": "/404", "destination": "/not-found" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
