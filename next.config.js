@@ -22,10 +22,6 @@ const nextConfig = {
   },
   productionBrowserSourceMaps: false,
   compress: true,
-  experimental: {
-    appDir: true,
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
-  },
   async headers() {
     const csp = [
       "default-src 'self'",
