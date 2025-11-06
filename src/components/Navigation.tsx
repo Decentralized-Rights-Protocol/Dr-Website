@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { WalletConnectButton } from '@/components/wallet/WalletConnectButton'
+import { GoogleTranslate } from '@/components/GoogleTranslate'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -34,7 +35,14 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/DRP.png" alt="DRP Logo" width={32} height={32} className="h-8 w-8" />
+              <Image 
+                src="/DRP.png" 
+                alt="DRP Logo" 
+                width={32} 
+                height={32} 
+                className="h-8 w-8 object-contain"
+                style={{ aspectRatio: '1/1' }}
+              />
               <span className="text-lg font-semibold text-neutral-900 dark:text-white hidden md:inline">Decentralized Rights Protocol</span>
             </Link>
           </div>
@@ -60,6 +68,7 @@ export default function Navigation() {
               <div className="[&_*:where(button)]:bg-primary-600 [&_*:where(button)]:text-white [&_*:where(button)]:hover:bg-primary-500 [&_*:where(button)]:transition-colors">
                 <WalletConnectButton />
               </div>
+              <GoogleTranslate />
               <LanguageSwitcher compact />
               <ThemeToggle />
             </div>
@@ -95,6 +104,7 @@ export default function Navigation() {
               <div className="flex [&_*:where(button)]:bg-primary-600 [&_*:where(button)]:text-white [&_*:where(button)]:hover:bg-primary-500 [&_*:where(button)]:transition-colors">
                 <WalletConnectButton />
               </div>
+              <GoogleTranslate />
               <LanguageSwitcher compact />
               <ThemeToggle />
             </div>

@@ -38,7 +38,7 @@ interface QuizState {
 export default function LessonPage() {
   const params = useParams();
   const router = useRouter();
-  const lessonId = params.id as string;
+  const lessonId = params?.id as string;
   
   const [lesson, setLesson] = useState<LessonContent | null>(null);
   const [loading, setLoading] = useState(true);

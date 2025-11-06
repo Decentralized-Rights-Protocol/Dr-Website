@@ -207,6 +207,38 @@ export default function ExplorerPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Sidebar Navigation */}
+          <aside className="lg:col-span-1">
+            <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-200 dark:border-neutral-700 sticky top-6">
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Navigation</h3>
+              <nav className="space-y-2">
+                {[
+                  { id: 'blocks', label: 'Blocks', icon: Hash },
+                  { id: 'transactions', label: 'Transactions', icon: Activity },
+                  { id: 'elders', label: 'Validators', icon: Shield },
+                  { id: 'status', label: 'Status', icon: TrendingUp }
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => item.id !== 'status' && setActiveTab(item.id as any)}
+                    className={cn(
+                      'w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                      activeTab === item.id
+                        ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400'
+                        : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-700'
+                    )}
+                  >
+                    <item.icon className="w-4 h-4" />
+                    {item.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+
+          {/* Main Content */}
+          <div className="lg:col-span-3">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-lg border border-neutral-200 dark:border-neutral-700">
@@ -317,7 +349,7 @@ export default function ExplorerPage() {
             {/* Blocks Tab */}
             {activeTab === 'blocks' && (
               <div className="space-y-4">
-                {blocks.map((block) => (
+                {blocks.map((block, index) => (
                   <div key={block.number} className="border border-neutral-200 dark:border-neutral-700 rounded-lg p-4 hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
@@ -486,10 +518,13 @@ export default function ExplorerPage() {
           </div>
         </div>
 
+          </div>
+        </div>
+
         {/* Footer */}
         <div className="mt-12 text-center">
           <p className="text-neutral-600 dark:text-neutral-400">
-            Powered by the Decentralized Rights Protocol
+            Powered by <span className="font-semibold text-primary-600 dark:text-primary-400">DRP</span>
           </p>
           <div className="mt-4 flex justify-center space-x-6">
             <a href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain" className="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300">

@@ -30,8 +30,20 @@ export default function NotFound() {
   ]
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-6 py-24 bg-gradient-to-br from-neutral-50 via-blue-50 to-purple-50 dark:from-neutral-900 dark:via-blue-900/20 dark:to-purple-900/20">
-      <div className="max-w-4xl mx-auto text-center">
+    <main className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
+      {/* Earth Flag Background */}
+      <div 
+        className="absolute inset-0 opacity-10 dark:opacity-5"
+        style={{
+          backgroundImage: 'url(/08_IFOPE_20x30.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(20px)',
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-blue-50 to-purple-50 dark:from-neutral-900 dark:via-blue-900/20 dark:to-purple-900/20" />
+      
+      <div className="max-w-4xl mx-auto text-center relative z-10">
         {/* Animated 404 */}
         <div className="relative mb-8">
           <h1 className="text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-purple-600 to-secondary-600 dark:from-primary-400 dark:via-purple-400 dark:to-secondary-400 animate-pulse">

@@ -65,6 +65,7 @@ export function LanguageSwitcher({
     }
 
     // Navigate to the new locale
+    if (!pathname) return
     const segments = pathname.split('/')
     segments[1] = langCode
     const newPath = segments.join('/')

@@ -76,6 +76,9 @@ export function Footer() {
               <li><Link href="/whitepaper" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Whitepaper (PDF)</Link></li>
               <li><Link href="/community" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Community</Link></li>
               <li><Link href="/learn" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Learn</Link></li>
+              <li className="pt-2"><Link href="/api" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">API</Link></li>
+              <li><Link href="/app" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">App</Link></li>
+              <li><Link href="/explorer" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Explorer</Link></li>
             </ul>
           </div>
 
