@@ -1,6 +1,12 @@
 {
   "redirects": [
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.decentralizedrights.com" }], "destination": "https://decentralizedrights.com/$1", "permanent": true }
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "www.decentralizedrights.com" }], "destination": "https://decentralizedrights.com/$1", "permanent": true },
+    { "source": "/api/(.*)", "destination": "https://api.decentralizedrights.com/$1", "permanent": false },
+    { "source": "/explorer/(.*)", "destination": "https://explorer.decentralizedrights.com/$1", "permanent": false },
+    { "source": "/app/(.*)", "destination": "https://app.decentralizedrights.com/$1", "permanent": false }
+  ],
+  "routes": [
+    { "src": "/.*", "dest": "/" }
   ],
   "headers": [
     {
