@@ -1,0 +1,2 @@
+# Ignore app/ folder at root - use src/app/ instead
+/app/
