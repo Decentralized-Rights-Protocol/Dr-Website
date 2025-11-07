@@ -1,15 +1,1 @@
-import { HeroSection } from '@/components/hero-section';
-import { MissionSection } from '@/components/mission-section';
-import { FeaturesSection } from '@/components/features-section';
-import { QuickLinks } from '@/components/quick-links';
-
-export default function HomePage() {
-  return (
-    <div className="flex flex-col">
-      <HeroSection />
-      <FeaturesSection />
-      <MissionSection />
-      <QuickLinks />
-    </div>
-  );
-}
+// This file has been moved to app-subdomain/ to avoid conflict with src/app
