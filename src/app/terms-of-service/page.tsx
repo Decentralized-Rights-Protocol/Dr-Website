@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 export const metadata: Metadata = {
   title: 'Terms of Service | Decentralized Rights Protocol',
   description: 'Terms of Service for using the Decentralized Rights Protocol platform and services.',
-  openGraph:({
+  openGraph: {
     title: 'Terms of Service | DRP',
     description: 'Legal terms and conditions for DRP platform usage',
     images: ['/DRP.png'],
