@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function TermsOfServicePage() {
   const content = readFileSync(join(process.cwd(), 'legal', 'terms-of-service.mdx'), 'utf-8');
-  
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -60,5 +60,5 @@ export default function TermsOfServicePage() {
         </div>
       </div>
     </div>
-  };
+  );
 }
