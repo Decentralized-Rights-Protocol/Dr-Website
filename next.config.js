@@ -1,12 +1,18 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
   images: {
     unoptimized: true,
   },
-  // Next.js automatically supports src/app directory
-  // No experimental.appDir needed in Next.js 14+
+  // Explicitly set paths to use src directory
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'src', 'styles')],
+  },
+  // Skip app/ folder, use src/app/ only
+  // This is automatic in Next.js 14 but we'll be explicit
   async rewrites() {
     return [
       {
