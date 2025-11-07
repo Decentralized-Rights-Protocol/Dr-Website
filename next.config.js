@@ -2,12 +2,11 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  experimental: {
-    appDir: true,
-  },
   images: {
     unoptimized: true,
   },
+  // Next.js automatically supports src/app directory
+  // No experimental.appDir needed in Next.js 14+
   async rewrites() {
     return [
       {
@@ -15,11 +14,11 @@ const nextConfig = {
         destination: 'https://explorer.decentralizedrights.com/:path*',
       },
       {
-        source: '/api/:path*',
+        source: '/api-external/:path*',
         destination: 'https://api.decentralizedrights.com/:path*',
       },
       {
-        source: '/app/:path*',
+        source: '/app-external/:path*',
         destination: 'https://app.decentralizedrights.com/:path*',
       },
     ];
