@@ -1,95 +1,47 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Navigation from "@/components/Navigation";
-import { Footer } from "@/components/footer";
-import ScrollToTop from "@/components/scroll-to-top";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ReactNode } from "react";
-import Script from "next/script";
+import './globals.css'
+import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Decentralized Rights Protocol (DRP)',
-  description: 'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
-  keywords: ['blockchain', 'decentralized rights', 'proof of status', 'proof of activity', 'DRP', 'AI blockchain', 'human rights', 'sustainability', 'crypto Africa', 'decentralized economy', 'Web3', 'clean energy'],
-  authors: [{ name: 'Decentralized Rights Protocol Team' }],
-  creator: 'NeonTechnoX',
-  publisher: 'Decentralized Rights Protocol',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://decentralizedrights.com'),
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: 'Decentralized Rights Protocol (DRP)',
-    description: 'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
-    url: 'https://decentralizedrights.com',
-    siteName: 'Decentralized Rights Protocol',
-    images: [
-      {
-        url: '/08_IFOPE_20x30.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Flag of Planet Earth representing unity and global rights',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Decentralized Rights Protocol (DRP)',
-    description: 'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
-    images: ['/08_IFOPE_20x30.jpg'],
-    creator: '@De_Rights',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
+  title: 'Decentralized Rights Protocol',
+  description: 'Empowering human rights, sustainability, and AI transparency through blockchain',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" type="image/png" href="/site-icon.png" />
-        <link rel="apple-touch-icon" href="/site-icon.png" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#0D1B2A" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* Tally embed script */}
-        <Script async src="https://tally.so/widgets/embed.js" />
-      </head>
+    <html lang="en">
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="relative flex min-h-screen flex-col">
-            <Navigation />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <ScrollToTop />
+        <nav className="border-b border-gray-200 dark:border-gray-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between h-16">
+              <div className="flex items-center">
+                <Link href="/" className="font-bold text-xl">
+                  DRP
+                </Link>
+              </div>
+              <div className="flex items-center space-x-8">
+                <Link href="/learn" className="hover:text-blue-600">Learn</Link>
+                <Link href="/why-drp" className="hover:text-blue-600">Why DRP</Link>
+                <Link href="/docs" className="hover:text-blue-600">Docs</Link>
+                <Link href="/roadmap" className="hover:text-blue-600">Roadmap</Link>
+                <Link href="/whitepaper" className="hover:text-blue-600">Whitepaper</Link>
+                <Link href="/community" className="hover:text-blue-600">Community</Link>
+                <a href="https://explorer.decentralizedrights.com" className="hover:text-blue-600" target="_blank" rel="noopener noreferrer">
+                  Explorer
+                </a>
+                <a href="https://app.decentralizedrights.com" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                  Launch App
+                </a>
+              </div>
+            </div>
           </div>
-        </ThemeProvider>
-        {/* Google Translate Script */}
-        <Script
-          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          strategy="afterInteractive"
-        />
+        </nav>
+        {children}
       </body>
     </html>
-  );
+  )
 }
