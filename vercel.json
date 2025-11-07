@@ -1,33 +1,23 @@
 {
-  "redirects": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.decentralizedrights.com" }],
-      "destination": "https://decentralizedrights.com/$1",
-      "permanent": true
+      "src": "/api/(.*)",
+      "dest": "https://api.decentralizedrights.com/$1"
+    },
+    {
+      "src": "/explorer/(.*)",
+      "dest": "https://explorer.decentralizedrights.com/$1"
+    },
+    {
+      "src": "/app/(.*)",
+      "dest": "https://app.decentralizedrights.com/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains; preload"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "no-referrer-when-downgrade"
-        }
-      ]
-    }
-  ]
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
 }
