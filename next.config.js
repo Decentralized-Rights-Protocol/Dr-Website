@@ -20,11 +20,11 @@ const nextConfig = {
         destination: 'https://explorer.decentralizedrights.com/:path*',
       },
       {
-        source: '/api-external/:path*',
+        source: '/api-docs/:path*',
         destination: 'https://api.decentralizedrights.com/:path*',
       },
       {
-        source: '/app-external/:path*',
+        source: '/dashboard/:path*',
         destination: 'https://app.decentralizedrights.com/:path*',
       },
     ];

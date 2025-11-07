@@ -65,9 +65,13 @@ export default function Navigation() {
 
           <div className="flex items-center gap-x-2">
             <div className="hidden lg:flex lg:items-center lg:gap-x-2">
-              <div className="[&_*:where(button)]:bg-primary-600 [&_*:where(button)]:text-white [&_*:where(button)]:hover:bg-primary-500 [&_*:where(button)]:transition-colors">
-                <WalletConnectButton />
-              </div>
+              {pathname?.startsWith('/learn') && (
+                <Link href="/learn" className="inline-flex">
+                  <div className="[&_*:where(button)]:bg-primary-600 [&_*:where(button)]:text-white [&_*:where(button)]:hover:bg-primary-500 [&_*:where(button)]:transition-colors">
+                    <WalletConnectButton />
+                  </div>
+                </Link>
+              )}
               <GoogleTranslate />
               <LanguageSwitcher compact />
               <ThemeToggle />
@@ -101,9 +105,13 @@ export default function Navigation() {
               </Link>
             ))}
             <div className="px-3 py-2 flex items-center gap-2 border-t border-neutral-200 dark:border-neutral-800 mt-2">
-              <div className="flex [&_*:where(button)]:bg-primary-600 [&_*:where(button)]:text-white [&_*:where(button)]:hover:bg-primary-500 [&_*:where(button)]:transition-colors">
-                <WalletConnectButton />
-              </div>
+              {pathname?.startsWith('/learn') && (
+                <Link href="/learn" className="flex">
+                  <div className="flex [&_*:where(button)]:bg-primary-600 [&_*:where(button)]:text-white [&_*:where(button)]:hover:bg-primary-500 [&_*:where(button)]:transition-colors">
+                    <WalletConnectButton />
+                  </div>
+                </Link>
+              )}
               <GoogleTranslate />
               <LanguageSwitcher compact />
               <ThemeToggle />

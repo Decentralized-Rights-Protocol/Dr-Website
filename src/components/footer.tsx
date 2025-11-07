@@ -51,15 +51,15 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Image 
-                src="/DRP.png" 
-                alt="DRP Logo" 
-                width={40} 
-                height={40} 
-                className="h-10 w-10 object-contain"
-                style={{ aspectRatio: '1/1' }}
-              />
+                <div className="flex items-center gap-3 mb-4">
+                  <Image
+                    src="/site-icon.png"
+                    alt="DRP Logo"
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 object-contain"
+                    style={{ aspectRatio: '1/1' }}
+                  />
               <span className="text-lg font-bold text-neutral-900 dark:text-white">Decentralized Rights Protocol</span>
             </div>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-sm">
