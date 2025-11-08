@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import { Footer } from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
-import { ScrollToTop } from '@/components/scroll-to-top'
 
 export const metadata: Metadata = {
   title: 'Decentralized Rights Protocol',
@@ -60,7 +59,6 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
-          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>
