@@ -1,10 +1,48 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import Navigation from '@/components/Navigation'
+import { Footer } from '@/components/footer'
+import { ThemeProvider } from '@/components/theme-provider'
+import { ScrollToTop } from '@/components/scroll-to-top'
 
 export const metadata: Metadata = {
   title: 'Decentralized Rights Protocol',
   description: 'Empowering human rights, sustainability, and AI transparency through blockchain',
+  metadataBase: new URL('https://decentralizedrights.com'),
+  openGraph: {
+    title: 'Decentralized Rights Protocol',
+    description: 'Empowering human rights, sustainability, and AI transparency through blockchain',
+    url: 'https://decentralizedrights.com',
+    siteName: 'Decentralized Rights Protocol',
+    images: [
+      {
+        url: '/DRP.png',
+        width: 1200,
+        height: 630,
+        alt: 'Decentralized Rights Protocol',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Decentralized Rights Protocol',
+    description: 'Empowering human rights, sustainability, and AI transparency through blockchain',
+    creator: '@De_Rights',
+    images: ['/DRP.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({
@@ -13,34 +51,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>
-        <nav className="border-b border-gray-200 dark:border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-16">
-              <div className="flex items-center">
-                <Link href="/" className="font-bold text-xl">
-                  DRP
-                </Link>
-              </div>
-              <div className="flex items-center space-x-8">
-                <Link href="/learn" className="hover:text-blue-600">Learn</Link>
-                <Link href="/why-drp" className="hover:text-blue-600">Why DRP</Link>
-                <Link href="/docs" className="hover:text-blue-600">Docs</Link>
-                <Link href="/roadmap" className="hover:text-blue-600">Roadmap</Link>
-                <Link href="/whitepaper" className="hover:text-blue-600">Whitepaper</Link>
-                <Link href="/community" className="hover:text-blue-600">Community</Link>
-                <a href="https://explorer.decentralizedrights.com" className="hover:text-blue-600" target="_blank" rel="noopener noreferrer">
-                  Explorer
-                </a>
-                <a href="https://app.decentralizedrights.com" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                  Launch App
-                </a>
-              </div>
-            </div>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body className="min-h-screen bg-background font-sans antialiased">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div className="relative flex min-h-screen flex-col">
+            <Navigation />
+            <main className="flex-1">{children}</main>
+            <Footer />
           </div>
-        </nav>
-        {children}
+          <ScrollToTop />
+        </ThemeProvider>
       </body>
     </html>
   )
