@@ -1,0 +1,33 @@
+{
+  "welcome": "Akwaaba",
+  "home": "Fie",
+  "about": "Fa yɛn ho",
+  "contact": "Ka yɛn ho asɛm",
+  "docs": "Nkrataa",
+  "community": "Mpɔtam",
+  "learn": "Sua",
+  "explorer": "Hwehwɛ",
+  "whitepaper": "Krataa fitaa",
+  "roadmap": "Kwan a yɛbɛfa so",
+  "features": "Nneɛma",
+  "getStarted": "Fi ase",
+  "learnMore": "Sua pii",
+  "description": "Decentralized Rights Protocol - ƞman a wƓde blockchain di dwuma de ma nnipa atɛntrenee wɓ wiase nyinaa",
+  "navigation": {
+    "home": "Fie",
+    "docs": "Nkrataa",
+    "community": "Mpɔtam",
+    "explorer": "Hwehwɛ",
+    "whitepaper": "Krataa fitaa"
+  },
+  "hero": {
+    "title": "Empowering Digital Rights Globally",
+    "subtitle": "Blockchain a ɛma nnipa atɛntrenee wɓ dijitaal mu",
+    "cta": "Fi ase nnɛ"
+  },
+  "footer": {
+    "copyright": "© 2025 Decentralized Rights Protocol",
+    "privacy": "Kokoamsɛ�",
+    "terms": "Nhyehyɛe ahorow"
+  }
+}
