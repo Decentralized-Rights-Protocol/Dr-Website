@@ -1,20 +1,31 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
+const { i18n } = require('./next-i18next.config');
 
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  i18n,
   images: {
     unoptimized: true,
   },
-  // Explicitly set paths to use src directory
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')],
   },
-  // Skip app/ folder, use src/app/ only
-  // This is automatic in Next.js 14 but we'll be explicit
   async rewrites() {
     return [
+      {
+        source: '/:locale/explorer/:path*',
+        destination: 'https://explorer.decentralizedrights.com/:path*',
+      },
+      {
+        source: '/:locale/api-docs/:path*',
+        destination: 'https://api.decentralizedrights.com/:path*',
+      },
+      {
+        source: '/:locale/dashboard/:path*',
+        destination: 'https://app.decentralizedrights.com/:path*',
+      },
       {
         source: '/explorer/:path*',
         destination: 'https://explorer.decentralizedrights.com/:path*',
