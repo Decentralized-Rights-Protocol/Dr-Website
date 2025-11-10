@@ -51,15 +51,15 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {/* Brand */}
           <div>
-                <div className="flex items-center gap-3 mb-4">
-                <Image
-                    src="/site-icon.png"
-                    alt="DRP Logo"
-                    width={40}
-                    height={40}
-                    className="h-10 w-10 object-contain"
-                    style={{ aspectRatio: '1/1' }}
-                  />
+            <div className="flex items-center gap-3 mb-4">
+              <Image
+                src="/site-icon.png"
+                alt="DRP Logo"
+                width={40}
+                height={40}
+                className="h-10 w-10 object-contain"
+                style={{ aspectRatio: '1/1' }}
+              />
               <span className="text-lg font-bold text-neutral-900 dark:text-white">Decentralized Rights Protocol</span>
             </div>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-sm">
@@ -111,22 +111,19 @@ export function Footer() {
         <div className="mt-10 rounded-xl border border-neutral-200/60 dark:border-neutral-800/60 bg-neutral-50/80 dark:bg-neutral-900/40 p-6 text-center">
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Stay updated with DRP</h3>
           <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 max-w-2xl mx-auto">Get the latest updates on protocol development, community events, and human rights initiatives.</p>
-          <iframe
-            data-tally-src="https://tally.so/embed/3xKMro?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-            loading="lazy"
-            width="100%"
-            height="143"
-            frameBorder="0"
+
+          {/* Embedded Tally Form */}
+          <iframe 
+            data-tally-src="https://tally.so/embed/3xKMro?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
+            loading="lazy" 
+            width="100%" 
+            height="143" 
+            frameBorder="0" 
             marginHeight={0}
             marginWidth={0}
             title="Subscribe to Newsletter"
-            className="rounded-md"
+            className="mx-auto max-w-md"
           ></iframe>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds:d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}`,
-            }}
-          />
         </div>
 
         {/* Footer small print */}
