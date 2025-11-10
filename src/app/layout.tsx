@@ -6,18 +6,18 @@ import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
   title: 'Decentralized Rights Protocol',
-  description: 'Empowering human rights, sustainability, and AI transparency through blockchain',
+  description: 'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
   metadataBase: new URL('https://decentralizedrights.com'),
   openGraph: {
     title: 'Decentralized Rights Protocol',
-    description: 'Empowering human rights, sustainability, and AI transparency through blockchain',
+    description: 'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
     url: 'https://decentralizedrights.com',
     siteName: 'Decentralized Rights Protocol',
     images: [
       {
-        url: 'https://decentralizedrights.com/DRP.png',
+        url: 'https://decentralizedrights.com/08_IFOPE_20x30.jpg',
         width: 1200,
-        height: 630,
+        height: 800,
         alt: 'Decentralized Rights Protocol',
       },
     ],
@@ -27,10 +27,16 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Decentralized Rights Protocol',
-    description: 'Empowering human rights, sustainability, and AI transparency through blockchain',
+    description: 'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
     creator: '@De_Rights',
-    images: ['https://decentralizedrights.com/DRP.png'],
+    images: ['https://decentralizedrights.com/08_IFOPE_20x30.jpg'],
   },
+  icons: {
+    icon: '/site-icon.png',
+    shortcut: '/site-icon.png',
+    apple: '/site-icon.png',
+  },
+  manifest: '/site.webmanifest',
   robots: {
     index: true,
     follow: true,
@@ -42,11 +48,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: '/site-icon.png',
-    apple: '/site-icon.png',
-  },
-  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({
@@ -57,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#7c3aed" />
+        <meta name="theme-color" content="#2563eb" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
