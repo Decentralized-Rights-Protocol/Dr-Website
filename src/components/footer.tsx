@@ -52,7 +52,7 @@ export function Footer() {
           {/* Brand */}
           <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <Image
+                <Image
                     src="/site-icon.png"
                     alt="DRP Logo"
                     width={40}
@@ -107,20 +107,26 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Newsletter */}
+        {/* Newsletter - Embedded Tally Form */}
         <div className="mt-10 rounded-xl border border-neutral-200/60 dark:border-neutral-800/60 bg-neutral-50/80 dark:bg-neutral-900/40 p-6 text-center">
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Stay updated with DRP</h3>
           <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 max-w-2xl mx-auto">Get the latest updates on protocol development, community events, and human rights initiatives.</p>
-          <button
-            data-tally-open="3xKMro"
-            data-tally-hide-title="1"
-            data-tally-overlay="1"
-            data-tally-emoji-text="👋"
-            data-tally-emoji-animation="wave"
-            className="rounded-md bg-primary-600 px-6 py-3 text-sm font-semibold text-white hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors"
-          >
-            Subscribe to Newsletter
-          </button>
+          <iframe
+            data-tally-src="https://tally.so/embed/3xKMro?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="143"
+            frameBorder="0"
+            marginHeight={0}
+            marginWidth={0}
+            title="Subscribe to Newsletter"
+            className="rounded-md"
+          ></iframe>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds:d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}`,
+            }}
+          />
         </div>
 
         {/* Footer small print */}
