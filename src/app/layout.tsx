@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     siteName: 'Decentralized Rights Protocol',
     images: [
       {
-        url: '/DRP.png',
+        url: 'https://decentralizedrights.com/DRP.png',
         width: 1200,
         height: 630,
         alt: 'Decentralized Rights Protocol',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: 'Decentralized Rights Protocol',
     description: 'Empowering human rights, sustainability, and AI transparency through blockchain',
     creator: '@De_Rights',
-    images: ['/DRP.png'],
+    images: ['https://decentralizedrights.com/DRP.png'],
   },
   robots: {
     index: true,
@@ -42,6 +42,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: '/site-icon.png',
+    apple: '/site-icon.png',
+  },
+  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({
@@ -51,7 +56,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <meta name="theme-color" content="#7c3aed" />
+      </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
