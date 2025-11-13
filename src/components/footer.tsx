@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Github, Mail, Linkedin, Instagram } from 'lucide-react'
 import { XIcon, DiscordIcon } from '@/components/custom-icons'
+import NewsletterTally from '@/components/NewsletterTally'
 
 const navigation = {
   main: [
@@ -76,11 +77,46 @@ export function Footer() {
               <li><Link href="/whitepaper" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Whitepaper (PDF)</Link></li>
               <li><Link href="/community" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Community</Link></li>
               <li><Link href="/learn" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Learn</Link></li>
-              <li className="pt-2"><Link href="/api" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">API</Link></li>
-              <li><Link href="/app" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">App</Link></li>
-              <li><Link href="/explorer" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Explorer</Link></li>
             </ul>
           </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-3">Services</h4>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="https://api.decentralizedrights.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-neutral-600 transition-colors hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400"
+                >
+                  API
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://app.decentralizedrights.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-neutral-600 transition-colors hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400"
+                >
+                  App
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://explorer.decentralizedrights.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-neutral-600 transition-colors hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400"
+                >
+                  Explorer
+                </a>
+              </li>
+            </ul>
+          </div>
+
 
           {/* Legal & Social */}
           <div className="grid grid-cols-2 gap-6">
@@ -107,24 +143,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Newsletter - Embedded Tally Form */}
-        <div className="mt-10 rounded-xl border border-neutral-200/60 dark:border-neutral-800/60 bg-neutral-50/80 dark:bg-neutral-900/40 p-6 text-center">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Stay updated with DRP</h3>
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 max-w-2xl mx-auto">Get the latest updates on protocol development, community events, and human rights initiatives.</p>
-
-          {/* Embedded Tally Form */}
-          <iframe 
-            data-tally-src="https://tally.so/embed/3xKMro?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
-            loading="lazy" 
-            width="100%" 
-            height="143" 
-            frameBorder="0" 
-            marginHeight={0}
-            marginWidth={0}
-            title="Subscribe to Newsletter"
-            className="mx-auto max-w-md"
-          ></iframe>
-        </div>
+        <NewsletterTally />
 
         {/* Footer small print */}
         <div className="mt-8 flex flex-col items-center gap-3">
