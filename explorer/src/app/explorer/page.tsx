@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { Search, ExternalLink, Copy, Clock, Hash, Users, Activity, TrendingUp, Shield, Zap, Globe } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 
 interface Block {
   number: number

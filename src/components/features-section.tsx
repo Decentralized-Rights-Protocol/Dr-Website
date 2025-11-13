@@ -1,12 +1,12 @@
 'use client'
 
 import * as React from 'react'
-import { Shield, Brain, Zap, Users, Globe, Lock, Cpu, Network, Info } from 'lucide-react'
+import { Shield, Brain, Zap, Users, Globe, Lock, Cpu, Network, Info, type LucideIcon } from 'lucide-react'
 
 type Feature = {
   name: string
   description: string
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  icon: LucideIcon
   color: string
   details: string
 }
