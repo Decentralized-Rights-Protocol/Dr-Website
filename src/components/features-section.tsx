@@ -3,7 +3,15 @@
 import * as React from 'react'
 import { Shield, Brain, Zap, Users, Globe, Lock, Cpu, Network, Info } from 'lucide-react'
 
-const features = [
+type Feature = {
+  name: string
+  description: string
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  color: string
+  details: string
+}
+
+const features: Feature[] = [
   {
     name: 'Quantum-Safe Security',
     description: 'Built with NIST-approved CRYSTALS-Kyber and CRYSTALS-Dilithium algorithms for future-proof security against quantum attacks.',
@@ -62,6 +70,53 @@ const features = [
   },
 ]
 
+function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
+  const [showDetails, setShowDetails] = React.useState(false)
+
+  return (
+    <div
+      className={`group relative bg-white dark:bg-neutral-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-neutral-200 dark:border-neutral-700 animate-slide-up hover-lift ${`animate-stagger-${(index % 8) + 1}`}`}
+      style={{
+        animationDelay: `${index * 100}ms`,
+      }}
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${feature.color} group-hover:scale-110 transition-transform duration-300`}>
+          <feature.icon className="h-6 w-6 text-white" />
+        </div>
+        <button
+          onClick={(event) => {
+            event.stopPropagation()
+            setShowDetails((prev) => !prev)
+          }}
+          className="p-1.5 rounded-lg text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+          aria-label={`Show more details about ${feature.name}`}
+          type="button"
+        >
+          <Info className="h-4 w-4" />
+        </button>
+      </div>
+      <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+        {feature.name}
+      </h3>
+      <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed mb-3">
+        {feature.description}
+      </p>
+
+      {showDetails && (
+        <div className="mt-4 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
+          <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            {feature.details}
+          </p>
+        </div>
+      )}
+
+      {/* Hover effect overlay */}
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-500/5 to-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+    </div>
+  )
+}
+
 export function FeaturesSection() {
   return (
     <section className="py-24 sm:py-32 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-800">
@@ -76,51 +131,9 @@ export function FeaturesSection() {
         </div>
         
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature, index) => {
-            const [showDetails, setShowDetails] = React.useState(false)
-            return (
-              <div
-                key={feature.name}
-                className={`group relative bg-white dark:bg-neutral-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-neutral-200 dark:border-neutral-700 animate-slide-up hover-lift ${`animate-stagger-${(index % 8) + 1}`}`}
-                style={{
-                  animationDelay: `${index * 100}ms`,
-                }}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${feature.color} group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      setShowDetails(!showDetails)
-                    }}
-                    className="p-1.5 rounded-lg text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
-                    aria-label="Show details"
-                  >
-                    <Info className="h-4 w-4" />
-                  </button>
-                </div>
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                  {feature.name}
-                </h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed mb-3">
-                  {feature.description}
-                </p>
-                
-                {showDetails && (
-                  <div className="mt-4 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                    <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                      {feature.details}
-                    </p>
-                  </div>
-                )}
-                
-                {/* Hover effect overlay */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-500/5 to-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-              </div>
-            )
-          })}
+          {features.map((feature, index) => (
+            <FeatureCard key={feature.name} feature={feature} index={index} />
+          ))}
         </div>
         
         {/* Call to action */}

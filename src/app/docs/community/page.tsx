@@ -134,7 +134,7 @@ export default function CommunityPage() {
               <div>
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Need Help?</h3>
                 <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
-                  If you're stuck or have questions, check out our FAQ or reach out to the community:
+                  If you&rsquo;re stuck or have questions, check out our FAQ or reach out to the community:
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link

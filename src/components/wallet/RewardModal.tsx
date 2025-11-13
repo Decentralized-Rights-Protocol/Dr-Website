@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { X, Coins, CheckCircle, ExternalLink, Loader2, Gift } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface RewardModalProps {
   isOpen: boolean;
@@ -28,14 +27,9 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [rewardResult, setRewardResult] = useState<RewardResponse | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const autoCloseTimeoutRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    if (isOpen && rewardData) {
-      processReward();
-    }
-  }, [isOpen, rewardData]);
-
-  const processReward = async () => {
+  const processReward = useCallback(async () => {
     if (!rewardData) return;
 
     setIsProcessing(true);
@@ -66,11 +60,10 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
       if (result.success) {
         setShowSuccess(true);
         // Auto-close after 3 seconds
-        setTimeout(() => {
+        autoCloseTimeoutRef.current = window.setTimeout(() => {
           onClose();
         }, 3000);
       }
-
     } catch (error) {
       console.error('Error processing reward:', error);
       setRewardResult({
@@ -81,7 +74,19 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
     } finally {
       setIsProcessing(false);
     }
-  };
+  }, [onClose, rewardData]);
+
+  useEffect(() => {
+    if (isOpen && rewardData) {
+      void processReward();
+    }
+    return () => {
+      if (autoCloseTimeoutRef.current !== null) {
+        window.clearTimeout(autoCloseTimeoutRef.current);
+        autoCloseTimeoutRef.current = null;
+      }
+    };
+  }, [isOpen, processReward, rewardData]);
 
   const getExplorerUrl = (txHash: string) => {
     // You can make this dynamic based on the network
@@ -126,7 +131,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
             </div>
             <div>
               <h2 className="text-xl font-bold">Reward Earned!</h2>
-              <p className="text-blue-100 text-sm">You've completed a learning activity</p>
+              <p className="text-blue-100 text-sm">You&rsquo;ve completed a learning activity</p>
             </div>
           </div>
         </div>
@@ -165,7 +170,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                     <div className="flex items-center justify-center gap-x-2 mb-2">
                       <Coins className="h-5 w-5 text-green-500" />
                       <span className="text-2xl font-bold text-green-600 dark:text-green-400">
-                        {rewardResult.reward_amount ? (rewardResult.reward_amount / 10**18).toFixed(2) : '0'} DeRi
+                        {rewardResult.reward_amount ? (rewardResult.reward_amount / 10 ** 18).toFixed(2) : '0'} DeRi
                       </span>
                     </div>
                     <p className="text-sm text-neutral-600 dark:text-neutral-300">
@@ -252,7 +257,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
               </h3>
               
               <p className="text-sm text-neutral-600 dark:text-neutral-300 mb-4">
-                You've earned {rewardData?.amount} DeRi tokens for completing this activity!
+                You&rsquo;ve earned {rewardData?.amount} DeRi tokens for completing this activity!
               </p>
               
               <button

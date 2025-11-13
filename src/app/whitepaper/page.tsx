@@ -92,7 +92,7 @@ export default function WhitepaperPage() {
             
             <div className="mt-6 p-4 bg-neutral-50 dark:bg-neutral-700 rounded-lg">
               <p className="text-sm text-neutral-600 dark:text-neutral-300">
-                <strong>Note:</strong> If the preview doesn't load, you can download the PDF directly using the button above.
+                <strong>Note:</strong> If the preview doesn&rsquo;t load, you can download the PDF directly using the button above.
               </p>
             </div>
           </div>

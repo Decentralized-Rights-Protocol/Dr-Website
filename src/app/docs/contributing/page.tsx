@@ -76,7 +76,7 @@ export default function ContributingPage() {
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
               <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3">5. Submit a Pull Request</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
-                Push your changes and create a pull request with a clear description of what you've changed and why.
+                Push your changes and create a pull request with a clear description of what you&rsquo;ve changed and why.
               </p>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function ContributingPage() {
             <ol className="space-y-4 text-neutral-600 dark:text-neutral-400">
               <li className="flex items-start gap-3">
                 <span className="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">1</span>
-                <span>Ensure your code follows the project's style guidelines</span>
+                <span>Ensure your code follows the project&rsquo;s style guidelines</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">2</span>

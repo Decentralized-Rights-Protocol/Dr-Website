@@ -95,7 +95,7 @@ export default function FAQPage() {
         <div className="mt-16 p-6 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-200 dark:border-primary-800">
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Still Have Questions?</h3>
           <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-            Can't find the answer you're looking for? Reach out to our community:
+            Can&rsquo;t find the answer you&rsquo;re looking for? Reach out to our community:
           </p>
           <div className="flex flex-wrap gap-4">
             <Link

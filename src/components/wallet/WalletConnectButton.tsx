@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Wallet, LogOut, Copy, ExternalLink, Coins, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -32,19 +32,22 @@ export function WalletConnectButton() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoadingBalance, setIsLoadingBalance] = useState(false);
 
-  // Check if wallet is already connected on mount
-  useEffect(() => {
-    checkWalletConnection();
+  const getNetworkName = useCallback((chainId: number): string => {
+    switch (chainId) {
+      case 1:
+        return "Ethereum Mainnet";
+      case 11155111:
+        return "Sepolia Testnet";
+      case 137:
+        return "Polygon Mainnet";
+      case 80001:
+        return "Polygon Mumbai";
+      default:
+        return `Chain ${chainId}`;
+    }
   }, []);
 
-  // Load DeRi balance when wallet connects
-  useEffect(() => {
-    if (walletState.isConnected && walletState.address) {
-      loadDeRiBalance();
-    }
-  }, [walletState.isConnected, walletState.address]);
-
-  const checkWalletConnection = async () => {
+  const checkWalletConnection = useCallback(async () => {
     if (typeof window !== "undefined" && window.ethereum) {
       try {
         const accounts = await window.ethereum.request({ method: "eth_accounts" });
@@ -62,9 +65,41 @@ export function WalletConnectButton() {
         console.error("Error checking wallet connection:", error);
       }
     }
-  };
+  }, [getNetworkName]);
 
-  const connectWallet = async () => {
+  const handleAccountsChanged = useCallback((accounts: string[]) => {
+    if (accounts.length === 0) {
+      setWalletState({
+        isConnected: false,
+        address: null,
+        balance: null,
+        chainId: null,
+        networkName: null
+      });
+      setDeriBalance(null);
+      setShowDropdown(false);
+      try {
+        localStorage.removeItem('connectedWallet');
+      } catch {}
+      return;
+    }
+
+    setWalletState(prev => ({ ...prev, address: accounts[0] }));
+    try {
+      localStorage.setItem('connectedWallet', accounts[0]);
+    } catch {}
+  }, []);
+
+  const handleChainChanged = useCallback((chainId: string) => {
+    const newChainId = parseInt(chainId, 16);
+    setWalletState(prev => ({
+      ...prev,
+      chainId: newChainId,
+      networkName: getNetworkName(newChainId)
+    }));
+  }, [getNetworkName]);
+
+  const connectWallet = useCallback(async () => {
     if (typeof window === "undefined" || !window.ethereum) {
       alert("Please install MetaMask or another Web3 wallet");
       return;
@@ -108,11 +143,11 @@ export function WalletConnectButton() {
     } finally {
       setIsConnecting(false);
     }
-  };
+  }, [getNetworkName, handleAccountsChanged, handleChainChanged]);
 
-  const loadDeRiBalance = async () => {
+  const loadDeRiBalance = useCallback(async () => {
     if (!walletState.address) return;
-    
+
     setIsLoadingBalance(true);
     try {
       const response = await fetch(`/api/reward/balance/${walletState.address}`);
@@ -124,29 +159,9 @@ export function WalletConnectButton() {
     } finally {
       setIsLoadingBalance(false);
     }
-  };
+  }, [walletState.address]);
 
-  const handleAccountsChanged = (accounts: string[]) => {
-    if (accounts.length === 0) {
-      disconnectWallet();
-    } else {
-      setWalletState(prev => ({ ...prev, address: accounts[0] }));
-      try {
-        localStorage.setItem('connectedWallet', accounts[0]);
-      } catch {}
-    }
-  };
-
-  const handleChainChanged = (chainId: string) => {
-    const newChainId = parseInt(chainId, 16);
-    setWalletState(prev => ({
-      ...prev,
-      chainId: newChainId,
-      networkName: getNetworkName(newChainId)
-    }));
-  };
-
-  const disconnectWallet = () => {
+  const disconnectWallet = useCallback(() => {
     setWalletState({
       isConnected: false,
       address: null,
@@ -157,28 +172,29 @@ export function WalletConnectButton() {
     setDeriBalance(null);
     setShowDropdown(false);
     try { localStorage.removeItem('connectedWallet'); } catch {}
-    
     // Remove event listeners
     if (window.ethereum) {
       window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
       window.ethereum.removeListener("chainChanged", handleChainChanged);
     }
-  };
+  }, [handleAccountsChanged, handleChainChanged]);
+
+  // Check if wallet is already connected on mount
+  useEffect(() => {
+    void checkWalletConnection();
+  }, [checkWalletConnection]);
+
+  // Load DeRi balance when wallet connects
+  useEffect(() => {
+    if (walletState.isConnected && walletState.address) {
+      void loadDeRiBalance();
+    }
+  }, [walletState.isConnected, walletState.address, loadDeRiBalance]);
 
   const copyAddress = () => {
     if (walletState.address) {
       navigator.clipboard.writeText(walletState.address);
       // You could add a toast notification here
-    }
-  };
-
-  const getNetworkName = (chainId: number): string => {
-    switch (chainId) {
-      case 1: return "Ethereum Mainnet";
-      case 11155111: return "Sepolia Testnet";
-      case 137: return "Polygon Mainnet";
-      case 80001: return "Polygon Mumbai";
-      default: return `Chain ${chainId}`;
     }
   };
 
