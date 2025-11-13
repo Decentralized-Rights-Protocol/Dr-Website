@@ -1,16 +1,22 @@
-'use client'
-
 import Link from 'next/link'
 import { ChevronLeft, Lock, Mail, User } from 'lucide-react'
 
+export const metadata = {
+  title: 'Sign In | DRP App Portal'
+}
+
 export default function LoginPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-neutral-50 to-primary-50/40 px-4 py-16 dark:from-neutral-950 dark:to-primary-950/20">
-      <div className="w-full max-w-md space-y-6 rounded-3xl border border-neutral-200 bg-white p-8 shadow-2xl backdrop-blur dark:border-neutral-800 dark:bg-neutral-900">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200">
-          <ChevronLeft className="h-4 w-4" />
-          Back to portal
-        </Link>
+    <div className="flex flex-col items-center gap-6">
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 text-sm text-neutral-500 transition hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+      >
+        <ChevronLeft className="h-4 w-4" />
+        Back to portal
+      </Link>
+
+      <section className="w-full max-w-lg space-y-6 rounded-3xl border border-neutral-200/80 bg-white/90 p-8 shadow-sm backdrop-blur dark:border-neutral-800/80 dark:bg-neutral-900/60">
         <div className="space-y-2 text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-600 dark:bg-primary-500/20 dark:text-primary-200">
             <Lock className="h-5 w-5" />
@@ -35,7 +41,7 @@ export default function LoginPage() {
           <form className="space-y-3">
             <label className="block">
               <span className="text-xs font-medium uppercase text-neutral-500 dark:text-neutral-400">Email</span>
-              <div className="mt-1 flex items-center rounded-xl border border-neutral-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800">
+              <div className="mt-1 flex items-center rounded-xl border border-neutral-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-950">
                 <Mail className="h-4 w-4 text-neutral-400" />
                 <input
                   type="email"
@@ -47,7 +53,7 @@ export default function LoginPage() {
 
             <label className="block">
               <span className="text-xs font-medium uppercase text-neutral-500 dark:text-neutral-400">Access token</span>
-              <div className="mt-1 flex items-center rounded-xl border border-neutral-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800">
+              <div className="mt-1 flex items-center rounded-xl border border-neutral-200 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-950">
                 <User className="h-4 w-4 text-neutral-400" />
                 <input
                   type="password"
@@ -57,8 +63,11 @@ export default function LoginPage() {
               </div>
             </label>
 
-            <button type="submit" className="mt-3 w-full rounded-xl border border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-800">
-              Request One-Time Code
+            <button
+              type="submit"
+              className="mt-3 w-full rounded-xl border border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-800"
+            >
+              Request one-time code
             </button>
           </form>
         </div>
@@ -69,8 +78,8 @@ export default function LoginPage() {
             Contact the DRP onboarding team
           </a>
         </p>
-      </div>
-    </main>
+      </section>
+    </div>
   )
 }
 
