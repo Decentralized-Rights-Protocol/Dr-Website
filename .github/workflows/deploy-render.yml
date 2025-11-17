@@ -1,0 +1,21 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/deploy-render.yml'
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Trigger Render deployment
+        run: |
+          echo "Render deployments are configured via render.yaml"
+          echo "Manual deployment trigger via Render dashboard or webhook"
+          echo "See infrastructure/deploy_report.md for deployment instructions"
+

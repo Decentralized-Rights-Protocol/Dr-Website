@@ -98,3 +98,69 @@ export interface DashboardMetrics {
   contributionPoints: number
   streak: number
 }
+
+export interface SubmissionResponse {
+  submission_id: string
+  cid: string
+  ipfs_cid: string
+  status: string
+  timestamp: string
+}
+
+export interface ActivityClaim {
+  title: string
+  description: string
+  location?: string
+  timestamp: string
+  media_cid: string
+  hash: string
+  actor_id: string
+}
+
+export interface StatusClaim {
+  category: string
+  issuer: string
+  reference_code?: string
+  credential_cid: string
+  actor_id: string
+}
+
+// API functions
+export async function submitActivity(claim: ActivityClaim): Promise<SubmissionResponse> {
+  const response = await apiRequest<SubmissionResponse, ActivityClaim>({
+    path: '/submit-activity',
+    method: 'POST',
+    body: claim
+  })
+  return response.data
+}
+
+export async function submitStatus(claim: StatusClaim): Promise<SubmissionResponse> {
+  const response = await apiRequest<SubmissionResponse, StatusClaim>({
+    path: '/submit-status',
+    method: 'POST',
+    body: claim
+  })
+  return response.data
+}
+
+export async function getSubmission(cid: string): Promise<SubmissionResponse> {
+  const response = await apiRequest<SubmissionResponse>({
+    path: `/submission/${cid}`,
+    method: 'GET'
+  })
+  return response.data
+}
+
+export async function requestReward(submissionId: string, actorId: string, aiAssessment: Record<string, unknown>): Promise<{ success: boolean; tx_hash?: string; reward_amount?: number; message: string }> {
+  const response = await apiRequest({
+    path: '/reward',
+    method: 'POST',
+    body: {
+      submission_id: submissionId,
+      actor_id: actorId,
+      ai_assessment: aiAssessment
+    }
+  })
+  return response.data as { success: boolean; tx_hash?: string; reward_amount?: number; message: string }
+}

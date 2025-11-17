@@ -1,7 +1,8 @@
 'use client'
 
 import { useMutation } from '@tanstack/react-query'
-import { apiRequest, type ActivityProofPayload } from '@/lib/api'
+import { submitActivity, type ActivityClaim, type SubmissionResponse } from '@/lib/api'
+import { useAppStore } from '@/store/app-store'
 
 interface SubmitActivityInput {
   title: string
@@ -13,29 +14,26 @@ interface SubmitActivityInput {
 }
 
 export function usePoAT() {
+  const address = useAppStore((state) => state.address)
+  
   return useMutation({
-    mutationFn: async ({ file, ...rest }: SubmitActivityInput) => {
-      const formData = new FormData()
-      formData.append('file', file)
-      const { data: media } = await apiRequest<{ cid: string }, FormData>({
-        path: '/verify/activity/media',
-        method: 'POST',
-        body: formData,
-        isMultipart: true
-      })
-
-      const payload: ActivityProofPayload = {
-        ...rest,
-        mediaCid: media.cid
+    mutationFn: async ({ file, hash, ...rest }: SubmitActivityInput): Promise<SubmissionResponse> => {
+      if (!address) {
+        throw new Error('Wallet not connected')
       }
 
-      const { data } = await apiRequest<{ status: string; reward?: { token: string; amount: number } }, ActivityProofPayload>({
-        path: '/verify/activity',
-        method: 'POST',
-        body: payload
-      })
+      // TODO: Upload file to IPFS and get CID (for now, use placeholder)
+      // In production, this would call IPFS API or backend endpoint
+      const mediaCid = `QmPlaceholder${Date.now()}` // Placeholder CID
 
-      return data
+      const claim: ActivityClaim = {
+        ...rest,
+        media_cid: mediaCid,
+        hash,
+        actor_id: address
+      }
+
+      return submitActivity(claim)
     }
   })
 }

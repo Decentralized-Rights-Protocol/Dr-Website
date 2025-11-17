@@ -1,0 +1,54 @@
+services:
+  - type: web
+    name: drp-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd drp-api && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: BLOCKCHAIN_NETWORK
+        value: drp-testnet
+      - key: IPFS_API_URL
+        value: https://ipfs.decentralizedrights.com/api/v0
+      - key: AI_API_URL
+        value: https://ai.decentralizedrights.com
+      - key: POST_QUANTUM_ENABLED
+        value: false
+      - key: DB_URL
+        sync: false  # Set in Render dashboard
+      - key: JWT_SECRET
+        sync: false
+      - key: ELDER_REGISTRY_ADMIN_KEY
+        sync: false
+
+  - type: web
+    name: drp-ai
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd drp-ai && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: POST_QUANTUM_ENABLED
+        value: false
+      - key: AI_PRIVATE_KEY_B64
+        sync: false
+      - key: AI_PUBLIC_KEY_B64
+        sync: false
+
+  - type: worker
+    name: drp-indexer
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd indexer && python indexer.py
+    envVars:
+      - key: DB_URL
+        sync: false
+      - key: API_URL
+        value: https://api.decentralizedrights.com
+      - key: AI_API_URL
+        value: https://ai.decentralizedrights.com
+      - key: IPFS_API_URL
+        value: https://ipfs.decentralizedrights.com/api/v0
+
+databases:
+  - name: drp-db
+    plan: free
+
