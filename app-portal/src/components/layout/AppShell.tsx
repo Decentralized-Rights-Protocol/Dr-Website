@@ -3,8 +3,9 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { Menu, Wallet, Zap } from 'lucide-react'
+import { Menu, Wallet, Heart, User } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { useWallet } from '@/hooks/useWallet'
 import { cn } from '@/lib/utils'
 
 const navigationLinks = [
@@ -24,6 +25,7 @@ interface AppShellProps {
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  const { address, connect, isConnecting } = useWallet()
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-br from-white via-neutral-50 to-primary-50/40 text-neutral-900 dark:from-neutral-950 dark:via-neutral-900 dark:to-primary-950/20 dark:text-neutral-50">
@@ -31,11 +33,11 @@ export function AppShell({ children }: AppShellProps) {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 text-white shadow-lg">
-              <Zap className="h-4 w-4" />
+              <Heart className="h-5 w-5" />
             </div>
-            <div>
-              <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-100">DRP App Portal</p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">Proofs · Rewards · Governance</p>
+            <div className="hidden sm:block">
+              <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-100">DRP App</p>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">Human Rights · Verified Impact</p>
             </div>
           </Link>
 
@@ -57,15 +59,32 @@ export function AppShell({ children }: AppShellProps) {
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
-            <Link
-              href="/login"
-              className="hidden items-center gap-2 rounded-lg border border-primary-600 px-4 py-2 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 dark:border-primary-400 dark:text-primary-200 dark:hover:bg-primary-900/30 md:inline-flex"
-            >
-              <Wallet className="h-4 w-4" />
-              Login
-            </Link>
+            {address ? (
+              <Link
+                href="/dashboard"
+                className="hidden items-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-medium text-white transition-all hover:shadow-lg sm:inline-flex"
+              >
+                <User className="h-4 w-4" />
+                <span className="hidden lg:inline">Dashboard</span>
+              </Link>
+            ) : (
+              <button
+                onClick={async () => {
+                  try {
+                    await connect()
+                  } catch (error) {
+                    console.error('Failed to connect wallet:', error)
+                  }
+                }}
+                disabled={isConnecting}
+                className="hidden items-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-medium text-white transition-all hover:shadow-lg disabled:opacity-50 sm:inline-flex"
+              >
+                <Wallet className="h-4 w-4" />
+                {isConnecting ? 'Connecting...' : <span className="hidden lg:inline">Connect Wallet</span>}
+              </button>
+            )}
             <button
               type="button"
               className="inline-flex items-center justify-center rounded-lg border border-neutral-200 p-2 text-neutral-700 transition hover:bg-neutral-100 dark:border-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800 md:hidden"
@@ -98,14 +117,32 @@ export function AppShell({ children }: AppShellProps) {
                   </Link>
                 )
               })}
-              <Link
-                href="/login"
-                onClick={() => setIsMobileNavOpen(false)}
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary-600 px-4 py-2 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 dark:border-primary-400 dark:text-primary-200 dark:hover:bg-primary-900/30"
-              >
-                <Wallet className="h-4 w-4" />
-                Login
-              </Link>
+              {address ? (
+                <Link
+                  href="/dashboard"
+                  onClick={() => setIsMobileNavOpen(false)}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-medium text-white"
+                >
+                  <User className="h-4 w-4" />
+                  Dashboard
+                </Link>
+              ) : (
+                <button
+                  onClick={async () => {
+                    try {
+                      await connect()
+                      setIsMobileNavOpen(false)
+                    } catch (error) {
+                      console.error('Failed to connect wallet:', error)
+                    }
+                  }}
+                  disabled={isConnecting}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+                >
+                  <Wallet className="h-4 w-4" />
+                  {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+                </button>
+              )}
             </nav>
           </div>
         )}
