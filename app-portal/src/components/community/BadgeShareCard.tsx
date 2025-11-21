@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Share2, Twitter, Linkedin } from 'lucide-react'
+import { Share2, Copy, CheckCircle2 } from 'lucide-react'
 
 interface BadgeShareCardProps {
   badgeTitle: string
@@ -13,52 +13,75 @@ export function BadgeShareCard({ badgeTitle, description, shareUrl }: BadgeShare
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(shareUrl)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2_000)
-    } catch (error) {
-      console.error('Failed to copy share link', error)
+    await navigator.clipboard.writeText(shareUrl)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleShare = async (platform: 'twitter' | 'linkedin') => {
+    const text = `Check out my ${badgeTitle} on the Decentralized Rights Protocol!`
+    const url = shareUrl
+
+    if (platform === 'twitter') {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank')
+    } else if (platform === 'linkedin') {
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank')
     }
   }
 
   return (
-    <section className="rounded-3xl border border-neutral-200/80 bg-gradient-to-br from-primary-500/10 via-white to-neutral-50/80 p-6 shadow-sm dark:border-neutral-800/80 dark:from-primary-500/10 dark:via-neutral-900/70 dark:to-neutral-950">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-wide text-primary-600 dark:text-primary-300">Share your stewardship</p>
-          <h3 className="mt-2 text-xl font-semibold text-neutral-900 dark:text-neutral-100">{badgeTitle}</h3>
-          <p className="text-sm text-neutral-600 dark:text-neutral-300">{description}</p>
+    <div className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
+      <div className="flex items-start justify-between">
+        <div className="flex-1">
+          <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100">{badgeTitle}</h3>
+          <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{description}</p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            onClick={handleCopy}
-            className="inline-flex items-center gap-2 rounded-xl border border-primary-500 px-4 py-2 text-sm font-medium text-primary-600 transition hover:bg-primary-50 dark:border-primary-400 dark:text-primary-200 dark:hover:bg-primary-900/40"
-          >
-            <Share2 className="h-4 w-4" />
-            {copied ? 'Link copied!' : 'Copy share link'}
-          </button>
-          <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`I just unlocked ${badgeTitle} on the Decentralized Rights Protocol!`)}&url=${encodeURIComponent(shareUrl)}`}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-          >
-            <Twitter className="h-4 w-4" />
-            Share on X
-          </a>
-          <a
-            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-sky-600 px-4 py-2 text-sm font-semibold text-sky-700 transition hover:bg-sky-50 dark:border-sky-400 dark:text-sky-200 dark:hover:bg-sky-900/40"
-          >
-            <Linkedin className="h-4 w-4" />
-            Share on LinkedIn
-          </a>
+        <div className="ml-4 rounded-full bg-primary-100 p-3 dark:bg-primary-900/30">
+          <Share2 className="h-5 w-5 text-primary-600 dark:text-primary-400" />
         </div>
       </div>
-    </section>
+
+      <div className="mt-6 space-y-3">
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            value={shareUrl}
+            readOnly
+            className="flex-1 rounded-lg border border-neutral-300 bg-neutral-50 px-4 py-2 text-sm text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+          />
+          <button
+            onClick={handleCopy}
+            className="flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 transition-colors"
+          >
+            {copied ? (
+              <>
+                <CheckCircle2 className="h-4 w-4" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <Copy className="h-4 w-4" />
+                Copy
+              </>
+            )}
+          </button>
+        </div>
+
+        <div className="flex gap-2">
+          <button
+            onClick={() => handleShare('twitter')}
+            className="flex-1 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 transition-colors"
+          >
+            Share on X
+          </button>
+          <button
+            onClick={() => handleShare('linkedin')}
+            className="flex-1 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 transition-colors"
+          >
+            Share on LinkedIn
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
