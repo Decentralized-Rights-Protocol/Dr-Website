@@ -1,15 +1,8 @@
-import { Metadata } from 'next'
+'use client'
+
 import { Github, Mail, Users, MessageSquare, Calendar, BookOpen, Linkedin, Instagram } from 'lucide-react'
 import { XIcon, DiscordIcon } from '@/components/custom-icons'
-
-export const metadata: Metadata = {
-  title: 'DRP Community - Join the Movement',
-  description: 'Join the Decentralized Rights Protocol community. Connect with developers, human rights advocates, and contributors worldwide.',
-  openGraph: {
-    title: 'DRP Community - Join the Movement',
-    description: 'Join the Decentralized Rights Protocol community. Connect with developers, human rights advocates, and contributors worldwide.',
-  },
-}
+import { ParticleBackground } from '@/components/particle-background'
 
 const socialLinks = [
   {
@@ -78,14 +71,28 @@ const events = [
 
 export default function CommunityPage() {
   return (
-    <div className="py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-2xl text-center mb-16">
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
-            Join Our Community
-          </h1>
-          <p className="mt-4 text-xl text-neutral-600 dark:text-neutral-400">
+    <div className="relative min-h-screen bg-gradient-to-br from-neutral-950 via-primary-950 to-neutral-950 overflow-hidden">
+      {/* Particle Background */}
+      <ParticleBackground />
+      
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
+      
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-cyan-400/10 rounded-full blur-2xl animate-bounce delay-500"></div>
+      </div>
+      
+      <div className="relative z-10 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          {/* Header */}
+          <div className="mx-auto max-w-2xl text-center mb-16">
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl animate-fade-in-up">
+              Join Our Community
+            </h1>
+          <p className="mt-4 text-xl text-neutral-300 animate-fade-in-up delay-200">
             Connect with developers, human rights advocates, and contributors 
             building the future of decentralized human rights protection.
           </p>
@@ -94,12 +101,12 @@ export default function CommunityPage() {
         {/* Community Stats */}
         <div className="mb-16">
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            {communityStats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">
+            {communityStats.map((stat, index) => (
+              <div key={stat.label} className="text-center animate-fade-in-up" style={{ animationDelay: `${300 + index * 100}ms` }}>
+                <div className="text-3xl font-bold text-primary-400 mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-neutral-600 dark:text-neutral-400">
+                <div className="text-sm text-neutral-300">
                   {stat.label}
                 </div>
               </div>
@@ -272,6 +279,7 @@ export default function CommunityPage() {
             </a>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

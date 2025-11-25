@@ -73,6 +73,7 @@ export function Footer() {
             <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-3">Project</h4>
             <ul className="space-y-2">
               <li><Link href="/docs" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Docs</Link></li>
+              <li><Link href="/tokens" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Tokens</Link></li>
               <li><Link href="/roadmap" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Roadmap</Link></li>
               <li><Link href="/whitepaper" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Whitepaper (PDF)</Link></li>
               <li><Link href="/community" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Community</Link></li>

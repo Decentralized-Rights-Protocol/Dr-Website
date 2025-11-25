@@ -1,19 +1,26 @@
-import { Metadata } from 'next'
+'use client'
+
 import Link from 'next/link'
 import { Download, Eye, FileText, ArrowLeft, ExternalLink } from 'lucide-react'
-
-export const metadata: Metadata = {
-  title: 'DRP Whitepaper - Decentralized Rights Protocol',
-  description: 'Read the complete whitepaper for the Decentralized Rights Protocol (DRP) - a quantum-safe blockchain platform for human rights protection.',
-  openGraph: {
-    title: 'DRP Whitepaper - Decentralized Rights Protocol',
-    description: 'Read the complete whitepaper for the Decentralized Rights Protocol (DRP) - a quantum-safe blockchain platform for human rights protection.',
-  },
-}
+import { ParticleBackground } from '@/components/particle-background'
 
 export default function WhitepaperPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-800">
+    <div className="relative min-h-screen bg-gradient-to-br from-neutral-950 via-primary-950 to-neutral-950 overflow-hidden">
+      {/* Particle Background */}
+      <ParticleBackground />
+      
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
+      
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-cyan-400/10 rounded-full blur-2xl animate-bounce delay-500"></div>
+      </div>
+      
+      <div className="relative z-10">
       {/* Header */}
       <div className="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-700">
         <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
@@ -198,6 +205,7 @@ export default function WhitepaperPage() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

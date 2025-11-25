@@ -1,14 +1,7 @@
-import { Metadata } from 'next'
-import { Calendar, CheckCircle, Clock, Target } from 'lucide-react'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'DRP Roadmap - Development Timeline',
-  description: 'Explore the development roadmap for the Decentralized Rights Protocol (DRP) including milestones, features, and upcoming releases.',
-  openGraph: {
-    title: 'DRP Roadmap - Development Timeline',
-    description: 'Explore the development roadmap for the Decentralized Rights Protocol (DRP) including milestones, features, and upcoming releases.',
-  },
-}
+import { Calendar, CheckCircle, Clock, Target } from 'lucide-react'
+import { ParticleBackground } from '@/components/particle-background'
 
 const roadmapItems = [
   {
@@ -134,8 +127,22 @@ const upcomingFeatures = [
 
 export default function RoadmapPage() {
   return (
-    <div className="py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="relative min-h-screen bg-gradient-to-br from-neutral-950 via-primary-950 to-neutral-950 overflow-hidden">
+      {/* Particle Background */}
+      <ParticleBackground />
+      
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
+      
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-cyan-400/10 rounded-full blur-2xl animate-bounce delay-500"></div>
+      </div>
+      
+      <div className="relative z-10 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center mb-16">
           <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
@@ -245,6 +252,7 @@ export default function RoadmapPage() {
               </a>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
