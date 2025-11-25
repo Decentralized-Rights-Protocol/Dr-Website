@@ -100,7 +100,7 @@ export default function TokensPage() {
             <TokenCard
               name="$RIGHTS"
               symbol="Governance Token"
-              description="Represents the six pillars: Rights, Integrity, Governance, Humanity, Trust, Sustainability. Enables voting and decision-making across the DRP ecosystem. Used by community panels, Elders, and the AI governance system to shape the protocol's future."
+              description="Represents the six pillars: Rights, Integrity, Governance, Humanity, Trust, Sustainability. Enables voting and decision-making across the DRP ecosystem. Used by community panels, Elders, and the AI governance system to shape the protocol&apos;s future."
               icon={<Sparkles className="w-8 h-8 text-white" />}
               features={[
                 { icon: <Building2 className="w-5 h-5" />, label: 'Governance & Voting' },
@@ -140,7 +140,7 @@ export default function TokensPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-6">
-              Building the World's First
+              Building the World&apos;s First
               <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 Rights-Driven Decentralized Civilization
               </span>
