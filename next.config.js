@@ -11,6 +11,22 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')],
   },
+  // Exclude other project directories from root build
+  // These are separate Next.js projects with their own builds
+  webpack: (config, { isServer }) => {
+    // Exclude app-portal, explorer, and api from root build
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: [
+        '**/node_modules/**',
+        '**/.next/**',
+        '**/app-portal/**',
+        '**/explorer/**',
+        '**/api/**',
+      ],
+    };
+    return config;
+  },
   // Skip app/ folder, use src/app/ only
   // This is automatic in Next.js 14 but we'll be explicit
   async rewrites() {

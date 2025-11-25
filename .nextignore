@@ -1,0 +1,6 @@
+# Ignore separate Next.js projects from root build
+app-portal/
+explorer/
+api/
+app/
+
