@@ -142,7 +142,7 @@ export default function RoadmapPage() {
       </div>
       
       <div className="relative z-10 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center mb-16">
           <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
@@ -251,8 +251,8 @@ export default function RoadmapPage() {
                 Contribute on GitHub
               </a>
             </div>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>

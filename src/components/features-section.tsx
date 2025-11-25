@@ -1,7 +1,9 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
 import { Shield, Brain, Zap, Users, Globe, Lock, Cpu, Network, Info, type LucideIcon } from 'lucide-react'
+import { ParticleBackground } from '@/components/particle-background'
 
 type Feature = {
   name: string
@@ -75,9 +77,9 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
 
   return (
     <div
-      className={`group relative bg-white dark:bg-neutral-800 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-neutral-200 dark:border-neutral-700 animate-slide-up hover-lift ${`animate-stagger-${(index % 8) + 1}`}`}
+      className={`group relative bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 hover:border-white/30 animate-fade-in-up`}
       style={{
-        animationDelay: `${index * 100}ms`,
+        animationDelay: `${300 + index * 100}ms`,
       }}
     >
       <div className="flex items-start justify-between mb-4">
@@ -89,43 +91,56 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
             event.stopPropagation()
             setShowDetails((prev) => !prev)
           }}
-          className="p-1.5 rounded-lg text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+          className="p-1.5 rounded-lg text-neutral-400 hover:text-primary-400 hover:bg-white/10 transition-colors"
           aria-label={`Show more details about ${feature.name}`}
           type="button"
         >
           <Info className="h-4 w-4" />
         </button>
       </div>
-      <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+      <h3 className="text-lg font-semibold text-white mb-2">
         {feature.name}
       </h3>
-      <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed mb-3">
+      <p className="text-sm text-neutral-300 leading-relaxed mb-3">
         {feature.description}
       </p>
 
       {showDetails && (
-        <div className="mt-4 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-700">
-          <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        <div className="mt-4 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
+          <p className="text-xs text-neutral-300 leading-relaxed">
             {feature.details}
           </p>
         </div>
       )}
 
       {/* Hover effect overlay */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-500/5 to-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-500/10 to-secondary-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
     </div>
   )
 }
 
 export function FeaturesSection() {
   return (
-    <section className="py-24 sm:py-32 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-800">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="relative py-24 sm:py-32 bg-gradient-to-br from-neutral-950 via-primary-950 to-neutral-950 overflow-hidden">
+      {/* Particle Background */}
+      <ParticleBackground />
+      
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
+      
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-cyan-400/10 rounded-full blur-2xl animate-bounce delay-500"></div>
+      </div>
+      
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl animate-fade-in-up">
             Revolutionary Features
           </h2>
-          <p className="mt-6 text-lg leading-8 text-neutral-600 dark:text-neutral-300">
+          <p className="mt-6 text-lg leading-8 text-neutral-300 animate-fade-in-up delay-200">
             DRP combines cutting-edge blockchain technology with AI verification to create a platform that truly serves humanity.
           </p>
         </div>
@@ -137,13 +152,16 @@ export function FeaturesSection() {
         </div>
         
         {/* Call to action */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-white font-semibold hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+        <div className="mt-16 text-center animate-fade-in-up delay-1000">
+          <Link
+            href="/docs"
+            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-white font-semibold hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+          >
             <span>Explore the Technology</span>
             <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
-          </div>
+          </Link>
         </div>
       </div>
     </section>

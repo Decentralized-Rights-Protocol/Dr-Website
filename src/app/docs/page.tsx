@@ -72,12 +72,12 @@ export default function DocsPage() {
       </div>
       
       <div className="relative z-10 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          {/* Header */}
-          <div className="mx-auto max-w-2xl text-center mb-16">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Header */}
+        <div className="mx-auto max-w-2xl text-center mb-16">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl animate-fade-in-up">
-              DRP Documentation
-            </h1>
+            DRP Documentation
+          </h1>
           <p className="mt-4 text-xl text-neutral-300 animate-fade-in-up delay-200">
             Everything you need to build with the Decentralized Rights Protocol
           </p>
@@ -191,9 +191,9 @@ export default function DocsPage() {
                 View FAQ
               </Link>
             </div>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   )

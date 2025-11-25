@@ -203,9 +203,9 @@ export default function WhitepaperPage() {
                 Join Community
               </Link>
             </div>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   )

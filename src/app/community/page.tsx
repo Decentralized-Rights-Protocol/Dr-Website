@@ -86,12 +86,12 @@ export default function CommunityPage() {
       </div>
       
       <div className="relative z-10 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          {/* Header */}
-          <div className="mx-auto max-w-2xl text-center mb-16">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Header */}
+        <div className="mx-auto max-w-2xl text-center mb-16">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl animate-fade-in-up">
-              Join Our Community
-            </h1>
+            Join Our Community
+          </h1>
           <p className="mt-4 text-xl text-neutral-300 animate-fade-in-up delay-200">
             Connect with developers, human rights advocates, and contributors 
             building the future of decentralized human rights protection.
@@ -278,8 +278,8 @@ export default function CommunityPage() {
               View on GitHub
             </a>
           </div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   )
