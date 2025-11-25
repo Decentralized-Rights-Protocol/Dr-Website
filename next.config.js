@@ -14,7 +14,7 @@ const nextConfig = {
   // Exclude other project directories from root build
   // These are separate Next.js projects with their own builds
   webpack: (config, { isServer }) => {
-    // Exclude app-portal, explorer, and api from root build
+    // Exclude app-portal, explorer, api from root build
     config.watchOptions = {
       ...config.watchOptions,
       ignored: [

@@ -1,0 +1,4 @@
+# Ignore root /app directory from main site build
+# This directory is for app.decentralizedrights.com subdomain
+/app/page.tsx
+/app/layout.tsx

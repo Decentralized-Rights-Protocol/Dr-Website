@@ -13,6 +13,7 @@ import { GoogleTranslate } from '@/components/GoogleTranslate'
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Learn', href: '/learn' },
+  { name: 'Tokens', href: '/tokens' },
   { name: 'Why DRP', href: '/why-drp' },
   { name: 'Whitepaper', href: '/whitepaper' },
   { name: 'Docs', href: '/docs' },
