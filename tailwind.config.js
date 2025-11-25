@@ -103,6 +103,9 @@ module.exports = {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'border-glow': 'borderGlow 2s linear infinite',
         'particle-float': 'particleFloat 6s linear infinite',
+        'spin-slow': 'spin-slow 20s linear infinite',
+        'lattice-rotate': 'lattice-rotate 20s linear infinite',
+        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -140,6 +143,22 @@ module.exports = {
           '100%': { 
             transform: 'translateY(-100px) rotate(360deg)',
             opacity: '0',
+          },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        'lattice-rotate': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        'glow-pulse': {
+          '0%, 100%': { 
+            boxShadow: '0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.2)',
+          },
+          '50%': { 
+            boxShadow: '0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3)',
           },
         },
       },
