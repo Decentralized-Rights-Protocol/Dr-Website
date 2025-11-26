@@ -6,22 +6,22 @@ import { getStatusProfile, type StatusProfile } from '@/lib/api'
 import { useAppStore } from '@/store/app-store'
 
 export default function ProfilePage() {
-  const { user } = useAppStore()
+  const address = useAppStore((state) => state.address)
   const [profile, setProfile] = useState<StatusProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [copiedId, setCopiedId] = useState(false)
 
   useEffect(() => {
-    if (user?.id) {
+    if (address) {
       loadProfile()
     }
-  }, [user?.id])
+  }, [address])
 
   const loadProfile = async () => {
-    if (!user?.id) return
+    if (!address) return
     try {
       setLoading(true)
-      const data = await getStatusProfile(user.id)
+      const data = await getStatusProfile(address)
       setProfile(data)
     } catch (error) {
       console.error('Failed to load profile:', error)
