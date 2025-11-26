@@ -55,7 +55,7 @@ export default function LeaderboardPage() {
           setLeaderboardData(data);
         } else {
           // Mock data for demonstration
-          const mockData: LeaderboardData = {
+          setLeaderboardData((prev) => ({
             overall: [
               { rank: 1, username: 'BlockchainMaster', level: 5, lessonsCompleted: 20, totalRewards: 500, streak: 15 },
               { rank: 2, username: 'DRPExpert', level: 4, lessonsCompleted: 18, totalRewards: 450, streak: 12 },
@@ -78,9 +78,8 @@ export default function LeaderboardPage() {
               { rank: 2, username: 'ConsistentLearner', level: 3, lessonsCompleted: 12, totalRewards: 240, streak: 18 },
               { rank: 3, username: 'DedicatedStudent', level: 3, lessonsCompleted: 10, totalRewards: 200, streak: 15 }
             ],
-            currentUser: leaderboardData.currentUser
-          };
-          setLeaderboardData(mockData);
+            currentUser: prev.currentUser
+          }));
         }
       } catch (error) {
         console.error('Failed to load leaderboard:', error);
@@ -89,6 +88,7 @@ export default function LeaderboardPage() {
       }
     };
     loadLeaderboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getRankIcon = (rank: number) => {

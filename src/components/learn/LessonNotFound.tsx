@@ -37,7 +37,7 @@ export function LessonNotFound() {
             Lesson Not Found
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
-            The lesson you're looking for doesn't exist or may have been moved.
+            The lesson you&apos;re looking for doesn&apos;t exist or may have been moved.
           </p>
         </div>
         

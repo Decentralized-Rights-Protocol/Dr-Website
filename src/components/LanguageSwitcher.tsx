@@ -41,7 +41,7 @@ export function LanguageSwitcher({
   const currentLanguage = languages.find(lang => lang.code === currentLocale) || languages[0]
 
   // RTL languages
-  const rtlLanguages = ['ar', 'he']
+  const rtlLanguages = React.useMemo(() => ['ar', 'he'], [])
   const isRTL = rtlLanguages.includes(currentLocale)
 
   const handleLanguageChange = (langCode: string) => {
@@ -94,7 +94,7 @@ export function LanguageSwitcher({
       document.documentElement.dir = 'ltr'
       document.documentElement.lang = initialLang
     }
-  }, [])
+  }, [rtlLanguages])
 
   return (
     <div className={cn("relative", className)}>
