@@ -8,8 +8,8 @@ interface TableProps {
 
 export function Table({ children, className }: TableProps) {
   return (
-    <div className={cn('overflow-x-auto', className)}>
-      <table className="w-full border-collapse">{children}</table>
+    <div className={cn('overflow-x-auto rounded-xl', className)}>
+      <table className="w-full border-collapse rounded-xl overflow-hidden">{children}</table>
     </div>
   )
 }
@@ -30,8 +30,8 @@ export function TableRow({ children, hover = true, className }: { children: Reac
   return (
     <tr
       className={cn(
-        'border-b border-purple-500/10',
-        hover && 'transition-colors hover:bg-purple-500/5',
+        'border-b border-purple-500/10 transition-all duration-200',
+        hover && 'hover:bg-purple-500/10 hover:shadow-lg hover:shadow-purple-500/5',
         className
       )}
     >

@@ -11,6 +11,9 @@ import {
   PauseIcon,
   BookOpenIcon
 } from "@heroicons/react/24/outline";
+import { LessonNotFound } from "@/components/learn/LessonNotFound";
+import { LessonSkeleton } from "@/components/learn/LessonSkeleton";
+import ReactMarkdown from "react-markdown";
 
 interface LessonContent {
   id: string;
@@ -55,18 +58,28 @@ export default function LessonPage() {
   useEffect(() => {
     const loadLesson = async () => {
       try {
+        setLoading(true);
         const response = await fetch(`/api/learn/lesson/${lessonId}`);
         if (response.ok) {
           const lessonData = await response.json();
           setLesson(lessonData);
+        } else if (response.status === 404) {
+          setLesson(null); // Explicitly set to null to show 404
         }
       } catch (error) {
         console.error('Failed to load lesson:', error);
+        setLesson(null);
       } finally {
         setLoading(false);
       }
     };
-    loadLesson();
+    
+    if (lessonId) {
+      loadLesson();
+    } else {
+      setLoading(false);
+      setLesson(null);
+    }
   }, [lessonId]);
 
   useEffect(() => {
@@ -119,30 +132,11 @@ export default function LessonPage() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">Loading lesson...</p>
-        </div>
-      </div>
-    );
+    return <LessonSkeleton />;
   }
 
   if (!lesson) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Lesson Not Found</h1>
-          <button 
-            onClick={() => router.back()}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
-          >
-            Go Back
-          </button>
-        </div>
-      </div>
-    );
+    return <LessonNotFound />;
   }
 
   return (
@@ -201,8 +195,8 @@ export default function LessonPage() {
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Lesson Content</h2>
               </div>
               
-              <div className="prose dark:prose-invert max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: lesson.content }} />
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                <ReactMarkdown>{lesson.content}</ReactMarkdown>
               </div>
               
               {!showQuiz && !quizState.completed && (

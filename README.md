@@ -10,6 +10,32 @@ A modern, responsive Next.js website for the Decentralized Rights Protocol - a b
 - **Responsive Design** - Optimized for all devices and screen sizes
 - **Smooth Animations** - CSS transitions and scroll-triggered effects
 - **Modern UI/UX** - Clean, professional design with humanitarian focus
+- **Learn-to-Earn Module** - Interactive lessons with MDX content, quizzes, and rewards
+- **DRP Explorer** - Modern galaxy-themed blockchain explorer with real-time transaction tracking
+
+### 📚 Recent Updates
+
+#### Learn Module Fixes (Latest)
+- ✅ Fixed lesson loading from MDX files dynamically
+- ✅ Added animated 404 page for missing lessons
+- ✅ Implemented loading skeleton animations
+- ✅ Improved error handling and fallback UI
+- ✅ Enhanced lesson content rendering with ReactMarkdown
+
+#### Explorer UI Improvements (Latest)
+- ✅ Redesigned with dark galaxy gradient theme (#030b17 → #06172d)
+- ✅ Added animated particle background system
+- ✅ Modern rounded search bar with improved UX
+- ✅ Pill-style tab navigation buttons
+- ✅ Enhanced table styling with shadows, rounded borders, and hover effects
+- ✅ Transaction card view with AI verification icons
+- ✅ Improved responsive design for all screen sizes
+
+#### Token Page Enhancements (Latest)
+- ✅ Fixed RIGHTS animation alignment to prevent word overlap
+- ✅ Improved responsive layout with proper flex containers
+- ✅ Reduced animation speed for better readability
+- ✅ Added proper spacing and margins for mobile devices
 
 ### 🔧 Technical Features
 - **Next.js 14** - Latest React framework with App Router
@@ -28,8 +54,10 @@ A modern, responsive Next.js website for the Decentralized Rights Protocol - a b
 5. **Key Features** - Quantum safe, human rights focus, SDGs alignment
 6. **Impact** - Real-world statistics and success stories
 7. **Community** - Join the movement section
-8. **Contact** - Get involved and connect
-9. **404 Page** - Cool blockchain-themed error page
+8. **Learn-to-Earn** - Interactive educational platform with MDX-based lessons
+9. **DRP Explorer** - Blockchain explorer with transaction tracking and AI verification
+10. **Contact** - Get involved and connect
+11. **404 Page** - Cool blockchain-themed error page
 
 ## 🛠️ Getting Started
 
@@ -64,37 +92,49 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 📁 Project Structure
 
+This project contains multiple sub-projects:
+
 ```
-drp-nextjs/
-├── src/
+DRP website/
+├── src/                         # Main website (decentralizedrights.com)
 │   ├── app/
-│   │   ├── globals.css          # Global styles and CSS variables
-│   │   ├── layout.tsx           # Root layout component
-│   │   ├── page.tsx             # Home page
-│   │   └── not-found.tsx        # 404 error page
+│   │   ├── learn/              # Learn-to-Earn module
+│   │   ├── tokens/             # Token information pages
+│   │   └── ...
 │   ├── components/
-│   │   ├── Navigation.tsx       # Navigation component
-│   │   ├── Hero.tsx             # Hero section
-│   │   ├── Mission.tsx          # Mission section
-│   │   ├── Technology.tsx       # Technology section
-│   │   ├── TokenEconomy.tsx     # Token economy section
-│   │   ├── Features.tsx         # Key features section
-│   │   ├── Impact.tsx           # Impact section
-│   │   ├── Community.tsx        # Community section
-│   │   ├── Contact.tsx          # Contact section
-│   │   ├── Footer.tsx           # Footer component
-│   │   ├── BlockchainAnimation.tsx  # 3D blockchain animation
-│   │   └── ErrorAnimation.tsx   # 3D error animation
-│   └── lib/                     # Utility functions
-├── public/
-│   ├── DRP.png                  # Website logo
-│   ├── whitepaper_v0.5.pdf      # Project whitepaper
-│   └── favicon files            # Website icons
-├── package.json                 # Dependencies and scripts
-├── tailwind.config.js           # Tailwind CSS configuration
-├── tsconfig.json                # TypeScript configuration
-└── next.config.js               # Next.js configuration
+│   │   ├── learn/              # Learn module components
+│   │   └── tokens/             # Token page components
+│   └── content/
+│       └── learn/              # MDX lesson files
+├── explorer/                    # Explorer subdomain (explorer.decentralizedrights.com)
+│   └── src/
+│       ├── app/
+│       ├── components/
+│       │   ├── ParticleBackground.tsx
+│       │   └── TransactionCard.tsx
+│       └── lib/
+│           └── api.ts          # API client
+├── api/                         # API subdomain (api.decentralizedrights.com)
+├── app-portal/                  # App portal (app.decentralizedrights.com)
+├── learn-api/                   # Python FastAPI backend for learn module
+└── backend/                     # Main backend services
 ```
+
+### Key Files Added/Updated:
+
+#### Learn Module
+- `src/lib/learn-utils.ts` - MDX file parser and lesson loader
+- `src/app/api/learn/lesson/[id]/route.ts` - Dynamic lesson API endpoint
+- `src/components/learn/LessonNotFound.tsx` - Animated 404 component
+- `src/components/learn/LessonSkeleton.tsx` - Loading skeleton component
+
+#### Explorer UI
+- `explorer/src/components/ParticleBackground.tsx` - Animated particle system
+- `explorer/src/components/TransactionCard.tsx` - Transaction card component
+- `explorer/src/app/page.tsx` - Redesigned explorer page with galaxy theme
+
+#### Token Page
+- `src/components/tokens/RightsAnimation.tsx` - Fixed alignment and responsive design
 
 ## 🎯 Key Technologies
 

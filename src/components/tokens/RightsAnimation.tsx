@@ -29,22 +29,22 @@ export function RightsAnimation() {
       setVisibleIndices([])
       setShowWords(false)
 
-      // Phase 1: Letters float in one by one
+      // Phase 1: Words appear one by one (slower animation)
       rightsData.forEach((item, index) => {
         setTimeout(() => {
           setVisibleIndices(prev => [...prev, index])
-        }, item.delay)
+        }, item.delay * 1.5) // Slower animation
       })
 
-      // Phase 2: Expand to words (after all letters are visible + 500ms)
+      // Phase 2: Show all words (after all are visible + 300ms)
       setTimeout(() => {
         setShowWords(true)
-      }, rightsData[rightsData.length - 1].delay + 500)
+      }, rightsData[rightsData.length - 1].delay * 1.5 + 800)
 
-      // Phase 3: Reset and restart (after 8 seconds)
+      // Phase 3: Reset and restart (after 12 seconds - longer cycle)
       timeoutId = setTimeout(() => {
         animateCycle()
-      }, 10000)
+      }, 14000)
     }
 
     animateCycle()
@@ -55,12 +55,19 @@ export function RightsAnimation() {
   }, [])
 
   return (
-    <div className="relative w-full h-64 flex items-center justify-center overflow-hidden">
+    <div className="relative w-full min-h-80 flex flex-col items-center justify-center overflow-hidden mb-16 px-4">
       {/* Glowing background effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-cyan-600/20 to-purple-600/20 blur-3xl" />
       
-      {/* Letters/Words Container */}
-      <div className="relative z-10 flex items-center justify-center gap-4 md:gap-6 flex-wrap">
+      {/* Big RIGHTS Title - Separate container */}
+      <div className="relative z-10 mb-8">
+        <div className="text-7xl md:text-9xl lg:text-[12rem] font-bold text-blue-400 drop-shadow-[0_0_30px_rgba(59,130,246,0.8)]">
+          RIGHTS
+        </div>
+      </div>
+      
+      {/* Keywords Container - Below title with proper spacing */}
+      <div className="relative z-10 flex items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 flex-wrap max-w-5xl px-2">
         {rightsData.map((item, index) => {
           const isVisible = visibleIndices.includes(index)
           const showWord = showWords && isVisible
@@ -68,32 +75,21 @@ export function RightsAnimation() {
           return (
             <div
               key={item.letter}
-              className="relative"
+              className={`
+                relative transition-all duration-700 ease-out
+                ${isVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-10'
+                }
+              `}
             >
-              {/* Letter */}
-              <div
-                className={`
-                  text-6xl md:text-8xl font-bold transition-all duration-700 ease-out
-                  ${isVisible 
-                    ? 'opacity-100 translate-y-0 text-blue-400 drop-shadow-[0_0_20px_rgba(59,130,246,0.8)]' 
-                    : 'opacity-0 translate-y-10'
-                  }
-                `}
-                style={{
-                  filter: isVisible ? 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.8))' : 'none',
-                }}
-              >
-                {item.letter}
-              </div>
-
-              {/* Word expansion */}
+              {/* Word - Now displayed directly, no letter overlap */}
               {showWord && (
                 <div
                   className={`
-                    absolute top-full mt-2 left-1/2 transform -translate-x-1/2
-                    text-sm md:text-base font-medium text-cyan-400
-                    whitespace-nowrap transition-all duration-500
-                    animate-fade-in-up
+                    text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-cyan-400
+                    whitespace-nowrap px-2 py-1
+                    transition-all duration-500
                   `}
                   style={{
                     textShadow: '0 0 10px rgba(6, 182, 212, 0.6)',

@@ -1,11 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Activity, Award, CheckCircle2, Clock, Hash, Shield, TrendingUp, XCircle, Zap, Search, ExternalLink, Copy, Check } from 'lucide-react'
+import { Activity, Award, CheckCircle2, Clock, Hash, Shield, TrendingUp, XCircle, Zap, Search, ExternalLink, Copy, Check, Sparkles, CheckCircle, Verified } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell } from '@/components/ui/Table'
 import { getTransactions, getActivityFeed, getAISummary, getStatusRankings, type Transaction, type ActivityFeedItem, type AISummary, type StatusRanking } from '@/lib/api'
 import { cn } from '@/lib/utils'
+import { ParticleBackground } from '@/components/ParticleBackground'
+import { TransactionCard } from '@/components/TransactionCard'
 
 export default function ExplorerPage() {
   const [activeTab, setActiveTab] = useState<'transactions' | 'activities' | 'rankings'>('transactions')
@@ -104,26 +106,29 @@ export default function ExplorerPage() {
   })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#12121a] to-[#1a1a24] text-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-[#030b17] via-[#041425] to-[#06172d] text-gray-100 relative overflow-hidden">
+      {/* Particle Background */}
+      <ParticleBackground />
+      
       {/* Header */}
-      <header className="border-b border-purple-500/20 bg-[#12121a]/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-purple-500/20 bg-[#030b17]/90 backdrop-blur-md sticky top-0 z-50 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 DRP Explorer
               </h1>
               <p className="text-sm text-gray-400 mt-1">Track blocks, transactions, and AI-verified activities in real time</p>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <div className="flex items-center gap-4 w-full md:w-auto">
+              <div className="relative flex-1 md:flex-none">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search by hash, address, or ID..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 bg-[#1a1a24] border border-purple-500/20 rounded-lg text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-purple-500/40 w-64"
+                  className="pl-12 pr-4 py-3 bg-[#06172d]/60 border border-purple-500/30 rounded-full text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-purple-500/60 focus:ring-2 focus:ring-purple-500/20 backdrop-blur-sm transition-all w-full md:w-80"
                 />
               </div>
             </div>
@@ -131,9 +136,9 @@ export default function ExplorerPage() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Tabs */}
-        <div className="flex gap-2 mb-6 border-b border-purple-500/20">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+        {/* Tabs - Pill Style */}
+        <div className="flex gap-3 mb-8">
           {[
             { id: 'transactions', label: 'Transactions', icon: Zap },
             { id: 'activities', label: 'Activity Feed', icon: Activity },
@@ -143,10 +148,10 @@ export default function ExplorerPage() {
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
               className={cn(
-                'flex items-center gap-2 px-6 py-3 font-semibold text-sm transition-colors border-b-2',
+                'flex items-center gap-2 px-6 py-3 font-semibold text-sm transition-all rounded-full border',
                 activeTab === tab.id
-                  ? 'border-purple-500 text-purple-400'
-                  : 'border-transparent text-gray-400 hover:text-gray-300'
+                  ? 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 border-purple-500/50 text-purple-300 shadow-lg shadow-purple-500/20'
+                  : 'bg-[#06172d]/40 border-purple-500/20 text-gray-400 hover:text-gray-300 hover:border-purple-500/40 hover:bg-[#06172d]/60'
               )}
             >
               <tab.icon className="h-4 w-4" />
@@ -158,11 +163,31 @@ export default function ExplorerPage() {
         {/* Transactions Tab */}
         {activeTab === 'transactions' && (
           <div className="space-y-6">
-            <Card>
+            {/* Transaction Cards View */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+              {loading ? (
+                <div className="col-span-full text-center py-12 text-gray-400">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mx-auto mb-4"></div>
+                  Loading transactions...
+                </div>
+              ) : filteredTransactions.length === 0 ? (
+                <div className="col-span-full text-center py-12 text-gray-400">
+                  <Hash className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                  No transactions found
+                </div>
+              ) : (
+                filteredTransactions.slice(0, 12).map((tx) => (
+                  <TransactionCard key={tx.tx_hash} transaction={tx} />
+                ))
+              )}
+            </div>
+
+            {/* Table View */}
+            <Card className="overflow-hidden">
               <div className="overflow-x-auto">
                 <Table>
                   <TableHead>
-                    <TableRow>
+                    <TableRow className="bg-gradient-to-r from-purple-500/10 to-blue-500/10">
                       <TableHeader>Hash</TableHeader>
                       <TableHeader>Type</TableHeader>
                       <TableHeader>From</TableHeader>
@@ -186,8 +211,14 @@ export default function ExplorerPage() {
                         </TableCell>
                       </TableRow>
                     ) : (
-                      filteredTransactions.map((tx) => (
-                        <TableRow key={tx.tx_hash} className="cursor-pointer hover:bg-purple-500/5">
+                      filteredTransactions.map((tx, index) => (
+                        <TableRow 
+                          key={tx.tx_hash} 
+                          className={cn(
+                            'cursor-pointer transition-all hover:shadow-lg hover:shadow-purple-500/10',
+                            index % 2 === 0 ? 'bg-[#06172d]/30' : 'bg-[#06172d]/10'
+                          )}
+                        >
                           <TableCell>
                             <div className="flex items-center gap-2">
                               <Hash className="h-3 w-3 text-purple-400" />
@@ -201,7 +232,7 @@ export default function ExplorerPage() {
                             </div>
                           </TableCell>
                           <TableCell>
-                            <span className="px-2 py-1 rounded text-xs font-semibold bg-purple-500/20 text-purple-300">
+                            <span className="px-2 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/40">
                               {tx.type}
                             </span>
                           </TableCell>
@@ -212,7 +243,7 @@ export default function ExplorerPage() {
                             <code className="text-xs font-mono text-gray-400">{formatAddress(tx.to)}</code>
                           </TableCell>
                           <TableCell>
-                            <span className={cn('px-2 py-1 rounded text-xs font-semibold border', getStatusBadge(tx.status))}>
+                            <span className={cn('px-2 py-1 rounded-full text-xs font-semibold border', getStatusBadge(tx.status))}>
                               {tx.status}
                             </span>
                           </TableCell>
@@ -317,8 +348,11 @@ export default function ExplorerPage() {
             {selectedActivity && aiSummary && (
               <Card className="sticky top-24">
                 <div className="flex items-center gap-2 mb-4">
-                  <Zap className="h-5 w-5 text-purple-400" />
+                  <div className="p-2 bg-purple-500/20 rounded-lg">
+                    <CheckCircle className="h-5 w-5 text-purple-400" />
+                  </div>
                   <h3 className="font-semibold text-lg">AI Verification Summary</h3>
+                  <Verified className="h-4 w-4 text-cyan-400 ml-auto" />
                 </div>
                 <div className="space-y-4">
                   <div>
