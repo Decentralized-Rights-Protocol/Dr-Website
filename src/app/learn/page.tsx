@@ -307,7 +307,7 @@ export default function LearnPage() {
                       </div>
                       
                       <Link 
-                        href={`/learn/lessons/${availableLessons.find(l => l.id === lesson.id)?.slug || lesson.id}`}
+                        href={`/learn/lesson/${lesson.id}`}
                         className={`w-full flex items-center justify-center space-x-2 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
                           level.id <= userProgress.currentLevel
                             ? 'bg-blue-500 hover:bg-blue-600 text-white'

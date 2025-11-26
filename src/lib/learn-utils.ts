@@ -92,6 +92,7 @@ export function getAllLessonFiles(): LessonFile[] {
 
 /**
  * Map lesson ID (e.g., "1-1") to a slug based on file order
+ * Files are sorted alphabetically within each level
  */
 function mapIdToSlug(lessonId: string): string | null {
   const [levelStr, lessonNumStr] = lessonId.split('-')
@@ -103,7 +104,9 @@ function mapIdToSlug(lessonId: string): string | null {
   }
   
   const allFiles = getAllLessonFiles()
-  const levelFiles = allFiles.filter(f => f.level === level)
+  const levelFiles = allFiles
+    .filter(f => f.level === level)
+    .sort((a, b) => a.slug.localeCompare(b.slug)) // Sort alphabetically for consistent mapping
   
   if (lessonNum > 0 && lessonNum <= levelFiles.length) {
     return levelFiles[lessonNum - 1].slug
