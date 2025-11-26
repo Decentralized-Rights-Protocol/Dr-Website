@@ -1,56 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { loadLessonById, loadLessonBySlug } from '@/lib/learn-utils';
+import { loadLessonBySlug } from '@/lib/learn-utils';
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  try {
-    const resolvedParams = await params;
-    const lessonId = resolvedParams.id;
-    
-    if (!lessonId) {
-      return NextResponse.json(
-        { error: 'Lesson ID is required' },
-        { status: 400 }
-      );
-    }
-    
-    // Try loading by ID first (for backward compatibility)
-    let lesson = loadLessonById(lessonId);
-    
-    // If not found by ID, try loading by slug
-    if (!lesson) {
-      lesson = loadLessonBySlug(lessonId);
-    }
-    
-    if (!lesson) {
-      return NextResponse.json(
-        { error: 'Lesson not found' },
-        { status: 404 }
-      );
-    }
-    
-    // Generate quiz data
-    const quiz = generateQuizForLesson(lesson);
-    
-    return NextResponse.json({
-      ...lesson,
-      quiz
-    });
-  } catch (error) {
-    console.error('Error loading lesson:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
-  }
-}
-
-/**
- * Generate quiz questions for a lesson
- */
-function generateQuizForLesson(lesson: { title: string; level: number; module: string }): {
+// Export quiz generator for use in page component
+export function generateQuizForLesson(lesson: { title: string; level: number; module: string }): {
   questions: Array<{
     id: string;
     question: string;
@@ -158,4 +110,44 @@ function generateQuizForLesson(lesson: { title: string; level: number; module: s
   }
   
   return { questions };
+}
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    const resolvedParams = await params;
+    const slug = resolvedParams.slug;
+    
+    if (!slug) {
+      return NextResponse.json(
+        { error: 'Lesson slug is required' },
+        { status: 400 }
+      );
+    }
+    
+    const lesson = loadLessonBySlug(slug);
+    
+    if (!lesson) {
+      return NextResponse.json(
+        { error: 'Lesson not found' },
+        { status: 404 }
+      );
+    }
+    
+    // Generate quiz data
+    const quiz = generateQuizForLesson(lesson);
+    
+    return NextResponse.json({
+      ...lesson,
+      quiz
+    });
+  } catch (error) {
+    console.error('Error loading lesson:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
 }

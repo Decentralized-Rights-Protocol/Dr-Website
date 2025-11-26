@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import React, { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { 
   ArrowLeftIcon, 
   CheckCircleIcon, 
@@ -10,136 +10,92 @@ import {
   PlayIcon,
   PauseIcon,
   BookOpenIcon
-} from "@heroicons/react/24/outline";
-import { LessonNotFound } from "@/components/learn/LessonNotFound";
-import { LessonSkeleton } from "@/components/learn/LessonSkeleton";
-import ReactMarkdown from "react-markdown";
-
-// This route is kept for backward compatibility
-// New routes should use /learn/lessons/[slug]
+} from '@heroicons/react/24/outline'
+import ReactMarkdown from 'react-markdown'
 
 interface LessonContent {
-  id: string;
-  title: string;
-  content: string;
-  duration: number;
-  reward: number;
+  id: string
+  slug: string
+  title: string
+  content: string
+  duration: number
+  reward: number
   quiz: {
     questions: Array<{
-      id: string;
-      question: string;
-      options: string[];
-      correct: number;
-    }>;
-  };
+      id: string
+      question: string
+      options: string[]
+      correct: number
+    }>
+  }
 }
 
 interface QuizState {
-  currentQuestion: number;
-  answers: { [key: string]: number };
-  completed: boolean;
-  score: number;
+  currentQuestion: number
+  answers: { [key: string]: number }
+  completed: boolean
+  score: number
 }
 
-export default function LessonPage() {
-  const params = useParams();
-  const router = useRouter();
-  const lessonId = params?.id as string;
-  
-  const [lesson, setLesson] = useState<LessonContent | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [showQuiz, setShowQuiz] = useState(false);
+export default function LessonPageClient({ lesson }: { lesson: LessonContent }) {
+  const router = useRouter()
+  const [showQuiz, setShowQuiz] = useState(false)
   const [quizState, setQuizState] = useState<QuizState>({
     currentQuestion: 0,
     answers: {},
     completed: false,
     score: 0
-  });
-  const [timeSpent, setTimeSpent] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  })
+  const [timeSpent, setTimeSpent] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
-    const loadLesson = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`/api/learn/lesson/${lessonId}`);
-        if (response.ok) {
-          const lessonData = await response.json();
-          setLesson(lessonData);
-        } else if (response.status === 404) {
-          setLesson(null); // Explicitly set to null to show 404
-        }
-      } catch (error) {
-        console.error('Failed to load lesson:', error);
-        setLesson(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    if (lessonId) {
-      loadLesson();
-    } else {
-      setLoading(false);
-      setLesson(null);
-    }
-  }, [lessonId]);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: NodeJS.Timeout
     if (isPlaying) {
       interval = setInterval(() => {
-        setTimeSpent(prev => prev + 1);
-      }, 1000);
+        setTimeSpent(prev => prev + 1)
+      }, 1000)
     }
-    return () => clearInterval(interval);
-  }, [isPlaying]);
+    return () => clearInterval(interval)
+  }, [isPlaying])
 
   const handleQuizAnswer = (questionId: string, answerIndex: number) => {
     setQuizState(prev => ({
       ...prev,
       answers: { ...prev.answers, [questionId]: answerIndex }
-    }));
-  };
+    }))
+  }
 
   const submitQuiz = () => {
-    if (!lesson) return;
+    if (!lesson) return
     
-    let score = 0;
+    let score = 0
     lesson.quiz.questions.forEach(question => {
       if (quizState.answers[question.id] === question.correct) {
-        score++;
+        score++
       }
-    });
+    })
     
-    const finalScore = (score / lesson.quiz.questions.length) * 100;
-    setQuizState(prev => ({ ...prev, completed: true, score: finalScore }));
+    const finalScore = (score / lesson.quiz.questions.length) * 100
+    setQuizState(prev => ({ ...prev, completed: true, score: finalScore }))
     
     // Submit completion to API
     fetch('/api/learn/complete', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        lessonId,
+        lessonId: lesson.id,
         score: finalScore,
         timeSpent,
         answers: quizState.answers
       })
-    });
-  };
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  if (loading) {
-    return <LessonSkeleton />;
+    })
   }
 
-  if (!lesson) {
-    return <LessonNotFound />;
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
   return (
@@ -149,7 +105,7 @@ export default function LessonPage() {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <button 
-              onClick={() => router.back()}
+              onClick={() => router.push('/learn')}
               className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
             >
               <ArrowLeftIcon className="h-5 w-5" />
@@ -310,5 +266,6 @@ export default function LessonPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }
+
