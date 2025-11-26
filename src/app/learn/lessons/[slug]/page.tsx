@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
-import { getAllLessonSlugs, loadLessonBySlug } from '@/lib/learn-utils'
+import { getAllLessonSlugs, loadLessonBySlug, generateQuizForLesson } from '@/lib/learn-utils'
 import LessonPageClient from './LessonPageClient'
-import { generateQuizForLesson } from '@/app/api/learn/lessons/[slug]/route'
 
 export async function generateStaticParams() {
   const slugs = getAllLessonSlugs()
