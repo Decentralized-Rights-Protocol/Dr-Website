@@ -25,6 +25,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "flags": "^4.0.1",
+    "gray-matter": "^4.0.3",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.292.0",
     "next": "^14.2.33",
@@ -36,6 +37,8 @@
     "react-intersection-observer": "^9.5.2",
     "react-markdown": "^10.1.0",
     "recharts": "^3.3.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
     "tailwind-merge": "^2.0.0",
     "three": "^0.158.0",
     "zod": "^3.25.76"

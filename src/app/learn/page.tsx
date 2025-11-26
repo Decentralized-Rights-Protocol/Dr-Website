@@ -105,6 +105,7 @@ export default function LearnPage() {
   });
 
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
+  const [availableLessons, setAvailableLessons] = useState<Array<{ id: string; slug: string; level: number; title: string; description: string }>>([]);
 
   useEffect(() => {
     // Load user progress from API
@@ -119,7 +120,22 @@ export default function LearnPage() {
         console.error('Failed to load progress:', error);
       }
     };
+    
+    // Load available lessons from API
+    const loadLessons = async () => {
+      try {
+        const response = await fetch('/api/learn/lessons');
+        if (response.ok) {
+          const data = await response.json();
+          setAvailableLessons(data.lessons || []);
+        }
+      } catch (error) {
+        console.error('Failed to load lessons:', error);
+      }
+    };
+    
     loadProgress();
+    loadLessons();
   }, []);
 
   const progressPercentage = userProgress.totalLessons > 0 
@@ -291,7 +307,7 @@ export default function LearnPage() {
                       </div>
                       
                       <Link 
-                        href={`/learn/lesson/${lesson.id}`}
+                        href={`/learn/lessons/${availableLessons.find(l => l.id === lesson.id)?.slug || lesson.id}`}
                         className={`w-full flex items-center justify-center space-x-2 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
                           level.id <= userProgress.currentLevel
                             ? 'bg-blue-500 hover:bg-blue-600 text-white'
