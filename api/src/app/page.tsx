@@ -451,6 +451,102 @@ export default function ApiLandingPage() {
           </div>
         </section>
 
+        <section id="all-endpoints" className="mx-auto mt-16 max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
+            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">All Dr-Blockchain Endpoints</h2>
+            <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300 mb-6">
+              Complete reference of all available API endpoints from the Dr-Blockchain backend.
+            </p>
+            <div className="space-y-4">
+              {[
+                {
+                  method: 'POST',
+                  path: '/api/activity/submit',
+                  description: 'Submit a new activity proof to the blockchain',
+                  category: 'Activity'
+                },
+                {
+                  method: 'GET',
+                  path: '/api/status/profile?id={user}',
+                  description: 'Get user status and PoST score',
+                  category: 'Status'
+                },
+                {
+                  method: 'GET',
+                  path: '/api/transactions',
+                  description: 'Get blockchain transactions with pagination and filters',
+                  category: 'Explorer'
+                },
+                {
+                  method: 'GET',
+                  path: '/api/activity/feed',
+                  description: 'Get activity feed with verification status and AI summaries',
+                  category: 'Activity'
+                },
+                {
+                  method: 'GET',
+                  path: '/api/ai/summary?activity_id={id}',
+                  description: 'Get AI verification summary for a specific activity',
+                  category: 'AI'
+                },
+                {
+                  method: 'GET',
+                  path: '/api/rewards/claim?user_id={id}&submission_id={id}',
+                  description: 'Claim rewards for verified activities',
+                  category: 'Rewards'
+                },
+                {
+                  method: 'GET',
+                  path: '/api/status/rankings',
+                  description: 'Get status rankings leaderboard',
+                  category: 'Status'
+                },
+                {
+                  method: 'GET',
+                  path: '/api/health/orbitdb',
+                  description: 'Check OrbitDB connection health',
+                  category: 'Health'
+                },
+                {
+                  method: 'GET',
+                  path: '/api/health/ipfs',
+                  description: 'Check IPFS pinning service health',
+                  category: 'Health'
+                }
+              ].map((endpoint) => (
+                <div
+                  key={endpoint.path}
+                  className="rounded-2xl border border-neutral-200 p-4 dark:border-neutral-800 hover:border-primary-400 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span
+                          className={cn(
+                            'px-2 py-1 rounded text-xs font-semibold',
+                            endpoint.method === 'GET'
+                              ? 'bg-blue-500/20 text-blue-700 dark:text-blue-300'
+                              : endpoint.method === 'POST'
+                              ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300'
+                              : 'bg-purple-500/20 text-purple-700 dark:text-purple-300'
+                          )}
+                        >
+                          {endpoint.method}
+                        </span>
+                        <code className="text-sm font-mono text-neutral-900 dark:text-neutral-50">{endpoint.path}</code>
+                        <span className="px-2 py-1 rounded text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
+                          {endpoint.category}
+                        </span>
+                      </div>
+                      <p className="text-sm text-neutral-600 dark:text-neutral-300">{endpoint.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="docs" className="mx-auto mt-16 max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
           <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
             <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">Docs & governance</h2>
