@@ -25,8 +25,9 @@ export async function GET(
     }
     
     if (!lesson) {
+      console.error(`[API] Lesson not found for ID/slug: ${lessonId}`);
       return NextResponse.json(
-        { error: 'Lesson not found' },
+        { error: 'Lesson not found', lessonId },
         { status: 404 }
       );
     }
@@ -39,9 +40,13 @@ export async function GET(
       quiz
     });
   } catch (error) {
-    console.error('Error loading lesson:', error);
+    console.error('[API] Error loading lesson:', error);
+    if (error instanceof Error) {
+      console.error('[API] Error details:', error.message);
+      console.error('[API] Stack:', error.stack);
+    }
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }

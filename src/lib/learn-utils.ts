@@ -53,6 +53,7 @@ export function getAllLessonFiles(): LessonFile[] {
   
   try {
     if (!existsSync(learnDir)) {
+      console.error(`[Learn Utils] Learn directory does not exist: ${learnDir}`)
       return lessons
     }
     
@@ -71,11 +72,12 @@ export function getAllLessonFiles(): LessonFile[] {
       
       files.forEach(file => {
         const slug = createSlug(file)
+        const filePath = join(levelDir, file)
         lessons.push({
           slug,
           level,
           filename: file,
-          path: join(levelDir, file)
+          path: filePath
         })
       })
     })
@@ -85,7 +87,10 @@ export function getAllLessonFiles(): LessonFile[] {
       return a.slug.localeCompare(b.slug)
     })
   } catch (error) {
-    console.error('Error reading lesson files:', error)
+    console.error('[Learn Utils] Error reading lesson files:', error)
+    if (error instanceof Error) {
+      console.error('[Learn Utils] Error details:', error.message)
+    }
     return lessons
   }
 }
@@ -128,6 +133,7 @@ export function loadLessonById(lessonId: string): LessonMetadata | null {
     if (lessonId.includes('-') && /^\d+-\d+$/.test(lessonId)) {
       const mappedSlug = mapIdToSlug(lessonId)
       if (!mappedSlug) {
+        console.error(`[Learn Utils] Could not map lesson ID ${lessonId} to slug`)
         return null
       }
       slug = mappedSlug
@@ -139,6 +145,13 @@ export function loadLessonById(lessonId: string): LessonMetadata | null {
     const lessonFile = allFiles.find(f => f.slug === slug)
     
     if (!lessonFile) {
+      console.error(`[Learn Utils] Lesson file not found for slug: ${slug} (from ID: ${lessonId})`)
+      console.error(`[Learn Utils] Available slugs: ${allFiles.map(f => f.slug).join(', ')}`)
+      return null
+    }
+    
+    if (!existsSync(lessonFile.path)) {
+      console.error(`[Learn Utils] Lesson file path does not exist: ${lessonFile.path} (slug: ${slug}, ID: ${lessonId})`)
       return null
     }
     
@@ -159,6 +172,10 @@ export function loadLessonById(lessonId: string): LessonMetadata | null {
     }
   } catch (error) {
     console.error(`Error loading lesson ${lessonId}:`, error)
+    if (error instanceof Error) {
+      console.error(`Error details: ${error.message}`)
+      console.error(`Stack: ${error.stack}`)
+    }
     return null
   }
 }
@@ -172,14 +189,22 @@ export function loadLessonBySlug(slug: string): LessonMetadata | null {
     const lessonFile = allFiles.find(f => f.slug === slug)
     
     if (!lessonFile) {
+      console.error(`[Learn Utils] Lesson file not found for slug: ${slug}`)
+      return null
+    }
+    
+    if (!existsSync(lessonFile.path)) {
+      console.error(`[Learn Utils] Lesson file path does not exist: ${lessonFile.path}`)
       return null
     }
     
     const content = readFileSync(lessonFile.path, 'utf-8')
     const { frontmatter, body } = parseFrontmatter(content)
     
-    // Generate ID from level and position
-    const levelFiles = allFiles.filter(f => f.level === lessonFile.level)
+    // Generate ID from level and position (sort first for consistent ordering)
+    const levelFiles = allFiles
+      .filter(f => f.level === lessonFile.level)
+      .sort((a, b) => a.slug.localeCompare(b.slug))
     const position = levelFiles.findIndex(f => f.slug === slug) + 1
     const id = `${lessonFile.level}-${position}`
     
