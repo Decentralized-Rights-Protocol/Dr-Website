@@ -1,0 +1,272 @@
+---
+title: "Identity & Access Management"
+description: "Implement decentralized identity and access management with DRP"
+duration: 40
+reward: 35
+level: 4
+module: "identity-access-management"
+---
+
+# Identity & Access Management
+
+Decentralized Identity (DID) and Access Management are fundamental to building secure, user-controlled systems. This lesson covers implementing identity solutions with DRP.
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+- Understand decentralized identity concepts
+- Implement DID (Decentralized Identifier) systems
+- Manage credentials and attestations
+- Control access with smart contracts
+- Build privacy-preserving identity solutions
+
+## Decentralized Identity
+
+### What is DID?
+
+A **Decentralized Identifier (DID)** is a new type of identifier that enables verifiable, self-sovereign digital identity. DIDs are:
+- Self-owned and controlled
+- Decentralized (no central authority)
+- Cryptographically verifiable
+- Persistent and resolvable
+
+### DID Structure
+
+```
+did:drp:1234567890abcdef
+│    │   └─ Unique identifier
+│    └───── Method (DRP)
+└─────────── DID scheme
+```
+
+## Implementing DID with DRP
+
+### Create a DID
+
+```typescript
+import { DID } from '@drp/identity';
+
+const did = await DID.create({
+  method: 'drp',
+  keys: {
+    authentication: privateKey,
+    assertion: assertionKey
+  }
+});
+
+console.log(did.id); // did:drp:abc123...
+```
+
+### Resolve a DID
+
+```typescript
+const resolution = await DID.resolve('did:drp:abc123');
+
+console.log(resolution.document);
+console.log(resolution.verificationMethod);
+```
+
+## Verifiable Credentials
+
+### Issue a Credential
+
+```typescript
+import { Credential } from '@drp/identity';
+
+const credential = await Credential.issue({
+  issuer: issuerDID,
+  subject: subjectDID,
+  type: 'UniversityDegree',
+  claims: {
+    degree: 'Bachelor of Science',
+    university: 'Example University',
+    year: 2024
+  },
+  expirationDate: '2029-12-31'
+});
+```
+
+### Verify a Credential
+
+```typescript
+const isValid = await Credential.verify({
+  credential: credential,
+  issuerPublicKey: issuerPublicKey
+});
+
+if (isValid) {
+  console.log('Credential is valid!');
+}
+```
+
+## Access Control
+
+### Role-Based Access Control (RBAC)
+
+```typescript
+import { AccessControl } from '@drp/identity';
+
+const ac = await AccessControl.deploy({
+  roles: {
+    admin: {
+      permissions: ['*'],
+      inherits: []
+    },
+    editor: {
+      permissions: ['read', 'write'],
+      inherits: ['viewer']
+    },
+    viewer: {
+      permissions: ['read'],
+      inherits: []
+    }
+  }
+});
+
+// Assign role
+await ac.assignRole({
+  user: userDID,
+  role: 'editor'
+});
+
+// Check permission
+const canWrite = await ac.hasPermission({
+  user: userDID,
+  permission: 'write'
+});
+```
+
+### Attribute-Based Access Control (ABAC)
+
+```typescript
+const abac = await ABAC.create({
+  policies: [
+    {
+      subject: { age: { $gte: 18 } },
+      resource: 'adult_content',
+      action: 'read',
+      allow: true
+    }
+  ]
+});
+```
+
+## Privacy and Zero-Knowledge Proofs
+
+### Selective Disclosure
+
+```typescript
+import { ZKProof } from '@drp/identity';
+
+// Prove age without revealing exact date
+const proof = await ZKProof.create({
+  credential: ageCredential,
+  reveal: {
+    isOver18: true
+  },
+  hide: {
+    dateOfBirth: true,
+    exactAge: true
+  }
+});
+```
+
+### Anonymous Credentials
+
+```typescript
+const anonymousCred = await AnonymousCredential.create({
+  issuer: issuerDID,
+  attributes: {
+    membership: 'premium',
+    verified: true
+  },
+  blind: true // Hide subject identity
+});
+```
+
+## Implementation Patterns
+
+### 1. Multi-Factor Authentication
+
+```typescript
+const mfa = await MFA.setup({
+  did: userDID,
+  factors: [
+    { type: 'password', enabled: true },
+    { type: 'totp', enabled: true },
+    { type: 'biometric', enabled: false }
+  ]
+});
+
+const authenticated = await mfa.authenticate({
+  did: userDID,
+  factors: {
+    password: passwordHash,
+    totp: totpCode
+  }
+});
+```
+
+### 2. Session Management
+
+```typescript
+const session = await Session.create({
+  did: userDID,
+  duration: 3600, // 1 hour
+  permissions: ['read', 'write']
+});
+
+// Verify session
+const isValid = await Session.verify({
+  sessionToken: session.token
+});
+```
+
+## Use Cases
+
+### 1. KYC/AML Compliance
+- Self-sovereign KYC
+- Privacy-preserving verification
+- Reusable credentials
+- Compliance automation
+
+### 2. Access Management
+- Decentralized access control
+- Fine-grained permissions
+- Audit trails
+- Dynamic policies
+
+### 3. Digital Identity
+- Self-owned identity
+- Cross-platform portability
+- Privacy by design
+- User control
+
+## Best Practices
+
+### Security
+- Use strong cryptography
+- Implement key rotation
+- Secure key storage
+- Regular security audits
+
+### Privacy
+- Minimize data collection
+- Use zero-knowledge proofs
+- Enable selective disclosure
+- Respect user consent
+
+### Usability
+- Simple user experience
+- Clear permission requests
+- Easy credential management
+- Mobile-friendly
+
+## Key Takeaways
+
+- Decentralized identity gives users control
+- Verifiable credentials enable trust
+- Privacy-preserving techniques protect users
+- Access control can be decentralized
+- Multiple use cases and applications
+

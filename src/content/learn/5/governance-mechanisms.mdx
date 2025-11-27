@@ -1,0 +1,304 @@
+---
+title: "Governance Mechanisms"
+description: "Understand and participate in DRP's decentralized governance system"
+duration: 35
+reward: 30
+level: 5
+module: "governance-mechanisms"
+---
+
+# Governance Mechanisms
+
+Decentralized governance is essential for the long-term success of any blockchain protocol. This lesson explores DRP's governance mechanisms and how you can participate effectively.
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+- Understand DRP's governance model
+- Create and submit governance proposals
+- Participate in voting and decision-making
+- Understand the Elder Quorum system
+- Navigate governance best practices
+
+## DRP Governance Model
+
+### Governance Layers
+
+1. **Token Holder Voting**: All token holders can vote
+2. **Elder Quorum**: Selected representatives for day-to-day decisions
+3. **Technical Committee**: Expert group for technical decisions
+4. **Community Forums**: Discussion and debate platform
+
+### Governance Process
+
+```
+Proposal Idea
+    ↓
+Community Discussion
+    ↓
+Formal Proposal
+    ↓
+Voting Period
+    ↓
+Implementation
+    ↓
+Review & Feedback
+```
+
+## Creating Proposals
+
+### Proposal Types
+
+1. **Protocol Changes**: Modifications to core protocol
+2. **Treasury Spending**: Allocation of community funds
+3. **Parameter Adjustments**: Changes to system parameters
+4. **Ecosystem Initiatives**: Community projects and grants
+
+### Writing a Good Proposal
+
+```typescript
+import { Proposal } from '@drp/governance';
+
+const proposal = await Proposal.create({
+  title: 'Implement New Feature X',
+  description: 'Detailed description of the proposal',
+  rationale: 'Why this change is needed',
+  implementation: 'How it will be implemented',
+  timeline: 'Expected timeline',
+  budget: 10000, // DRP tokens
+  votingPeriod: 7 * 24 * 3600 // 7 days
+});
+```
+
+## Voting Mechanisms
+
+### On-Chain Voting
+
+```typescript
+import { Governance } from '@drp/governance';
+
+const governance = new Governance({
+  contract: governanceContract
+});
+
+// Vote on proposal
+await governance.vote({
+  proposalId: proposalId,
+  support: true, // true = yes, false = no
+  weight: tokenBalance // voting weight
+});
+```
+
+### Delegation
+
+```typescript
+// Delegate voting power
+await governance.delegate({
+  delegate: delegateAddress,
+  amount: votingPower
+});
+
+// Undelegate
+await governance.undelegate();
+```
+
+### Voting Power Calculation
+
+```typescript
+const votingPower = await governance.calculateVotingPower({
+  address: voterAddress,
+  factors: {
+    tokenBalance: true,
+    staking: true,
+    participationHistory: true,
+    reputation: true
+  }
+});
+```
+
+## Elder Quorum System
+
+### Elder Selection
+
+Elders are selected based on:
+- Token holdings
+- Contribution history
+- Technical expertise
+- Community standing
+- Participation level
+
+### Elder Responsibilities
+
+```typescript
+interface Elder {
+  responsibilities: [
+    'Review proposals',
+    'Make routine decisions',
+    'Emergency response',
+    'Technical guidance'
+  ];
+  term: number; // Term length
+  compensation: number; // DRP tokens
+}
+```
+
+### Becoming an Elder
+
+```typescript
+const elderCandidate = await ElderCandidate.create({
+  qualifications: {
+    experience: '5+ years blockchain',
+    contributions: contributionHistory,
+    endorsements: endorsements
+  }
+});
+
+await elderCandidate.submitApplication();
+```
+
+## Proposal Lifecycle
+
+### 1. Pre-Proposal Phase
+
+```typescript
+// Create discussion thread
+const discussion = await Forum.createDiscussion({
+  title: proposal.title,
+  category: 'governance',
+  tags: ['proposal', 'feature']
+});
+
+// Gather feedback
+const feedback = await discussion.collectFeedback({
+  period: 3 * 24 * 3600 // 3 days
+});
+```
+
+### 2. Formal Proposal
+
+```typescript
+const formalProposal = await Proposal.submit({
+  discussion: discussionId,
+  author: authorAddress,
+  content: {
+    summary: proposal.summary,
+    details: proposal.details,
+    code: proposalCode,
+    budget: proposalBudget
+  }
+});
+```
+
+### 3. Voting Period
+
+```typescript
+// Monitor voting
+const votingStatus = await governance.getVotingStatus({
+  proposalId: formalProposal.id
+});
+
+console.log(`Votes: ${votingStatus.votesFor} / ${votingStatus.votesAgainst}`);
+console.log(`Quorum: ${votingStatus.quorumReached}`);
+```
+
+### 4. Execution
+
+```typescript
+// After voting succeeds
+if (await governance.canExecute(formalProposal.id)) {
+  await governance.execute({
+    proposalId: formalProposal.id,
+    parameters: formalProposal.parameters
+  });
+}
+```
+
+## Governance Best Practices
+
+### For Proposers
+
+- Research thoroughly before proposing
+- Engage community early
+- Provide clear implementation plans
+- Consider all stakeholders
+- Be open to feedback
+
+### For Voters
+
+- Read proposals carefully
+- Consider long-term implications
+- Participate actively
+- Engage in discussions
+- Delegate wisely if needed
+
+### For Elders
+
+- Stay informed on all proposals
+- Provide technical expertise
+- Represent community interests
+- Act transparently
+- Communicate decisions clearly
+
+## Treasury Management
+
+### Budget Proposals
+
+```typescript
+const budgetProposal = await BudgetProposal.create({
+  category: 'development',
+  amount: 50000,
+  recipients: [developer1, developer2],
+  milestones: [
+    { description: 'Phase 1', payment: 20000 },
+    { description: 'Phase 2', payment: 30000 }
+  ]
+});
+```
+
+### Spending Tracking
+
+```typescript
+const treasury = await Treasury.create();
+
+const spending = await treasury.getSpending({
+  period: 'lastQuarter',
+  category: 'development'
+});
+
+console.log(`Total spent: ${spending.total}`);
+console.log(`Remaining budget: ${spending.remaining}`);
+```
+
+## Dispute Resolution
+
+### Challenge a Proposal
+
+```typescript
+const challenge = await Challenge.create({
+  proposalId: proposalId,
+  reason: 'Technical infeasibility',
+  evidence: evidenceData
+});
+
+await challenge.submit();
+```
+
+### Arbitration Process
+
+```typescript
+const arbitration = await Arbitration.create({
+  challenge: challengeId,
+  arbitrators: selectedArbitrators
+});
+
+const decision = await arbitration.resolve();
+```
+
+## Key Takeaways
+
+- Governance is fundamental to DRP's success
+- Active participation improves outcomes
+- Proposals require careful preparation
+- Voting should be informed and thoughtful
+- Treasury management requires transparency
+

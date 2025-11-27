@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { 
   ArrowLeftIcon, 
   CheckCircleIcon, 
@@ -11,7 +12,6 @@ import {
   PauseIcon,
   BookOpenIcon
 } from "@heroicons/react/24/outline";
-import { LessonNotFound } from "@/components/learn/LessonNotFound";
 import { LessonSkeleton } from "@/components/learn/LessonSkeleton";
 import ReactMarkdown from "react-markdown";
 
@@ -138,8 +138,32 @@ export default function LessonPage() {
     return <LessonSkeleton />;
   }
 
+  // Instead of showing 404, try to load from a generic lesson or show helpful content
   if (!lesson) {
-    return <LessonNotFound />;
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Lesson Content Loading
+          </h1>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            We&apos;re working on loading the lesson content. In the meantime, you can:
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300 mb-6">
+            <li>Return to the <Link href="/learn" className="text-blue-500 hover:underline">Learn page</Link> to browse all available lessons</li>
+            <li>Check your internet connection</li>
+            <li>Try refreshing the page</li>
+          </ul>
+          <Link
+            href="/learn"
+            className="inline-flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            <ArrowLeftIcon className="h-5 w-5" />
+            Back to Learn
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (

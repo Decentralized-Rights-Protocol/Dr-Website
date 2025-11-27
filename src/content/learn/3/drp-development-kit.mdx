@@ -1,0 +1,214 @@
+---
+title: "DRP Development Kit"
+description: "Get started with the DRP Development Kit and build your first DRP application"
+duration: 30
+reward: 25
+level: 3
+module: "drp-development-kit"
+---
+
+# DRP Development Kit
+
+Welcome to the DRP Development Kit (DRP-DK)! This comprehensive toolkit provides everything you need to build decentralized applications on the DRP network.
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+- Understand what the DRP Development Kit includes
+- Set up your development environment
+- Install and configure DRP-DK
+- Create your first DRP application
+- Use DRP's core libraries and APIs
+
+## What is DRP-DK?
+
+The **DRP Development Kit** is a collection of tools, libraries, and documentation designed to simplify building on the DRP network. It includes:
+
+- **Core Libraries**: TypeScript/JavaScript SDKs for DRP
+- **CLI Tools**: Command-line utilities for development
+- **Testing Framework**: Tools for testing DRP applications
+- **Documentation**: Comprehensive guides and API references
+
+## Installation
+
+### Prerequisites
+
+- Node.js 18.x or higher
+- npm or yarn package manager
+- Git
+
+### Install DRP-DK
+
+```bash
+npm install @drp/sdk @drp/cli
+```
+
+Or with yarn:
+
+```bash
+yarn add @drp/sdk @drp/cli
+```
+
+## Setting Up Your Development Environment
+
+### 1. Initialize a New Project
+
+```bash
+npx @drp/cli create my-drp-app
+cd my-drp-app
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment
+
+Create a `.env` file:
+
+```env
+DRP_NETWORK=testnet
+DRP_NODE_URL=https://testnet.drp.network
+PRIVATE_KEY=your-private-key
+```
+
+## Core Components
+
+### DRP SDK
+
+The SDK provides programmatic access to DRP:
+
+```typescript
+import { DRPClient } from '@drp/sdk';
+
+const client = new DRPClient({
+  network: 'testnet',
+  nodeUrl: process.env.DRP_NODE_URL
+});
+```
+
+### Smart Contracts
+
+Deploy and interact with smart contracts:
+
+```typescript
+import { Contract } from '@drp/sdk';
+
+const contract = await Contract.deploy({
+  code: contractBytecode,
+  initParams: {}
+});
+```
+
+### Transactions
+
+Send transactions on the DRP network:
+
+```typescript
+const tx = await client.sendTransaction({
+  to: recipientAddress,
+  value: amount,
+  data: transactionData
+});
+```
+
+## Development Workflow
+
+### 1. Write Your Code
+
+Create your application logic using DRP SDK:
+
+```typescript
+// src/app.ts
+import { DRPClient } from '@drp/sdk';
+
+async function main() {
+  const client = new DRPClient();
+  // Your application logic
+}
+```
+
+### 2. Test Locally
+
+Use the local test network:
+
+```bash
+npm run test:local
+```
+
+### 3. Deploy to Testnet
+
+Deploy your application:
+
+```bash
+npm run deploy:testnet
+```
+
+### 4. Deploy to Mainnet
+
+Once tested, deploy to mainnet:
+
+```bash
+npm run deploy:mainnet
+```
+
+## Best Practices
+
+### Security
+- Never commit private keys
+- Use environment variables for sensitive data
+- Implement proper error handling
+- Test thoroughly before mainnet deployment
+
+### Performance
+- Optimize contract code
+- Use efficient data structures
+- Monitor gas/transaction costs
+- Implement caching where appropriate
+
+## Common Use Cases
+
+### 1. Token Creation
+Create custom tokens on DRP:
+
+```typescript
+const token = await Token.create({
+  name: 'MyToken',
+  symbol: 'MTK',
+  totalSupply: 1000000
+});
+```
+
+### 2. NFT Marketplace
+Build NFT functionality:
+
+```typescript
+const nft = await NFT.mint({
+  metadata: { name: 'Artwork #1', image: '...' }
+});
+```
+
+### 3. DeFi Applications
+Create DeFi protocols:
+
+```typescript
+const pool = await Pool.create({
+  tokenA: token1,
+  tokenB: token2
+});
+```
+
+## Next Steps
+
+In the next lesson, you'll learn how to build complete DApps using these tools and concepts.
+
+## Key Takeaways
+
+- DRP-DK provides all tools needed to build on DRP
+- Easy setup and configuration process
+- Comprehensive SDK for programmatic access
+- Support for smart contracts, transactions, and more
+- Built-in testing and deployment tools
+

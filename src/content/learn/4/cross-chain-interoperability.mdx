@@ -1,0 +1,266 @@
+---
+title: "Cross-Chain Interoperability"
+description: "Enable communication and asset transfer between different blockchains using DRP"
+duration: 45
+reward: 40
+level: 4
+module: "cross-chain-interoperability"
+---
+
+# Cross-Chain Interoperability
+
+The blockchain ecosystem consists of multiple networks, each with unique strengths. Cross-chain interoperability enables these networks to work together seamlessly. This lesson explores how DRP enables cross-chain operations.
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+- Understand cross-chain interoperability concepts
+- Implement cross-chain bridges
+- Transfer assets between chains
+- Execute cross-chain smart contracts
+- Build interoperable applications
+
+## Why Cross-Chain?
+
+### Challenges with Isolated Chains
+- **Fragmentation**: Assets locked in separate chains
+- **Limited Liquidity**: Can't combine pools across chains
+- **User Friction**: Need multiple wallets and networks
+- **Limited Composability**: Can't use tools from other chains
+
+### Benefits of Interoperability
+- Unified user experience
+- Increased liquidity
+- Better composability
+- Network effects
+
+## Cross-Chain Architecture
+
+### 1. Bridge Pattern
+
+```
+Chain A              Bridge            Chain B
+┌────────┐         ┌────────┐         ┌────────┐
+│ Asset  │────────▶│ Lock   │────────▶│ Wrapped│
+│  100   │         │ 100    │         │  100   │
+└────────┘         └────────┘         └────────┘
+```
+
+### 2. Hash-Locked Transfers
+
+```typescript
+import { HashLock } from '@drp/crosschain';
+
+const hashLock = await HashLock.create({
+  secret: generateSecret(),
+  hash: hashSecret(secret),
+  timeout: 3600 // 1 hour
+});
+
+// On Chain A
+await lockAsset({
+  chain: 'chain-a',
+  amount: 100,
+  hash: hashLock.hash
+});
+
+// On Chain B
+await claimAsset({
+  chain: 'chain-b',
+  amount: 100,
+  secret: hashLock.secret
+});
+```
+
+## DRP Cross-Chain Solutions
+
+### Asset Bridges
+
+```typescript
+import { Bridge } from '@drp/crosschain';
+
+const bridge = new Bridge({
+  sourceChain: 'ethereum',
+  targetChain: 'drp',
+  bridgeContract: bridgeAddress
+});
+
+// Transfer assets
+const tx = await bridge.transfer({
+  asset: 'ETH',
+  amount: 1.0,
+  recipient: recipientAddress
+});
+
+// Monitor status
+await tx.waitForCompletion();
+console.log('Transfer completed!');
+```
+
+### Cross-Chain Messaging
+
+```typescript
+import { CrossChainMessaging } from '@drp/crosschain';
+
+const messaging = new CrossChainMessaging({
+  sourceChain: 'drp',
+  targetChain: 'polygon'
+});
+
+// Send message
+await messaging.send({
+  targetContract: contractAddress,
+  function: 'processMessage',
+  params: [data],
+  callbacks: {
+    onConfirm: () => console.log('Message confirmed'),
+    onError: (error) => console.error('Error:', error)
+  }
+});
+```
+
+## Implementation Patterns
+
+### 1. Lock-and-Mint
+
+```typescript
+class LockAndMintBridge {
+  async lock(sourceChain: string, amount: number) {
+    // Lock assets on source chain
+    await this.sourceChain.lock({
+      amount: amount,
+      recipient: this.bridgeAddress
+    });
+    
+    // Mint on target chain
+    await this.targetChain.mint({
+      amount: amount,
+      recipient: this.recipient
+    });
+  }
+  
+  async unlock(targetChain: string, amount: number) {
+    // Burn on target chain
+    await this.targetChain.burn(amount);
+    
+    // Unlock on source chain
+    await this.sourceChain.unlock({
+      amount: amount,
+      recipient: this.recipient
+    });
+  }
+}
+```
+
+### 2. Atomic Swaps
+
+```typescript
+import { AtomicSwap } from '@drp/crosschain';
+
+const swap = await AtomicSwap.create({
+  chainA: 'ethereum',
+  assetA: 'ETH',
+  amountA: 1.0,
+  chainB: 'bitcoin',
+  assetB: 'BTC',
+  amountB: 0.05,
+  timeout: 3600
+});
+
+// Initiate swap
+await swap.initiate();
+
+// Accept swap
+await swap.accept({
+  participant: otherParty
+});
+
+// Complete swap
+await swap.complete();
+```
+
+## Use Cases
+
+### 1. DeFi Cross-Chain
+
+```typescript
+// Lend on Ethereum, borrow on Polygon
+const defiBridge = new DeFiBridge({
+  chains: ['ethereum', 'polygon']
+});
+
+await defiBridge.crossChainLending({
+  depositChain: 'ethereum',
+  depositAmount: 1000,
+  borrowChain: 'polygon',
+  borrowAmount: 500
+});
+```
+
+### 2. NFT Bridges
+
+```typescript
+const nftBridge = await NFTBridge.create({
+  sourceChain: 'ethereum',
+  targetChain: 'drp'
+});
+
+// Bridge NFT
+await nftBridge.transfer({
+  tokenId: 123,
+  collection: collectionAddress,
+  recipient: recipientAddress
+});
+```
+
+### 3. Governance Cross-Chain
+
+```typescript
+// Vote on Ethereum, execute on DRP
+const governance = await CrossChainGovernance.create({
+  votingChain: 'ethereum',
+  executionChain: 'drp'
+});
+
+await governance.propose({
+  proposal: proposalData,
+  votingPeriod: 7 * 24 * 3600 // 7 days
+});
+```
+
+## Security Considerations
+
+### Bridge Security
+- Multi-signature requirements
+- Time locks for large transfers
+- Fraud proofs
+- Circuit breakers
+
+### Validator Security
+- Decentralized validators
+- Economic incentives
+- Slashing conditions
+- Monitoring and alerts
+
+## Best Practices
+
+### Design
+- Use standardized protocols
+- Implement proper timeouts
+- Add circuit breakers
+- Plan for failures
+
+### Testing
+- Test on testnets first
+- Use small amounts initially
+- Monitor closely
+- Have rollback plans
+
+## Key Takeaways
+
+- Cross-chain interoperability unlocks new possibilities
+- Bridges enable asset transfers
+- Atomic swaps ensure trustless exchanges
+- Multiple patterns available
+- Security is crucial
+

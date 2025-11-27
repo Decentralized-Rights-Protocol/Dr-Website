@@ -1,0 +1,274 @@
+---
+title: "Economic Models"
+description: "Understand DRP's token economics and incentive mechanisms"
+duration: 45
+reward: 40
+level: 5
+module: "economic-models"
+---
+
+# Economic Models
+
+A well-designed economic model is crucial for the sustainability and growth of any blockchain protocol. This lesson explores DRP's economic architecture and incentive mechanisms.
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+- Understand DRP's token economics
+- Analyze incentive mechanisms
+- Model economic scenarios
+- Design sustainable tokenomics
+- Evaluate economic sustainability
+
+## Token Economics Overview
+
+### DRP Token ($DRP)
+
+**Key Characteristics:**
+- **Supply**: Dynamic based on network activity
+- **Utility**: Multiple use cases
+- **Distribution**: Fair launch mechanism
+- **Inflation**: Controlled and predictable
+
+### Token Use Cases
+
+1. **Transaction Fees**: Pay for network usage
+2. **Staking**: Secure the network and earn rewards
+3. **Governance**: Vote on proposals
+4. **Collateral**: Lock for various services
+5. **Incentives**: Reward contributors
+
+## Supply Mechanisms
+
+### Token Generation
+
+```typescript
+interface TokenSupply {
+  initialSupply: number;
+  inflationRate: number; // Annual percentage
+  maxSupply?: number; // Optional cap
+  generationEvents: [
+    'blockRewards',
+    'stakingRewards',
+    'governanceRewards',
+    'contributionRewards'
+  ];
+}
+```
+
+### Inflation Model
+
+```typescript
+const inflation = calculateInflation({
+  currentSupply: totalSupply,
+  targetRate: 0.05, // 5% annual
+  adjustmentPeriod: 365 * 24 * 3600, // 1 year
+  factors: {
+    networkUsage: networkUsage,
+    stakingRate: stakingRate,
+    growthRate: growthRate
+  }
+});
+```
+
+## Staking Economics
+
+### Staking Rewards
+
+```typescript
+import { Staking } from '@drp/economics';
+
+const staking = new Staking({
+  minimumStake: 1000, // DRP tokens
+  lockPeriod: 30 * 24 * 3600, // 30 days
+  rewardRate: 0.12 // 12% APR
+});
+
+// Calculate rewards
+const rewards = await staking.calculateRewards({
+  stake: 10000,
+  duration: 365 * 24 * 3600, // 1 year
+  compound: true
+});
+
+console.log(`Annual rewards: ${rewards.annual}`);
+console.log(`APY: ${rewards.apy}%`);
+```
+
+### Staking Pools
+
+```typescript
+const pool = await StakingPool.create({
+  name: 'Community Pool',
+  fee: 0.02, // 2% fee
+  minStake: 100,
+  maxStake: 1000000
+});
+
+// Join pool
+await pool.stake({
+  amount: 5000,
+  duration: 90 * 24 * 3600 // 90 days
+});
+
+// Withdraw
+await pool.unstake({
+  stakeId: stakeId,
+  amount: 5000
+});
+```
+
+## Fee Mechanisms
+
+### Transaction Fees
+
+```typescript
+const fee = calculateFee({
+  baseFee: 0.001, // Base fee in DRP
+  gasUsed: gasAmount,
+  priority: 'normal', // low, normal, high
+  networkCongestion: congestionLevel
+});
+```
+
+### Fee Distribution
+
+```typescript
+interface FeeDistribution {
+  validators: 0.6, // 60% to validators
+  stakers: 0.3,    // 30% to stakers
+  treasury: 0.1    // 10% to treasury
+}
+```
+
+## Incentive Mechanisms
+
+### Network Participation Incentives
+
+```typescript
+const incentives = await IncentiveCalculator.calculate({
+  activity: {
+    transactionsProcessed: 1000,
+    dataStored: 1000000, // bytes
+    uptime: 0.99 // 99%
+  },
+  rewards: {
+    transactionReward: 0.01,
+    storageReward: 0.001,
+    uptimeReward: 100
+  }
+});
+```
+
+### Contribution Rewards
+
+```typescript
+const contribution = await ContributionReward.create({
+  type: 'development',
+  value: 5000, // DRP tokens
+  milestones: [
+    { description: 'Phase 1', reward: 2000 },
+    { description: 'Phase 2', reward: 3000 }
+  ]
+});
+```
+
+## Economic Models
+
+### Token Velocity
+
+```typescript
+const velocity = calculateVelocity({
+  transactions: totalTransactions,
+  averageTransactionValue: avgValue,
+  circulatingSupply: circulatingSupply,
+  period: timePeriod
+});
+
+// Lower velocity = higher value per token
+```
+
+### Value Accrual
+
+```typescript
+interface ValueAccrual {
+  mechanisms: [
+    'feeBurning',      // Burn fees to reduce supply
+    'stakingLocks',    // Lock tokens for rewards
+    'governanceLocks', // Lock tokens for voting
+    'utilityDemand'    // Demand from use cases
+  ];
+}
+```
+
+## Sustainability Analysis
+
+### Economic Health Metrics
+
+```typescript
+const healthMetrics = {
+  inflationRate: calculateInflation(),
+  stakingRate: calculateStakingRate(),
+  tokenVelocity: calculateVelocity(),
+  networkValue: calculateNetworkValue(),
+  treasuryReserves: getTreasuryBalance()
+};
+```
+
+### Sustainability Model
+
+```typescript
+const sustainability = analyzeSustainability({
+  revenue: networkRevenue,
+  expenses: networkExpenses,
+  reserves: treasuryReserves,
+  growth: growthRate,
+  timeline: 10 // years
+});
+```
+
+## Token Distribution
+
+### Fair Launch
+
+```typescript
+interface Distribution {
+  initial: {
+    publicSale: 0.4,      // 40%
+    team: 0.2,            // 20%
+    treasury: 0.2,        // 20%
+    ecosystem: 0.2        // 20%
+  };
+  vesting: {
+    team: '4 years',
+    treasury: '10 years',
+    ecosystem: 'gradual'
+  };
+}
+```
+
+## Economic Design Principles
+
+### 1. Alignment of Incentives
+- Reward desired behaviors
+- Penalize harmful actions
+- Balance short and long-term
+
+### 2. Sustainability
+- Long-term viability
+- Reasonable inflation
+- Reserve management
+
+### 3. Fairness
+- Equitable distribution
+- Accessible participation
+- Transparent mechanisms
+
+## Key Takeaways
+
+- Economic design is crucial for sustainability
+- Incentives must align with network goals
+- Staking and fees create value
+- Distribution affects adoption
+- Regular analysis ensures health
+
