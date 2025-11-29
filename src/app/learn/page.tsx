@@ -279,54 +279,71 @@ export default function LearnPage() {
                 </div>
               </div>
               
-              <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {level.lessons.map((lesson) => (
-                    <div 
-                      key={lesson.id}
-                      className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-shadow"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
-                          {lesson.title}
-                        </h4>
-                        {userProgress.completedLessons > 0 && (
-                          <CheckCircleIcon className="h-5 w-5 text-green-500" />
-                        )}
-                      </div>
-                      
-                      <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-300 mb-3">
-                        <div className="flex items-center space-x-1">
-                          <ClockIcon className="h-4 w-4" />
-                          <span>{lesson.duration}min</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <TrophyIcon className="h-4 w-4" />
-                          <span>{lesson.reward} $DeRi</span>
-                        </div>
-                      </div>
-                      
-                      <Link 
-                        href={`/learn/lesson/${lesson.id}`}
-                        className={`w-full flex items-center justify-center space-x-2 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                          level.id <= userProgress.currentLevel
-                            ? 'bg-blue-500 hover:bg-blue-600 text-white'
-                            : 'bg-gray-300 dark:bg-gray-600 text-gray-500 cursor-not-allowed'
-                        }`}
+              <div className="p-4 md:p-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+                  {level.lessons.map((lesson) => {
+                    // Try to find lesson details from availableLessons
+                    const lessonDetails = availableLessons.find(l => l.id === lesson.id) || null;
+                    const isUnlocked = level.id <= userProgress.currentLevel;
+                    
+                    return (
+                      <div 
+                        key={lesson.id}
+                        className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 md:p-4 hover:shadow-md transition-all hover:scale-105 bg-white dark:bg-gray-800"
                       >
-                        <PlayIcon className="h-4 w-4" />
-                        <span>
-                          {userProgress.completedLessons > 0 ? 'Continue' : 'Start Learning'}
-                        </span>
-                      </Link>
-                    </div>
-                  ))}
+                        <div className="flex items-start justify-between mb-2 gap-2">
+                          <h4 className="font-semibold text-gray-900 dark:text-white text-sm leading-tight flex-1">
+                            {lesson.title}
+                          </h4>
+                          {userProgress.completedLessons > 0 && (
+                            <CheckCircleIcon className="h-5 w-5 text-green-500 flex-shrink-0" />
+                          )}
+                        </div>
+                        
+                        {(lessonDetails?.description || lesson.title) && (
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 line-clamp-2">
+                            {lessonDetails?.description || ''}
+                          </p>
+                        )}
+                        
+                        <div className="flex items-center justify-between text-xs md:text-sm text-gray-600 dark:text-gray-300 mb-3">
+                          <div className="flex items-center space-x-1">
+                            <ClockIcon className="h-3 w-3 md:h-4 md:w-4" />
+                            <span>{lesson.duration}min</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <TrophyIcon className="h-3 w-3 md:h-4 md:w-4" />
+                            <span>{lesson.reward} $DeRi</span>
+                          </div>
+                        </div>
+                        
+                        <Link 
+                          href={isUnlocked ? `/learn/lesson/${lesson.id}` : '#'}
+                          className={`w-full flex items-center justify-center space-x-2 py-2 px-3 md:px-4 rounded-md text-xs md:text-sm font-medium transition-all ${
+                            isUnlocked
+                              ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm hover:shadow-md'
+                              : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                          }`}
+                          onClick={(e) => {
+                            if (!isUnlocked) {
+                              e.preventDefault();
+                            }
+                          }}
+                        >
+                          <PlayIcon className="h-3 w-3 md:h-4 md:w-4" />
+                          <span>
+                            {isUnlocked ? (userProgress.completedLessons > 0 ? 'Continue' : 'Start Learning') : 'Locked'}
+                          </span>
+                        </Link>
+                      </div>
+                    );
+                  })}
                 </div>
                 
                 {level.id > userProgress.currentLevel && (
-                  <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                    <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                      Complete Level {level.id - 1} to unlock this level
+                  <div className="mt-4 p-3 md:p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                    <p className="text-xs md:text-sm text-yellow-800 dark:text-yellow-200 text-center">
+                      🔒 Complete Level {level.id - 1} to unlock this level
                     </p>
                   </div>
                 )}

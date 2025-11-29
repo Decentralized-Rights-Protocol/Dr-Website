@@ -22,6 +22,43 @@ export interface LessonFile {
 }
 
 /**
+ * Custom order mapping to match curriculum expectations
+ * This ensures IDs match the intended curriculum order
+ */
+const CURRICULUM_ORDER: Record<number, string[]> = {
+  1: [
+    'blockchain-basics',        // 1-1
+    'cryptography-hashing',     // 1-2
+    'consensus-mechanisms',     // 1-3
+    'smart-contracts-101'       // 1-4
+  ],
+  2: [
+    'drp-architecture',         // 2-1
+    'post-pat-consensus',       // 2-2
+    'elder-quorum-system',      // 2-3
+    'activity-proofs'           // 2-4
+  ],
+  3: [
+    'drp-development-kit',      // 3-1
+    'building-dapps',           // 3-2
+    'contributing-to-drp',      // 3-3
+    'testing-deployment'        // 3-4
+  ],
+  4: [
+    'enterprise-integration',   // 4-1
+    'supply-chain-applications', // 4-2
+    'identity-access-management', // 4-3
+    'cross-chain-interoperability' // 4-4
+  ],
+  5: [
+    'advanced-drp-concepts',    // 5-1
+    'governance-mechanisms',    // 5-2
+    'economic-models',          // 5-3
+    'future-of-drp'             // 5-4
+  ]
+}
+
+/**
  * Parse frontmatter from MDX file content using gray-matter
  */
 function parseFrontmatter(content: string): { frontmatter: Record<string, any>, body: string } {
@@ -82,10 +119,7 @@ export function getAllLessonFiles(): LessonFile[] {
       })
     })
     
-    return lessons.sort((a, b) => {
-      if (a.level !== b.level) return a.level - b.level
-      return a.slug.localeCompare(b.slug)
-    })
+    return lessons
   } catch (error) {
     console.error('[Learn Utils] Error reading lesson files:', error)
     if (error instanceof Error) {
@@ -96,8 +130,7 @@ export function getAllLessonFiles(): LessonFile[] {
 }
 
 /**
- * Map lesson ID (e.g., "1-1") to a slug based on file order
- * Files are sorted alphabetically within each level
+ * Map lesson ID (e.g., "1-1") to a slug based on curriculum order
  */
 function mapIdToSlug(lessonId: string): string | null {
   const [levelStr, lessonNumStr] = lessonId.split('-')
@@ -105,18 +138,28 @@ function mapIdToSlug(lessonId: string): string | null {
   const lessonNum = parseInt(lessonNumStr)
   
   if (isNaN(level) || isNaN(lessonNum)) {
+    console.error(`[Learn Utils] Invalid lesson ID format: ${lessonId}`)
     return null
   }
   
+  // Use curriculum order if available
+  if (CURRICULUM_ORDER[level]) {
+    if (lessonNum > 0 && lessonNum <= CURRICULUM_ORDER[level].length) {
+      return CURRICULUM_ORDER[level][lessonNum - 1]
+    }
+  }
+  
+  // Fallback to alphabetical order
   const allFiles = getAllLessonFiles()
   const levelFiles = allFiles
     .filter(f => f.level === level)
-    .sort((a, b) => a.slug.localeCompare(b.slug)) // Sort alphabetically for consistent mapping
+    .sort((a, b) => a.slug.localeCompare(b.slug))
   
   if (lessonNum > 0 && lessonNum <= levelFiles.length) {
     return levelFiles[lessonNum - 1].slug
   }
   
+  console.error(`[Learn Utils] Could not map lesson ID ${lessonId} to slug`)
   return null
 }
 
@@ -125,7 +168,7 @@ function mapIdToSlug(lessonId: string): string | null {
  */
 export function loadLessonById(lessonId: string): LessonMetadata | null {
   try {
-    // Try direct slug match first
+    // Try direct slug match first (if it's not an ID format)
     let slug = lessonId
     let level: number | null = null
     
@@ -146,7 +189,7 @@ export function loadLessonById(lessonId: string): LessonMetadata | null {
     
     if (!lessonFile) {
       console.error(`[Learn Utils] Lesson file not found for slug: ${slug} (from ID: ${lessonId})`)
-      console.error(`[Learn Utils] Available slugs: ${allFiles.map(f => f.slug).join(', ')}`)
+      console.error(`[Learn Utils] Available slugs for level ${level || 'any'}: ${allFiles.filter(f => !level || f.level === level).map(f => f.slug).join(', ')}`)
       return null
     }
     
@@ -171,10 +214,10 @@ export function loadLessonById(lessonId: string): LessonMetadata | null {
       content: body.trim()
     }
   } catch (error) {
-    console.error(`Error loading lesson ${lessonId}:`, error)
+    console.error(`[Learn Utils] Error loading lesson ${lessonId}:`, error)
     if (error instanceof Error) {
-      console.error(`Error details: ${error.message}`)
-      console.error(`Stack: ${error.stack}`)
+      console.error(`[Learn Utils] Error details: ${error.message}`)
+      console.error(`[Learn Utils] Stack: ${error.stack}`)
     }
     return null
   }
@@ -190,6 +233,7 @@ export function loadLessonBySlug(slug: string): LessonMetadata | null {
     
     if (!lessonFile) {
       console.error(`[Learn Utils] Lesson file not found for slug: ${slug}`)
+      console.error(`[Learn Utils] Available slugs: ${allFiles.map(f => `${f.level}-${f.slug}`).join(', ')}`)
       return null
     }
     
@@ -201,12 +245,28 @@ export function loadLessonBySlug(slug: string): LessonMetadata | null {
     const content = readFileSync(lessonFile.path, 'utf-8')
     const { frontmatter, body } = parseFrontmatter(content)
     
-    // Generate ID from level and position (sort first for consistent ordering)
-    const levelFiles = allFiles
-      .filter(f => f.level === lessonFile.level)
-      .sort((a, b) => a.slug.localeCompare(b.slug))
-    const position = levelFiles.findIndex(f => f.slug === slug) + 1
-    const id = `${lessonFile.level}-${position}`
+    // Generate ID from level and position using curriculum order
+    let id: string
+    if (CURRICULUM_ORDER[lessonFile.level]) {
+      const position = CURRICULUM_ORDER[lessonFile.level].indexOf(slug) + 1
+      if (position > 0) {
+        id = `${lessonFile.level}-${position}`
+      } else {
+        // Fallback to alphabetical order
+        const levelFiles = allFiles
+          .filter(f => f.level === lessonFile.level)
+          .sort((a, b) => a.slug.localeCompare(b.slug))
+        const position = levelFiles.findIndex(f => f.slug === slug) + 1
+        id = `${lessonFile.level}-${position}`
+      }
+    } else {
+      // Fallback to alphabetical order
+      const levelFiles = allFiles
+        .filter(f => f.level === lessonFile.level)
+        .sort((a, b) => a.slug.localeCompare(b.slug))
+      const position = levelFiles.findIndex(f => f.slug === slug) + 1
+      id = `${lessonFile.level}-${position}`
+    }
     
     return {
       id,
@@ -220,7 +280,10 @@ export function loadLessonBySlug(slug: string): LessonMetadata | null {
       content: body.trim()
     }
   } catch (error) {
-    console.error(`Error loading lesson by slug ${slug}:`, error)
+    console.error(`[Learn Utils] Error loading lesson by slug ${slug}:`, error)
+    if (error instanceof Error) {
+      console.error(`[Learn Utils] Error details: ${error.message}`)
+    }
     return null
   }
 }
@@ -241,10 +304,21 @@ export function listAllLessons(): Array<{ id: string; slug: string; level: numbe
     byLevel[file.level].push(file)
   })
   
-  // Process each level
+  // Process each level using curriculum order
   Object.keys(byLevel).forEach(levelStr => {
     const level = parseInt(levelStr)
-    const files = byLevel[level].sort((a, b) => a.slug.localeCompare(b.slug))
+    let files = byLevel[level]
+    
+    // Sort according to curriculum order if available
+    if (CURRICULUM_ORDER[level]) {
+      files = CURRICULUM_ORDER[level]
+        .map(slug => files.find(f => f.slug === slug))
+        .filter((f): f is LessonFile => f !== undefined)
+        .concat(files.filter(f => !CURRICULUM_ORDER[level].includes(f.slug)))
+    } else {
+      // Fallback to alphabetical
+      files = files.sort((a, b) => a.slug.localeCompare(b.slug))
+    }
     
     files.forEach((file, index) => {
       try {
@@ -259,7 +333,7 @@ export function listAllLessons(): Array<{ id: string; slug: string; level: numbe
           description: frontmatter.description || ''
         })
       } catch (error) {
-        console.error(`Error reading lesson file ${file.path}:`, error)
+        console.error(`[Learn Utils] Error reading lesson file ${file.path}:`, error)
       }
     })
   })
@@ -278,121 +352,123 @@ export function getAllLessonSlugs(): string[] {
 }
 
 /**
- * Generate quiz questions for a lesson
+ * Generate quiz questions for a lesson based on its content
  */
-export function generateQuizForLesson(lesson: { title: string; level: number; module: string }): {
+export function generateQuizForLesson(lesson: LessonMetadata): {
   questions: Array<{
-    id: string;
-    question: string;
-    options: string[];
-    correct: number;
-  }>;
+    id: string
+    question: string
+    options: string[]
+    correct: number
+  }>
 } {
-  const title = lesson.title.toLowerCase();
-  const questions: Array<{
-    id: string;
-    question: string;
-    options: string[];
-    correct: number;
-  }> = [];
+  // Extract key concepts from content
+  const content = lesson.content.toLowerCase()
   
-  // Quiz for blockchain basics
-  if (title.includes('blockchain') || lesson.module.includes('blockchain')) {
-    questions.push(
-      {
-        id: 'q1',
-        question: 'What is the primary characteristic that makes blockchain different from traditional databases?',
-        options: [
-          'It stores more data',
-          'It is decentralized and immutable',
-          'It is faster',
-          'It uses less storage'
-        ],
-        correct: 1
-      },
-      {
-        id: 'q2',
-        question: 'What does the term "immutable" mean in blockchain context?',
-        options: [
-          'Data can be easily changed',
-          'Data cannot be changed once recorded',
-          'Data is temporary',
-          'Data is encrypted'
-        ],
-        correct: 1
-      },
-      {
-        id: 'q3',
-        question: 'Which of the following is NOT a key characteristic of blockchain?',
-        options: [
-          'Decentralization',
-          'Immutability',
-          'Centralized control',
-          'Transparency'
-        ],
-        correct: 2
-      }
-    );
-  }
-  // Quiz for DRP architecture
-  else if (title.includes('architecture') || title.includes('drp')) {
-    questions.push(
-      {
-        id: 'q1',
-        question: 'What are the four layers of DRP architecture?',
-        options: [
-          'Application, Protocol, Consensus, Network',
-          'Frontend, Backend, Database, API',
-          'User, System, Hardware, Software',
-          'Input, Process, Output, Storage'
-        ],
-        correct: 0
-      },
-      {
-        id: 'q2',
-        question: 'What is the primary purpose of the Elder Quorum?',
-        options: [
-          'To mine new blocks',
-          'To provide governance and make protocol decisions',
-          'To store user data',
-          'To process transactions'
-        ],
-        correct: 1
-      },
-      {
-        id: 'q3',
-        question: 'What does PoAT stand for in DRP consensus?',
-        options: [
-          'Proof of Authority Time',
-          'Proof of Activity',
-          'Proof of Available Time',
-          'Proof of Advanced Technology'
-        ],
-        correct: 1
-      }
-    );
-  }
-  // Default quiz for other lessons
-  else {
+  // Generate questions based on lesson content
+  const questions: Array<{
+    id: string
+    question: string
+    options: string[]
+    correct: number
+  }> = []
+  
+  // Question 1: About the main topic
+  if (content.includes('blockchain')) {
     questions.push({
       id: 'q1',
-      question: `What is the main topic covered in "${lesson.title}"?`,
+      question: `What is the primary focus of "${lesson.title}"?`,
       options: [
-        'Understanding core concepts',
-        'Advanced technical details',
-        'Practical applications',
-        'All of the above'
+        'Understanding blockchain technology',
+        'Learning programming languages',
+        'Designing websites',
+        'Creating mobile apps'
       ],
       correct: 0
-    });
+    })
   }
   
-  return { questions };
+  // Question 2: About key concepts
+  if (content.includes('consensus') || content.includes('agreement')) {
+    questions.push({
+      id: 'q2',
+      question: 'Which mechanism helps blockchain networks reach agreement?',
+      options: [
+        'Consensus mechanism',
+        'Database replication',
+        'Central authority',
+        'Random selection'
+      ],
+      correct: 0
+    })
+  }
+  
+  // Question 3: About DRP
+  if (content.includes('drp') || content.includes('decentralized rights')) {
+    questions.push({
+      id: 'q3',
+      question: 'What does DRP stand for?',
+      options: [
+        'Decentralized Rights Protocol',
+        'Data Retrieval Process',
+        'Dynamic Resource Planning',
+        'Digital Rights Protection'
+      ],
+      correct: 0
+    })
+  }
+  
+  // Default questions if none matched
+  if (questions.length === 0) {
+    questions.push({
+      id: 'q1',
+      question: `What is the main topic of "${lesson.title}"?`,
+      options: [
+        lesson.title,
+        'A different topic',
+        'Another subject',
+        'Something else'
+      ],
+      correct: 0
+    })
+    
+    questions.push({
+      id: 'q2',
+      question: `How long is this lesson?`,
+      options: [
+        `${lesson.duration} minutes`,
+        '5 minutes',
+        '1 hour',
+        '2 hours'
+      ],
+      correct: 0
+    })
+  }
+  
+  // Add at least 3 questions
+  while (questions.length < 3) {
+    questions.push({
+      id: `q${questions.length + 1}`,
+      question: `What is an important concept in "${lesson.title}"?`,
+      options: [
+        'Key concept discussed in the lesson',
+        'Unrelated topic',
+        'Something else',
+        'Not applicable'
+      ],
+      correct: 0
+    })
+  }
+  
+  return { questions }
 }
 
 /**
- * Clean and return markdown content (keep as markdown, not HTML)
+ * Clean markdown content for display
  */
-function cleanMarkdown(content: string): string {
-  return content.trim()
+export function cleanMarkdown(content: string): string {
+  // Remove excessive newlines
+  return content
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
 }

@@ -168,19 +168,19 @@ export default function LessonPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4">
             <button 
               onClick={() => router.back()}
-              className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+              className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white self-start"
             >
               <ArrowLeftIcon className="h-5 w-5" />
               <span>Back to Learn</span>
             </button>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
               <div className="flex items-center space-x-2">
                 <ClockIcon className="h-5 w-5 text-gray-500" />
                 <span className="text-sm text-gray-600 dark:text-gray-300">
@@ -189,19 +189,19 @@ export default function LessonPage() {
               </div>
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
+                className="flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm"
               >
                 {isPlaying ? <PauseIcon className="h-4 w-4" /> : <PlayIcon className="h-4 w-4" />}
-                <span>{isPlaying ? 'Pause' : 'Start'}</span>
+                <span className="hidden sm:inline">{isPlaying ? 'Pause' : 'Start'}</span>
               </button>
             </div>
           </div>
           
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-2">
             {lesson.title}
           </h1>
           
-          <div className="flex items-center space-x-6 text-sm text-gray-600 dark:text-gray-300">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
             <div className="flex items-center space-x-1">
               <ClockIcon className="h-4 w-4" />
               <span>{lesson.duration} minutes</span>
@@ -213,24 +213,24 @@ export default function LessonPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Lesson Content */}
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6">
               <div className="flex items-center space-x-2 mb-4">
-                <BookOpenIcon className="h-6 w-6 text-blue-500" />
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Lesson Content</h2>
+                <BookOpenIcon className="h-5 w-5 sm:h-6 sm:w-6 text-blue-500" />
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">Lesson Content</h2>
               </div>
               
-              <div className="prose prose-lg dark:prose-invert max-w-none">
+              <div className="prose prose-sm sm:prose-lg dark:prose-invert max-w-none overflow-x-auto">
                 <ReactMarkdown>{lesson.content}</ReactMarkdown>
               </div>
               
               {!showQuiz && !quizState.completed && (
-                <div className="mt-8 text-center">
+                <div className="mt-6 sm:mt-8 text-center">
                   <button
                     onClick={() => setShowQuiz(true)}
-                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium"
+                    className="bg-green-500 hover:bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium"
                   >
                     Take Quiz to Complete Lesson
                   </button>
@@ -242,8 +242,8 @@ export default function LessonPage() {
           {/* Quiz Sidebar */}
           <div className="lg:col-span-1">
             {showQuiz && !quizState.completed && (
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 sticky top-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 sticky top-4 sm:top-6">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   Quiz: Question {quizState.currentQuestion + 1} of {lesson.quiz.questions.length}
                 </h3>
                 
