@@ -1,0 +1,11 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="55" fill="url(#guardianGradient)" stroke="#10B981" stroke-width="2"/>
+  <path d="M60 30 L70 50 L90 55 L75 70 L78 90 L60 80 L42 90 L45 70 L30 55 L50 50 Z" fill="white" opacity="0.9"/>
+  <defs>
+    <linearGradient id="guardianGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
+

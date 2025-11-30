@@ -140,9 +140,18 @@ export interface StatusClaim {
  */
 export async function submitActivity(claim: ActivityClaim): Promise<SubmissionResponse> {
   const response = await apiRequest<SubmissionResponse, ActivityClaim>({
-    path: '/api/activity/submit',
+    path: '/api/v1/activities/submit',
     method: 'POST',
-    body: claim
+    body: {
+      title: claim.title,
+      description: claim.description,
+      location: claim.location,
+      timestamp: claim.timestamp,
+      media_cid: claim.media_cid,
+      hash: claim.hash,
+      actor_id: claim.actor_id,
+      activity_type: 'poat'
+    }
   })
   return response.data
 }
@@ -178,9 +187,17 @@ export async function getStatusProfile(userId: string): Promise<StatusProfile> {
 
 export async function submitStatus(claim: StatusClaim): Promise<SubmissionResponse> {
   const response = await apiRequest<SubmissionResponse, StatusClaim>({
-    path: '/api/status/submit',
+    path: '/api/v1/activities/submit',
     method: 'POST',
-    body: claim
+    body: {
+      title: `${claim.category} Status Claim`,
+      description: `Status claim from ${claim.issuer}`,
+      timestamp: new Date().toISOString(),
+      media_cid: claim.credential_cid,
+      hash: `0x${Date.now().toString(16)}`,
+      actor_id: claim.actor_id,
+      activity_type: 'post'
+    }
   })
   return response.data
 }
@@ -221,16 +238,35 @@ export async function getTransactions(params?: {
 }): Promise<TransactionsResponse> {
   const searchParams = new URLSearchParams()
   if (params?.page) searchParams.set('page', params.page.toString())
-  if (params?.page_size) searchParams.set('page_size', params.page_size.toString())
+  if (params?.page_size) searchParams.set('limit', params.page_size.toString())
   if (params?.type) searchParams.set('type', params.type)
   if (params?.status) searchParams.set('status', params.status)
 
   const query = searchParams.toString()
-  const response = await apiRequest<TransactionsResponse>({
-    path: `/api/transactions${query ? `?${query}` : ''}`,
+  const response = await apiRequest<Transaction[]>({
+    path: `/api/v1/explorer/transactions${query ? `?${query}` : ''}`,
     method: 'GET'
   })
-  return response.data
+  
+  // Transform to match expected format
+  const transactions = response.data || []
+  return {
+    transactions: transactions.map((tx: any) => ({
+      tx_hash: tx.tx_hash,
+      block_number: tx.block_number || 0,
+      timestamp: tx.timestamp,
+      from: tx.from_address,
+      to: tx.to_address,
+      value: tx.value,
+      gas_used: tx.gas_used || 0,
+      status: tx.status === 'confirmed' ? 'success' : tx.status === 'failed' ? 'failed' : 'pending',
+      type: tx.type,
+      metadata: tx.metadata
+    })),
+    total: transactions.length,
+    page: params?.page || 1,
+    page_size: params?.page_size || 50
+  }
 }
 
 /**

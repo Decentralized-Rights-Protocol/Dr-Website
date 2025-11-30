@@ -1,0 +1,14 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="55" fill="url(#quantumGradient)" stroke="#06B6D4" stroke-width="2"/>
+  <circle cx="45" cy="55" r="8" fill="white" opacity="0.9"/>
+  <circle cx="75" cy="55" r="8" fill="white" opacity="0.9"/>
+  <circle cx="60" cy="75" r="8" fill="white" opacity="0.9"/>
+  <path d="M45 55 Q60 65 75 55 M45 55 Q60 45 60 75 M60 75 Q60 65 75 55" stroke="white" stroke-width="2" opacity="0.7" fill="none"/>
+  <defs>
+    <linearGradient id="quantumGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06B6D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
+

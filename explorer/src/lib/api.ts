@@ -95,11 +95,30 @@ export async function getTransactions(params?: {
   if (params?.status) searchParams.set('status', params.status)
 
   const query = searchParams.toString()
-  const response = await apiRequest<TransactionsResponse>({
-    path: `/api/transactions${query ? `?${query}` : ''}`,
+  const response = await apiRequest<Transaction[]>({
+    path: `/api/v1/explorer/transactions${query ? `?${query}` : ''}`,
     method: 'GET'
   })
-  return response.data
+  
+  // Transform to match expected format
+  const transactions = response.data || []
+  return {
+    transactions: transactions.map((tx: any) => ({
+      tx_hash: tx.tx_hash,
+      block_number: tx.block_number || 0,
+      timestamp: tx.timestamp,
+      from: tx.from_address,
+      to: tx.to_address,
+      value: tx.value,
+      gas_used: tx.gas_used || 0,
+      status: tx.status === 'confirmed' ? 'success' : tx.status === 'failed' ? 'failed' : 'pending',
+      type: tx.type,
+      metadata: tx.metadata
+    })),
+    total: transactions.length,
+    page: params?.page || 1,
+    page_size: params?.page_size || 50
+  }
 }
 
 // ============================================================================
@@ -144,11 +163,31 @@ export async function getActivityFeed(params?: {
   if (params?.actor_id) searchParams.set('actor_id', params.actor_id)
 
   const query = searchParams.toString()
-  const response = await apiRequest<ActivityFeedResponse>({
-    path: `/api/activity/feed${query ? `?${query}` : ''}`,
+  const response = await apiRequest<any[]>({
+    path: `/api/v1/explorer/activity${query ? `?${query}` : ''}&limit=${params?.page_size || 50}`,
     method: 'GET'
   })
-  return response.data
+  
+  // Transform to match expected format
+  const activities = response.data || []
+  return {
+    activities: activities.map((act: any) => ({
+      id: act.id,
+      actor_id: act.actor,
+      title: act.title,
+      description: act.description || '',
+      location: act.metadata?.location,
+      timestamp: act.timestamp,
+      media_cid: act.metadata?.media_cid,
+      hash: act.metadata?.hash || '',
+      verification_status: act.metadata?.ai_verdict === 'approved' ? 'approved' : 'pending',
+      ai_summary: act.metadata?.ai_summary,
+      rewards: act.metadata?.rewards
+    })),
+    total: activities.length,
+    page: params?.page || 1,
+    page_size: params?.page_size || 50
+  }
 }
 
 // ============================================================================
