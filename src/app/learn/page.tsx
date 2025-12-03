@@ -143,7 +143,7 @@ export default function LearnPage() {
     : 0;
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-neutral-950 via-primary-950 to-neutral-950 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950 overflow-hidden">
       {/* Particle Background */}
       <ParticleBackground />
       

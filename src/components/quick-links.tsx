@@ -37,7 +37,7 @@ const links = [
 
 export function QuickLinks() {
   return (
-    <section className="relative py-24 sm:py-32 bg-gradient-to-br from-neutral-950 via-primary-950 to-neutral-950 overflow-hidden">
+    <section className="relative py-24 sm:py-32 bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950 overflow-hidden">
       {/* Particle Background */}
       <ParticleBackground />
       
