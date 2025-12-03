@@ -57,7 +57,7 @@ const docSections = [
 
 export default function DocsPage() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950 overflow-hidden">
+    <div className="relative min-h-screen style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }} overflow-hidden">
       {/* Particle Background */}
       <ParticleBackground />
       

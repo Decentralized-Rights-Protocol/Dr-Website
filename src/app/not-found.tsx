@@ -3,7 +3,7 @@ import { ParticleBackground } from '@/components/particle-background'
 
 export default function NotFound() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950 overflow-hidden">
+    <div className="relative min-h-screen style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }} overflow-hidden">
       <ParticleBackground />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
       

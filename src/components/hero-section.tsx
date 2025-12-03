@@ -27,7 +27,7 @@ const features = [
 
 export function HeroSection() {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950">
+    <div className="relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       {/* Particle Background */}
       <ParticleBackground />
       
