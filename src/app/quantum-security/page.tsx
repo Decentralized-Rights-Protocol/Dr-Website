@@ -47,7 +47,7 @@ export default function QuantumSecurityPage() {
             
             <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                DRP's Solution
+                DRP&apos;s Solution
               </h3>
               <p className="text-gray-700 dark:text-gray-300">
                 We use quantum-resistant signature schemes including hash-based cryptography,

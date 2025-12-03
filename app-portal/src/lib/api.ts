@@ -149,8 +149,7 @@ export async function submitActivity(claim: ActivityClaim): Promise<SubmissionRe
       timestamp: claim.timestamp,
       media_cid: claim.media_cid,
       hash: claim.hash,
-      actor_id: claim.actor_id,
-      activity_type: 'poat'
+      actor_id: claim.actor_id
     }
   })
   return response.data
@@ -190,13 +189,11 @@ export async function submitStatus(claim: StatusClaim): Promise<SubmissionRespon
     path: '/api/v1/activities/submit',
     method: 'POST',
     body: {
-      title: `${claim.category} Status Claim`,
-      description: `Status claim from ${claim.issuer}`,
-      timestamp: new Date().toISOString(),
-      media_cid: claim.credential_cid,
-      hash: `0x${Date.now().toString(16)}`,
-      actor_id: claim.actor_id,
-      activity_type: 'post'
+      category: claim.category,
+      issuer: claim.issuer,
+      reference_code: claim.reference_code,
+      credential_cid: claim.credential_cid,
+      actor_id: claim.actor_id
     }
   })
   return response.data

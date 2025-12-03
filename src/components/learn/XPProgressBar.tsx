@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getGamificationEngine, getXPProgress } from '@/lib/gamification'
+import { getGamificationEngine } from '@/lib/gamification'
 
 interface XPProgressBarProps {
   className?: string

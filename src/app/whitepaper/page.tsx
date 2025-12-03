@@ -148,6 +148,26 @@ export default function WhitepaperPage() {
           </div>
         </div>
 
+        {/* Economics Section */}
+        <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/40 dark:via-indigo-950/40 dark:to-purple-950/40 rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-700 p-8 mb-12">
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+            DRP Economics: The Sustainable Rights Economy (SRE)
+          </h2>
+          <p className="text-neutral-700 dark:text-neutral-200 mb-4">
+            DRP introduces a new economic fabric where value is tied to verified human activity, sustainability,
+            and rights-based distribution. The Sustainable Rights Economy (SRE) and Activity-Based Economy (ABE)
+            define how $RIGHTS and $DeRi move through the system.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4">
+            <Link
+              href="/economics"
+              className="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-colors"
+            >
+              Explore DRP Economics
+            </Link>
+          </div>
+        </div>
+
         {/* Table of Contents */}
         <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-700 p-8">
           <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
