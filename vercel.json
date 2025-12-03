@@ -4,6 +4,7 @@
   "outputDirectory": ".next",
   "framework": "nextjs",
   "installCommand": "npm install",
+  "rootDirectory": "src",
   "routes": [
     {
       "src": "/api/(.*)",
