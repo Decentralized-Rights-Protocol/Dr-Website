@@ -1,17 +1,27 @@
+import Link from 'next/link'
+import { ParticleBackground } from '@/components/particle-background'
+
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-black text-center text-gray-800 dark:text-gray-100 px-4">
-      <h1 className="text-6xl font-bold mb-4">404</h1>
-      <h2 className="text-3xl font-bold mb-4">Oops — Page Not Found!</h2>
-      <p className="text-lg mb-8 max-w-md">
-        The page you are looking for doesn&rsquo;t exist or was moved.
-      </p>
-      <a 
-        href="/" 
-        className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-      >
-        Go Home
-      </a>
+    <div className="relative min-h-screen bg-gradient-to-br from-neutral-950 via-primary-950 to-neutral-950 overflow-hidden">
+      <ParticleBackground />
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
+      
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 pt-32 pb-24">
+        <h1 className="text-8xl font-bold mb-4 text-white animate-fade-in-up">404</h1>
+        <h2 className="text-3xl font-bold mb-4 text-white sm:text-4xl animate-fade-in-up delay-200">
+          Page Not Found
+        </h2>
+        <p className="text-lg mb-8 max-w-md text-neutral-300 animate-fade-in-up delay-300">
+          The page you are looking for doesn&rsquo;t exist or was moved.
+        </p>
+        <Link 
+          href="/" 
+          className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl animate-fade-in-up delay-400"
+        >
+          Go Home
+        </Link>
+      </div>
     </div>
   );
 }

@@ -143,68 +143,68 @@ export default function LearnPage() {
     : 0;
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-neutral-950 via-primary-950 to-neutral-950 overflow-hidden">
       {/* Particle Background */}
       <ParticleBackground />
       
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
       
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
-        <div className="absolute top-1/4 right-1/4 w-48 h-48 bg-cyan-400/10 rounded-full blur-2xl animate-bounce delay-700"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl animate-bounce delay-500"></div>
       </div>
       
-      <div className="relative z-10 container mx-auto px-4 py-8">
+      <div className="relative z-10 pt-32 pb-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="mb-6 animate-fade-in-up">
-            <span className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-300 border border-blue-200/50 dark:border-blue-700/50">
+            <span className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-white border border-white/20">
               🎓 Learn • Earn • Contribute
             </span>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in-up delay-200">
+          <h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl mb-4 animate-fade-in-up delay-200">
             DRP Learn-to-Earn
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 animate-fade-in-up delay-300">
+          <p className="text-xl text-neutral-300 mb-8 animate-fade-in-up delay-300">
             Master blockchain, DRP, and AI governance while earning $DeRi rewards
           </p>
           
           {/* Progress Overview */}
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-xl border border-white/20 dark:border-gray-700/50 p-6 max-w-2xl mx-auto animate-fade-in-up delay-400">
+          <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-xl border border-white/20 p-6 max-w-2xl mx-auto animate-fade-in-up delay-400">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
-                  <BookOpenIcon className="h-6 w-6 text-blue-500" />
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                  <BookOpenIcon className="h-6 w-6 text-primary-400" />
+                  <span className="text-sm font-medium text-neutral-300">
                     {userProgress.completedLessons}/{userProgress.totalLessons} Lessons
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <TrophyIcon className="h-6 w-6 text-yellow-500" />
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                  <TrophyIcon className="h-6 w-6 text-yellow-400" />
+                  <span className="text-sm font-medium text-neutral-300">
                     {userProgress.totalRewards} $DeRi
                   </span>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-2xl font-bold text-white">
                   Level {userProgress.currentLevel}
                 </div>
-                <div className="text-sm text-gray-500">Current Level</div>
+                <div className="text-sm text-neutral-400">Current Level</div>
               </div>
             </div>
             
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+            <div className="w-full bg-neutral-800 rounded-full h-3">
               <div 
-                className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500"
+                className="bg-gradient-to-r from-primary-500 to-secondary-500 h-3 rounded-full transition-all duration-500"
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
-            <div className="text-center mt-2 text-sm text-gray-500">
+            <div className="text-center mt-2 text-sm text-neutral-400">
               {progressPercentage.toFixed(1)}% Complete
             </div>
           </div>
@@ -214,39 +214,39 @@ export default function LearnPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <Link 
             href="/learn/dashboard" 
-            className="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up delay-500"
+            className="group bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-white/20 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up delay-500"
           >
             <div className="flex items-center space-x-4">
-              <UserIcon className="h-8 w-8 text-blue-500" />
+              <UserIcon className="h-8 w-8 text-primary-400" />
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white">Dashboard</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">View your progress</p>
+                <h3 className="font-semibold text-white">Dashboard</h3>
+                <p className="text-sm text-neutral-300">View your progress</p>
               </div>
             </div>
           </Link>
           
           <Link 
             href="/learn/leaderboard" 
-            className="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up delay-600"
+            className="group bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-white/20 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up delay-600"
           >
             <div className="flex items-center space-x-4">
-              <TrophyIcon className="h-8 w-8 text-yellow-500" />
+              <TrophyIcon className="h-8 w-8 text-yellow-400" />
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white">Leaderboard</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">See top learners</p>
+                <h3 className="font-semibold text-white">Leaderboard</h3>
+                <p className="text-sm text-neutral-300">See top learners</p>
               </div>
             </div>
           </Link>
           
           <Link 
             href="/learn/ai-tutor" 
-            className="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up delay-700"
+            className="group bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-white/20 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up delay-700"
           >
             <div className="flex items-center space-x-4">
-              <StarIcon className="h-8 w-8 text-purple-500" />
+              <StarIcon className="h-8 w-8 text-secondary-400" />
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white">AI Tutor</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">Get help & answers</p>
+                <h3 className="font-semibold text-white">AI Tutor</h3>
+                <p className="text-sm text-neutral-300">Get help & answers</p>
               </div>
             </div>
           </Link>
@@ -254,14 +254,14 @@ export default function LearnPage() {
 
         {/* Curriculum Levels */}
         <div className="space-y-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8 animate-fade-in-up delay-800">
+          <h2 className="text-3xl font-bold text-center text-white sm:text-4xl mb-8 animate-fade-in-up delay-800">
             Curriculum Levels
           </h2>
           
           {curriculumLevels.map((level, index) => (
             <div 
               key={level.id}
-              className={`group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 dark:border-gray-700/50 overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] animate-fade-in-up ${
+              className={`group bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-white/20 overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] animate-fade-in-up ${
                 level.id <= userProgress.currentLevel ? 'opacity-100' : 'opacity-60'
               }`}
               style={{ animationDelay: `${900 + index * 100}ms` }}
@@ -289,24 +289,24 @@ export default function LearnPage() {
                     return (
                       <div 
                         key={lesson.id}
-                        className="border border-gray-200 dark:border-gray-700 rounded-lg p-3 md:p-4 hover:shadow-md transition-all hover:scale-105 bg-white dark:bg-gray-800"
+                        className="border border-white/20 rounded-lg p-3 md:p-4 hover:shadow-md transition-all hover:scale-105 bg-white/5 backdrop-blur-sm"
                       >
                         <div className="flex items-start justify-between mb-2 gap-2">
-                          <h4 className="font-semibold text-gray-900 dark:text-white text-sm leading-tight flex-1">
+                          <h4 className="font-semibold text-white text-sm leading-tight flex-1">
                             {lesson.title}
                           </h4>
                           {userProgress.completedLessons > 0 && (
-                            <CheckCircleIcon className="h-5 w-5 text-green-500 flex-shrink-0" />
+                            <CheckCircleIcon className="h-5 w-5 text-green-400 flex-shrink-0" />
                           )}
                         </div>
                         
                         {(lessonDetails?.description || lesson.title) && (
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 line-clamp-2">
+                          <p className="text-xs text-neutral-400 mb-3 line-clamp-2">
                             {lessonDetails?.description || ''}
                           </p>
                         )}
                         
-                        <div className="flex items-center justify-between text-xs md:text-sm text-gray-600 dark:text-gray-300 mb-3">
+                        <div className="flex items-center justify-between text-xs md:text-sm text-neutral-300 mb-3">
                           <div className="flex items-center space-x-1">
                             <ClockIcon className="h-3 w-3 md:h-4 md:w-4" />
                             <span>{lesson.duration}min</span>
@@ -321,8 +321,8 @@ export default function LearnPage() {
                           href={isUnlocked ? `/learn/lesson/${lesson.id}` : '#'}
                           className={`w-full flex items-center justify-center space-x-2 py-2 px-3 md:px-4 rounded-md text-xs md:text-sm font-medium transition-all ${
                             isUnlocked
-                              ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm hover:shadow-md'
-                              : 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                              ? 'bg-primary-600 hover:bg-primary-700 text-white shadow-sm hover:shadow-md'
+                              : 'bg-neutral-800 text-neutral-500 cursor-not-allowed'
                           }`}
                           onClick={(e) => {
                             if (!isUnlocked) {
@@ -341,8 +341,8 @@ export default function LearnPage() {
                 </div>
                 
                 {level.id > userProgress.currentLevel && (
-                  <div className="mt-4 p-3 md:p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
-                    <p className="text-xs md:text-sm text-yellow-800 dark:text-yellow-200 text-center">
+                  <div className="mt-4 p-3 md:p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
+                    <p className="text-xs md:text-sm text-yellow-300 text-center">
                       🔒 Complete Level {level.id - 1} to unlock this level
                     </p>
                   </div>
@@ -350,6 +350,7 @@ export default function LearnPage() {
               </div>
             </div>
           ))}
+        </div>
         </div>
       </div>
     </div>

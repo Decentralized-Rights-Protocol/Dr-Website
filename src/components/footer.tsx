@@ -7,6 +7,7 @@ import NewsletterTally from '@/components/NewsletterTally'
 const navigation = {
   main: [
     { name: 'Whitepaper', href: '/whitepaper' },
+    { name: 'Economics', href: '/economics' },
     { name: 'Docs', href: '/docs' },
     { name: 'Roadmap', href: '/roadmap' },
     { name: 'Community', href: '/community' },
