@@ -143,7 +143,7 @@ export default function LearnPage() {
     : 0;
 
   return (
-    <div className="relative min-h-screen style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }} overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       {/* Particle Background */}
       <ParticleBackground />
       

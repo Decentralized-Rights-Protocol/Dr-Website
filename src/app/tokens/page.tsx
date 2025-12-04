@@ -12,7 +12,7 @@ export default function TokensPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }} pt-32 pb-24">
+      <section className="relative overflow-hidden pt-32 pb-24" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
         <ParticleBackground />
         
         {/* Background Grid */}
@@ -136,7 +136,7 @@ export default function TokensPage() {
       <QuantumSafeSection />
 
       {/* Footer CTA */}
-      <section className="py-24 style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }}">
+      <section className="py-24" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-6">
