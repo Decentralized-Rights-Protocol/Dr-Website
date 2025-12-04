@@ -69,43 +69,43 @@ export function RightsAnimation() {
       {/* Keywords Container - Below title with proper spacing and alignment */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
-          {rightsData.map((item, index) => {
-            const isVisible = visibleIndices.includes(index)
-            const showWord = showWords && isVisible
+        {rightsData.map((item, index) => {
+          const isVisible = visibleIndices.includes(index)
+          const showWord = showWords && isVisible
 
-            return (
-              <div
-                key={item.letter}
-                className={`
+          return (
+            <div
+              key={item.letter}
+              className={`
                   relative transition-all duration-700 ease-out w-full text-center
-                  ${isVisible 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-10'
-                  }
-                `}
-              >
+                ${isVisible 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-10'
+                }
+              `}
+            >
                 {/* Letter and Word - Properly aligned structure */}
-                {showWord && (
-                  <div
-                    className={`
+              {showWord && (
+                <div
+                  className={`
                       flex items-center justify-center gap-2
                       text-base sm:text-lg md:text-xl lg:text-2xl font-semibold
                       px-4 py-3 rounded-lg
                       bg-white/5 backdrop-blur-sm border border-cyan-400/20
                       transition-all duration-500 hover:border-cyan-400/40 hover:bg-white/10
-                    `}
-                    style={{
-                      textShadow: '0 0 10px rgba(6, 182, 212, 0.6)',
-                    }}
-                  >
+                  `}
+                  style={{
+                    textShadow: '0 0 10px rgba(6, 182, 212, 0.6)',
+                  }}
+                >
                     <span className="text-cyan-300 font-bold">{item.letter}</span>
                     <span className="text-cyan-400">–</span>
                     <span className="text-cyan-400">{item.word}</span>
-                  </div>
-                )}
-              </div>
-            )
-          })}
+                </div>
+              )}
+            </div>
+          )
+        })}
         </div>
       </div>
 

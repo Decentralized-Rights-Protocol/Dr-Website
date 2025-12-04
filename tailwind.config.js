@@ -9,8 +9,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Professional blockchain protocol colors
+        // CSS variable-based colors for theme support
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        card: {
+          DEFAULT: 'var(--card)',
+          foreground: 'var(--card-foreground)',
+        },
+        popover: {
+          DEFAULT: 'var(--popover)',
+          foreground: 'var(--popover-foreground)',
+        },
+        muted: {
+          DEFAULT: 'var(--muted)',
+          foreground: 'var(--muted-foreground)',
+        },
+        destructive: {
+          DEFAULT: 'var(--destructive)',
+          foreground: 'var(--destructive-foreground)',
+        },
+        border: 'var(--border)',
+        input: 'var(--input)',
+        ring: 'var(--ring)',
+        // Professional blockchain protocol colors with CSS variable support
         primary: {
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
           50: '#f0f9ff',
           100: '#e0f2fe',
           200: '#bae6fd',
@@ -24,6 +48,8 @@ module.exports = {
           950: '#082f49',
         },
         secondary: {
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)',
           50: '#faf5ff',
           100: '#f3e8ff',
           200: '#e9d5ff',
@@ -37,6 +63,8 @@ module.exports = {
           950: '#3b0764',
         },
         accent: {
+          DEFAULT: 'var(--accent)',
+          foreground: 'var(--accent-foreground)',
           50: '#f0fdfa',
           100: '#ccfbf1',
           200: '#99f6e4',
