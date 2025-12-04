@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export default function QuantumSecurityPage() {
   return (
-    <div className="min-h-screen style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }}">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <div className="max-w-5xl mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-12">

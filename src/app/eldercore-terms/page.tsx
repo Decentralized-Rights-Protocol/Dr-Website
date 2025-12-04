@@ -19,7 +19,7 @@ export default function EldercoreTermsPage() {
   const content = readFileSync(join(process.cwd(), 'legal', 'eldercore-terms.mdx'), 'utf-8')
   
   return (
-    <div className="min-h-screen style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }} py-12">
+    <div className="min-h-screen py-12" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <div className="container mx-auto px-4 max-w-4xl">
         <section className="mb-10 text-center">
           <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg">

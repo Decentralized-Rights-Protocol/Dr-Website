@@ -3,7 +3,7 @@ import { BookOpen, ArrowLeft, Sparkles } from 'lucide-react'
 
 export default function LessonNotFoundPage() {
   return (
-    <div className="min-h-screen style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }} flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <div className="max-w-md w-full text-center animate-fade-in-up">
         {/* Animated 404 */}
         <div className="relative mb-8">

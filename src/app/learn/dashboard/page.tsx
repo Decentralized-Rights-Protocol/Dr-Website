@@ -73,7 +73,7 @@ export default function LearnDashboardPage() {
   }, [])
 
   return (
-    <div className="min-h-screen style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }} p-4">
+    <div className="min-h-screen p-4" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <div className="max-w-7xl mx-auto py-8">
         {/* Header */}
         <div className="mb-8">
