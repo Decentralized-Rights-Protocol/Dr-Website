@@ -53,7 +53,7 @@ const economicsPages = [
 
 export default function EconomicsPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       {/* Hero Section */}
       <EconomicsHero
         title="DRP Economics: The Sustainable Rights Economy (SRE)"
@@ -62,7 +62,7 @@ export default function EconomicsPage() {
       />
 
       {/* Current Economic Crisis */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-16 bg-transparent">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -71,20 +71,20 @@ export default function EconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               The Current Economic Crisis
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-6">
+              <p className="text-xl text-neutral-300 mb-6">
                 Our current economic system behaves like &quot;The Alien&quot;—an inhuman force that extracts value, 
                 surveils populations, and perpetuates inequality. It treats human beings as resources to be 
                 optimized rather than rights-holders to be empowered.
               </p>
-              <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
-                <strong className="text-neutral-900 dark:text-white">The Problem:</strong> We have an 
+              <p className="text-lg text-neutral-300 mb-6">
+                <strong className="text-white">The Problem:</strong> We have an 
                 extraction-based economy where:
               </p>
-              <ul className="list-disc pl-6 space-y-2 text-neutral-600 dark:text-neutral-300 mb-6">
+              <ul className="list-disc pl-6 space-y-2 text-neutral-300 mb-6">
                 <li>AI is used as a ruler (surveillance, control, optimization of humans)</li>
                 <li>Value flows upward to centralized entities</li>
                 <li>Inequality is built into the system by design</li>
@@ -97,7 +97,7 @@ export default function EconomicsPage() {
       </section>
 
       {/* AI as Auditor, Not Ruler */}
-      <section className="py-16 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900">
+      <section className="py-16 bg-transparent">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -106,10 +106,10 @@ export default function EconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               AI as Auditor, Not Ruler
             </h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+            <p className="text-xl text-neutral-300 mb-8">
               DRP flips the script: Instead of AI surveilling and controlling humans, AI serves as a 
               transparent auditor that verifies human activity, ensures fairness, and maintains the integrity 
               of the rights-based distribution system.
@@ -146,7 +146,7 @@ export default function EconomicsPage() {
       <SystemComparison />
 
       {/* DRP Mission */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
+      <section className="py-16 bg-transparent">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -155,10 +155,10 @@ export default function EconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               DRP&apos;s Mission: Replace Extraction with Verified Human Activity
             </h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+            <p className="text-xl text-neutral-300 mb-8">
               The Sustainable Rights Economy (SRE) is built on three core principles:
             </p>
             <div className="grid md:grid-cols-3 gap-6 mt-12">
@@ -185,13 +185,13 @@ export default function EconomicsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700"
+                  className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700"
                 >
                   <Icon className="h-12 w-12 text-blue-500 mb-4" />
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-bold text-white mb-3">
                     {title}
                   </h3>
-                  <p className="text-neutral-600 dark:text-neutral-300">
+                  <p className="text-neutral-300">
                     {description}
                   </p>
                 </motion.div>
@@ -202,7 +202,7 @@ export default function EconomicsPage() {
       </section>
 
       {/* Economics Pages Grid */}
-      <section className="py-16 bg-white dark:bg-neutral-950">
+      <section className="py-16 bg-transparent-950">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -211,10 +211,10 @@ export default function EconomicsPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               Explore DRP Economics
             </h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300">
+            <p className="text-xl text-neutral-300">
               Deep dive into each aspect of the Sustainable Rights Economy
             </p>
           </motion.div>
@@ -236,11 +236,11 @@ export default function EconomicsPage() {
                     <page.icon className="h-8 w-8 text-white" />
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     {page.title}
                   </h3>
                   
-                  <p className="text-neutral-600 dark:text-neutral-300 mb-4">
+                  <p className="text-neutral-300 mb-4">
                     {page.description}
                   </p>
                   

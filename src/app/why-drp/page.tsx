@@ -51,7 +51,7 @@ export default function WhyDRPPage() {
   const [viewMode, setViewMode] = React.useState<'table' | 'chart'>('table')
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       {/* Particle Background */}
       <ParticleBackground />
       
@@ -74,13 +74,13 @@ export default function WhyDRPPage() {
               🌍 Why Choose DRP?
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 animate-fade-in-up delay-200">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up delay-200">
             A New Standard for
             <span className="block bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x">
               Trust, Fairness, and Sustainability
             </span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto animate-fade-in-up delay-300">
+          <p className="text-xl text-neutral-300 mb-8 max-w-3xl mx-auto animate-fade-in-up delay-300">
             DRP redefines what a blockchain can achieve — blending AI, ethics, and decentralization 
             to empower every human being with transparent, secure, and sustainable technology.
           </p>
@@ -88,14 +88,14 @@ export default function WhyDRPPage() {
 
         {/* DRP Advantages */}
         <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12 animate-fade-in-up delay-400">
+          <h2 className="text-3xl font-bold text-center text-white mb-12 animate-fade-in-up delay-400">
             What Makes DRP Different
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {drpAdvantages.map((advantage, index) => (
               <div
                 key={advantage.title}
-                className="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 dark:border-gray-700/50 p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 animate-fade-in-up"
+                className="group bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-white/20 p-6 hover:shadow-xl hover:scale-105 hover:bg-white/20 transition-all duration-300 animate-fade-in-up"
                 style={{ animationDelay: `${500 + index * 100}ms` }}
               >
                 <div className="flex items-center gap-x-4 mb-4">
@@ -105,11 +105,11 @@ export default function WhyDRPPage() {
                   )}>
                     <advantage.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <h3 className="text-lg font-semibold text-white">
                     {advantage.title}
                   </h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-neutral-300">
                   {advantage.description}
                 </p>
               </div>

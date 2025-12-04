@@ -46,7 +46,7 @@ const pillars = [
 
 export default function SREPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       {/* Hero */}
       <EconomicsHero
         title="Sustainable Rights Economy (SRE)"
@@ -54,7 +54,7 @@ export default function SREPage() {
       />
 
       {/* Navigation */}
-      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+      <div className="border-b border-white/20 bg-transparent">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
@@ -76,19 +76,19 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               What is the Sustainable Rights Economy?
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-6">
+              <p className="text-xl text-neutral-300 mb-6">
                 The Sustainable Rights Economy (SRE) is an economic paradigm that replaces extraction with 
                 verification, surveillance with transparency, and inequality with rights-based distribution. 
                 It is built on the principle that economic value should flow to those who create it through 
                 verified human activity, sustainable contribution, and community service.
               </p>
-              <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+              <p className="text-lg text-neutral-300 mb-6">
                 In the SRE, distribution is not based on ownership of capital or extraction of resources, 
-                but on <strong className="text-neutral-900 dark:text-white">verified contribution</strong> 
+                but on <strong className="text-white">verified contribution</strong> 
                 to human development, sustainability, and community well-being.
               </p>
             </div>
@@ -106,22 +106,22 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               How Rights-Backed Distribution Works
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+              <p className="text-lg text-neutral-300 mb-6">
                 Rights-backed distribution means that economic resources are allocated based on fundamental 
                 human rights rather than market power or capital ownership. The system recognizes that every 
                 human being has inherent rights to:
               </p>
-              <ul className="list-disc pl-6 space-y-3 text-neutral-600 dark:text-neutral-300 mb-6">
-                <li><strong className="text-neutral-900 dark:text-white">Basic Needs:</strong> Food, water, shelter, healthcare, education</li>
-                <li><strong className="text-neutral-900 dark:text-white">Dignity:</strong> Recognition of human worth and contribution</li>
-                <li><strong className="text-neutral-900 dark:text-white">Participation:</strong> Voice in economic and governance decisions</li>
-                <li><strong className="text-neutral-900 dark:text-white">Development:</strong> Opportunity to develop capabilities and flourish</li>
+              <ul className="list-disc pl-6 space-y-3 text-neutral-300 mb-6">
+                <li><strong className="text-white">Basic Needs:</strong> Food, water, shelter, healthcare, education</li>
+                <li><strong className="text-white">Dignity:</strong> Recognition of human worth and contribution</li>
+                <li><strong className="text-white">Participation:</strong> Voice in economic and governance decisions</li>
+                <li><strong className="text-white">Development:</strong> Opportunity to develop capabilities and flourish</li>
               </ul>
-              <p className="text-lg text-neutral-600 dark:text-neutral-300">
+              <p className="text-lg text-neutral-300">
                 Distribution algorithms prioritize these rights, ensuring that even those who cannot 
                 contribute economically (due to age, disability, or circumstances) receive basic support 
                 as a matter of right, not charity.
@@ -141,11 +141,11 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               AI Scoring: Contribution, Sustainability, Learning, Community Service
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+              <p className="text-lg text-neutral-300 mb-6">
                 AI in the SRE serves as a transparent scoring system that evaluates multiple dimensions 
                 of contribution:
               </p>
@@ -176,10 +176,10 @@ export default function SREPage() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 border border-blue-200 dark:border-blue-900"
                   >
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+                    <h3 className="text-xl font-bold text-white mb-3">
                       {item.title}
                     </h3>
-                    <p className="text-neutral-600 dark:text-neutral-300">
+                    <p className="text-neutral-300">
                       {item.description}
                     </p>
                   </motion.div>
@@ -200,11 +200,11 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Clean Incentives: Renewable Energy, Good Behavior, Verified Effort
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+              <p className="text-lg text-neutral-300 mb-6">
                 The SRE creates positive feedback loops by directly rewarding behaviors that benefit 
                 individuals, communities, and the planet:
               </p>
@@ -240,10 +240,10 @@ export default function SREPage() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">
+                      <h3 className="text-xl font-bold text-white mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-neutral-600 dark:text-neutral-300">
+                      <p className="text-neutral-300">
                         {item.description}
                       </p>
                     </div>
@@ -265,10 +265,10 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               SDG Integration: Goals 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 16, 17
             </h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+            <p className="text-xl text-neutral-300 mb-8">
               The Sustainable Rights Economy directly addresses 12 of the 17 UN Sustainable Development Goals:
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -285,11 +285,11 @@ export default function SREPage() {
                     <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-bold">
                       {goal.number}
                     </div>
-                    <h3 className="font-bold text-neutral-900 dark:text-white">
+                    <h3 className="font-bold text-white">
                       {goal.name}
                     </h3>
                   </div>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-300">
+                  <p className="text-sm text-neutral-300">
                     {goal.description}
                   </p>
                 </motion.div>
@@ -309,10 +309,10 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               The Four Pillars of SRE
             </h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300">
+            <p className="text-xl text-neutral-300">
               The foundation of the Sustainable Rights Economy
             </p>
           </motion.div>

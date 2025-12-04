@@ -7,13 +7,13 @@ import { EconomicsHero } from '@/components/economics/EconomicsHero'
 
 export default function GovernancePage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <EconomicsHero
         title="Human-Centric Governance Model"
         subtitle="AI Elders, proofs, and rights-backed decision-making"
       />
 
-      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
@@ -26,7 +26,7 @@ export default function GovernancePage() {
       </div>
 
       {/* AI Elders Concept */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-16 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -35,10 +35,10 @@ export default function GovernancePage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               AI Elders: Ethical AI as Guardians, Not Rulers
             </h2>
-            <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+            <p className="text-lg text-neutral-300 mb-6">
               AI Elders are specialized AI systems tasked with monitoring the integrity of the DRP economy—
               not to control humans, but to protect them. They:
             </p>
@@ -62,24 +62,24 @@ export default function GovernancePage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Proof of Status (PoST) and Proof of Activities (PoAT)
             </h2>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
-              <div className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+              <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
+                <h3 className="text-xl font-bold text-white mb-3">
                   Proof of Status (PoST)
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-300">
+                <p className="text-neutral-300">
                   Encodes verified credentials (education, professional status, institutional recognition) 
                   without exposing private data. Used for governance weighting and access control.
                 </p>
               </div>
-              <div className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+              <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
+                <h3 className="text-xl font-bold text-white mb-3">
                   Proof of Activities (PoAT)
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-300">
+                <p className="text-neutral-300">
                   Records verified human activity (work, learning, civic engagement) to inform rewards, 
                   representation, and distribution decisions.
                 </p>
@@ -90,7 +90,7 @@ export default function GovernancePage() {
       </section>
 
       {/* Cross-Chain Recovery & Reporting */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-16 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -99,24 +99,24 @@ export default function GovernancePage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Cross-Chain Recovery and Anonymous Reporting
             </h2>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+                <h3 className="text-xl font-bold text-white mb-3">
                   Cross-Chain Recovery of Lost Assets
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-300">
+                <p className="text-neutral-300">
                   Using rights-backed identity and multi-chain attestations, DRP can recover lost assets 
                   when users lose keys, subject to strict governance and community oversight.
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+                <h3 className="text-xl font-bold text-white mb-3">
                   Anonymous Reporting & Justice Framework
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-300">
+                <p className="text-neutral-300">
                   Whistleblowers and vulnerable individuals can report abuse or corruption anonymously. 
                   AI Elders triage reports, and human councils adjudicate using transparent, rights-based norms.
                 </p>
@@ -136,10 +136,10 @@ export default function GovernancePage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Rights-Backed Decision-Making
             </h2>
-            <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+            <p className="text-lg text-neutral-300 mb-6">
               Every governance decision in DRP is evaluated against a rights charter inspired by global 
               human rights frameworks and adapted for decentralized contexts.
             </p>

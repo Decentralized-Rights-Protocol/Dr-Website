@@ -53,13 +53,13 @@ const greenScoringProofs = [
 
 export default function ABEPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <EconomicsHero
         title="Activity-Based Economy (ABE)"
         subtitle="Value = Verified Human Activity + Sustainable Contribution"
       />
 
-      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+      <div className="border-b border-white/20 bg-transparent">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
@@ -85,10 +85,10 @@ export default function ABEPage() {
               <TrendingUp className="h-6 w-6 text-white" />
               <span className="text-xl font-bold text-white">Core Equation</span>
             </div>
-            <h2 className="text-5xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-5xl font-bold text-white mb-6">
               Value = Verified Human Activity + Sustainable Contribution
             </h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+            <p className="text-xl text-neutral-300 mb-8">
               In the Activity-Based Economy, economic value is not extracted from ownership or speculation, 
               but created through verified human contribution and sustainable practices.
             </p>
@@ -106,12 +106,12 @@ export default function ABEPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               How DRP Verifies Activity Without Cameras or Microphones
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
-                Unlike surveillance capitalism, DRP verifies activity through <strong className="text-neutral-900 dark:text-white">proof systems</strong> 
+              <p className="text-lg text-neutral-300 mb-6">
+                Unlike surveillance capitalism, DRP verifies activity through <strong className="text-white">proof systems</strong> 
                 that respect privacy and dignity:
               </p>
               <div className="grid md:grid-cols-2 gap-6 mt-8">
@@ -141,10 +141,10 @@ export default function ABEPage() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700"
                   >
-                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+                    <h3 className="text-xl font-bold text-white mb-3">
                       {item.title}
                     </h3>
-                    <p className="text-neutral-600 dark:text-neutral-300">
+                    <p className="text-neutral-300">
                       {item.description}
                     </p>
                   </motion.div>
@@ -165,10 +165,10 @@ export default function ABEPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Contribution Proofs: Learning, Work, Health, Civic Actions
             </h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+            <p className="text-xl text-neutral-300 mb-8">
               The Activity-Based Economy recognizes multiple forms of valuable contribution:
             </p>
             <div className="grid md:grid-cols-2 gap-6">
@@ -184,10 +184,10 @@ export default function ABEPage() {
                   <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${type.color} mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <type.icon className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                  <h3 className="text-2xl font-bold text-white mb-4">
                     {type.title}
                   </h3>
-                  <p className="text-neutral-600 dark:text-neutral-300">
+                  <p className="text-neutral-300">
                     {type.description}
                   </p>
                 </motion.div>
@@ -212,10 +212,10 @@ export default function ABEPage() {
                 <Leaf className="h-5 w-5 text-green-600 dark:text-green-400" />
                 <span className="text-sm font-medium text-green-700 dark:text-green-300">Sustainability Rewards</span>
               </div>
-              <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+              <h2 className="text-4xl font-bold text-white mb-6">
                 Green Scoring Proofs: Renewable Usage, Low Carbon Footprint
               </h2>
-              <p className="text-xl text-neutral-600 dark:text-neutral-300">
+              <p className="text-xl text-neutral-300">
                 Environmental sustainability is directly rewarded in the Activity-Based Economy
               </p>
             </div>
@@ -236,10 +236,10 @@ export default function ABEPage() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">
+                      <h3 className="text-xl font-bold text-white mb-2">
                         {proof.title}
                       </h3>
-                      <p className="text-neutral-600 dark:text-neutral-300">
+                      <p className="text-neutral-300">
                         {proof.description}
                       </p>
                     </div>
@@ -261,7 +261,7 @@ export default function ABEPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-12 text-center">
+            <h2 className="text-4xl font-bold text-white mb-12 text-center">
               Effort → Verification → Rewards
             </h2>
             <div className="relative">
@@ -283,7 +283,7 @@ export default function ABEPage() {
                     <div className={`p-8 rounded-2xl bg-gradient-to-br ${step.color} mb-4`}>
                       <step.icon className="h-12 w-12 text-white" />
                     </div>
-                    <span className="text-lg font-semibold text-neutral-900 dark:text-white">
+                    <span className="text-lg font-semibold text-white">
                       {step.label}
                     </span>
                     {index < 2 && (
@@ -303,7 +303,7 @@ export default function ABEPage() {
                 ))}
               </div>
             </div>
-            <p className="text-center text-lg text-neutral-600 dark:text-neutral-300 mt-12">
+            <p className="text-center text-lg text-neutral-300 mt-12">
               The Activity-Based Economy creates a transparent, fair loop where verified contribution 
               directly translates to economic reward, without extraction or surveillance.
             </p>

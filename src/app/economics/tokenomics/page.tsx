@@ -8,13 +8,13 @@ import { TokenFlowDiagram } from '@/components/economics/TokenFlowDiagram'
 
 export default function TokenomicsPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <EconomicsHero
         title="DRP Dual Token Model"
         subtitle="$RIGHTS governance + $DeRi utility rewards"
       />
 
-      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
@@ -27,7 +27,7 @@ export default function TokenomicsPage() {
       </div>
 
       {/* Dual Token Overview */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-16 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -36,10 +36,10 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               The Dual Token Architecture
             </h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+            <p className="text-xl text-neutral-300 mb-8">
               DRP uses two complementary tokens to separate governance from utility, ensuring both 
               rights protection and economic activity are properly incentivized.
             </p>
@@ -136,7 +136,7 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
+            <h2 className="text-4xl font-bold text-white mb-8 text-center">
               Token Flows Through the Economy
             </h2>
             <TokenFlowDiagram />
@@ -145,7 +145,7 @@ export default function TokenomicsPage() {
       </section>
 
       {/* Fair Launch */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-16 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -154,11 +154,11 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Fair Launch, No VC Dominance
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+              <p className="text-lg text-neutral-300 mb-6">
                 DRP tokens are distributed through a fair launch mechanism that prevents centralization:
               </p>
               <ul className="space-y-4">
@@ -198,10 +198,10 @@ export default function TokenomicsPage() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">
+                      <h3 className="text-xl font-bold text-white mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-neutral-600 dark:text-neutral-300">
+                      <p className="text-neutral-300">
                         {item.description}
                       </p>
                     </div>
@@ -223,7 +223,7 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
+            <h2 className="text-4xl font-bold text-white mb-8 text-center">
               Staking, Governance, and Access Control
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
@@ -253,15 +253,15 @@ export default function TokenomicsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700"
+                  className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700"
                 >
                   <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br ${item.color} mb-4`}>
                     <item.icon className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-bold text-white mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-neutral-600 dark:text-neutral-300">
+                  <p className="text-neutral-300">
                     {item.description}
                   </p>
                 </motion.div>
@@ -272,7 +272,7 @@ export default function TokenomicsPage() {
       </section>
 
       {/* Layer Diagram */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-16 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -281,7 +281,7 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-12 text-center">
+            <h2 className="text-4xl font-bold text-white mb-12 text-center">
               Rights Layer → Activity Layer → Distribution Layer
             </h2>
             <div className="space-y-6">
@@ -319,14 +319,14 @@ export default function TokenomicsPage() {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-2">
-                        <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
+                        <h3 className="text-2xl font-bold text-white">
                           {layer.layer}
                         </h3>
                         <span className="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium">
                           {layer.token}
                         </span>
                       </div>
-                      <p className="text-lg text-neutral-600 dark:text-neutral-300">
+                      <p className="text-lg text-neutral-300">
                         {layer.description}
                       </p>
                     </div>

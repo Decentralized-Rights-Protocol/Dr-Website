@@ -7,13 +7,13 @@ import { EconomicsHero } from '@/components/economics/EconomicsHero'
 
 export default function DistributionPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <EconomicsHero
         title="Sustainable Supply & Distribution"
         subtitle="AI-driven fair allocation of essentials, quality goods, and premium resources"
       />
 
-      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+      <div className="border-b border-neutral-200 dark:border-neutral-800 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
@@ -26,7 +26,7 @@ export default function DistributionPage() {
       </div>
 
       {/* Distribution Categories */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-16 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -35,10 +35,10 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               How DRP Distributes Value
             </h2>
-            <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+            <p className="text-xl text-neutral-300 mb-8">
               The DRP distribution model distinguishes between essentials, quality goods, and scarce or premium goods. 
               Each category has its own allocation logic, grounded in rights, dignity, and verified contribution.
             </p>
@@ -65,10 +65,10 @@ export default function DistributionPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="p-6 rounded-xl bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-700"
                 >
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-bold text-white mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-neutral-600 dark:text-neutral-300">
+                  <p className="text-neutral-300">
                     {item.description}
                   </p>
                 </motion.div>
@@ -88,10 +88,10 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Demand Scoring and AI Integrity Checks
             </h2>
-            <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+            <p className="text-lg text-neutral-300 mb-6">
               DRP uses transparent, auditable AI models to score demand and ensure integrity:
             </p>
             <ul className="space-y-4">
@@ -119,7 +119,7 @@ export default function DistributionPage() {
       </section>
 
       {/* Quality Goods Network */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-16 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -128,10 +128,10 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Quality Control: The Quality Goods Network
             </h2>
-            <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-6">
+            <p className="text-lg text-neutral-300 mb-6">
               DRP envisions a network of manufacturers, artisans, and logistics partners focused on delivering 
               durable, safe, and rights-aligned products:
             </p>
@@ -162,10 +162,10 @@ export default function DistributionPage() {
                   className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700"
                 >
                   <item.icon className="h-10 w-10 text-blue-500 mb-4" />
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">
+                  <h3 className="text-xl font-bold text-white mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-neutral-600 dark:text-neutral-300">
+                  <p className="text-neutral-300">
                     {item.description}
                   </p>
                 </motion.div>
@@ -185,42 +185,42 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Supply Chain Redesign: Local-First and Rights-Weighted
             </h2>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
-              <div className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+              <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
+                <h3 className="text-xl font-bold text-white mb-3">
                   Local-First Distribution
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-300">
+                <p className="text-neutral-300">
                   Goods are sourced and distributed locally wherever possible, reducing emissions and 
                   empowering local economies. Global supply chains are used strategically, not by default.
                 </p>
               </div>
-              <div className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+              <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
+                <h3 className="text-xl font-bold text-white mb-3">
                   AI Demand Prediction
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-300">
+                <p className="text-neutral-300">
                   AI models anticipate demand for essentials and quality goods, preventing shortages and 
                   minimizing waste while respecting rights-based priorities.
                 </p>
               </div>
-              <div className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+              <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
+                <h3 className="text-xl font-bold text-white mb-3">
                   Rights-Weighted Allocation
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-300">
+                <p className="text-neutral-300">
                   Allocation algorithms prioritize vulnerable populations and those with historically 
                   limited access, correcting structural injustice over time.
                 </p>
               </div>
-              <div className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+              <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
+                <h3 className="text-xl font-bold text-white mb-3">
                   Transparent Routing
                 </h3>
-                <p className="text-neutral-600 dark:text-neutral-300">
+                <p className="text-neutral-300">
                   Every major distribution decision—who receives what, when, and why—is logged on-chain for 
                   community and institutional audit.
                 </p>
@@ -231,7 +231,7 @@ export default function DistributionPage() {
       </section>
 
       {/* Diagrams */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-16 bg-transparent-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -240,7 +240,7 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-8">
+            <h2 className="text-3xl font-bold text-white mb-8">
               AI → Fair Allocation → Delivery
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
@@ -248,28 +248,28 @@ export default function DistributionPage() {
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 mb-3">
                   <Cpu className="h-10 w-10 text-white" />
                 </div>
-                <span className="font-semibold text-neutral-900 dark:text-white">AI Demand Engine</span>
+                <span className="font-semibold text-white">AI Demand Engine</span>
               </div>
               <div className="text-4xl text-neutral-400">→</div>
               <div className="flex flex-col items-center">
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 mb-3">
                   <Scale className="h-10 w-10 text-white" />
                 </div>
-                <span className="font-semibold text-neutral-900 dark:text-white">Fair Allocation</span>
+                <span className="font-semibold text-white">Fair Allocation</span>
               </div>
               <div className="text-4xl text-neutral-400">→</div>
               <div className="flex flex-col items-center">
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 mb-3">
                   <Truck className="h-10 w-10 text-white" />
                 </div>
-                <span className="font-semibold text-neutral-900 dark:text-white">Delivery Network</span>
+                <span className="font-semibold text-white">Delivery Network</span>
               </div>
             </div>
 
-            <h3 className="text-3xl font-bold text-neutral-900 dark:text-white mb-6">
+            <h3 className="text-3xl font-bold text-white mb-6">
               Quality Goods Network Model
             </h3>
-            <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-8">
+            <p className="text-lg text-neutral-300 mb-8">
               A mesh of local hubs, manufacturers, and logistics nodes coordinated by AI and governed by 
               human rights principles.
             </p>

@@ -11,7 +11,7 @@ interface EconomicsHeroProps {
 
 export function EconomicsHero({ title, subtitle, description }: EconomicsHeroProps) {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-blue-950 via-indigo-950 to-purple-950 py-24 sm:py-32">
+    <div className="relative overflow-hidden py-24 sm:py-32" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
