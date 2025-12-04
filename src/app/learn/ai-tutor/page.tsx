@@ -247,7 +247,7 @@ Could you be more specific about what you'd like to learn? I can provide explana
   };
 
   return (
-    <div className="min-h-screen" style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }}">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">

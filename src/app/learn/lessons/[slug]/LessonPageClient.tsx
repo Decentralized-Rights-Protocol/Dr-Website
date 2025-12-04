@@ -99,7 +99,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
   }
 
   return (
-    <div className="min-h-screen" style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }}">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
