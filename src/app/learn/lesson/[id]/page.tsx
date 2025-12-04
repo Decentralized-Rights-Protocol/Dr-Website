@@ -141,7 +141,7 @@ export default function LessonPage() {
   // Instead of showing 404, try to load from a generic lesson or show helpful content
   if (!lesson) {
     return (
-      <div className="min-h-screen" style={{ background: "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)" }} flex items-center justify-center p-4">
+      <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
         <div className="max-w-2xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Lesson Content Loading
