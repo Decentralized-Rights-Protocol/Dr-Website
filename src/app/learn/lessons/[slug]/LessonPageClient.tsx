@@ -12,6 +12,7 @@ import {
   BookOpenIcon
 } from '@heroicons/react/24/outline'
 import ReactMarkdown from 'react-markdown'
+import { ParticleBackground } from '@/components/particle-background'
 
 interface LessonContent {
   id: string
@@ -99,10 +100,15 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
   }
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      <div className="container mx-auto px-4 py-8">
+    <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
+      <ParticleBackground />
+      
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
+      
+      <div className="relative z-10 container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+        <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <button 
               onClick={() => router.push('/learn')}
@@ -129,11 +135,11 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
             </div>
           </div>
           
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-white mb-2">
             {lesson.title}
           </h1>
           
-          <div className="flex items-center space-x-6 text-sm text-gray-600 dark:text-gray-300">
+          <div className="flex items-center space-x-6 text-sm text-neutral-300">
             <div className="flex items-center space-x-1">
               <ClockIcon className="h-4 w-4" />
               <span>{lesson.duration} minutes</span>
@@ -148,13 +154,13 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Lesson Content */}
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
               <div className="flex items-center space-x-2 mb-4">
-                <BookOpenIcon className="h-6 w-6 text-blue-500" />
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Lesson Content</h2>
+                <BookOpenIcon className="h-6 w-6 text-blue-400" />
+                <h2 className="text-xl font-semibold text-white">Lesson Content</h2>
               </div>
               
-              <div className="prose prose-lg dark:prose-invert max-w-none">
+              <div className="prose prose-lg prose-invert max-w-none text-neutral-200">
                 <ReactMarkdown>{lesson.content}</ReactMarkdown>
               </div>
               
@@ -174,14 +180,14 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
           {/* Quiz Sidebar */}
           <div className="lg:col-span-1">
             {showQuiz && !quizState.completed && (
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 sticky top-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6 sticky top-6">
+                <h3 className="text-lg font-semibold text-white mb-4">
                   Quiz: Question {quizState.currentQuestion + 1} of {lesson.quiz.questions.length}
                 </h3>
                 
                 {lesson.quiz.questions[quizState.currentQuestion] && (
                   <div>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4">
+                    <p className="text-neutral-200 mb-4">
                       {lesson.quiz.questions[quizState.currentQuestion].question}
                     </p>
                     
@@ -193,10 +199,10 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
                             lesson.quiz.questions[quizState.currentQuestion].id, 
                             index
                           )}
-                          className={`w-full text-left p-3 rounded-md border transition-colors ${
+                          className={`w-full text-left p-3 rounded-md border transition-colors text-white ${
                             quizState.answers[lesson.quiz.questions[quizState.currentQuestion].id] === index
-                              ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                              : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                              ? 'border-blue-400 bg-blue-500/20'
+                              : 'border-white/20 bg-white/5 hover:border-white/30 hover:bg-white/10'
                           }`}
                         >
                           {option}
@@ -211,7 +217,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
                           currentQuestion: Math.max(0, prev.currentQuestion - 1) 
                         }))}
                         disabled={quizState.currentQuestion === 0}
-                        className="px-4 py-2 text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-md disabled:opacity-50"
+                        className="px-4 py-2 text-neutral-200 border border-white/20 bg-white/5 rounded-md disabled:opacity-50 hover:bg-white/10"
                       >
                         Previous
                       </button>
@@ -241,16 +247,16 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
             )}
 
             {quizState.completed && (
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
                 <div className="text-center">
                   <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  <h3 className="text-xl font-semibold text-white mb-2">
                     Quiz Completed!
                   </h3>
-                  <div className="text-3xl font-bold text-green-500 mb-2">
+                  <div className="text-3xl font-bold text-green-400 mb-2">
                     {quizState.score.toFixed(0)}%
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  <p className="text-neutral-300 mb-4">
                     You earned {lesson.reward} $DeRi tokens!
                   </p>
                   <button

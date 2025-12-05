@@ -318,7 +318,7 @@ export default function LearnPage() {
                         </div>
                         
                         <Link 
-                          href={isUnlocked ? `/learn/lesson/${lesson.id}` : '#'}
+                          href={isUnlocked ? (lessonDetails?.slug ? `/learn/lessons/${lessonDetails.slug}` : `/learn/lesson/${lesson.id}`) : '#'}
                           className={`w-full flex items-center justify-center space-x-2 py-2 px-3 md:px-4 rounded-md text-xs md:text-sm font-medium transition-all ${
                             isUnlocked
                               ? 'bg-primary-600 hover:bg-primary-700 text-white shadow-sm hover:shadow-md'
