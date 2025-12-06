@@ -1,0 +1,313 @@
+---
+title: "Cryptography & Hashing"
+duration: "25min"
+reward: "20 $DeRi"
+level: 1
+order: 2
+locked: false
+---
+
+# Cryptography & Hashing
+
+## Overview
+
+Cryptography is the mathematical foundation that makes blockchain secure, private, and trustworthy. This lesson explores the cryptographic primitives—hashing, digital signatures, and encryption—that enable blockchain's core properties of immutability, authenticity, and privacy.
+
+## Why It Matters
+
+Without cryptography, blockchain would be just a distributed database. Cryptography provides:
+
+- **Data Integrity**: Ensuring data hasn't been tampered with
+- **Authentication**: Verifying who created or signed a transaction
+- **Privacy**: Protecting sensitive information while maintaining transparency
+- **Security**: Making it computationally infeasible to break the system
+
+## Deep Dive Explanation
+
+### Hash Functions
+
+A hash function is a one-way mathematical function that takes input of any size and produces a fixed-size output (hash). Key properties:
+
+**Essential Properties:**
+1. **Deterministic**: Same input always produces same output
+2. **Fast Computation**: Hash can be calculated quickly
+3. **One-Way**: Cannot reverse to get original input
+4. **Avalanche Effect**: Small input change = completely different output
+5. **Collision Resistant**: Extremely difficult to find two inputs with same hash
+
+### How Hashing Works
+
+```
+Input: "Hello, DRP!"
+         ↓
+    Hash Function
+    (SHA-256)
+         ↓
+Output: "a3f5d8e2b1c9..."
+    (256 bits / 64 hex chars)
+```
+
+**Example:**
+- Input: `"Hello"`
+- SHA-256 Hash: `185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969`
+
+- Input: `"hello"` (just lowercase 'h')
+- SHA-256 Hash: `2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824`
+
+Notice how one character change produces a completely different hash!
+
+### Hash Function Types
+
+**SHA-256 (Used in Bitcoin):**
+- 256-bit output (64 hexadecimal characters)
+- Very secure, widely used
+- Part of SHA-2 family
+
+**Keccak-256 (Used in Ethereum):**
+- 256-bit output
+- Part of SHA-3 family
+- Different internal structure
+
+**Blake2b (Used in some blockchains):**
+- Faster than SHA-256
+- More secure against certain attacks
+- Configurable output size
+
+## Visual Explanation
+
+### Hash Function Diagram
+
+```
+┌─────────────────────────────────────┐
+│         Input Data                   │
+│  (Any size: 1 byte to terabytes)    │
+└──────────────┬──────────────────────┘
+               │
+               ↓
+    ┌──────────────────────┐
+    │   Hash Algorithm     │
+    │   (SHA-256, etc.)    │
+    └──────────┬───────────┘
+               │
+               ↓
+┌───────────────────────────────┐
+│      Hash Output              │
+│  (Fixed size: 256 bits)       │
+│  "a3f5d8e2b1c9..."            │
+└───────────────────────────────┘
+```
+
+### Merkle Tree Structure
+
+Merkle trees efficiently hash large amounts of data:
+
+```
+                    Root Hash
+                   (Merkle Root)
+                  /            \
+            Hash AB          Hash CD
+           /      \          /      \
+      Hash A    Hash B  Hash C    Hash D
+       /          \      /          \
+  Data 1      Data 2  Data 3    Data 4
+```
+
+**Benefits:**
+- Efficient verification: Only need to check path to root
+- Tamper detection: Any data change affects root hash
+- Scalability: Works with millions of transactions
+
+### Digital Signatures
+
+Digital signatures provide authentication and non-repudiation:
+
+```
+1. User creates key pair:
+   ┌─────────────┐
+   │ Private Key │ (Secret, never shared)
+   └──────┬──────┘
+          │
+          ├───→ Public Key (Shared with everyone)
+          │
+2. Signing Process:
+   Message + Private Key → Digital Signature
+
+3. Verification Process:
+   Message + Signature + Public Key → Valid/Invalid
+```
+
+**Process:**
+1. **Key Generation**: Create public/private key pair
+2. **Signing**: Use private key to sign message hash
+3. **Verification**: Anyone can verify using public key
+4. **Non-Repudiation**: Signer cannot deny signing
+
+## Real-World Use Cases
+
+### 1. Blockchain Transaction Signing
+
+**Scenario**: Alice wants to send 10 tokens to Bob
+
+```
+1. Alice creates transaction:
+   "Send 10 tokens from Alice to Bob"
+
+2. Alice signs with her private key:
+   Transaction + Private Key → Signature
+
+3. Transaction broadcast to network:
+   Transaction + Signature + Alice's Public Key
+
+4. Network verifies:
+   Signature valid? → Transaction accepted
+   Signature invalid? → Transaction rejected
+```
+
+### 2. Password Storage
+
+**Traditional (Insecure):**
+```
+Password: "MyPassword123"
+Stored: "MyPassword123" ← If database hacked, passwords exposed!
+```
+
+**With Hashing (Secure):**
+```
+Password: "MyPassword123"
+Hashed: "a3f5d8e2b1c9..." ← Even if hacked, original password unknown
+```
+
+### 3. File Integrity Verification
+
+**Scenario**: Downloading software
+
+```
+1. Download file
+2. Calculate hash of downloaded file
+3. Compare with published hash
+4. Match? → File is authentic and untampered
+   Mismatch? → File may be corrupted or malicious
+```
+
+### 4. Proof of Work (Mining)
+
+**Bitcoin Mining Process:**
+```
+Block Data + Nonce
+      ↓
+   Hash Function
+      ↓
+   Hash Output
+      ↓
+   Check: Does hash start with enough zeros?
+      ↓
+   No? → Try different nonce
+   Yes? → Block is valid, miner gets reward
+```
+
+## Cryptographic Primitives in DRP
+
+### Hash Functions in DRP
+
+DRP uses cryptographic hashing for:
+
+1. **Block Hashing**: Each block's hash links to previous block
+2. **Transaction Hashing**: Unique identifier for each transaction
+3. **Content Hashing**: Proof of content creation and ownership
+4. **Activity Proof Hashing**: Cryptographic evidence of real-world activities
+
+### Digital Signatures in DRP
+
+DRP uses digital signatures for:
+
+1. **Transaction Authorization**: Users sign transactions with private keys
+2. **Content Authentication**: Creators sign content to prove ownership
+3. **Governance Voting**: Elder Quorum members sign governance proposals
+4. **Activity Proof Signing**: Validators sign activity proofs
+
+### Zero-Knowledge Proofs (Advanced)
+
+DRP may use ZKPs for:
+
+- **Privacy-Preserving Verification**: Prove activity without revealing details
+- **Selective Disclosure**: Share only necessary information
+- **Scalability**: Batch verification of multiple activities
+
+## Key Takeaways
+
+1. **Hash functions** are one-way mathematical functions that produce fixed-size outputs from variable-size inputs
+2. **Cryptographic hashing** ensures data integrity through the avalanche effect and collision resistance
+3. **Digital signatures** provide authentication, non-repudiation, and data integrity using public/private key pairs
+4. **Merkle trees** efficiently hash large datasets and enable efficient verification
+5. **Hash functions are deterministic** but one-way, making them perfect for blockchain immutability
+6. **Public key cryptography** enables trustless authentication without sharing secrets
+7. **Cryptography is the foundation** that makes blockchain secure, private, and trustworthy
+
+## Quiz
+
+### Question 1
+What is the primary purpose of a cryptographic hash function in blockchain?
+
+A) To encrypt transaction data  
+B) To create a fixed-size, unique fingerprint of data  
+C) To store user passwords  
+D) To generate random numbers  
+
+**Correct Answer: B** - Hash functions create unique fingerprints (hashes) of data, enabling integrity verification and block chaining.
+
+### Question 2
+What happens if you change even one character in the input to a hash function?
+
+A) The hash output remains the same  
+B) The hash output changes completely (avalanche effect)  
+C) The hash function fails  
+D) Only the first character of the hash changes  
+
+**Correct Answer: B** - The avalanche effect ensures that any input change produces a completely different hash output.
+
+### Question 3
+In digital signatures, what key is used to verify a signature?
+
+A) Private key  
+B) Public key  
+C) Both private and public keys  
+D) A shared secret key  
+
+**Correct Answer: B** - The public key is used to verify signatures, allowing anyone to verify without needing the private key.
+
+### Question 4
+What is a Merkle tree used for in blockchain?
+
+A) Storing transaction data  
+B) Efficiently hashing and verifying large amounts of data  
+C) Encrypting block contents  
+D) Generating random nonces  
+
+**Correct Answer: B** - Merkle trees efficiently hash large datasets and enable quick verification of individual transactions by checking the path to the root.
+
+### Question 5
+Why are hash functions considered "one-way"?
+
+A) They can only process data in one direction  
+B) It's computationally infeasible to reverse the hash to get the original input  
+C) They only work with text data  
+D) They require a special key to reverse  
+
+**Correct Answer: B** - One-way means that while it's easy to compute a hash from input, it's computationally infeasible to determine the original input from just the hash.
+
+## Summary
+
+Cryptography and hashing are the mathematical foundations that make blockchain technology secure and trustworthy. Hash functions provide data integrity through unique fingerprints, while digital signatures enable authentication and non-repudiation without requiring trust in intermediaries.
+
+The key concepts covered include:
+
+- **Hash Functions**: One-way functions that create fixed-size outputs from variable inputs, with properties like determinism, avalanche effect, and collision resistance
+- **Digital Signatures**: Public/private key cryptography that enables authentication and non-repudiation
+- **Merkle Trees**: Efficient data structures for hashing and verifying large datasets
+- **Applications**: Transaction signing, password storage, file integrity, and proof of work
+
+In DRP, these cryptographic primitives enable secure transaction authorization, content authentication, activity proof verification, and governance mechanisms. Understanding cryptography is essential for grasping how blockchain achieves its security properties and how DRP implements its unique consensus and rights management systems.
+
+---
+
+**Well done!** You now understand how cryptography secures blockchain systems. Next, you'll learn how consensus mechanisms enable decentralized networks to agree on valid transactions.

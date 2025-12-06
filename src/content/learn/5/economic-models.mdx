@@ -1,274 +1,479 @@
 ---
 title: "Economic Models"
-description: "Understand DRP's token economics and incentive mechanisms"
-duration: 45
-reward: 40
+duration: "25min"
+reward: "20 $DeRi"
 level: 5
-module: "economic-models"
+order: 3
+locked: true
 ---
 
 # Economic Models
 
-A well-designed economic model is crucial for the sustainability and growth of any blockchain protocol. This lesson explores DRP's economic architecture and incentive mechanisms.
+## Overview
 
-## Learning Objectives
+DRP's economic model is designed to create sustainable incentives, fair value distribution, and long-term protocol health. This lesson explores the $DeRi token economics, reward mechanisms, staking systems, and how economic incentives align participant behavior with protocol goals.
 
-By the end of this lesson, you will be able to:
-- Understand DRP's token economics
-- Analyze incentive mechanisms
-- Model economic scenarios
-- Design sustainable tokenomics
-- Evaluate economic sustainability
+## Why It Matters
 
-## Token Economics Overview
+Economic models determine:
 
-### DRP Token ($DRP)
+- **Incentive Alignment**: Whether participants act in protocol's best interest
+- **Sustainability**: Long-term viability of the protocol
+- **Fairness**: Equitable distribution of value
+- **Security**: Economic security of the network
+- **Growth**: Ability to attract and retain participants
 
-**Key Characteristics:**
-- **Supply**: Dynamic based on network activity
-- **Utility**: Multiple use cases
-- **Distribution**: Fair launch mechanism
-- **Inflation**: Controlled and predictable
+Poor economic models lead to:
+- **Centralization**: Wealth concentration
+- **Instability**: Volatile token prices
+- **Security Risks**: Insufficient economic security
+- **Unsustainability**: Protocol cannot sustain itself
 
-### Token Use Cases
+DRP's economic model addresses these by:
+- **Balanced Incentives**: Reward various types of contributions
+- **Fair Distribution**: Multiple reward mechanisms
+- **Economic Security**: Sufficient staking for security
+- **Sustainability**: Long-term tokenomics design
+- **Value Alignment**: Rewards align with value creation
 
-1. **Transaction Fees**: Pay for network usage
-2. **Staking**: Secure the network and earn rewards
-3. **Governance**: Vote on proposals
-4. **Collateral**: Lock for various services
-5. **Incentives**: Reward contributors
+## Deep Dive Explanation
 
-## Supply Mechanisms
+### $DeRi Token Overview
 
-### Token Generation
+**Token Functions**:
+1. **Staking**: Secure the network
+2. **Governance**: Voting rights
+3. **Payments**: Transaction fees and royalties
+4. **Rewards**: Incentivize contributions
+5. **Access**: Required for certain operations
 
+**Token Distribution**:
+```
+Total Supply: 1,000,000,000 $DeRi
+
+Distribution:
+├── Community Rewards (40%)
+│   ├── Content Creation (15%)
+│   ├── Activity Proofs (10%)
+│   ├── Network Participation (10%)
+│   └── Education & Community (5%)
+│
+├── Validator Rewards (25%)
+│   ├── Block Creation (15%)
+│   ├── Validation (7%)
+│   └── Security Contributions (3%)
+│
+├── Development Fund (15%)
+│   ├── Core Development (10%)
+│   └── Ecosystem Grants (5%)
+│
+├── Treasury (10%)
+│   ├── Protocol Development (6%)
+│   └── Emergency Reserves (4%)
+│
+└── Initial Distribution (10%)
+    ├── Early Contributors (6%)
+    └── Strategic Partners (4%)
+```
+
+### Reward Mechanisms
+
+#### 1. Content Creation Rewards
+
+**Purpose**: Incentivize original content creation
+
+**Reward Structure**:
 ```typescript
-interface TokenSupply {
-  initialSupply: number;
-  inflationRate: number; // Annual percentage
-  maxSupply?: number; // Optional cap
-  generationEvents: [
-    'blockRewards',
-    'stakingRewards',
-    'governanceRewards',
-    'contributionRewards'
-  ];
+interface ContentReward {
+  baseReward: number // Base $DeRi per content
+  qualityMultiplier: number // Based on quality metrics
+  engagementMultiplier: number // Based on consumption
+  networkImpact: number // Based on ecosystem value
+}
+
+function calculateContentReward(content: Content): number {
+  return (
+    content.baseReward *
+    content.qualityMultiplier *
+    content.engagementMultiplier *
+    content.networkImpact
+  )
 }
 ```
 
-### Inflation Model
+**Example**:
+- Base reward: 100 $DeRi
+- Quality multiplier: 1.5x
+- Engagement multiplier: 2.0x
+- Network impact: 1.2x
+- **Total**: 100 × 1.5 × 2.0 × 1.2 = 360 $DeRi
 
+#### 2. Activity Proof Rewards
+
+**Purpose**: Reward network participation and value creation
+
+**Activity Types**:
+- Content consumption
+- Content distribution
+- Community building
+- Educational contributions
+
+**Reward Calculation**:
 ```typescript
-const inflation = calculateInflation({
-  currentSupply: totalSupply,
-  targetRate: 0.05, // 5% annual
-  adjustmentPeriod: 365 * 24 * 3600, // 1 year
-  factors: {
-    networkUsage: networkUsage,
-    stakingRate: stakingRate,
-    growthRate: growthRate
-  }
-});
-```
+interface ActivityReward {
+  activityType: string
+  baseReward: number
+  volumeMultiplier: number
+  consistencyBonus: number
+}
 
-## Staking Economics
-
-### Staking Rewards
-
-```typescript
-import { Staking } from '@drp/economics';
-
-const staking = new Staking({
-  minimumStake: 1000, // DRP tokens
-  lockPeriod: 30 * 24 * 3600, // 30 days
-  rewardRate: 0.12 // 12% APR
-});
-
-// Calculate rewards
-const rewards = await staking.calculateRewards({
-  stake: 10000,
-  duration: 365 * 24 * 3600, // 1 year
-  compound: true
-});
-
-console.log(`Annual rewards: ${rewards.annual}`);
-console.log(`APY: ${rewards.apy}%`);
-```
-
-### Staking Pools
-
-```typescript
-const pool = await StakingPool.create({
-  name: 'Community Pool',
-  fee: 0.02, // 2% fee
-  minStake: 100,
-  maxStake: 1000000
-});
-
-// Join pool
-await pool.stake({
-  amount: 5000,
-  duration: 90 * 24 * 3600 // 90 days
-});
-
-// Withdraw
-await pool.unstake({
-  stakeId: stakeId,
-  amount: 5000
-});
-```
-
-## Fee Mechanisms
-
-### Transaction Fees
-
-```typescript
-const fee = calculateFee({
-  baseFee: 0.001, // Base fee in DRP
-  gasUsed: gasAmount,
-  priority: 'normal', // low, normal, high
-  networkCongestion: congestionLevel
-});
-```
-
-### Fee Distribution
-
-```typescript
-interface FeeDistribution {
-  validators: 0.6, // 60% to validators
-  stakers: 0.3,    // 30% to stakers
-  treasury: 0.1    // 10% to treasury
+// Consumption activity
+const consumptionReward = {
+  activityType: 'consumption',
+  baseReward: 1, // $DeRi per consumption
+  volumeMultiplier: calculateVolumeBonus(consumptions),
+  consistencyBonus: calculateConsistency(period)
 }
 ```
 
-## Incentive Mechanisms
+#### 3. Validator Rewards
 
-### Network Participation Incentives
+**Purpose**: Incentivize network security and validation
 
+**Reward Components**:
 ```typescript
-const incentives = await IncentiveCalculator.calculate({
-  activity: {
-    transactionsProcessed: 1000,
-    dataStored: 1000000, // bytes
-    uptime: 0.99 // 99%
+interface ValidatorReward {
+  blockCreation: number // For creating blocks
+  validation: number // For validating blocks
+  uptime: number // For consistent availability
+  security: number // For security contributions
+}
+
+function calculateValidatorReward(validator: Validator): number {
+  return (
+    validator.blocksCreated * blockReward +
+    validator.validations * validationReward +
+    validator.uptime * uptimeBonus +
+    validator.securityContributions * securityReward
+  )
+}
+```
+
+#### 4. Staking Rewards
+
+**Purpose**: Reward long-term commitment
+
+**Staking Tiers**:
+```typescript
+interface StakingTier {
+  minimumStake: number
+  rewardRate: number // Annual percentage
+  lockPeriod: number // Minimum lock time
+  benefits: string[]
+}
+
+const stakingTiers = [
+  {
+    minimumStake: 1000,
+    rewardRate: 5, // 5% APY
+    lockPeriod: 30, // 30 days
+    benefits: ['Basic rewards']
   },
-  rewards: {
-    transactionReward: 0.01,
-    storageReward: 0.001,
-    uptimeReward: 100
+  {
+    minimumStake: 10000,
+    rewardRate: 8, // 8% APY
+    lockPeriod: 90, // 90 days
+    benefits: ['Higher rewards', 'Governance voting']
+  },
+  {
+    minimumStake: 100000,
+    rewardRate: 12, // 12% APY
+    lockPeriod: 365, // 1 year
+    benefits: ['Maximum rewards', 'Elder eligibility', 'Priority support']
   }
-});
+]
 ```
 
-### Contribution Rewards
+### Royalty Distribution Model
 
+**Multi-Party Royalty Splits**:
 ```typescript
-const contribution = await ContributionReward.create({
-  type: 'development',
-  value: 5000, // DRP tokens
-  milestones: [
-    { description: 'Phase 1', reward: 2000 },
-    { description: 'Phase 2', reward: 3000 }
-  ]
-});
-```
+interface RoyaltyDistribution {
+  contentHash: string
+  totalRevenue: number
+  recipients: Array<{
+    address: string
+    role: string // creator, distributor, platform
+    share: number // percentage
+    amount: number // calculated amount
+  }>
+}
 
-## Economic Models
-
-### Token Velocity
-
-```typescript
-const velocity = calculateVelocity({
-  transactions: totalTransactions,
-  averageTransactionValue: avgValue,
-  circulatingSupply: circulatingSupply,
-  period: timePeriod
-});
-
-// Lower velocity = higher value per token
-```
-
-### Value Accrual
-
-```typescript
-interface ValueAccrual {
-  mechanisms: [
-    'feeBurning',      // Burn fees to reduce supply
-    'stakingLocks',    // Lock tokens for rewards
-    'governanceLocks', // Lock tokens for voting
-    'utilityDemand'    // Demand from use cases
-  ];
+function distributeRoyalties(distribution: RoyaltyDistribution) {
+  distribution.recipients.forEach(recipient => {
+    const amount = (distribution.totalRevenue * recipient.share) / 100
+    recipient.amount = amount
+    
+    // Distribute $DeRi tokens
+    transferTokens(recipient.address, amount)
+  })
 }
 ```
 
-## Sustainability Analysis
+**Example Distribution**:
+```
+Total Revenue: 1000 $DeRi
 
-### Economic Health Metrics
-
-```typescript
-const healthMetrics = {
-  inflationRate: calculateInflation(),
-  stakingRate: calculateStakingRate(),
-  tokenVelocity: calculateVelocity(),
-  networkValue: calculateNetworkValue(),
-  treasuryReserves: getTreasuryBalance()
-};
+Recipients:
+├── Creator: 70% = 700 $DeRi
+├── Distributor: 15% = 150 $DeRi
+├── Platform: 10% = 100 $DeRi
+└── DRP Network: 5% = 50 $DeRi
 ```
 
-### Sustainability Model
+### Economic Security Model
 
+**Staking Requirements**:
 ```typescript
-const sustainability = analyzeSustainability({
-  revenue: networkRevenue,
-  expenses: networkExpenses,
-  reserves: treasuryReserves,
-  growth: growthRate,
-  timeline: 10 // years
-});
-```
+interface SecurityModel {
+  minimumStake: number // Minimum to become validator
+  totalStaked: number // Total network stake
+  securityRatio: number // Stake to value ratio
+  slashingConditions: SlashingCondition[]
+}
 
-## Token Distribution
-
-### Fair Launch
-
-```typescript
-interface Distribution {
-  initial: {
-    publicSale: 0.4,      // 40%
-    team: 0.2,            // 20%
-    treasury: 0.2,        // 20%
-    ecosystem: 0.2        // 20%
-  };
-  vesting: {
-    team: '4 years',
-    treasury: '10 years',
-    ecosystem: 'gradual'
-  };
+// Economic security calculation
+function calculateEconomicSecurity(model: SecurityModel): number {
+  // Security increases with total stake
+  // Higher stake = more expensive to attack
+  return model.totalStaked * model.securityRatio
 }
 ```
 
-## Economic Design Principles
+**Slashing Conditions**:
+- Double-signing: 100% stake slashed
+- Extended downtime: Gradual slashing
+- Malicious behavior: Full slashing
+- Governance violations: Partial slashing
 
-### 1. Alignment of Incentives
-- Reward desired behaviors
-- Penalize harmful actions
-- Balance short and long-term
+### Token Emission Schedule
 
-### 2. Sustainability
-- Long-term viability
-- Reasonable inflation
-- Reserve management
+**Emission Curve**:
+```typescript
+interface EmissionSchedule {
+  totalSupply: number
+  emissionRate: number // Tokens per block
+  halvingPeriod: number // Blocks until halving
+  currentEpoch: number
+}
 
-### 3. Fairness
-- Equitable distribution
-- Accessible participation
-- Transparent mechanisms
+function calculateEmission(epoch: number): number {
+  // Exponential decay
+  const baseEmission = 1000 // Initial tokens per block
+  const halvingEpochs = Math.floor(epoch / halvingPeriod)
+  return baseEmission / Math.pow(2, halvingEpochs)
+}
+```
+
+**Emission Timeline**:
+- Year 1: 1000 tokens/block
+- Year 2: 500 tokens/block (after first halving)
+- Year 4: 250 tokens/block (after second halving)
+- Year 8: 125 tokens/block (after third halving)
+- Continues until max supply reached
+
+## Visual Explanation
+
+### Reward Distribution Flow
+
+```
+Protocol Revenue
+    │
+    ├── Content Creation (15%)
+    │   └── Creators
+    │
+    ├── Activity Proofs (10%)
+    │   └── Active Participants
+    │
+    ├── Validator Rewards (25%)
+    │   ├── Block Creation (15%)
+    │   └── Validation (10%)
+    │
+    ├── Staking Rewards (20%)
+    │   └── Stakers
+    │
+    ├── Development Fund (15%)
+    │   └── Developers & Grants
+    │
+    └── Treasury (15%)
+        └── Protocol Development
+```
+
+### Economic Security Model
+
+```
+Network Value
+    │
+    ├── Total Staked: 50M $DeRi
+    │
+    ├── Attack Cost Calculation
+    │   └── 51% Attack Cost: 25.5M $DeRi
+    │       + Opportunity Cost
+    │       + Slashing Risk
+    │       = Prohibitively Expensive
+    │
+    └── Security Level: HIGH
+```
+
+### Token Flow
+
+```
+Token Sources
+    │
+    ├── Mining/Validation
+    ├── Activity Rewards
+    ├── Content Creation
+    └── Staking Rewards
+            ↓
+    Token Circulation
+            ↓
+    Token Sinks
+    │
+    ├── Transaction Fees
+    ├── Staking (Locked)
+    ├── Governance (Locked)
+    └── Burns (Deflationary)
+```
+
+## Real-World Examples
+
+### Example 1: Content Creator Economics
+
+**Scenario**: Artist creates and distributes music
+
+**Revenue Streams**:
+1. **Initial Registration**: 100 $DeRi
+2. **Content Creation Reward**: 200 $DeRi
+3. **Streaming Royalties**: 70% of revenue
+4. **Distribution Activity**: 50 $DeRi per 1000 streams
+5. **Long-term Staking**: 8% APY on staked tokens
+
+**Total Potential**: 
+- One-time: 350 $DeRi
+- Ongoing: Royalties + Activity rewards + Staking
+
+### Example 2: Validator Economics
+
+**Scenario**: Node operator validates network
+
+**Revenue Streams**:
+1. **Block Creation**: 15 $DeRi per block
+2. **Validation Rewards**: 5 $DeRi per validation
+3. **Staking Rewards**: 8% APY on staked tokens
+4. **Uptime Bonus**: 2% bonus for 99%+ uptime
+
+**Monthly Estimate**:
+- Blocks created: 1000 × 15 = 15,000 $DeRi
+- Validations: 5000 × 5 = 25,000 $DeRi
+- Staking: 100,000 × 0.08/12 = 667 $DeRi
+- **Total**: ~40,667 $DeRi/month
+
+### Example 3: Platform Economics
+
+**Scenario**: Music streaming platform
+
+**Revenue Model**:
+- User subscriptions: 10 $DeRi/month
+- Platform fee: 10% of royalties
+- Activity rewards: Distribution activities
+- Volume discounts: Lower fees for high volume
+
+**Sustainability**: Platform earns while creators earn more
 
 ## Key Takeaways
 
-- Economic design is crucial for sustainability
-- Incentives must align with network goals
-- Staking and fees create value
-- Distribution affects adoption
-- Regular analysis ensures health
+1. **Balanced token distribution** ensures fair value distribution across stakeholders
+2. **Multiple reward mechanisms** incentivize different types of contributions
+3. **Staking system** provides economic security and rewards long-term commitment
+4. **Royalty distribution** ensures creators receive fair compensation
+5. **Economic security** is maintained through sufficient staking
+6. **Emission schedule** controls token supply over time
+7. **Value alignment** ensures rewards match value creation
 
+## Quiz
+
+### Question 1
+What is the primary purpose of DRP's economic model?
+
+A) To make tokens expensive  
+B) To create sustainable incentives, fair value distribution, and align participant behavior with protocol goals  
+C) To reduce token supply  
+D) To slow down transactions  
+
+**Correct Answer: B** - The economic model is designed to create sustainable incentives, ensure fair distribution of value, and align what participants are rewarded for with what benefits the protocol.
+
+### Question 2
+How are content creation rewards calculated?
+
+A) Fixed amount only  
+B) Base reward multiplied by quality, engagement, and network impact factors  
+C) Random amount  
+D) Based only on views  
+
+**Correct Answer: B** - Content rewards consider base reward, quality metrics, engagement levels, and network impact to fairly reward valuable content.
+
+### Question 3
+What is the purpose of staking in DRP's economic model?
+
+A) To lock tokens forever  
+B) To provide economic security for the network and reward long-term commitment  
+C) To reduce token supply only  
+D) To slow down the network  
+
+**Correct Answer: B** - Staking secures the network economically (making attacks expensive) and rewards participants for long-term commitment with staking rewards.
+
+### Question 4
+How does the royalty distribution model work?
+
+A) All revenue goes to one party  
+B) Revenue is split among creators, distributors, platforms, and the network based on predefined shares  
+C) Revenue is destroyed  
+D) Revenue is random  
+
+**Correct Answer: B** - Royalties are automatically distributed among all parties (creators, distributors, platforms, network) based on their predefined percentage shares.
+
+### Question 5
+What is economic security in DRP?
+
+A) Having many tokens  
+B) Having sufficient total stake to make attacks prohibitively expensive  
+C) Encrypting everything  
+D) Slowing down transactions  
+
+**Correct Answer: B** - Economic security means having enough total value staked that attacking the network (like a 51% attack) would be prohibitively expensive and risky.
+
+## Summary
+
+DRP's economic model is carefully designed to create sustainable, fair, and secure incentives. Through balanced token distribution, multiple reward mechanisms, staking systems, and royalty distribution, DRP aligns participant behavior with protocol goals.
+
+Key economic components include:
+
+- **Token Distribution**: Fair allocation across community, validators, development, and treasury
+- **Reward Mechanisms**: Content creation, activity proofs, validation, and staking rewards
+- **Royalty Distribution**: Automated, transparent splits among all parties
+- **Economic Security**: Sufficient staking to make attacks prohibitively expensive
+- **Emission Schedule**: Controlled token supply over time
+- **Value Alignment**: Rewards match actual value creation
+
+The economic model ensures that:
+- Creators are fairly compensated
+- Validators are incentivized to secure the network
+- Long-term participants are rewarded
+- The protocol remains sustainable
+- All stakeholders benefit from network growth
+
+Understanding DRP's economic model is essential for maximizing participation benefits, making informed decisions, and contributing to the protocol's long-term success.
+
+---
+
+**Excellent!** You now understand DRP's economic models. Finally, you'll learn about the future of DRP!

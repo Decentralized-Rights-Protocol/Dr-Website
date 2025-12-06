@@ -1,39 +1,105 @@
 ---
 title: "Contributing to DRP"
-description: "Learn how to contribute to the DRP ecosystem and open source project"
-duration: 25
-reward: 20
+duration: "25min"
+reward: "20 $DeRi"
 level: 3
-module: "contributing-to-drp"
+order: 3
+locked: true
 ---
 
 # Contributing to DRP
 
-The DRP ecosystem thrives on community contributions. This lesson will guide you through the various ways you can contribute to DRP, whether through code, documentation, governance, or community support.
+## Overview
 
-## Learning Objectives
+Contributing to DRP is a rewarding way to shape the future of decentralized digital rights management. This lesson covers how to contribute code, documentation, proposals, and community support to the DRP ecosystem, along with the processes and best practices for making meaningful contributions.
 
-By the end of this lesson, you will be able to:
-- Understand different ways to contribute to DRP
-- Navigate the DRP open source repositories
-- Submit code contributions and pull requests
-- Participate in DRP governance
-- Help grow the DRP community
+## Why It Matters
 
-## Ways to Contribute
+Open-source projects thrive on community contributions:
 
-### 1. Code Contributions
+- **Protocol Improvement**: Code contributions enhance DRP's capabilities
+- **Documentation**: Better docs help more developers build on DRP
+- **Community Growth**: Active contributors attract more participants
+- **Innovation**: Diverse perspectives lead to better solutions
+- **Recognition**: Contributors gain reputation and rewards
 
-#### Finding Issues
-- Browse GitHub issues tagged with "good first issue"
-- Look for bugs and feature requests
-- Check the roadmap for planned improvements
+Contributing to DRP enables you to:
+- Shape protocol development
+- Build your reputation in the ecosystem
+- Earn $DeRi rewards for contributions
+- Learn from experienced developers
+- Network with the DRP community
 
-#### Development Setup
+## Deep Dive Explanation
+
+### Types of Contributions
+
+#### 1. Code Contributions
+
+**Areas for Contribution**:
+- Smart contract improvements
+- SDK enhancements
+- Tooling and utilities
+- Bug fixes
+- Performance optimizations
+
+**Process**:
+```
+1. Find Issue or Feature
+      ↓
+2. Fork Repository
+      ↓
+3. Create Branch
+      ↓
+4. Make Changes
+      ↓
+5. Write Tests
+      ↓
+6. Submit Pull Request
+      ↓
+7. Code Review
+      ↓
+8. Merge
+```
+
+#### 2. Documentation
+
+**Documentation Types**:
+- API documentation
+- Tutorial guides
+- Code examples
+- Architecture diagrams
+- FAQ updates
+
+**Impact**: Documentation helps onboard new developers and users
+
+#### 3. Proposals
+
+**Proposal Types**:
+- Protocol upgrades (DRP Improvement Proposals - DRIPs)
+- Parameter adjustments
+- New features
+- Economic changes
+
+**Process**: Submit to Elder Quorum for review
+
+#### 4. Community Support
+
+**Ways to Help**:
+- Answer questions in forums
+- Help new developers
+- Create educational content
+- Organize events
+- Translate documentation
+
+### Getting Started
+
+#### 1. Set Up Development Environment
+
 ```bash
-# Clone the repository
-git clone https://github.com/Decentralized-Rights-Protocol/DRP-Core.git
-cd DRP-Core
+# Clone repository
+git clone https://github.com/drp-protocol/drp-core.git
+cd drp-core
 
 # Install dependencies
 npm install
@@ -41,137 +107,496 @@ npm install
 # Run tests
 npm test
 
-# Start development server
-npm run dev
+# Start local node
+npm run node
 ```
 
-#### Submitting Pull Requests
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Write tests
-5. Submit a pull request with clear description
+#### 2. Find Contribution Opportunities
 
-### 2. Documentation
+**Ways to Find Issues**:
+- GitHub Issues labeled "good first issue"
+- Community discussions
+- Feature requests
+- Bug reports
+- Documentation gaps
 
-Help improve DRP documentation:
-- Fix typos and errors
-- Add missing explanations
-- Improve code examples
-- Translate documentation to other languages
+**Example Workflow**:
+```bash
+# Browse issues
+gh issue list --label "good first issue"
 
-### 3. Testing and Bug Reports
+# Claim an issue
+gh issue comment <issue-number> --body "I'll work on this"
 
-#### Reporting Bugs
-- Use the GitHub issue tracker
-- Provide detailed bug reports:
-  - Steps to reproduce
-  - Expected vs actual behavior
-  - Environment details
-  - Error messages/logs
-
-#### Testing New Features
-- Test pre-release versions
-- Provide feedback on new features
-- Report edge cases and issues
-
-### 4. Community Support
-
-#### Help Others
-- Answer questions on forums
-- Assist in Discord/Slack channels
-- Create tutorials and guides
-- Share your DRP projects
-
-#### Organize Events
-- Host local meetups
-- Organize workshops
-- Give presentations
-- Write blog posts
-
-## Governance Participation
-
-### Proposal Process
-1. **Discussion**: Start a discussion in the governance forum
-2. **Draft Proposal**: Create a formal proposal
-3. **Community Review**: Gather feedback
-4. **Voting**: Participate in on-chain voting
-5. **Implementation**: Execute approved proposals
-
-### Voting Rights
-- Token holders can vote on proposals
-- Vote weight based on stake
-- Participate in Elder Quorum elections
-
-## Code Contribution Guidelines
-
-### Coding Standards
-- Follow project style guide
-- Write clear, documented code
-- Maintain test coverage
-- Update documentation
-
-### Commit Messages
-```
-feat: Add new feature description
-fix: Fix bug description
-docs: Update documentation
-test: Add or update tests
-refactor: Code refactoring
+# Create branch
+git checkout -b fix/issue-123
 ```
 
-### Review Process
-- All code goes through review
-- Address review feedback
-- Maintain discussion in PR comments
-- Be open to suggestions
+#### 3. Development Workflow
 
-## Getting Started Checklist
+**Branch Naming**:
+- `feature/description`: New features
+- `fix/description`: Bug fixes
+- `docs/description`: Documentation
+- `refactor/description`: Code refactoring
 
-- [ ] Join DRP Discord/Telegram
-- [ ] Follow GitHub repository
-- [ ] Read contribution guidelines
-- [ ] Set up development environment
-- [ ] Find your first issue to work on
-- [ ] Introduce yourself to the community
+**Commit Messages**:
+```
+feat: Add royalty distribution batching
+fix: Resolve gas estimation error
+docs: Update SDK installation guide
+refactor: Optimize activity proof verification
+```
 
-## Recognition and Rewards
+### Code Contribution Process
 
-### Contributor Recognition
-- Listed in contributor acknowledgments
-- Invitation to contributor events
-- Potential grants for significant contributions
-- Community recognition and badges
+#### 1. Fork and Clone
 
-### Incentive Programs
-- Bug bounty programs
-- Feature development grants
-- Documentation improvement rewards
-- Community growth incentives
+```bash
+# Fork on GitHub, then clone
+git clone https://github.com/your-username/drp-core.git
+cd drp-core
 
-## Resources
+# Add upstream
+git remote add upstream https://github.com/drp-protocol/drp-core.git
+```
 
-### Official Channels
-- GitHub: github.com/Decentralized-Rights-Protocol
-- Documentation: docs.drp.network
-- Discord: discord.gg/drp
-- Forum: forum.drp.network
+#### 2. Create Feature Branch
 
-### Learning Resources
-- Developer guides
-- API documentation
+```bash
+git checkout -b feature/my-contribution
+```
+
+#### 3. Make Changes
+
+**Follow Coding Standards**:
+- Use TypeScript for type safety
+- Follow existing code style
+- Write self-documenting code
+- Add comments for complex logic
+
+**Example**:
+```typescript
+/**
+ * Calculates royalty distribution for multiple recipients
+ * @param amount Total amount to distribute
+ * @param recipients Array of recipients with their shares
+ * @returns Array of distribution amounts
+ */
+export function calculateRoyalties(
+  amount: bigint,
+  recipients: Recipient[]
+): bigint[] {
+  // Implementation
+}
+```
+
+#### 4. Write Tests
+
+**Test Requirements**:
+- Unit tests for new functions
+- Integration tests for features
+- Edge case coverage
+- Maintain existing test coverage
+
+**Example**:
+```typescript
+describe('calculateRoyalties', () => {
+  it('should distribute correctly', () => {
+    const amount = parseEther('100')
+    const recipients = [
+      { address: '0x1', share: 80 },
+      { address: '0x2', share: 20 }
+    ]
+    
+    const result = calculateRoyalties(amount, recipients)
+    
+    expect(result[0]).toBe(parseEther('80'))
+    expect(result[1]).toBe(parseEther('20'))
+  })
+})
+```
+
+#### 5. Submit Pull Request
+
+**PR Template**:
+```markdown
+## Description
+Brief description of changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+- [ ] Unit tests added/updated
+- [ ] Integration tests pass
+- [ ] Manual testing completed
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Comments added for complex code
+- [ ] Documentation updated
+```
+
+### Documentation Contributions
+
+#### Types of Documentation
+
+**1. API Documentation**:
+```typescript
+/**
+ * Registers digital rights for content
+ * @param contentHash - SHA-256 hash of the content
+ * @param owner - Address of the rights owner
+ * @param royaltyRate - Royalty percentage (0-100)
+ * @returns Promise resolving to registration result
+ * @example
+ * ```typescript
+ * const result = await client.rights.register({
+ *   contentHash: '0xabc...',
+ *   owner: '0x123...',
+ *   royaltyRate: 10
+ * })
+ * ```
+ */
+```
+
+**2. Tutorial Guides**:
+- Step-by-step instructions
+- Code examples
+- Common pitfalls
+- Best practices
+
+**3. Architecture Documentation**:
+- System design
+- Component interactions
+- Data flows
+- Decision records
+
+### Proposal Process (DRIPs)
+
+#### DRP Improvement Proposals (DRIPs)
+
+**Proposal Structure**:
+```markdown
+# DRIP-001: Title
+
+## Summary
+Brief overview
+
+## Motivation
+Why this change is needed
+
+## Specification
+Detailed technical specification
+
+## Implementation
+Implementation details
+
+## Security Considerations
+Security implications
+
+## Backward Compatibility
+Impact on existing systems
+
+## References
+Related issues, discussions
+```
+
+**Submission Process**:
+1. Draft proposal
+2. Discuss in community forum
+3. Refine based on feedback
+4. Submit to Elder Quorum
+5. Review and voting
+6. Implementation if approved
+
+### Community Contributions
+
+#### Forum Participation
+
+**Ways to Contribute**:
+- Answer questions
+- Share knowledge
+- Provide feedback
+- Report issues
+
+#### Educational Content
+
+**Content Types**:
+- Blog posts
 - Video tutorials
-- Example projects
+- Code examples
+- Case studies
 
-## Next Steps
+**Rewards**: Educational content creators earn $DeRi through Activity Proofs
 
-In the next lesson, you'll learn about testing and deployment best practices for DRP applications.
+#### Translation
+
+**Process**:
+1. Identify documentation to translate
+2. Create translation branch
+3. Translate content
+4. Submit for review
+5. Merge when approved
+
+## Visual Explanation
+
+### Contribution Workflow
+
+```
+Identify Contribution Opportunity
+        ↓
+┌─────────────────────────────────────┐
+│  Fork Repository                     │
+│  git fork drp-protocol/drp-core     │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Create Feature Branch               │
+│  git checkout -b feature/my-feature  │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Make Changes                        │
+│  - Write code                        │
+│  - Add tests                         │
+│  - Update docs                       │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Test Changes                        │
+│  npm test                            │
+│  npm run lint                        │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Submit Pull Request                 │
+│  - Fill PR template                  │
+│  - Request review                    │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Code Review                         │
+│  - Address feedback                  │
+│  - Make requested changes            │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Merge                                │
+│  - Contribution accepted              │
+│  - Rewards distributed                │
+└─────────────────────────────────────┘
+```
+
+### Contribution Types
+
+```
+Contributions
+    │
+    ├── Code
+    │   ├── Features
+    │   ├── Bug Fixes
+    │   ├── Refactoring
+    │   └── Optimizations
+    │
+    ├── Documentation
+    │   ├── API Docs
+    │   ├── Tutorials
+    │   ├── Guides
+    │   └── Translations
+    │
+    ├── Proposals
+    │   ├── Protocol Upgrades
+    │   ├── Parameter Changes
+    │   └── New Features
+    │
+    └── Community
+        ├── Support
+        ├── Education
+        └── Events
+```
+
+## Real-World Examples
+
+### Example 1: Bug Fix Contribution
+
+**Issue**: Gas estimation fails for large royalty distributions
+
+**Contribution**:
+1. Identified root cause
+2. Fixed gas estimation algorithm
+3. Added test cases
+4. Submitted PR with fix
+
+**Result**: Issue resolved, contributor rewarded
+
+### Example 2: Feature Addition
+
+**Feature**: Batch royalty distribution
+
+**Contribution**:
+1. Designed batch distribution system
+2. Implemented smart contract changes
+3. Updated SDK
+4. Wrote documentation
+
+**Result**: Feature merged, improves efficiency
+
+### Example 3: Documentation Improvement
+
+**Issue**: SDK documentation incomplete
+
+**Contribution**:
+1. Reviewed all SDK functions
+2. Added comprehensive JSDoc comments
+3. Created usage examples
+4. Updated README
+
+**Result**: Better developer experience
+
+## Rewards and Recognition
+
+### Contribution Rewards
+
+**Code Contributions**:
+- $DeRi tokens based on contribution value
+- Recognition in release notes
+- Contributor badge
+
+**Documentation**:
+- Activity proof rewards
+- Community recognition
+- Enhanced reputation
+
+**Proposals**:
+- Reward if proposal accepted
+- Implementation rewards
+- Governance participation
+
+### Building Reputation
+
+**Ways to Build Reputation**:
+- Consistent contributions
+- High-quality code
+- Helpful community support
+- Successful proposals
+
+**Benefits**:
+- Higher reward rates
+- Governance influence
+- Career opportunities
+- Network connections
+
+## Best Practices
+
+### Code Quality
+
+- Follow existing patterns
+- Write comprehensive tests
+- Document complex logic
+- Optimize for gas efficiency
+- Consider security implications
+
+### Communication
+
+- Be respectful and constructive
+- Provide clear explanations
+- Respond to feedback promptly
+- Ask questions when needed
+- Share knowledge with others
+
+### Collaboration
+
+- Work with maintainers
+- Accept constructive criticism
+- Help other contributors
+- Share credit appropriately
+- Celebrate team successes
 
 ## Key Takeaways
 
-- Multiple ways to contribute to DRP
-- Code contributions follow standard open source practices
-- Community support is highly valued
-- Governance participation gives you a voice
-- All contributions are recognized and appreciated
+1. **Multiple contribution types** including code, docs, proposals, and community support
+2. **Clear process** for code contributions: fork, branch, develop, test, PR, review, merge
+3. **Documentation** is as valuable as code contributions
+4. **Proposals (DRIPs)** enable protocol evolution through structured process
+5. **Community contributions** help grow and support the ecosystem
+6. **Rewards** recognize valuable contributions with $DeRi tokens
+7. **Reputation building** through consistent, high-quality contributions
 
+## Quiz
+
+### Question 1
+What is the typical workflow for code contributions to DRP?
+
+A) Directly push to main branch  
+B) Fork, create branch, make changes, test, submit PR, code review, merge  
+C) Only submit issues  
+D) Email changes to maintainers  
+
+**Correct Answer: B** - The standard workflow involves forking the repository, creating a feature branch, making and testing changes, submitting a pull request, undergoing code review, and then merging.
+
+### Question 2
+What are DRIPs?
+
+A) A type of cryptocurrency  
+B) DRP Improvement Proposals for protocol changes  
+C) A testing framework  
+D) A deployment tool  
+
+**Correct Answer: B** - DRIPs (DRP Improvement Proposals) are structured proposals for protocol upgrades, parameter changes, and new features.
+
+### Question 3
+Why is writing tests important for code contributions?
+
+A) Tests are optional  
+B) Tests ensure code works correctly and prevent regressions  
+C) Tests slow down development  
+D) Tests are only for production code  
+
+**Correct Answer: B** - Tests verify that code works correctly, prevent regressions, and maintain code quality standards.
+
+### Question 4
+What types of contributions are rewarded in DRP?
+
+A) Only code contributions  
+B) Code, documentation, proposals, and community support  
+C) Only financial contributions  
+D) Only bug reports  
+
+**Correct Answer: B** - DRP rewards various types of contributions including code, documentation, proposals, and community support through Activity Proofs and other mechanisms.
+
+### Question 5
+How can you find contribution opportunities?
+
+A) Only by being invited  
+B) Through GitHub issues, community discussions, and identifying gaps  
+C) Only through paid contracts  
+D) Contributions are not accepted  
+
+**Correct Answer: B** - You can find opportunities through GitHub issues (especially "good first issue" labels), community discussions, feature requests, and by identifying documentation or code gaps.
+
+## Summary
+
+Contributing to DRP is a rewarding way to shape the future of decentralized digital rights management. Whether through code, documentation, proposals, or community support, every contribution helps build a better protocol and ecosystem.
+
+Key aspects include:
+
+- **Multiple Contribution Types**: Code, documentation, proposals, community support
+- **Clear Processes**: Structured workflows for different contribution types
+- **Quality Standards**: Testing, documentation, and code review requirements
+- **Recognition and Rewards**: Contributors are recognized and rewarded with $DeRi tokens
+- **Community Building**: Contributions help grow and strengthen the DRP ecosystem
+- **Learning Opportunities**: Contributing is a great way to learn and network
+
+The DRP community welcomes contributions of all types and sizes. Whether you're fixing a small bug, writing documentation, proposing a major feature, or helping other community members, your contributions make a difference.
+
+Understanding how to contribute effectively enables you to become an active participant in the DRP ecosystem, build your reputation, and help shape the future of digital rights management.
+
+---
+
+**Fantastic!** You now understand how to contribute to DRP. Next, you'll learn about testing and deployment best practices.

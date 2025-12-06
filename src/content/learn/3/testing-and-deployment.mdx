@@ -1,0 +1,531 @@
+---
+title: "Testing & Deployment"
+duration: "25min"
+reward: "20 $DeRi"
+level: 3
+order: 4
+locked: true
+---
+
+# Testing & Deployment
+
+## Overview
+
+Thorough testing and proper deployment are critical for building reliable, secure DRP applications. This lesson covers testing strategies, deployment processes, and best practices for ensuring your DRP applications work correctly in production environments.
+
+## Why It Matters
+
+Insufficient testing and poor deployment practices lead to:
+
+- **Bugs in Production**: Costly errors affecting users
+- **Security Vulnerabilities**: Exploitable weaknesses
+- **Poor User Experience**: Broken features and failures
+- **Financial Losses**: Failed transactions and lost funds
+- **Reputation Damage**: Loss of user trust
+
+Proper testing and deployment ensure:
+- **Reliability**: Applications work as expected
+- **Security**: Vulnerabilities identified and fixed
+- **User Confidence**: Trust in your application
+- **Cost Efficiency**: Avoid expensive mistakes
+- **Maintainability**: Easier to update and improve
+
+## Deep Dive Explanation
+
+### Testing Strategy
+
+A comprehensive testing strategy includes multiple layers:
+
+```
+┌─────────────────────────────────────┐
+│      Unit Tests                      │
+│  Test individual functions           │
+├─────────────────────────────────────┤
+│      Integration Tests               │
+│  Test component interactions         │
+├─────────────────────────────────────┤
+│      Contract Tests                  │
+│  Test smart contract functionality   │
+├─────────────────────────────────────┤
+│      End-to-End Tests                │
+│  Test complete user flows            │
+├─────────────────────────────────────┤
+│      Security Tests                  │
+│  Test for vulnerabilities            │
+└─────────────────────────────────────┘
+```
+
+### Unit Testing
+
+**Purpose**: Test individual functions in isolation
+
+**Example**:
+```typescript
+import { calculateRoyalties } from './royalty-engine'
+import { parseEther } from 'ethers'
+
+describe('calculateRoyalties', () => {
+  it('should calculate correct distribution', () => {
+    const amount = parseEther('100')
+    const recipients = [
+      { address: '0x1', share: 60 },
+      { address: '0x2', share: 40 }
+    ]
+    
+    const result = calculateRoyalties(amount, recipients)
+    
+    expect(result[0]).toEqual(parseEther('60'))
+    expect(result[1]).toEqual(parseEther('40'))
+  })
+
+  it('should handle zero amount', () => {
+    const result = calculateRoyalties(parseEther('0'), [])
+    expect(result).toEqual([])
+  })
+
+  it('should throw for invalid shares', () => {
+    expect(() => {
+      calculateRoyalties(parseEther('100'), [
+        { address: '0x1', share: 150 } // > 100%
+      ])
+    }).toThrow('Invalid share percentage')
+  })
+})
+```
+
+### Integration Testing
+
+**Purpose**: Test how components work together
+
+**Example**:
+```typescript
+import { DRPClient } from '@drp/sdk'
+import { TestNetwork } from '@drp/sdk/testing'
+
+describe('Rights Registration Flow', () => {
+  let testNetwork: TestNetwork
+  let client: DRPClient
+
+  beforeAll(async () => {
+    testNetwork = await TestNetwork.start()
+    client = testNetwork.getClient()
+  })
+
+  afterAll(async () => {
+    await testNetwork.stop()
+  })
+
+  it('should register rights and create activity proof', async () => {
+    // Register content
+    const rights = await client.rights.register({
+      contentHash: '0xabc123...',
+      royaltyRate: 10
+    })
+
+    expect(rights.rightsId).toBeDefined()
+
+    // Create activity proof
+    const proof = await client.activity.createProof({
+      type: 'content_creation',
+      contentHash: '0xabc123...'
+    })
+
+    expect(proof.proofId).toBeDefined()
+
+    // Verify proof linked to rights
+    const proofs = await client.activity.getProofs(rights.contentHash)
+    expect(proofs).toContainEqual(expect.objectContaining({
+      proofId: proof.proofId
+    }))
+  })
+})
+```
+
+### Smart Contract Testing
+
+**Purpose**: Test smart contract functionality
+
+**Tools**: Hardhat, Foundry, Truffle
+
+**Example (Hardhat)**:
+```solidity
+// test/RightsRegistry.test.sol
+pragma solidity ^0.8.0;
+
+import "forge-std/Test.sol";
+import "../contracts/RightsRegistry.sol";
+
+contract RightsRegistryTest is Test {
+    RightsRegistry registry;
+    address owner = address(1);
+    address user = address(2);
+
+    function setUp() public {
+        registry = new RightsRegistry();
+    }
+
+    function testRegisterRights() public {
+        bytes32 contentHash = keccak256("test content");
+        uint256 royaltyRate = 10;
+
+        registry.registerRights(contentHash, owner, royaltyRate);
+
+        assertEq(registry.getOwner(contentHash), owner);
+        assertEq(registry.getRoyaltyRate(contentHash), royaltyRate);
+    }
+
+    function testTransferRights() public {
+        bytes32 contentHash = keccak256("test content");
+        registry.registerRights(contentHash, owner, 10);
+        
+        vm.prank(owner);
+        registry.transferRights(contentHash, user);
+
+        assertEq(registry.getOwner(contentHash), user);
+    }
+
+    function testCannotTransferWithoutOwnership() public {
+        bytes32 contentHash = keccak256("test content");
+        registry.registerRights(contentHash, owner, 10);
+
+        vm.prank(user);
+        vm.expectRevert("Not the owner");
+        registry.transferRights(contentHash, user);
+    }
+}
+```
+
+### End-to-End Testing
+
+**Purpose**: Test complete user workflows
+
+**Example**:
+```typescript
+import { test, expect } from '@playwright/test'
+
+test('complete content registration and streaming flow', async ({ page }) => {
+  // Navigate to app
+  await page.goto('http://localhost:3000')
+
+  // Connect wallet
+  await page.click('text=Connect Wallet')
+  await page.click('text=MetaMask')
+  
+  // Register content
+  await page.fill('[name="contentHash"]', '0xabc123...')
+  await page.fill('[name="royaltyRate"]', '10')
+  await page.click('text=Register')
+
+  // Wait for transaction
+  await page.waitForSelector('text=Registration successful')
+
+  // Stream content
+  await page.click('text=Play')
+  await page.waitForSelector('text=Streaming...')
+
+  // Verify consumption recorded
+  await page.goto('/activity')
+  await expect(page.locator('text=Consumption recorded')).toBeVisible()
+})
+```
+
+### Security Testing
+
+**Purpose**: Identify vulnerabilities
+
+**Types of Security Tests**:
+
+1. **Static Analysis**:
+```bash
+# Use Slither for Solidity
+slither contracts/
+
+# Use Semgrep for general code
+semgrep --config=auto src/
+```
+
+2. **Fuzz Testing**:
+```solidity
+function testFuzzRoyaltyCalculation(uint256 amount, uint8 share) public {
+    vm.assume(amount > 0 && amount < type(uint256).max);
+    vm.assume(share > 0 && share <= 100);
+    
+    uint256 result = calculateRoyalty(amount, share);
+    assert(result <= amount);
+}
+```
+
+3. **Reentrancy Testing**:
+```solidity
+function testReentrancy() public {
+    // Test contract that attempts reentrancy
+    MaliciousContract attacker = new MaliciousContract();
+    
+    vm.expectRevert("ReentrancyGuard: reentrant call");
+    registry.registerRights(..., address(attacker), ...);
+}
+```
+
+## Deployment Process
+
+### Pre-Deployment Checklist
+
+```
+□ All tests passing
+□ Security audit completed
+□ Gas optimization reviewed
+□ Documentation updated
+□ Environment variables configured
+□ Backup strategy in place
+□ Monitoring set up
+□ Rollback plan prepared
+```
+
+### Deployment Environments
+
+**1. Local Development**:
+```bash
+# Start local node
+npm run node
+
+# Deploy contracts locally
+npm run deploy:local
+```
+
+**2. Testnet**:
+```bash
+# Deploy to testnet
+npm run deploy:testnet
+
+# Verify contracts
+npm run verify:testnet
+```
+
+**3. Mainnet**:
+```bash
+# Deploy to mainnet (requires careful review)
+npm run deploy:mainnet
+
+# Verify contracts
+npm run verify:mainnet
+```
+
+### Deployment Scripts
+
+**Hardhat Deployment**:
+```typescript
+// scripts/deploy.ts
+import { ethers } from 'hardhat'
+
+async function main() {
+  const [deployer] = await ethers.getSigners()
+  console.log('Deploying with account:', deployer.address)
+
+  // Deploy Rights Registry
+  const RightsRegistry = await ethers.getContractFactory('RightsRegistry')
+  const rightsRegistry = await RightsRegistry.deploy()
+  await rightsRegistry.waitForDeployment()
+  
+  console.log('RightsRegistry deployed to:', await rightsRegistry.getAddress())
+
+  // Verify on Etherscan
+  await hre.run('verify:verify', {
+    address: await rightsRegistry.getAddress(),
+    constructorArguments: []
+  })
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
+```
+
+### Continuous Integration/Deployment
+
+**GitHub Actions Example**:
+```yaml
+name: Test and Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm install
+      - run: npm test
+      - run: npm run lint
+
+  deploy-testnet:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm install
+      - run: npm run deploy:testnet
+        env:
+          PRIVATE_KEY: ${{ secrets.TESTNET_PRIVATE_KEY }}
+          RPC_URL: ${{ secrets.TESTNET_RPC_URL }}
+```
+
+## Monitoring and Maintenance
+
+### Monitoring
+
+**Key Metrics**:
+- Transaction success rate
+- Gas usage
+- Error rates
+- User activity
+- Contract events
+
+**Tools**:
+- Block explorers
+- Custom dashboards
+- Alert systems
+- Log aggregation
+
+### Error Handling
+
+**Production Error Handling**:
+```typescript
+try {
+  await client.rights.register({...})
+} catch (error) {
+  // Log error
+  logger.error('Registration failed', {
+    error: error.message,
+    stack: error.stack,
+    user: userAddress
+  })
+
+  // Notify monitoring
+  monitoring.recordError('registration_failed', error)
+
+  // User-friendly message
+  showError('Registration failed. Please try again.')
+}
+```
+
+## Best Practices
+
+### Testing Best Practices
+
+1. **Test Coverage**: Aim for >80% coverage
+2. **Test Isolation**: Each test should be independent
+3. **Test Data**: Use realistic test data
+4. **Edge Cases**: Test boundary conditions
+5. **Error Cases**: Test failure scenarios
+
+### Deployment Best Practices
+
+1. **Incremental Deployment**: Deploy to testnet first
+2. **Verification**: Verify contracts on block explorer
+3. **Monitoring**: Set up monitoring before mainnet
+4. **Documentation**: Document deployment process
+5. **Rollback Plan**: Always have a rollback strategy
+
+### Security Best Practices
+
+1. **Audits**: Get professional security audits
+2. **Access Control**: Implement proper access controls
+3. **Input Validation**: Validate all inputs
+4. **Gas Limits**: Set appropriate gas limits
+5. **Upgradeability**: Consider upgrade patterns carefully
+
+## Key Takeaways
+
+1. **Comprehensive testing** includes unit, integration, contract, E2E, and security tests
+2. **Testing strategy** should cover all layers of the application
+3. **Deployment process** should include local, testnet, and mainnet stages
+4. **Security testing** is critical for protecting users and funds
+5. **Monitoring** enables early detection of issues in production
+6. **CI/CD** automates testing and deployment processes
+7. **Best practices** ensure reliable, secure deployments
+
+## Quiz
+
+### Question 1
+What is the purpose of unit testing?
+
+A) To test the entire application  
+B) To test individual functions in isolation  
+C) To test only smart contracts  
+D) To test user interfaces  
+
+**Correct Answer: B** - Unit tests verify that individual functions work correctly in isolation, without dependencies on other components.
+
+### Question 2
+Why is it important to test on testnet before mainnet deployment?
+
+A) Testnet is faster  
+B) To identify and fix issues without risking real funds  
+C) Testnet is required by law  
+D) Mainnet doesn't support testing  
+
+**Correct Answer: B** - Testing on testnet allows you to identify and fix issues without risking real funds or affecting mainnet users.
+
+### Question 3
+What is fuzz testing used for?
+
+A) Testing UI components  
+B) Testing with random inputs to find edge cases and vulnerabilities  
+C) Testing network connectivity  
+D) Testing documentation  
+
+**Correct Answer: B** - Fuzz testing uses random or semi-random inputs to discover edge cases, unexpected behavior, and potential vulnerabilities.
+
+### Question 4
+What should be included in a pre-deployment checklist?
+
+A) Only code review  
+B) Tests passing, security audit, documentation, monitoring setup, and rollback plan  
+C) Only deployment scripts  
+D) Nothing, just deploy  
+
+**Correct Answer: B** - A comprehensive checklist includes tests, security audits, documentation, monitoring, and rollback plans to ensure safe deployment.
+
+### Question 5
+Why is monitoring important after deployment?
+
+A) To slow down the application  
+B) To detect issues early and ensure the application is working correctly  
+C) Monitoring is not important  
+D) To increase costs  
+
+**Correct Answer: B** - Monitoring enables early detection of issues, tracks performance, and ensures the application is functioning correctly in production.
+
+## Summary
+
+Testing and deployment are critical phases in building reliable DRP applications. A comprehensive testing strategy covers unit, integration, contract, end-to-end, and security testing, ensuring applications work correctly and securely.
+
+Key aspects include:
+
+- **Testing Layers**: Multiple testing types for comprehensive coverage
+- **Smart Contract Testing**: Specialized tools and techniques for blockchain code
+- **Security Testing**: Identifying and fixing vulnerabilities before deployment
+- **Deployment Process**: Structured approach from local to mainnet
+- **CI/CD**: Automation for consistent, reliable deployments
+- **Monitoring**: Ongoing observation of production systems
+- **Best Practices**: Guidelines for reliable, secure deployments
+
+Proper testing and deployment practices protect users, prevent costly mistakes, and ensure applications function correctly in production. Whether building smart contracts, DApps, or SDK components, following these practices is essential for success in the DRP ecosystem.
+
+Understanding testing and deployment enables you to build production-ready applications that users can trust and rely on.
+
+---
+
+**Congratulations!** You've completed Level 3: Building & Contributing. You now understand the DRP SDK, DApp development, contributing to DRP, and testing/deployment. You're ready to explore Level 4: Real-World Integration!

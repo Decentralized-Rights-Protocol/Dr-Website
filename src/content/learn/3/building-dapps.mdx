@@ -1,280 +1,588 @@
 ---
-title: "Building DApps on DRP"
-description: "Learn to build decentralized applications using DRP infrastructure"
-duration: 40
-reward: 35
+title: "Building DApps"
+duration: "25min"
+reward: "20 $DeRi"
 level: 3
-module: "building-dapps"
+order: 2
+locked: true
 ---
 
-# Building DApps on DRP
+# Building DApps
 
-Decentralized Applications (DApps) are the future of web development. In this lesson, you'll learn how to build powerful DApps using DRP's infrastructure and tools.
+## Overview
 
-## Learning Objectives
+This lesson guides you through building complete decentralized applications (DApps) on DRP. You'll learn the architecture patterns, development workflow, and best practices for creating production-ready applications that leverage DRP's digital rights management capabilities.
 
-By the end of this lesson, you will be able to:
-- Understand DApp architecture and components
-- Set up a DRP development environment
-- Build a simple DApp using DRP SDK
-- Deploy and interact with smart contracts
-- Implement user authentication and data management
+## Why It Matters
 
-## What are DApps?
+Building DApps requires understanding:
 
-**Decentralized Applications (DApps)** are applications that run on a decentralized network rather than a single computer. They combine:
+- **Architecture Patterns**: How to structure DApp components
+- **User Experience**: Making blockchain interactions seamless
+- **State Management**: Handling on-chain and off-chain data
+- **Security**: Protecting users and their assets
+- **Performance**: Optimizing for speed and cost
+- **Deployment**: Getting applications to users
 
-- **Frontend**: User interface (React, Vue, Angular)
-- **Smart Contracts**: Backend logic on blockchain
-- **Blockchain Network**: Decentralized infrastructure
-- **Web3 Integration**: Wallet connections and transactions
+Mastering DApp development enables you to:
+- Create innovative digital rights solutions
+- Build user-friendly blockchain applications
+- Contribute to the DRP ecosystem
+- Monetize your development skills
 
-## DApp Architecture
-
-### Traditional Web App
-```
-User → Frontend → Backend API → Database
-```
+## Deep Dive Explanation
 
 ### DApp Architecture
-```
-User → Frontend → Smart Contracts → Blockchain
-     ↓
-   Web3 Wallet
-```
 
-## DRP Development Kit
+A typical DRP DApp follows this architecture:
 
-The DRP SDK provides tools for building DApps:
+```
+┌─────────────────────────────────────┐
+│      Frontend (React/Vue/Next.js)    │
+│  - User Interface                    │
+│  - Wallet Integration                │
+│  - State Management                  │
+├─────────────────────────────────────┤
+│      SDK Layer                       │
+│  - DRP SDK                           │
+│  - Contract Interactions             │
+│  - Event Listening                   │
+├─────────────────────────────────────┤
+│      Smart Contracts                 │
+│  - Rights Registry                   │
+│  - Royalty Engine                    │
+│  - Activity Proofs                   │
+├─────────────────────────────────────┤
+│      Blockchain Network              │
+│  - DRP Mainnet/Testnet               │
+└─────────────────────────────────────┘
+```
 
 ### Core Components
-- **DRP Client**: Connect to DRP network
-- **Smart Contract Interface**: Interact with contracts
-- **Wallet Integration**: Connect user wallets
-- **Data Management**: Handle on-chain data
 
-### Installation
-```bash
-npm install @drp/sdk
-npm install @drp/contracts
-npm install ethers
+#### 1. Frontend Application
+
+**Technologies**:
+- React, Vue, or Next.js for UI
+- Web3 libraries for wallet connection
+- State management (Redux, Zustand, etc.)
+- UI frameworks (Tailwind, Material-UI)
+
+**Key Features**:
+- Wallet connection
+- Transaction signing
+- Real-time updates
+- Error handling
+
+#### 2. Wallet Integration
+
+**Purpose**: Connect users' wallets to DApp
+
+**Implementation**:
+```typescript
+import { useWallet } from '@drp/sdk/react'
+
+function App() {
+  const { connect, disconnect, account, isConnected } = useWallet()
+
+  return (
+    <div>
+      {isConnected ? (
+        <>
+          <p>Connected: {account}</p>
+          <button onClick={disconnect}>Disconnect</button>
+        </>
+      ) : (
+        <button onClick={connect}>Connect Wallet</button>
+      )}
+    </div>
+  )
+}
 ```
 
-## Building Your First DApp
+#### 3. Contract Interactions
 
-### 1. Project Setup
-```bash
-npx create-react-app my-dapp
-cd my-dapp
-npm install @drp/sdk ethers
-```
+**Purpose**: Interact with DRP smart contracts
 
-### 2. DRP Client Configuration
-```javascript
-import { DRPClient } from '@drp/sdk';
+**Implementation**:
+```typescript
+import { useDRPClient } from '@drp/sdk/react'
 
-const drpClient = new DRPClient({
-  network: 'mainnet', // or 'testnet'
-  rpcUrl: 'https://rpc.drp.network',
-  chainId: 137
-});
-```
+function ContentRegistration() {
+  const client = useDRPClient()
+  const [loading, setLoading] = useState(false)
 
-### 3. Wallet Connection
-```javascript
-import { ethers } from 'ethers';
-
-const connectWallet = async () => {
-  if (window.ethereum) {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const address = await signer.getAddress();
-    return { provider, signer, address };
+  const registerContent = async (contentHash: string) => {
+    setLoading(true)
+    try {
+      const result = await client.rights.register({
+        contentHash,
+        royaltyRate: 10,
+        metadata: { title: 'My Content' }
+      })
+      console.log('Registered:', result.rightsId)
+    } catch (error) {
+      console.error('Registration failed:', error)
+    } finally {
+      setLoading(false)
+    }
   }
-};
+
+  return (
+    <button onClick={() => registerContent('0x...')} disabled={loading}>
+      {loading ? 'Registering...' : 'Register Content'}
+    </button>
+  )
+}
 ```
 
-### 4. Smart Contract Interaction
-```javascript
-import { DRPContract } from '@drp/contracts';
+### Development Workflow
 
-const contract = new DRPContract({
-  address: '0x...',
-  abi: contractABI,
-  signer: signer
-});
+#### 1. Project Setup
 
-// Call contract methods
-const result = await contract.methods.getData();
+```bash
+# Create Next.js project
+npx create-next-app@latest my-drp-dapp --typescript
+
+# Install DRP SDK
+npm install @drp/sdk
+
+# Install wallet connectors
+npm install @web3modal/ethereum @web3modal/react
 ```
 
-## DApp Development Best Practices
+#### 2. Configuration
 
-### Security
-- **Input Validation**: Validate all user inputs
-- **Access Control**: Implement proper permissions
-- **Error Handling**: Handle contract call failures
-- **Gas Optimization**: Optimize for gas efficiency
+```typescript
+// lib/drp-config.ts
+import { DRPClient } from '@drp/sdk'
 
-### User Experience
-- **Loading States**: Show progress indicators
-- **Error Messages**: Provide clear error feedback
-- **Transaction Status**: Track transaction progress
-- **Mobile Responsive**: Ensure mobile compatibility
+export const drpConfig = {
+  network: process.env.NEXT_PUBLIC_DRP_NETWORK || 'testnet',
+  rpcUrl: process.env.NEXT_PUBLIC_DRP_RPC_URL,
+  contracts: {
+    rightsRegistry: process.env.NEXT_PUBLIC_RIGHTS_REGISTRY,
+    royaltyEngine: process.env.NEXT_PUBLIC_ROYALTY_ENGINE
+  }
+}
 
-### Performance
-- **Lazy Loading**: Load components on demand
-- **Caching**: Cache contract data
-- **Batch Operations**: Group multiple transactions
-- **Optimistic Updates**: Update UI before confirmation
-
-## Real-World DApp Examples
-
-### 1. Decentralized Marketplace
-- **Features**: Buy/sell digital assets
-- **Smart Contracts**: Escrow, payment processing
-- **DRP Integration**: Rights management, royalties
-
-### 2. Content Creator Platform
-- **Features**: Upload, monetize content
-- **Smart Contracts**: Copyright protection, revenue sharing
-- **DRP Integration**: Digital rights, licensing
-
-### 3. Supply Chain Tracker
-- **Features**: Track product journey
-- **Smart Contracts**: Verification, compliance
-- **DRP Integration**: Authenticity proofs
-
-## DRP-Specific Features
-
-### Digital Rights Management
-```javascript
-// Create digital rights
-const rights = await drpClient.createRights({
-  contentHash: '0x...',
-  owner: userAddress,
-  royaltyRate: 5 // 5%
-});
-
-// Transfer rights
-await drpClient.transferRights(rightsId, newOwner);
+export const client = new DRPClient(drpConfig)
 ```
 
-### Activity Proofs
-```javascript
-// Generate activity proof
-const proof = await drpClient.generateProof({
-  activity: 'content_creation',
-  timestamp: Date.now(),
-  metadata: { type: 'image', size: '2MB' }
-});
+#### 3. Provider Setup
 
-// Verify proof
-const isValid = await drpClient.verifyProof(proof);
+```typescript
+// app/providers.tsx
+'use client'
+
+import { DRPProvider } from '@drp/sdk/react'
+import { Web3Modal } from '@web3modal/react'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <DRPProvider config={drpConfig}>
+      <Web3Modal projectId={process.env.NEXT_PUBLIC_WALLET_CONNECT_ID} />
+      {children}
+    </DRPProvider>
+  )
+}
 ```
 
-### Elder Quorum Integration
-```javascript
-// Submit governance proposal
-const proposal = await drpClient.submitProposal({
-  title: 'Update protocol parameters',
-  description: 'Increase block size limit',
-  type: 'parameter_change'
-});
+## Visual Explanation
 
-// Vote on proposal
-await drpClient.vote(proposalId, true);
+### DApp User Flow
+
 ```
+User Opens DApp
+        ↓
+┌─────────────────────────────────────┐
+│  Connect Wallet                      │
+│  - MetaMask / WalletConnect          │
+│  - Approve connection                │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Browse Content / Features           │
+│  - View available content            │
+│  - Explore rights                     │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Interact with DRP                    │
+│  - Register content                   │
+│  - Create activity proofs              │
+│  - Distribute royalties               │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Transactions Processed               │
+│  - User signs transactions           │
+│  - Smart contracts execute            │
+│  - State updated on blockchain        │
+└─────────────────────────────────────┘
+```
+
+### State Management Flow
+
+```
+User Action
+        ↓
+┌─────────────────────────────────────┐
+│  Frontend State Updated              │
+│  (Optimistic UI)                     │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Transaction Submitted                │
+│  - User signs                        │
+│  - Sent to network                    │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Transaction Pending                  │
+│  - Show loading state                 │
+│  - Display transaction hash           │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Transaction Confirmed                 │
+│  - Update UI with final state         │
+│  - Show success message               │
+└─────────────────────────────────────┘
+```
+
+## Real-World Use Cases
+
+### 1. Music Streaming DApp
+
+**Features**:
+- Artist registration
+- Song upload and rights registration
+- Streaming with consumption tracking
+- Automatic royalty distribution
+
+**Implementation**:
+```typescript
+// components/MusicPlayer.tsx
+export function MusicPlayer({ songHash }: { songHash: string }) {
+  const client = useDRPClient()
+  const [playing, setPlaying] = useState(false)
+
+  const handlePlay = async () => {
+    setPlaying(true)
+    
+    // Record consumption
+    await client.activity.createProof({
+      type: 'consumption',
+      contentHash: songHash,
+      metadata: { action: 'play' }
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={handlePlay}>
+        {playing ? '⏸️' : '▶️'} Play
+      </button>
+    </div>
+  )
+}
+```
+
+### 2. Digital Art Marketplace
+
+**Features**:
+- Artwork minting
+- NFT creation with DRP rights
+- Marketplace listings
+- Royalty on resales
+
+**Implementation**:
+```typescript
+// components/ArtworkCard.tsx
+export function ArtworkCard({ artwork }: { artwork: Artwork }) {
+  const client = useDRPClient()
+  const [price, setPrice] = useState('')
+
+  const listForSale = async () => {
+    await client.marketplace.list({
+      rightsId: artwork.rightsId,
+      price: parseEther(price),
+      royaltyRate: 10 // 10% to creator on resale
+    })
+  }
+
+  return (
+    <div>
+      <img src={artwork.image} alt={artwork.title} />
+      <h3>{artwork.title}</h3>
+      <p>Creator: {artwork.creator}</p>
+      <input 
+        value={price} 
+        onChange={(e) => setPrice(e.target.value)}
+        placeholder="Price in $DeRi"
+      />
+      <button onClick={listForSale}>List for Sale</button>
+    </div>
+  )
+}
+```
+
+### 3. Content Licensing Platform
+
+**Features**:
+- License creation
+- Usage tracking
+- Automated payments
+- License marketplace
+
+**Implementation**:
+```typescript
+// components/LicenseManager.tsx
+export function LicenseManager() {
+  const client = useDRPClient()
+  const [licenses, setLicenses] = useState<License[]>([])
+
+  useEffect(() => {
+    // Listen for license events
+    client.licensing.on('LicenseCreated', (license) => {
+      setLicenses(prev => [...prev, license])
+    })
+  }, [])
+
+  const createLicense = async (contentHash: string, terms: LicenseTerms) => {
+    await client.licensing.create({
+      contentHash,
+      terms,
+      fee: terms.fee
+    })
+  }
+
+  return (
+    <div>
+      {licenses.map(license => (
+        <LicenseCard key={license.id} license={license} />
+      ))}
+    </div>
+  )
+}
+```
+
+## Best Practices
+
+### 1. User Experience
+
+**Loading States**:
+- Show loading indicators during transactions
+- Display transaction hashes for tracking
+- Provide clear error messages
+
+**Optimistic Updates**:
+- Update UI immediately
+- Revert if transaction fails
+- Provide feedback on status
+
+### 2. Error Handling
+
+**Comprehensive Error Handling**:
+```typescript
+try {
+  await client.rights.register({...})
+} catch (error) {
+  if (error.code === 'USER_REJECTED') {
+    showError('Transaction cancelled by user')
+  } else if (error.code === 'INSUFFICIENT_FUNDS') {
+    showError('Insufficient $DeRi tokens')
+  } else {
+    showError('Transaction failed. Please try again.')
+  }
+}
+```
+
+### 3. Gas Optimization
+
+**Batch Operations**:
+- Group multiple operations
+- Reduce transaction count
+- Lower total gas costs
+
+**Efficient Queries**:
+- Cache on-chain data
+- Use event listeners instead of polling
+- Optimize contract calls
+
+### 4. Security
+
+**Input Validation**:
+- Validate all user inputs
+- Sanitize data before submission
+- Check contract states before actions
+
+**Wallet Security**:
+- Never store private keys
+- Use wallet connection libraries
+- Verify transaction details before signing
 
 ## Testing DApps
 
-### Unit Testing
-```javascript
-import { DRPClient } from '@drp/sdk';
+### Component Testing
 
-describe('DRP Client', () => {
-  it('should connect to network', async () => {
-    const client = new DRPClient({ network: 'testnet' });
-    const isConnected = await client.isConnected();
-    expect(isConnected).toBe(true);
-  });
-});
+```typescript
+import { render, screen } from '@testing-library/react'
+import { DRPProvider } from '@drp/sdk/react'
+import { MusicPlayer } from './MusicPlayer'
+
+test('plays song and records consumption', async () => {
+  render(
+    <DRPProvider config={testConfig}>
+      <MusicPlayer songHash="0xabc..." />
+    </DRPProvider>
+  )
+
+  const playButton = screen.getByText('▶️ Play')
+  fireEvent.click(playButton)
+
+  // Verify consumption proof created
+  await waitFor(() => {
+    expect(mockClient.activity.createProof).toHaveBeenCalled()
+  })
+})
 ```
 
 ### Integration Testing
-```javascript
-describe('DApp Integration', () => {
-  it('should create and transfer rights', async () => {
-    const rights = await createRights();
-    await transferRights(rights.id, newOwner);
-    const owner = await getRightsOwner(rights.id);
-    expect(owner).toBe(newOwner);
-  });
-});
+
+```typescript
+describe('Music Streaming DApp', () => {
+  it('handles complete streaming flow', async () => {
+    // Register song
+    const rights = await registerSong(songData)
+    
+    // Play song
+    await playSong(rights.contentHash)
+    
+    // Verify consumption recorded
+    const proofs = await getConsumptionProofs(rights.contentHash)
+    expect(proofs.length).toBeGreaterThan(0)
+    
+    // Check royalties distributed
+    const royalties = await getRoyalties(rights.contentHash)
+    expect(royalties.length).toBeGreaterThan(0)
+  })
+})
 ```
 
 ## Deployment
 
-### Smart Contract Deployment
+### Build for Production
+
 ```bash
-# Compile contracts
-npx hardhat compile
-
-# Deploy to testnet
-npx hardhat run scripts/deploy.js --network sepolia
-
-# Verify on Etherscan
-npx hardhat verify --network sepolia <contract-address>
-```
-
-### Frontend Deployment
-```bash
-# Build for production
+# Build Next.js app
 npm run build
 
-# Deploy to Vercel
+# Test production build
+npm run start
+```
+
+### Environment Variables
+
+```env
+NEXT_PUBLIC_DRP_NETWORK=mainnet
+NEXT_PUBLIC_DRP_RPC_URL=https://rpc.drp.network
+NEXT_PUBLIC_RIGHTS_REGISTRY=0x...
+NEXT_PUBLIC_ROYALTY_ENGINE=0x...
+NEXT_PUBLIC_WALLET_CONNECT_ID=your-project-id
+```
+
+### Deploy to Vercel/Netlify
+
+```bash
+# Vercel
 vercel --prod
 
-# Deploy to IPFS
-npx ipfs-deploy dist
-```
-
-## Monitoring and Analytics
-
-### Contract Events
-```javascript
-// Listen to contract events
-contract.on('RightsCreated', (event) => {
-  console.log('New rights created:', event);
-});
-
-// Query past events
-const events = await contract.queryFilter('RightsCreated', fromBlock, toBlock);
-```
-
-### User Analytics
-```javascript
-// Track user interactions
-const analytics = {
-  walletConnected: true,
-  transactionsCount: 5,
-  gasUsed: '0.1 ETH',
-  lastActivity: Date.now()
-};
+# Netlify
+netlify deploy --prod
 ```
 
 ## Key Takeaways
 
-- DApps combine frontend, smart contracts, and blockchain
-- DRP SDK provides powerful tools for DApp development
-- Security and user experience are crucial for DApp success
-- Testing and monitoring ensure reliable operation
-- DRP's unique features enable innovative applications
+1. **DApp architecture** separates frontend, SDK layer, and smart contracts
+2. **Wallet integration** is essential for user interactions
+3. **State management** handles both on-chain and off-chain data
+4. **User experience** requires loading states, error handling, and feedback
+5. **Security** involves input validation and secure wallet handling
+6. **Testing** includes component, integration, and end-to-end tests
+7. **Deployment** requires proper configuration and environment setup
 
-## Next Steps
+## Quiz
 
-In the next lesson, you'll learn about contributing to the DRP ecosystem and becoming an active community member.
+### Question 1
+What are the main layers in a typical DRP DApp architecture?
+
+A) Only smart contracts  
+B) Frontend, SDK Layer, Smart Contracts, and Blockchain Network  
+C) Only frontend and backend  
+D) Only wallet and contracts  
+
+**Correct Answer: B** - A typical DApp has frontend (UI), SDK layer (DRP SDK), smart contracts (DRP protocol), and the blockchain network.
+
+### Question 2
+What is the purpose of wallet integration in a DApp?
+
+A) To store private keys  
+B) To connect users' wallets so they can sign transactions  
+C) To mine blocks  
+D) To encrypt data  
+
+**Correct Answer: B** - Wallet integration allows users to connect their wallets (like MetaMask) to sign transactions and interact with the DApp.
+
+### Question 3
+What is an "optimistic update" in DApp development?
+
+A) Updating the UI immediately and reverting if the transaction fails  
+B) Waiting for blockchain confirmation before updating UI  
+C) Never updating the UI  
+D) Only showing errors  
+
+**Correct Answer: A** - Optimistic updates improve UX by updating the UI immediately, then reverting if the transaction fails.
+
+### Question 4
+Why is error handling important in DApps?
+
+A) To hide errors from users  
+B) To provide clear feedback about transaction failures and guide users  
+C) To prevent all errors  
+D) To slow down the app  
+
+**Correct Answer: B** - Good error handling provides clear, user-friendly messages about what went wrong and how to fix it.
+
+### Question 5
+What should you do before deploying a DApp to production?
+
+A) Nothing, deploy immediately  
+B) Test thoroughly, configure environment variables, and build for production  
+C) Only test on mainnet  
+D) Skip testing  
+
+**Correct Answer: B** - Before deployment, you should thoroughly test, configure all environment variables, and build the production version of your DApp.
+
+## Summary
+
+Building DApps on DRP requires understanding architecture patterns, user experience design, state management, and deployment processes. A well-structured DApp separates concerns into frontend, SDK layer, smart contracts, and blockchain network.
+
+Key development aspects include:
+
+- **Architecture**: Layered structure with clear separation of concerns
+- **Wallet Integration**: Essential for user transaction signing
+- **State Management**: Handling both on-chain and off-chain state
+- **User Experience**: Loading states, error handling, and clear feedback
+- **Security**: Input validation and secure wallet handling
+- **Testing**: Comprehensive testing at all levels
+- **Deployment**: Proper configuration and production builds
+
+Whether building music platforms, art marketplaces, or licensing systems, following these patterns and best practices ensures your DApp is secure, user-friendly, and production-ready. The DRP SDK provides the tools needed to focus on building great user experiences rather than wrestling with blockchain complexity.
+
+Understanding DApp development is essential for creating innovative solutions in the DRP ecosystem and contributing to the future of digital rights management.
 
 ---
 
-**Ready for the quiz?** Test your DApp development knowledge and earn $DeRi tokens!
+**Excellent work!** You now understand how to build DApps on DRP. Next, you'll learn how to contribute to the DRP protocol itself.

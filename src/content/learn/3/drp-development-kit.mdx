@@ -1,214 +1,624 @@
 ---
 title: "DRP Development Kit"
-description: "Get started with the DRP Development Kit and build your first DRP application"
-duration: 30
-reward: 25
+duration: "25min"
+reward: "20 $DeRi"
 level: 3
-module: "drp-development-kit"
+order: 1
+locked: true
 ---
 
 # DRP Development Kit
 
-Welcome to the DRP Development Kit (DRP-DK)! This comprehensive toolkit provides everything you need to build decentralized applications on the DRP network.
+## Overview
 
-## Learning Objectives
+The DRP Development Kit (DRP SDK) provides developers with comprehensive tools, libraries, and documentation to build decentralized applications on the DRP protocol. This lesson covers the SDK's components, setup process, and core functionality for interacting with DRP's smart contracts and services.
 
-By the end of this lesson, you will be able to:
-- Understand what the DRP Development Kit includes
-- Set up your development environment
-- Install and configure DRP-DK
-- Create your first DRP application
-- Use DRP's core libraries and APIs
+## Why It Matters
 
-## What is DRP-DK?
+Building on blockchain can be challenging:
 
-The **DRP Development Kit** is a collection of tools, libraries, and documentation designed to simplify building on the DRP network. It includes:
+- **Complex Integration**: Direct smart contract interaction is complex
+- **Lack of Tooling**: Missing developer-friendly abstractions
+- **Documentation Gaps**: Incomplete or unclear documentation
+- **Testing Difficulties**: Hard to test blockchain interactions
+- **Deployment Complexity**: Complex deployment processes
 
-- **Core Libraries**: TypeScript/JavaScript SDKs for DRP
-- **CLI Tools**: Command-line utilities for development
-- **Testing Framework**: Tools for testing DRP applications
-- **Documentation**: Comprehensive guides and API references
+The DRP SDK addresses these by:
+- **Simplified APIs**: High-level abstractions over smart contracts
+- **Comprehensive Tools**: Complete development toolkit
+- **Clear Documentation**: Extensive guides and examples
+- **Testing Framework**: Built-in testing utilities
+- **Deployment Helpers**: Streamlined deployment processes
 
-## Installation
+## Deep Dive Explanation
 
-### Prerequisites
+### SDK Architecture
 
-- Node.js 18.x or higher
-- npm or yarn package manager
-- Git
+The DRP SDK is organized into modular components:
 
-### Install DRP-DK
-
-```bash
-npm install @drp/sdk @drp/cli
+```
+┌─────────────────────────────────────┐
+│      Application Layer                │
+│  (Your DApp)                         │
+├─────────────────────────────────────┤
+│      SDK Core                        │
+│  - Client Library                    │
+│  - Contract Interfaces               │
+│  - Utility Functions                 │
+├─────────────────────────────────────┤
+│      Protocol Layer                  │
+│  - Smart Contracts                   │
+│  - Activity Proofs                   │
+│  - Rights Registry                   │
+└─────────────────────────────────────┘
 ```
 
-Or with yarn:
+### Core Components
 
-```bash
-yarn add @drp/sdk @drp/cli
-```
+#### 1. Client Library
 
-## Setting Up Your Development Environment
+**Purpose**: Main interface for interacting with DRP
 
-### 1. Initialize a New Project
+**Features**:
+- Connection management
+- Transaction signing
+- Event listening
+- Error handling
 
-```bash
-npx @drp/cli create my-drp-app
-cd my-drp-app
-```
-
-### 2. Install Dependencies
-
-```bash
-npm install
-```
-
-### 3. Configure Environment
-
-Create a `.env` file:
-
-```env
-DRP_NETWORK=testnet
-DRP_NODE_URL=https://testnet.drp.network
-PRIVATE_KEY=your-private-key
-```
-
-## Core Components
-
-### DRP SDK
-
-The SDK provides programmatic access to DRP:
-
+**Example**:
 ```typescript
-import { DRPClient } from '@drp/sdk';
+import { DRPClient } from '@drp/sdk'
 
 const client = new DRPClient({
-  network: 'testnet',
-  nodeUrl: process.env.DRP_NODE_URL
-});
+  network: 'mainnet',
+  privateKey: process.env.PRIVATE_KEY
+})
+
+await client.connect()
 ```
 
-### Smart Contracts
+#### 2. Rights Management
 
-Deploy and interact with smart contracts:
+**Purpose**: Interact with rights registry and management
 
+**Features**:
+- Register digital rights
+- Transfer rights
+- Query ownership
+- Manage royalties
+
+**Example**:
 ```typescript
-import { Contract } from '@drp/sdk';
+import { RightsManager } from '@drp/sdk'
 
-const contract = await Contract.deploy({
-  code: contractBytecode,
-  initParams: {}
-});
+const rightsManager = new RightsManager(client)
+
+// Register content
+const rights = await rightsManager.registerContent({
+  contentHash: '0xabc123...',
+  royaltyRate: 10, // 10%
+  metadata: {
+    title: 'My Song',
+    artist: 'Artist Name'
+  }
+})
 ```
 
-### Transactions
+#### 3. Activity Proof System
 
-Send transactions on the DRP network:
+**Purpose**: Create and submit activity proofs
 
+**Features**:
+- Generate proofs
+- Sign activities
+- Submit to network
+- Track proof status
+
+**Example**:
 ```typescript
-const tx = await client.sendTransaction({
-  to: recipientAddress,
-  value: amount,
-  data: transactionData
-});
+import { ActivityProof } from '@drp/sdk'
+
+const proof = new ActivityProof(client)
+
+// Create content creation proof
+const creationProof = await proof.createContentProof({
+  contentHash: '0xabc123...',
+  contentType: 'music',
+  metadata: { /* ... */ }
+})
+
+await proof.submit(creationProof)
 ```
 
-## Development Workflow
+#### 4. Royalty Engine
 
-### 1. Write Your Code
+**Purpose**: Handle royalty calculations and distribution
 
-Create your application logic using DRP SDK:
+**Features**:
+- Calculate royalties
+- Distribute payments
+- Track revenue
+- Multi-party splits
+
+**Example**:
+```typescript
+import { RoyaltyEngine } from '@drp/sdk'
+
+const royaltyEngine = new RoyaltyEngine(client)
+
+// Distribute royalties
+await royaltyEngine.distribute({
+  contentHash: '0xabc123...',
+  amount: '1000000000000000000', // 1 token
+  recipients: [
+    { address: '0x...', share: 80 },
+    { address: '0x...', share: 20 }
+  ]
+})
+```
+
+### Installation and Setup
+
+#### Prerequisites
+
+- Node.js 18+ or Python 3.9+
+- npm/yarn or pip
+- DRP network access
+- Wallet with $DeRi tokens
+
+#### Installation
+
+**JavaScript/TypeScript**:
+```bash
+npm install @drp/sdk
+# or
+yarn add @drp/sdk
+```
+
+**Python**:
+```bash
+pip install drp-sdk
+```
+
+#### Configuration
 
 ```typescript
-// src/app.ts
-import { DRPClient } from '@drp/sdk';
-
-async function main() {
-  const client = new DRPClient();
-  // Your application logic
+// config.ts
+export const drpConfig = {
+  network: process.env.DRP_NETWORK || 'testnet',
+  rpcUrl: process.env.DRP_RPC_URL,
+  privateKey: process.env.PRIVATE_KEY,
+  contracts: {
+    rightsRegistry: '0x...',
+    royaltyEngine: '0x...',
+    activityProof: '0x...'
+  }
 }
 ```
 
-### 2. Test Locally
+### Core Functionality
 
-Use the local test network:
-
-```bash
-npm run test:local
-```
-
-### 3. Deploy to Testnet
-
-Deploy your application:
-
-```bash
-npm run deploy:testnet
-```
-
-### 4. Deploy to Mainnet
-
-Once tested, deploy to mainnet:
-
-```bash
-npm run deploy:mainnet
-```
-
-## Best Practices
-
-### Security
-- Never commit private keys
-- Use environment variables for sensitive data
-- Implement proper error handling
-- Test thoroughly before mainnet deployment
-
-### Performance
-- Optimize contract code
-- Use efficient data structures
-- Monitor gas/transaction costs
-- Implement caching where appropriate
-
-## Common Use Cases
-
-### 1. Token Creation
-Create custom tokens on DRP:
+#### Connecting to Network
 
 ```typescript
-const token = await Token.create({
-  name: 'MyToken',
-  symbol: 'MTK',
-  totalSupply: 1000000
-});
+import { DRPClient } from '@drp/sdk'
+
+const client = new DRPClient(drpConfig)
+
+try {
+  await client.connect()
+  console.log('Connected to DRP network')
+  console.log('Network:', client.network)
+  console.log('Chain ID:', client.chainId)
+} catch (error) {
+  console.error('Connection failed:', error)
+}
 ```
 
-### 2. NFT Marketplace
-Build NFT functionality:
+#### Registering Digital Rights
 
 ```typescript
-const nft = await NFT.mint({
-  metadata: { name: 'Artwork #1', image: '...' }
-});
+// Register content and create rights
+const registration = await client.rights.register({
+  contentHash: contentHash,
+  owner: client.account.address,
+  royaltyRate: 10,
+  metadata: {
+    title: 'Digital Art #1',
+    creator: 'Artist Name',
+    type: 'image',
+    format: 'png'
+  }
+})
+
+console.log('Rights registered:', registration.rightsId)
+console.log('Transaction hash:', registration.txHash)
 ```
 
-### 3. DeFi Applications
-Create DeFi protocols:
+#### Creating Activity Proofs
 
 ```typescript
-const pool = await Pool.create({
-  tokenA: token1,
-  tokenB: token2
-});
+// Generate activity proof
+const proof = await client.activity.createProof({
+  type: 'content_creation',
+  contentHash: contentHash,
+  timestamp: Date.now(),
+  metadata: {
+    duration: 180, // seconds
+    quality: 'high'
+  }
+})
+
+// Submit proof
+const submission = await client.activity.submit(proof)
+console.log('Proof submitted:', submission.proofId)
 ```
 
-## Next Steps
+#### Listening to Events
 
-In the next lesson, you'll learn how to build complete DApps using these tools and concepts.
+```typescript
+// Listen for rights registrations
+client.rights.on('Registered', (event) => {
+  console.log('New rights registered:', event.rightsId)
+  console.log('Owner:', event.owner)
+  console.log('Content hash:', event.contentHash)
+})
+
+// Listen for royalty distributions
+client.royalty.on('Distributed', (event) => {
+  console.log('Royalty distributed:', event.amount)
+  console.log('Recipient:', event.recipient)
+})
+```
+
+## Visual Explanation
+
+### SDK Integration Flow
+
+```
+Developer Application
+        ↓
+┌─────────────────────────────────────┐
+│  DRP SDK Imported                    │
+│  import { DRPClient } from '@drp/sdk'│
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Client Initialized                │
+│  const client = new DRPClient()   │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Connect to Network                  │
+│  await client.connect()              │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Use SDK Functions                   │
+│  - Register rights                   │
+│  - Create proofs                     │
+│  - Distribute royalties              │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Smart Contracts Execute             │
+│  - Transactions processed             │
+│  - State updated                      │
+└─────────────────────────────────────┘
+```
+
+### Development Workflow
+
+```
+1. Setup
+   ↓
+   Install SDK
+   Configure connection
+   ↓
+2. Development
+   ↓
+   Write application code
+   Use SDK functions
+   Test locally
+   ↓
+3. Testing
+   ↓
+   Use testnet
+   Deploy test contracts
+   Verify functionality
+   ↓
+4. Deployment
+   ↓
+   Deploy to mainnet
+   Monitor transactions
+   Handle errors
+   ↓
+5. Maintenance
+   ↓
+   Update SDK
+   Monitor events
+   Optimize performance
+```
+
+## Real-World Use Cases
+
+### 1. Music Streaming Platform
+
+**Requirements**:
+- Register songs
+- Track plays
+- Distribute royalties
+
+**Implementation**:
+```typescript
+class MusicPlatform {
+  constructor(private client: DRPClient) {}
+
+  async registerSong(songData: SongData) {
+    const contentHash = await this.hashContent(songData.file)
+    return await this.client.rights.register({
+      contentHash,
+      royaltyRate: songData.royaltyRate,
+      metadata: {
+        title: songData.title,
+        artist: songData.artist,
+        type: 'music'
+      }
+    })
+  }
+
+  async recordPlay(songHash: string) {
+    return await this.client.activity.createProof({
+      type: 'consumption',
+      contentHash: songHash,
+      metadata: { duration: 180 }
+    })
+  }
+}
+```
+
+### 2. Digital Art Marketplace
+
+**Requirements**:
+- Mint NFTs
+- Track ownership
+- Royalty on resales
+
+**Implementation**:
+```typescript
+class ArtMarketplace {
+  constructor(private client: DRPClient) {}
+
+  async mintArtwork(artwork: Artwork) {
+    const rights = await this.client.rights.register({
+      contentHash: artwork.hash,
+      royaltyRate: 10, // 10% on resales
+      metadata: {
+        title: artwork.title,
+        artist: artwork.artist,
+        type: 'art'
+      }
+    })
+    return rights
+  }
+
+  async transferOwnership(rightsId: string, to: string) {
+    return await this.client.rights.transfer(rightsId, to)
+  }
+}
+```
+
+### 3. Content Licensing Platform
+
+**Requirements**:
+- License content
+- Track usage
+- Automated payments
+
+**Implementation**:
+```typescript
+class LicensingPlatform {
+  constructor(private client: DRPClient) {}
+
+  async createLicense(contentHash: string, terms: LicenseTerms) {
+    return await this.client.rights.createLicense({
+      contentHash,
+      terms,
+      duration: terms.duration,
+      fee: terms.fee
+    })
+  }
+
+  async useContent(licenseId: string) {
+    // Record usage
+    await this.client.activity.createProof({
+      type: 'usage',
+      licenseId,
+      timestamp: Date.now()
+    })
+    
+    // Trigger payment
+    await this.client.royalty.distribute({
+      licenseId,
+      amount: license.fee
+    })
+  }
+}
+```
+
+## Testing with SDK
+
+### Unit Testing
+
+```typescript
+import { DRPClient } from '@drp/sdk'
+import { MockProvider } from '@drp/sdk/testing'
+
+describe('Rights Management', () => {
+  let client: DRPClient
+  let mockProvider: MockProvider
+
+  beforeEach(() => {
+    mockProvider = new MockProvider()
+    client = new DRPClient({
+      provider: mockProvider
+    })
+  })
+
+  it('should register rights', async () => {
+    const rights = await client.rights.register({
+      contentHash: '0xabc...',
+      royaltyRate: 10
+    })
+    
+    expect(rights.rightsId).toBeDefined()
+    expect(rights.owner).toBe(client.account.address)
+  })
+})
+```
+
+### Integration Testing
+
+```typescript
+import { TestNetwork } from '@drp/sdk/testing'
+
+describe('Integration Tests', () => {
+  let testNetwork: TestNetwork
+
+  beforeAll(async () => {
+    testNetwork = await TestNetwork.start()
+  })
+
+  afterAll(async () => {
+    await testNetwork.stop()
+  })
+
+  it('should handle full rights lifecycle', async () => {
+    const client = testNetwork.getClient()
+    
+    // Register
+    const rights = await client.rights.register({...})
+    
+    // Transfer
+    await client.rights.transfer(rights.id, otherAddress)
+    
+    // Verify
+    const owner = await client.rights.getOwner(rights.id)
+    expect(owner).toBe(otherAddress)
+  })
+})
+```
+
+## Error Handling
+
+### Common Errors
+
+**Connection Errors**:
+```typescript
+try {
+  await client.connect()
+} catch (error) {
+  if (error.code === 'NETWORK_ERROR') {
+    console.error('Network unreachable')
+  } else if (error.code === 'INVALID_RPC') {
+    console.error('Invalid RPC endpoint')
+  }
+}
+```
+
+**Transaction Errors**:
+```typescript
+try {
+  await client.rights.register({...})
+} catch (error) {
+  if (error.code === 'INSUFFICIENT_FUNDS') {
+    console.error('Not enough $DeRi tokens')
+  } else if (error.code === 'GAS_ESTIMATION_FAILED') {
+    console.error('Transaction would fail')
+  }
+}
+```
 
 ## Key Takeaways
 
-- DRP-DK provides all tools needed to build on DRP
-- Easy setup and configuration process
-- Comprehensive SDK for programmatic access
-- Support for smart contracts, transactions, and more
-- Built-in testing and deployment tools
+1. **DRP SDK** provides comprehensive tools for building on DRP
+2. **Modular design** with separate components for rights, activities, and royalties
+3. **Simple APIs** abstract away complex smart contract interactions
+4. **Type-safe** with TypeScript support and comprehensive types
+5. **Testing tools** included for unit and integration testing
+6. **Event system** enables reactive application development
+7. **Error handling** with clear error codes and messages
 
+## Quiz
+
+### Question 1
+What is the primary purpose of the DRP SDK?
+
+A) To mine blocks  
+B) To provide developers with tools and libraries to build applications on DRP  
+C) To store blockchain data  
+D) To encrypt transactions  
+
+**Correct Answer: B** - The DRP SDK provides developers with comprehensive tools, libraries, and APIs to simplify building decentralized applications on the DRP protocol.
+
+### Question 2
+Which component of the SDK handles digital rights registration?
+
+A) ActivityProof  
+B) RightsManager  
+C) RoyaltyEngine  
+D) NetworkClient  
+
+**Correct Answer: B** - RightsManager (or client.rights) handles registering, transferring, and managing digital rights on DRP.
+
+### Question 3
+How do you listen for events in the DRP SDK?
+
+A) Using webhooks  
+B) Using the event listener methods like client.rights.on()  
+C) Polling the blockchain  
+D) Using external services  
+
+**Correct Answer: B** - The SDK provides event listeners like `client.rights.on('Registered', callback)` to react to blockchain events in real-time.
+
+### Question 4
+What is required before using the DRP SDK?
+
+A) Nothing, it works out of the box  
+B) Node.js/Python, network access, and a wallet with $DeRi tokens  
+C) Only a web browser  
+D) Only an internet connection  
+
+**Correct Answer: B** - You need Node.js 18+ or Python 3.9+, access to the DRP network, and a wallet with $DeRi tokens for transactions.
+
+### Question 5
+What testing utilities does the DRP SDK provide?
+
+A) No testing support  
+B) Mock providers and test networks for unit and integration testing  
+C) Only manual testing  
+D) Only production testing  
+
+**Correct Answer: B** - The SDK includes MockProvider for unit testing and TestNetwork for integration testing, making it easy to test DRP applications.
+
+## Summary
+
+The DRP Development Kit is an essential tool for developers building on the DRP protocol. It provides high-level abstractions over smart contracts, simplifying complex blockchain interactions and enabling rapid application development.
+
+Key features include:
+
+- **Comprehensive SDK**: Complete toolkit for DRP development
+- **Modular Components**: Rights management, activity proofs, royalty engine
+- **Simple APIs**: Easy-to-use functions abstracting smart contract complexity
+- **Type Safety**: Full TypeScript support with comprehensive types
+- **Testing Tools**: Built-in utilities for testing applications
+- **Event System**: Real-time event listening for reactive applications
+- **Error Handling**: Clear error codes and helpful error messages
+
+The SDK enables developers to focus on building their applications rather than wrestling with low-level blockchain interactions. Whether building music platforms, art marketplaces, or licensing systems, the DRP SDK provides the tools needed to integrate DRP functionality seamlessly.
+
+Understanding the DRP SDK is essential for anyone looking to build decentralized applications on the DRP protocol, providing the foundation for creating innovative solutions in digital rights management.
+
+---
+
+**Great progress!** You now understand the DRP Development Kit. Next, you'll learn how to build complete decentralized applications on DRP.

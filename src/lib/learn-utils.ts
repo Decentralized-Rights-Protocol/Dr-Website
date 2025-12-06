@@ -27,14 +27,14 @@ export interface LessonFile {
  */
 const CURRICULUM_ORDER: Record<number, string[]> = {
   1: [
-    'blockchain-basics',        // 1-1
-    'cryptography-hashing',     // 1-2
+    'what-is-blockchain',        // 1-1
+    'cryptography-and-hashing',     // 1-2
     'consensus-mechanisms',     // 1-3
     'smart-contracts-101'       // 1-4
   ],
   2: [
     'drp-architecture',         // 2-1
-    'post-pat-consensus',       // 2-2
+    'post-poat-consensus',       // 2-2
     'elder-quorum-system',      // 2-3
     'activity-proofs'           // 2-4
   ],
@@ -42,7 +42,7 @@ const CURRICULUM_ORDER: Record<number, string[]> = {
     'drp-development-kit',      // 3-1
     'building-dapps',           // 3-2
     'contributing-to-drp',      // 3-3
-    'testing-deployment'        // 3-4
+    'testing-and-deployment'        // 3-4
   ],
   4: [
     'enterprise-integration',   // 4-1

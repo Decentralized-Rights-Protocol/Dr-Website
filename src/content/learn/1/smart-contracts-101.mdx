@@ -1,98 +1,471 @@
 ---
 title: "Smart Contracts 101"
-description: "Introduction to self-executing contracts on the blockchain"
-duration: 30
-reward: 25
+duration: "25min"
+reward: "20 $DeRi"
 level: 1
-module: "blockchain-foundations"
+order: 4
+locked: false
 ---
 
 # Smart Contracts 101
 
-## What are Smart Contracts?
+## Overview
 
-Smart contracts are self-executing programs that run on blockchain networks. They automatically execute when predetermined conditions are met, without the need for intermediaries.
+Smart contracts are self-executing programs stored on a blockchain that automatically execute when predetermined conditions are met. They eliminate the need for intermediaries by encoding business logic directly into code that runs on the blockchain, creating trustless, automated agreements.
 
-## Key Characteristics
+## Why It Matters
 
-- **Autonomous**: Execute automatically when conditions are met
-- **Transparent**: Code is visible to all participants
-- **Immutable**: Cannot be changed once deployed
-- **Trustless**: No need for third-party verification
+Smart contracts revolutionize how agreements are made and enforced:
 
-## How Smart Contracts Work
+- **Automation**: Execute automatically without human intervention
+- **Trustlessness**: No need to trust a third party
+- **Transparency**: Code is visible and auditable by anyone
+- **Immutability**: Once deployed, cannot be altered
+- **Cost Reduction**: Eliminate intermediaries and their fees
+- **Global Access**: Available 24/7 to anyone with internet
 
-1. **Deployment**: Contract code is deployed to the blockchain
-2. **Trigger**: External event or transaction triggers the contract
-3. **Execution**: Contract logic runs automatically
-4. **Result**: State changes are recorded on the blockchain
+## Deep Dive Explanation
 
-## Common Use Cases
+### What is a Smart Contract?
 
-### Financial Applications
-- Decentralized exchanges (DEXs)
-- Lending and borrowing protocols
-- Automated market makers (AMMs)
+A smart contract is essentially a program that:
+1. Lives on the blockchain
+2. Contains predefined rules and conditions
+3. Executes automatically when conditions are met
+4. Cannot be altered once deployed (immutable)
+5. Is transparent and auditable by all network participants
 
-### Identity and Access
-- Digital identity verification
-- Access control systems
-- Authentication protocols
+### Simple Analogy: Vending Machine
 
-### Supply Chain
-- Product tracking and verification
-- Automated compliance checking
-- Quality assurance systems
+Think of a vending machine as a physical smart contract:
 
-## DRP Smart Contracts
+```
+IF (money inserted >= item price) AND (item in stock) THEN
+    Dispense item
+    Return change
+ELSE
+    Return money
+END IF
+```
 
-The Decentralized Rights Protocol uses smart contracts for:
+**Smart Contract Equivalent:**
+```solidity
+if (msg.value >= itemPrice && items[itemId] > 0) {
+    items[itemId]--;
+    payable(msg.sender).transfer(msg.value - itemPrice);
+    emit ItemPurchased(itemId, msg.sender);
+}
+```
 
-- **Activity Verification**: Automatically verify human rights activities
-- **Reward Distribution**: Distribute $DeRi tokens for contributions
-- **Governance**: Enable community voting and decision-making
-- **Identity Management**: Manage user credentials and permissions
+### Smart Contract Structure
 
-## Programming Languages
+```
+┌─────────────────────────────────────┐
+│      Smart Contract                 │
+├─────────────────────────────────────┤
+│  State Variables                    │
+│  - Stored data                      │
+│  - Balances, ownership, etc.         │
+├─────────────────────────────────────┤
+│  Functions                          │
+│  - Read data (view functions)       │
+│  - Modify state (state-changing)    │
+│  - Receive payments (payable)       │
+├─────────────────────────────────────┤
+│  Events                             │
+│  - Log important actions            │
+│  - Enable off-chain monitoring      │
+└─────────────────────────────────────┘
+```
 
-### Solidity
-- Most popular for Ethereum
-- JavaScript-like syntax
-- Extensive documentation and tools
+### How Smart Contracts Work
 
-### Rust
-- Used by Solana and Polkadot
-- Memory-safe and performant
-- Growing ecosystem
+**Lifecycle:**
 
-### Move
-- Used by Aptos and Sui
-- Designed for blockchain applications
-- Focus on security and safety
+```
+1. Development
+   ↓
+   Write code in Solidity/Vyper/etc.
+   ↓
+2. Compilation
+   ↓
+   Convert to bytecode
+   ↓
+3. Deployment
+   ↓
+   Deploy to blockchain (creates contract address)
+   ↓
+4. Execution
+   ↓
+   Users call functions → Gas paid → Code executes
+   ↓
+5. State Update
+   ↓
+   Blockchain state updated permanently
+```
 
-## Best Practices
+**Execution Flow:**
 
-1. **Security First**: Always audit your code
-2. **Gas Optimization**: Write efficient code to reduce costs
-3. **Error Handling**: Implement proper error handling
-4. **Testing**: Thoroughly test before deployment
-5. **Documentation**: Document your code clearly
+```
+User Transaction
+      ↓
+Contract Function Call
+      ↓
+Gas Paid (transaction fee)
+      ↓
+Code Executes on All Nodes
+      ↓
+Consensus: All nodes agree on result
+      ↓
+State Updated on Blockchain
+      ↓
+Event Emitted (if applicable)
+```
 
-## Common Vulnerabilities
+## Visual Explanation
 
-- **Reentrancy**: Contract calls itself before completing
-- **Integer Overflow**: Numbers exceed maximum value
-- **Access Control**: Unauthorized access to functions
-- **Front-running**: Transactions executed before yours
+### Smart Contract Interaction
 
-## Quiz Questions
+```
+┌─────────────┐
+│   User A    │
+└──────┬──────┘
+       │ Calls function with parameters
+       │ Pays gas fee
+       ↓
+┌─────────────────────────────────────┐
+│      Smart Contract                  │
+│      Address: 0x1234...              │
+│                                      │
+│  function transfer(address to,       │
+│                   uint amount) {     │
+│      balances[msg.sender] -= amount │
+│      balances[to] += amount          │
+│      emit Transfer(msg.sender, to,   │
+│                    amount)           │
+│  }                                   │
+└──────┬───────────────────────────────┘
+       │
+       │ Executes automatically
+       │ Updates blockchain state
+       ↓
+┌─────────────┐
+│   User B    │ ← Receives tokens
+└─────────────┘
+```
 
-1. What makes smart contracts "smart"?
-2. Name three common use cases for smart contracts
-3. What are the main security considerations when writing smart contracts?
+### Smart Contract vs Traditional Contract
 
-## Next Steps
+**Traditional Contract:**
+```
+Party A ──────┐
+              │
+              ├──→ Lawyer/Intermediary ──→ Enforcement
+              │                              (Courts, etc.)
+Party B ──────┘
+```
 
-- Complete the quiz to earn 25 $DeRi tokens
-- Move on to Level 2: "DRP in Action"
-- Try writing your first smart contract in the DRP sandbox
+**Smart Contract:**
+```
+Party A ──────┐
+              │
+              ├──→ Smart Contract Code ──→ Automatic Execution
+              │                              (Blockchain)
+Party B ──────┘
+```
+
+### Gas and Execution Costs
+
+```
+Transaction Components:
+┌─────────────────────────────────────┐
+│  Base Fee (Network)                 │
+│  + Priority Fee (Speed)             │
+│  + Contract Execution Cost             │
+│     (Complexity × Gas Price)        │
+└─────────────────────────────────────┘
+         ↓
+    Total Gas Cost
+```
+
+**Gas Optimization:**
+- Simple operations: 3-5 gas
+- Storage writes: 20,000 gas
+- Complex calculations: Variable
+- Contract deployment: 100,000+ gas
+
+## Real-World Use Cases
+
+### 1. Decentralized Finance (DeFi)
+
+**Automated Market Makers (AMMs):**
+```solidity
+// Simplified AMM logic
+function swap(uint amountIn) {
+    uint amountOut = (amountIn * reserveB) / reserveA;
+    reserveA += amountIn;
+    reserveB -= amountOut;
+    transfer(amountOut);
+}
+```
+
+**Examples:**
+- Uniswap: Automated token swaps
+- Aave: Lending and borrowing
+- Compound: Interest-bearing accounts
+
+### 2. Non-Fungible Tokens (NFTs)
+
+**Digital Ownership:**
+```solidity
+contract NFT {
+    mapping(uint => address) public ownerOf;
+    
+    function transfer(uint tokenId, address to) {
+        require(ownerOf[tokenId] == msg.sender);
+        ownerOf[tokenId] = to;
+        emit Transfer(msg.sender, to, tokenId);
+    }
+}
+```
+
+**Examples:**
+- Digital art ownership
+- In-game assets
+- Collectibles
+
+### 3. Supply Chain Management
+
+**Product Tracking:**
+```solidity
+struct Product {
+    string origin;
+    address manufacturer;
+    uint timestamp;
+    bool verified;
+}
+
+function verifyProduct(uint productId) {
+    products[productId].verified = true;
+    emit ProductVerified(productId);
+}
+```
+
+**Benefits:**
+- Immutable product history
+- Transparent supply chain
+- Automated verification
+
+### 4. Voting Systems
+
+**Decentralized Voting:**
+```solidity
+mapping(address => bool) public hasVoted;
+uint public yesVotes;
+uint public noVotes;
+
+function vote(bool choice) {
+    require(!hasVoted[msg.sender]);
+    hasVoted[msg.sender] = true;
+    if (choice) yesVotes++;
+    else noVotes++;
+}
+```
+
+**Benefits:**
+- Transparent and auditable
+- Tamper-proof
+- Automatic tallying
+
+### 5. Escrow Services
+
+**Automated Escrow:**
+```solidity
+contract Escrow {
+    address buyer;
+    address seller;
+    uint amount;
+    
+    function release() {
+        require(msg.sender == buyer);
+        payable(seller).transfer(amount);
+    }
+    
+    function refund() {
+        require(block.timestamp > deadline);
+        payable(buyer).transfer(amount);
+    }
+}
+```
+
+## Smart Contracts in DRP
+
+### Rights Management Contracts
+
+DRP uses smart contracts to manage digital rights:
+
+```solidity
+contract DigitalRights {
+    struct Right {
+        address owner;
+        string contentHash;
+        uint royaltyRate;
+        bool isActive;
+    }
+    
+    mapping(string => Right) public rights;
+    
+    function createRight(string memory contentHash, uint royaltyRate) {
+        rights[contentHash] = Right({
+            owner: msg.sender,
+            contentHash: contentHash,
+            royaltyRate: royaltyRate,
+            isActive: true
+        });
+    }
+    
+    function distributeRoyalty(string memory contentHash) payable {
+        Right storage right = rights[contentHash];
+        uint royalty = (msg.value * right.royaltyRate) / 100;
+        payable(right.owner).transfer(royalty);
+    }
+}
+```
+
+### Activity Proof Contracts
+
+Smart contracts verify and record activity proofs:
+
+```solidity
+contract ActivityProof {
+    struct Proof {
+        address creator;
+        bytes32 activityHash;
+        uint timestamp;
+        bool verified;
+    }
+    
+    function submitProof(bytes32 activityHash) {
+        proofs[activityHash] = Proof({
+            creator: msg.sender,
+            activityHash: activityHash,
+            timestamp: block.timestamp,
+            verified: false
+        });
+    }
+}
+```
+
+## Limitations and Considerations
+
+### Immutability Challenge
+
+**Problem**: Bugs cannot be fixed after deployment
+
+**Solutions:**
+- Extensive testing before deployment
+- Code audits
+- Upgradeable contract patterns (with governance)
+- Bug bounty programs
+
+### Gas Costs
+
+**Problem**: Complex operations can be expensive
+
+**Solutions:**
+- Gas optimization techniques
+- Layer 2 solutions
+- Batch processing
+- Efficient algorithms
+
+### Scalability
+
+**Problem**: Blockchain throughput limitations
+
+**Solutions:**
+- Layer 2 scaling (rollups, sidechains)
+- Sharding
+- State channels
+- Optimized contract design
+
+## Key Takeaways
+
+1. **Smart contracts** are self-executing programs stored on blockchain that run automatically when conditions are met
+2. **Trustless automation** eliminates need for intermediaries in agreements and transactions
+3. **Immutability** means deployed contracts cannot be changed, requiring careful development and testing
+4. **Gas fees** are required to execute smart contracts, paid by users who interact with them
+5. **Transparency** allows anyone to audit contract code and verify its behavior
+6. **Wide applications** include DeFi, NFTs, supply chain, voting, and escrow services
+7. **DRP uses smart contracts** for rights management, royalty distribution, and activity proof verification
+
+## Quiz
+
+### Question 1
+What is a smart contract?
+
+A) A legal document stored on blockchain  
+B) A self-executing program that runs on blockchain  
+C) A cryptocurrency wallet  
+D) A blockchain node  
+
+**Correct Answer: B** - Smart contracts are programs that execute automatically on the blockchain when predetermined conditions are met.
+
+### Question 2
+What is "gas" in the context of smart contracts?
+
+A) A type of cryptocurrency  
+B) The fee paid to execute smart contract operations  
+C) A smart contract programming language  
+D) A blockchain consensus mechanism  
+
+**Correct Answer: B** - Gas is the fee paid to execute operations on the blockchain, including smart contract function calls.
+
+### Question 3
+Why are smart contracts considered "trustless"?
+
+A) They don't require trust because code is transparent and executes automatically  
+B) They don't need any security measures  
+C) They can't be hacked  
+D) They don't use cryptography  
+
+**Correct Answer: A** - Smart contracts are trustless because the code is transparent, auditable, and executes automatically according to predefined rules, eliminating the need to trust intermediaries.
+
+### Question 4
+What happens once a smart contract is deployed to the blockchain?
+
+A) It can be easily modified  
+B) It becomes immutable and cannot be changed  
+C) Only the creator can modify it  
+D) It can be deleted  
+
+**Correct Answer: B** - Once deployed, smart contracts are immutable and cannot be altered, which is why thorough testing and auditing are crucial before deployment.
+
+### Question 5
+Which of the following is a common use case for smart contracts?
+
+A) Storing large files  
+B) Automated token swaps in DeFi  
+C) Mining cryptocurrency  
+D) Creating blockchain nodes  
+
+**Correct Answer: B** - Automated token swaps in DeFi (like Uniswap) are a common use case, along with lending, NFTs, voting, and supply chain management.
+
+## Summary
+
+Smart contracts are revolutionary programs that execute automatically on blockchains, enabling trustless automation of agreements and transactions. They eliminate intermediaries by encoding business logic directly into immutable, transparent code that executes when conditions are met.
+
+Key characteristics include:
+
+- **Self-execution**: Automatically run when conditions are satisfied
+- **Immutability**: Cannot be altered after deployment
+- **Transparency**: Code is visible and auditable
+- **Trustlessness**: No need for trusted third parties
+- **Gas-powered**: Require fees (gas) to execute
+
+Smart contracts enable countless applications including DeFi protocols, NFT marketplaces, supply chain tracking, voting systems, and escrow services. In DRP, smart contracts manage digital rights, automate royalty distribution, and verify activity proofs, creating a decentralized system for rights management.
+
+Understanding smart contracts is essential for grasping how blockchain applications work and how DRP implements its automated rights management and governance systems. They represent the programmable layer that makes blockchain technology truly transformative.
+
+---
+
+**Congratulations!** You've completed Level 1: Blockchain Foundations. You now understand blockchain basics, cryptography, consensus mechanisms, and smart contracts. You're ready to explore Level 2: DRP in Action, where you'll learn how these concepts come together in the Decentralized Rights Protocol!

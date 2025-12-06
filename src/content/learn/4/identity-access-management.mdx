@@ -1,272 +1,524 @@
 ---
 title: "Identity & Access Management"
-description: "Implement decentralized identity and access management with DRP"
-duration: 40
-reward: 35
+duration: "25min"
+reward: "20 $DeRi"
 level: 4
-module: "identity-access-management"
+order: 3
+locked: true
 ---
 
 # Identity & Access Management
 
-Decentralized Identity (DID) and Access Management are fundamental to building secure, user-controlled systems. This lesson covers implementing identity solutions with DRP.
+## Overview
 
-## Learning Objectives
+Identity and Access Management (IAM) on DRP enables self-sovereign digital identities, decentralized authentication, and fine-grained access control. This lesson explores how DRP can revolutionize identity management through blockchain technology, giving users control over their digital identities.
 
-By the end of this lesson, you will be able to:
-- Understand decentralized identity concepts
-- Implement DID (Decentralized Identifier) systems
-- Manage credentials and attestations
-- Control access with smart contracts
-- Build privacy-preserving identity solutions
+## Why It Matters
 
-## Decentralized Identity
+Traditional identity systems have critical flaws:
 
-### What is DID?
+- **Centralized Control**: Governments and corporations control identities
+- **Data Breaches**: Centralized databases are targets for hackers
+- **Privacy Violations**: Users have little control over their data
+- **Interoperability Issues**: Different systems don't work together
+- **Identity Theft**: Stolen credentials cause significant harm
 
-A **Decentralized Identifier (DID)** is a new type of identifier that enables verifiable, self-sovereign digital identity. DIDs are:
-- Self-owned and controlled
-- Decentralized (no central authority)
-- Cryptographically verifiable
-- Persistent and resolvable
+DRP IAM addresses these by:
+- **Self-Sovereign Identity**: Users control their own identity data
+- **Decentralized Storage**: No single point of failure
+- **Privacy by Design**: Users choose what to share
+- **Interoperability**: Works across different systems
+- **Cryptographic Security**: Strong protection against identity theft
 
-### DID Structure
+## Deep Dive Explanation
 
+### Self-Sovereign Identity (SSI)
+
+**Core Principles**:
+
+1. **User Control**: Users own and control their identity
+2. **Portability**: Identity works across platforms
+3. **Privacy**: Users choose what to disclose
+4. **Interoperability**: Works with different systems
+5. **Consent**: Users must consent to data sharing
+
+### Identity Components
+
+```
+┌─────────────────────────────────────┐
+│      Decentralized Identifier (DID) │
+│  - Unique identifier                 │
+│  - Resolves to DID Document          │
+│  - Cryptographically verifiable      │
+├─────────────────────────────────────┤
+│      Verifiable Credentials           │
+│  - Issued by trusted parties         │
+│  - Cryptographically signed           │
+│  - User-controlled                   │
+├─────────────────────────────────────┤
+│      Proofs & Attestations           │
+│  - Zero-knowledge proofs             │
+│  - Selective disclosure               │
+│  - Privacy-preserving                │
+└─────────────────────────────────────┘
+```
+
+### Decentralized Identifiers (DIDs)
+
+**DID Structure**:
 ```
 did:drp:1234567890abcdef
-│    │   └─ Unique identifier
-│    └───── Method (DRP)
-└─────────── DID scheme
+
+Components:
+- did:        Protocol identifier
+- drp:        Method (DRP network)
+- 1234...:    Unique identifier
 ```
 
-## Implementing DID with DRP
-
-### Create a DID
-
-```typescript
-import { DID } from '@drp/identity';
-
-const did = await DID.create({
-  method: 'drp',
-  keys: {
-    authentication: privateKey,
-    assertion: assertionKey
-  }
-});
-
-console.log(did.id); // did:drp:abc123...
-```
-
-### Resolve a DID
-
-```typescript
-const resolution = await DID.resolve('did:drp:abc123');
-
-console.log(resolution.document);
-console.log(resolution.verificationMethod);
-```
-
-## Verifiable Credentials
-
-### Issue a Credential
-
-```typescript
-import { Credential } from '@drp/identity';
-
-const credential = await Credential.issue({
-  issuer: issuerDID,
-  subject: subjectDID,
-  type: 'UniversityDegree',
-  claims: {
-    degree: 'Bachelor of Science',
-    university: 'Example University',
-    year: 2024
-  },
-  expirationDate: '2029-12-31'
-});
-```
-
-### Verify a Credential
-
-```typescript
-const isValid = await Credential.verify({
-  credential: credential,
-  issuerPublicKey: issuerPublicKey
-});
-
-if (isValid) {
-  console.log('Credential is valid!');
+**DID Document**:
+```json
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:drp:1234567890abcdef",
+  "verificationMethod": [{
+    "id": "did:drp:1234567890abcdef#keys-1",
+    "type": "EcdsaSecp256k1VerificationKey2019",
+    "controller": "did:drp:1234567890abcdef",
+    "publicKeyMultibase": "z6Mk..."
+  }],
+  "authentication": ["#keys-1"],
+  "service": [{
+    "id": "#service-1",
+    "type": "DRPIdentityService",
+    "serviceEndpoint": "https://identity.drp.network"
+  }]
 }
 ```
 
-## Access Control
+### Verifiable Credentials
+
+**Credential Structure**:
+```typescript
+interface VerifiableCredential {
+  "@context": string[]
+  id: string
+  type: string[]
+  issuer: string // DID of issuer
+  issuanceDate: string
+  credentialSubject: {
+    id: string // DID of subject
+    [key: string]: any // Claim data
+  }
+  proof: {
+    type: string
+    created: string
+    proofPurpose: string
+    verificationMethod: string
+    jws: string // JSON Web Signature
+  }
+}
+```
+
+**Example Credential**:
+```json
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2018/credentials/examples/v1"
+  ],
+  "id": "https://example.edu/credentials/3732",
+  "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "issuer": "did:drp:university-123",
+  "issuanceDate": "2024-01-15T00:00:00Z",
+  "credentialSubject": {
+    "id": "did:drp:student-456",
+    "degree": {
+      "type": "BachelorDegree",
+      "name": "Bachelor of Science",
+      "university": "Example University"
+    }
+  },
+  "proof": {
+    "type": "EcdsaSecp256k1Signature2019",
+    "created": "2024-01-15T00:00:00Z",
+    "proofPurpose": "assertionMethod",
+    "verificationMethod": "did:drp:university-123#keys-1",
+    "jws": "eyJ..."
+  }
+}
+```
+
+## Visual Explanation
+
+### Identity Creation Flow
+
+```
+User
+  ↓
+┌─────────────────────────────────────┐
+│  Generate Key Pair                    │
+│  - Private key (user controls)       │
+│  - Public key (shared)                │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Create DID                          │
+│  did:drp:unique-identifier          │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Register DID Document               │
+│  - Public keys                       │
+│  - Service endpoints                  │
+│  - Authentication methods            │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Identity Created on DRP             │
+│  - User controls                     │
+│  - Decentralized                      │
+│  - Portable                           │
+└─────────────────────────────────────┘
+```
+
+### Credential Issuance Flow
+
+```
+Issuer (University)
+        ↓
+┌─────────────────────────────────────┐
+│  Verify User Identity                │
+│  - Check identity documents          │
+│  - Verify qualifications              │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Create Verifiable Credential        │
+│  - Add claims                        │
+│  - Sign with issuer's private key    │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Issue to User                        │
+│  - User receives credential          │
+│  - Stored in user's wallet           │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Credential Recorded on DRP          │
+│  - Immutable record                  │
+│  - Verifiable by anyone               │
+└─────────────────────────────────────┘
+```
+
+### Authentication Flow
+
+```
+User Wants to Access Service
+        ↓
+┌─────────────────────────────────────┐
+│  Service Requests Credential         │
+│  "Prove you are over 18"             │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  User Selects Credential              │
+│  - From their wallet                 │
+│  - Creates proof                     │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Zero-Knowledge Proof Created       │
+│  - Proves age > 18                   │
+│  - Doesn't reveal exact age          │
+│  - Doesn't reveal other data         │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Service Verifies Proof              │
+│  - Checks signature                 │
+│  - Validates claim                  │
+└──────────────┬───────────────────────┘
+               ↓
+┌─────────────────────────────────────┐
+│  Access Granted                      │
+│  - Minimal data shared               │
+│  - Privacy preserved                 │
+└─────────────────────────────────────┘
+```
+
+## Real-World Use Cases
+
+### 1. Digital Identity for Citizens
+
+**Scenario**: Government issues digital identity credentials
+
+**Implementation**:
+```typescript
+// Government issues identity credential
+const identityCredential = await drpClient.identity.issueCredential({
+  issuer: 'did:drp:government-123',
+  subject: 'did:drp:citizen-456',
+  claims: {
+    name: 'John Doe',
+    dateOfBirth: '1990-01-01',
+    nationality: 'Country X',
+    idNumber: 'ID-123456789'
+  },
+  expirationDate: '2034-01-01'
+})
+
+// Citizen stores in wallet
+await wallet.storeCredential(identityCredential)
+
+// Use for services
+const proof = await wallet.createProof({
+  credential: identityCredential,
+  reveal: ['name', 'dateOfBirth'], // Only reveal what's needed
+  hide: ['idNumber'] // Keep private
+})
+```
+
+### 2. Professional Credentials
+
+**Scenario**: Professional organizations issue certifications
+
+**Benefits**:
+- Instant verification
+- No fake credentials
+- Portable across borders
+- Lifetime record
+
+**Example**:
+```typescript
+// Medical board issues license
+const medicalLicense = await drpClient.identity.issueCredential({
+  issuer: 'did:drp:medical-board',
+  subject: 'did:drp:doctor-789',
+  claims: {
+    licenseNumber: 'MD-12345',
+    specialty: 'Cardiology',
+    issueDate: '2020-01-15',
+    expirationDate: '2025-01-15',
+    status: 'active'
+  }
+})
+
+// Hospital verifies license
+const isValid = await drpClient.identity.verifyCredential(medicalLicense)
+```
+
+### 3. Access Control for DApps
+
+**Scenario**: DApp needs to verify user attributes
+
+**Implementation**:
+```typescript
+// User wants to access age-restricted content
+const ageProof = await wallet.createZeroKnowledgeProof({
+  credential: ageCredential,
+  claim: 'age',
+  predicate: '>=',
+  value: 18,
+  reveal: false // Don't reveal exact age
+})
+
+// DApp verifies
+const hasAccess = await drpClient.identity.verifyProof(ageProof)
+if (hasAccess) {
+  // Grant access to content
+}
+```
+
+### 4. KYC/AML Compliance
+
+**Scenario**: Financial services need identity verification
+
+**Benefits**:
+- Reusable KYC credentials
+- Privacy-preserving
+- Instant verification
+- Reduced costs
+
+**Flow**:
+```
+1. User completes KYC with Bank A
+2. Bank A issues KYC credential
+3. User stores credential
+4. Bank B verifies credential (no need for new KYC)
+5. User shares only necessary information
+```
+
+## Access Control Mechanisms
 
 ### Role-Based Access Control (RBAC)
 
+**Implementation**:
 ```typescript
-import { AccessControl } from '@drp/identity';
+// Define roles
+const roles = {
+  admin: ['read', 'write', 'delete'],
+  editor: ['read', 'write'],
+  viewer: ['read']
+}
 
-const ac = await AccessControl.deploy({
-  roles: {
-    admin: {
-      permissions: ['*'],
-      inherits: []
-    },
-    editor: {
-      permissions: ['read', 'write'],
-      inherits: ['viewer']
-    },
-    viewer: {
-      permissions: ['read'],
-      inherits: []
-    }
+// Issue role credential
+const roleCredential = await drpClient.identity.issueCredential({
+  issuer: 'did:drp:organization-123',
+  subject: 'did:drp:user-456',
+  claims: {
+    role: 'editor',
+    permissions: ['read', 'write'],
+    organization: 'Example Corp'
   }
-});
+})
 
-// Assign role
-await ac.assignRole({
-  user: userDID,
-  role: 'editor'
-});
-
-// Check permission
-const canWrite = await ac.hasPermission({
-  user: userDID,
-  permission: 'write'
-});
+// Check access
+const hasPermission = await drpClient.accessControl.checkPermission(
+  'did:drp:user-456',
+  'write'
+)
 ```
 
 ### Attribute-Based Access Control (ABAC)
 
+**Fine-Grained Control**:
 ```typescript
-const abac = await ABAC.create({
-  policies: [
-    {
-      subject: { age: { $gte: 18 } },
-      resource: 'adult_content',
-      action: 'read',
-      allow: true
-    }
-  ]
-});
+// Access based on multiple attributes
+const accessPolicy = {
+  resource: 'sensitive-data',
+  conditions: {
+    role: 'researcher',
+    clearance: 'level-3',
+    department: 'R&D',
+    location: 'authorized-facility'
+  }
+}
+
+// User must prove all attributes
+const proof = await wallet.createCompositeProof({
+  credentials: [roleCredential, clearanceCredential, locationCredential],
+  policy: accessPolicy
+})
 ```
 
-## Privacy and Zero-Knowledge Proofs
+## Privacy Features
 
-### Selective Disclosure
+### Zero-Knowledge Proofs
 
+**Selective Disclosure**:
 ```typescript
-import { ZKProof } from '@drp/identity';
-
-// Prove age without revealing exact date
-const proof = await ZKProof.create({
+// Prove age without revealing exact age
+const ageProof = await wallet.createZKProof({
   credential: ageCredential,
-  reveal: {
-    isOver18: true
-  },
-  hide: {
-    dateOfBirth: true,
-    exactAge: true
-  }
-});
+  statement: 'age >= 21',
+  reveal: false
+})
+
+// Prove membership without revealing identity
+const membershipProof = await wallet.createZKProof({
+  credential: membershipCredential,
+  statement: 'isMember == true',
+  reveal: ['membershipStatus'],
+  hide: ['memberId', 'name']
+})
 ```
 
-### Anonymous Credentials
+### Revocation
 
+**Credential Revocation**:
 ```typescript
-const anonymousCred = await AnonymousCredential.create({
-  issuer: issuerDID,
-  attributes: {
-    membership: 'premium',
-    verified: true
-  },
-  blind: true // Hide subject identity
-});
+// Revoke credential
+await drpClient.identity.revokeCredential({
+  credentialId: 'credential-123',
+  reason: 'License suspended',
+  revoker: 'did:drp:authority-123'
+})
+
+// Check revocation status
+const isRevoked = await drpClient.identity.checkRevocation('credential-123')
 ```
-
-## Implementation Patterns
-
-### 1. Multi-Factor Authentication
-
-```typescript
-const mfa = await MFA.setup({
-  did: userDID,
-  factors: [
-    { type: 'password', enabled: true },
-    { type: 'totp', enabled: true },
-    { type: 'biometric', enabled: false }
-  ]
-});
-
-const authenticated = await mfa.authenticate({
-  did: userDID,
-  factors: {
-    password: passwordHash,
-    totp: totpCode
-  }
-});
-```
-
-### 2. Session Management
-
-```typescript
-const session = await Session.create({
-  did: userDID,
-  duration: 3600, // 1 hour
-  permissions: ['read', 'write']
-});
-
-// Verify session
-const isValid = await Session.verify({
-  sessionToken: session.token
-});
-```
-
-## Use Cases
-
-### 1. KYC/AML Compliance
-- Self-sovereign KYC
-- Privacy-preserving verification
-- Reusable credentials
-- Compliance automation
-
-### 2. Access Management
-- Decentralized access control
-- Fine-grained permissions
-- Audit trails
-- Dynamic policies
-
-### 3. Digital Identity
-- Self-owned identity
-- Cross-platform portability
-- Privacy by design
-- User control
-
-## Best Practices
-
-### Security
-- Use strong cryptography
-- Implement key rotation
-- Secure key storage
-- Regular security audits
-
-### Privacy
-- Minimize data collection
-- Use zero-knowledge proofs
-- Enable selective disclosure
-- Respect user consent
-
-### Usability
-- Simple user experience
-- Clear permission requests
-- Easy credential management
-- Mobile-friendly
 
 ## Key Takeaways
 
-- Decentralized identity gives users control
-- Verifiable credentials enable trust
-- Privacy-preserving techniques protect users
-- Access control can be decentralized
-- Multiple use cases and applications
+1. **Self-sovereign identity** gives users control over their digital identities
+2. **DIDs (Decentralized Identifiers)** provide unique, portable identifiers
+3. **Verifiable Credentials** enable trusted, cryptographically signed claims
+4. **Zero-knowledge proofs** enable privacy-preserving verification
+5. **Access control** can be role-based or attribute-based
+6. **Privacy by design** ensures users control what they share
+7. **Interoperability** enables identity to work across different systems
 
+## Quiz
+
+### Question 1
+What is a key advantage of self-sovereign identity on DRP?
+
+A) Centralized control by governments  
+B) Users control their own identity data, stored decentralized  
+C) Only works on one platform  
+D) Requires passwords  
+
+**Correct Answer: B** - Self-sovereign identity gives users control over their identity data, which is stored decentralized rather than in centralized databases.
+
+### Question 2
+What is a DID (Decentralized Identifier)?
+
+A) A password  
+B) A unique, portable identifier that resolves to a DID document with public keys and service endpoints  
+C) An encryption key  
+D) A username  
+
+**Correct Answer: B** - A DID is a unique identifier (like did:drp:123) that resolves to a DID document containing public keys, authentication methods, and service endpoints.
+
+### Question 3
+How do zero-knowledge proofs enhance privacy in identity management?
+
+A) They hide all information  
+B) They allow proving claims (like age >= 18) without revealing the exact value or other data  
+C) They encrypt everything  
+D) They require passwords  
+
+**Correct Answer: B** - Zero-knowledge proofs enable proving statements (like "age >= 18") without revealing the exact age or other unnecessary information.
+
+### Question 4
+What is a Verifiable Credential?
+
+A) A password  
+B) A cryptographically signed credential issued by a trusted party that can be verified by anyone  
+C) An encryption method  
+D) A username  
+
+**Correct Answer: B** - Verifiable Credentials are cryptographically signed documents issued by trusted parties (like universities, governments) that can be verified by anyone.
+
+### Question 5
+How does DRP IAM improve upon traditional identity systems?
+
+A) By centralizing all data  
+B) By giving users control, eliminating single points of failure, enabling privacy, and providing interoperability  
+C) By requiring more passwords  
+D) By slowing down verification  
+
+**Correct Answer: B** - DRP IAM improves traditional systems by giving users control, eliminating centralized databases (single points of failure), enabling privacy-preserving verification, and working across different platforms.
+
+## Summary
+
+Identity and Access Management on DRP revolutionizes how digital identities are created, managed, and used. Through self-sovereign identity, users gain control over their personal data while maintaining privacy and security.
+
+Key components include:
+
+- **Self-Sovereign Identity**: Users own and control their identity data
+- **DIDs**: Unique, portable identifiers that work across platforms
+- **Verifiable Credentials**: Trusted, cryptographically signed claims
+- **Zero-Knowledge Proofs**: Privacy-preserving verification
+- **Access Control**: Role-based and attribute-based mechanisms
+- **Privacy by Design**: Users choose what to share
+- **Interoperability**: Works across different systems and platforms
+
+Applications span digital citizenship, professional credentials, DApp access control, and KYC/AML compliance, providing benefits including user control, privacy, security, portability, and reduced costs.
+
+Understanding DRP IAM enables the creation of user-centric identity systems that respect privacy while providing the security and trust needed for digital interactions.
+
+---
+
+**Excellent!** You now understand identity and access management. Next, you'll learn about cross-chain interoperability.
