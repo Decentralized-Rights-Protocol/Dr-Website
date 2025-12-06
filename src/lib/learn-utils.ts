@@ -86,13 +86,34 @@ function createSlug(filename: string): string {
  */
 export function getAllLessonFiles(): LessonFile[] {
   const lessons: LessonFile[] = []
-  const learnDir = join(process.cwd(), 'src', 'content', 'learn')
+  // Try multiple possible paths for different environments
+  const possiblePaths = [
+    join(process.cwd(), 'src', 'content', 'learn'),
+    join(process.cwd(), '.next', 'server', 'app', 'src', 'content', 'learn'),
+    join(__dirname, '..', '..', 'content', 'learn'),
+  ]
+  
+  let learnDir: string | null = null
+  for (const path of possiblePaths) {
+    if (existsSync(path)) {
+      learnDir = path
+      break
+    }
+  }
+  
+  // Fallback to standard path
+  if (!learnDir) {
+    learnDir = join(process.cwd(), 'src', 'content', 'learn')
+  }
   
   try {
     if (!existsSync(learnDir)) {
-      console.error(`[Learn Utils] Learn directory does not exist: ${learnDir}`)
+      console.error(`[Learn Utils] Learn directory does not exist. Tried: ${possiblePaths.join(', ')}`)
+      console.error(`[Learn Utils] Current working directory: ${process.cwd()}`)
       return lessons
     }
+    
+    console.log(`[Learn Utils] Using learn directory: ${learnDir}`)
     
     // Read level directories
     const levelDirs = readdirSync(learnDir, { withFileTypes: true })
