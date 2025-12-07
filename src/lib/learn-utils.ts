@@ -25,7 +25,7 @@ export interface LessonFile {
  * Custom order mapping to match curriculum expectations
  * This ensures IDs match the intended curriculum order
  */
-const CURRICULUM_ORDER: Record<number, string[]> = {
+export const CURRICULUM_ORDER: Record<number, string[]> = {
   1: [
     'what-is-blockchain',        // 1-1
     'cryptography-and-hashing',     // 1-2
