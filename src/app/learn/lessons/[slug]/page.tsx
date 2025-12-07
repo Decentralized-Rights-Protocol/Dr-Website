@@ -3,10 +3,16 @@ import { getAllLessonSlugs, loadLessonBySlug, generateQuizForLesson } from '@/li
 import LessonPageClient from './LessonPageClient'
 
 export async function generateStaticParams() {
-  const slugs = getAllLessonSlugs()
-  return slugs.map((slug) => ({
-    slug: slug,
-  }))
+  try {
+    const slugs = getAllLessonSlugs()
+    console.log(`[Static Generation] Found ${slugs.length} lesson slugs:`, slugs)
+    return slugs.map((slug) => ({
+      slug: slug,
+    }))
+  } catch (error) {
+    console.error('[Static Generation] Error getting lesson slugs:', error)
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
