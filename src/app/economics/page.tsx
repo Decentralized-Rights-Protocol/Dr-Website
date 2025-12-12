@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, TrendingUp, Globe, Shield, Sparkles, Activity, Coins, Package, Users, Building2 } from 'lucide-react'
+import { ArrowRight, TrendingUp, Globe, Shield, Sparkles, Activity, Coins, Package, Users, Building2, BarChart, Network } from 'lucide-react'
 import { EconomicsHero } from '@/components/economics/EconomicsHero'
 import { SystemComparison } from '@/components/economics/SystemComparison'
 
@@ -48,6 +48,20 @@ const economicsPages = [
     description: 'For governments, communities, businesses, and WEF stakeholders',
     icon: Globe,
     color: 'from-cyan-500 to-teal-600',
+  },
+  {
+    href: '/economics/micro',
+    title: 'Micro Economics',
+    description: 'Individual incentives, agent behavior, and market mechanisms',
+    icon: BarChart,
+    color: 'from-violet-500 to-purple-600',
+  },
+  {
+    href: '/economics/macro',
+    title: 'Macro Economics',
+    description: 'System-wide dynamics, monetary policy, and long-term stability',
+    icon: Network,
+    color: 'from-rose-500 to-pink-600',
   },
 ]
 
