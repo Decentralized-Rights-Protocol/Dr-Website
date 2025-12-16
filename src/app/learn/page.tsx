@@ -32,14 +32,37 @@ interface UserProgress {
   achievements: string[];
 }
 
-const curriculumLevels = [
+interface CurriculumTier {
+  id: number;
+  tier: string;
+  title: string;
+  description: string;
+  learningGoal: string;
+  prerequisites: string[];
+  keyOutcomes: string[];
+  estimatedDuration: string;
+  color: string;
+  lessons: Array<{ id: string; title: string; duration: number; reward: number }>;
+}
+
+const curriculumLevels: CurriculumTier[] = [
   {
     id: 1,
+    tier: "Foundation",
     title: "Blockchain Foundations",
-    description: "Master the basics of blockchain technology and decentralized systems",
+    description: "Master the fundamentals of blockchain technology, cryptography, and decentralized systems. Build a solid understanding of the technologies that power DRP.",
+    learningGoal: "Understand core blockchain concepts, cryptographic principles, consensus mechanisms, and smart contract fundamentals to establish a strong technical foundation for DRP.",
+    prerequisites: ["Basic computer literacy", "Interest in decentralized systems"],
+    keyOutcomes: [
+      "Explain blockchain architecture and immutability",
+      "Understand cryptographic hashing and digital signatures",
+      "Compare different consensus mechanisms",
+      "Describe smart contract functionality and use cases"
+    ],
+    estimatedDuration: "90 minutes",
     color: "bg-blue-500",
     lessons: [
-      { id: "1-1", title: "What is Blockchain?", duration: 15, reward: 10 },
+      { id: "1-1", title: "What is Blockchain?", duration: 25, reward: 20 },
       { id: "1-2", title: "Cryptography & Hashing", duration: 20, reward: 15 },
       { id: "1-3", title: "Consensus Mechanisms", duration: 25, reward: 20 },
       { id: "1-4", title: "Smart Contracts 101", duration: 30, reward: 25 },
@@ -47,11 +70,22 @@ const curriculumLevels = [
   },
   {
     id: 2,
-    title: "DRP in Action",
-    description: "Understand the Decentralized Rights Protocol and its applications",
+    tier: "Intermediate",
+    title: "DRP Architecture & Consensus",
+    description: "Deep dive into DRP's layered architecture, hybrid consensus mechanisms (PoST & PoAT), and the Elder Quorum governance system.",
+    learningGoal: "Master DRP's technical architecture, understand how Proof of Status and Proof of Activities work together, and learn how governance decisions are made through the Elder Quorum.",
+    prerequisites: ["Foundation tier completed", "Understanding of blockchain basics", "Familiarity with consensus mechanisms"],
+    keyOutcomes: [
+      "Map DRP's four-layer architecture (Application, Protocol, Consensus, Network)",
+      "Explain PoST (Proof of Stake + Time) validator selection",
+      "Describe PoAT (Proof of Activity) verification process",
+      "Understand Elder Quorum governance and decision-making",
+      "Analyze activity proof generation and verification"
+    ],
+    estimatedDuration: "110 minutes",
     color: "bg-green-500",
     lessons: [
-      { id: "2-1", title: "DRP Architecture", duration: 20, reward: 15 },
+      { id: "2-1", title: "DRP Architecture", duration: 25, reward: 20 },
       { id: "2-2", title: "PoST & PoAT Consensus", duration: 25, reward: 20 },
       { id: "2-3", title: "Elder Quorum System", duration: 30, reward: 25 },
       { id: "2-4", title: "Activity Proofs", duration: 35, reward: 30 },
@@ -59,8 +93,20 @@ const curriculumLevels = [
   },
   {
     id: 3,
-    title: "Building & Contributing",
-    description: "Learn to build on DRP and contribute to the ecosystem",
+    tier: "Advanced",
+    title: "Building on DRP",
+    description: "Learn to develop decentralized applications (DApps) on DRP, contribute to the ecosystem, and deploy production-ready solutions.",
+    learningGoal: "Acquire practical development skills to build, test, and deploy DRP applications. Understand the DRP Development Kit (SDK) and contribute meaningfully to the ecosystem.",
+    prerequisites: ["Intermediate tier completed", "Basic programming knowledge (JavaScript/TypeScript recommended)", "Understanding of DRP architecture"],
+    keyOutcomes: [
+      "Set up DRP development environment and SDK",
+      "Build functional DApps using DRP smart contracts",
+      "Implement activity proof verification in applications",
+      "Write and run tests for DRP applications",
+      "Deploy applications to DRP network",
+      "Contribute code and documentation to DRP ecosystem"
+    ],
+    estimatedDuration: "130 minutes",
     color: "bg-purple-500",
     lessons: [
       { id: "3-1", title: "DRP Development Kit", duration: 30, reward: 25 },
@@ -71,8 +117,19 @@ const curriculumLevels = [
   },
   {
     id: 4,
-    title: "Real-World Integration",
-    description: "Apply DRP in real-world scenarios and use cases",
+    tier: "Advanced",
+    title: "Enterprise & Integration",
+    description: "Explore real-world DRP implementations, enterprise integration patterns, supply chain applications, and cross-chain interoperability.",
+    learningGoal: "Understand how DRP integrates with existing enterprise systems, supply chains, and identity management. Learn cross-chain interoperability and advanced integration patterns.",
+    prerequisites: ["Advanced tier (Building on DRP) completed", "Understanding of enterprise architecture", "Familiarity with API integration"],
+    keyOutcomes: [
+      "Design DRP integration for enterprise systems",
+      "Implement supply chain tracking using DRP",
+      "Build identity and access management solutions",
+      "Configure cross-chain bridges and interoperability",
+      "Evaluate DRP use cases for specific industries"
+    ],
+    estimatedDuration: "150 minutes",
     color: "bg-orange-500",
     lessons: [
       { id: "4-1", title: "Enterprise Integration", duration: 30, reward: 25 },
@@ -83,9 +140,21 @@ const curriculumLevels = [
   },
   {
     id: 5,
-    title: "Mastery & Governance",
-    description: "Become a DRP expert and participate in governance",
-    color: "bg-red-500",
+    tier: "Research / Governance",
+    title: "Governance & Economic Models",
+    description: "Master DRP's governance mechanisms, economic models (SRE, ABE), and explore future research directions. Prepare for active participation in protocol governance.",
+    learningGoal: "Understand DRP's governance structures, economic models (Sustainable Rights Economy, Activity-Based Economy), and research frontiers. Develop expertise to participate in protocol decisions and contribute to DRP's evolution.",
+    prerequisites: ["All previous tiers completed", "Understanding of economics basics", "Interest in governance and research"],
+    keyOutcomes: [
+      "Participate effectively in DRP governance processes",
+      "Understand Sustainable Rights Economy (SRE) principles",
+      "Analyze Activity-Based Economy (ABE) mechanisms",
+      "Evaluate economic models and their implications",
+      "Contribute to DRP research and future development",
+      "Make informed governance decisions as $RIGHTS holder"
+    ],
+    estimatedDuration: "150 minutes",
+    color: "bg-indigo-500",
     lessons: [
       { id: "5-1", title: "Advanced DRP Concepts", duration: 40, reward: 35 },
       { id: "5-2", title: "Governance Mechanisms", duration: 35, reward: 30 },
@@ -267,15 +336,70 @@ export default function LearnPage() {
               style={{ animationDelay: `${900 + index * 100}ms` }}
             >
               <div className={`${level.color} p-6 text-white`}>
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="px-3 py-1 bg-white/20 rounded-full text-xs font-semibold uppercase tracking-wide">
+                        {level.tier}
+                      </span>
+                      <span className="text-sm opacity-90">Level {level.id}</span>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2">{level.title}</h3>
+                    <p className="text-lg opacity-90 mb-3">{level.description}</p>
+                    <div className="grid md:grid-cols-2 gap-4 mt-4 text-sm">
+                      <div>
+                        <span className="font-semibold">Duration:</span> {level.estimatedDuration}
+                      </div>
+                      <div>
+                        <span className="font-semibold">Lessons:</span> {level.lessons.length}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Expanded Metadata Section */}
+              <div className="p-6 bg-white/5 backdrop-blur-sm border-t border-white/10">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Learning Goal */}
                   <div>
-                    <h3 className="text-2xl font-bold mb-2">Level {level.id}: {level.title}</h3>
-                    <p className="text-lg opacity-90">{level.description}</p>
+                    <h4 className="text-sm font-semibold text-primary-400 mb-2 flex items-center gap-2">
+                      <span>🎯</span> Learning Goal
+                    </h4>
+                    <p className="text-sm text-neutral-300 leading-relaxed">
+                      {level.learningGoal}
+                    </p>
                   </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-bold">{level.lessons.length}</div>
-                    <div className="text-sm opacity-90">Lessons</div>
+                  
+                  {/* Prerequisites */}
+                  <div>
+                    <h4 className="text-sm font-semibold text-primary-400 mb-2 flex items-center gap-2">
+                      <span>📋</span> Prerequisites
+                    </h4>
+                    <ul className="text-sm text-neutral-300 space-y-1">
+                      {level.prerequisites.map((prereq, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-primary-400 mt-1">•</span>
+                          <span>{prereq}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
+                </div>
+                
+                {/* Key Outcomes */}
+                <div className="mt-6 pt-6 border-t border-white/10">
+                  <h4 className="text-sm font-semibold text-primary-400 mb-3 flex items-center gap-2">
+                    <span>✅</span> Key Outcomes
+                  </h4>
+                  <ul className="grid md:grid-cols-2 gap-2 text-sm text-neutral-300">
+                    {level.keyOutcomes.map((outcome, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <CheckCircleIcon className="h-4 w-4 text-green-400 flex-shrink-0 mt-0.5" />
+                        <span>{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
               

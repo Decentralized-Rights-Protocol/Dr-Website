@@ -41,153 +41,238 @@ export function EconomicsDiagramSVG({ type, className = '', delay = 0 }: Economi
   )
 }
 
-// Supply and Demand Diagram
+// Supply and Demand Diagram - Redesigned for clarity
 function SupplyDemandDiagram() {
   return (
-    <svg viewBox="0 0 600 400" className="w-full h-auto">
+    <svg viewBox="0 0 700 500" className="w-full h-auto">
       <defs>
-        <linearGradient id="supplyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.3" />
-        </linearGradient>
-        <linearGradient id="demandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.3" />
-        </linearGradient>
+        <marker id="axisArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <polygon points="0 0, 8 4, 0 8" fill="currentColor" className="text-neutral-700 dark:text-neutral-300" />
+        </marker>
       </defs>
       
-      {/* Axes */}
-      <line x1="50" y1="350" x2="550" y2="350" stroke="currentColor" strokeWidth="2" className="text-neutral-700 dark:text-neutral-300" />
-      <line x1="50" y1="350" x2="50" y2="50" stroke="currentColor" strokeWidth="2" className="text-neutral-700 dark:text-neutral-300" />
+      {/* Title */}
+      <text x="350" y="30" textAnchor="middle" className="text-lg fill-neutral-900 dark:fill-white font-bold">
+        DRP Supply-Demand Dynamics
+      </text>
+      
+      {/* Axes with arrows */}
+      <line x1="80" y1="400" x2="620" y2="400" stroke="currentColor" strokeWidth="2.5" className="text-neutral-700 dark:text-neutral-300" markerEnd="url(#axisArrow)" />
+      <line x1="80" y1="400" x2="80" y2="80" stroke="currentColor" strokeWidth="2.5" className="text-neutral-700 dark:text-neutral-300" markerEnd="url(#axisArrow)" />
       
       {/* Axis Labels */}
-      <text x="300" y="390" textAnchor="middle" className="text-sm fill-neutral-700 dark:fill-neutral-300 font-medium">
-        Quantity (Activity Units)
+      <text x="350" y="440" textAnchor="middle" className="text-sm fill-neutral-700 dark:fill-neutral-300 font-semibold">
+        Quantity (Q) - Activity Units
       </text>
-      <text x="15" y="200" textAnchor="middle" transform="rotate(-90, 15, 200)" className="text-sm fill-neutral-700 dark:fill-neutral-300 font-medium">
-        Price (Token Units)
+      <text x="20" y="240" textAnchor="middle" transform="rotate(-90, 20, 240)" className="text-sm fill-neutral-700 dark:fill-neutral-300 font-semibold">
+        Price (P) - $DeRi per Unit
       </text>
       
-      {/* Supply Curve (Activity-driven, upward sloping) */}
+      {/* Grid lines for reference */}
+      <g stroke="#e5e7eb" strokeWidth="0.5" strokeDasharray="2,2" className="dark:stroke-neutral-700">
+        <line x1="80" y1="350" x2="620" y2="350" />
+        <line x1="80" y1="300" x2="620" y2="300" />
+        <line x1="80" y1="250" x2="620" y2="250" />
+        <line x1="80" y1="200" x2="620" y2="200" />
+        <line x1="80" y1="150" x2="620" y2="150" />
+        <line x1="150" y1="80" x2="150" y2="400" />
+        <line x1="300" y1="80" x2="300" y2="400" />
+        <line x1="450" y1="80" x2="450" y2="400" />
+        <line x1="550" y1="80" x2="550" y2="400" />
+      </g>
+      
+      {/* Supply Curve (Activity-driven, upward sloping) - More accurate curve */}
       <path
-        d="M 100 320 Q 200 280, 300 240 T 500 180"
+        d="M 150 350 Q 250 300, 350 250 Q 450 200, 550 150"
         fill="none"
         stroke="#3b82f6"
-        strokeWidth="3"
-        strokeDasharray="5,5"
+        strokeWidth="3.5"
+        strokeLinecap="round"
       />
-      <text x="520" y="175" className="text-sm fill-blue-600 dark:fill-blue-400 font-semibold">
-        Supply (Activity-Based)
+      <text x="570" y="140" className="text-sm fill-blue-600 dark:fill-blue-400 font-semibold">
+        S (Activity-Based)
       </text>
       
-      {/* Demand Curve (downward sloping) */}
+      {/* Supply curve label with equation */}
+      <g transform="translate(200, 180)">
+        <rect x="-5" y="-12" width="140" height="24" rx="4" fill="#3b82f6" fillOpacity="0.1" stroke="#3b82f6" strokeWidth="1" />
+        <text x="65" y="5" textAnchor="middle" className="text-xs fill-blue-700 dark:fill-blue-300 font-medium">
+          S = f(Activity, Verification)
+        </text>
+      </g>
+      
+      {/* Demand Curve (downward sloping) - More accurate curve */}
       <path
-        d="M 100 180 Q 200 220, 300 240 T 500 280"
+        d="M 150 150 Q 250 200, 350 250 Q 450 300, 550 350"
         fill="none"
         stroke="#10b981"
-        strokeWidth="3"
+        strokeWidth="3.5"
+        strokeLinecap="round"
       />
-      <text x="520" y="285" className="text-sm fill-green-600 dark:fill-green-400 font-semibold">
-        Demand
+      <text x="570" y="360" className="text-sm fill-green-600 dark:fill-green-400 font-semibold">
+        D (Utility-Driven)
       </text>
       
-      {/* Equilibrium Point */}
-      <circle cx="300" cy="240" r="6" fill="#f59e0b" />
-      <text x="310" y="235" className="text-xs fill-amber-600 dark:fill-amber-400 font-semibold">
-        E
-      </text>
-      <text x="310" y="250" className="text-xs fill-neutral-600 dark:fill-neutral-400">
-        Equilibrium
-      </text>
-      
-      {/* Activity Indicator */}
-      <g transform="translate(100, 100)">
-        <rect x="0" y="0" width="120" height="60" rx="4" fill="url(#supplyGrad)" stroke="#3b82f6" strokeWidth="2" />
-        <text x="60" y="25" textAnchor="middle" className="text-xs fill-blue-700 dark:fill-blue-300 font-semibold">
-          Activity → Issuance
+      {/* Demand curve label */}
+      <g transform="translate(200, 120)">
+        <rect x="-5" y="-12" width="140" height="24" rx="4" fill="#10b981" fillOpacity="0.1" stroke="#10b981" strokeWidth="1" />
+        <text x="65" y="5" textAnchor="middle" className="text-xs fill-green-700 dark:fill-green-300 font-medium">
+          D = f(Utility, Network)
         </text>
-        <text x="60" y="45" textAnchor="middle" className="text-xs fill-blue-600 dark:fill-blue-400">
-          Supply Driver
+      </g>
+      
+      {/* Equilibrium Point with coordinates */}
+      <circle cx="350" cy="250" r="8" fill="#f59e0b" stroke="white" strokeWidth="2" />
+      <circle cx="350" cy="250" r="6" fill="#f59e0b" />
+      <text x="360" y="245" className="text-sm fill-amber-700 dark:fill-amber-300 font-bold">
+        E*
+      </text>
+      <text x="360" y="260" className="text-xs fill-neutral-600 dark:fill-neutral-400">
+        (Q*, P*)
+      </text>
+      
+      {/* Equilibrium lines */}
+      <line x1="80" y1="250" x2="350" y2="250" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="3,3" />
+      <line x1="350" y1="250" x2="350" y2="400" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="3,3" />
+      
+      {/* Key Insight Box */}
+      <g transform="translate(80, 50)">
+        <rect x="0" y="0" width="540" height="40" rx="6" fill="#fef3c7" fillOpacity="0.8" stroke="#f59e0b" strokeWidth="2" className="dark:fill-amber-950/30 dark:stroke-amber-700" />
+        <text x="270" y="15" textAnchor="middle" className="text-xs fill-amber-900 dark:fill-amber-200 font-semibold">
+          Key Insight: Supply shifts with verified activity, not fixed like traditional markets
+        </text>
+        <text x="270" y="30" textAnchor="middle" className="text-xs fill-amber-800 dark:fill-amber-300">
+          More activity → Supply curve shifts right → Lower equilibrium price (if demand constant)
         </text>
       </g>
     </svg>
   )
 }
 
-// Control Loop Diagram
+// Control Loop Diagram - Redesigned for clarity
 function ControlLoopDiagram() {
   return (
-    <svg viewBox="0 0 700 500" className="w-full h-auto">
+    <svg viewBox="0 0 800 600" className="w-full h-auto">
       <defs>
         <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
           <polygon points="0 0, 10 3, 0 6" fill="currentColor" className="text-blue-600 dark:text-blue-400" />
         </marker>
+        <marker id="feedbackArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+          <polygon points="0 0, 10 3, 0 6" fill="#f59e0b" />
+        </marker>
       </defs>
       
-      {/* Central Control Loop */}
-      <g transform="translate(350, 250)">
-        {/* Activity Box */}
-        <rect x="-80" y="-100" width="160" height="60" rx="8" fill="#3b82f6" fillOpacity="0.2" stroke="#3b82f6" strokeWidth="2" />
-        <text x="0" y="-70" textAnchor="middle" className="text-sm fill-blue-700 dark:fill-blue-300 font-semibold">
-          Activity
+      {/* Title */}
+      <text x="400" y="30" textAnchor="middle" className="text-lg fill-neutral-900 dark:fill-white font-bold">
+        DRP Stabilization Control Loop
+      </text>
+      
+      {/* Main Flow (Top to Bottom) */}
+      <g transform="translate(400, 100)">
+        {/* 1. Activity Input */}
+        <rect x="-100" y="-30" width="200" height="50" rx="6" fill="#3b82f6" fillOpacity="0.15" stroke="#3b82f6" strokeWidth="2.5" />
+        <text x="0" y="0" textAnchor="middle" className="text-base fill-blue-700 dark:fill-blue-300 font-semibold">
+          Verified Activity
+        </text>
+        <text x="0" y="15" textAnchor="middle" className="text-xs fill-blue-600 dark:fill-blue-400">
+          A_i, w_i, v_i
         </text>
         
-        {/* Arrow: Activity → Issuance */}
-        <line x1="0" y1="-40" x2="0" y2="-20" stroke="#3b82f6" strokeWidth="2" markerEnd="url(#arrowhead)" />
-        <text x="20" y="-25" className="text-xs fill-blue-600 dark:fill-blue-400">
-          →
+        {/* Arrow down */}
+        <line x1="0" y1="20" x2="0" y2="50" stroke="#3b82f6" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
+        <text x="15" y="38" className="text-xs fill-blue-600 dark:fill-blue-400 font-medium">
+          Generates
         </text>
         
-        {/* Issuance Box */}
-        <rect x="-80" y="-20" width="160" height="60" rx="8" fill="#8b5cf6" fillOpacity="0.2" stroke="#8b5cf6" strokeWidth="2" />
-        <text x="0" y="10" textAnchor="middle" className="text-sm fill-purple-700 dark:fill-purple-300 font-semibold">
-          Issuance
+        {/* 2. Money Supply Issuance */}
+        <rect x="-100" y="50" width="200" height="50" rx="6" fill="#8b5cf6" fillOpacity="0.15" stroke="#8b5cf6" strokeWidth="2.5" />
+        <text x="0" y="75" textAnchor="middle" className="text-base fill-purple-700 dark:fill-purple-300 font-semibold">
+          Money Supply (M)
+        </text>
+        <text x="0" y="90" textAnchor="middle" className="text-xs fill-purple-600 dark:fill-purple-400">
+          M(t) = M(t-1) + Σ(...)
         </text>
         
-        {/* Arrow: Issuance → Velocity */}
-        <line x1="80" y1="10" x2="120" y2="10" stroke="#8b5cf6" strokeWidth="2" markerEnd="url(#arrowhead)" />
-        <text x="100" y="5" className="text-xs fill-purple-600 dark:fill-purple-400">
-          →
+        {/* Arrow right */}
+        <line x1="100" y1="75" x2="150" y2="75" stroke="#8b5cf6" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
+        <text x="125" y="70" className="text-xs fill-purple-600 dark:fill-purple-400 font-medium">
+          Increases
         </text>
         
-        {/* Velocity Box */}
-        <rect x="120" y="-20" width="160" height="60" rx="8" fill="#10b981" fillOpacity="0.2" stroke="#10b981" strokeWidth="2" />
-        <text x="200" y="10" textAnchor="middle" className="text-sm fill-green-700 dark:fill-green-300 font-semibold">
-          Velocity
+        {/* 3. Velocity */}
+        <rect x="150" y="50" width="200" height="50" rx="6" fill="#10b981" fillOpacity="0.15" stroke="#10b981" strokeWidth="2.5" />
+        <text x="250" y="75" textAnchor="middle" className="text-base fill-green-700 dark:fill-green-300 font-semibold">
+          Velocity (V)
+        </text>
+        <text x="250" y="90" textAnchor="middle" className="text-xs fill-green-600 dark:fill-green-400">
+          Transactions per token
         </text>
         
-        {/* Arrow: Velocity → Friction */}
-        <line x1="200" y1="40" x2="200" y2="80" stroke="#10b981" strokeWidth="2" markerEnd="url(#arrowhead)" />
-        <text x="210" y="65" className="text-xs fill-green-600 dark:fill-green-400">
-          ↓
+        {/* Arrow down from velocity */}
+        <line x1="250" y1="100" x2="250" y2="150" stroke="#10b981" strokeWidth="2.5" markerEnd="url(#arrowhead)" />
+        <text x="265" y="130" className="text-xs fill-green-600 dark:fill-green-400 font-medium">
+          Measured
         </text>
         
-        {/* Friction Box */}
-        <rect x="120" y="80" width="160" height="60" rx="8" fill="#f59e0b" fillOpacity="0.2" stroke="#f59e0b" strokeWidth="2" />
-        <text x="200" y="110" textAnchor="middle" className="text-sm fill-amber-700 dark:fill-amber-300 font-semibold">
-          Friction (Quizzes)
+        {/* 4. Price Level */}
+        <rect x="150" y="150" width="200" height="50" rx="6" fill="#06b6d4" fillOpacity="0.15" stroke="#06b6d4" strokeWidth="2.5" />
+        <text x="250" y="175" textAnchor="middle" className="text-base fill-cyan-700 dark:fill-cyan-300 font-semibold">
+          Price Level (P)
+        </text>
+        <text x="250" y="190" textAnchor="middle" className="text-xs fill-cyan-600 dark:fill-cyan-400">
+          M × V = P × Y
         </text>
         
-        {/* Arrow: Friction → Stabilized Price (back to start) */}
-        <line x1="120" y1="110" x2="80" y2="110" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arrowhead)" />
-        <line x1="80" y1="110" x2="80" y2="40" stroke="#f59e0b" strokeWidth="2" />
-        <line x1="80" y1="40" x2="0" y2="40" stroke="#f59e0b" strokeWidth="2" />
-        <line x1="0" y1="40" x2="0" y2="-40" stroke="#f59e0b" strokeWidth="2" />
-        <text x="-20" y="10" className="text-xs fill-amber-600 dark:fill-amber-400">
-          ←
+        {/* Feedback Loop: Price → Friction */}
+        <path
+          d="M 150 175 Q 50 200, 0 250 Q -50 300, 0 350"
+          fill="none"
+          stroke="#f59e0b"
+          strokeWidth="2.5"
+          strokeDasharray="4,4"
+          markerEnd="url(#feedbackArrow)"
+        />
+        <text x="-30" y="300" className="text-xs fill-amber-600 dark:fill-amber-400 font-medium">
+          If P ↑
         </text>
         
-        {/* Stabilized Price Box */}
-        <rect x="-80" y="80" width="160" height="60" rx="8" fill="#06b6d4" fillOpacity="0.2" stroke="#06b6d4" strokeWidth="2" />
-        <text x="0" y="110" textAnchor="middle" className="text-sm fill-cyan-700 dark:fill-cyan-300 font-semibold">
-          Stabilized Price
+        {/* 5. Friction Control */}
+        <rect x="-100" y="350" width="200" height="50" rx="6" fill="#f59e0b" fillOpacity="0.15" stroke="#f59e0b" strokeWidth="2.5" />
+        <text x="0" y="375" textAnchor="middle" className="text-base fill-amber-700 dark:fill-amber-300 font-semibold">
+          Quiz Friction
+        </text>
+        <text x="0" y="390" textAnchor="middle" className="text-xs fill-amber-600 dark:fill-amber-400">
+          Difficulty adjustment
+        </text>
+        
+        {/* Feedback Arrow: Friction → Velocity */}
+        <path
+          d="M 0 350 Q 50 300, 100 250 Q 150 200, 200 100"
+          fill="none"
+          stroke="#f59e0b"
+          strokeWidth="2.5"
+          strokeDasharray="4,4"
+          markerEnd="url(#feedbackArrow)"
+        />
+        <text x="50" y="200" className="text-xs fill-amber-600 dark:fill-amber-400 font-medium">
+          Reduces V
         </text>
       </g>
       
-      {/* Title */}
-      <text x="350" y="30" textAnchor="middle" className="text-base fill-neutral-900 dark:fill-white font-bold">
-        DRP Stabilization Control Loop
-      </text>
+      {/* Legend */}
+      <g transform="translate(50, 500)">
+        <text x="0" y="0" className="text-sm fill-neutral-700 dark:fill-neutral-300 font-semibold">
+          Legend:
+        </text>
+        <line x1="0" y1="15" x2="30" y2="15" stroke="#3b82f6" strokeWidth="2.5" />
+        <text x="35" y="18" className="text-xs fill-neutral-600 dark:fill-neutral-400">
+          Forward flow
+        </text>
+        <line x1="120" y1="15" x2="150" y2="15" stroke="#f59e0b" strokeWidth="2.5" strokeDasharray="4,4" />
+        <text x="155" y="18" className="text-xs fill-neutral-600 dark:fill-neutral-400">
+          Feedback control
+        </text>
+      </g>
     </svg>
   )
 }

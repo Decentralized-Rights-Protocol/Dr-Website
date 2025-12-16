@@ -7,6 +7,7 @@ import { EconomicsDiagramSVG } from '@/components/economics/EconomicsDiagramSVG'
 import { KeyMetricsPanel } from '@/components/economics/KeyMetricsPanel'
 import { MicroMacroNav } from '@/components/economics/MicroMacroNav'
 import { DollarSign, TrendingUp, TrendingDown, Users, Activity, Globe, Shield, AlertTriangle, Target } from 'lucide-react'
+import { LaTeXEquation } from '@/components/economics/LaTeXEquation'
 
 export default function MacroeconomicsPage() {
   // Mock metrics - replace with real data from API/backend
@@ -67,21 +68,23 @@ export default function MacroeconomicsPage() {
       </section>
 
       {/* Section 1: Money Supply Model */}
-      <section className="py-16 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900">
+      <section className="py-20 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto space-y-8"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              1. Money Supply Model
-            </h2>
-            <p className="text-lg text-neutral-300 mb-8">
-              The DRP money supply expands endogenously through verified activity, creating a unique monetary model that differs fundamentally from traditional fiat or fixed-supply cryptocurrencies.
-            </p>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                1. Money Supply Model
+              </h2>
+              <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+                The DRP money supply expands endogenously through verified activity, creating a unique monetary model that differs fundamentally from traditional fiat or fixed-supply cryptocurrencies.
+              </p>
+            </div>
 
             <EconomicsCard
               title="Activity-Based Money Creation"
@@ -90,25 +93,22 @@ export default function MacroeconomicsPage() {
                   <p className="mb-4">
                     The DRP money supply <strong className="text-neutral-900 dark:text-white">M(t)</strong> at time <em>t</em> is determined by:
                   </p>
-                  <div className="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-lg mb-4 font-mono text-sm">
-                    M(t) = M(t-1) + Σ(activity_i × reward_weight_i × verification_score_i × difficulty_adjustment)
-                  </div>
-                  <p className="mb-4">
-                    Where:
-                  </p>
-                  <ul className="list-disc pl-6 space-y-2 mb-4">
-                    <li><strong>M(t-1):</strong> Previous period money supply</li>
-                    <li><strong>activity_i:</strong> Verified activity by agent i in period t</li>
-                    <li><strong>reward_weight_i:</strong> Activity-specific reward multiplier (e.g., learning = 1.2x, sustainability = 1.5x)</li>
-                    <li><strong>verification_score_i:</strong> AI verification confidence (0-1), ensuring only legitimate activity generates tokens</li>
-                    <li><strong>difficulty_adjustment:</strong> Protocol parameter that adjusts based on velocity and inflation targets</li>
-                  </ul>
-                  <p className="mb-4">
-                    This creates a <strong className="text-neutral-900 dark:text-white">supply curve that shifts with activity:</strong> as more agents engage in verified activity, money supply expands. However, the protocol manages this through difficulty adjustments and velocity controls to prevent excessive inflation.
-                  </p>
-                  <p>
-                    Unlike traditional central banking where money creation is exogenous (decided by central banks), DRP money creation is <strong className="text-neutral-900 dark:text-white">endogenous</strong>—driven by real economic activity. This aligns money supply with economic output, creating a more stable monetary system.
-                  </p>
+                  
+                  <LaTeXEquation
+                  equation="M(t) = M(t-1) + \sum_{i=1}^{n} \left( A_i \cdot w_i \cdot v_i \cdot d(t) \right)"
+                  label="Money Supply Evolution"
+                  variables={[
+                    { symbol: 'M(t)', description: 'Money supply at time t' },
+                    { symbol: 'M(t-1)', description: 'Previous period money supply' },
+                    { symbol: 'A_i', description: 'Verified activity by agent i in period t' },
+                    { symbol: 'w_i', description: 'Activity-specific reward weight (e.g., learning = 1.2, sustainability = 1.5)' },
+                    { symbol: 'v_i', description: 'AI verification confidence score (0 ≤ v_i ≤ 1), ensuring only legitimate activity generates tokens' },
+                    { symbol: 'd(t)', description: 'Difficulty adjustment parameter that adjusts based on velocity and inflation targets' },
+                    { symbol: 'n', description: 'Total number of active agents' }
+                  ]}
+                  explanation="This creates a supply curve that shifts with activity: as more agents engage in verified activity, money supply expands. However, the protocol manages this through difficulty adjustments and velocity controls to prevent excessive inflation. Unlike traditional central banking where money creation is exogenous (decided by central banks), DRP money creation is endogenous—driven by real economic activity. This aligns money supply with economic output, creating a more stable monetary system."
+                />
+
                 </>
               }
               delay={0.1}
@@ -138,21 +138,23 @@ export default function MacroeconomicsPage() {
       </section>
 
       {/* Section 2: Inflation & Stabilization Tools */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-20 bg-white dark:bg-neutral-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto space-y-8"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              2. Inflation & Stabilization Tools
-            </h2>
-            <p className="text-lg text-neutral-300 mb-8">
-              DRP employs a sophisticated stabilization mechanism that uses quiz friction, difficulty tuning, and reward modulation to maintain price stability while preserving economic growth.
-            </p>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                2. Inflation & Stabilization Tools
+              </h2>
+              <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+                DRP employs a sophisticated stabilization mechanism that uses quiz friction, difficulty tuning, and reward modulation to maintain price stability while preserving economic growth.
+              </p>
+            </div>
 
             <EconomicsCard
               title="The Quantity Theory of Money in DRP"
@@ -161,27 +163,25 @@ export default function MacroeconomicsPage() {
                   <p className="mb-4">
                     The classic equation of exchange applies to DRP:
                   </p>
-                  <div className="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-lg mb-4 font-mono text-sm">
-                    M × V = P × Y
-                  </div>
-                  <p className="mb-4">
-                    Where:
-                  </p>
-                  <ul className="list-disc pl-6 space-y-2 mb-4">
-                    <li><strong>M:</strong> Money supply</li>
-                    <li><strong>V:</strong> Velocity (rate of token circulation)</li>
-                    <li><strong>P:</strong> Price level (general price of goods/services in $DeRi)</li>
-                    <li><strong>Y:</strong> Real output (aggregate verified activity + transaction value)</li>
-                  </ul>
-                  <p>
-                    To maintain price stability (stable P), the protocol must balance M, V, and Y. If M × V grows faster than Y, inflation occurs. DRP&apos;s stabilization tools target V (velocity) and M (supply growth rate) to keep P stable.
-                  </p>
+                  
+                  <LaTeXEquation
+                    equation="M \cdot V = P \cdot Y"
+                    label="Equation of Exchange"
+                    variables={[
+                      { symbol: 'M', description: 'Money supply (total $DeRi tokens in circulation)' },
+                      { symbol: 'V', description: 'Velocity of money (rate of token circulation, transactions per token per period)' },
+                      { symbol: 'P', description: 'Price level (general price of goods/services denominated in $DeRi)' },
+                      { symbol: 'Y', description: 'Real output (aggregate verified activity + transaction value)' }
+                    ]}
+                    explanation="To maintain price stability (stable P), the protocol must balance M, V, and Y. If M × V grows faster than Y, inflation occurs. DRP's stabilization tools target V (velocity) through quiz friction and M (supply growth rate) through difficulty adjustments to keep P stable."
+                  />
+
                 </>
               }
               delay={0.1}
             />
 
-            <div className="mt-8">
+            <div className="mt-12 mb-8">
               <EconomicsDiagramSVG type="control-loop" delay={0.2} />
             </div>
 
@@ -229,21 +229,23 @@ export default function MacroeconomicsPage() {
       </section>
 
       {/* Section 3: Output, Productivity & Employment */}
-      <section className="py-16 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900">
+      <section className="py-20 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto space-y-8"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              3. Output, Productivity & Employment
-            </h2>
-            <p className="text-lg text-neutral-300 mb-8">
-              DRP defines economic output differently from traditional GDP, focusing on verified human activity, transaction value, and sustainability contributions.
-            </p>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                3. Output, Productivity & Employment
+              </h2>
+              <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+                DRP defines economic output differently from traditional GDP, focusing on verified human activity, transaction value, and sustainability contributions.
+              </p>
+            </div>
 
             <EconomicsCard
               title="DRP Output Measure (Y_DRP)"
@@ -252,20 +254,22 @@ export default function MacroeconomicsPage() {
                   <p className="mb-4">
                     DRP output is measured as:
                   </p>
-                  <div className="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-lg mb-4 font-mono text-sm">
-                    Y_DRP = Σ(verified_activity_i × quality_score_i) + Σ(transaction_value_j) + Σ(sustainability_contribution_k × SDG_weight_k)
-                  </div>
-                  <p className="mb-4">
-                    Where:
-                  </p>
-                  <ul className="list-disc pl-6 space-y-2 mb-4">
-                    <li><strong>verified_activity_i:</strong> Activity verified by AI Elders, weighted by quality</li>
-                    <li><strong>transaction_value_j:</strong> Value of transactions within DRP apps and services</li>
-                    <li><strong>sustainability_contribution_k:</strong> Contributions to SDG goals (renewable energy, education, etc.), weighted by SDG importance</li>
-                  </ul>
-                  <p>
-                    This creates a <strong className="text-neutral-900 dark:text-white">broader measure of economic value</strong> than traditional GDP: it includes non-market activities (learning, community service) and sustainability contributions that traditional economics externalize. Output growth in DRP reflects genuine human development and environmental sustainability, not just market transactions.
-                  </p>
+                  
+                  <LaTeXEquation
+                    equation="Y_{DRP} = \sum_{i=1}^{n} (A_i^{verified} \cdot q_i) + \sum_{j=1}^{m} T_j + \sum_{k=1}^{p} (S_k \cdot w_k^{SDG})"
+                    label="DRP Output Calculation"
+                    variables={[
+                      { symbol: 'Y_{DRP}', description: 'Total DRP economic output' },
+                      { symbol: 'A_i^{verified}', description: 'Verified activity by agent i, validated by AI Elders' },
+                      { symbol: 'q_i', description: 'Quality score for activity i (0 ≤ q_i ≤ 1)' },
+                      { symbol: 'T_j', description: 'Transaction value j within DRP apps and services' },
+                      { symbol: 'S_k', description: 'Sustainability contribution k (renewable energy usage, education, etc.)' },
+                      { symbol: 'w_k^{SDG}', description: 'SDG weight for contribution k, reflecting UN Sustainable Development Goal importance' },
+                      { symbol: 'n, m, p', description: 'Number of activities, transactions, and sustainability contributions respectively' }
+                    ]}
+                    explanation="This creates a broader measure of economic value than traditional GDP: it includes non-market activities (learning, community service) and sustainability contributions that traditional economics externalize. Output growth in DRP reflects genuine human development and environmental sustainability, not just market transactions."
+                  />
+
                 </>
               }
               delay={0.1}
@@ -317,21 +321,23 @@ export default function MacroeconomicsPage() {
       </section>
 
       {/* Section 4: Fiscal & Monetary Policy */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-20 bg-white dark:bg-neutral-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto space-y-8"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              4. Fiscal & Monetary Policy in DRP
-            </h2>
-            <p className="text-lg text-neutral-300 mb-8">
-              DRP implements algorithmic fiscal and monetary policy through AI-driven resource allocation and protocol parameter adjustments, creating a transparent, rules-based economic system.
-            </p>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                4. Fiscal & Monetary Policy in DRP
+              </h2>
+              <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+                DRP implements algorithmic fiscal and monetary policy through AI-driven resource allocation and protocol parameter adjustments, creating a transparent, rules-based economic system.
+              </p>
+            </div>
 
             <EconomicsCard
               title="AI-Driven Fiscal Policy"
@@ -400,21 +406,23 @@ export default function MacroeconomicsPage() {
       </section>
 
       {/* Section 5: Inequality Dynamics & Redistribution */}
-      <section className="py-16 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900">
+      <section className="py-20 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto space-y-8"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              5. Inequality Dynamics & Redistribution
-            </h2>
-            <p className="text-lg text-neutral-300 mb-8">
-              DRP addresses inequality through status accrual mechanisms, rights-based allocation, and activity credits that create pathways for upward mobility while ensuring basic needs are met.
-            </p>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                5. Inequality Dynamics & Redistribution
+              </h2>
+              <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+                DRP addresses inequality through status accrual mechanisms, rights-based allocation, and activity credits that create pathways for upward mobility while ensuring basic needs are met.
+              </p>
+            </div>
 
             <EconomicsCard
               title="Status Accrual & Upward Mobility"
@@ -499,21 +507,23 @@ export default function MacroeconomicsPage() {
       </section>
 
       {/* Section 6: International & Systemic Effects */}
-      <section className="py-16 bg-white dark:bg-neutral-900">
+      <section className="py-20 bg-white dark:bg-neutral-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto space-y-8"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              6. International & Systemic Effects
-            </h2>
-            <p className="text-lg text-neutral-300 mb-8">
-              DRP operates as a post-national economic system with cross-border adoption, cross-chain interactions, and asset recovery mechanisms that create global economic integration.
-            </p>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                6. International & Systemic Effects
+              </h2>
+              <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+                DRP operates as a post-national economic system with cross-border adoption, cross-chain interactions, and asset recovery mechanisms that create global economic integration.
+              </p>
+            </div>
 
             <EconomicsCard
               title="Cross-Border Adoption & Post-National Currency"
@@ -582,21 +592,23 @@ export default function MacroeconomicsPage() {
       </section>
 
       {/* Section 7: Long-Term Stability & Shocks */}
-      <section className="py-16 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900">
+      <section className="py-20 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto space-y-8"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              7. Long-Term Stability & Shocks
-            </h2>
-            <p className="text-lg text-neutral-300 mb-8">
-              DRP is designed to withstand economic shocks through adaptive mechanisms, diversified participation, and algorithmic stabilization tools.
-            </p>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                7. Long-Term Stability & Shocks
+              </h2>
+              <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+                DRP is designed to withstand economic shocks through adaptive mechanisms, diversified participation, and algorithmic stabilization tools.
+              </p>
+            </div>
 
             <EconomicsCard
               title="Supply Shocks: Mass Offline Events"

@@ -7,6 +7,7 @@ import { EconomicsDiagramSVG } from '@/components/economics/EconomicsDiagramSVG'
 import { KeyMetricsPanel } from '@/components/economics/KeyMetricsPanel'
 import { MicroMacroNav } from '@/components/economics/MicroMacroNav'
 import { Activity, Coins, Users, Shield, TrendingUp, CheckCircle, AlertTriangle, Target } from 'lucide-react'
+import { LaTeXEquation } from '@/components/economics/LaTeXEquation'
 
 export default function MicroeconomicsPage() {
   // Mock metrics - replace with real data from API/backend
@@ -271,20 +272,20 @@ export default function MicroeconomicsPage() {
                   <p className="mb-4">
                     Token supply in DRP is not fixed or arbitrarily set by a central authority. Instead, supply expands algorithmically based on verified human activity:
                   </p>
-                  <div className="bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg mb-4 font-mono text-sm">
-                    M(t) = Σ(activity_i × reward_weight_i × verification_score_i)
-                  </div>
-                  <p className="mb-4">
-                    Where:
-                  </p>
-                  <ul className="list-disc pl-6 space-y-2 mb-4">
-                    <li><strong>activity_i:</strong> The quantity of verified activity by agent i</li>
-                    <li><strong>reward_weight_i:</strong> Activity-specific reward multiplier (e.g., learning activities may have higher weights)</li>
-                    <li><strong>verification_score_i:</strong> AI verification confidence (0-1), ensuring only legitimate activity generates tokens</li>
-                  </ul>
-                  <p>
-                    This creates a <strong className="text-neutral-900 dark:text-white">positive feedback loop:</strong> more activity → more tokens → more economic activity → more demand for tokens. However, the protocol manages this through velocity controls (quizzes, difficulty tuning) to prevent runaway inflation.
-                  </p>
+                  
+                  <LaTeXEquation
+                    equation="M(t) = \sum_{i=1}^{n} \left( A_i \cdot w_i \cdot v_i \right)"
+                    label="Activity-Based Money Supply"
+                    variables={[
+                      { symbol: 'M(t)', description: 'Token supply at time t' },
+                      { symbol: 'A_i', description: 'Quantity of verified activity by agent i' },
+                      { symbol: 'w_i', description: 'Activity-specific reward weight (e.g., learning activities may have higher weights)' },
+                      { symbol: 'v_i', description: 'AI verification confidence score (0 ≤ v_i ≤ 1), ensuring only legitimate activity generates tokens' },
+                      { symbol: 'n', description: 'Total number of active agents' }
+                    ]}
+                    explanation="This creates a positive feedback loop: more activity → more tokens → more economic activity → more demand for tokens. However, the protocol manages this through velocity controls (quizzes, difficulty tuning) to prevent runaway inflation."
+                  />
+
                 </>
               }
               delay={0.1}

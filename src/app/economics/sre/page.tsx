@@ -255,7 +255,7 @@ export default function SREPage() {
         </div>
       </section>
 
-      {/* SDG Integration */}
+      {/* SDG Integration - Redesigned */}
       <section className="py-16 bg-white dark:bg-neutral-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
@@ -263,38 +263,409 @@ export default function SREPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-6xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              SDG Integration: Goals 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 16, 17
-            </h2>
-            <p className="text-xl text-neutral-300 mb-8">
-              The Sustainable Rights Economy directly addresses 12 of the 17 UN Sustainable Development Goals:
-            </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {sdgGoals.map((goal, index) => (
-                <motion.div
-                  key={goal.number}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border border-blue-200 dark:border-blue-900"
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-bold">
-                      {goal.number}
-                    </div>
-                    <h3 className="font-bold text-white">
-                      {goal.name}
-                    </h3>
-                  </div>
-                  <p className="text-sm text-neutral-300">
-                    {goal.description}
-                  </p>
-                </motion.div>
-              ))}
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-white mb-4">
+                SDG Integration: Mapping DRP Mechanisms to UN Goals
+              </h2>
+              <p className="text-xl text-neutral-300 mb-2">
+                The Sustainable Rights Economy directly addresses 12 of the 17 UN Sustainable Development Goals
+              </p>
+              <p className="text-lg text-neutral-400">
+                Through rights-based distribution, verified activity, and AI-driven resource allocation
+              </p>
             </div>
+
+            {/* SDG Impact Table */}
+            <div className="mb-12 overflow-x-auto">
+              <table className="w-full border-collapse bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-lg">
+                <thead>
+                  <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                    <th className="px-6 py-4 text-left font-semibold">SDG Goal</th>
+                    <th className="px-6 py-4 text-left font-semibold">DRP Mechanism</th>
+                    <th className="px-6 py-4 text-left font-semibold">Input Metrics</th>
+                    <th className="px-6 py-4 text-left font-semibold">Economic Output</th>
+                    <th className="px-6 py-4 text-center font-semibold">Impact Level</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700">
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 text-white font-bold flex items-center justify-center">
+                          1
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">No Poverty</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Rights-based distribution floor
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Basic needs verification, activity credits
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Guaranteed minimum allocation, wealth distribution
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-xs font-semibold">
+                        High
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 text-white font-bold flex items-center justify-center">
+                          2
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Zero Hunger</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Food security through verified contribution
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Agricultural activity, food production verification
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Food access tokens, supply chain transparency
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-full text-xs font-semibold">
+                        High
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 text-white font-bold flex items-center justify-center">
+                          3
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Good Health</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Healthcare access based on human rights
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Health service verification, wellness activities
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Healthcare access tokens, preventive care rewards
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-xs font-semibold">
+                        High
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-pink-500 text-white font-bold flex items-center justify-center">
+                          4
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Quality Education</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Learn-to-earn model incentivizes education
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Learning activity verification, knowledge sharing
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Education rewards, skill development tokens
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-xs font-semibold">
+                        High
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 text-white font-bold flex items-center justify-center">
+                          7
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Affordable Energy</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Renewable energy usage rewarded
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Energy production verification, renewable source tracking
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Energy credits, sustainability bonuses
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-full text-xs font-semibold">
+                        Medium
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-600 to-pink-600 text-white font-bold flex items-center justify-center">
+                          8
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Decent Work</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Verified work receives fair compensation
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Work activity verification, productivity metrics
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Fair wages, work quality rewards
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-xs font-semibold">
+                        High
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 text-white font-bold flex items-center justify-center">
+                          9
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Innovation</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Infrastructure supports sustainable development
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Innovation activity, R&D contributions
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Innovation grants, technology development rewards
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-xs font-semibold">
+                        Medium
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 text-white font-bold flex items-center justify-center">
+                          10
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Reduced Inequality</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Rights-based allocation reduces disparities
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Status accrual, activity credits, redistribution metrics
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Lower Gini coefficient, equitable wealth distribution
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-full text-xs font-semibold">
+                        High
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-amber-500 text-white font-bold flex items-center justify-center">
+                          11
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Sustainable Cities</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Community-driven urban development
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Community service, urban planning participation
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Community development tokens, infrastructure rewards
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-full text-xs font-semibold">
+                        Medium
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 text-white font-bold flex items-center justify-center">
+                          12
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Responsible Consumption</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Quality goods, not waste
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Consumption verification, product quality tracking
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Quality goods network, waste reduction rewards
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-xs font-semibold">
+                        Medium
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-500 text-white font-bold flex items-center justify-center">
+                          16
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Peace & Justice</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Transparent governance and accountability
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Governance participation, transparency metrics
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Accountable systems, transparent decision-making
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs font-semibold">
+                        High
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 text-white font-bold flex items-center justify-center">
+                          17
+                        </div>
+                        <span className="font-semibold text-neutral-900 dark:text-white">Partnerships</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
+                      Global collaboration for rights protection
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Cross-border collaboration, partnership verification
+                    </td>
+                    <td className="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
+                      Global network effects, collaborative rewards
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs font-semibold">
+                        Medium
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Systems Flow Diagram */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mb-12"
+            >
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">
+                DRP → SDG Impact Flow
+              </h3>
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl p-8 border border-blue-200 dark:border-blue-900">
+                <div className="grid md:grid-cols-4 gap-6">
+                  {/* Input Layer */}
+                  <div className="text-center">
+                    <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 mb-3 shadow-md">
+                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">Inputs</h4>
+                      <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1 text-left">
+                        <li>• Verified Activities</li>
+                        <li>• Rights Claims</li>
+                        <li>• Energy Usage</li>
+                        <li>• Governance Participation</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="flex items-center justify-center">
+                    <div className="w-full h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 relative">
+                      <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-8 border-l-indigo-500 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+                    </div>
+                  </div>
+
+                  {/* DRP Mechanisms */}
+                  <div className="text-center">
+                    <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 mb-3 shadow-md">
+                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">DRP Mechanisms</h4>
+                      <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1 text-left">
+                        <li>• AI Scoring</li>
+                        <li>• Rights-Based Distribution</li>
+                        <li>• Activity Verification</li>
+                        <li>• Governance Algorithms</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="flex items-center justify-center">
+                    <div className="w-full h-0.5 bg-gradient-to-r from-indigo-500 to-green-500 relative">
+                      <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-8 border-l-green-500 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+                    </div>
+                  </div>
+
+                  {/* Output Layer */}
+                  <div className="text-center">
+                    <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 mb-3 shadow-md">
+                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">Economic Outputs</h4>
+                      <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1 text-left">
+                        <li>• Wealth Distribution</li>
+                        <li>• Access to Resources</li>
+                        <li>• Community Resilience</li>
+                        <li>• SDG Progress</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SDG Impact Metrics */}
+                <div className="mt-8 grid md:grid-cols-3 gap-4">
+                  <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 text-center shadow-md">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">12</div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">SDGs Addressed</div>
+                  </div>
+                  <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 text-center shadow-md">
+                    <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">70%</div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">High Impact Goals</div>
+                  </div>
+                  <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 text-center shadow-md">
+                    <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">100%</div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">Rights-Based</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
