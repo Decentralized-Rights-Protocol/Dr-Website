@@ -1,0 +1,35 @@
+version: 2
+updates:
+  # Root Next.js website
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    allow:
+      - dependency-type: "direct"
+
+  # API docs app
+  - package-ecosystem: "npm"
+    directory: "/api"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+
+  # Portal app
+  - package-ecosystem: "npm"
+    directory: "/app-portal"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+
+  # Explorer app
+  - package-ecosystem: "npm"
+    directory: "/explorer"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+
+
+
+

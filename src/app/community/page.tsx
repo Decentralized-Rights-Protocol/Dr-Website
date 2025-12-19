@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { Github, Mail, Users, MessageSquare, Calendar, BookOpen, Linkedin, Instagram } from 'lucide-react'
 import { XIcon, DiscordIcon } from '@/components/custom-icons'
 import { ParticleBackground } from '@/components/particle-background'
@@ -54,18 +55,46 @@ const communityStats = [
   { label: 'Lines of Code', value: '100K+' },
 ]
 
-const events = [
+type CommunityEvent = {
+  title: string
+  date: string
+  type: string
+  description: string
+  url?: string
+}
+
+const events: CommunityEvent[] = [
   {
-    title: 'Human Rights & Blockchain Summit',
-    date: 'April 20, 2024',
-    type: 'Conference',
-    description: 'Join us for a discussion on blockchain for social good',
+    title: 'UN Human Rights Council – Thematic Discussion',
+    date: 'June 2025 (TBA)',
+    type: 'UN Event',
+    description:
+      'UN Human Rights Council thematic discussion on digital rights, AI governance, and human rights protections.',
+    url: 'https://www.ohchr.org/en/hr-bodies/hrc',
   },
   {
-    title: 'Community Governance Meeting',
-    date: 'May 5, 2024',
-    type: 'Meeting',
-    description: 'Monthly community governance and decision-making session',
+    title: 'UN Internet Governance Forum 2025',
+    date: 'Q4 2025 (TBA)',
+    type: 'UN Event',
+    description:
+      'Global multi‑stakeholder forum on public policy issues related to the Internet, digital rights, and governance.',
+    url: 'https://www.intgovforum.org/',
+  },
+  {
+    title: 'Ethereum Devcon',
+    date: '2025 (Date TBA)',
+    type: 'Blockchain Conference',
+    description:
+      'Flagship Ethereum developer conference bringing together builders, researchers, and protocol designers.',
+    url: 'https://devcon.org/',
+  },
+  {
+    title: 'Web3 Summit',
+    date: '2025 (Date TBA)',
+    type: 'Blockchain Conference',
+    description:
+      'Conference focused on decentralized web, interoperability, and the future of Web3 infrastructure.',
+    url: 'https://web3summit.com/',
   },
 ]
 
@@ -149,53 +178,56 @@ export default function CommunityPage() {
           </div>
         </div>
 
-        {/* Newsletter Signup */}
-        <div className="mb-16 p-8 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-white">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
-            <p className="text-primary-100 mb-6 max-w-2xl mx-auto">
-              Get the latest updates on protocol development, community events, 
-              and human rights initiatives delivered to your inbox.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 rounded-md border border-transparent px-4 py-3 text-neutral-900 placeholder-neutral-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white"
-              />
-              <button className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-primary-600 hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-colors">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
+        {/* Newsletter Signup (Tally embed) */}
+        <NewsletterSignupTally />
 
         {/* Upcoming Events */}
         <div className="mb-16">
           <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
             Upcoming Events
           </h2>
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {events.map((event, index) => (
-              <div key={index} className="rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-700">
-                <div className="flex items-center gap-x-3 mb-4">
-                  <Calendar className="h-5 w-5 text-primary-600" />
-                  <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
-                    {event.date}
-                  </span>
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-800 dark:text-primary-200">
-                    {event.type}
-                  </span>
+          {events.length === 0 ? (
+            <div className="rounded-2xl bg-white/80 dark:bg-neutral-900/80 p-6 text-center shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-700">
+              <p className="text-neutral-700 dark:text-neutral-300 text-sm">
+                No upcoming events are currently scheduled. Check back soon for new UN sessions and major blockchain conferences.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+              {events.map((event) => (
+                <div
+                  key={event.title}
+                  className="rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-700"
+                >
+                  <div className="flex items-center gap-x-3 mb-4">
+                    <Calendar className="h-5 w-5 text-primary-600" />
+                    <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
+                      {event.date}
+                    </span>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-800 dark:text-primary-200">
+                      {event.type}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+                    {event.title}
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
+                    {event.description}
+                  </p>
+                  {event.url && (
+                    <a
+                      href={event.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline"
+                    >
+                      Learn more
+                    </a>
+                  )}
                 </div>
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                  {event.title}
-                </h3>
-                <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                  {event.description}
-                </p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Ways to Contribute */}
@@ -280,6 +312,38 @@ export default function CommunityPage() {
           </div>
           </div>
         </div>
+      </div>
+    </div>
+  )
+}
+
+function NewsletterSignupTally() {
+  useEffect(() => {
+    if (!document.querySelector('script[src="https://tally.so/widgets/embed.js"]')) {
+      const script = document.createElement('script')
+      script.src = 'https://tally.so/widgets/embed.js'
+      script.async = true
+      document.body.appendChild(script)
+    }
+  }, [])
+
+  return (
+    <div className="mb-16 p-8 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-white">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
+        <p className="text-primary-100 mb-6 max-w-2xl mx-auto">
+          Get the latest updates on protocol development, community events, and human rights initiatives delivered to your inbox.
+        </p>
+        <button
+          data-tally-open="3xKMro"
+          data-tally-layout="modal"
+          data-tally-hide-title="1"
+          data-tally-emoji-text="👋"
+          data-tally-emoji-animation="wave"
+          className="inline-flex items-center justify-center rounded-md bg-white px-6 py-3 text-sm font-semibold text-primary-600 hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-colors"
+        >
+          Open Signup Form
+        </button>
       </div>
     </div>
   )

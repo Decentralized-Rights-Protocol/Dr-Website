@@ -80,17 +80,31 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
     const finalScore = (score / lesson.quiz.questions.length) * 100
     setQuizState(prev => ({ ...prev, completed: true, score: finalScore }))
     
-    // Submit completion to API
-    fetch('/api/learn/complete', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        lessonId: lesson.id,
-        score: finalScore,
-        timeSpent,
-        answers: quizState.answers
-      })
-    })
+    // Submit completion to API with logging on failure
+    void (async () => {
+      try {
+        const response = await fetch('/api/learn/complete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            lessonId: lesson.id,
+            score: finalScore,
+            timeSpent,
+            answers: quizState.answers
+          })
+        })
+
+        if (!response.ok) {
+          console.error('Failed to submit lesson completion:', {
+            status: response.status,
+            statusText: response.statusText,
+            url: response.url
+          })
+        }
+      } catch (error) {
+        console.error('Error submitting lesson completion:', error)
+      }
+    })()
   }
 
   const formatTime = (seconds: number) => {

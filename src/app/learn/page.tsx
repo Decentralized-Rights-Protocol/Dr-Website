@@ -184,6 +184,12 @@ export default function LearnPage() {
         if (response.ok) {
           const progress = await response.json();
           setUserProgress(progress);
+        } else {
+          console.error('Failed to load progress:', {
+            status: response.status,
+            statusText: response.statusText,
+            url: response.url,
+          });
         }
       } catch (error) {
         console.error('Failed to load progress:', error);
@@ -196,7 +202,14 @@ export default function LearnPage() {
         const response = await fetch('/api/learn/lessons');
         if (response.ok) {
           const data = await response.json();
-          setAvailableLessons(data.lessons || []);
+          const lessonsList = data.lessons || [];
+          setAvailableLessons(lessonsList);
+        } else {
+          console.error('Failed to load lessons:', {
+            status: response.status,
+            statusText: response.statusText,
+            url: response.url,
+          });
         }
       } catch (error) {
         console.error('Failed to load lessons:', error);
@@ -323,9 +336,19 @@ export default function LearnPage() {
 
         {/* Curriculum Levels */}
         <div className="space-y-8">
-          <h2 className="text-3xl font-bold text-center text-white sm:text-4xl mb-8 animate-fade-in-up delay-800">
+          <h2 className="text-3xl font-bold text-center text-white sm:text-4xl mb-4 animate-fade-in-up delay-800">
             Curriculum Levels
           </h2>
+          
+          {availableLessons.length === 0 && (
+            <div className="mb-4 max-w-2xl mx-auto rounded-lg border border-yellow-400/40 bg-yellow-500/10 px-4 py-3 text-sm text-yellow-100">
+              <p>
+                Dynamic lesson metadata is temporarily unavailable. You can still access all lessons through the curriculum
+                cards below; links will fall back to the classic <span className="font-semibold">/learn/lesson/[id]</span>{' '}
+                routes.
+              </p>
+            </div>
+          )}
           
           {curriculumLevels.map((level, index) => (
             <div 
