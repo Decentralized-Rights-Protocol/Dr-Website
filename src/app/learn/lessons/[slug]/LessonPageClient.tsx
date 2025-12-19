@@ -17,6 +17,7 @@ import { ThinkFirstQuestion } from '@/components/learn/ThinkFirstQuestion'
 import { ConceptDiagram } from '@/components/learn/ConceptDiagram'
 import { Checkpoint } from '@/components/learn/Checkpoint'
 import { parseQuestionsFromContent, extractSections } from '@/lib/learn-content-parser'
+import { diagramComponents } from '@/components/learn/AsciiDiagramReplacer'
 
 interface LessonContent {
   id: string
@@ -55,6 +56,8 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
   const [isPlaying, setIsPlaying] = useState(false)
   const [completedSections, setCompletedSections] = useState<Set<string>>(new Set())
   const [revealedQuestions, setRevealedQuestions] = useState<Set<string>>(new Set())
+  // CRITICAL FIX: Track revealed state per quiz question ID to prevent state leakage
+  const [revealedQuizQuestions, setRevealedQuizQuestions] = useState<Set<string>>(new Set())
 
   // Parse questions and sections from content
   const { parsedQuestions, sections } = useMemo(() => {
@@ -245,7 +248,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
                 )}
 
                 {/* Render main content (questions filtered out) */}
-                <ReactMarkdown>{filteredContent}</ReactMarkdown>
+                <ReactMarkdown components={diagramComponents}>{filteredContent}</ReactMarkdown>
 
                 {/* Render questions inline with hidden answers */}
                 {parsedQuestions.length > 0 && (
@@ -258,6 +261,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
                     {parsedQuestions.map((question) => (
                       <ThinkFirstQuestion
                         key={question.id}
+                        questionId={question.id} // CRITICAL: Unique ID for state isolation
                         question={question.question}
                         type={question.type}
                         options={question.options}
@@ -301,12 +305,28 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
                 
                 {lesson.quiz.questions[quizState.currentQuestion] && (
                   <ThinkFirstQuestion
+                    key={lesson.quiz.questions[quizState.currentQuestion].id} // CRITICAL: Force remount on question change
+                    questionId={lesson.quiz.questions[quizState.currentQuestion].id} // CRITICAL: Unique ID for state tracking
                     question={lesson.quiz.questions[quizState.currentQuestion].question}
                     type="multiple-choice"
                     options={lesson.quiz.questions[quizState.currentQuestion].options}
                     correctAnswer={lesson.quiz.questions[quizState.currentQuestion].correct}
                     selectedAnswer={quizState.answers[lesson.quiz.questions[quizState.currentQuestion].id] ?? null}
                     isQuizMode={true}
+                    isRevealedExternal={revealedQuizQuestions.has(lesson.quiz.questions[quizState.currentQuestion].id)}
+                    onRevealToggle={(revealed) => {
+                      // CRITICAL FIX: Track revealed state per question ID
+                      const questionId = lesson.quiz.questions[quizState.currentQuestion].id
+                      if (revealed) {
+                        setRevealedQuizQuestions(prev => new Set(prev).add(questionId))
+                      } else {
+                        setRevealedQuizQuestions(prev => {
+                          const next = new Set(prev)
+                          next.delete(questionId)
+                          return next
+                        })
+                      }
+                    }}
                     onAnswerSelected={(index) => {
                       handleQuizAnswer(
                         lesson.quiz.questions[quizState.currentQuestion].id,
@@ -314,7 +334,9 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
                       )
                     }}
                     onAnswerRevealed={() => {
-                      // Optional: track when answer is revealed
+                      // Track when answer is revealed for analytics
+                      const questionId = lesson.quiz.questions[quizState.currentQuestion].id
+                      setRevealedQuizQuestions(prev => new Set(prev).add(questionId))
                     }}
                   />
                 )}

@@ -6,6 +6,7 @@ import { LightBulbIcon, EyeIcon } from '@heroicons/react/24/outline'
 
 interface ThinkFirstQuestionProps {
   question: string
+  questionId?: string // CRITICAL: Unique ID for per-question state isolation
   type?: 'multiple-choice' | 'reflection' | 'scenario'
   options?: string[]
   correctAnswer?: number | string
@@ -15,6 +16,9 @@ interface ThinkFirstQuestionProps {
   selectedAnswer?: number | null
   showNavigation?: boolean
   isQuizMode?: boolean
+  // External revealed state for quiz mode (per-question tracking)
+  isRevealedExternal?: boolean
+  onRevealToggle?: (revealed: boolean) => void
 }
 
 /**
@@ -24,6 +28,7 @@ interface ThinkFirstQuestionProps {
  */
 export function ThinkFirstQuestion({
   question,
+  questionId,
   type = 'multiple-choice',
   options = [],
   correctAnswer,
@@ -32,16 +37,32 @@ export function ThinkFirstQuestion({
   onAnswerSelected,
   selectedAnswer: externalSelectedAnswer,
   showNavigation = false,
-  isQuizMode = false
+  isQuizMode = false,
+  isRevealedExternal,
+  onRevealToggle
 }: ThinkFirstQuestionProps) {
-  const [isRevealed, setIsRevealed] = useState(false)
+  // CRITICAL FIX: Use external revealed state in quiz mode to prevent state leakage
+  // In quiz mode, parent tracks revealed state per question ID
+  // In non-quiz mode, use local state (each component instance is independent)
+  const [internalRevealed, setInternalRevealed] = useState(false)
   const [internalSelectedOption, setInternalSelectedOption] = useState<number | null>(null)
+  
+  // Determine revealed state: external (quiz) or internal (standalone)
+  const isRevealed = isQuizMode && isRevealedExternal !== undefined 
+    ? isRevealedExternal 
+    : internalRevealed
   
   // Use external selected answer if provided (for quiz mode), otherwise use internal state
   const selectedOption = externalSelectedAnswer !== undefined ? externalSelectedAnswer : internalSelectedOption
 
   const handleReveal = () => {
-    setIsRevealed(true)
+    if (isQuizMode && onRevealToggle) {
+      // Quiz mode: notify parent to update per-question state
+      onRevealToggle(true)
+    } else {
+      // Standalone mode: update local state
+      setInternalRevealed(true)
+    }
     onAnswerRevealed?.()
   }
 
