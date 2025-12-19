@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { 
   ArrowLeftIcon, 
@@ -13,6 +13,10 @@ import {
 } from '@heroicons/react/24/outline'
 import ReactMarkdown from 'react-markdown'
 import { ParticleBackground } from '@/components/particle-background'
+import { ThinkFirstQuestion } from '@/components/learn/ThinkFirstQuestion'
+import { ConceptDiagram } from '@/components/learn/ConceptDiagram'
+import { Checkpoint } from '@/components/learn/Checkpoint'
+import { parseQuestionsFromContent, extractSections } from '@/lib/learn-content-parser'
 
 interface LessonContent {
   id: string
@@ -49,6 +53,27 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
   })
   const [timeSpent, setTimeSpent] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [completedSections, setCompletedSections] = useState<Set<string>>(new Set())
+  const [revealedQuestions, setRevealedQuestions] = useState<Set<string>>(new Set())
+
+  // Parse questions and sections from content
+  const { parsedQuestions, sections } = useMemo(() => {
+    const questions = parseQuestionsFromContent(lesson.content)
+    const contentSections = extractSections(lesson.content)
+    return { parsedQuestions: questions, sections: contentSections }
+  }, [lesson.content])
+
+  // Determine diagram type based on lesson content
+  const getDiagramType = (): 'architecture' | 'consensus' | 'governance' | 'economic' | 'flow' | 'layers' | null => {
+    const content = lesson.content.toLowerCase()
+    if (content.includes('architecture') || content.includes('layer')) return 'architecture'
+    if (content.includes('consensus') || content.includes('post') || content.includes('poat')) return 'consensus'
+    if (content.includes('governance') || content.includes('elder quorum')) return 'governance'
+    if (content.includes('economic') || content.includes('token') || content.includes('reward')) return 'economic'
+    if (content.includes('flow') || content.includes('process')) return 'flow'
+    if (content.includes('layer')) return 'layers'
+    return null
+  }
 
   useEffect(() => {
     let interval: NodeJS.Timeout
@@ -113,6 +138,27 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
+  const handleQuestionRevealed = (questionId: string) => {
+    setRevealedQuestions(prev => new Set(prev).add(questionId))
+  }
+
+  const handleSectionComplete = (sectionTitle: string) => {
+    setCompletedSections(prev => new Set(prev).add(sectionTitle))
+  }
+
+  // Calculate progress based on sections and questions
+  const progressPercentage = useMemo(() => {
+    const totalItems = sections.length + parsedQuestions.length
+    const completedItems = completedSections.size + revealedQuestions.size
+    return totalItems > 0 ? (completedItems / totalItems) * 100 : 0
+  }, [sections.length, parsedQuestions.length, completedSections.size, revealedQuestions.size])
+
+  // Filter out question blocks from content for display
+  const filteredContent = useMemo(() => {
+    // Remove question blocks from content (they'll be displayed separately)
+    return lesson.content.replace(/###\s+Question\s+\d+[\s\S]*?(?=###|##|$)/gi, '')
+  }, [lesson.content])
+
   return (
     <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <ParticleBackground />
@@ -163,6 +209,20 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
               <span>{lesson.reward} $DeRi reward</span>
             </div>
           </div>
+
+          {/* Progress Indicator */}
+          <div className="mt-4 pt-4 border-t border-white/20">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm text-neutral-300">Progress</span>
+              <span className="text-sm font-semibold text-white">{progressPercentage.toFixed(0)}%</span>
+            </div>
+            <div className="w-full bg-white/10 rounded-full h-2">
+              <div 
+                className="bg-gradient-to-r from-blue-400 to-green-400 h-2 rounded-full transition-all duration-500"
+                style={{ width: `${progressPercentage}%` }}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -175,7 +235,47 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
               </div>
               
               <div className="prose prose-lg prose-invert max-w-none text-neutral-200">
-                <ReactMarkdown>{lesson.content}</ReactMarkdown>
+                {/* Add diagram if appropriate - show early in lesson */}
+                {getDiagramType() && (
+                  <ConceptDiagram
+                    type={getDiagramType()!}
+                    title={`${lesson.title} - Visual Overview`}
+                    caption="This diagram illustrates the key concepts covered in this lesson"
+                  />
+                )}
+
+                {/* Render main content (questions filtered out) */}
+                <ReactMarkdown>{filteredContent}</ReactMarkdown>
+
+                {/* Render questions inline with hidden answers */}
+                {parsedQuestions.length > 0 && (
+                  <div className="mt-12">
+                    <h3 className="text-2xl font-bold text-white mb-4">Think First Questions</h3>
+                    <p className="text-neutral-300 mb-6">
+                      Before revealing answers, take a moment to think about each question. 
+                      This active engagement improves comprehension and retention.
+                    </p>
+                    {parsedQuestions.map((question) => (
+                      <ThinkFirstQuestion
+                        key={question.id}
+                        question={question.question}
+                        type={question.type}
+                        options={question.options}
+                        correctAnswer={question.correctAnswer}
+                        explanation={question.explanation}
+                        onAnswerRevealed={() => handleQuestionRevealed(question.id)}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Add checkpoint at the end */}
+                <Checkpoint
+                  title="Content Review Complete"
+                  description="You've finished reading this lesson. Review the key concepts before taking the final quiz."
+                  completed={completedSections.size >= sections.length && revealedQuestions.size >= parsedQuestions.length}
+                  position="end"
+                />
               </div>
               
               {!showQuiz && !quizState.completed && (
@@ -196,67 +296,60 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
             {showQuiz && !quizState.completed && (
               <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6 sticky top-6">
                 <h3 className="text-lg font-semibold text-white mb-4">
-                  Quiz: Question {quizState.currentQuestion + 1} of {lesson.quiz.questions.length}
+                  Final Quiz: Question {quizState.currentQuestion + 1} of {lesson.quiz.questions.length}
                 </h3>
                 
                 {lesson.quiz.questions[quizState.currentQuestion] && (
-                  <div>
-                    <p className="text-neutral-200 mb-4">
-                      {lesson.quiz.questions[quizState.currentQuestion].question}
-                    </p>
-                    
-                    <div className="space-y-2">
-                      {lesson.quiz.questions[quizState.currentQuestion].options.map((option, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleQuizAnswer(
-                            lesson.quiz.questions[quizState.currentQuestion].id, 
-                            index
-                          )}
-                          className={`w-full text-left p-3 rounded-md border transition-colors text-white ${
-                            quizState.answers[lesson.quiz.questions[quizState.currentQuestion].id] === index
-                              ? 'border-blue-400 bg-blue-500/20'
-                              : 'border-white/20 bg-white/5 hover:border-white/30 hover:bg-white/10'
-                          }`}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                    
-                    <div className="flex justify-between mt-6">
-                      <button
-                        onClick={() => setQuizState(prev => ({ 
-                          ...prev, 
-                          currentQuestion: Math.max(0, prev.currentQuestion - 1) 
-                        }))}
-                        disabled={quizState.currentQuestion === 0}
-                        className="px-4 py-2 text-neutral-200 border border-white/20 bg-white/5 rounded-md disabled:opacity-50 hover:bg-white/10"
-                      >
-                        Previous
-                      </button>
-                      
-                      {quizState.currentQuestion === lesson.quiz.questions.length - 1 ? (
-                        <button
-                          onClick={submitQuiz}
-                          className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
-                        >
-                          Submit Quiz
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => setQuizState(prev => ({ 
-                            ...prev, 
-                            currentQuestion: prev.currentQuestion + 1 
-                          }))}
-                          className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
-                        >
-                          Next
-                        </button>
-                      )}
-                    </div>
-                  </div>
+                  <ThinkFirstQuestion
+                    question={lesson.quiz.questions[quizState.currentQuestion].question}
+                    type="multiple-choice"
+                    options={lesson.quiz.questions[quizState.currentQuestion].options}
+                    correctAnswer={lesson.quiz.questions[quizState.currentQuestion].correct}
+                    selectedAnswer={quizState.answers[lesson.quiz.questions[quizState.currentQuestion].id] ?? null}
+                    isQuizMode={true}
+                    onAnswerSelected={(index) => {
+                      handleQuizAnswer(
+                        lesson.quiz.questions[quizState.currentQuestion].id,
+                        index
+                      )
+                    }}
+                    onAnswerRevealed={() => {
+                      // Optional: track when answer is revealed
+                    }}
+                  />
                 )}
+                
+                <div className="flex justify-between mt-6 pt-6 border-t border-white/20">
+                  <button
+                    onClick={() => setQuizState(prev => ({ 
+                      ...prev, 
+                      currentQuestion: Math.max(0, prev.currentQuestion - 1) 
+                    }))}
+                    disabled={quizState.currentQuestion === 0}
+                    className="px-4 py-2 text-neutral-200 border border-white/20 bg-white/5 rounded-md disabled:opacity-50 hover:bg-white/10"
+                  >
+                    Previous
+                  </button>
+                  
+                  {quizState.currentQuestion === lesson.quiz.questions.length - 1 ? (
+                    <button
+                      onClick={submitQuiz}
+                      className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
+                    >
+                      Submit Quiz
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setQuizState(prev => ({ 
+                        ...prev, 
+                        currentQuestion: prev.currentQuestion + 1 
+                      }))}
+                      className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+                    >
+                      Next
+                    </button>
+                  )}
+                </div>
               </div>
             )}
 
