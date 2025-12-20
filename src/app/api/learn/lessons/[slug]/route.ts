@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { loadLessonBySlug, generateQuizForLesson } from '@/lib/learn-utils';
+import { loadLessonBySlug } from '@/lib/learn-utils';
+import { getQuestionsForLesson } from '@/learn/data/questions';
 
 export async function GET(
   request: NextRequest,
@@ -25,8 +26,18 @@ export async function GET(
       );
     }
     
-    // Generate quiz data
-    const quiz = generateQuizForLesson(lesson);
+    // Get unique questions for this lesson
+    const questions = getQuestionsForLesson(slug);
+    
+    // Convert to quiz format expected by frontend
+    const quiz = {
+      questions: questions.map(q => ({
+        id: q.id,
+        question: q.questionText,
+        options: q.options,
+        correct: q.correctAnswer
+      }))
+    };
     
     return NextResponse.json({
       ...lesson,

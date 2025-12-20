@@ -18,6 +18,8 @@ import { ConceptDiagram } from '@/components/learn/ConceptDiagram'
 import { Checkpoint } from '@/components/learn/Checkpoint'
 import { parseQuestionsFromContent, extractSections } from '@/lib/learn-content-parser'
 import { diagramComponents } from '@/components/learn/AsciiDiagramReplacer'
+import { ConceptCard, DidYouKnow, ChallengeMode, QuickRecap, EarnDeRi } from '@/learn/components/gamified'
+import { getLessonDiagram } from '@/learn/components/diagrams/LessonSpecificDiagrams'
 
 interface LessonContent {
   id: string
@@ -238,14 +240,29 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
               </div>
               
               <div className="prose prose-lg prose-invert max-w-none text-neutral-200">
-                {/* Add diagram if appropriate - show early in lesson */}
-                {getDiagramType() && (
-                  <ConceptDiagram
-                    type={getDiagramType()!}
-                    title={`${lesson.title} - Visual Overview`}
-                    caption="This diagram illustrates the key concepts covered in this lesson"
-                  />
-                )}
+                {/* Add lesson-specific diagram if available */}
+                {(() => {
+                  const LessonDiagram = getLessonDiagram(lesson.slug)
+                  if (LessonDiagram) {
+                    return (
+                      <LessonDiagram
+                        title={`${lesson.title} - Visual Overview`}
+                        caption="This diagram illustrates the key concepts covered in this lesson"
+                      />
+                    )
+                  }
+                  // Fallback to generic diagram
+                  if (getDiagramType()) {
+                    return (
+                      <ConceptDiagram
+                        type={getDiagramType()!}
+                        title={`${lesson.title} - Visual Overview`}
+                        caption="This diagram illustrates the key concepts covered in this lesson"
+                      />
+                    )
+                  }
+                  return null
+                })()}
 
                 {/* Render main content (questions filtered out) */}
                 <ReactMarkdown components={diagramComponents}>{filteredContent}</ReactMarkdown>

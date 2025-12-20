@@ -1,3 +1,76 @@
 ---
+
+
+CURSOR INSTRUCTIONS — DO NOT OVERWRITE EXISTING PAGES
+
+You MUST follow these rules:
+
+1. Do not modify or regenerate any existing files unless I explicitly say so.
+This includes:
+
+src/app/page.tsx
+
+src/app/layout.tsx
+
+src/components/**
+
+src/styles/**
+
+Any existing section pages (Why DRP, Tokens, Docs, etc.)
+
+
+
+2. All new features must be added ONLY inside new folders that you create under:
+
+src/app/new/
+src/components/new/
+src/app/learn/
+src/content/learn/
+
+and must never touch or rewrite other code.
+
+
+3. DO NOT change or remove the DRP design system
+
+gradients
+
+particle background
+
+typography
+
+Tailwind config
+
+layout structure
+
+navbar
+
+footer
+
+
+
+4. Any new UI must match existing DRP styling automatically.
+Use the same spacing, colors, fonts, animations.
+
+
+5. If you need code from an existing file, read it but DO NOT overwrite it.
+
+
+
+⭐️ ROUTING REQUIREMENT
+
+Use the existing global layout but do not alter it.
+
+
+⭐️ SAFETY CHECK
+
+Before writing any file, ask:
+
+> “This file already exists. Should I create a new version in /new/ instead of touching it?”
+
+
+
+If yes → create file in /new/.
+
+
 alwaysApply: true
 ---
