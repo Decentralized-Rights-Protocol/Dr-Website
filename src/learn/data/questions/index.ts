@@ -58,6 +58,41 @@ export function verifyNoDuplicates(): { valid: boolean; duplicates: string[] } {
 }
 
 /**
+ * Verify question IDs follow the L{level}_{LESSON}_Q{num} format
+ * Returns validation results with suggestions for non-compliant IDs
+ */
+export function verifyQuestionIdFormat(): {
+  valid: boolean
+  nonCompliant: Array<{ id: string; lessonSlug: string; suggestedId?: string }>
+} {
+  const nonCompliant: Array<{ id: string; lessonSlug: string; suggestedId?: string }> = []
+  
+  allQuestions.forEach(lesson => {
+    lesson.questions.forEach(question => {
+      // Check if ID follows L{level}_{LESSON}_Q{num} format
+      const pattern = /^L\d+_[A-Z_]+_Q\d+$/
+      if (!pattern.test(question.id)) {
+        // Generate suggested ID
+        const lessonName = lesson.lessonSlug.toUpperCase().replace(/-/g, '_')
+        const questionNum = question.id.match(/\d+$/)?.[0] || '1'
+        const suggestedId = `L${lesson.level}_${lessonName}_Q${questionNum}`
+        
+        nonCompliant.push({
+          id: question.id,
+          lessonSlug: lesson.lessonSlug,
+          suggestedId
+        })
+      }
+    })
+  })
+
+  return {
+    valid: nonCompliant.length === 0,
+    nonCompliant
+  }
+}
+
+/**
  * Get all question IDs for a level
  */
 export function getQuestionIdsForLevel(level: number): string[] {

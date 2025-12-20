@@ -354,7 +354,13 @@ export function getAllLessonSlugs(): string[] {
 }
 
 /**
+ * @deprecated This function generates generic, non-unique questions.
+ * Use getQuestionsForLesson() from '@/learn/data/questions' instead.
+ * 
  * Generate quiz questions for a lesson based on its content
+ * 
+ * NOTE: This is a fallback function that should not be used in production.
+ * All lessons should have unique questions defined in level-*-questions.ts files.
  */
 export function generateQuizForLesson(lesson: LessonMetadata): {
   questions: Array<{

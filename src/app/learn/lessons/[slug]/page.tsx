@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
-import { getAllLessonSlugs, loadLessonBySlug, generateQuizForLesson } from '@/lib/learn-utils'
+import { getAllLessonSlugs, loadLessonBySlug } from '@/lib/learn-utils'
+import { getQuestionsForLesson } from '@/learn/data/questions'
 import LessonPageClient from './LessonPageClient'
 
 export async function generateStaticParams() {
@@ -39,8 +40,18 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
     notFound()
   }
   
-  // Generate quiz data
-  const quiz = generateQuizForLesson(lesson)
+  // Get unique questions for this lesson
+  const questions = getQuestionsForLesson(lesson.slug)
+  
+  // Convert to quiz format expected by frontend
+  const quiz = {
+    questions: questions.map(q => ({
+      id: q.id,
+      question: q.questionText,
+      options: q.options,
+      correct: q.correctAnswer
+    }))
+  }
   
   return <LessonPageClient lesson={{ ...lesson, quiz }} />
 }

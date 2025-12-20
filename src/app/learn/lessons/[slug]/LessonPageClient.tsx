@@ -20,6 +20,14 @@ import { parseQuestionsFromContent, extractSections } from '@/lib/learn-content-
 import { diagramComponents } from '@/components/learn/AsciiDiagramReplacer'
 import { ConceptCard, DidYouKnow, ChallengeMode, QuickRecap, EarnDeRi } from '@/learn/components/gamified'
 import { getLessonDiagram } from '@/learn/components/diagrams/LessonSpecificDiagrams'
+import { shuffleStringOptions } from '@/learn/utils/quiz-helpers'
+import { 
+  CuriosityTrigger, 
+  UnderstandingTrigger, 
+  IdentityTrigger, 
+  AgencyTrigger, 
+  StewardshipTrigger 
+} from '@/learn/components/psychology'
 
 interface LessonContent {
   id: string
@@ -28,6 +36,8 @@ interface LessonContent {
   content: string
   duration: number
   reward: number
+  level?: number
+  description?: string
   quiz: {
     questions: Array<{
       id: string
@@ -60,6 +70,19 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
   const [revealedQuestions, setRevealedQuestions] = useState<Set<string>>(new Set())
   // CRITICAL FIX: Track revealed state per quiz question ID to prevent state leakage
   const [revealedQuizQuestions, setRevealedQuizQuestions] = useState<Set<string>>(new Set())
+  
+  // Shuffle quiz options per question on mount/change
+  // Store shuffled questions with new correct indices
+  const shuffledQuiz = useMemo(() => {
+    return lesson.quiz.questions.map(q => {
+      const { shuffled, newCorrectIndex } = shuffleStringOptions(q.options, q.correct)
+      return {
+        ...q,
+        options: shuffled,
+        correct: newCorrectIndex
+      }
+    })
+  }, [lesson.quiz.questions])
 
   // Parse questions and sections from content
   const { parsedQuestions, sections } = useMemo(() => {
@@ -101,13 +124,13 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
     if (!lesson) return
     
     let score = 0
-    lesson.quiz.questions.forEach(question => {
+    shuffledQuiz.forEach(question => {
       if (quizState.answers[question.id] === question.correct) {
         score++
       }
     })
     
-    const finalScore = (score / lesson.quiz.questions.length) * 100
+    const finalScore = (score / shuffledQuiz.length) * 100
     setQuizState(prev => ({ ...prev, completed: true, score: finalScore }))
     
     // Submit completion to API with logging on failure
@@ -157,6 +180,9 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
     const completedItems = completedSections.size + revealedQuestions.size
     return totalItems > 0 ? (completedItems / totalItems) * 100 : 0
   }, [sections.length, parsedQuestions.length, completedSections.size, revealedQuestions.size])
+
+  // Extract level from lesson ID (format: "1-1", "2-3", etc.) or use provided level
+  const lessonLevel = lesson.level || (lesson.id ? parseInt(lesson.id.split('-')[0]) : 1)
 
   // Filter out question blocks from content for display
   const filteredContent = useMemo(() => {
@@ -213,6 +239,11 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
               <TrophyIcon className="h-4 w-4" />
               <span>{lesson.reward} $DeRi reward</span>
             </div>
+            <div className="flex items-center space-x-1">
+              <span className="px-2 py-1 bg-blue-500/30 rounded text-xs font-semibold">
+                Level {lessonLevel}
+              </span>
+            </div>
           </div>
 
           {/* Progress Indicator */}
@@ -229,6 +260,59 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
             </div>
           </div>
         </div>
+
+        {/* Psychology Triggers - Level-based */}
+        {lessonLevel === 1 && (
+          <CuriosityTrigger
+            lessonTitle={lesson.title}
+            whyItMatters={lesson.description || `Understanding ${lesson.title} is fundamental to mastering blockchain technology and DRP. This knowledge forms the foundation for all advanced concepts.`}
+            rewardAmount={lesson.reward}
+          />
+        )}
+        {lessonLevel === 2 && (
+          <UnderstandingTrigger
+            lessonTitle={lesson.title}
+            keyConcepts={[
+              'Core DRP architecture principles',
+              'Hybrid consensus mechanisms',
+              'Activity proof verification',
+              'Governance structures'
+            ]}
+            lockedUntilUnderstanding={true}
+          />
+        )}
+        {lessonLevel === 3 && (
+          <IdentityTrigger
+            learnerTitle="DRP Contributor"
+            progressPercentage={progressPercentage}
+            level={lessonLevel}
+          />
+        )}
+        {lessonLevel === 4 && (
+          <AgencyTrigger
+            missionTitle={lesson.title}
+            missionDescription={`Apply your knowledge of ${lesson.title} to real-world scenarios. This mission will test your ability to implement DRP concepts in practical applications.`}
+            useCases={[
+              'Enterprise system integration',
+              'Supply chain tracking',
+              'Identity management solutions',
+              'Cross-chain interoperability'
+            ]}
+            poatCheckpoint={true}
+          />
+        )}
+        {lessonLevel === 5 && (
+          <StewardshipTrigger
+            governanceRole={`As a Level ${lessonLevel} learner, you're preparing to participate in DRP governance. This lesson will help you understand the ethical implications and long-term impact of protocol decisions.`}
+            ethicalScenarios={[
+              'Balancing innovation with security',
+              'Ensuring fair reward distribution',
+              'Protecting user privacy and rights',
+              'Maintaining decentralization principles'
+            ]}
+            rightsEligible={true}
+          />
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Lesson Content */}
@@ -317,23 +401,23 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
             {showQuiz && !quizState.completed && (
               <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6 sticky top-6">
                 <h3 className="text-lg font-semibold text-white mb-4">
-                  Final Quiz: Question {quizState.currentQuestion + 1} of {lesson.quiz.questions.length}
+                  Final Quiz: Question {quizState.currentQuestion + 1} of {shuffledQuiz.length}
                 </h3>
                 
-                {lesson.quiz.questions[quizState.currentQuestion] && (
+                {shuffledQuiz[quizState.currentQuestion] && (
                   <ThinkFirstQuestion
-                    key={lesson.quiz.questions[quizState.currentQuestion].id} // CRITICAL: Force remount on question change
-                    questionId={lesson.quiz.questions[quizState.currentQuestion].id} // CRITICAL: Unique ID for state tracking
-                    question={lesson.quiz.questions[quizState.currentQuestion].question}
+                    key={shuffledQuiz[quizState.currentQuestion].id} // CRITICAL: Force remount on question change
+                    questionId={shuffledQuiz[quizState.currentQuestion].id} // CRITICAL: Unique ID for state tracking
+                    question={shuffledQuiz[quizState.currentQuestion].question}
                     type="multiple-choice"
-                    options={lesson.quiz.questions[quizState.currentQuestion].options}
-                    correctAnswer={lesson.quiz.questions[quizState.currentQuestion].correct}
-                    selectedAnswer={quizState.answers[lesson.quiz.questions[quizState.currentQuestion].id] ?? null}
+                    options={shuffledQuiz[quizState.currentQuestion].options}
+                    correctAnswer={shuffledQuiz[quizState.currentQuestion].correct}
+                    selectedAnswer={quizState.answers[shuffledQuiz[quizState.currentQuestion].id] ?? null}
                     isQuizMode={true}
-                    isRevealedExternal={revealedQuizQuestions.has(lesson.quiz.questions[quizState.currentQuestion].id)}
+                    isRevealedExternal={revealedQuizQuestions.has(shuffledQuiz[quizState.currentQuestion].id)}
                     onRevealToggle={(revealed) => {
                       // CRITICAL FIX: Track revealed state per question ID
-                      const questionId = lesson.quiz.questions[quizState.currentQuestion].id
+                      const questionId = shuffledQuiz[quizState.currentQuestion].id
                       if (revealed) {
                         setRevealedQuizQuestions(prev => new Set(prev).add(questionId))
                       } else {
@@ -346,13 +430,13 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
                     }}
                     onAnswerSelected={(index) => {
                       handleQuizAnswer(
-                        lesson.quiz.questions[quizState.currentQuestion].id,
+                        shuffledQuiz[quizState.currentQuestion].id,
                         index
                       )
                     }}
                     onAnswerRevealed={() => {
                       // Track when answer is revealed for analytics
-                      const questionId = lesson.quiz.questions[quizState.currentQuestion].id
+                      const questionId = shuffledQuiz[quizState.currentQuestion].id
                       setRevealedQuizQuestions(prev => new Set(prev).add(questionId))
                     }}
                   />
@@ -370,7 +454,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
                     Previous
                   </button>
                   
-                  {quizState.currentQuestion === lesson.quiz.questions.length - 1 ? (
+                  {quizState.currentQuestion === shuffledQuiz.length - 1 ? (
                     <button
                       onClick={submitQuiz}
                       className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
@@ -383,7 +467,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
                         ...prev, 
                         currentQuestion: prev.currentQuestion + 1 
                       }))}
-                      className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+                      className="px-4 py-2 bg-blue-500 hover:bg-green-600 text-white rounded-md"
                     >
                       Next
                     </button>
