@@ -39,7 +39,7 @@ export function CuriosityTrigger({ lessonTitle, whyItMatters, rewardAmount }: Cu
           <SparklesIcon className="h-5 w-5 text-green-400" />
           <p className="text-sm text-neutral-200">
             <span className="font-semibold text-green-400">No pressure!</span> This quiz helps you learn. 
-            You'll earn <EarnDeRi amount={rewardAmount} /> just for completing it.
+            You&apos;ll earn <EarnDeRi amount={rewardAmount} /> just for completing it.
           </p>
         </div>
       </div>
