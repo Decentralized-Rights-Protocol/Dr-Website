@@ -11,6 +11,14 @@ import {
   BookOpenIcon,
   AcademicCapIcon
 } from "@heroicons/react/24/outline";
+import {
+  formatStructuredResponse,
+  generatePatternMode,
+  generateGuidedQuestion,
+  shouldUsePatternMode,
+  addGamificationElements,
+  adaptComplexity
+} from "@/learn/utils/ai-tutor-helpers";
 
 interface Message {
   id: string;
@@ -32,7 +40,22 @@ export default function AITutorPage() {
     {
       id: '1',
       type: 'assistant',
-      content: "Hello! I'm your DRP Learning Assistant. I'm here to help you understand blockchain concepts, DRP architecture, and answer any questions you have about your learning journey. What would you like to know?",
+      content: `Hello! I'm your DRP Learning Assistant. I'm here to TEACH, not just answer.
+
+**How I help you learn:**
+🔹 I give clear, simple explanations first
+🔹 I provide 2-4 different perspectives on the same idea
+🔹 I use plain language, then technical details
+🔹 I end with questions to help you think actively
+🔹 I adapt to your level - no assumptions about prior knowledge
+
+**My teaching approach:**
+• **Structured answers** with core explanation, variants, key takeaways, and check questions
+• **Pattern mode** for complex topics - we build understanding step by step
+• **Guided guessing** - you think first, then we discuss together
+• **No overwhelming walls of text** - clear, concise, interactive
+
+What would you like to explore? Ask me anything about blockchain, DRP, or your current lesson!`,
       timestamp: new Date(),
       suggestions: [
         "Explain blockchain basics",
@@ -111,125 +134,197 @@ export default function AITutorPage() {
     const lowerMessage = message.toLowerCase();
     
     if (lowerMessage.includes('blockchain') || lowerMessage.includes('block chain')) {
+      const coreExplanation = adaptComplexity(
+        "Blockchain is a digital ledger that stores records (blocks) linked together using cryptography. Everyone can see and verify the records, but no one can change them without everyone else knowing.",
+        context.currentLevel
+      );
+      
+      const variants = [
+        {
+          label: "Intuitive",
+          content: "Think of blockchain like a shared Google Doc where everyone has a copy. When someone makes a change, everyone sees it, and the system checks that the change is valid before accepting it."
+        },
+        {
+          label: "Technical",
+          content: "Blockchain is a distributed ledger technology that maintains a continuously growing list of cryptographically linked blocks. Each block contains a hash of the previous block, creating an immutable chain."
+        },
+        {
+          label: "DRP Context",
+          content: "In DRP, blockchain ensures that digital rights ownership and activity proofs are recorded permanently and transparently, without needing a central authority to verify them."
+        }
+      ];
+      
+      const keyTakeaway = "Blockchain enables trust without a central authority by distributing verification across the network.";
+      const checkQuestion = "Why would a blockchain fail if nodes didn't use a consensus mechanism?";
+      
+      const content = formatStructuredResponse(coreExplanation, variants, keyTakeaway, checkQuestion);
+      
       return {
-        content: `Great question about blockchain! Since you're at Level ${context.currentLevel}, let me explain it in a way that builds on what you've learned.
-
-**Blockchain** is a distributed ledger technology that maintains a continuously growing list of records (blocks) that are linked and secured using cryptography. Think of it as a digital notebook that everyone can see and verify, but no one can alter without everyone else knowing.
-
-Key concepts for your level:
-• **Decentralization**: No single authority controls the network
-• **Immutability**: Once data is recorded, it cannot be changed
-• **Consensus**: How the network agrees on valid transactions
-• **Cryptography**: Mathematical security that protects the data
-
-This directly relates to DRP's approach to decentralized rights management. Would you like me to explain how DRP uses these blockchain principles?`,
+        content: addGamificationElements(content, "the core concept of blockchain", "advanced cryptography details"),
         suggestions: [
           "How does DRP use blockchain?",
-          "What's the difference between blockchain and DRP?",
           "Explain consensus mechanisms",
+          "What makes blockchain secure?",
           "Give me a practical example"
         ]
       };
     }
 
     if (lowerMessage.includes('consensus') || lowerMessage.includes('post') || lowerMessage.includes('poat')) {
+      // Check if this is complex enough for Pattern Mode
+      if (shouldUsePatternMode('consensus', message)) {
+        const patternResponse = generatePatternMode(
+          'Consensus',
+          [
+            {
+              word: 'Agreement',
+              question: 'What are we agreeing on?',
+              explanation: 'We need all computers in the network to agree on which transactions are valid and which block comes next.'
+            },
+            {
+              word: 'Distributed Nodes',
+              question: 'Who is doing the agreeing?',
+              explanation: 'Multiple independent computers (nodes) participate in the network, each maintaining a copy of the ledger.'
+            },
+            {
+              word: 'Rules + Verification',
+              question: 'How do they agree without trust?',
+              explanation: 'They follow a set of rules (consensus mechanism) that mathematically verifies transactions and blocks.'
+            }
+          ],
+          'Agreement + Nodes + Rules = Consensus'
+        );
+        
+        return {
+          content: patternResponse,
+          suggestions: [
+            "Continue with consensus",
+            "Explain PoST specifically",
+            "How does PoAT work?",
+            "Give me a real example"
+          ]
+        };
+      }
+      
+      const coreExplanation = adaptComplexity(
+        "Consensus is how all computers in a blockchain agree on which transactions are valid and which block comes next, without needing a central authority.",
+        context.currentLevel
+      );
+      
+      const variants = [
+        {
+          label: "Intuitive",
+          content: "Think of consensus like a group vote where everyone agrees on the same decision before moving forward. In blockchain, this happens automatically through mathematical rules."
+        },
+        {
+          label: "Technical",
+          content: "Consensus is a protocol that enables distributed nodes to reach agreement on the ledger state despite failures or malicious actors. DRP uses PoST (Proof of Stake + Time) combining stake (40%) with participation time (60%)."
+        },
+        {
+          label: "DRP Context",
+          content: "In DRP, consensus also verifies human activity and rights-related actions through PoAT (Proof of Activity), not just financial transactions. This ensures decisions are made by active, invested participants."
+        }
+      ];
+      
+      const keyTakeaway = "Consensus ensures trust without a central authority by enabling distributed agreement.";
+      const checkQuestion = "Why would a blockchain fail if nodes didn't use a consensus mechanism?";
+      
+      const content = formatStructuredResponse(coreExplanation, variants, keyTakeaway, checkQuestion);
+      
       return {
-        content: `Excellent! Consensus is a core concept in DRP. Let me break down DRP's unique consensus mechanisms:
-
-**DRP uses a hybrid consensus approach:**
-
-1. **PoST (Proof of Stake + Time)**: Validators stake tokens and are selected based on both their stake and the time they've been active in the network. This ensures experienced participants have influence.
-
-2. **PoAT (Proof of Activity)**: This verifies that participants are actively contributing to the network through real-world activities, not just holding tokens.
-
-**Why this matters for DRP:**
-• **Rights Management**: Ensures those making decisions about digital rights are both invested and active
-• **Sybil Resistance**: Prevents fake accounts from gaining influence
-• **Real-world Integration**: PoAT connects blockchain decisions to actual activities
-
-The Elder Quorum system you're learning about uses this consensus to make decisions about protocol changes and rights management.
-
-Would you like me to explain how the Elder Quorum works, or do you have questions about staking?`,
+        content: addGamificationElements(content, "the core concept of consensus", "advanced PoST/PoAT mechanics"),
         suggestions: [
-          "How does Elder Quorum work?",
-          "What is staking in DRP?",
-          "Explain activity proofs",
+          "How does PoST work?",
+          "Explain PoAT in detail",
+          "What is the Elder Quorum?",
           "Give me a real example"
         ]
       };
     }
 
     if (lowerMessage.includes('help') || lowerMessage.includes('lesson') || lowerMessage.includes('current')) {
+      const coreExplanation = `I'd be happy to help with your current lesson on "${context.currentLesson || 'DRP concepts'}"! Let me break down the key points in a way that helps you understand deeply.`;
+      
+      const variants = [
+        {
+          label: "Key Concepts",
+          content: `For Level ${context.currentLevel}, focus on understanding the layered approach: Application → Protocol → Consensus → Network. Each layer has a specific role in rights management.`
+        },
+        {
+          label: "Study Strategy",
+          content: "Take notes on how DRP differs from traditional blockchains. Practice explaining concepts in your own words. Connect each concept to real-world applications you care about."
+        },
+        {
+          label: "Common Questions",
+          content: "Students often ask: 'How does DRP handle scalability?', 'What makes DRP different?', 'How do I become an Elder?' These are great questions that show you're thinking critically!"
+        }
+      ];
+      
+      const keyTakeaway = "Understanding comes from active engagement: explain concepts in your own words and connect them to real applications.";
+      const checkQuestion = "What specific part of the lesson would you like to explore deeper? I can break it down step by step!";
+      
+      const content = formatStructuredResponse(coreExplanation, variants, keyTakeaway, checkQuestion);
+      
       return {
-        content: `I'd be happy to help with your current lesson on "${context.currentLesson}"! 
-
-Based on your progress at Level ${context.currentLevel}, here are some key points to focus on:
-
-**For DRP Architecture:**
-• Understand the layered approach: Application → Protocol → Consensus → Network
-• Learn how different components interact
-• Focus on the role of each layer in rights management
-
-**Study Tips:**
-• Take notes on how DRP differs from traditional blockchains
-• Practice explaining the concepts in your own words
-• Try to connect each concept to real-world applications
-
-**Common Questions Students Ask:**
-• "How does DRP handle scalability?"
-• "What makes DRP different from other protocols?"
-• "How do I become an Elder?"
-
-Would you like me to quiz you on these concepts, or do you have a specific question about the architecture?`,
+        content: addGamificationElements(content, "effective study strategies"),
         suggestions: [
           "Quiz me on DRP architecture",
           "Explain scalability in DRP",
           "How do I become an Elder?",
-          "Give me practice questions"
+          "Break down a specific concept"
         ]
       };
     }
 
     if (lowerMessage.includes('quiz') || lowerMessage.includes('test') || lowerMessage.includes('practice')) {
+      // Use guided guessing approach
+      const guidedQuestion = generateGuidedQuestion(
+        "What is the primary purpose of DRP's hybrid consensus?",
+        [
+          "To reduce energy consumption",
+          "To ensure rights management decisions are made by active, invested participants",
+          "To increase transaction speed",
+          "To reduce network fees"
+        ],
+        "Think about what makes DRP different from other blockchains"
+      );
+      
       return {
-        content: `Perfect! Let's test your knowledge. Here are some practice questions based on your current level:
-
-**Level ${context.currentLevel} Quiz Questions:**
-
-1. **Multiple Choice**: What is the primary purpose of DRP's hybrid consensus?
-   A) To reduce energy consumption
-   B) To ensure rights management decisions are made by active, invested participants
-   C) To increase transaction speed
-   D) To reduce network fees
-
-2. **True/False**: PoAT (Proof of Activity) only considers token holdings for validator selection.
-
-3. **Short Answer**: Explain how the Elder Quorum system contributes to DRP's decentralized governance.
-
-Take your time to think about these. When you're ready, share your answers and I'll provide feedback and explanations!
-
-**Pro Tip**: Don't worry about getting them wrong - mistakes are how we learn!`,
+        content: `Perfect! Let's test your knowledge with guided questions. I'll ask, you think, then we'll discuss together.\n\n${guidedQuestion}\n\n**Remember**: There's no pressure! Take your time to think. When you pick an answer, I'll help you understand why it's right or guide you toward the correct understanding.`,
         suggestions: [
           "I think the answer is B",
-          "I'm not sure about PoAT",
-          "Can you explain Elder Quorum again?",
-          "Give me more practice questions"
+          "I'm not sure, can you help?",
+          "Give me another question",
+          "Explain consensus again first"
         ]
       };
     }
 
-    // Default response
+    // Default response - use structured format
+    const coreExplanation = "I'm here to help you understand DRP and blockchain concepts through clear explanations, multiple perspectives, and guided learning.";
+    
+    const variants = [
+      {
+        label: "How I Teach",
+        content: "I explain concepts simply first, then provide different perspectives (intuitive, technical, DRP-specific), and end with a question to check your understanding."
+      },
+      {
+        label: "What I Can Help With",
+        content: `Based on your Level ${context.currentLevel} progress, I can help with blockchain fundamentals, DRP consensus (PoST + PoAT), smart contracts, governance, and real-world applications.`
+      },
+      {
+        label: "Learning Approach",
+        content: "I use structured explanations, pattern-building for complex topics, and guided questions to help you think actively rather than just memorize."
+      }
+    ];
+    
+    const keyTakeaway = "Active learning through multiple perspectives and reflection leads to deeper understanding.";
+    const checkQuestion = "What topic would you like to explore? Try asking about something specific, and I'll break it down step by step!";
+    
+    const content = formatStructuredResponse(coreExplanation, variants, keyTakeaway, checkQuestion);
+    
     return {
-      content: `That's an interesting question! I'm here to help you understand DRP and blockchain concepts. 
-
-Based on your current progress at Level ${context.currentLevel}, I can help you with:
-• Blockchain fundamentals and how they apply to DRP
-• DRP's unique consensus mechanisms (PoST + PoAT)
-• Smart contracts and their role in rights management
-• The Elder Quorum system and governance
-• Practical applications and real-world use cases
-
-Could you be more specific about what you'd like to learn? I can provide explanations, examples, or even quiz you on topics you've covered!`,
+      content: addGamificationElements(content, "how the AI Tutor works"),
       suggestions: [
         "Explain DRP consensus mechanisms",
         "Help me understand smart contracts",
