@@ -24,7 +24,7 @@
     "tailwind-merge": "^2.2.1",
     "web3": "^4.6.0",
     "zustand": "^4.5.5",
-    "zod": "^3.23.8"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@types/node": "^20",
