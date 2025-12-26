@@ -13,7 +13,7 @@
   "dependencies": {
     "@flags-sdk/statsig": "^0.2.3",
     "@heroicons/react": "^2.2.0",
-    "@hookform/resolvers": "^3.3.2",
+    "@hookform/resolvers": "^5.2.2",
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
     "@next/mdx": "^14.0.0",
