@@ -25,7 +25,7 @@ const navigation = {
     },
     {
       name: 'Discord',
-      href: 'https://discord.gg/k8auUAqF',
+      href: 'https://discord.gg/zbWg92AnQQ',
       icon: DiscordIcon,
     },
     {
@@ -73,6 +73,7 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-3">Protocol</h4>
             <ul className="space-y-2">
+              <li><Link href="/philosophy" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Philosophy</Link></li>
               <li><Link href="/docs" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Docs</Link></li>
               <li><Link href="/tokens" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Tokens</Link></li>
               <li><Link href="/economics" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Economics</Link></li>
