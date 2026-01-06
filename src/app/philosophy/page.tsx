@@ -2,12 +2,15 @@
 
 import { motion } from 'framer-motion'
 import { ParticleBackground } from '@/components/particle-background'
+import { StructuredData } from '@/components/seo/StructuredData'
 
 export default function PhilosophyPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      {/* Particle Background */}
-      <ParticleBackground />
+    <>
+      <StructuredData type="philosophy" />
+      <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
+        {/* Particle Background */}
+        <ParticleBackground />
       
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
@@ -491,6 +494,7 @@ export default function PhilosophyPage() {
         </section>
       </div>
     </div>
+    </>
   )
 }
 

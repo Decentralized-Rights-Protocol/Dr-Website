@@ -5,8 +5,30 @@ import { Footer } from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
-  title: 'Decentralized Rights Protocol',
-  description: 'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
+  title: {
+    default: 'Decentralized Rights Protocol | Quantum-Safe Blockchain for Human Rights',
+    template: '%s | Decentralized Rights Protocol',
+  },
+  description: 'Decentralized Rights Protocol (DRP) is a quantum-safe blockchain platform that protects human rights through AI-verified consensus, Proof of Status (PoST), and Proof of Activity (PoAT). Built with NIST-approved post-quantum cryptography, DRP prioritizes human dignity, sustainability, and transparent governance.',
+  keywords: [
+    'decentralized rights protocol',
+    'DRP blockchain',
+    'quantum-safe blockchain',
+    'human rights blockchain',
+    'proof of activity',
+    'proof of status',
+    'AI-verified consensus',
+    'sustainable blockchain',
+    'blockchain governance',
+    'RIGHTS token',
+    'DeRi token',
+    'CRYSTALS-Kyber',
+    'CRYSTALS-Dilithium',
+    'post-quantum cryptography',
+    'decentralized governance',
+    'sustainable web3',
+    'human-centered blockchain',
+  ],
   metadataBase: new URL('https://decentralizedrights.com'),
   openGraph: {
     title: 'Decentralized Rights Protocol',

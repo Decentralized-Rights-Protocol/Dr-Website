@@ -45,15 +45,19 @@ export function HeroSection() {
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl animate-fade-in-up">
-            Protecting Human Rights
+            Decentralized Rights Protocol
             <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-gradient-x">
-              Through Blockchain
+              Quantum-Safe Blockchain for Human Rights
             </span>
           </h1>
-          <p className="mt-6 text-lg leading-8 text-neutral-300 animate-fade-in-up delay-200">
-            The Decentralized Rights Protocol (DRP) is building a quantum-safe, transparent platform 
-            to protect, verify, and advance human rights globally using cutting-edge blockchain technology.
-          </p>
+          <div className="mt-6 text-lg leading-8 text-neutral-300 animate-fade-in-up delay-200 space-y-3">
+            <p className="font-medium">
+              Decentralized Rights Protocol (DRP) is a quantum-safe blockchain platform that protects human rights through AI-verified consensus mechanisms. DRP uses Proof of Status (PoST) for identity verification and Proof of Activity (PoAT) to reward real-world contributions, creating a sustainable, human-rights-centered blockchain ecosystem.
+            </p>
+            <p>
+              Built with NIST-approved post-quantum cryptography (CRYSTALS-Kyber and CRYSTALS-Dilithium), DRP ensures long-term security against quantum computing threats while prioritizing human dignity, environmental responsibility, and transparent governance.
+            </p>
+          </div>
           <div className="mt-10 flex items-center justify-center gap-x-6 animate-fade-in-up delay-300">
             <Link
               href="/whitepaper"
