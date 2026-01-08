@@ -24,7 +24,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "flags": "^4.0.1",
+    "flags": "^4.0.2",
     "framer-motion": "^12.23.25",
     "gray-matter": "^4.0.3",
     "jsonwebtoken": "^9.0.2",
