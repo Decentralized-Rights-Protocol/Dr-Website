@@ -30,6 +30,6 @@ jobs:
         run: npm run type-check
 
       - name: Run npm audit (high severity and above)
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high
 
 

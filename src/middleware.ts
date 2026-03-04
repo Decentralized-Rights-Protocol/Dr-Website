@@ -30,7 +30,7 @@ export function middleware(req: NextRequest) {
   }
 
   // Basic rate limiting per IP
-  const ip = req.ip ?? req.headers.get('x-forwarded-for') ?? 'unknown'
+  const ip = req.headers.get('x-forwarded-for') ?? req.headers.get('x-real-ip') ?? 'unknown'
   const now = Date.now()
   const bucket = ipBuckets.get(ip)
   if (!bucket || now > bucket.resetAt) {
