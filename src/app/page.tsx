@@ -1,9 +1,5 @@
-import { HeroSection } from '@/components/hero-section'
-import { FeaturesSection } from '@/components/features-section'
-import { MissionSection } from '@/components/mission-section'
-import { QuickLinks } from '@/components/quick-links'
+import { DRPLandingExperience } from '@/components/home/DRPLandingExperience'
 import { StructuredData } from '@/components/seo/StructuredData'
-import { FAQ } from '@/components/seo/FAQ'
 
 export const metadata = {
   title: 'Decentralized Rights Protocol | Quantum-Safe Blockchain for Human Rights',
@@ -33,22 +29,7 @@ export default function Home() {
   return (
     <>
       <StructuredData type="homepage" />
-      <div className="flex flex-col">
-        {/* Hero Section with Features */}
-        <HeroSection />
-        
-        {/* Features Section */}
-        <FeaturesSection />
-        
-        {/* Mission Section */}
-        <MissionSection />
-        
-        {/* FAQ Section for AI Search Optimization */}
-        <FAQ className="bg-white dark:bg-neutral-900" />
-        
-        {/* Get Started Section */}
-        <QuickLinks />
-      </div>
+      <DRPLandingExperience />
     </>
   )
 }

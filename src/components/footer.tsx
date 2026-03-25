@@ -48,8 +48,25 @@ const navigation = {
 
 export function Footer() {
   return (
-    <footer className="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-t border-neutral-200/60 dark:border-neutral-800/60">
+    <footer className="border-t border-cyan-300/10 bg-[#020817]/90 text-white backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+        <div className="mb-10 rounded-2xl border border-cyan-300/20 bg-cyan-400/10 p-6">
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-200">Build with DRP</p>
+          <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-2xl text-sm text-slate-200">
+              Launch rights-aware products with verifiable identity, activity, and governance rails.
+            </p>
+            <div className="flex items-center gap-3">
+              <Link href="/docs" className="rounded-lg bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-cyan-200">
+                Explore Docs
+              </Link>
+              <Link href="/whitepaper" className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:border-cyan-300/60 hover:bg-cyan-300/10">
+                Whitepaper
+              </Link>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {/* Brand */}
           <div>
@@ -62,38 +79,38 @@ export function Footer() {
                 className="h-10 w-10 object-contain"
                 style={{ aspectRatio: '1/1' }}
               />
-              <span className="text-lg font-bold text-neutral-900 dark:text-white">Decentralized Rights Protocol</span>
+              <span className="text-lg font-bold text-white">Decentralized Rights Protocol</span>
             </div>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-sm">
+            <p className="max-w-sm text-sm text-slate-300">
               Building a human-rights-centered blockchain with transparent governance and zero-trust security.
             </p>
           </div>
 
           {/* Protocol */}
           <div>
-            <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-3">Protocol</h4>
+            <h4 className="mb-3 text-sm font-semibold text-white">Protocol</h4>
             <ul className="space-y-2">
-              <li><Link href="/philosophy" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Philosophy</Link></li>
-              <li><Link href="/docs" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Docs</Link></li>
-              <li><Link href="/tokens" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Tokens</Link></li>
-              <li><Link href="/economics" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Economics</Link></li>
-              <li><Link href="/roadmap" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Roadmap</Link></li>
-              <li><Link href="/whitepaper" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Whitepaper (PDF)</Link></li>
-              <li><Link href="/community" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Community</Link></li>
-              <li><Link href="/learn" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Learn</Link></li>
+              <li><Link href="/philosophy" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Philosophy</Link></li>
+              <li><Link href="/docs" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Docs</Link></li>
+              <li><Link href="/tokens" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Tokens</Link></li>
+              <li><Link href="/economics" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Economics</Link></li>
+              <li><Link href="/roadmap" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Roadmap</Link></li>
+              <li><Link href="/whitepaper" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Whitepaper (PDF)</Link></li>
+              <li><Link href="/community" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Community</Link></li>
+              <li><Link href="/learn" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Learn</Link></li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-3">Services</h4>
+            <h4 className="mb-3 text-sm font-semibold text-white">Services</h4>
             <ul className="space-y-2">
               <li>
                 <a
                   href="https://api.decentralizedrights.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-neutral-600 transition-colors hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400"
+                  className="text-sm text-slate-300 transition-colors hover:text-cyan-200"
                 >
                   API
                 </a>
@@ -103,7 +120,7 @@ export function Footer() {
                   href="https://app.decentralizedrights.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-neutral-600 transition-colors hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400"
+                  className="text-sm text-slate-300 transition-colors hover:text-cyan-200"
                 >
                   App
                 </a>
@@ -113,7 +130,7 @@ export function Footer() {
                   href="https://explorer.decentralizedrights.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-neutral-600 transition-colors hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400"
+                  className="text-sm text-slate-300 transition-colors hover:text-cyan-200"
                 >
                   Explorer
                 </a>
@@ -125,19 +142,19 @@ export function Footer() {
           {/* Legal & Social */}
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-3">Legal</h4>
+              <h4 className="mb-3 text-sm font-semibold text-white">Legal</h4>
               <ul className="space-y-2">
-                <li><Link href="/legal/terms-of-service" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Terms of Service</Link></li>
-                <li><Link href="/legal/privacy-policy" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/legal/eldercore-terms" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">ElderCore Terms</Link></li>
-                <li><Link href="/legal/eldercore-privacy" className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">ElderCore Privacy</Link></li>
+                <li><Link href="/legal/terms-of-service" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Terms of Service</Link></li>
+                <li><Link href="/legal/privacy-policy" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Privacy Policy</Link></li>
+                <li><Link href="/legal/eldercore-terms" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">ElderCore Terms</Link></li>
+                <li><Link href="/legal/eldercore-privacy" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">ElderCore Privacy</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-3">Social</h4>
+              <h4 className="mb-3 text-sm font-semibold text-white">Social</h4>
               <div className="flex flex-wrap gap-3">
                 {navigation.social.map((item) => (
-                  <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                  <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className="text-slate-400 transition-colors hover:text-cyan-200">
                     <span className="sr-only">{item.name}</span>
                     <item.icon className="h-5 w-5" />
                   </a>
@@ -153,9 +170,9 @@ export function Footer() {
         <div className="mt-8 flex flex-col items-center gap-3">
           <div className="flex items-center gap-2">
             <Image src="/08_IFOPE_20x30.jpg" alt="Flag of Planet Earth" width={60} height={40} className="h-10 w-auto rounded-sm shadow-sm" />
-            <p className="text-xs text-neutral-400 dark:text-neutral-500">Flag of Planet Earth © Oskar Pernefeldt — used with attribution.</p>
+            <p className="text-xs text-slate-400">Flag of Planet Earth © Oskar Pernefeldt - used with attribution.</p>
           </div>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400">&copy; {new Date().getFullYear()} Decentralized Rights Protocol. All rights reserved.</p>
+          <p className="text-xs text-slate-400">&copy; {new Date().getFullYear()} Decentralized Rights Protocol. All rights reserved.</p>
         </div>
       </div>
     </footer>
