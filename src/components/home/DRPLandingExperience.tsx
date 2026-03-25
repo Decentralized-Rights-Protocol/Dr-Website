@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import {
   ArrowRight,
   BrainCircuit,
@@ -16,7 +16,7 @@ import {
   Leaf,
   ShieldCheck,
   Sprout,
-  UserRoundCheck,
+  UserCheck,
   XCircle,
 } from 'lucide-react'
 
@@ -42,7 +42,7 @@ const featureCards: FeatureCard[] = [
   {
     title: 'Proof of Activity',
     description: 'On-chain evidence of meaningful participation, rewards, and community contribution.',
-    icon: UserRoundCheck,
+    icon: UserCheck,
   },
   {
     title: 'AI-Assisted Governance',
@@ -128,9 +128,9 @@ const faqItems = [
   },
 ]
 
-const sectionReveal = {
+const sectionReveal: Variants = {
   hidden: { opacity: 0, y: 32, filter: 'blur(8px)' },
-  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.6, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.6 } },
 }
 
 export function DRPLandingExperience() {
