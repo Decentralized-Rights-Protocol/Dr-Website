@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect } from 'react'
-import { Github, Mail, Users, MessageSquare, Calendar, BookOpen, Linkedin, Instagram } from 'lucide-react'
+import { Github, Users, MessageSquare, Calendar, BookOpen, Linkedin, Instagram, ArrowRight, Building2 } from 'lucide-react'
 import { XIcon, DiscordIcon } from '@/components/custom-icons'
-import { ParticleBackground } from '@/components/particle-background'
+import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
 
 const socialLinks = [
   {
@@ -100,220 +100,127 @@ const events: CommunityEvent[] = [
 
 export default function CommunityPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      {/* Particle Background */}
-      <ParticleBackground />
-      
-      {/* Background Grid */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
-      
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-cyan-400/10 rounded-full blur-2xl animate-bounce delay-500"></div>
-      </div>
-      
-      <div className="relative z-10 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-2xl text-center mb-16">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl animate-fade-in-up">
-            Join Our Community
-          </h1>
-          <p className="mt-4 text-xl text-neutral-300 animate-fade-in-up delay-200">
-            Connect with developers, human rights advocates, and contributors 
-            building the future of decentralized human rights protection.
-          </p>
-        </div>
+    <PremiumPage>
+      <PremiumHero
+        badge="Community Network"
+        title="Join the Global DRP Builder and Advocate Community"
+        description="Collaborate with developers, institutions, human-rights practitioners, and ecosystem partners shaping the next generation of trust infrastructure."
+      />
 
-        {/* Community Stats */}
-        <div className="mb-16">
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            {communityStats.map((stat, index) => (
-              <div key={stat.label} className="text-center animate-fade-in-up" style={{ animationDelay: `${300 + index * 100}ms` }}>
-                <div className="text-3xl font-bold text-primary-400 mb-2">
-                  {stat.value}
+      <PremiumSection eyebrow="Global Participation" title="Community by the Numbers">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {communityStats.map((stat) => (
+            <div key={stat.label} className="rounded-2xl border border-white/10 bg-black/30 p-5 text-center">
+              <p className="text-3xl font-semibold text-cyan-200">{stat.value}</p>
+              <p className="mt-2 text-sm text-slate-300">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </PremiumSection>
+
+      <PremiumSection
+        eyebrow="Channels"
+        title="Connect Where You Work Best"
+        description="Real-time discussions, open source coordination, policy conversations, and ecosystem updates."
+      >
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {socialLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative rounded-2xl border border-white/10 bg-black/30 p-6 transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-400/10"
+            >
+              <div className="mb-4 flex items-center gap-x-4">
+                <div className={`${link.color} rounded-lg p-3`}>
+                  <link.icon className="h-6 w-6 text-white" aria-hidden="true" />
                 </div>
-                <div className="text-sm text-neutral-300">
-                  {stat.label}
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{link.name}</h3>
+                  <p className="text-xs text-cyan-200">{link.members} members</p>
                 </div>
+              </div>
+              <p className="text-sm text-slate-300">{link.description}</p>
+            </a>
+          ))}
+        </div>
+      </PremiumSection>
+
+      <section className="py-10 sm:py-14">
+        <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+          <NewsletterSignupTally />
+        </div>
+      </section>
+
+      <PremiumSection eyebrow="Events" title="Upcoming Ecosystem and Governance Events">
+        {events.length === 0 ? (
+          <div className="rounded-2xl border border-white/10 bg-black/25 p-6 text-center text-sm text-slate-300">
+            No upcoming events are currently scheduled.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            {events.map((event) => (
+              <div key={event.title} className="rounded-2xl border border-white/10 bg-black/30 p-6">
+                <div className="mb-4 flex items-center gap-x-3">
+                  <Calendar className="h-5 w-5 text-cyan-200" />
+                  <span className="text-sm font-medium text-cyan-100">{event.date}</span>
+                </div>
+                <h3 className="text-lg font-semibold text-white">{event.title}</h3>
+                <p className="mt-2 text-sm text-slate-300">{event.description}</p>
+                {event.url ? (
+                  <a href={event.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center text-sm font-semibold text-cyan-200 hover:text-cyan-100">
+                    Event details
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </a>
+                ) : null}
               </div>
             ))}
           </div>
-        </div>
+        )}
+      </PremiumSection>
 
-        {/* Social Links */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
-            Connect With Us
-          </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {socialLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-700 hover:ring-primary-600 dark:hover:ring-primary-400 transition-all duration-200 hover:shadow-lg"
-              >
-                <div className="flex items-center gap-x-4 mb-4">
-                  <div className={`${link.color} p-3 rounded-lg`}>
-                    <link.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                      {link.name}
-                    </h3>
-                    <p className="text-sm text-primary-600 dark:text-primary-400">
-                      {link.members} members
-                    </p>
-                  </div>
-                </div>
-                <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                  {link.description}
-                </p>
+      <PremiumSection
+        eyebrow="Contribute"
+        title="Choose How You Want to Participate"
+        description="Whether technical or non-technical, there is a high-impact role for every contributor."
+      >
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            { icon: Github, title: 'Code', body: 'Contribute protocol and app code in open repositories.' },
+            { icon: BookOpen, title: 'Documentation', body: 'Improve clarity and onboarding for global contributors.' },
+            { icon: MessageSquare, title: 'Community', body: 'Guide discussions and support new ecosystem members.' },
+            { icon: Users, title: 'Advocacy', body: 'Bridge rights policy, institutions, and technology adoption.' },
+          ].map((item) => (
+            <article key={item.title} className="rounded-2xl border border-white/10 bg-black/30 p-5">
+              <item.icon className="h-5 w-5 text-cyan-200" />
+              <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
+              <p className="mt-2 text-sm text-slate-300">{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </PremiumSection>
+
+      <section className="pb-20 pt-8">
+        <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+          <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/15 via-blue-300/10 to-amber-300/10 p-8 text-center">
+            <h2 className="text-3xl font-semibold text-white">Partnerships and Institutional Collaboration</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-slate-300">
+              Organizations interested in grants, pilots, or policy collaboration can directly connect with the DRP team.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <a href="mailto:contact@decentralizedrights.com" className="inline-flex items-center rounded-xl border border-cyan-300/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">
+                <Building2 className="mr-2 h-4 w-4" />
+                Contact Partnerships
               </a>
-            ))}
-          </div>
-        </div>
-
-        {/* Newsletter Signup (Tally embed) */}
-        <NewsletterSignupTally />
-
-        {/* Upcoming Events */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
-            Upcoming Events
-          </h2>
-          {events.length === 0 ? (
-            <div className="rounded-2xl bg-white/80 dark:bg-neutral-900/80 p-6 text-center shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-700">
-              <p className="text-neutral-700 dark:text-neutral-300 text-sm">
-                No upcoming events are currently scheduled. Check back soon for new UN sessions and major blockchain conferences.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-              {events.map((event) => (
-                <div
-                  key={event.title}
-                  className="rounded-2xl bg-white dark:bg-neutral-900 p-6 shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-700"
-                >
-                  <div className="flex items-center gap-x-3 mb-4">
-                    <Calendar className="h-5 w-5 text-primary-600" />
-                    <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
-                      {event.date}
-                    </span>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-800 dark:text-primary-200">
-                      {event.type}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                    {event.title}
-                  </h3>
-                  <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
-                    {event.description}
-                  </p>
-                  {event.url && (
-                    <a
-                      href={event.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline"
-                    >
-                      Learn more
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Ways to Contribute */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
-            Ways to Contribute
-          </h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-            <div className="text-center">
-              <div className="mx-auto w-12 h-12 bg-primary-100 dark:bg-primary-900/20 rounded-lg flex items-center justify-center mb-4">
-                <Github className="h-6 w-6 text-primary-600 dark:text-primary-400" />
-              </div>
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                Code
-              </h3>
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                Contribute to our open-source codebase and help build the protocol
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto w-12 h-12 bg-secondary-100 dark:bg-secondary-900/20 rounded-lg flex items-center justify-center mb-4">
-                <BookOpen className="h-6 w-6 text-secondary-600 dark:text-secondary-400" />
-              </div>
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                Documentation
-              </h3>
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                Help improve our documentation and make DRP more accessible
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto w-12 h-12 bg-accent-100 dark:bg-accent-900/20 rounded-lg flex items-center justify-center mb-4">
-                <MessageSquare className="h-6 w-6 text-accent-600 dark:text-accent-400" />
-              </div>
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                Community
-              </h3>
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                Help others learn and grow in our Discord and forums
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto w-12 h-12 bg-primary-100 dark:bg-primary-900/20 rounded-lg flex items-center justify-center mb-4">
-                <Users className="h-6 w-6 text-primary-600 dark:text-primary-400" />
-              </div>
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
-                Advocacy
-              </h3>
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                Spread awareness about human rights and blockchain technology
-              </p>
+              <a href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                View GitHub
+              </a>
             </div>
           </div>
         </div>
-
-        {/* Call to Action */}
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
-            Ready to Make a Difference?
-          </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl mx-auto">
-            Join thousands of developers, advocates, and contributors working together 
-            to protect human rights through technology.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://discord.gg/k8auUAqF"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
-            >
-              Join Discord
-            </a>
-            <a
-              href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 border border-neutral-300 dark:border-neutral-600 text-base font-medium rounded-md text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
-            >
-              View on GitHub
-            </a>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </PremiumPage>
   )
 }
 

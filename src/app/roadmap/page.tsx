@@ -1,7 +1,6 @@
-'use client'
-
-import { Calendar, CheckCircle, Clock, Target } from 'lucide-react'
-import { ParticleBackground } from '@/components/particle-background'
+import Link from 'next/link'
+import { Calendar, CheckCircle2, Clock3, Milestone, ArrowRight } from 'lucide-react'
+import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
 
 const roadmapItems = [
   {
@@ -16,9 +15,9 @@ const roadmapItems = [
       'Basic smart contract framework',
       'Developer documentation v1.0',
     ],
-    icon: CheckCircle,
-    color: 'text-green-600 dark:text-green-400',
-    bgColor: 'bg-green-50 dark:bg-green-900/20',
+    icon: CheckCircle2,
+    color: 'text-emerald-300',
+    bgColor: 'bg-emerald-300/10',
   },
   {
     quarter: 'Q1 2026',
@@ -32,9 +31,9 @@ const roadmapItems = [
       'Security audit phase 1',
       'Governance framework implementation',
     ],
-    icon: CheckCircle,
-    color: 'text-green-600 dark:text-green-400',
-    bgColor: 'bg-green-50 dark:bg-green-900/20',
+    icon: CheckCircle2,
+    color: 'text-emerald-300',
+    bgColor: 'bg-emerald-300/10',
   },
   {
     quarter: 'Q1 2026',
@@ -48,9 +47,9 @@ const roadmapItems = [
       'Token distribution preparation',
       'Partnership announcements',
     ],
-    icon: Clock,
-    color: 'text-blue-600 dark:text-blue-400',
-    bgColor: 'bg-blue-50 dark:bg-blue-900/20',
+    icon: Clock3,
+    color: 'text-cyan-200',
+    bgColor: 'bg-cyan-300/10',
   },
   {
     quarter: 'Q2 2026',
@@ -64,9 +63,9 @@ const roadmapItems = [
       'First human rights organizations integration',
       'Community governance activation',
     ],
-    icon: Target,
-    color: 'text-purple-600 dark:text-purple-400',
-    bgColor: 'bg-purple-50 dark:bg-purple-900/20',
+    icon: Milestone,
+    color: 'text-indigo-200',
+    bgColor: 'bg-indigo-300/10',
   },
   {
     quarter: 'Q2 2026',
@@ -80,9 +79,9 @@ const roadmapItems = [
       'Advanced governance features',
       'Cross-chain interoperability',
     ],
-    icon: Target,
-    color: 'text-purple-600 dark:text-purple-400',
-    bgColor: 'bg-purple-50 dark:bg-purple-900/20',
+    icon: Milestone,
+    color: 'text-indigo-200',
+    bgColor: 'bg-indigo-300/10',
   },
   {
     quarter: 'Q3 2026',
@@ -96,9 +95,9 @@ const roadmapItems = [
       'AI-powered verification tools',
       'International partnerships',
     ],
-    icon: Target,
-    color: 'text-purple-600 dark:text-purple-400',
-    bgColor: 'bg-purple-50 dark:bg-purple-900/20',
+    icon: Milestone,
+    color: 'text-indigo-200',
+    bgColor: 'bg-indigo-300/10',
   },
 ]
 
@@ -127,134 +126,86 @@ const upcomingFeatures = [
 
 export default function RoadmapPage() {
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      {/* Particle Background */}
-      <ParticleBackground />
-      
-      {/* Background Grid */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
-      
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-cyan-400/10 rounded-full blur-2xl animate-bounce delay-500"></div>
-      </div>
-      
-      <div className="relative z-10 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Header */}
-        <div className="mx-auto max-w-2xl text-center mb-16">
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
-            Development Roadmap
-          </h1>
-          <p className="mt-4 text-xl text-neutral-600 dark:text-neutral-400">
-            Our journey to build the future of human rights protection through blockchain technology
-          </p>
-        </div>
+    <PremiumPage>
+      <PremiumHero
+        badge="Future Roadmap"
+        title="Milestones for a Rights-Centered Protocol Economy"
+        description="A transparent execution timeline across core protocol delivery, ecosystem scale, and global impact rollouts."
+      />
 
-        {/* Timeline */}
+      <PremiumSection
+        eyebrow="Protocol Timeline"
+        title="From Foundation to Global Expansion"
+        description="We focus on high-signal milestones: security posture, network reliability, ecosystem tooling, and governance maturity."
+      >
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-neutral-200 dark:bg-neutral-700"></div>
-          
+          <div className="absolute left-3 top-0 h-full w-px bg-white/15" />
           <div className="space-y-12">
-            {roadmapItems.map((item, index) => (
-              <div key={item.quarter} className="relative flex items-start">
-                {/* Timeline dot */}
-                <div className={`absolute left-4 top-6 w-3 h-3 rounded-full ${item.bgColor} border-2 border-white dark:border-neutral-900 flex items-center justify-center`}>
-                  <item.icon className={`w-2 h-2 ${item.color}`} />
+            {roadmapItems.map((item) => (
+              <div key={`${item.quarter}-${item.title}`} className="relative flex items-start">
+                <div className={`absolute left-0 top-5 flex h-6 w-6 items-center justify-center rounded-full border border-white/15 ${item.bgColor}`}>
+                  <item.icon className={`h-3.5 w-3.5 ${item.color}`} />
                 </div>
-                
-                {/* Content */}
-                <div className="ml-12 flex-1">
-                  <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${item.bgColor} ${item.color}`}>
-                    <Calendar className="w-4 h-4 mr-2" />
+                <article className="ml-12 flex-1 rounded-2xl border border-white/10 bg-black/30 p-6">
+                  <div className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${item.bgColor} ${item.color}`}>
+                    <Calendar className="mr-1.5 h-3.5 w-3.5" />
                     {item.quarter}
                   </div>
-                  
-                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
-                    {item.title}
-                  </h3>
-                  
-                  <p className="text-neutral-600 dark:text-neutral-400 mb-6">
-                    {item.description}
-                  </p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {item.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-start">
-                        <div className={`w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0 ${item.color.replace('text-', 'bg-')}`}></div>
-                        <span className="text-sm text-neutral-600 dark:text-neutral-400">{feature}</span>
+                  <h3 className="mt-4 text-2xl font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2 text-slate-300">{item.description}</p>
+                  <div className="mt-5 grid gap-3 md:grid-cols-2">
+                    {item.features.map((feature) => (
+                      <div key={feature} className="rounded-xl border border-white/10 bg-white/[0.02] px-3 py-2 text-sm text-slate-300">
+                        {feature}
                       </div>
                     ))}
                   </div>
-                </div>
+                </article>
               </div>
             ))}
           </div>
         </div>
+      </PremiumSection>
 
-        {/* Upcoming Features */}
-        <div className="mt-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-4">
-              Upcoming Features
-            </h2>
-            <p className="text-lg text-neutral-600 dark:text-neutral-400">
-              Exciting features and improvements coming to the DRP ecosystem
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {upcomingFeatures.map((feature, index) => (
-              <div key={index} className="rounded-2xl bg-white dark:bg-neutral-900 p-8 shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-700">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">
-                    {feature.title}
-                  </h3>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 dark:bg-primary-900/20 text-primary-800 dark:text-primary-200">
-                    {feature.timeline}
-                  </span>
-                </div>
-                <p className="text-neutral-600 dark:text-neutral-400">
-                  {feature.description}
-                </p>
+      <PremiumSection
+        eyebrow="Future Modules"
+        title="Upcoming Product and Ecosystem Tracks"
+        description="Near-term initiatives that increase utility for developers, institutions, and communities."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          {upcomingFeatures.map((feature) => (
+            <article key={feature.title} className="rounded-2xl border border-white/10 bg-black/30 p-6">
+              <div className="flex items-center justify-between gap-4">
+                <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
+                <span className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-100">
+                  {feature.timeline}
+                </span>
               </div>
-            ))}
-          </div>
+              <p className="mt-3 text-sm text-slate-300">{feature.description}</p>
+            </article>
+          ))}
         </div>
+      </PremiumSection>
 
-        {/* Community Involvement */}
-        <div className="mt-24 p-8 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-white">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold mb-4">Help Shape Our Future</h2>
-            <p className="text-primary-100 mb-8 max-w-2xl mx-auto">
-              Our roadmap is community-driven. Join our Discord to suggest features, 
-              vote on priorities, and help us build the future of human rights protection.
+      <section className="pb-20 pt-8">
+        <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+          <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/15 via-blue-300/10 to-indigo-300/10 p-8 text-center">
+            <h2 className="text-3xl font-semibold text-white">Build With Us in Public</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-slate-300">
+              Our roadmap is intentionally collaborative. Join the community and help prioritize what ships next.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://discord.gg/k8auUAqF"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors"
-              >
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <a href="https://discord.gg/k8auUAqF" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-xl border border-cyan-300/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">
                 Join Discord
               </a>
-              <a
-                href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-white hover:text-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-colors"
-              >
-                Contribute on GitHub
-              </a>
-            </div>
+              <Link href="/community" className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                Explore Community
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </PremiumPage>
   )
 }

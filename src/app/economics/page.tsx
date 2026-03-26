@@ -1,10 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, TrendingUp, Globe, Shield, Sparkles, Activity, Coins, Package, Users, Building2, BarChart, Network } from 'lucide-react'
-import { EconomicsHero } from '@/components/economics/EconomicsHero'
-import { SystemComparison } from '@/components/economics/SystemComparison'
+import { ArrowRight, Globe, Shield, Sparkles, Activity, Coins, Package, Users, BarChart, Network } from 'lucide-react'
+import { PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
 
 const economicsPages = [
   {
@@ -67,242 +65,79 @@ const economicsPages = [
 
 export default function EconomicsPage() {
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      {/* Hero Section */}
-      <EconomicsHero
-        title="DRP Economics: The Sustainable Rights Economy (SRE)"
-        subtitle="Replacing extraction with verified human activity"
-        description="A new economic paradigm where human dignity, sustainability, and verified contribution replace surveillance, inequality, and environmental degradation."
+    <>
+      <PremiumHero
+        badge="Economic Architecture"
+        title="DRP Economics: Sustainable Rights Economy"
+        description="A rights-centered system where verified contribution, sustainability, and transparent governance replace extraction economics."
       />
 
-      {/* Current Economic Crisis */}
-      <section className="py-16 bg-transparent">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              The Current Economic Crisis
-            </h2>
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <p className="text-xl text-neutral-300 mb-6">
-                Our current economic system behaves like &quot;The Alien&quot;—an inhuman force that extracts value, 
-                surveils populations, and perpetuates inequality. It treats human beings as resources to be 
-                optimized rather than rights-holders to be empowered.
-              </p>
-              <p className="text-lg text-neutral-300 mb-6">
-                <strong className="text-white">The Problem:</strong> We have an 
-                extraction-based economy where:
-              </p>
-              <ul className="list-disc pl-6 space-y-2 text-neutral-300 mb-6">
-                <li>AI is used as a ruler (surveillance, control, optimization of humans)</li>
-                <li>Value flows upward to centralized entities</li>
-                <li>Inequality is built into the system by design</li>
-                <li>Environmental degradation is externalized</li>
-                <li>Human dignity is ignored in favor of efficiency metrics</li>
-              </ul>
-            </div>
-          </motion.div>
+      <PremiumSection eyebrow="Framework" title="AI as Auditor, Not Ruler">
+        <div className="grid gap-4 md:grid-cols-2">
+          <article className="rounded-2xl border border-red-300/25 bg-red-300/10 p-5">
+            <h3 className="text-lg font-semibold text-red-100">Legacy Model</h3>
+            <p className="mt-2 text-sm text-red-50/90">Opaque control, extraction incentives, centralized value capture.</p>
+          </article>
+          <article className="rounded-2xl border border-emerald-300/25 bg-emerald-300/10 p-5">
+            <h3 className="text-lg font-semibold text-emerald-100">DRP Model</h3>
+            <p className="mt-2 text-sm text-emerald-50/90">Transparent verification, rights alignment, distributed value creation.</p>
+          </article>
         </div>
-      </section>
+      </PremiumSection>
 
-      {/* AI as Auditor, Not Ruler */}
-      <section className="py-16 bg-transparent">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              AI as Auditor, Not Ruler
-            </h2>
-            <p className="text-xl text-neutral-300 mb-8">
-              DRP flips the script: Instead of AI surveilling and controlling humans, AI serves as a 
-              transparent auditor that verifies human activity, ensures fairness, and maintains the integrity 
-              of the rights-based distribution system.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6 mt-12">
-              <div className="p-6 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900">
-                <h3 className="text-xl font-bold text-red-900 dark:text-red-100 mb-3">
-                  Current System: AI as Ruler
-                </h3>
-                <ul className="space-y-2 text-red-800 dark:text-red-200">
-                  <li>• Surveillance and control</li>
-                  <li>• Optimization of humans</li>
-                  <li>• Opaque decision-making</li>
-                  <li>• Centralized power</li>
-                </ul>
+      <PremiumSection eyebrow="Core Pillars" title="What Powers the Economy">
+        <div className="grid gap-4 md:grid-cols-3">
+          {[
+            { icon: Activity, title: 'Verified Activity', body: 'Contribution is measured through proofs, not speculation.' },
+            { icon: Shield, title: 'Rights-Backed Distribution', body: 'Economic rails prioritize dignity and fairness.' },
+            { icon: Sparkles, title: 'Sustainability Incentives', body: 'Environmental and social value are first-class metrics.' },
+          ].map((item) => (
+            <article key={item.title} className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <item.icon className="h-5 w-5 text-cyan-200" />
+              <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
+              <p className="mt-2 text-sm text-slate-300">{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </PremiumSection>
+
+      <PremiumSection eyebrow="Modules" title="Explore DRP Economics in Depth">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {economicsPages.map((page) => (
+            <Link
+              key={page.href}
+              href={page.href}
+              className="group block h-full rounded-2xl border border-white/10 bg-black/30 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-400/10"
+            >
+              <div className={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${page.color}`}>
+                <page.icon className="h-8 w-8 text-white" />
               </div>
-              <div className="p-6 rounded-xl bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-900">
-                <h3 className="text-xl font-bold text-green-900 dark:text-green-100 mb-3">
-                  DRP System: AI as Auditor
-                </h3>
-                <ul className="space-y-2 text-green-800 dark:text-green-200">
-                  <li>• Verification and transparency</li>
-                  <li>• Empowerment of humans</li>
-                  <li>• Open, auditable processes</li>
-                  <li>• Decentralized governance</li>
-                </ul>
+              <h3 className="text-xl font-semibold text-white">{page.title}</h3>
+              <p className="mt-3 text-sm text-slate-300">{page.description}</p>
+              <div className="mt-4 flex items-center font-medium text-cyan-200">
+                Open module
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </div>
-            </div>
-          </motion.div>
+            </Link>
+          ))}
         </div>
-      </section>
+      </PremiumSection>
 
-      {/* System Comparison */}
-      <SystemComparison />
-
-      {/* DRP Mission */}
-      <section className="py-16 bg-transparent">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              DRP&apos;s Mission: Replace Extraction with Verified Human Activity
-            </h2>
-            <p className="text-xl text-neutral-300 mb-8">
-              The Sustainable Rights Economy (SRE) is built on three core principles:
+      <section className="pb-20 pt-8">
+        <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+          <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/15 via-blue-300/10 to-indigo-300/10 p-8 text-center">
+            <h2 className="text-3xl font-semibold text-white">Go from Theory to Governance</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-slate-300">
+              Continue with whitepaper details or inspect ecosystem activity through explorer tooling.
             </p>
-            <div className="grid md:grid-cols-3 gap-6 mt-12">
-              {[
-                {
-                  icon: Activity,
-                  title: 'Verified Activity',
-                  description: 'Human contribution is verified, not surveilled. Value flows to those who create it.',
-                },
-                {
-                  icon: Shield,
-                  title: 'Rights-Backed',
-                  description: 'Distribution is based on human rights, not extraction. Dignity is the metric.',
-                },
-                {
-                  icon: Sparkles,
-                  title: 'Sustainable',
-                  description: 'Environmental and social sustainability are rewarded, not externalized.',
-                },
-              ].map(({ icon: Icon, title, description }, index) => (
-                <motion.div
-                  key={title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700"
-                >
-                  <Icon className="h-12 w-12 text-blue-500 mb-4" />
-                  <h3 className="text-xl font-bold text-white mb-3">
-                    {title}
-                  </h3>
-                  <p className="text-neutral-300">
-                    {description}
-                  </p>
-                </motion.div>
-              ))}
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link href="/whitepaper" className="inline-flex items-center rounded-xl border border-cyan-300/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">Read Whitepaper</Link>
+              <Link href="/explorer" className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Open Explorer</Link>
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Economics Pages Grid */}
-      <section className="py-16 bg-transparent-950">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-white mb-4">
-              Explore DRP Economics
-            </h2>
-            <p className="text-xl text-neutral-300">
-              Deep dive into each aspect of the Sustainable Rights Economy
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {economicsPages.map((page, index) => (
-              <motion.div
-                key={page.href}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Link
-                  href={page.href}
-                  className="group block h-full p-8 rounded-2xl bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-300 hover:shadow-xl"
-                >
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${page.color} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <page.icon className="h-8 w-8 text-white" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {page.title}
-                  </h3>
-                  
-                  <p className="text-neutral-300 mb-4">
-                    {page.description}
-                  </p>
-                  
-                  <div className="flex items-center text-blue-600 dark:text-blue-400 font-medium">
-                    Learn more
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-blue-600 to-purple-600">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Explore the DRP Economy?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Discover how the Sustainable Rights Economy transforms value creation, distribution, and governance.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/explorer"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-blue-600 bg-white rounded-xl hover:bg-blue-50 transition-all duration-300 hover:scale-105"
-              >
-                View Explorer
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link
-                href="/whitepaper"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white rounded-xl hover:bg-white/10 transition-all duration-300 hover:scale-105"
-              >
-                Read Whitepaper
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </div>
+    </>
   )
 }
 

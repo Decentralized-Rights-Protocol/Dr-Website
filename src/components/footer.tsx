@@ -91,6 +91,8 @@ export function Footer() {
             <h4 className="mb-3 text-sm font-semibold text-white">Protocol</h4>
             <ul className="space-y-2">
               <li><Link href="/philosophy" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Philosophy</Link></li>
+              <li><Link href="/about" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">About</Link></li>
+              <li><Link href="/ecosystem" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Ecosystem</Link></li>
               <li><Link href="/docs" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Docs</Link></li>
               <li><Link href="/tokens" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Tokens</Link></li>
               <li><Link href="/economics" className="text-sm text-slate-300 transition-colors hover:text-cyan-200">Economics</Link></li>

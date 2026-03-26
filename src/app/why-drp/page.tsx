@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { ArrowRight, BarChart3, Table, Star, Shield, Zap, Users, Globe, Brain, Leaf } from 'lucide-react'
 import { ComparisonTable } from '@/components/ComparisonTable'
 import { ComparisonChart } from '@/components/ComparisonChart'
-import { ParticleBackground } from '@/components/particle-background'
 import { cn } from '@/lib/utils'
+import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
 
 const drpAdvantages = [
   {
@@ -51,175 +51,95 @@ export default function WhyDRPPage() {
   const [viewMode, setViewMode] = React.useState<'table' | 'chart'>('table')
 
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      {/* Particle Background */}
-      <ParticleBackground />
-      
-      {/* Background Grid */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
-      
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
-        <div className="absolute top-1/4 right-1/4 w-48 h-48 bg-cyan-400/10 rounded-full blur-2xl animate-bounce delay-700"></div>
-      </div>
+    <PremiumPage>
+      <PremiumHero
+        badge="Why DRP"
+        title="A New Standard for Trust, Fairness, and Sustainability"
+        description="DRP blends AI verification, rights-centered governance, and long-term security into one coherent protocol stack."
+      />
 
-      <div className="relative z-10 container mx-auto px-4 py-16">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="mb-6 animate-fade-in-up">
-            <span className="inline-flex items-center rounded-full bg-gradient-to-r from-green-500/10 to-blue-500/10 backdrop-blur-sm px-4 py-2 text-sm font-medium text-green-700 dark:text-green-300 border border-green-200/50 dark:border-green-700/50">
-              🌍 Why Choose DRP?
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in-up delay-200">
-            A New Standard for
-            <span className="block bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x">
-              Trust, Fairness, and Sustainability
-            </span>
-          </h1>
-          <p className="text-xl text-neutral-300 mb-8 max-w-3xl mx-auto animate-fade-in-up delay-300">
-            DRP redefines what a blockchain can achieve — blending AI, ethics, and decentralization 
-            to empower every human being with transparent, secure, and sustainable technology.
-          </p>
-        </div>
-
-        {/* DRP Advantages */}
-        <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center text-white mb-12 animate-fade-in-up delay-400">
-            What Makes DRP Different
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {drpAdvantages.map((advantage, index) => (
-              <div
-                key={advantage.title}
-                className="group bg-white/10 backdrop-blur-md rounded-xl shadow-lg border border-white/20 p-6 hover:shadow-xl hover:scale-105 hover:bg-white/20 transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${500 + index * 100}ms` }}
-              >
-                <div className="flex items-center gap-x-4 mb-4">
-                  <div className={cn(
-                    "p-3 rounded-lg bg-gradient-to-br from-white/20 to-white/10 group-hover:scale-110 transition-transform duration-300",
-                    advantage.color
-                  )}>
-                    <advantage.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">
-                    {advantage.title}
-                  </h3>
+      <PremiumSection eyebrow="Protocol Edge" title="What Makes DRP Structurally Different">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {drpAdvantages.map((advantage) => (
+            <div
+              key={advantage.title}
+              className="group rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20 hover:shadow-xl"
+            >
+              <div className="mb-4 flex items-center gap-x-4">
+                <div className={cn(
+                  'rounded-lg bg-gradient-to-br from-white/20 to-white/10 p-3 transition-transform duration-300 group-hover:scale-110',
+                  advantage.color
+                )}>
+                  <advantage.icon className="h-6 w-6" />
                 </div>
-                <p className="text-neutral-300">
-                  {advantage.description}
-                </p>
+                <h3 className="text-lg font-semibold text-white">{advantage.title}</h3>
               </div>
-            ))}
+              <p className="text-neutral-300">{advantage.description}</p>
+            </div>
+          ))}
+        </div>
+      </PremiumSection>
+
+      <PremiumSection
+        eyebrow="Benchmarking"
+        title="DRP vs Traditional Blockchain Architectures"
+        description="Switch between table and chart views to compare critical performance and mission-alignment metrics."
+      >
+        <div className="mb-8 flex justify-center">
+          <div className="rounded-lg border border-white/20 bg-white/10 p-1 backdrop-blur-sm">
+            <button
+              onClick={() => setViewMode('table')}
+              className={cn(
+                'flex items-center gap-x-2 rounded-md px-4 py-2 text-sm font-medium transition-all duration-200',
+                viewMode === 'table' ? 'bg-cyan-400 text-slate-900 shadow-sm' : 'text-gray-300 hover:text-white'
+              )}
+            >
+              <Table className="h-4 w-4" />
+              Table View
+            </button>
+            <button
+              onClick={() => setViewMode('chart')}
+              className={cn(
+                'flex items-center gap-x-2 rounded-md px-4 py-2 text-sm font-medium transition-all duration-200',
+                viewMode === 'chart' ? 'bg-cyan-400 text-slate-900 shadow-sm' : 'text-gray-300 hover:text-white'
+              )}
+            >
+              <BarChart3 className="h-4 w-4" />
+              Chart View
+            </button>
           </div>
         </div>
+        <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-sm">
+          {viewMode === 'table' ? <ComparisonTable /> : <ComparisonChart />}
+        </div>
+      </PremiumSection>
 
-        {/* Comparison Section */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in-up delay-600">
-              DRP vs. Other Blockchains
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 animate-fade-in-up delay-700">
-              See how DRP compares to major blockchain platforms across key metrics
+      <section className="pb-20 pt-8">
+        <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+          <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/15 via-blue-300/10 to-amber-300/10 p-8 text-center">
+            <h2 className="text-3xl font-semibold text-white">Ready to Build on the Future Stack?</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-slate-300">
+              Dive into the whitepaper and learning modules to understand DRP from architecture to implementation.
             </p>
-            
-            {/* View Toggle */}
-            <div className="flex justify-center mb-8">
-              <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg p-1 border border-white/20 dark:border-gray-700/50">
-                <button
-                  onClick={() => setViewMode('table')}
-                  className={cn(
-                    "flex items-center gap-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200",
-                    viewMode === 'table'
-                      ? "bg-blue-500 text-white shadow-sm"
-                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  )}
-                >
-                  <Table className="h-4 w-4" />
-                  Table View
-                </button>
-                <button
-                  onClick={() => setViewMode('chart')}
-                  className={cn(
-                    "flex items-center gap-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200",
-                    viewMode === 'chart'
-                      ? "bg-blue-500 text-white shadow-sm"
-                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                  )}
-                >
-                  <BarChart3 className="h-4 w-4" />
-                  Chart View
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Comparison Content */}
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-xl border border-white/20 dark:border-gray-700/50 p-8 animate-fade-in-up delay-800">
-            {viewMode === 'table' ? (
-              <ComparisonTable />
-            ) : (
-              <ComparisonChart />
-            )}
-          </div>
-        </div>
-
-        {/* Key Metrics Highlight */}
-        <div className="mb-20">
-          <div className="bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl p-8 text-white text-center animate-fade-in-up delay-900">
-            <h3 className="text-2xl font-bold mb-4">DRP Performance Highlights</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div>
-                <div className="text-3xl font-bold mb-2">99%</div>
-                <div className="text-sm opacity-90">Less Energy Use</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold mb-2">100%</div>
-                <div className="text-sm opacity-90">AI Integration</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold mb-2">98%</div>
-                <div className="text-sm opacity-90">Sustainability Score</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold mb-2">100%</div>
-                <div className="text-sm opacity-90">Quantum Resistant</div>
-              </div>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/whitepaper"
+                className="group inline-flex items-center gap-x-2 rounded-xl border border-cyan-300/40 bg-cyan-300/90 px-8 py-4 font-semibold text-slate-900 transition hover:bg-cyan-200"
+              >
+                Read Whitepaper
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+              <Link
+                href="/learn"
+                className="inline-flex items-center gap-x-2 rounded-xl border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white transition hover:bg-white/20"
+              >
+                Start Learning
+                <Star className="h-5 w-5" />
+              </Link>
             </div>
           </div>
         </div>
-
-        {/* Call to Action */}
-        <div className="text-center animate-fade-in-up delay-1000">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-            Ready to Experience the Future of Blockchain?
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join the DRP ecosystem and be part of a blockchain revolution that prioritizes 
-            human rights, sustainability, and artificial intelligence.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/whitepaper"
-              className="group inline-flex items-center gap-x-2 bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-green-600 hover:to-blue-600 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              Read the Full DRP Whitepaper
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/learn"
-              className="inline-flex items-center gap-x-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white px-8 py-4 rounded-lg font-semibold hover:bg-white dark:hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700"
-            >
-              Start Learning DRP
-              <Star className="h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </PremiumPage>
   )
 }
