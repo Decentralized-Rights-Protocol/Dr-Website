@@ -16,6 +16,7 @@ export function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
   const animationRef = useRef<number>()
+  const themeRef = useRef<'light' | 'dark'>('light')
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -23,6 +24,12 @@ export function ParticleBackground() {
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
+
+    const detectTheme = () => {
+      const isDarkClass = document.documentElement.classList.contains('dark')
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      themeRef.current = isDarkClass || prefersDark ? 'dark' : 'light'
+    }
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth
@@ -32,6 +39,10 @@ export function ParticleBackground() {
     const createParticles = () => {
       const particles: Particle[] = []
       const particleCount = Math.floor((canvas.width * canvas.height) / 10000)
+      const palette =
+        themeRef.current === 'dark'
+          ? ['#8B5CF6', '#06B6D4', '#60A5FA', '#F59E0B'] // richer glow for dark
+          : ['#7C3AED', '#14B8A6', '#3B82F6', '#F59E0B'] // slightly deeper but subtler for light
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
@@ -41,7 +52,7 @@ export function ParticleBackground() {
           vy: (Math.random() - 0.5) * 0.5,
           size: Math.random() * 2 + 1,
           opacity: Math.random() * 0.5 + 0.2,
-          color: ['#8B5CF6', '#06B6D4', '#10B981', '#F59E0B'][Math.floor(Math.random() * 4)]
+          color: palette[Math.floor(Math.random() * palette.length)],
         })
       }
 
@@ -88,6 +99,7 @@ export function ParticleBackground() {
       animationRef.current = requestAnimationFrame(animate)
     }
 
+    detectTheme()
     resizeCanvas()
     createParticles()
     animate()
@@ -96,11 +108,19 @@ export function ParticleBackground() {
       resizeCanvas()
       createParticles()
     }
+    const handleThemeChange = () => {
+      detectTheme()
+      createParticles()
+    }
 
     window.addEventListener('resize', handleResize)
+    // Observe theme changes when next-themes toggles class
+    const themeObserver = new MutationObserver(handleThemeChange)
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 
     return () => {
       window.removeEventListener('resize', handleResize)
+      themeObserver.disconnect()
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
