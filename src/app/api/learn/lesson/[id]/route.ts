@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { loadLessonById, loadLessonBySlug } from '@/lib/learn-utils';
 import { getQuestionsForLesson } from '@/learn/data/questions';
+import { logError, logInfo } from '@/lib/logging';
 
 export async function GET(
   request: NextRequest,
@@ -12,7 +13,7 @@ export async function GET(
     
     if (!lessonId) {
       return NextResponse.json(
-        { error: 'Lesson ID is required' },
+        { code: 'BAD_REQUEST', message: 'Lesson ID is required' },
         { status: 400 }
       );
     }
@@ -26,9 +27,9 @@ export async function GET(
     }
     
     if (!lesson) {
-      console.error(`[API] Lesson not found for ID/slug: ${lessonId}`);
+      logError('lesson_not_found', { lessonId });
       return NextResponse.json(
-        { error: 'Lesson not found', lessonId },
+        { code: 'NOT_FOUND', message: 'Lesson not found', details: { lessonId } },
         { status: 404 }
       );
     }
@@ -46,18 +47,16 @@ export async function GET(
       }))
     };
     
+    logInfo('lesson_loaded', { lessonId: lesson.slug });
     return NextResponse.json({
       ...lesson,
       quiz
     });
   } catch (error) {
-    console.error('[API] Error loading lesson:', error);
-    if (error instanceof Error) {
-      console.error('[API] Error details:', error.message);
-      console.error('[API] Stack:', error.stack);
-    }
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    logError('lesson_load_error', { message });
     return NextResponse.json(
-      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
+      { code: 'INTERNAL_ERROR', message: 'Internal server error', details: message },
       { status: 500 }
     );
   }

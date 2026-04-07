@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import { Footer } from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
   title: {
@@ -85,11 +87,17 @@ export default function RootLayout({
       <body className="min-h-screen bg-background font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
-            <Navigation />
+            <header>
+              <Navigation />
+            </header>
             <main className="flex-1">{children}</main>
-            <Footer />
+            <footer>
+              <Footer />
+            </footer>
           </div>
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

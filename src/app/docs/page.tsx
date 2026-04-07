@@ -1,8 +1,14 @@
-'use client'
-
 import Link from 'next/link'
 import { BookOpen, Code, Zap, Users, ArrowRight } from 'lucide-react'
 import { PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
+import { buildPageMetadata } from '@/lib/seo/seo'
+
+export const metadata = buildPageMetadata({
+  title: 'DRP Docs | Getting Started, Consensus & AI',
+  description:
+    'Developer documentation for the Decentralized Rights Protocol (DRP): getting started, consensus (PoST/PoAT), AI Elders, and post-quantum security.',
+  canonical: '/docs',
+})
 
 const docSections = [
   {

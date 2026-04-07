@@ -11,6 +11,43 @@ export function StructuredData({ type = 'default' }: StructuredDataProps) {
   const baseUrl = 'https://decentralizedrights.com'
   const currentUrl = `${baseUrl}${pathname}`
 
+  const getBreadcrumbSchemaFromPathname = () => {
+    const segments = pathname.split('/').filter(Boolean)
+
+    const titleCase = (value: string) =>
+      value
+        .replace(/[-_]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .split(' ')
+        .map((part) => (part ? part[0].toUpperCase() + part.slice(1) : part))
+        .join(' ')
+
+    const itemListElement = [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl,
+      },
+      ...segments.map((segment, index) => {
+        const href = `${baseUrl}/${segments.slice(0, index + 1).join('/')}`
+        return {
+          '@type': 'ListItem',
+          position: index + 2,
+          name: titleCase(segment),
+          item: href,
+        }
+      }),
+    ]
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement,
+    }
+  }
+
   const getStructuredData = () => {
     switch (type) {
       case 'homepage':
@@ -19,24 +56,25 @@ export function StructuredData({ type = 'default' }: StructuredDataProps) {
           getSoftwareApplicationSchema(),
           getFAQSchema(),
           getWebSiteSchema(),
+          getBreadcrumbSchemaFromPathname(),
         ]
       case 'whitepaper':
         return [
           getArticleSchema(),
-          getBreadcrumbSchema(['Home', 'Whitepaper']),
+          getBreadcrumbSchemaFromPathname(),
         ]
       case 'philosophy':
         return [
           getArticleSchema('philosophy'),
-          getBreadcrumbSchema(['Home', 'Philosophy']),
+          getBreadcrumbSchemaFromPathname(),
         ]
       case 'governance':
         return [
           getArticleSchema('governance'),
-          getBreadcrumbSchema(['Home', 'Economics', 'Governance']),
+          getBreadcrumbSchemaFromPathname(),
         ]
       default:
-        return [getWebPageSchema()]
+        return [getWebPageSchema(), getBreadcrumbSchemaFromPathname()]
     }
   }
 
@@ -245,6 +283,8 @@ export function StructuredData({ type = 'default' }: StructuredDataProps) {
     }
   }
 
+  // Kept for backwards compatibility with older internal usage; most pages now use
+  // a pathname-derived breadcrumb list for accuracy.
   const getBreadcrumbSchema = (items: string[]) => ({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -252,10 +292,7 @@ export function StructuredData({ type = 'default' }: StructuredDataProps) {
       '@type': 'ListItem',
       position: index + 1,
       name: item,
-      item:
-        index === 0
-          ? baseUrl
-          : `${baseUrl}/${item.toLowerCase().replace(/\s+/g, '-')}`,
+      item: index === 0 ? baseUrl : `${baseUrl}/${item.toLowerCase().replace(/\s+/g, '-')}`,
     })),
   })
 

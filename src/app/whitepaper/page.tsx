@@ -2,6 +2,16 @@ import Link from 'next/link'
 import { Download, Eye, ExternalLink, BookOpenText, ShieldCheck, Brain, Scale, Quote } from 'lucide-react'
 import { StructuredData } from '@/components/seo/StructuredData'
 import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
+import { buildPageMetadata } from '@/lib/seo/seo'
+import * as React from 'react'
+import { WhitepaperActions } from '@/components/whitepaper/WhitepaperActions'
+
+export const metadata = buildPageMetadata({
+  title: 'DRP Whitepaper | Quantum-Safe Human Rights Protocol',
+  description:
+    'Read the Decentralized Rights Protocol (DRP) whitepaper: architecture, AI-verified consensus (PoST/PoAT), token economics, rights-centered governance, and quantum-safe security.',
+  canonical: '/whitepaper',
+})
 
 export default function WhitepaperPage() {
   const sections = [
@@ -23,29 +33,29 @@ export default function WhitepaperPage() {
           badge="Protocol Research Portal"
           title="DRP Whitepaper"
           description="A rigorous technical and governance blueprint for the Decentralized Rights Protocol, including consensus architecture, sustainable economics, and quantum-safe security."
-          actions={
-            <>
-              <a
-                href="/whitepaper_v0.5.pdf"
-                download="DRP_Whitepaper_v0.5.pdf"
-                className="inline-flex items-center rounded-xl border border-cyan-200/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200"
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Download PDF
-              </a>
-              <a
-                href="/whitepaper_v0.5.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/50 hover:bg-cyan-300/10"
-              >
-                <Eye className="mr-2 h-4 w-4" />
-                Read Online
-                <ExternalLink className="ml-2 h-4 w-4" />
-              </a>
-            </>
-          }
+          actions={<WhitepaperActions />}
         />
+
+        <PremiumSection
+          eyebrow="Definition-first"
+          title="What the DRP whitepaper answers"
+          description="DRP is a human-rights-centered blockchain protocol. The whitepaper documents how AI-verified consensus, Proof of Status (PoST), and Proof of Activity (PoAT) work together to produce rights-aligned, auditable governance and participation."
+        >
+          <div className="grid gap-4 md:grid-cols-3">
+            <article className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-300">
+              <strong className="text-white font-semibold">What is DRP?</strong>
+              <div className="mt-1">A proof-based trust and governance layer for human rights.</div>
+            </article>
+            <article className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-300">
+              <strong className="text-white font-semibold">How do PoST/PoAT work?</strong>
+              <div className="mt-1">Verified status and verified activity become auditable proofs.</div>
+            </article>
+            <article className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-300">
+              <strong className="text-white font-semibold">Why the focus on dignity?</strong>
+              <div className="mt-1">Governance is evaluated against rights baselines and sustainability.</div>
+            </article>
+          </div>
+        </PremiumSection>
 
         <PremiumSection
           eyebrow="Research Index"

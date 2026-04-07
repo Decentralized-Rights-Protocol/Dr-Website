@@ -1,9 +1,15 @@
-'use client'
-
+import { buildPageMetadata } from '@/lib/seo/seo'
 import Link from 'next/link'
 import { Compass, ShieldCheck, HeartHandshake, Sparkles, ArrowRight } from 'lucide-react'
 import { StructuredData } from '@/components/seo/StructuredData'
 import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
+
+export const metadata = buildPageMetadata({
+  title: 'DRP Philosophy | Rights-First Trust Infrastructure',
+  description:
+    'DRP philosophy explains why decentralized rights, proof over authority, and privacy-preserving verification come first—so AI and blockchain protect dignity instead of extracting value.',
+  canonical: '/philosophy',
+})
 
 export default function PhilosophyPage() {
   return (
@@ -15,6 +21,23 @@ export default function PhilosophyPage() {
           title="Rights Before Power, Proof Before Authority"
           description="A human-centered philosophy for trust infrastructure in the AI and blockchain era."
         />
+
+        <PremiumSection
+          eyebrow="Definition-first"
+          title="Why proofs replace power"
+          description="DRP’s philosophy is simple: trust should be grounded in verifiable proofs. PoST and PoAT translate identity and activity into auditable evidence so governance can be rights-aligned and accountable."
+        >
+          <div className="grid gap-4 md:grid-cols-2">
+            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <h3 className="text-base font-semibold text-white">PoST: verified status</h3>
+              <p className="mt-2 text-sm text-slate-300">Governance weighting based on credential proofs, not influence.</p>
+            </article>
+            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <h3 className="text-base font-semibold text-white">PoAT: verified activity</h3>
+              <p className="mt-2 text-sm text-slate-300">Rewards based on meaningful contribution and transparent evidence.</p>
+            </article>
+          </div>
+        </PremiumSection>
 
         <PremiumSection
           eyebrow="Why DRP Exists"

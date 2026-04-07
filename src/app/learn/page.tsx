@@ -1,6 +1,14 @@
 import Link from 'next/link'
 import { ArrowRight, BookOpen, Bot, GraduationCap, Rocket, Sparkles, Trophy } from 'lucide-react'
 import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
+import { buildPageMetadata } from '@/lib/seo/seo'
+
+export const metadata = buildPageMetadata({
+  title: 'Learn DRP | Proof of Status & Proof of Activity',
+  description:
+    'Start learning the Decentralized Rights Protocol (DRP) from first principles: PoST identity verification, PoAT activity proofs, AI Elders, governance, and quantum-safe security.',
+  canonical: '/learn',
+})
 
 interface CurriculumTier {
   id: number
@@ -89,6 +97,23 @@ export default function LearnPage() {
           </>
         }
       />
+
+      <PremiumSection
+        eyebrow="Definition-first"
+        title="Start with PoST + PoAT"
+        description="DRP’s learning path begins with proof mechanisms: PoST verifies status credentials for governance weighting, and PoAT verifies meaningful activity for equitable rewards—validated with AI Elders."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+            <h3 className="text-base font-semibold text-white">Proof of Status (PoST)</h3>
+            <p className="mt-2 text-sm text-slate-300">Verifiable credential signals without unnecessary private-data exposure.</p>
+          </article>
+          <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+            <h3 className="text-base font-semibold text-white">Proof of Activity (PoAT)</h3>
+            <p className="mt-2 text-sm text-slate-300">Evidence of meaningful contribution connected to rewards and governance participation.</p>
+          </article>
+        </div>
+      </PremiumSection>
 
       <PremiumSection
         eyebrow="Learning Flight Path"

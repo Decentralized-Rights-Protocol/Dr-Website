@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logError, logInfo } from '@/lib/logging';
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,7 +9,7 @@ export async function POST(request: NextRequest) {
     // Validate required fields
     if (!wallet_address || !lesson_id || score === undefined) {
       return NextResponse.json(
-        { error: 'Missing required fields: wallet_address, lesson_id, score' },
+        { code: 'BAD_REQUEST', message: 'Missing required fields: wallet_address, lesson_id, score' },
         { status: 400 }
       );
     }
@@ -16,7 +17,7 @@ export async function POST(request: NextRequest) {
     // Validate wallet address format
     if (!/^0x[a-fA-F0-9]{40}$/.test(wallet_address)) {
       return NextResponse.json(
-        { error: 'Invalid wallet address format' },
+        { code: 'BAD_REQUEST', message: 'Invalid wallet address format' },
         { status: 400 }
       );
     }
@@ -24,13 +25,14 @@ export async function POST(request: NextRequest) {
     // Validate score range
     if (score < 0 || score > 100) {
       return NextResponse.json(
-        { error: 'Score must be between 0 and 100' },
+        { code: 'BAD_REQUEST', message: 'Score must be between 0 and 100' },
         { status: 400 }
       );
     }
 
     // Forward request to FastAPI backend
     const backendUrl = process.env.LEARN_API_URL || 'http://localhost:8001';
+    logInfo('reward_forward_request', { lesson_id, score });
     const response = await fetch(`${backendUrl}/api/reward/lesson-complete`, {
       method: 'POST',
       headers: {
@@ -45,19 +47,23 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `Backend responded with status: ${response.status}`);
+      const backendMessage = (errorData && (errorData.error || errorData.message)) || `Backend responded with status: ${response.status}`;
+      logError('reward_backend_error', { status: response.status, backendMessage });
+      throw new Error(backendMessage);
     }
 
     const data = await response.json();
+    logInfo('reward_success', { lesson_id });
     return NextResponse.json(data);
 
   } catch (error) {
-    console.error('Error processing lesson completion reward:', error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    logError('reward_process_error', { message });
     return NextResponse.json(
       { 
-        success: false,
+        code: 'INTERNAL_ERROR',
         message: 'Failed to process reward',
-        error: error instanceof Error ? error.message : 'Unknown error'
+        details: message
       },
       { status: 500 }
     );

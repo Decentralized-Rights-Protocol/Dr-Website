@@ -1,5 +1,3 @@
-'use client'
-
 import { RightsAnimation } from '@/components/tokens/RightsAnimation'
 import { TokenCard } from '@/components/tokens/TokenCard'
 import { TokenComparisonTable } from '@/components/tokens/TokenComparisonTable'
@@ -7,12 +5,22 @@ import { QuantumSafeSection } from '@/components/tokens/QuantumSafeSection'
 import { Zap, Link as LinkIcon, Award, Building2, Sparkles, Shield } from 'lucide-react'
 import { ParticleBackground } from '@/components/particle-background'
 import Link from 'next/link'
+import { StructuredData } from '@/components/seo/StructuredData'
+import { buildPageMetadata } from '@/lib/seo/seo'
+
+export const metadata = buildPageMetadata({
+  title: 'DRP Tokens | RIGHTS & DeRi',
+  description:
+    'Learn how DRP uses a dual-token economy: $RIGHTS for governance and voting, and $DeRi for utility, participation rewards, and on-chain activity proofs.',
+  canonical: '/tokens',
+})
 
 export default function TokensPage() {
   return (
     <div className="flex flex-col min-h-screen">
+      <StructuredData />
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 pb-24" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
+      <section className="relative overflow-hidden pt-32 pb-24 bg-gradient-to-br from-primary/30 via-accent/20 to-secondary/30">
         <ParticleBackground />
         
         {/* Background Grid */}
@@ -20,20 +28,20 @@ export default function TokensPage() {
 
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl animate-bounce delay-500"></div>
+          <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full blur-3xl animate-pulse bg-primary/20"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full blur-3xl animate-pulse delay-1000 bg-accent/20"></div>
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full blur-2xl animate-bounce delay-500 bg-secondary/15"></div>
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl animate-fade-in-up">
+            <h1 className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl animate-fade-in-up text-foreground">
               DRP Token
-              <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
                 Ecosystem
               </span>
             </h1>
-            <p className="mt-6 text-xl leading-8 text-neutral-300 animate-fade-in-up delay-200">
+            <p className="mt-6 text-xl leading-8 text-foreground/80 animate-fade-in-up delay-200">
               Powering Rights, Integrity, Governance, Humanity, Trust and Sustainability
             </p>
 
@@ -41,7 +49,7 @@ export default function TokensPage() {
             <div className="mt-10 flex items-center justify-center gap-x-6 animate-fade-in-up delay-300">
               <Link
                 href="/whitepaper"
-                className="group rounded-md bg-white px-6 py-3 text-sm font-semibold text-neutral-900 shadow-lg hover:bg-neutral-50 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 transform hover:scale-105"
+                className="group rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-300 transform hover:scale-105"
               >
                 <span className="flex items-center gap-2">
                   Read Whitepaper
@@ -53,7 +61,7 @@ export default function TokensPage() {
               </Link>
               <Link
                 href="/docs"
-                className="group text-sm font-semibold leading-6 text-white hover:text-neutral-300 transition-colors duration-300"
+                className="group text-sm font-semibold leading-6 text-foreground hover:text-foreground/80 transition-colors duration-300"
               >
                 Explore DRP <span className="group-hover:translate-x-1 transition-transform inline-block" aria-hidden="true">→</span>
               </Link>
@@ -68,13 +76,13 @@ export default function TokensPage() {
       </section>
 
       {/* Token Descriptions Section */}
-      <section className="py-24 bg-neutral-950">
+      <section className="py-24 bg-background">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Two Tokens, One Vision
             </h2>
-            <p className="mt-6 text-lg leading-8 text-neutral-400">
+            <p className="mt-6 text-lg leading-8 text-foreground/70">
               A dual-token system designed to power the DRP ecosystem with utility and governance
             </p>
           </div>
@@ -115,18 +123,18 @@ export default function TokensPage() {
       </section>
 
       {/* Comparison Table Section */}
-      <section className="py-24 bg-neutral-900">
+      <section className="py-24 bg-muted">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Token Comparison
             </h2>
-            <p className="mt-6 text-lg leading-8 text-neutral-400">
+            <p className="mt-6 text-lg leading-8 text-foreground/70">
               Understanding the distinct roles and features of each DRP token
             </p>
           </div>
 
-          <div className="bg-neutral-900/50 backdrop-blur-xl border border-neutral-800 rounded-3xl p-8 lg:p-12">
+          <div className="bg-card backdrop-blur-xl border border-border rounded-3xl p-8 lg:p-12">
             <TokenComparisonTable />
           </div>
         </div>
@@ -136,16 +144,16 @@ export default function TokensPage() {
       <QuantumSafeSection />
 
       {/* Footer CTA */}
-      <section className="py-24" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
+      <section className="py-24 bg-gradient-to-br from-primary/30 via-accent/20 to-secondary/30">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-6">
+            <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
               Building the World&apos;s First
-              <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
                 Rights-Driven Decentralized Civilization
               </span>
             </h2>
-            <p className="text-xl leading-8 text-neutral-300 mb-10">
+            <p className="text-xl leading-8 text-foreground/80 mb-10">
               Join us in creating a future where human rights are protected, verified, and advanced through blockchain technology.
             </p>
 
@@ -153,7 +161,7 @@ export default function TokensPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/roadmap"
-                className="group rounded-md bg-gradient-to-r from-blue-600 to-cyan-600 px-8 py-4 text-base font-semibold text-white shadow-lg hover:from-blue-700 hover:to-cyan-700 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 transform hover:scale-105"
+                className="group rounded-md bg-primary px-8 py-4 text-base font-semibold text-primary-foreground shadow-lg hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-300 transform hover:scale-105"
               >
                 <span className="flex items-center gap-2">
                   Join Testnet
@@ -165,7 +173,7 @@ export default function TokensPage() {
               </Link>
               <Link
                 href="/community"
-                className="group rounded-md bg-white/10 backdrop-blur-sm px-8 py-4 text-base font-semibold text-white border border-white/20 hover:bg-white/20 hover:border-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 transform hover:scale-105"
+                className="group rounded-md bg-card backdrop-blur-sm px-8 py-4 text-base font-semibold text-card-foreground border border-border hover:bg-accent hover:text-accent-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-300 transform hover:scale-105"
               >
                 <span className="flex items-center gap-2">
                   Follow Development
@@ -177,7 +185,7 @@ export default function TokensPage() {
               </Link>
               <Link
                 href="/docs"
-                className="group rounded-md bg-white/10 backdrop-blur-sm px-8 py-4 text-base font-semibold text-white border border-white/20 hover:bg-white/20 hover:border-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 transform hover:scale-105"
+                className="group rounded-md bg-card backdrop-blur-sm px-8 py-4 text-base font-semibold text-card-foreground border border-border hover:bg-accent hover:text-accent-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-300 transform hover:scale-105"
               >
                 <span className="flex items-center gap-2">
                   Learn More

@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { Wallet, LogOut, Copy, ExternalLink } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { trackDRPEvent } from '@/lib/analytics'
 
 interface WalletState {
   isConnected: boolean
@@ -27,6 +28,7 @@ export function WalletConnect() {
     
     // Simulate wallet connection
     setTimeout(() => {
+      trackDRPEvent('wallet_connect', { method: 'mock', status: 'success' })
       setWalletState({
         isConnected: true,
         address: '0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6',
@@ -38,6 +40,7 @@ export function WalletConnect() {
   }
 
   const disconnectWallet = () => {
+    trackDRPEvent('wallet_connect', { status: 'disconnect' })
     setWalletState({
       isConnected: false,
       address: null,
@@ -146,3 +149,4 @@ export function WalletConnect() {
     </div>
   )
 }
+{"name":"cursor-agent-exec","description":"Provides agent execution capabilities for Cursor, enabling agents to run commands, interact with files, and use tools with user permissions and approvals","publisher":"anysphere","version":"0.0.1","engines":{"vscode":"^1.43.0"},"main":"./dist/main","activationEvents":["*"],"enabledApiProposals":["control","cursor","cursorTracing"],"extensionDependencies":[],"contributes":{}}

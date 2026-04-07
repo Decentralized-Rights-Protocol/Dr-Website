@@ -12,6 +12,8 @@ import { GoogleTranslate } from '@/components/GoogleTranslate'
 
 const navigation = [
   { name: 'Home', href: '/' },
+  { name: 'Ecosystem', href: '/ecosystem' },
+  { name: 'About', href: '/about' },
   { name: 'Learn', href: '/learn' },
   { name: 'Tokens', href: '/tokens' },
   { name: 'Why DRP', href: '/why-drp' },
@@ -31,7 +33,7 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-neutral-200/60 dark:border-neutral-800/60">
+    <nav className="fixed left-0 right-0 top-0 z-50 border-b border border-border/60 bg-background/75 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-3">
@@ -44,7 +46,7 @@ export default function Navigation() {
                 className="h-8 w-8 object-contain"
                 style={{ aspectRatio: '1/1' }}
               />
-              <span className="text-lg font-semibold text-neutral-900 dark:text-white hidden md:inline">Decentralized Rights Protocol</span>
+              <span className="hidden text-lg font-semibold text-foreground md:inline">Decentralized Rights Protocol</span>
             </Link>
           </div>
 
@@ -55,8 +57,8 @@ export default function Navigation() {
                 href={item.href}
                 className={`text-sm font-medium transition-colors ${
                   isActive(item.href)
-                    ? 'text-primary-600 dark:text-primary-400'
-                    : 'text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400'
+                    ? 'text-primary'
+                    : 'text-foreground/70 hover:text-foreground'
                 }`}
               >
                 {item.name}
@@ -68,7 +70,7 @@ export default function Navigation() {
             <div className="hidden lg:flex lg:items-center lg:gap-x-2">
               {pathname?.startsWith('/learn') && (
                 <Link href="/learn" className="inline-flex">
-                  <div className="[&_*:where(button)]:bg-primary-600 [&_*:where(button)]:text-white [&_*:where(button)]:hover:bg-primary-500 [&_*:where(button)]:transition-colors">
+                  <div className="[&_*:where(button)]:bg-primary [&_*:where(button)]:text-primary-foreground [&_*:where(button)]:hover:opacity-90 [&_*:where(button)]:transition-colors">
                     <WalletConnectButton />
                   </div>
                 </Link>
@@ -77,9 +79,15 @@ export default function Navigation() {
               <LanguageSwitcher compact />
               <ThemeToggle />
             </div>
+            <Link
+              href="/whitepaper"
+              className="hidden rounded-lg border border-border/70 bg-accent px-3 py-1.5 text-xs font-semibold text-accent-foreground transition hover:opacity-90 lg:inline-flex"
+            >
+              Read Whitepaper
+            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none"
+              className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 hover:text-foreground focus:outline-none lg:hidden"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -89,26 +97,26 @@ export default function Navigation() {
       </div>
 
       {isOpen && (
-        <div className="lg:hidden bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
+        <div className="border-t border-border bg-background/95 lg:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                className={`block rounded-md px-3 py-2 text-base font-medium transition-colors ${
                   isActive(item.href)
-                    ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                    : 'text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-50 dark:hover:bg-neutral-800'
+                    ? 'bg-accent text-accent-foreground'
+                    : 'text-foreground/80 hover:bg-accent hover:text-accent-foreground'
                 }`}
               >
                 {item.name}
               </Link>
             ))}
-            <div className="px-3 py-2 flex items-center gap-2 border-t border-neutral-200 dark:border-neutral-800 mt-2">
+            <div className="mt-2 flex items-center gap-2 border-t border-border/20 px-3 py-2">
               {pathname?.startsWith('/learn') && (
                 <Link href="/learn" className="flex">
-                  <div className="flex [&_*:where(button)]:bg-primary-600 [&_*:where(button)]:text-white [&_*:where(button)]:hover:bg-primary-500 [&_*:where(button)]:transition-colors">
+                  <div className="flex [&_*:where(button)]:bg-primary [&_*:where(button)]:text-primary-foreground [&_*:where(button)]:hover:opacity-90 [&_*:where(button)]:transition-colors">
                     <WalletConnectButton />
                   </div>
                 </Link>

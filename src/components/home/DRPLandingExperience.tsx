@@ -143,33 +143,45 @@ export function DRPLandingExperience() {
   )
 
   return (
-    <div className="relative overflow-hidden bg-[#030712] text-white">
+    <div className="relative overflow-hidden bg-background text-foreground">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-cyan-500/20 blur-[130px]" />
-        <div className="absolute top-[38%] -left-24 h-72 w-72 rounded-full bg-blue-500/20 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-amber-300/10 blur-[120px]" />
+        <div className="absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/20 blur-[130px] dark:bg-cyan-500/20" />
+        <div className="absolute top-[38%] -left-24 h-72 w-72 rounded-full bg-accent/20 blur-[120px] dark:bg-blue-500/20" />
+        <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-secondary/20 blur-[120px] dark:bg-amber-300/10" />
       </div>
 
       <section className="relative mx-auto max-w-7xl px-6 pb-20 pt-28 lg:px-8 lg:pt-36">
         <motion.div initial="hidden" animate="visible" variants={sectionReveal} className="mx-auto max-w-3xl text-center">
-          <p className="inline-flex items-center rounded-full border border-cyan-400/30 bg-cyan-300/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
+          <p className="inline-flex items-center rounded-full border border-border bg-accent px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent-foreground">
             Decentralized Rights Protocol
           </p>
           <h1 className="mt-8 text-5xl font-semibold leading-tight tracking-tight sm:text-6xl">
             Infrastructure for verified rights
-            <span className="block bg-gradient-to-r from-cyan-300 via-blue-300 to-amber-200 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-primary/70 via-accent/70 to-secondary/70 bg-clip-text text-transparent dark:from-cyan-300 dark:via-blue-300 dark:to-amber-200">
               in a machine-speed world
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-slate-300 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl text-base text-foreground/70 sm:text-lg">
             DRP connects identity, activity, and governance into one trust layer for institutions building fair, transparent, and future-resilient systems.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link href="/whitepaper" className="inline-flex items-center rounded-xl bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_45px_rgba(34,211,238,0.28)] transition hover:bg-cyan-300">
+            <Link href="/whitepaper" className="inline-flex items-center rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[0_0_35px_rgba(0,0,0,0.06)] transition hover:opacity-90">
               Read Whitepaper <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
-            <Link href="/docs" className="inline-flex items-center rounded-xl border border-slate-700 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-cyan-300/40 hover:bg-cyan-300/10">
+            <Link href="/docs" className="inline-flex items-center rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-card-foreground transition hover:bg-accent hover:text-accent-foreground">
               Explore Documentation
+            </Link>
+            <Link
+              href="/what-is-drp"
+              className="inline-flex items-center rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-card-foreground transition hover:bg-accent hover:text-accent-foreground"
+            >
+              What is DRP?
+            </Link>
+            <Link
+              href="/how-drp-works"
+              className="inline-flex items-center rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-card-foreground transition hover:bg-accent hover:text-accent-foreground"
+            >
+              How it works
             </Link>
           </div>
         </motion.div>
@@ -182,9 +194,9 @@ export function DRPLandingExperience() {
           className="mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3"
         >
           {['Verifiable Institutions', 'Human-Centered Economics', 'Transparent Governance'].map((label, i) => (
-            <div key={label} className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan-300/30">
-              <p className="text-xs uppercase tracking-[0.2em] text-slate-400">System {`0${i + 1}`}</p>
-              <p className="mt-2 text-sm font-medium text-slate-200">{label}</p>
+            <div key={label} className="rounded-2xl border border-border bg-card p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-primary">
+              <p className="text-xs uppercase tracking-[0.2em] text-foreground/60">System {`0${i + 1}`}</p>
+              <p className="mt-2 text-sm font-medium text-foreground">{label}</p>
             </div>
           ))}
         </motion.div>
@@ -193,7 +205,7 @@ export function DRPLandingExperience() {
       <section className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.25 }} variants={sectionReveal}>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Protocol capabilities</h2>
-          <p className="mt-3 max-w-2xl text-slate-300">A modern bento grid focused on proof systems, governance, and real-world utility.</p>
+          <p className="mt-3 max-w-2xl text-foreground/70">A modern bento grid focused on proof systems, governance, and real-world utility.</p>
         </motion.div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {featureCards.map((feature, index) => (
@@ -203,11 +215,11 @@ export function DRPLandingExperience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
-              className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-cyan-300/40 hover:shadow-[0_0_35px_rgba(56,189,248,0.15)]"
+              className="group rounded-2xl border border-border bg-card p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-primary"
             >
-              <feature.icon className="h-8 w-8 text-cyan-200 transition group-hover:text-cyan-100" />
+              <feature.icon className="h-8 w-8 text-primary transition group-hover:opacity-90" />
               <h3 className="mt-5 text-xl font-semibold">{feature.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">{feature.description}</p>
+              <p className="mt-3 text-sm leading-relaxed text-foreground/70">{feature.description}</p>
             </motion.article>
           ))}
         </div>
@@ -229,11 +241,11 @@ export function DRPLandingExperience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: index * 0.08 }}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6"
+              className="rounded-2xl border border-border bg-card p-6"
             >
-              <p className="text-xs font-semibold tracking-[0.2em] text-cyan-200">{step}</p>
+              <p className="text-xs font-semibold tracking-[0.2em] text-primary">{step}</p>
               <h3 className="mt-3 text-xl font-semibold">{title}</h3>
-              <p className="mt-2 text-sm text-slate-300">{desc}</p>
+              <p className="mt-2 text-sm text-foreground/70">{desc}</p>
             </motion.div>
           ))}
         </div>
@@ -241,21 +253,21 @@ export function DRPLandingExperience() {
 
       <section className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionReveal} className="grid gap-4 lg:grid-cols-2">
-          <div className="rounded-2xl border border-red-300/20 bg-red-400/5 p-7">
-            <h3 className="flex items-center text-xl font-semibold text-red-200">
+          <div className="rounded-2xl border border-red-300/40 bg-red-500/10 p-7 dark:border-red-300/20 dark:bg-red-400/5">
+            <h3 className="flex items-center text-xl font-semibold text-red-700 dark:text-red-200">
               <XCircle className="mr-2 h-5 w-5" /> What is broken
             </h3>
-            <ul className="mt-4 space-y-3 text-sm text-slate-300">
+            <ul className="mt-4 space-y-3 text-sm text-foreground/70">
               <li>Opaque identity systems and fragmented trust networks.</li>
               <li>Non-portable records and unverifiable impact claims.</li>
               <li>Governance controlled by visibility, not verified contribution.</li>
             </ul>
           </div>
-          <div className="rounded-2xl border border-emerald-300/30 bg-emerald-300/10 p-7">
-            <h3 className="flex items-center text-xl font-semibold text-emerald-100">
+          <div className="rounded-2xl border border-emerald-300/50 bg-emerald-400/10 p-7 dark:border-emerald-300/30 dark:bg-emerald-300/10">
+            <h3 className="flex items-center text-xl font-semibold text-emerald-800 dark:text-emerald-100">
               <CheckCircle2 className="mr-2 h-5 w-5" /> What DRP solves
             </h3>
-            <ul className="mt-4 space-y-3 text-sm text-slate-100">
+            <ul className="mt-4 space-y-3 text-sm text-foreground">
               <li>Verifiable status and activity across institutions and geographies.</li>
               <li>Auditable governance workflows with explainable AI assistance.</li>
               <li>Infrastructure that aligns incentives with rights and measurable impact.</li>
@@ -267,10 +279,10 @@ export function DRPLandingExperience() {
       <section className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionReveal}>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Impact and vision</h2>
-          <p className="mt-3 max-w-2xl text-slate-300">A cross-sector protocol surface designed for public and institutional deployment.</p>
+          <p className="mt-3 max-w-2xl text-foreground/70">A cross-sector protocol surface designed for public and institutional deployment.</p>
         </motion.div>
         <div className="mt-8 grid gap-4 lg:grid-cols-[1.2fr_2fr]">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+          <div className="rounded-2xl border border-border bg-card p-3">
             <div className="grid grid-cols-2 gap-2">
               {impactTabs.map((tab) => (
                 <button
@@ -278,8 +290,8 @@ export function DRPLandingExperience() {
                   onClick={() => setActiveImpact(tab.key)}
                   className={`flex items-center justify-center rounded-xl border px-3 py-2 text-sm transition ${
                     tab.key === activeImpact
-                      ? 'border-cyan-300/50 bg-cyan-300/20 text-cyan-100'
-                      : 'border-white/10 bg-black/10 text-slate-300 hover:border-cyan-300/30'
+                      ? 'border-primary/50 bg-primary/10 text-primary'
+                      : 'border-border bg-muted text-foreground/70 hover:border-primary/40'
                   }`}
                   type="button"
                 >
@@ -294,11 +306,11 @@ export function DRPLandingExperience() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.28 }}
-            className="rounded-2xl border border-white/10 bg-gradient-to-br from-cyan-300/10 to-blue-400/10 p-8"
+            className="rounded-2xl border border-border bg-gradient-to-br from-primary/10 to-accent/10 p-8"
           >
-            <currentImpact.icon className="h-8 w-8 text-cyan-200" />
-            <h3 className="mt-4 text-2xl font-semibold text-white">{currentImpact.title}</h3>
-            <p className="mt-3 max-w-2xl text-slate-200">{currentImpact.copy}</p>
+            <currentImpact.icon className="h-8 w-8 text-primary" />
+            <h3 className="mt-4 text-2xl font-semibold">{currentImpact.title}</h3>
+            <p className="mt-3 max-w-2xl text-foreground/80">{currentImpact.copy}</p>
           </motion.div>
         </div>
       </section>
@@ -309,17 +321,17 @@ export function DRPLandingExperience() {
         </motion.div>
         <div className="mt-8 space-y-3">
           {faqItems.map((item, index) => (
-            <div key={item.question} className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+            <div key={item.question} className="overflow-hidden rounded-2xl border border-border bg-card">
               <button
                 onClick={() => setOpenFaq((current) => (current === index ? null : index))}
                 className="flex w-full items-center justify-between px-5 py-4 text-left"
                 aria-expanded={openFaq === index}
                 type="button"
               >
-                <span className="text-sm font-medium text-slate-100">{item.question}</span>
-                <ChevronDown className={`h-5 w-5 text-slate-300 transition ${openFaq === index ? 'rotate-180' : ''}`} />
+                <span className="text-sm font-medium">{item.question}</span>
+                <ChevronDown className={`h-5 w-5 text-foreground/70 transition ${openFaq === index ? 'rotate-180' : ''}`} />
               </button>
-              {openFaq === index ? <p className="px-5 pb-4 text-sm text-slate-300">{item.answer}</p> : null}
+              {openFaq === index ? <p className="px-5 pb-4 text-sm text-foreground/70">{item.answer}</p> : null}
             </div>
           ))}
         </div>
@@ -327,3 +339,4 @@ export function DRPLandingExperience() {
     </div>
   )
 }
+{"name":"cursor-browser-extension","description":"Handles Playwright integration for Cursor","author":"Anysphere, Inc.","publisher":"anysphere","version":"0.0.1","private":true,"repository":{"type":"git","url":"https://github.com/getcursor/cursor"},"extensionKind":["ui"],"engines":{"vscode":"^1.43.0","yarn":"please-use-npm"},"activationEvents":["onStartupFinished","onUri"],"enabledApiProposals":["control","cursor","cursorTracing"],"extensionDependencies":[],"main":"./dist/main","contributes":{"commands":[{"command":"cursor-browser-extension.status","title":"Cursor Browser Extension Status","category":"Cursor Browser Extension"}],"keybindings":[],"menus":{},"configuration":{}}}
