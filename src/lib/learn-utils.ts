@@ -87,7 +87,9 @@ function createSlug(filename: string): string {
 export function getAllLessonFiles(): LessonFile[] {
   const lessons: LessonFile[] = []
   // Use process.cwd() which works in both dev and production
-  const learnDir = join(process.cwd(), 'src', 'content', 'learn')
+  // Check if we are at the root or already in the src directory
+  const baseDir = existsSync(join(process.cwd(), 'src')) ? join(process.cwd(), 'src') : process.cwd()
+  const learnDir = join(baseDir, 'content', 'learn')
   
   try {
     if (!existsSync(learnDir)) {
