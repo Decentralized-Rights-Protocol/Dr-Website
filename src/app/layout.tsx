@@ -5,6 +5,11 @@ import { Footer } from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { ParticleBackground } from '@/components/particle-background'
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: {
@@ -14,14 +19,18 @@ export const metadata: Metadata = {
   description: 'Decentralized Rights Protocol (DRP) is a quantum-safe blockchain platform that protects human rights through AI-verified consensus, Proof of Status (PoST), and Proof of Activity (PoAT). Built with NIST-approved post-quantum cryptography, DRP prioritizes human dignity, sustainability, and transparent governance.',
   keywords: [
     'decentralized rights protocol',
+    'human rights infrastructure',
+    'proof of status',
+    'proof of activity',
+    'AI-assisted governance',
+    'sustainable blockchain',
+    'transparent verification',
+    'rights-centered governance',
+    'decentralized identity',
+    'blockchain for social impact',
     'DRP blockchain',
     'quantum-safe blockchain',
     'human rights blockchain',
-    'proof of activity',
-    'proof of status',
-    'AI-verified consensus',
-    'sustainable blockchain',
-    'blockchain governance',
     'RIGHTS token',
     'DeRi token',
     'CRYSTALS-Kyber',
@@ -80,17 +89,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={cn("font-sans", inter.variable)}>
       <head>
         <meta name="theme-color" content="#2563eb" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative flex min-h-screen flex-col">
+            <ParticleBackground />
             <header>
               <Navigation />
             </header>
-            <main className="flex-1">{children}</main>
+            <main className="relative flex-1 z-10">{children}</main>
             <footer>
               <Footer />
             </footer>

@@ -13,7 +13,6 @@ import {
   BookOpenIcon
 } from "@heroicons/react/24/outline";
 import { LessonSkeleton } from "@/components/learn/LessonSkeleton";
-import { ParticleBackground } from '@/components/particle-background';
 import ReactMarkdown from "react-markdown";
 
 // This route is kept for backward compatibility
@@ -173,7 +172,6 @@ export default function LessonPage() {
   if (!lesson) {
     return (
       <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-        <ParticleBackground />
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
         <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
           <div className="max-w-2xl w-full bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-xl shadow-xl border border-white/20 p-8 text-center">
@@ -203,7 +201,6 @@ export default function LessonPage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      <ParticleBackground />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
       <div className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}

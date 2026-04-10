@@ -1,6 +1,14 @@
 import Link from 'next/link'
 import { Calendar, CheckCircle2, Clock3, Milestone, ArrowRight } from 'lucide-react'
 import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
+import { buildPageMetadata } from '@/lib/seo/seo'
+
+export const metadata = buildPageMetadata({
+  title: 'DRP Roadmap | Future of Rights-Centered Protocol Economy',
+  description:
+    'Explore the Decentralized Rights Protocol (DRP) roadmap. From foundation to global expansion, see our transparent execution timeline for core protocol delivery and ecosystem scaling.',
+  canonical: '/roadmap',
+})
 
 const roadmapItems = [
   {

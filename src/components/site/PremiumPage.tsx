@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { ParticleBackground } from '@/components/particle-background'
 
 interface PremiumPageProps {
   children: ReactNode
@@ -16,7 +15,6 @@ interface PremiumSectionProps {
 export function PremiumPage({ children }: PremiumPageProps) {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
-      <ParticleBackground />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,color-mix(in_oklab,var(--primary)_20%,transparent),transparent_30%),radial-gradient(circle_at_80%_0%,color-mix(in_oklab,var(--accent)_24%,transparent),transparent_36%),radial-gradient(circle_at_50%_80%,color-mix(in_oklab,var(--secondary)_16%,transparent),transparent_38%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(color-mix(in_oklab,var(--muted-foreground)_14%,transparent)_1px,transparent_1px),linear-gradient(90deg,color-mix(in_oklab,var(--muted-foreground)_14%,transparent)_1px,transparent_1px)] bg-[size:42px_42px] opacity-[0.14]" />
       <div className="relative z-10">{children}</div>

@@ -67,7 +67,7 @@ export default function Navigation() {
           </div>
 
           <div className="flex items-center gap-x-2">
-            <div className="hidden lg:flex lg:items-center lg:gap-x-2">
+            <div className="hidden lg:flex lg:items-center lg:gap-x-4">
               {pathname?.startsWith('/learn') && (
                 <Link href="/learn" className="inline-flex">
                   <div className="[&_*:where(button)]:bg-primary [&_*:where(button)]:text-primary-foreground [&_*:where(button)]:hover:opacity-90 [&_*:where(button)]:transition-colors">
@@ -79,12 +79,6 @@ export default function Navigation() {
               <LanguageSwitcher compact />
               <ThemeToggle />
             </div>
-            <Link
-              href="/whitepaper"
-              className="hidden rounded-lg border border-border/70 bg-accent px-3 py-1.5 text-xs font-semibold text-accent-foreground transition hover:opacity-90 lg:inline-flex"
-            >
-              Read Whitepaper
-            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center rounded-md p-2 text-foreground/70 hover:text-foreground focus:outline-none lg:hidden"

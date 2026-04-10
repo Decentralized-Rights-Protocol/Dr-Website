@@ -12,7 +12,6 @@ import {
   BookOpenIcon
 } from '@heroicons/react/24/outline'
 import ReactMarkdown from 'react-markdown'
-import { ParticleBackground } from '@/components/particle-background'
 import { ThinkFirstQuestion } from '@/components/learn/ThinkFirstQuestion'
 import { ConceptDiagram } from '@/components/learn/ConceptDiagram'
 import { Checkpoint } from '@/components/learn/Checkpoint'
@@ -192,7 +191,6 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
 
   return (
     <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      <ParticleBackground />
       
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>

@@ -3,7 +3,6 @@ import { TokenCard } from '@/components/tokens/TokenCard'
 import { TokenComparisonTable } from '@/components/tokens/TokenComparisonTable'
 import { QuantumSafeSection } from '@/components/tokens/QuantumSafeSection'
 import { Zap, Link as LinkIcon, Award, Building2, Sparkles, Shield } from 'lucide-react'
-import { ParticleBackground } from '@/components/particle-background'
 import Link from 'next/link'
 import { StructuredData } from '@/components/seo/StructuredData'
 import { buildPageMetadata } from '@/lib/seo/seo'
@@ -21,7 +20,6 @@ export default function TokensPage() {
       <StructuredData />
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-32 pb-24 bg-gradient-to-br from-primary/30 via-accent/20 to-secondary/30">
-        <ParticleBackground />
         
         {/* Background Grid */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>

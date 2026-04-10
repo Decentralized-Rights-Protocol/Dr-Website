@@ -1,10 +1,8 @@
 import Link from 'next/link'
-import { ParticleBackground } from '@/components/particle-background'
 
 export default function NotFound() {
   return (
     <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      <ParticleBackground />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
       
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 pt-32 pb-24">

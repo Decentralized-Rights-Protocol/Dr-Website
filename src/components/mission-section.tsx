@@ -1,7 +1,6 @@
 'use client'
 
 import { Shield, Eye, Heart, Users } from 'lucide-react'
-import { ParticleBackground } from '@/components/particle-background'
 
 const values = [
   {
@@ -29,9 +28,6 @@ const values = [
 export function MissionSection() {
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      {/* Particle Background */}
-      <ParticleBackground />
-      
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
       

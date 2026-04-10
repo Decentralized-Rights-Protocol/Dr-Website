@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { ArrowRight, Download, Shield, Users, Globe, Zap } from 'lucide-react'
-import { ParticleBackground } from '@/components/particle-background'
 
 const features = [
   {
@@ -33,8 +32,6 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 dark:from-primary/20 dark:via-accent/20 dark:to-secondary/20" />
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-20 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
       </div>
-      {/* Particle Background */}
-      <ParticleBackground />
       
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">

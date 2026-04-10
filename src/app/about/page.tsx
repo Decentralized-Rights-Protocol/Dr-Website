@@ -1,6 +1,14 @@
 import Link from 'next/link'
 import { HeartHandshake, Sparkles, ShieldCheck, Compass, ArrowRight } from 'lucide-react'
 import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
+import { buildPageMetadata } from '@/lib/seo/seo'
+
+export const metadata = buildPageMetadata({
+  title: 'About DRP | Our Mission and Core Principles',
+  description:
+    'Learn about the mission, philosophy, and origin of the Decentralized Rights Protocol (DRP). We are building a human-centered blockchain infrastructure for dignity, accountability, and long-term impact.',
+  canonical: '/about',
+})
 
 export default function AboutPage() {
   return (

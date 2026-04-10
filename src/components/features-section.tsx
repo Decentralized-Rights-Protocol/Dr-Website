@@ -3,7 +3,6 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Shield, Brain, Zap, Users, Globe, Lock, Cpu, Network, Info, type LucideIcon } from 'lucide-react'
-import { ParticleBackground } from '@/components/particle-background'
 
 type Feature = {
   name: string
@@ -122,8 +121,6 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
 export function FeaturesSection() {
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      {/* Particle Background */}
-      <ParticleBackground />
       
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-10"></div>
