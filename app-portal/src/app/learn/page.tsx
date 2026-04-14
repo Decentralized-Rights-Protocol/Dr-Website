@@ -1,6 +1,10 @@
+'use client'
+
 import Link from 'next/link'
 import { GraduationCap, BookOpen, Sparkles } from 'lucide-react'
 import { env } from '@/lib/env'
+import { LearnProgressPanel } from '@/components/learn/LearnProgressPanel'
+import { useWallet } from '@/hooks/useWallet'
 
 export const metadata = {
   title: 'Learn & Earn | DRP App Portal'
@@ -25,6 +29,8 @@ const modules = [
 ]
 
 export default function LearnPage() {
+  const { address } = useWallet()
+
   return (
     <div className="space-y-8">
       <header className="space-y-3">
@@ -69,6 +75,16 @@ export default function LearnPage() {
             </p>
           </div>
         ))}
+      </section>
+
+      <section className="space-y-4">
+        <div>
+          <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">Convex-backed progress</h2>
+          <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
+            Learning completion is tracked in Convex as app-layer state. Token issuance or protocol privileges should be mirrored later through the chain bridge.
+          </p>
+        </div>
+        <LearnProgressPanel walletAddress={address} />
       </section>
     </div>
   )

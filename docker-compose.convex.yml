@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  convex:
+    image: node:20
+    volumes:
+      - .:/app
+    working_dir: /app
+    environment:
+      - CONVEX_DEPLOYMENT=${CONVEX_DEPLOYMENT}
+    command: npx convex dev --once

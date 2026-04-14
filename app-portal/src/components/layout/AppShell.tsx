@@ -2,16 +2,20 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Menu, Wallet, Heart, User } from 'lucide-react'
+import { useMutation as useConvexMutation } from 'convex/react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useWallet } from '@/hooks/useWallet'
 import { cn } from '@/lib/utils'
+import { api } from '../../../convex/_generated/api'
 
 const navigationLinks = [
   { href: '/', label: 'Home' },
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/proofs/activities', label: 'Proofs' },
+  { href: '/governance', label: 'Governance' },
+  { href: '/review', label: 'Review' },
   { href: '/wallet', label: 'Wallet' },
   { href: '/rewards', label: 'Rewards' },
   { href: '/leaderboard', label: 'Community' },
@@ -26,6 +30,12 @@ export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const { address, connect, isConnecting } = useWallet()
+  const touchWalletSession = useConvexMutation(api.users.touchWalletSession)
+
+  useEffect(() => {
+    if (!address) return
+    void touchWalletSession({ walletAddress: address })
+  }, [address, touchWalletSession])
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-br from-white via-neutral-50 to-primary-50/40 text-neutral-900 dark:from-neutral-950 dark:via-neutral-900 dark:to-primary-950/20 dark:text-neutral-50">

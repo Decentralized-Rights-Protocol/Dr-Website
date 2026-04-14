@@ -3,11 +3,14 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle2, Globe2, Heart, Shield, Users, Zap, Award, TrendingUp, Smartphone, Lock, Sparkles } from 'lucide-react'
+import { useQuery } from 'convex/react'
 import { useWallet } from '@/hooks/useWallet'
+import { api } from '../../convex/_generated/api'
 
 export default function HomePage() {
   const { address, connect, isConnecting } = useWallet()
   const [featureHover, setFeatureHover] = useState<string | null>(null)
+  const snapshot = useQuery(api.metrics.getEcosystemSnapshot, {})
 
   const features = [
     {
@@ -45,10 +48,10 @@ export default function HomePage() {
   ]
 
   const stats = [
-    { label: 'Verified Activities', value: '182K+', trend: '+12%' },
-    { label: 'Active Users', value: '38K+', trend: '+24%' },
-    { label: 'Tokens Rewarded', value: '4.2M', trend: '+18%' },
-    { label: 'Countries', value: '156', trend: '+8' }
+    { label: 'Verified Activities', value: snapshot ? `${snapshot.verifiedActivities}` : '…', trend: 'Convex live' },
+    { label: 'Active Users', value: snapshot ? `${snapshot.activeUsers}` : '…', trend: 'Convex live' },
+    { label: 'Rewarded Actions', value: snapshot ? `${snapshot.rewardedActions}` : '…', trend: 'App layer' },
+    { label: 'Active Proposals', value: snapshot ? `${snapshot.activeProposals}` : '…', trend: 'Governance feed' }
   ]
 
   return (

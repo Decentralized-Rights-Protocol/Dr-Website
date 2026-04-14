@@ -191,7 +191,7 @@ export function StatusVerificationWizard() {
             )}
             {mutation.isSuccess && (
               <p className="text-sm text-green-600 dark:text-green-300">
-                Status verified! Governance access will unlock once on-chain confirmation finalises.
+                Status review submitted. Governance eligibility only changes after review and any future protocol mirror confirms the result.
               </p>
             )}
           </div>

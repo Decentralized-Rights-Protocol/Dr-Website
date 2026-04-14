@@ -1,8 +1,8 @@
 # Decentralized Rights Protocol (DRP) App Portal Blueprint
 
 ## Vision & Objectives
-- Deliver a unified hub where citizens verify status, submit activities, earn on-chain rewards, and track impact.
-- Treat the portal as a thin client orchestrating secure flows to decentralized services (FastAPI, OrbitDB/IPFS, smart contracts, AI).
+- Deliver a unified hub where citizens verify status, submit activities, record governance participation, and track public-interest impact.
+- Treat the portal as an application client backed by Convex for real-time workflows, while preserving protocol truth in Dr-Blockchain and related services.
 - Prioritise resilience, offline-friendly UX, and verifiable attestations.
 
 ## User Journeys
@@ -13,16 +13,16 @@
 
 ### 2. Proof of Activities (PoAT)
 1. User captures media + metadata via `ActivityForm`.
-2. Client encrypts payload (AES-GCM using `ENCRYPTION_KEY`), signs with wallet.
-3. Upload to IPFS via FastAPI proxy → returns CID.
-4. FastAPI invokes AI verification (`/api/verify-activity`) and OrbitDB write.
-5. When successful, mint $DeRi via tokenomics service.
+2. Client signs the submission context with wallet identity where required.
+3. Convex records intake, review state, and audit history for the application layer.
+4. Future sync services mirror verified protocol events back into Convex.
+5. Protocol-side issuance remains outside the app backend.
 
 ### 3. Proof of Status (PoST)
 1. Users submit ID/credential (file, QR, partner code).
-2. `ProofCard` wraps multi-step flow including AI OCR, risk score.
-3. Backend writes signed hash to `ProofRegistry` smart contract.
-4. Reward engine mints $RIGHTS tokens.
+2. `ProofCard` wraps multi-step flow including AI-assisted review context.
+3. Convex tracks attestation review, governance eligibility hints, and audit notes.
+4. Protocol-side attestations and governance eligibility should be mirrored in from Dr-Blockchain.
 
 ### 4. Dashboard & Insights
 - Fetch aggregates (`/api/dashboard`, `/api/leaderboard`).
@@ -65,24 +65,24 @@ app-portal (Next.js App Router)
 
 ## Data Services
 - **FastAPI microservices (Railway)** handle verification, IPFS pinning, reward issuance.
-- **OrbitDB** stores append-only proof journals; IPFS stores encrypted artefacts.
-- **Smart Contracts** (`DeRiToken`, `RightsToken`, `ProofRegistry`) emit events consumed by Explorer.
+- **Convex** stores app-layer submissions, governance records, notifications, dashboards, and review workflows.
+- **IPFS and related storage services** can store artefacts once the file bridge is wired.
+- **Protocol services and smart contracts** emit events that should later be mirrored into Convex by a sync bridge.
 - **AI Service** (`ai.decentralizedrights.com`) processes PoAT/PoST classification and powers Elder AI assistant.
 
-## Integration Contracts
+## Integration Boundaries
 | Module | Endpoint / Contract | Responsibility |
 |--------|---------------------|----------------|
-| PoAT | `POST /api/verify-activity` | Validate activity, return reward action |
-| PoST | `POST /api/verify-status` | Validate status, issue governance eligibility |
-| Rewards | `POST /api/reward` | Mint tokens after verification |
+| Convex app backend | `convex/*` | Intake, review, notifications, dashboards, governance UX |
+| PoAT / PoST verification | future bridge | Mirror verified protocol outcomes into app records |
+| Rewards | protocol layer | Issue tokens after protocol verification |
 | Wallet | `eth_sendTransaction`, `eth_call` | Query balances, sign payloads |
-| OrbitDB | `/orbitdb/{db}/entries` | Append proof records |
 | AI | `POST /ai/assistant`, `POST /ai/verify` | Chat + verification |
 
 ## State Management Strategy
-- Use React Query for server data (`useQuery`, `useMutation`).
+- Use Convex hooks for app-layer data (`useQuery`, `useMutation` from Convex React).
 - Zustand store for session, wallet connection, and optimistic UI (reward toasts).
-- Persist critical session info in encrypted storage (`localforage`, AES with `ENCRYPTION_KEY`).
+- Persist only minimal client session state locally until a stronger auth model is added.
 
 ## Security Hardening
 - Enforce HTTPS via Cloudflare + Vercel.
@@ -103,5 +103,5 @@ app-portal (Next.js App Router)
 ## Success Metrics
 - <3 min from onboarding to first proof submission.
 - 99.9% uptime via multi-region deployments.
-- All proofs recorded on-chain + OrbitDB with verifiable hashes.
+- All app-layer submissions tracked with auditable state transitions and later mirrored protocol references.
 - ElderAI assistant resolves ≥70% user inquiries autonomously.

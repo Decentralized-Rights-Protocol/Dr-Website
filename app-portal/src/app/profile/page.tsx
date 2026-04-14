@@ -1,34 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Shield, Award, TrendingUp, Clock, Hash, CheckCircle2, User, Copy, Check } from 'lucide-react'
-import { getStatusProfile, type StatusProfile } from '@/lib/api'
 import { useAppStore } from '@/store/app-store'
+import { useQuery } from 'convex/react'
+import { api } from '../../../convex/_generated/api'
 
 export default function ProfilePage() {
   const address = useAppStore((state) => state.address)
-  const [profile, setProfile] = useState<StatusProfile | null>(null)
-  const [loading, setLoading] = useState(true)
   const [copiedId, setCopiedId] = useState(false)
-
-  useEffect(() => {
-    if (address) {
-      loadProfile()
-    }
-  }, [address])
-
-  const loadProfile = async () => {
-    if (!address) return
-    try {
-      setLoading(true)
-      const data = await getStatusProfile(address)
-      setProfile(data)
-    } catch (error) {
-      console.error('Failed to load profile:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
+  const profile = useQuery(api.users.getProfileByWallet, { walletAddress: address })
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
@@ -45,7 +26,7 @@ export default function ProfilePage() {
     return `${hash.slice(0, 8)}...${hash.slice(-8)}`
   }
 
-  if (loading) {
+  if (address && !profile) {
     return (
       <div className="space-y-6">
         <div className="animate-pulse">
@@ -64,7 +45,7 @@ export default function ProfilePage() {
           <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-50">User Profile</h1>
         </header>
         <div className="rounded-3xl border border-neutral-200/80 bg-white/90 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
-          <p className="text-neutral-600 dark:text-neutral-300">No profile data available. Please connect your wallet first.</p>
+          <p className="text-neutral-600 dark:text-neutral-300">No Convex profile data available yet. Connect your wallet to initialize the app profile.</p>
         </div>
       </div>
     )
@@ -96,9 +77,9 @@ export default function ProfilePage() {
             <div>
               <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-1">User ID</p>
               <div className="flex items-center gap-2">
-                <code className="text-sm font-mono text-neutral-700 dark:text-neutral-300">{formatAddress(profile.user_id)}</code>
+                <code className="text-sm font-mono text-neutral-700 dark:text-neutral-300">{formatAddress(profile.walletAddress)}</code>
                 <button
-                  onClick={() => copyToClipboard(profile.user_id)}
+                  onClick={() => copyToClipboard(profile.walletAddress)}
                   className="text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300 transition-colors"
                 >
                   {copiedId ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
@@ -108,7 +89,7 @@ export default function ProfilePage() {
             <div>
               <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-1">Verified Status</p>
               <div className="flex items-center gap-2">
-                {profile.verified_status ? (
+                {profile.verificationStatus === 'verified' ? (
                   <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/40 text-sm font-semibold">
                     <CheckCircle2 className="h-4 w-4" />
                     Verified
@@ -124,8 +105,8 @@ export default function ProfilePage() {
             <div>
               <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-1">Last Updated</p>
               <p className="text-sm text-neutral-700 dark:text-neutral-300">
-                {new Date(profile.last_updated).toLocaleString()}
-              </p>
+                {new Date(profile.updatedAt).toLocaleString()}
+                </p>
             </div>
           </div>
         </div>
@@ -144,13 +125,13 @@ export default function ProfilePage() {
           <div className="space-y-4">
             <div>
               <div className="flex items-baseline gap-2 mb-2">
-                <span className="text-4xl font-bold text-primary-600 dark:text-primary-400">{profile.post_score.toFixed(2)}</span>
+                <span className="text-4xl font-bold text-primary-600 dark:text-primary-400">{profile.statusScore.toFixed(2)}</span>
                 <span className="text-sm text-neutral-500 dark:text-neutral-400">points</span>
               </div>
               <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-                  style={{ width: `${Math.min((profile.post_score / 100) * 100, 100)}%` }}
+                  style={{ width: `${Math.min((profile.statusScore / 100) * 100, 100)}%` }}
                 />
               </div>
             </div>
@@ -174,7 +155,7 @@ export default function ProfilePage() {
           </p>
           <div className="rounded-lg bg-neutral-50 dark:bg-neutral-900/50 p-4 border border-neutral-200 dark:border-neutral-800">
             <code className="text-xs font-mono text-neutral-700 dark:text-neutral-300 break-all">
-              {profile.user_id}
+              {profile.walletAddress}
             </code>
           </div>
         </div>
@@ -193,7 +174,7 @@ export default function ProfilePage() {
           <p className="text-sm text-neutral-600 dark:text-neutral-300">No attestations yet. Submit your first Proof of Status to get started.</p>
         ) : (
           <div className="space-y-3">
-            {profile.attestations.map((attestation, idx) => (
+            {profile.attestations.map((attestation: any, idx: number) => (
               <div
                 key={idx}
                 className="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 bg-neutral-50/50 dark:bg-neutral-900/30"
@@ -202,17 +183,17 @@ export default function ProfilePage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="px-2 py-1 rounded text-xs font-semibold bg-primary-500/20 text-primary-700 dark:text-primary-300">
-                        {attestation.category}
+                        {attestation.proofKind.toUpperCase()}
                       </span>
-                      <span className="text-xs text-neutral-500 dark:text-neutral-400">by {attestation.issuer}</span>
+                      <span className="text-xs text-neutral-500 dark:text-neutral-400">{attestation.verifierMode}</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-neutral-600 dark:text-neutral-400">
                       <Hash className="h-3 w-3" />
-                      <code className="font-mono">{formatHash(attestation.credential_cid)}</code>
+                      <code className="font-mono">{formatHash(attestation.chainEventRef ?? `pending:${attestation.id}`)}</code>
                     </div>
                   </div>
                   <div className="text-xs text-neutral-500 dark:text-neutral-400">
-                    {new Date(attestation.verified_at).toLocaleDateString()}
+                    {new Date(attestation.createdAt).toLocaleDateString()}
                   </div>
                 </div>
               </div>
@@ -223,4 +204,3 @@ export default function ProfilePage() {
     </div>
   )
 }
-

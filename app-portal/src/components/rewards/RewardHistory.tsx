@@ -1,44 +1,27 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
 import { Gift, Loader2 } from 'lucide-react'
-import { apiRequest, type RewardSummary } from '@/lib/api'
+import { useQuery } from 'convex/react'
+import { useAppStore } from '@/store/app-store'
+import { api } from '../../../convex/_generated/api'
 
 interface RewardLog {
-  id: string
-  type: 'activity' | 'status' | 'boost'
+  id: string | number
+  type: string
   token: '$DeRi' | '$RIGHTS'
   amount: number
   createdAt: string
   txHash?: string
 }
 
-async function fetchRewardSummary() {
-  const [{ data: summary }, { data: logs }] = await Promise.all([
-    apiRequest<RewardSummary>({ path: '/rewards/summary' }),
-    apiRequest<RewardLog[]>({ path: '/rewards/history' })
-  ])
-  return { summary, logs }
-}
-
 export function RewardHistory() {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['rewards-history'],
-    queryFn: fetchRewardSummary
-  })
+  const walletAddress = useAppStore((state) => state.address)
+  const data = useQuery(api.metrics.getRewardHistory, { walletAddress })
 
-  if (isLoading) {
+  if (!data) {
     return (
       <div className="flex min-h-[180px] items-center justify-center rounded-3xl border border-neutral-200/80 bg-white/80 dark:border-neutral-800/80 dark:bg-neutral-900/60">
         <Loader2 className="h-5 w-5 animate-spin text-primary-500" />
-      </div>
-    )
-  }
-
-  if (isError || !data) {
-    return (
-      <div className="rounded-3xl border border-red-200/70 bg-red-50/60 p-6 text-sm text-red-700 dark:border-red-600/70 dark:bg-red-900/30 dark:text-red-200">
-        Unable to load rewards. Try refreshing or check your connection.
       </div>
     )
   }
@@ -86,7 +69,7 @@ export function RewardHistory() {
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
-              {data.logs.map((log) => (
+              {data.logs.map((log: RewardLog) => (
                 <tr key={log.id}>
                   <td className="px-3 py-2 text-neutral-700 dark:text-neutral-200">
                     {new Date(log.createdAt).toLocaleString()}

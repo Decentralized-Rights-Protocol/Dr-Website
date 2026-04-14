@@ -1,21 +1,13 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
 import { Crown, Loader2 } from 'lucide-react'
-import { apiRequest, type LeaderboardEntry } from '@/lib/api'
-
-async function fetchLeaderboard() {
-  const { data } = await apiRequest<LeaderboardEntry[]>({ path: '/community/leaderboard' })
-  return data
-}
+import { useQuery } from 'convex/react'
+import { api } from '../../../convex/_generated/api'
 
 export function LeaderboardTable() {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['leaderboard'],
-    queryFn: fetchLeaderboard
-  })
+  const data = useQuery(api.metrics.listLeaderboard, {})
 
-  if (isLoading) {
+  if (!data) {
     return (
       <div className="flex min-h-[220px] items-center justify-center rounded-3xl border border-neutral-200/80 bg-white/80 dark:border-neutral-800/80 dark:bg-neutral-900/60">
         <Loader2 className="h-6 w-6 animate-spin text-primary-500" />
@@ -23,10 +15,10 @@ export function LeaderboardTable() {
     )
   }
 
-  if (isError || !data) {
+  if (data.length === 0) {
     return (
       <div className="rounded-3xl border border-amber-200/70 bg-amber-50/60 p-6 text-sm text-amber-800 dark:border-amber-500/70 dark:bg-amber-900/30 dark:text-amber-200">
-        Leaderboard data is temporarily unavailable. Please try again later.
+        No leaderboard activity yet. Approved submissions and completed learning records will populate this table.
       </div>
     )
   }
@@ -54,7 +46,7 @@ export function LeaderboardTable() {
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
-            {data.map((entry) => (
+            {data.map((entry: any) => (
               <tr key={entry.address}>
                 <td className="px-3 py-2 font-semibold text-neutral-700 dark:text-neutral-200">#{entry.rank}</td>
                 <td className="px-3 py-2">

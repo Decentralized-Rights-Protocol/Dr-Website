@@ -22,7 +22,7 @@ export default function StatusProofPage() {
         <ul className="mt-3 list-disc space-y-2 pl-6 text-sm text-neutral-600 dark:text-neutral-300">
           <li>Provide clear scans with legible institutional insignia or QR codes.</li>
           <li>Optionally include your partner reference code to accelerate AI verification.</li>
-          <li>Our FastAPI backend issues a signed hash to the ProofRegistry smart contract post review.</li>
+          <li>Convex tracks the app review state; protocol-side attestations should be mirrored later by the dedicated sync bridge.</li>
         </ul>
       </section>
     </div>

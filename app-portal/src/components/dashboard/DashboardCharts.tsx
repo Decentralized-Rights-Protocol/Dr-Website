@@ -2,21 +2,12 @@
 
 import { ResponsiveContainer, AreaChart, Area, CartesianGrid, Tooltip, XAxis, BarChart, Bar } from 'recharts'
 
-const activityHistory = [
-  { month: 'Jan', activities: 8, rewards: 120 },
-  { month: 'Feb', activities: 12, rewards: 180 },
-  { month: 'Mar', activities: 10, rewards: 160 },
-  { month: 'Apr', activities: 16, rewards: 240 },
-  { month: 'May', activities: 21, rewards: 300 }
-]
+interface DashboardChartsProps {
+  activityHistory: Array<{ month: string; activities: number; rewards: number }>
+  rewardBreakdown: Array<{ label: string; amount: number }>
+}
 
-const rewardBreakdown = [
-  { label: '$DeRi', amount: 420 },
-  { label: '$RIGHTS', amount: 160 },
-  { label: 'Boosts', amount: 90 }
-]
-
-export function DashboardCharts() {
+export function DashboardCharts({ activityHistory, rewardBreakdown }: DashboardChartsProps) {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <div className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">

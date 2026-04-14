@@ -1,8 +1,9 @@
 'use client'
 
-import { useMutation } from '@tanstack/react-query'
-import { submitActivity, type ActivityClaim, type SubmissionResponse } from '@/lib/api'
+import { useState } from 'react'
+import { useMutation } from 'convex/react'
 import { useAppStore } from '@/store/app-store'
+import { api } from '../../convex/_generated/api'
 
 interface SubmitActivityInput {
   title: string
@@ -15,25 +16,50 @@ interface SubmitActivityInput {
 
 export function usePoAT() {
   const address = useAppStore((state) => state.address)
+  const createSubmission = useMutation(api.submissions.createSubmission)
+  const [isPending, setIsPending] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
   
-  return useMutation({
-    mutationFn: async ({ file, hash, ...rest }: SubmitActivityInput): Promise<SubmissionResponse> => {
+  return {
+    isPending,
+    isSuccess,
+    isError: error !== null,
+    error,
+    mutateAsync: async ({ file, hash, ...rest }: SubmitActivityInput) => {
+      setIsPending(true)
+      setIsSuccess(false)
+      setError(null)
+
       if (!address) {
-        throw new Error('Wallet not connected')
+        const nextError = new Error('Wallet not connected')
+        setIsPending(false)
+        setError(nextError)
+        throw nextError
       }
 
-      // TODO: Upload file to IPFS and get CID (for now, use placeholder)
-      // In production, this would call IPFS API or backend endpoint
-      const mediaCid = `QmPlaceholder${Date.now()}` // Placeholder CID
-
-      const claim: ActivityClaim = {
-        ...rest,
-        media_cid: mediaCid,
-        hash,
-        actor_id: address
+      try {
+        const result = await createSubmission({
+          walletAddress: address,
+          kind: 'activity',
+          title: rest.title,
+          description: rest.description,
+          location: rest.location,
+          occurredAt: rest.timestamp,
+          payloadHash: hash,
+          attachmentName: file.name,
+          attachmentMimeType: file.type,
+          attachmentSizeBytes: file.size,
+        })
+        setIsSuccess(true)
+        return result
+      } catch (nextError) {
+        const normalized = nextError instanceof Error ? nextError : new Error('Submission failed')
+        setError(normalized)
+        throw normalized
+      } finally {
+        setIsPending(false)
       }
-
-      return submitActivity(claim)
-    }
-  })
+    },
+  }
 }

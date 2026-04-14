@@ -1,8 +1,9 @@
 'use client'
 
-import { useMutation } from '@tanstack/react-query'
-import { submitStatus, type StatusClaim, type SubmissionResponse } from '@/lib/api'
+import { useState } from 'react'
+import { useMutation } from 'convex/react'
 import { useAppStore } from '@/store/app-store'
+import { api } from '../../convex/_generated/api'
 
 interface SubmitStatusInput {
   category: string
@@ -13,24 +14,49 @@ interface SubmitStatusInput {
 
 export function usePoST() {
   const address = useAppStore((state) => state.address)
+  const createSubmission = useMutation(api.submissions.createSubmission)
+  const [isPending, setIsPending] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
   
-  return useMutation({
-    mutationFn: async ({ credentialFile, ...rest }: SubmitStatusInput): Promise<SubmissionResponse> => {
+  return {
+    isPending,
+    isSuccess,
+    isError: error !== null,
+    error,
+    mutateAsync: async ({ credentialFile, category, issuer, referenceCode }: SubmitStatusInput) => {
+      setIsPending(true)
+      setIsSuccess(false)
+      setError(null)
+
       if (!address) {
-        throw new Error('Wallet not connected')
+        const nextError = new Error('Wallet not connected')
+        setIsPending(false)
+        setError(nextError)
+        throw nextError
       }
 
-      // TODO: Upload credential file to IPFS and get CID (for now, use placeholder)
-      // In production, this would call IPFS API or backend endpoint
-      const credentialCid = `QmPlaceholder${Date.now()}` // Placeholder CID
-
-      const claim: StatusClaim = {
-        ...rest,
-        credential_cid: credentialCid,
-        actor_id: address
+      try {
+        const result = await createSubmission({
+          walletAddress: address,
+          kind: 'status',
+          title: `${category} credential`,
+          description: `Status verification request from ${issuer}${referenceCode ? ` (${referenceCode})` : ''}.`,
+          occurredAt: new Date().toISOString(),
+          payloadHash: `${credentialFile.name}:${credentialFile.size}:${credentialFile.lastModified}`,
+          attachmentName: credentialFile.name,
+          attachmentMimeType: credentialFile.type,
+          attachmentSizeBytes: credentialFile.size,
+        })
+        setIsSuccess(true)
+        return result
+      } catch (nextError) {
+        const normalized = nextError instanceof Error ? nextError : new Error('Submission failed')
+        setError(normalized)
+        throw normalized
+      } finally {
+        setIsPending(false)
       }
-
-      return submitStatus(claim)
-    }
-  })
+    },
+  }
 }

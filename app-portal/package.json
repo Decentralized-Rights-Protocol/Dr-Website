@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "convex:dev": "convex dev",
+    "convex:codegen": "convex dev --once"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^5.51.1",
     "@tanstack/react-query-devtools": "^5.51.1",
     "clsx": "^2.0.0",
+    "convex": "^1.17.4",
     "ethers": "^6.13.2",
     "lucide-react": "^0.292.0",
     "next": "^14.2.33",
@@ -38,4 +41,3 @@
     "typescript": "^5"
   }
 }
-

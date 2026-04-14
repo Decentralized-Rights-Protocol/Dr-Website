@@ -1,4 +1,5 @@
 const requiredEnvVars = [
+  'NEXT_PUBLIC_CONVEX_URL',
   'NEXT_PUBLIC_API_URL',
   'NEXT_PUBLIC_RPC_URL',
   'NEXT_PUBLIC_CHAIN_ID',
@@ -16,7 +17,6 @@ const envCache: Partial<EnvMap> = {}
 function readEnv(key: EnvKey): string {
   if (envCache[key]) return envCache[key] as string
   const value = process.env[key]
-  // During build time, provide defaults instead of throwing
   if (!value) {
     const defaults: Partial<EnvMap> = {
       NEXT_PUBLIC_API_URL: 'https://api.decentralizedrights.com',
@@ -31,10 +31,6 @@ function readEnv(key: EnvKey): string {
       envCache[key] = defaultValue
       return defaultValue
     }
-    // Only throw in runtime, not during build
-    if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-      throw new Error(`Missing required environment variable: ${key}`)
-    }
     return ''
   }
   envCache[key] = value
@@ -42,6 +38,7 @@ function readEnv(key: EnvKey): string {
 }
 
 export const env: EnvMap = {
+  NEXT_PUBLIC_CONVEX_URL: readEnv('NEXT_PUBLIC_CONVEX_URL'),
   NEXT_PUBLIC_API_URL: readEnv('NEXT_PUBLIC_API_URL'),
   NEXT_PUBLIC_RPC_URL: readEnv('NEXT_PUBLIC_RPC_URL'),
   NEXT_PUBLIC_CHAIN_ID: readEnv('NEXT_PUBLIC_CHAIN_ID'),

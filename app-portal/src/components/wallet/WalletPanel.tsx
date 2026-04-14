@@ -17,7 +17,7 @@ export function WalletPanel() {
         <div>
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Wallet</h3>
           <p className="text-sm text-neutral-500 dark:text-neutral-400">
-            Link your wallet to sign proofs and receive on-chain rewards.
+            Link your wallet to sign attestations, establish identity continuity, and receive application-layer reward projections before protocol mirroring.
           </p>
         </div>
       </header>

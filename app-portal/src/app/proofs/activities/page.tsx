@@ -22,9 +22,9 @@ export default function ActivitiesProofPage() {
       <section className="rounded-3xl border border-neutral-200/80 bg-neutral-50/70 p-6 text-sm text-neutral-600 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60 dark:text-neutral-300">
         <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">Privacy protocol</h2>
         <ul className="mt-3 list-disc space-y-2 pl-6">
-          <li>Media files are encrypted locally before IPFS pinning. Only hashed proofs are stored on-chain.</li>
-          <li>Validators review anonymised metadata unless you explicitly grant disclosure.</li>
-          <li>Activity hashes sync to OrbitDB `/orbitdb/drp_network` for tamper-evident auditing.</li>
+          <li>Convex records app-layer metadata and review state for your submission.</li>
+          <li>Attachment metadata is stored now; durable file storage and chain mirroring should be connected through the future sync layer.</li>
+          <li>Protocol confirmation must come from Dr-Blockchain, not from this app submission alone.</li>
         </ul>
       </section>
     </div>

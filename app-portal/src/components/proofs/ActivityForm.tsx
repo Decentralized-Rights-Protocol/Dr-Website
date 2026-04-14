@@ -48,7 +48,7 @@ export function ActivityForm() {
     if (mutation.isSuccess) {
       return {
         type: 'success' as const,
-        message: 'Your proof was submitted. Rewards will arrive shortly after verification.'
+        message: 'Your proof is now in the Convex review queue. Protocol mirroring happens separately and is not implied by this submission.'
       }
     }
     if (mutation.isError) {
