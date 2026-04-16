@@ -210,4 +210,64 @@ export default defineSchema({
   })
     .index("by_scope", ["scope"])
     .index("by_wallet", ["walletAddress"]),
+
+  // --- DRP CORE TABLES ---
+
+  drpActivities: defineTable({
+    userId: v.id("users"),
+    type: v.string(),
+    category: v.string(),
+    metadata: v.any(),
+    proof: v.string(),
+    hash: v.string(),
+    signature: v.object({
+      edSig: v.string(),
+      pqSig: v.optional(v.string()),
+    }),
+    status: v.union(v.literal("pending"), v.literal("approved"), v.literal("rejected"), v.literal("flagged")),
+    score: v.number(),
+    reward: v.object({
+      deri: v.number(),
+      rights: v.number(),
+    }),
+    createdAt: v.string(),
+  })
+    .index("by_user", ["userId"])
+    .index("by_status", ["status"]),
+
+  drpTransactions: defineTable({
+    txId: v.string(),
+    userId: v.id("users"),
+    activityHash: v.string(),
+    category: v.string(),
+    reward: v.object({
+      deri: v.number(),
+      rights: v.number(),
+    }),
+    timestamp: v.string(),
+    blockIndex: v.optional(v.number()),
+  })
+    .index("by_user", ["userId"])
+    .index("by_block", ["blockIndex"])
+    .index("by_txid", ["txId"]),
+
+  drpBalances: defineTable({
+    userId: v.id("users"),
+    deri: v.number(),
+    rights: v.number(),
+    updatedAt: v.string(),
+  }).index("by_user", ["userId"]),
+
+  drpBlocks: defineTable({
+    index: v.number(),
+    timestamp: v.string(),
+    transactions: v.array(v.any()),
+    previousHash: v.string(),
+    blockHash: v.string(),
+    poatScore: v.number(),
+    signature: v.object({
+      edSig: v.string(),
+      pqSig: v.optional(v.string()),
+    }),
+  }).index("by_index", ["index"]),
 });

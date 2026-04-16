@@ -6,10 +6,6 @@ import { env } from '@/lib/env'
 import { LearnProgressPanel } from '@/components/learn/LearnProgressPanel'
 import { useWallet } from '@/hooks/useWallet'
 
-export const metadata = {
-  title: 'Learn & Earn | DRP App Portal'
-}
-
 const modules = [
   {
     title: 'Digital Rights Foundations',
