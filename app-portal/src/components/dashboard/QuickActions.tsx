@@ -9,16 +9,10 @@ const actions = [
     icon: Activity
   },
   {
-    href: '/proofs/status',
-    title: 'Verify your status',
-    description: 'Confirm institutional or community credentials for governance access.',
+    href: '/explorer',
+    title: 'Blockchain explorer',
+    description: 'Monitor the live DRP ledger, blocks, and reality layer transactions.',
     icon: Scan
-  },
-  {
-    href: '/wallet',
-    title: 'Connect wallet',
-    description: 'Link your wallet or custodial key to sign attestations securely.',
-    icon: Wallet
   },
   {
     href: '/rewards',

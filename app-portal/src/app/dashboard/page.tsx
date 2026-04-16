@@ -33,13 +33,13 @@ export default function DashboardPage() {
     {
       title: 'Rewards earned',
       value: `${metrics.cards.deriIssued} $DeRi`,
-      trendLabel: `${metrics.cards.rightsIssued} weighted governance units tracked`,
+      trendLabel: `${metrics.cards.rightsIssued} weighted $RIGHTS governance weight`,
       icon: <Award className="h-5 w-5" />
     },
     {
-      title: 'Learning records',
-      value: `${metrics.cards.activeLearners}`,
-      trendLabel: `${metrics.cards.openProposals} open proposals`,
+      title: 'Blockchain Ledger',
+      value: `${metrics.cards.blockchainBlocks} Blocks`,
+      trendLabel: `${metrics.cards.totalTransactions} verified reality-layer transactions`,
       icon: <BookOpen className="h-5 w-5" />
     }
   ] : []

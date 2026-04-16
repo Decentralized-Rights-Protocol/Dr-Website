@@ -19,6 +19,7 @@ function readEnv(key: EnvKey): string {
   const value = process.env[key]
   if (!value) {
     const defaults: Partial<EnvMap> = {
+      NEXT_PUBLIC_CONVEX_URL: 'https://placeholder.convex.cloud',
       NEXT_PUBLIC_API_URL: 'https://api.decentralizedrights.com',
       NEXT_PUBLIC_RPC_URL: 'https://rpc.decentralizedrights.com',
       NEXT_PUBLIC_CHAIN_ID: '31337',
@@ -28,6 +29,9 @@ function readEnv(key: EnvKey): string {
     }
     const defaultValue = defaults[key]
     if (defaultValue) {
+      if (key === 'NEXT_PUBLIC_CONVEX_URL') {
+        console.warn('NEXT_PUBLIC_CONVEX_URL is not set. Using placeholder. Run npx convex dev to get your real URL.')
+      }
       envCache[key] = defaultValue
       return defaultValue
     }

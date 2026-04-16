@@ -24,6 +24,14 @@ export const getDashboardMetrics = query({
     const scopedLearn = userId ? learn.filter((entry) => entry.userId === userId) : learn;
     const scopedProofs = userId ? proofs.filter((entry) => entry.userId === userId) : proofs;
 
+    // --- INTEGRATE DRP LEDGER DATA ---
+    const drpActivities = await ctx.db.query("drpActivities").collect();
+    const drpTransactions = await ctx.db.query("drpTransactions").collect();
+    const drpBlocks = await ctx.db.query("drpBlocks").collect();
+
+    const scopedDrpActivities = userId ? drpActivities.filter((act) => act.userId === userId) : drpActivities;
+    const scopedDrpTransactions = userId ? drpTransactions.filter((tx) => tx.userId === userId) : drpTransactions;
+
     const monthlyMap = new Map<string, { month: string; activities: number; rewards: number }>();
     for (const submission of scopedSubmissions) {
       const month = toMonthBucket(submission.createdAt);
@@ -34,27 +42,48 @@ export const getDashboardMetrics = query({
       }
       monthlyMap.set(month, entry);
     }
+    
+    // Add new DRP ledger activities to monthly map
+    for (const act of scopedDrpActivities) {
+      const month = toMonthBucket(act.createdAt);
+      const entry = monthlyMap.get(month) ?? { month, activities: 0, rewards: 0 };
+      entry.activities += 1;
+      if (act.status === "approved") {
+        entry.rewards += act.reward.deri;
+      }
+      monthlyMap.set(month, entry);
+    }
 
-    const approvedActivities = scopedSubmissions.filter((submission) => submission.kind === "activity" && submission.submissionStatus === "approved").length;
+    const approvedActivities = scopedSubmissions.filter((submission) => submission.kind === "activity" && submission.submissionStatus === "approved").length 
+                             + scopedDrpActivities.filter(act => act.status === "approved").length;
     const approvedStatuses = scopedSubmissions.filter((submission) => submission.kind === "status" && submission.submissionStatus === "approved").length;
     const completedModules = scopedLearn.filter((entry) => entry.completionStatus === "completed").length;
+
+    const totalDeri = scopedDrpTransactions.reduce((sum, tx) => sum + tx.reward.deri, 0) 
+                    + scopedSubmissions.filter(s => s.kind === "activity" && s.submissionStatus === "approved").length * 35 
+                    + completedModules * 12;
+
+    const totalRights = scopedDrpTransactions.reduce((sum, tx) => sum + tx.reward.rights, 0)
+                      + approvedStatuses * 15;
 
     return {
       cards: {
         verifiedActivities: approvedActivities,
         statusApprovals: approvedStatuses,
-        deriIssued: approvedActivities * 35 + completedModules * 12,
-        rightsIssued: approvedStatuses * 15 + proposals.reduce((total, proposal) => total + proposal.yesWeight + proposal.noWeight + proposal.abstainWeight, 0),
+        deriIssued: totalDeri,
+        rightsIssued: totalRights,
         openProposals: proposals.filter((proposal) => proposal.proposalStatus === "active" || proposal.proposalStatus === "review").length,
         reviewBacklog: queue.filter((item) => item.queueStatus !== "resolved").length,
         activeLearners: scopedLearn.length,
         proofsPending: scopedProofs.filter((proof) => proof.recordStatus === "pending").length,
+        blockchainBlocks: drpBlocks.length,
+        totalTransactions: drpTransactions.length,
       },
       activityHistory: Array.from(monthlyMap.values()).sort((a, b) => a.month.localeCompare(b.month)).slice(-6),
       rewardBreakdown: [
-        { label: "$DeRi", amount: approvedActivities * 35 + completedModules * 12 },
-        { label: "$RIGHTS", amount: approvedStatuses * 15 },
-        { label: "Governance", amount: userId ? proposals.filter((proposal) => proposal.proposerUserId === userId).length * 10 : proposals.length * 3 },
+        { label: "$DeRi", amount: totalDeri },
+        { label: "$RIGHTS", amount: totalRights },
+        { label: "Ledger Blocks", amount: drpBlocks.length },
       ],
     };
   },
