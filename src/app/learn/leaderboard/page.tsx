@@ -2,12 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 import { 
-  TrophyIcon, 
-  UserIcon,
-  FireIcon,
-  StarIcon,
-  ChartBarIcon
-} from "@heroicons/react/24/outline";
+  Trophy, 
+  User,
+  Flame,
+  Star,
+  BarChart3,
+  Medal,
+  Crown,
+  ChevronRight,
+  TrendingUp,
+  Award,
+  BookOpen,
+  Coins
+} from "lucide-react";
 
 interface LeaderboardEntry {
   rank: number;
@@ -88,213 +95,189 @@ export default function LeaderboardPage() {
       }
     };
     loadLeaderboard();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getRankIcon = (rank: number) => {
-    switch (rank) {
-      case 1:
-        return <TrophyIcon className="h-6 w-6 text-yellow-500" />;
-      case 2:
-        return <TrophyIcon className="h-6 w-6 text-gray-400" />;
-      case 3:
-        return <TrophyIcon className="h-6 w-6 text-amber-600" />;
-      default:
-        return <span className="text-lg font-bold text-gray-600 dark:text-gray-300">#{rank}</span>;
-    }
-  };
-
-  const getRankColor = (rank: number) => {
-    switch (rank) {
-      case 1:
-        return 'bg-gradient-to-r from-yellow-400 to-yellow-600';
-      case 2:
-        return 'bg-gradient-to-r from-gray-300 to-gray-500';
-      case 3:
-        return 'bg-gradient-to-r from-amber-500 to-amber-700';
-      default:
-        return 'bg-white dark:bg-gray-800';
-    }
-  };
+  const medals = ['🥇', '🥈', '🥉'];
+  const medalColors = [
+    'border-yellow-400/40 bg-yellow-400/5 shadow-yellow-900/10',
+    'border-slate-400/30 bg-slate-400/5 shadow-slate-900/10',
+    'border-amber-600/30 bg-amber-600/5 shadow-amber-900/10',
+  ];
 
   const currentData = leaderboardData[activeTab];
+  const top3 = currentData.slice(0, 3);
+  const others = currentData.slice(3);
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">Loading leaderboard...</p>
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
+          <p className="text-slate-400 font-medium animate-pulse">Loading rankings...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Learning Leaderboard
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300">
-            See how you rank among DRP learners worldwide
-          </p>
+    <div className="space-y-12">
+      {/* Header */}
+      <div className="text-center space-y-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-widest">
+          <Trophy className="w-3.5 h-3.5" />
+          Rankings
         </div>
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+          Learning Leaderboard
+        </h1>
+        <p className="text-slate-400 max-w-2xl mx-auto">
+          Compete with the DRP community, earn XP, and climb the ranks to become a Protocol Elder.
+        </p>
+      </div>
 
-        {/* Current User Stats */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-full">
-                <UserIcon className="h-8 w-8 text-blue-500" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Your Ranking
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Rank #{leaderboardData.currentUser.rank} out of 1,000+ learners
-                </p>
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                Level {leaderboardData.currentUser.level}
-              </div>
-              <div className="text-sm text-gray-500">
-                {leaderboardData.currentUser.lessonsCompleted} lessons completed
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tab Navigation */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-1 shadow-lg">
+      {/* Tab Switcher */}
+      <div className="flex justify-center">
+        <div className="flex gap-1 rounded-xl bg-slate-900/80 border border-slate-800 p-1 backdrop-blur-sm">
+          {[
+            { id: 'overall', label: 'Overall' },
+            { id: 'weekly', label: 'This Week' },
+            { id: 'monthly', label: 'This Month' }
+          ].map(tab => (
             <button
-              onClick={() => setActiveTab('overall')}
-              className={`px-6 py-2 rounded-md font-medium transition-colors ${
-                activeTab === 'overall'
-                  ? 'bg-blue-500 text-white'
-                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              Overall
-            </button>
-            <button
-              onClick={() => setActiveTab('weekly')}
-              className={`px-6 py-2 rounded-md font-medium transition-colors ${
-                activeTab === 'weekly'
-                  ? 'bg-blue-500 text-white'
-                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              This Week
-            </button>
-            <button
-              onClick={() => setActiveTab('monthly')}
-              className={`px-6 py-2 rounded-md font-medium transition-colors ${
-                activeTab === 'monthly'
-                  ? 'bg-blue-500 text-white'
-                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
-              }`}
-            >
-              This Month
-            </button>
-          </div>
-        </div>
-
-        {/* Leaderboard */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                {activeTab === 'overall' && 'All-Time Leaders'}
-                {activeTab === 'weekly' && 'Weekly Champions'}
-                {activeTab === 'monthly' && 'Monthly Masters'}
-              </h2>
-              <ChartBarIcon className="h-6 w-6 text-gray-500" />
-            </div>
-          </div>
-
-          <div className="divide-y divide-gray-200 dark:divide-gray-700">
-            {currentData.map((entry, index) => (
-              <div 
-                key={entry.username}
-                className={`p-6 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors ${
-                  entry.isCurrentUser ? 'bg-blue-50 dark:bg-blue-900/20' : ''
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`rounded-lg px-6 py-2 text-sm font-bold transition-all
+                ${activeTab === tab.id 
+                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-900/20' 
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
                 }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0">
-                      {getRankIcon(entry.rank)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Top 3 Podium */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {top3.map((user, i) => (
+          <div key={user.username} className={`relative rounded-3xl border p-6 shadow-xl overflow-hidden transition-transform hover:-translate-y-1 ${medalColors[i]}`}>
+            {/* Background Decorative Icon */}
+            <div className="absolute -right-4 -bottom-4 opacity-5 pointer-events-none">
+              {i === 0 ? <Crown size={120} /> : <Trophy size={120} />}
+            </div>
+            
+            <div className="relative flex flex-col items-center text-center gap-4">
+              <div className="relative">
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-indigo-900/40">
+                  {user.username[0].toUpperCase()}
+                </div>
+                <div className="absolute -top-3 -right-3 text-3xl">
+                  {medals[i]}
+                </div>
+              </div>
+              
+              <div className="space-y-1">
+                <p className="text-xl font-black text-white">{user.username}</p>
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-xs font-bold text-slate-500 uppercase">Level {user.level}</span>
+                  <div className="w-1 h-1 rounded-full bg-slate-700" />
+                  <span className="text-xs font-bold text-indigo-400 uppercase">{user.totalRewards} DeRi</span>
+                </div>
+              </div>
+
+              <div className="w-full h-px bg-slate-800 my-2" />
+
+              <div className="grid grid-cols-2 w-full gap-4">
+                <div className="text-center">
+                  <p className="text-lg font-black text-white">{user.streak}</p>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Streak</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-black text-indigo-400">{user.lessonsCompleted}</p>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Lessons</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Others Rankings Table */}
+      <div className="rounded-3xl border border-slate-800 bg-slate-900/50 backdrop-blur-md overflow-hidden shadow-2xl">
+        <div className="overflow-x-auto">
+          <div className="min-w-[600px]">
+            {/* Table Header */}
+            <div className="grid grid-cols-12 gap-4 px-8 py-4 bg-slate-950/50 border-b border-slate-800 text-[10px] font-black text-slate-500 uppercase tracking-widest">
+              <div className="col-span-1">Rank</div>
+              <div className="col-span-5">Learner</div>
+              <div className="col-span-2 text-center">Level</div>
+              <div className="col-span-2 text-center">Lessons</div>
+              <div className="col-span-2 text-right">Rewards</div>
+            </div>
+
+            {/* List Items */}
+            <div className="divide-y divide-slate-800">
+              {others.map((user) => (
+                <div key={user.username} className={`grid grid-cols-12 gap-4 px-8 py-5 items-center transition-colors
+                  ${user.isCurrentUser ? 'bg-indigo-600/10' : 'hover:bg-slate-800/30'}`}>
+                  <div className="col-span-1">
+                    <span className="text-sm font-black text-slate-500">#{user.rank}</span>
+                  </div>
+                  <div className="col-span-5 flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-sm font-black text-slate-300">
+                      {user.username[0].toUpperCase()}
                     </div>
-                    
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
-                        {entry.username.charAt(0).toUpperCase()}
-                      </div>
-                      <div>
-                        <h3 className={`font-semibold ${
-                          entry.isCurrentUser 
-                            ? 'text-blue-900 dark:text-blue-100' 
-                            : 'text-gray-900 dark:text-white'
-                        }`}>
-                          {entry.username}
-                          {entry.isCurrentUser && ' (You)'}
-                        </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          Level {entry.level}
-                        </p>
-                      </div>
+                    <div>
+                      <p className={`text-sm font-bold ${user.isCurrentUser ? 'text-indigo-300' : 'text-slate-200'}`}>
+                        {user.username}
+                        {user.isCurrentUser && <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-400">YOU</span>}
+                      </p>
+                      <p className="text-[10px] text-slate-500 font-medium">Verified Contributor</p>
                     </div>
                   </div>
-
-                  <div className="flex items-center space-x-8">
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-gray-900 dark:text-white">
-                        {entry.lessonsCompleted}
-                      </div>
-                      <div className="text-xs text-gray-500">Lessons</div>
-                    </div>
-                    
-                    <div className="text-center">
-                      <div className="flex items-center space-x-1">
-                        <TrophyIcon className="h-4 w-4 text-yellow-500" />
-                        <span className="text-lg font-bold text-gray-900 dark:text-white">
-                          {entry.totalRewards}
-                        </span>
-                      </div>
-                      <div className="text-xs text-gray-500">$DeRi</div>
-                    </div>
-                    
-                    <div className="text-center">
-                      <div className="flex items-center space-x-1">
-                        <FireIcon className="h-4 w-4 text-red-500" />
-                        <span className="text-lg font-bold text-gray-900 dark:text-white">
-                          {entry.streak}
-                        </span>
-                      </div>
-                      <div className="text-xs text-gray-500">Streak</div>
+                  <div className="col-span-2 text-center">
+                    <span className="text-xs font-bold text-slate-400">Lv {user.level}</span>
+                  </div>
+                  <div className="col-span-2 text-center">
+                    <span className="text-xs font-bold text-slate-400">{user.lessonsCompleted}</span>
+                  </div>
+                  <div className="col-span-2 text-right">
+                    <div className="flex items-center justify-end gap-1.5 text-indigo-400 font-black">
+                      <span className="text-sm">{user.totalRewards}</span>
+                      <Coins size={14} className="text-indigo-500/50" />
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Motivational Message */}
-        <div className="mt-8 text-center">
-          <div className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg p-6 text-white">
-            <h3 className="text-xl font-semibold mb-2">Keep Learning, Keep Earning!</h3>
-            <p className="opacity-90">
-              Every lesson brings you closer to becoming a DRP expert. 
-              Your dedication to learning is building the future of decentralized systems.
-            </p>
+      {/* User Status Sticky/Footer */}
+      <div className="rounded-2xl border border-indigo-500/30 bg-indigo-600/10 p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg shadow-indigo-900/10">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center text-white font-black text-lg">
+            {leaderboardData.currentUser.username[0].toUpperCase()}
+          </div>
+          <div>
+            <h3 className="text-lg font-black text-white">Your Ranking</h3>
+            <p className="text-sm text-indigo-400/80 font-medium">Rank #{leaderboardData.currentUser.rank} out of 1,000+ learners</p>
+          </div>
+        </div>
+        <div className="flex gap-8">
+          <div className="text-center">
+            <p className="text-xl font-black text-white">Level {leaderboardData.currentUser.level}</p>
+            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Current Tier</p>
+          </div>
+          <div className="text-center">
+            <p className="text-xl font-black text-indigo-400">{leaderboardData.currentUser.totalRewards}</p>
+            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Total $DeRi</p>
+          </div>
+          <div className="text-center">
+            <p className="text-xl font-black text-white">{leaderboardData.currentUser.lessonsCompleted}</p>
+            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Completed</p>
           </div>
         </div>
       </div>

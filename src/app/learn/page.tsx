@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { ArrowRight, BookOpen, Bot, GraduationCap, Rocket, Sparkles, Trophy } from 'lucide-react'
-import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
+import { ArrowRight, BookOpen, Bot, GraduationCap, Rocket, Sparkles, Trophy, Zap, Star, Flame, CheckCircle, Brain, Send, ChevronRight } from 'lucide-react'
 import { buildPageMetadata } from '@/lib/seo/seo'
+import { Button } from '@/components/ui/button'
 
 export const metadata = buildPageMetadata({
   title: 'Learn DRP | Proof of Status & Proof of Activity',
@@ -78,130 +78,172 @@ const curriculumLevels: CurriculumTier[] = [
 ]
 
 export default function LearnPage() {
+  const levelColors: Record<number, { border: string, badge: string, dot: string }> = {
+    1: { border: 'border-emerald-500/25', badge: 'bg-emerald-500/15 text-emerald-400', dot: 'bg-emerald-400' },
+    2: { border: 'border-indigo-500/25',  badge: 'bg-indigo-500/15 text-indigo-400',  dot: 'bg-indigo-400' },
+    3: { border: 'border-violet-500/25',  badge: 'bg-violet-500/15 text-violet-400',  dot: 'bg-violet-400' },
+  };
+
   return (
-    <PremiumPage>
-      <PremiumHero
-        badge="Learn Hub"
-        title="Learn DRP From First Principles to Protocol Architecture"
-        description="A structured learning journey designed for curious beginners, builders, and governance participants."
-        actions={
-          <>
-            <Link href="/learn/dashboard" className="inline-flex items-center rounded-xl border border-cyan-200/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">
-              <GraduationCap className="mr-2 h-4 w-4" />
-              Open Dashboard
+    <div className="space-y-12">
+      {/* Hero Section */}
+      <section className="relative py-20 text-center">
+        {/* Decorative orb behind heading */}
+        <div className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 
+            w-[600px] h-[300px] bg-indigo-600/10 blur-[80px] rounded-full" />
+        
+        <div className="relative space-y-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 
+              bg-indigo-500/10 px-4 py-1.5 text-xs font-medium text-indigo-300 uppercase tracking-wider">
+            Learn Hub
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight 
+              tracking-tight max-w-3xl mx-auto">
+            Learn DRP From First Principles to Protocol Architecture
+          </h1>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed">
+            A structured learning journey designed for curious beginners, builders, and governance participants.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 pt-2">
+            <Link href="/learn/dashboard">
+              <Button className="rounded-full bg-indigo-600 hover:bg-indigo-500 text-white 
+                  px-7 py-6 font-semibold shadow-lg shadow-indigo-900/40 
+                  transition-all duration-200 hover:scale-[1.03] hover:shadow-indigo-700/50">
+                <GraduationCap className="mr-2 h-5 w-5" />
+                Open Dashboard
+              </Button>
             </Link>
-            <Link href="/learn/ai-tutor" className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/40 hover:bg-cyan-300/10">
-              <Bot className="mr-2 h-4 w-4" />
-              Ask AI Tutor
+            <Link href="/learn/ai-tutor">
+              <Button variant="outline" className="rounded-full border-indigo-500/40 
+                  text-indigo-300 hover:bg-indigo-500/10 px-7 py-6 font-semibold 
+                  transition-all duration-200">
+                <Bot className="mr-2 h-5 w-5" />
+                Ask AI Tutor
+              </Button>
             </Link>
-          </>
-        }
-      />
-
-      <PremiumSection
-        eyebrow="Definition-first"
-        title="Start with PoST + PoAT"
-        description="DRP’s learning path begins with proof mechanisms: PoST verifies status credentials for governance weighting, and PoAT verifies meaningful activity for equitable rewards—validated with AI Elders."
-      >
-        <div className="grid gap-4 md:grid-cols-2">
-          <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-base font-semibold text-white">Proof of Status (PoST)</h3>
-            <p className="mt-2 text-sm text-slate-300">Verifiable credential signals without unnecessary private-data exposure.</p>
-          </article>
-          <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-base font-semibold text-white">Proof of Activity (PoAT)</h3>
-            <p className="mt-2 text-sm text-slate-300">Evidence of meaningful contribution connected to rewards and governance participation.</p>
-          </article>
-        </div>
-      </PremiumSection>
-
-      <PremiumSection
-        eyebrow="Learning Flight Path"
-        title="Beginner to Advanced Progression"
-        description="Follow a practical roadmap with clear outcomes, compact lessons, and reward checkpoints."
-      >
-        <div className="grid gap-4 md:grid-cols-3">
-          {[
-            { icon: BookOpen, title: 'Guided Curriculum', body: 'Clear sequence with concept-to-application flow.' },
-            { icon: Trophy, title: 'Rewarded Learning', body: 'Progress milestones tied to DeRi incentives.' },
-            { icon: Rocket, title: 'Builder Readiness', body: 'Moves learners from theory into deployment.' },
-          ].map((item) => (
-            <article key={item.title} className="rounded-2xl border border-white/10 bg-black/25 p-5">
-              <item.icon className="h-5 w-5 text-cyan-200" />
-              <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
-              <p className="mt-2 text-sm text-slate-300">{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </PremiumSection>
-
-      <section className="py-8 sm:py-12">
-        <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
-          <div className="space-y-5">
-            {curriculumLevels.map((level) => (
-              <article key={level.id} className="rounded-3xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-xl">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">{level.tier}</p>
-                    <h3 className="mt-2 text-2xl font-semibold text-white">
-                      Level {level.id}: {level.title}
-                    </h3>
-                    <p className="mt-3 max-w-3xl text-slate-300">{level.description}</p>
-                  </div>
-                  <span className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-100">
-                    {level.duration}
-                  </span>
-                </div>
-
-                <div className="mt-6 grid gap-2 text-sm text-slate-300 sm:grid-cols-2">
-                  {level.outcomes.map((outcome) => (
-                    <p key={outcome} className="rounded-xl border border-white/10 bg-black/20 px-3 py-2">
-                      {outcome}
-                    </p>
-                  ))}
-                </div>
-
-                <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-                  {level.lessons.map((lesson) => (
-                    <Link
-                      key={lesson.href}
-                      href={lesson.href}
-                      className="group rounded-2xl border border-white/10 bg-black/30 p-4 transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-400/10"
-                    >
-                      <p className="text-sm font-semibold text-white">{lesson.title}</p>
-                      <p className="mt-2 text-xs text-slate-400">{lesson.duration}</p>
-                      <p className="mt-1 text-xs text-cyan-200">{lesson.reward}</p>
-                      <span className="mt-4 inline-flex items-center text-xs font-semibold text-cyan-100">
-                        Start lesson
-                        <ArrowRight className="ml-1 h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </article>
-            ))}
           </div>
         </div>
       </section>
 
-      <PremiumSection
-        eyebrow="Guided Intelligence"
-        title="Study with the DRP AI Tutor"
-        description="Use the tutor to summarize modules, clarify concepts, and generate practical implementation checklists."
-      >
-        <div className="flex flex-wrap items-center gap-3">
-          <Link href="/learn/ai-tutor" className="rounded-xl border border-cyan-300/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">
-            Open AI Tutor
-          </Link>
-          <Link href="/learn/leaderboard" className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
-            View Leaderboard
-          </Link>
-          <span className="inline-flex items-center rounded-xl border border-amber-300/30 bg-amber-300/10 px-3 py-2 text-xs text-amber-100">
-            <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-            Balanced for beginners and technical contributors
-          </span>
+      {/* Definitions Section */}
+      <section className="grid gap-6 md:grid-cols-2">
+        <div className="rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-sm p-6 sm:p-8 shadow-xl">
+          <h3 className="text-xl font-bold text-white mb-2">Proof of Status (PoST)</h3>
+          <p className="text-slate-400 leading-relaxed">Verifiable credential signals without unnecessary private-data exposure.</p>
         </div>
-      </PremiumSection>
-    </PremiumPage>
+        <div className="rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-sm p-6 sm:p-8 shadow-xl">
+          <h3 className="text-xl font-bold text-white mb-2">Proof of Activity (PoAT)</h3>
+          <p className="text-slate-400 leading-relaxed">Evidence of meaningful contribution connected to rewards and governance participation.</p>
+        </div>
+      </section>
+
+      {/* Learning Flight Path */}
+      <section className="grid gap-6 md:grid-cols-3">
+        {[
+          { icon: BookOpen, title: 'Guided Curriculum', body: 'Clear sequence with concept-to-application flow.' },
+          { icon: Trophy, title: 'Rewarded Learning', body: 'Progress milestones tied to DeRi incentives.' },
+          { icon: Rocket, title: 'Builder Readiness', body: 'Moves learners from theory into deployment.' },
+        ].map((item) => (
+          <article key={item.title} className="rounded-2xl border border-slate-700/50 bg-slate-900/60 backdrop-blur-sm p-6 shadow-xl">
+            <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center mb-4">
+              <item.icon className="h-6 w-6 text-indigo-400" />
+            </div>
+            <h3 className="text-lg font-bold text-white">{item.title}</h3>
+            <p className="mt-2 text-sm text-slate-400 leading-relaxed">{item.body}</p>
+          </article>
+        ))}
+      </section>
+
+      {/* Curriculum Levels */}
+      <div className="space-y-8">
+        {curriculumLevels.map((level) => (
+          <article key={level.id} className={`rounded-2xl border ${levelColors[level.id].border} bg-slate-900/60 
+              backdrop-blur-sm p-6 sm:p-8 shadow-xl`}>
+            <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+              <div>
+                <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 
+                    text-xs font-semibold uppercase tracking-wider mb-4 ${levelColors[level.id].badge}`}>
+                  <span className={`w-1.5 h-1.5 rounded-full ${levelColors[level.id].dot}`}/>
+                  {level.tier}
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                  Level {level.id}: {level.title}
+                </h3>
+                <p className="mt-3 max-w-3xl text-slate-400 leading-relaxed">
+                  {level.description}
+                </p>
+              </div>
+              <div className="rounded-full border border-slate-700 bg-slate-800/50 px-4 py-1.5 text-xs font-medium text-slate-300">
+                {level.duration}
+              </div>
+            </div>
+
+            <div className="grid gap-3 mb-8 sm:grid-cols-2 lg:grid-cols-3">
+              {level.outcomes.map((outcome) => (
+                <div key={outcome} className="flex items-start gap-2 text-sm text-slate-300">
+                  <CheckCircle className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <span>{outcome}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {level.lessons.map((lesson) => (
+                <Link
+                  key={lesson.href}
+                  href={lesson.href}
+                  className="group block rounded-xl border border-slate-700/50 
+                      bg-slate-800/50 hover:bg-slate-800 hover:border-indigo-500/40 p-5 
+                      transition-all duration-200 hover:shadow-lg hover:shadow-indigo-900/20 
+                      hover:-translate-y-0.5"
+                >
+                  <p className="font-semibold text-white text-sm leading-snug group-hover:text-indigo-300 
+                      transition-colors">
+                    {lesson.title}
+                  </p>
+                  <div className="mt-2 flex items-center gap-3 text-xs text-slate-500">
+                    <span>{lesson.duration}</span>
+                    <span className="text-indigo-400 font-medium">{lesson.reward}</span>
+                  </div>
+                  <span className="mt-4 inline-block text-xs font-medium text-indigo-400 
+                      group-hover:translate-x-1 transition-transform duration-150">
+                    Start lesson →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* AI Tutor CTA */}
+      <section className="rounded-3xl border border-indigo-500/20 bg-indigo-500/5 p-8 sm:p-12 text-center relative overflow-hidden">
+        <div className="pointer-events-none absolute left-0 top-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),transparent_70%)]" />
+        <div className="relative space-y-6">
+          <h2 className="text-3xl font-bold text-white">Study with the DRP AI Tutor</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+            Use the tutor to summarize modules, clarify concepts, and generate practical implementation checklists.
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-4 pt-4">
+            <Link href="/learn/ai-tutor">
+              <Button className="rounded-xl bg-indigo-600 hover:bg-indigo-500 px-8 py-6 font-semibold">
+                Open AI Tutor
+              </Button>
+            </Link>
+            <Link href="/learn/leaderboard">
+              <Button variant="outline" className="rounded-xl border-slate-700 text-white px-8 py-6 font-semibold">
+                View Leaderboard
+              </Button>
+            </Link>
+          </div>
+          <div className="pt-4">
+            <span className="inline-flex items-center rounded-full bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 text-xs text-amber-300 font-medium">
+              <Sparkles className="mr-2 h-4 w-4" />
+              Balanced for beginners and technical contributors
+            </span>
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }

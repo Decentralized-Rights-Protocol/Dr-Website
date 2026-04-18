@@ -3,14 +3,18 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { 
-  ArrowLeftIcon, 
-  CheckCircleIcon, 
-  ClockIcon, 
-  TrophyIcon,
-  PlayIcon,
-  PauseIcon,
-  BookOpenIcon
-} from '@heroicons/react/24/outline'
+  ArrowLeft, 
+  CheckCircle, 
+  Clock, 
+  Trophy,
+  Play,
+  Pause,
+  BookOpen,
+  ChevronRight,
+  Coins,
+  Brain,
+  Sparkles
+} from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import { ThinkFirstQuestion } from '@/components/learn/ThinkFirstQuestion'
 import { ConceptDiagram } from '@/components/learn/ConceptDiagram'
@@ -27,6 +31,85 @@ import {
   AgencyTrigger, 
   StewardshipTrigger 
 } from '@/learn/components/psychology'
+import { Button } from '@/components/ui/button'
+
+// Helper for time formatting
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+};
+
+// Diagram Components (from the prompt's fixes)
+function LayerDiagram({ layers }: { layers: string[] }) {
+  const colors = ['from-indigo-700 to-indigo-600', 'from-violet-700 to-violet-600', 
+                   'from-purple-700 to-purple-600', 'from-blue-700 to-blue-600'];
+  return (
+    <div className="rounded-xl border border-slate-700 bg-slate-900 p-6 my-6">
+      <div className="space-y-2">
+        {layers.map((layer, i) => (
+          <div key={i} 
+            className={`rounded-lg bg-gradient-to-r ${colors[i % colors.length]} px-5 py-3 
+                text-white text-sm font-semibold text-center shadow-md`}
+            style={{ marginInline: `${i * 12}px` }}>
+            {layer}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FlowDiagram({ steps }: { steps: string[] }) {
+  return (
+    <div className="rounded-xl border border-slate-700 bg-slate-900 p-6 my-6 overflow-x-auto custom-scrollbar">
+      <div className="flex items-center gap-0 min-w-max">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-center">
+            <div className="rounded-xl bg-slate-800 border border-indigo-500/30 
+                px-4 py-3 text-sm text-slate-200 text-center max-w-[140px] 
+                leading-snug shadow">
+              {step}
+            </div>
+            {i < steps.length - 1 && (
+              <div className="flex items-center px-1">
+                <div className="h-0.5 w-6 bg-indigo-500/40"/>
+                <ChevronRight className="w-4 h-4 text-indigo-500/60 -ml-1"/>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function BlockchainDiagram() {
+  const blocks = [
+    { label: 'Block 1', hash: '0x1a2b', prev: 'null' },
+    { label: 'Block 2', hash: '0x3c4d', prev: '0x1a2b' },
+    { label: 'Block 3', hash: '0x5e6f', prev: '0x3c4d' },
+  ];
+  return (
+    <div className="rounded-xl border border-slate-700 bg-slate-900 p-6 my-6 overflow-x-auto custom-scrollbar">
+      <div className="flex items-center gap-2 min-w-max">
+        {blocks.map((block, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <div className="rounded-lg border border-indigo-500/40 bg-slate-800 
+                p-4 text-xs space-y-1 min-w-[120px] shadow-lg shadow-indigo-900/10">
+              <div className="font-bold text-indigo-400">{block.label}</div>
+              <div className="text-slate-400">Hash: <span className="text-slate-300 font-mono">{block.hash}</span></div>
+              <div className="text-slate-400">Prev: <span className="text-slate-300 font-mono">{block.prev}</span></div>
+            </div>
+            {i < blocks.length - 1 && (
+              <ChevronRight className="text-indigo-500 w-5 h-5" />
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 interface LessonContent {
   id: string
@@ -64,7 +147,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
     score: 0
   })
   const [timeSpent, setTimeSpent] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
   const [completedSections, setCompletedSections] = useState<Set<string>>(new Set())
   const [revealedQuestions, setRevealedQuestions] = useState<Set<string>>(new Set())
   // CRITICAL FIX: Track revealed state per quiz question ID to prevent state leakage
@@ -135,7 +218,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
     // Submit completion to API with logging on failure
     void (async () => {
       try {
-        const response = await fetch('/api/learn/complete', {
+        await fetch('/api/learn/complete', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -145,32 +228,14 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
             answers: quizState.answers
           })
         })
-
-        if (!response.ok) {
-          console.error('Failed to submit lesson completion:', {
-            status: response.status,
-            statusText: response.statusText,
-            url: response.url
-          })
-        }
       } catch (error) {
         console.error('Error submitting lesson completion:', error)
       }
     })()
   }
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = seconds % 60
-    return `${mins}:${secs.toString().padStart(2, '0')}`
-  }
-
   const handleQuestionRevealed = (questionId: string) => {
     setRevealedQuestions(prev => new Set(prev).add(questionId))
-  }
-
-  const handleSectionComplete = (sectionTitle: string) => {
-    setCompletedSections(prev => new Set(prev).add(sectionTitle))
   }
 
   // Calculate progress based on sections and questions
@@ -189,317 +254,293 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
     return lesson.content.replace(/###\s+Question\s+\d+[\s\S]*?(?=###|##|$)/gi, '')
   }, [lesson.content])
 
+  const progress = showQuiz ? 100 : Math.max(progressPercentage, Math.min(Math.floor((timeSpent / (lesson.duration * 60)) * 100), 95));
+
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      
-      {/* Background Grid */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
-      
-      <div className="relative z-10 container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <button 
-              onClick={() => router.push('/learn')}
-              className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-            >
-              <ArrowLeftIcon className="h-5 w-5" />
-              <span>Back to Learn</span>
-            </button>
-            
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <ClockIcon className="h-5 w-5 text-gray-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-300">
-                  {formatTime(timeSpent)}
-                </span>
-              </div>
-              <button
+    <div className="max-w-4xl mx-auto pb-20">
+      {/* Sticky Header Bar */}
+      <div className="sticky top-0 z-30 -mx-4 px-4 py-3 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 mb-8">
+        <div className="flex items-center justify-between gap-4">
+          <button 
+            onClick={() => router.push('/learn')}
+            className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+            <span className="hidden sm:inline">Back to Learn</span>
+          </button>
+          
+          <div className="flex items-center gap-3 sm:gap-6">
+            {/* Timer */}
+            <div className="flex items-center gap-2 rounded-lg bg-slate-900 border border-slate-800 px-3 py-1.5 shadow-inner">
+              <Clock className="w-3.5 h-3.5 text-slate-500" />
+              <span className="text-sm font-mono font-bold text-white">{formatTime(timeSpent)}</span>
+              <button 
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
+                className="ml-1 text-indigo-400 hover:text-indigo-300 transition-colors"
               >
-                {isPlaying ? <PauseIcon className="h-4 w-4" /> : <PlayIcon className="h-4 w-4" />}
-                <span>{isPlaying ? 'Pause' : 'Start'}</span>
+                {isPlaying ? <Pause size={14} /> : <Play size={14} />}
               </button>
             </div>
-          </div>
-          
-          <h1 className="text-3xl font-bold text-white mb-2">
-            {lesson.title}
-          </h1>
-          
-          <div className="flex items-center space-x-6 text-sm text-neutral-300">
-            <div className="flex items-center space-x-1">
-              <ClockIcon className="h-4 w-4" />
-              <span>{lesson.duration} minutes</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <TrophyIcon className="h-4 w-4" />
-              <span>{lesson.reward} $DeRi reward</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <span className="px-2 py-1 bg-blue-500/30 rounded text-xs font-semibold">
-                Level {lessonLevel}
-              </span>
-            </div>
-          </div>
-
-          {/* Progress Indicator */}
-          <div className="mt-4 pt-4 border-t border-white/20">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-neutral-300">Progress</span>
-              <span className="text-sm font-semibold text-white">{progressPercentage.toFixed(0)}%</span>
-            </div>
-            <div className="w-full bg-white/10 rounded-full h-2">
-              <div 
-                className="bg-gradient-to-r from-blue-400 to-green-400 h-2 rounded-full transition-all duration-500"
-                style={{ width: `${progressPercentage}%` }}
-              />
+            
+            {/* Level badge */}
+            <div className="rounded-full bg-indigo-500/15 border border-indigo-500/30 px-3 py-1 text-[10px] font-black text-indigo-400 uppercase tracking-widest">
+              Level {lessonLevel}
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Psychology Triggers - Level-based */}
+      {/* Lesson Progress */}
+      <div className="mb-10 space-y-2">
+        <div className="flex items-center justify-between text-[10px] font-black text-slate-500 uppercase tracking-widest">
+          <span>Your Progress</span>
+          <span className="text-indigo-400">{progress.toFixed(0)}%</span>
+        </div>
+        <div className="h-2 rounded-full bg-slate-900 border border-slate-800 overflow-hidden shadow-inner">
+          <div 
+            className="h-full bg-gradient-to-r from-indigo-600 to-violet-500 rounded-full transition-all duration-1000 ease-out"
+            style={{ width: `${progress}%` }} 
+          />
+        </div>
+      </div>
+
+      {/* Lesson Title & Meta */}
+      <div className="space-y-6 mb-12">
+        <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          {lesson.title}
+        </h1>
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-1.5 rounded-lg bg-slate-900 border border-slate-800 px-3 py-1.5 text-xs font-bold text-slate-400">
+            <Clock className="w-3.5 h-3.5" />
+            {lesson.duration} minutes
+          </div>
+          <div className="flex items-center gap-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 text-xs font-black text-emerald-400 uppercase tracking-widest">
+            <Coins className="w-3.5 h-3.5" />
+            {lesson.reward} $DeRi reward
+          </div>
+        </div>
+      </div>
+
+      {/* Psychology Triggers */}
+      <div className="mb-12 space-y-6">
         {lessonLevel === 1 && (
           <CuriosityTrigger
             lessonTitle={lesson.title}
-            whyItMatters={lesson.description || `Understanding ${lesson.title} is fundamental to mastering blockchain technology and DRP. This knowledge forms the foundation for all advanced concepts.`}
+            whyItMatters={lesson.description || `Understanding ${lesson.title} is fundamental to mastering blockchain technology and DRP.`}
             rewardAmount={lesson.reward}
           />
         )}
         {lessonLevel === 2 && (
           <UnderstandingTrigger
             lessonTitle={lesson.title}
-            keyConcepts={[
-              'Core DRP architecture principles',
-              'Hybrid consensus mechanisms',
-              'Activity proof verification',
-              'Governance structures'
-            ]}
+            keyConcepts={['DRP architecture', 'Consensus mechanisms', 'Activity proofs']}
             lockedUntilUnderstanding={true}
           />
         )}
         {lessonLevel === 3 && (
-          <IdentityTrigger
-            learnerTitle="DRP Contributor"
-            progressPercentage={progressPercentage}
-            level={lessonLevel}
-          />
+          <IdentityTrigger learnerTitle="DRP Contributor" progressPercentage={progress} level={lessonLevel} />
         )}
-        {lessonLevel === 4 && (
-          <AgencyTrigger
-            missionTitle={lesson.title}
-            missionDescription={`Apply your knowledge of ${lesson.title} to real-world scenarios. This mission will test your ability to implement DRP concepts in practical applications.`}
-            useCases={[
-              'Enterprise system integration',
-              'Supply chain tracking',
-              'Identity management solutions',
-              'Cross-chain interoperability'
-            ]}
-            poatCheckpoint={true}
-          />
-        )}
-        {lessonLevel === 5 && (
-          <StewardshipTrigger
-            governanceRole={`As a Level ${lessonLevel} learner, you're preparing to participate in DRP governance. This lesson will help you understand the ethical implications and long-term impact of protocol decisions.`}
-            ethicalScenarios={[
-              'Balancing innovation with security',
-              'Ensuring fair reward distribution',
-              'Protecting user privacy and rights',
-              'Maintaining decentralization principles'
-            ]}
-            rightsEligible={true}
-          />
-        )}
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Lesson Content */}
-          <div className="lg:col-span-2">
-            <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
-              <div className="flex items-center space-x-2 mb-4">
-                <BookOpenIcon className="h-6 w-6 text-blue-400" />
-                <h2 className="text-xl font-semibold text-white">Lesson Content</h2>
-              </div>
-              
-              <div className="prose prose-lg prose-invert max-w-none text-neutral-200">
-                {/* Add lesson-specific diagram if available */}
-                {(() => {
-                  const LessonDiagram = getLessonDiagram(lesson.slug)
-                  if (LessonDiagram) {
-                    return (
-                      <LessonDiagram
-                        title={`${lesson.title} - Visual Overview`}
-                        caption="This diagram illustrates the key concepts covered in this lesson"
-                      />
-                    )
-                  }
-                  // Fallback to generic diagram
-                  if (getDiagramType()) {
-                    return (
-                      <ConceptDiagram
-                        type={getDiagramType()!}
-                        title={`${lesson.title} - Visual Overview`}
-                        caption="This diagram illustrates the key concepts covered in this lesson"
-                      />
-                    )
-                  }
-                  return null
-                })()}
+      {/* Lesson Content Area */}
+      <article className="rounded-3xl border border-slate-800 bg-slate-900/40 p-6 sm:p-10 shadow-2xl backdrop-blur-sm
+          prose prose-invert prose-slate max-w-none
+          prose-headings:text-white prose-headings:font-black prose-headings:tracking-tight
+          prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+          prose-h3:text-xl prose-h3:text-indigo-300 prose-h3:mt-8
+          prose-p:text-slate-300 prose-p:leading-relaxed prose-p:text-lg
+          prose-li:text-slate-300 prose-li:text-lg
+          prose-strong:text-white prose-strong:font-bold
+          prose-code:text-indigo-300 prose-code:bg-indigo-500/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+          prose-pre:bg-slate-950 prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-2xl prose-pre:shadow-inner">
+        
+        {/* Render main content */}
+        <ReactMarkdown 
+          components={{
+            ...diagramComponents,
+            code({node, inline, className, children, ...props}) {
+              const match = /language-diagram-(.+)/.exec(className || '')
+              if (match) {
+                const type = match[1];
+                const data = String(children).replace(/\n$/, '').split('\n');
+                if (type === 'layers') return <LayerDiagram layers={data} />;
+                if (type === 'flow') return <FlowDiagram steps={data} />;
+                if (type === 'blockchain') return <BlockchainDiagram />;
+              }
+              return <code className={className} {...props}>{children}</code>
+            }
+          }}
+        >
+          {filteredContent}
+        </ReactMarkdown>
 
-                {/* Render main content (questions filtered out) */}
-                <ReactMarkdown components={diagramComponents}>{filteredContent}</ReactMarkdown>
-
-                {/* Render questions inline with hidden answers */}
-                {parsedQuestions.length > 0 && (
-                  <div className="mt-12">
-                    <h3 className="text-2xl font-bold text-white mb-4">Think First Questions</h3>
-                    <p className="text-neutral-300 mb-6">
-                      Before revealing answers, take a moment to think about each question. 
-                      This active engagement improves comprehension and retention.
-                    </p>
-                    {parsedQuestions.map((question) => (
-                      <ThinkFirstQuestion
-                        key={question.id}
-                        questionId={question.id} // CRITICAL: Unique ID for state isolation
-                        question={question.question}
-                        type={question.type}
-                        options={question.options}
-                        correctAnswer={question.correctAnswer}
-                        explanation={question.explanation}
-                        onAnswerRevealed={() => handleQuestionRevealed(question.id)}
-                      />
-                    ))}
-                  </div>
-                )}
-
-                {/* Add checkpoint at the end */}
-                <Checkpoint
-                  title="Content Review Complete"
-                  description="You've finished reading this lesson. Review the key concepts before taking the final quiz."
-                  completed={completedSections.size >= sections.length && revealedQuestions.size >= parsedQuestions.length}
-                  position="end"
+        {/* Render questions inline */}
+        {parsedQuestions.length > 0 && (
+          <div className="mt-12 not-prose space-y-8">
+            <h3 className="text-2xl font-black text-white flex items-center gap-3">
+              <Brain className="w-6 h-6 text-indigo-400" />
+              Think First Questions
+            </h3>
+            <div className="space-y-6">
+              {parsedQuestions.map((question) => (
+                <ThinkFirstQuestion
+                  key={question.id}
+                  questionId={question.id}
+                  question={question.question}
+                  type={question.type}
+                  options={question.options}
+                  correctAnswer={question.correctAnswer}
+                  explanation={question.explanation}
+                  onAnswerRevealed={() => handleQuestionRevealed(question.id)}
                 />
-              </div>
-              
-              {!showQuiz && !quizState.completed && (
-                <div className="mt-8 text-center">
-                  <button
-                    onClick={() => setShowQuiz(true)}
-                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium"
-                  >
-                    Take Quiz to Complete Lesson
-                  </button>
-                </div>
-              )}
+              ))}
             </div>
           </div>
+        )}
 
-          {/* Quiz Sidebar */}
-          <div className="lg:col-span-1">
-            {showQuiz && !quizState.completed && (
-              <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6 sticky top-6">
-                <h3 className="text-lg font-semibold text-white mb-4">
-                  Final Quiz: Question {quizState.currentQuestion + 1} of {shuffledQuiz.length}
-                </h3>
+        {/* Checkpoint at the end */}
+        <div className="not-prose mt-12">
+          <Checkpoint
+            title="Content Review Complete"
+            description="You've finished reading this lesson. Review the key concepts before taking the final quiz."
+            completed={progress >= 95}
+            position="end"
+          />
+        </div>
+      </article>
+
+      {/* Quiz Section */}
+      {!showQuiz && !quizState.completed && (
+        <div className="mt-12 p-1 rounded-3xl bg-gradient-to-r from-indigo-500 to-violet-600 shadow-xl shadow-indigo-900/20">
+          <button 
+            onClick={() => { setShowQuiz(true); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="w-full bg-slate-950 rounded-[calc(1.5rem-4px)] py-8 px-6 text-center hover:bg-slate-900 transition-colors"
+          >
+            <Brain className="w-10 h-10 text-indigo-400 mx-auto mb-4" />
+            <h3 className="text-2xl font-black text-white">Knowledge Check</h3>
+            <p className="text-slate-400 mt-2 mb-6">Verify your understanding and earn {lesson.reward} $DeRi tokens.</p>
+            <div className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-500 transition-colors">
+              Start Final Quiz
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </button>
+        </div>
+      )}
+
+      {showQuiz && !quizState.completed && (
+        <div className="mt-12 space-y-8 animate-fade-in-up">
+          <div className="rounded-3xl border border-indigo-500/25 bg-indigo-500/5 p-6 sm:p-10 shadow-2xl backdrop-blur-sm">
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-900/20">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-white">Final Quiz</h3>
+                  <p className="text-slate-500 text-sm">Question {quizState.currentQuestion + 1} of {shuffledQuiz.length}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5">
+                <Coins className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-black text-emerald-400">+{lesson.reward} $DeRi</span>
+              </div>
+            </div>
+
+            {shuffledQuiz[quizState.currentQuestion] && (
+              <div className="space-y-8">
+                <p className="text-xl font-bold text-white leading-relaxed">
+                  {shuffledQuiz[quizState.currentQuestion].question}
+                </p>
                 
-                {shuffledQuiz[quizState.currentQuestion] && (
-                  <ThinkFirstQuestion
-                    key={shuffledQuiz[quizState.currentQuestion].id} // CRITICAL: Force remount on question change
-                    questionId={shuffledQuiz[quizState.currentQuestion].id} // CRITICAL: Unique ID for state tracking
-                    question={shuffledQuiz[quizState.currentQuestion].question}
-                    type="multiple-choice"
-                    options={shuffledQuiz[quizState.currentQuestion].options}
-                    correctAnswer={shuffledQuiz[quizState.currentQuestion].correct}
-                    selectedAnswer={quizState.answers[shuffledQuiz[quizState.currentQuestion].id] ?? null}
-                    isQuizMode={true}
-                    isRevealedExternal={revealedQuizQuestions.has(shuffledQuiz[quizState.currentQuestion].id)}
-                    onRevealToggle={(revealed) => {
-                      // CRITICAL FIX: Track revealed state per question ID
-                      const questionId = shuffledQuiz[quizState.currentQuestion].id
-                      if (revealed) {
-                        setRevealedQuizQuestions(prev => new Set(prev).add(questionId))
-                      } else {
-                        setRevealedQuizQuestions(prev => {
-                          const next = new Set(prev)
-                          next.delete(questionId)
-                          return next
-                        })
-                      }
-                    }}
-                    onAnswerSelected={(index) => {
-                      handleQuizAnswer(
-                        shuffledQuiz[quizState.currentQuestion].id,
-                        index
-                      )
-                    }}
-                    onAnswerRevealed={() => {
-                      // Track when answer is revealed for analytics
-                      const questionId = shuffledQuiz[quizState.currentQuestion].id
-                      setRevealedQuizQuestions(prev => new Set(prev).add(questionId))
-                    }}
-                  />
-                )}
+                <div className="grid gap-3">
+                  {shuffledQuiz[quizState.currentQuestion].options.map((option, index) => {
+                    const isSelected = quizState.answers[shuffledQuiz[quizState.currentQuestion].id] === index;
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => handleQuizAnswer(shuffledQuiz[quizState.currentQuestion].id, index)}
+                        className={`group relative w-full text-left p-5 rounded-2xl border transition-all duration-200 
+                          ${isSelected
+                            ? 'border-indigo-500 bg-indigo-600 text-white shadow-lg shadow-indigo-900/40'
+                            : 'border-slate-700 bg-slate-800/40 text-slate-300 hover:border-slate-500 hover:bg-slate-800'
+                          }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold pr-4">{option}</span>
+                          <div className={`w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center
+                            ${isSelected ? 'border-white bg-white' : 'border-slate-600 group-hover:border-slate-500'}`}>
+                            {isSelected && <div className="w-2 h-2 rounded-full bg-indigo-600" />}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
                 
-                <div className="flex justify-between mt-6 pt-6 border-t border-white/20">
+                <div className="flex items-center justify-between pt-6 border-t border-slate-800">
                   <button
-                    onClick={() => setQuizState(prev => ({ 
-                      ...prev, 
-                      currentQuestion: Math.max(0, prev.currentQuestion - 1) 
-                    }))}
+                    onClick={() => setQuizState(prev => ({ ...prev, currentQuestion: Math.max(0, prev.currentQuestion - 1) }))}
                     disabled={quizState.currentQuestion === 0}
-                    className="px-4 py-2 text-neutral-200 border border-white/20 bg-white/5 rounded-md disabled:opacity-50 hover:bg-white/10"
+                    className="flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-slate-500 hover:text-white disabled:opacity-30 transition-colors"
                   >
+                    <ArrowLeft size={16} />
                     Previous
                   </button>
                   
                   {quizState.currentQuestion === shuffledQuiz.length - 1 ? (
                     <button
                       onClick={submitQuiz}
-                      className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
+                      disabled={Object.keys(quizState.answers).length < shuffledQuiz.length}
+                      className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-lg shadow-emerald-900/20 disabled:opacity-40 transition-all active:scale-95"
                     >
-                      Submit Quiz
+                      Complete Lesson
                     </button>
                   ) : (
                     <button
-                      onClick={() => setQuizState(prev => ({ 
-                        ...prev, 
-                        currentQuestion: prev.currentQuestion + 1 
-                      }))}
-                      className="px-4 py-2 bg-blue-500 hover:bg-green-600 text-white rounded-md"
+                      onClick={() => setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion + 1 }))}
+                      className="flex items-center gap-2 px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-xl shadow-lg shadow-indigo-900/20 transition-all active:scale-95"
                     >
-                      Next
+                      Next Question
+                      <ChevronRight size={18} />
                     </button>
                   )}
                 </div>
               </div>
             )}
-
-            {quizState.completed && (
-              <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
-                <div className="text-center">
-                  <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    Quiz Completed!
-                  </h3>
-                  <div className="text-3xl font-bold text-green-400 mb-2">
-                    {quizState.score.toFixed(0)}%
-                  </div>
-                  <p className="text-neutral-300 mb-4">
-                    You earned {lesson.reward} $DeRi tokens!
-                  </p>
-                  <button
-                    onClick={() => router.push('/learn')}
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md"
-                  >
-                    Continue Learning
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         </div>
-      </div>
+      )}
+
+      {quizState.completed && (
+        <div className="mt-12 animate-bounce-in">
+          <div className="rounded-3xl border border-emerald-500/25 bg-emerald-500/5 p-10 text-center shadow-2xl backdrop-blur-sm">
+            <div className="w-20 h-20 rounded-2xl bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-900/20 mx-auto mb-6">
+              <CheckCircle className="w-10 h-10" />
+            </div>
+            <h3 className="text-3xl font-black text-white mb-2">Lesson Completed!</h3>
+            <p className="text-slate-400 mb-8 max-w-sm mx-auto">Great work! You've mastered this module and earned your rewards.</p>
+            
+            <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-10">
+              <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800">
+                <p className="text-2xl font-black text-emerald-400">{quizState.score.toFixed(0)}%</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Score</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800">
+                <p className="text-2xl font-black text-indigo-400">+{lesson.reward}</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">$DeRi Earned</p>
+              </div>
+            </div>
+
+            <Link
+              href="/learn"
+              className="inline-flex items-center justify-center gap-2 w-full max-w-sm bg-indigo-600 hover:bg-indigo-500 text-white font-black py-4 px-8 rounded-xl shadow-lg shadow-indigo-900/20 transition-all active:scale-95"
+            >
+              Back to Learn Hub
+              <ChevronRight className="w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
-

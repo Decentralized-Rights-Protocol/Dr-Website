@@ -2,15 +2,19 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { 
-  ChatBubbleLeftRightIcon,
-  PaperAirplaneIcon,
-  SparklesIcon,
-  UserIcon,
-  CpuChipIcon,
-  LightBulbIcon,
-  BookOpenIcon,
-  AcademicCapIcon
-} from "@heroicons/react/24/outline";
+  MessageSquare,
+  Send,
+  Sparkles,
+  User,
+  Cpu,
+  Lightbulb,
+  BookOpen,
+  GraduationCap,
+  Bot,
+  ArrowRight
+} from "lucide-react";
+import ReactMarkdown from 'react-markdown';
+import { Button } from '@/components/ui/button';
 import {
   formatStructuredResponse,
   generatePatternMode,
@@ -342,191 +346,200 @@ What would you like to explore? Ask me anything about blockchain, DRP, or your c
   };
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full">
-              <CpuChipIcon className="h-8 w-8 text-white" />
+    <div className="space-y-8 max-w-5xl mx-auto">
+      {/* Header */}
+      <div className="text-center space-y-4">
+        <div className="flex items-center justify-center gap-3">
+          <div className="p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-900/20">
+            <Bot className="h-8 w-8 text-white" />
+          </div>
+          <div className="text-left">
+            <h1 className="text-3xl font-extrabold text-white tracking-tight">
+              AI Learning Assistant
+            </h1>
+            <p className="text-slate-400 text-sm">
+              Your personalized tutor for blockchain and DRP concepts
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Chat Interface */}
+        <div className="lg:col-span-3 flex flex-col h-[700px] rounded-3xl border border-slate-800 bg-slate-900/50 backdrop-blur-md overflow-hidden shadow-2xl">
+          {/* Chat Header */}
+          <div className="p-4 border-b border-slate-800 bg-slate-900/80 backdrop-blur-sm flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <div>
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Assistant Online</span>
+                <p className="text-xs text-indigo-400 font-medium">Level {tutorContext.currentLevel} • {tutorContext.currentLesson}</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                DRP Learning Assistant
-              </h1>
-              <p className="text-gray-600 dark:text-gray-300">
-                Your AI tutor for blockchain and DRP concepts
-              </p>
+            <div className="flex gap-2">
+              <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400">
+                <Sparkles className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+
+          {/* Messages Area */}
+          <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+            {messages.map((message) => (
+              <div key={message.id} className={`flex gap-4 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                {/* Avatar */}
+                <div className={`w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center shadow-md ${
+                  message.type === 'user' 
+                    ? 'bg-slate-700 text-white' 
+                    : 'bg-gradient-to-br from-indigo-500 to-violet-600 text-white'
+                }`}>
+                  {message.type === 'user' ? <User className="w-5 h-5" /> : <Bot className="w-5 h-5" />}
+                </div>
+
+                {/* Bubble */}
+                <div className={`max-w-[85%] space-y-3`}>
+                  <div className={`rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm
+                    ${message.type === 'user' 
+                      ? 'bg-indigo-600 text-white rounded-tr-sm' 
+                      : 'bg-slate-800 text-slate-200 border border-slate-700/50 rounded-tl-sm'
+                    }`}>
+                    {message.type === 'user' 
+                      ? message.content 
+                      : <ReactMarkdown className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-950 prose-pre:border prose-pre:border-slate-800">
+                          {message.content}
+                        </ReactMarkdown>
+                    }
+                  </div>
+
+                  {/* Suggestions for AI messages */}
+                  {message.type === 'assistant' && message.suggestions && (
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {message.suggestions.map((suggestion, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleSendMessage(suggestion)}
+                          className="px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-[11px] font-medium text-slate-400 hover:text-white hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all"
+                        >
+                          {suggestion}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+            
+            {isLoading && (
+              <div className="flex gap-4">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white">
+                  <Bot className="w-5 h-5" />
+                </div>
+                <div className="bg-slate-800 border border-slate-700/50 rounded-2xl rounded-tl-sm px-4 py-3">
+                  <div className="flex gap-1">
+                    <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce" />
+                    <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.2s]" />
+                    <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.4s]" />
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input Area */}
+          <div className="p-4 bg-slate-900/80 backdrop-blur-md border-t border-slate-800">
+            <div className="flex gap-3 max-w-4xl mx-auto">
+              <input
+                type="text"
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Ask the AI tutor anything about DRP..."
+                className="flex-1 rounded-xl border border-slate-700 bg-slate-800 
+                    px-4 py-3 text-sm text-white placeholder-slate-500 
+                    focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50
+                    transition-all"
+                disabled={isLoading}
+              />
+              <Button 
+                onClick={() => handleSendMessage()}
+                disabled={!inputMessage.trim() || isLoading}
+                className="rounded-xl bg-indigo-600 hover:bg-indigo-500 px-5 
+                    text-white font-semibold transition-all hover:scale-105 
+                    disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
+              >
+                <Send className="w-4 h-4" />
+                <span className="hidden sm:inline">Send</span>
+              </Button>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Chat Interface */}
-          <div className="lg:col-span-3">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg h-[600px] flex flex-col">
-              {/* Chat Header */}
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                    <SparklesIcon className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">
-                      DRP Learning Assistant
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      Level {tutorContext.currentLevel} • {tutorContext.currentLesson}
-                    </p>
-                  </div>
-                </div>
+        {/* Sidebar */}
+        <div className="lg:col-span-1 space-y-6">
+          {/* Progress Widget */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-5 space-y-4 shadow-xl">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+              <GraduationCap className="w-4 h-4" />
+              Learning Status
+            </h3>
+            <div className="space-y-3">
+              <div>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Current Level</p>
+                <p className="text-sm font-bold text-white">Level {tutorContext.currentLevel}</p>
               </div>
-
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                {messages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div
-                      className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                        message.type === 'user'
-                          ? 'bg-blue-500 text-white'
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
-                      }`}
-                    >
-                      <p className="text-sm">{message.content}</p>
-                      {message.suggestions && (
-                        <div className="mt-3 space-y-2">
-                          {message.suggestions.map((suggestion, index) => (
-                            <button
-                              key={index}
-                              onClick={() => handleSendMessage(suggestion)}
-                              className="block w-full text-left text-xs p-2 bg-white dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded hover:bg-gray-50 dark:hover:bg-gray-500 transition-colors"
-                            >
-                              {suggestion}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-                
-                {isLoading && (
-                  <div className="flex justify-start">
-                    <div className="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-2">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                <div ref={messagesEndRef} />
+              <div>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Current Lesson</p>
+                <p className="text-sm font-bold text-white leading-tight">{tutorContext.currentLesson}</p>
               </div>
-
-              {/* Input */}
-              <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex space-x-2">
-                  <input
-                    type="text"
-                    value={inputMessage}
-                    onChange={(e) => setInputMessage(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Ask me anything about DRP or blockchain..."
-                    className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    disabled={isLoading}
-                  />
-                  <button
-                    onClick={() => handleSendMessage()}
-                    disabled={!inputMessage.trim() || isLoading}
-                    className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-md transition-colors"
-                  >
-                    <PaperAirplaneIcon className="h-5 w-5" />
-                  </button>
+              <div className="pt-2">
+                <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-indigo-500 w-[65%]" />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Learning Context */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                <BookOpenIcon className="h-5 w-5 mr-2" />
-                Your Progress
-              </h3>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Current Level</p>
-                  <p className="font-semibold text-gray-900 dark:text-white">Level {tutorContext.currentLevel}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Current Lesson</p>
-                  <p className="font-semibold text-gray-900 dark:text-white">{tutorContext.currentLesson}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Learning Style</p>
-                  <p className="font-semibold text-gray-900 dark:text-white capitalize">{tutorContext.learningStyle}</p>
-                </div>
-              </div>
+          {/* Quick Topics */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-5 space-y-4 shadow-xl">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+              <Lightbulb className="w-4 h-4" />
+              Quick Help
+            </h3>
+            <div className="space-y-2">
+              {[
+                { label: "Blockchain Basics", icon: <BookOpen className="w-3.5 h-3.5" /> },
+                { label: "DRP Consensus", icon: <Cpu className="w-3.5 h-3.5" /> },
+                { label: "Practice Quiz", icon: <Sparkles className="w-3.5 h-3.5" /> }
+              ].map((topic) => (
+                <button
+                  key={topic.label}
+                  onClick={() => handleSendMessage(`Explain ${topic.label}`)}
+                  className="w-full flex items-center justify-between p-2.5 rounded-lg bg-slate-800/50 border border-slate-700/50 text-xs text-slate-300 hover:bg-slate-800 hover:border-indigo-500/40 hover:text-white transition-all group"
+                >
+                  <span className="flex items-center gap-2">
+                    {topic.icon}
+                    {topic.label}
+                  </span>
+                  <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </button>
+              ))}
             </div>
+          </div>
 
-            {/* Quick Actions */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                <LightBulbIcon className="h-5 w-5 mr-2" />
-                Quick Help
-              </h3>
-              <div className="space-y-2">
+          {/* Recent Topics */}
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-5 space-y-4 shadow-xl">
+            <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest">Recent Topics</h3>
+            <div className="flex flex-wrap gap-2">
+              {tutorContext.recentTopics.map((topic) => (
                 <button
-                  onClick={() => handleSendMessage("Explain blockchain basics")}
-                  className="w-full text-left p-2 text-sm bg-gray-50 dark:bg-gray-700 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                  key={topic}
+                  onClick={() => handleSendMessage(`Tell me more about ${topic}`)}
+                  className="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-[10px] font-bold text-indigo-400 hover:bg-indigo-500/20 transition-colors"
                 >
-                  Blockchain Basics
+                  {topic}
                 </button>
-                <button
-                  onClick={() => handleSendMessage("What is DRP consensus?")}
-                  className="w-full text-left p-2 text-sm bg-gray-50 dark:bg-gray-700 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
-                >
-                  DRP Consensus
-                </button>
-                <button
-                  onClick={() => handleSendMessage("Help with current lesson")}
-                  className="w-full text-left p-2 text-sm bg-gray-50 dark:bg-gray-700 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
-                >
-                  Current Lesson Help
-                </button>
-                <button
-                  onClick={() => handleSendMessage("Quiz me on recent topics")}
-                  className="w-full text-left p-2 text-sm bg-gray-50 dark:bg-gray-700 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
-                >
-                  Practice Quiz
-                </button>
-              </div>
-            </div>
-
-            {/* Recent Topics */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                <AcademicCapIcon className="h-5 w-5 mr-2" />
-                Recent Topics
-              </h3>
-              <div className="space-y-2">
-                {tutorContext.recentTopics.map((topic, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleSendMessage(`Explain ${topic}`)}
-                    className="w-full text-left p-2 text-sm bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
-                  >
-                    {topic}
-                  </button>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </div>

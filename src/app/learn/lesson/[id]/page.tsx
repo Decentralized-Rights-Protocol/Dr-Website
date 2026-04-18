@@ -4,19 +4,97 @@ import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
-  ArrowLeftIcon, 
-  CheckCircleIcon, 
-  ClockIcon, 
-  TrophyIcon,
-  PlayIcon,
-  PauseIcon,
-  BookOpenIcon
-} from "@heroicons/react/24/outline";
+  ArrowLeft, 
+  CheckCircle, 
+  Clock, 
+  Trophy,
+  Play,
+  Pause,
+  BookOpen,
+  Coins,
+  Brain,
+  ChevronRight
+} from "lucide-react";
 import { LessonSkeleton } from "@/components/learn/LessonSkeleton";
 import ReactMarkdown from "react-markdown";
 
-// This route is kept for backward compatibility
-// New routes should use /learn/lessons/[slug]
+// Helper for time formatting
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+};
+
+// Diagram Components
+function LayerDiagram({ layers }: { layers: string[] }) {
+  const colors = ['from-indigo-700 to-indigo-600', 'from-violet-700 to-violet-600', 
+                   'from-purple-700 to-purple-600', 'from-blue-700 to-blue-600'];
+  return (
+    <div className="rounded-xl border border-slate-700 bg-slate-900 p-6 my-6">
+      <div className="space-y-2">
+        {layers.map((layer, i) => (
+          <div key={i} 
+            className={`rounded-lg bg-gradient-to-r ${colors[i % colors.length]} px-5 py-3 
+                text-white text-sm font-semibold text-center shadow-md`}
+            style={{ marginInline: `${i * 12}px` }}>
+            {layer}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FlowDiagram({ steps }: { steps: string[] }) {
+  return (
+    <div className="rounded-xl border border-slate-700 bg-slate-900 p-6 my-6 overflow-x-auto custom-scrollbar">
+      <div className="flex items-center gap-0 min-w-max">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-center">
+            <div className="rounded-xl bg-slate-800 border border-indigo-500/30 
+                px-4 py-3 text-sm text-slate-200 text-center max-w-[140px] 
+                leading-snug shadow">
+              {step}
+            </div>
+            {i < steps.length - 1 && (
+              <div className="flex items-center px-1">
+                <div className="h-0.5 w-6 bg-indigo-500/40"/>
+                <ChevronRight className="w-4 h-4 text-indigo-500/60 -ml-1"/>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function BlockchainDiagram() {
+  const blocks = [
+    { label: 'Block 1', hash: '0x1a2b', prev: 'null' },
+    { label: 'Block 2', hash: '0x3c4d', prev: '0x1a2b' },
+    { label: 'Block 3', hash: '0x5e6f', prev: '0x3c4d' },
+  ];
+  return (
+    <div className="rounded-xl border border-slate-700 bg-slate-900 p-6 my-6 overflow-x-auto custom-scrollbar">
+      <div className="flex items-center gap-2 min-w-max">
+        {blocks.map((block, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <div className="rounded-lg border border-indigo-500/40 bg-slate-800 
+                p-4 text-xs space-y-1 min-w-[120px] shadow-lg shadow-indigo-900/10">
+              <div className="font-bold text-indigo-400">{block.label}</div>
+              <div className="text-slate-400">Hash: <span className="text-slate-300 font-mono">{block.hash}</span></div>
+              <div className="text-slate-400">Prev: <span className="text-slate-300 font-mono">{block.prev}</span></div>
+            </div>
+            {i < blocks.length - 1 && (
+              <ChevronRight className="text-indigo-500 w-5 h-5" />
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 interface LessonContent {
   id: string;
@@ -24,6 +102,7 @@ interface LessonContent {
   content: string;
   duration: number;
   reward: number;
+  level: number;
   quiz: {
     questions: Array<{
       id: string;
@@ -56,34 +135,26 @@ export default function LessonPage() {
     score: 0
   });
   const [timeSpent, setTimeSpent] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const loadLesson = async () => {
       try {
         setLoading(true);
-        // First try to load by ID
         const response = await fetch(`/api/learn/lesson/${lessonId}`);
         if (response.ok) {
           const lessonData = await response.json();
-          // If we got a slug, redirect to the slug-based route
           if (lessonData.slug && lessonData.slug !== lessonId) {
             router.replace(`/learn/lessons/${lessonData.slug}`);
             return;
           }
-          setLesson(lessonData);
-        } else if (response.status === 404) {
-          // Try to find the lesson by mapping ID to slug
-          const slugResponse = await fetch('/api/learn/lessons');
-          if (slugResponse.ok) {
-            const { lessons } = await slugResponse.json();
-            const foundLesson = lessons.find((l: any) => l.id === lessonId);
-            if (foundLesson?.slug) {
-              router.replace(`/learn/lessons/${foundLesson.slug}`);
-              return;
-            }
+          // Ensure level exists
+          if (!lessonData.level) {
+            lessonData.level = lessonId.startsWith('1-') ? 1 : lessonId.startsWith('2-') ? 2 : 3;
           }
-          setLesson(null); // Explicitly set to null to show 404
+          setLesson(lessonData);
+        } else {
+          setLesson(null);
         }
       } catch (error) {
         console.error('Failed to load lesson:', error);
@@ -93,12 +164,7 @@ export default function LessonPage() {
       }
     };
     
-    if (lessonId) {
-      loadLesson();
-    } else {
-      setLoading(false);
-      setLesson(null);
-    }
+    if (lessonId) loadLesson();
   }, [lessonId, router]);
 
   useEffect(() => {
@@ -123,250 +189,296 @@ export default function LessonPage() {
     
     let score = 0;
     lesson.quiz.questions.forEach(question => {
-      if (quizState.answers[question.id] === question.correct) {
-        score++;
-      }
+      if (quizState.answers[question.id] === question.correct) score++;
     });
     
     const finalScore = (score / lesson.quiz.questions.length) * 100;
     setQuizState(prev => ({ ...prev, completed: true, score: finalScore }));
     
-    // Submit completion to API with logging on failure
     void (async () => {
       try {
-        const response = await fetch('/api/learn/complete', {
+        await fetch('/api/learn/complete', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            lessonId,
-            score: finalScore,
-            timeSpent,
-            answers: quizState.answers
-          })
+          body: JSON.stringify({ lessonId, score: finalScore, timeSpent, answers: quizState.answers })
         });
-
-        if (!response.ok) {
-          console.error('Failed to submit lesson completion:', {
-            status: response.status,
-            statusText: response.statusText,
-            url: response.url,
-          });
-        }
       } catch (error) {
         console.error('Error submitting lesson completion:', error);
       }
     })();
   };
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
+  if (loading) return <LessonSkeleton />;
 
-  if (loading) {
-    return <LessonSkeleton />;
-  }
-
-  // Show not found component with DRP design
   if (!lesson) {
     return (
-      <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
-        <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-          <div className="max-w-2xl w-full bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-xl shadow-xl border border-white/20 p-8 text-center">
-            <h1 className="text-3xl font-bold text-white mb-4">
-              Lesson Not Found
-            </h1>
-            <p className="text-neutral-300 mb-6">
-              The lesson you&apos;re looking for doesn&apos;t exist or may have been moved.
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-neutral-300 mb-6 text-left max-w-md mx-auto">
-              <li>Return to the <Link href="/learn" className="text-blue-400 hover:underline">Learn page</Link> to browse all available lessons</li>
-              <li>Check your internet connection</li>
-              <li>Try refreshing the page</li>
-            </ul>
-            <Link
-              href="/learn"
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <ArrowLeftIcon className="h-5 w-5" />
-              Back to Learn
-            </Link>
-          </div>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6">
+        <div className="w-20 h-20 rounded-3xl bg-slate-900 border border-slate-800 flex items-center justify-center">
+          <BookOpen className="w-10 h-10 text-slate-700" />
         </div>
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold text-white tracking-tight">Lesson Not Found</h1>
+          <p className="text-slate-400 max-w-sm">The lesson you're looking for doesn't exist or may have been moved.</p>
+        </div>
+        <Link href="/learn" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-900/20">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Learn
+        </Link>
       </div>
     );
   }
 
+  const progress = showQuiz ? 100 : Math.min(Math.floor((timeSpent / (lesson.duration * 60)) * 100), 95);
+
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
-      <div className="relative z-10 container mx-auto px-3 sm:px-4 py-4 sm:py-8">
-        {/* Header */}
-        <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-4 sm:p-6 mb-4 sm:mb-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4">
-            <button 
-              onClick={() => router.back()}
-              className="flex items-center space-x-2 text-neutral-300 hover:text-white self-start"
-            >
-              <ArrowLeftIcon className="h-5 w-5" />
-              <span>Back to Learn</span>
-            </button>
-            
-            <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
-              <div className="flex items-center space-x-2">
-                <ClockIcon className="h-5 w-5 text-neutral-400" />
-                <span className="text-sm text-neutral-300">
-                  {formatTime(timeSpent)}
-                </span>
-              </div>
-              <button
+    <div className="max-w-4xl mx-auto pb-20">
+      {/* Sticky Header Bar */}
+      <div className="sticky top-0 z-30 -mx-4 px-4 py-3 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 mb-8">
+        <div className="flex items-center justify-between gap-4">
+          <Link href="/learn" className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors group">
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+            <span className="hidden sm:inline">Back to Learn</span>
+          </Link>
+          
+          <div className="flex items-center gap-3 sm:gap-6">
+            {/* Timer */}
+            <div className="flex items-center gap-2 rounded-lg bg-slate-900 border border-slate-800 px-3 py-1.5 shadow-inner">
+              <Clock className="w-3.5 h-3.5 text-slate-500" />
+              <span className="text-sm font-mono font-bold text-white">{formatTime(timeSpent)}</span>
+              <button 
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="flex items-center space-x-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm"
+                className="ml-1 text-indigo-400 hover:text-indigo-300 transition-colors"
               >
-                {isPlaying ? <PauseIcon className="h-4 w-4" /> : <PlayIcon className="h-4 w-4" />}
-                <span className="hidden sm:inline">{isPlaying ? 'Pause' : 'Start'}</span>
+                {isPlaying ? <Pause size={14} /> : <Play size={14} />}
               </button>
             </div>
-          </div>
-          
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-2">
-            {lesson.title}
-          </h1>
-          
-          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm text-neutral-300">
-            <div className="flex items-center space-x-1">
-              <ClockIcon className="h-4 w-4" />
-              <span>{lesson.duration} minutes</span>
+            
+            {/* Level badge */}
+            <div className="rounded-full bg-indigo-500/15 border border-indigo-500/30 px-3 py-1 text-[10px] font-black text-indigo-400 uppercase tracking-widest">
+              Level {lesson.level}
             </div>
-            <div className="flex items-center space-x-1">
-              <TrophyIcon className="h-4 w-4" />
-              <span>{lesson.reward} $DeRi reward</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-          {/* Lesson Content */}
-          <div className="lg:col-span-2">
-            <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-4 sm:p-6">
-              <div className="flex items-center space-x-2 mb-4">
-                <BookOpenIcon className="h-5 w-5 sm:h-6 sm:w-6 text-blue-400" />
-                <h2 className="text-lg sm:text-xl font-semibold text-white">Lesson Content</h2>
-              </div>
-              
-              <div className="prose prose-sm sm:prose-lg prose-invert max-w-none overflow-x-auto text-neutral-200">
-                <ReactMarkdown>{lesson.content}</ReactMarkdown>
-              </div>
-              
-              {!showQuiz && !quizState.completed && (
-                <div className="mt-6 sm:mt-8 text-center">
-                  <button
-                    onClick={() => setShowQuiz(true)}
-                    className="bg-green-500 hover:bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium"
-                  >
-                    Take Quiz to Complete Lesson
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Quiz Sidebar */}
-          <div className="lg:col-span-1">
-            {showQuiz && !quizState.completed && (
-              <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-4 sm:p-6 sticky top-4 sm:top-6">
-                <h3 className="text-base sm:text-lg font-semibold text-white mb-4">
-                  Quiz: Question {quizState.currentQuestion + 1} of {lesson.quiz.questions.length}
-                </h3>
-                
-                {lesson.quiz.questions[quizState.currentQuestion] && (
-                  <div>
-                    <p className="text-neutral-200 mb-4">
-                      {lesson.quiz.questions[quizState.currentQuestion].question}
-                    </p>
-                    
-                    <div className="space-y-2">
-                      {lesson.quiz.questions[quizState.currentQuestion].options.map((option, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleQuizAnswer(
-                            lesson.quiz.questions[quizState.currentQuestion].id, 
-                            index
-                          )}
-                          className={`w-full text-left p-3 rounded-md border transition-colors text-white ${
-                            quizState.answers[lesson.quiz.questions[quizState.currentQuestion].id] === index
-                              ? 'border-blue-400 bg-blue-500/20'
-                              : 'border-white/20 bg-white/5 hover:border-white/30 hover:bg-white/10'
-                          }`}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                    
-                    <div className="flex justify-between mt-6">
-                      <button
-                        onClick={() => setQuizState(prev => ({ 
-                          ...prev, 
-                          currentQuestion: Math.max(0, prev.currentQuestion - 1) 
-                        }))}
-                        disabled={quizState.currentQuestion === 0}
-                        className="px-4 py-2 text-neutral-200 border border-white/20 bg-white/5 rounded-md disabled:opacity-50 hover:bg-white/10"
-                      >
-                        Previous
-                      </button>
-                      
-                      {quizState.currentQuestion === lesson.quiz.questions.length - 1 ? (
-                        <button
-                          onClick={submitQuiz}
-                          className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
-                        >
-                          Submit Quiz
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => setQuizState(prev => ({ 
-                            ...prev, 
-                            currentQuestion: prev.currentQuestion + 1 
-                          }))}
-                          className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
-                        >
-                          Next
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {quizState.completed && (
-              <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
-                <div className="text-center">
-                  <CheckCircleIcon className="h-16 w-16 text-green-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    Quiz Completed!
-                  </h3>
-                  <div className="text-3xl font-bold text-green-400 mb-2">
-                    {quizState.score.toFixed(0)}%
-                  </div>
-                  <p className="text-neutral-300 mb-4">
-                    You earned {lesson.reward} $DeRi tokens!
-                  </p>
-                  <button
-                    onClick={() => router.push('/learn')}
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md"
-                  >
-                    Continue Learning
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
+
+      {/* Lesson Progress */}
+      <div className="mb-10 space-y-2">
+        <div className="flex items-center justify-between text-[10px] font-black text-slate-500 uppercase tracking-widest">
+          <span>Your Progress</span>
+          <span className="text-indigo-400">{progress}%</span>
+        </div>
+        <div className="h-2 rounded-full bg-slate-900 border border-slate-800 overflow-hidden shadow-inner">
+          <div 
+            className="h-full bg-gradient-to-r from-indigo-600 to-violet-500 rounded-full transition-all duration-1000 ease-out"
+            style={{ width: `${progress}%` }} 
+          />
+        </div>
+      </div>
+
+      {/* Lesson Title & Meta */}
+      <div className="space-y-6 mb-12">
+        <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          {lesson.title}
+        </h1>
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-1.5 rounded-lg bg-slate-900 border border-slate-800 px-3 py-1.5 text-xs font-bold text-slate-400">
+            <Clock className="w-3.5 h-3.5" />
+            {lesson.duration} minutes
+          </div>
+          <div className="flex items-center gap-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 text-xs font-black text-emerald-400 uppercase tracking-widest">
+            <Coins className="w-3.5 h-3.5" />
+            {lesson.reward} $DeRi reward
+          </div>
+        </div>
+      </div>
+
+      {/* Lesson Content Area */}
+      <article className="rounded-3xl border border-slate-800 bg-slate-900/40 p-6 sm:p-10 shadow-2xl backdrop-blur-sm
+          prose prose-invert prose-slate max-w-none
+          prose-headings:text-white prose-headings:font-black prose-headings:tracking-tight
+          prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+          prose-h3:text-xl prose-h3:text-indigo-300 prose-h3:mt-8
+          prose-p:text-slate-300 prose-p:leading-relaxed prose-p:text-lg
+          prose-li:text-slate-300 prose-li:text-lg
+          prose-strong:text-white prose-strong:font-bold
+          prose-code:text-indigo-300 prose-code:bg-indigo-500/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+          prose-pre:bg-slate-950 prose-pre:border prose-pre:border-slate-800 prose-pre:rounded-2xl prose-pre:shadow-inner">
+        
+        {/* Render markdown content */}
+        <ReactMarkdown
+          components={{
+            // Add custom visual diagram logic if specific markers are found in content
+            // For now, we'll inject them as examples or if the user wants to replace text patterns
+            code({node, inline, className, children, ...props}) {
+              const match = /language-diagram-(.+)/.exec(className || '')
+              if (match) {
+                const type = match[1];
+                const data = String(children).replace(/\n$/, '').split('\n');
+                if (type === 'layers') return <LayerDiagram layers={data} />;
+                if (type === 'flow') return <FlowDiagram steps={data} />;
+                if (type === 'blockchain') return <BlockchainDiagram />;
+              }
+              return <code className={className} {...props}>{children}</code>
+            }
+          }}
+        >
+          {lesson.content}
+        </ReactMarkdown>
+
+        {/* Example Diagram Injectors (would normally be in content) */}
+        {lessonId === '1-1' && (
+          <div className="not-prose mt-12 space-y-6">
+            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+              Visualizing the Chain
+            </h3>
+            <BlockchainDiagram />
+          </div>
+        )}
+
+        {lessonId === '2-1' && (
+          <div className="not-prose mt-12 space-y-6">
+            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+              DRP Layer Stack
+            </h3>
+            <LayerDiagram layers={['Application Layer', 'Identity & Status (PoST)', 'Activity Verification (PoAT)', 'Consensus Layer (L1)']} />
+          </div>
+        )}
+      </article>
+
+      {/* Quiz Section */}
+      {!showQuiz && !quizState.completed && (
+        <div className="mt-12 p-1 rounded-3xl bg-gradient-to-r from-indigo-500 to-violet-600 shadow-xl shadow-indigo-900/20">
+          <button 
+            onClick={() => { setShowQuiz(true); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="w-full bg-slate-950 rounded-[calc(1.5rem-4px)] py-8 px-6 text-center hover:bg-slate-900 transition-colors"
+          >
+            <Brain className="w-10 h-10 text-indigo-400 mx-auto mb-4" />
+            <h3 className="text-2xl font-black text-white">Ready for the Knowledge Check?</h3>
+            <p className="text-slate-400 mt-2 mb-6">Complete the quiz to verify your understanding and earn {lesson.reward} $DeRi tokens.</p>
+            <div className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-500 transition-colors">
+              Start Quiz
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </button>
+        </div>
+      )}
+
+      {showQuiz && !quizState.completed && (
+        <div className="mt-12 space-y-8 animate-fade-in-up">
+          <div className="rounded-3xl border border-indigo-500/25 bg-indigo-500/5 p-6 sm:p-10 shadow-2xl backdrop-blur-sm">
+            <div className="flex items-center justify-between mb-10">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-900/20">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-white leading-none">Knowledge Check</h3>
+                  <p className="text-slate-500 text-sm mt-1">Question {quizState.currentQuestion + 1} of {lesson.quiz.questions.length}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5">
+                <Coins className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-black text-emerald-400">+{lesson.reward} $DeRi</span>
+              </div>
+            </div>
+
+            {lesson.quiz.questions[quizState.currentQuestion] && (
+              <div className="space-y-8">
+                <p className="text-xl font-bold text-white leading-relaxed">
+                  {lesson.quiz.questions[quizState.currentQuestion].question}
+                </p>
+                
+                <div className="grid gap-3">
+                  {lesson.quiz.questions[quizState.currentQuestion].options.map((option, index) => {
+                    const isSelected = quizState.answers[lesson.quiz.questions[quizState.currentQuestion].id] === index;
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => handleQuizAnswer(lesson.quiz.questions[quizState.currentQuestion].id, index)}
+                        className={`group relative w-full text-left p-5 rounded-2xl border transition-all duration-200 
+                          ${isSelected
+                            ? 'border-indigo-500 bg-indigo-600 text-white shadow-lg shadow-indigo-900/40'
+                            : 'border-slate-700 bg-slate-800/40 text-slate-300 hover:border-slate-500 hover:bg-slate-800'
+                          }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold pr-4">{option}</span>
+                          <div className={`w-5 h-5 rounded-full border-2 flex-shrink-0 flex items-center justify-center
+                            ${isSelected ? 'border-white bg-white' : 'border-slate-600 group-hover:border-slate-500'}`}>
+                            {isSelected && <div className="w-2 h-2 rounded-full bg-indigo-600" />}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+                
+                <div className="flex items-center justify-between pt-6 border-t border-slate-800">
+                  <button
+                    onClick={() => setQuizState(prev => ({ ...prev, currentQuestion: Math.max(0, prev.currentQuestion - 1) }))}
+                    disabled={quizState.currentQuestion === 0}
+                    className="flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-slate-500 hover:text-white disabled:opacity-30 transition-colors"
+                  >
+                    <ArrowLeft size={16} />
+                    Previous
+                  </button>
+                  
+                  {quizState.currentQuestion === lesson.quiz.questions.length - 1 ? (
+                    <button
+                      onClick={submitQuiz}
+                      disabled={Object.keys(quizState.answers).length < lesson.quiz.questions.length}
+                      className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-lg shadow-emerald-900/20 disabled:opacity-40 transition-all active:scale-95"
+                    >
+                      Complete Lesson
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion + 1 }))}
+                      className="flex items-center gap-2 px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-xl shadow-lg shadow-indigo-900/20 transition-all active:scale-95"
+                    >
+                      Next Question
+                      <ChevronRight size={18} />
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {quizState.completed && (
+        <div className="mt-12 animate-bounce-in">
+          <div className="rounded-3xl border border-emerald-500/25 bg-emerald-500/5 p-10 text-center shadow-2xl backdrop-blur-sm">
+            <div className="w-20 h-20 rounded-2xl bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-900/20 mx-auto mb-6">
+              <CheckCircle className="w-10 h-10" />
+            </div>
+            <h3 className="text-3xl font-black text-white mb-2">Lesson Completed!</h3>
+            <p className="text-slate-400 mb-8 max-w-sm mx-auto">Great work! You've mastered this module and earned your rewards.</p>
+            
+            <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-10">
+              <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800">
+                <p className="text-2xl font-black text-emerald-400">{quizState.score.toFixed(0)}%</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Score</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800">
+                <p className="text-2xl font-black text-indigo-400">+{lesson.reward}</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">$DeRi Earned</p>
+              </div>
+            </div>
+
+            <Link
+              href="/learn"
+              className="inline-flex items-center justify-center gap-2 w-full max-w-sm bg-indigo-600 hover:bg-indigo-500 text-white font-black py-4 px-8 rounded-xl shadow-lg shadow-indigo-900/20 transition-all active:scale-95"
+            >
+              Back to Learn Hub
+              <ChevronRight className="w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

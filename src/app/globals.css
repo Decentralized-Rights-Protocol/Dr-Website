@@ -57,6 +57,13 @@
   --drp-purple: #8B5CF6;
   --drp-teal: #06B6D4;
 
+  /* Learn Section Tokens */
+  --learn-card-bg: rgba(15, 23, 42, 0.7);
+  --learn-card-border: rgba(99, 102, 241, 0.15);
+  --learn-accent: #6366f1;
+  --learn-accent-light: #818cf8;
+  --learn-accent-muted: rgba(99, 102, 241, 0.12);
+
   /* Light theme */
   --card: #F8FAFC;
   --card-foreground: #0D1B2A;
@@ -99,6 +106,13 @@
   --border: #334155;
   --input: #334155;
   --ring: #FFFFFF;
+
+  /* Learn Section Tokens (Dark Optimized) */
+  --learn-card-bg: rgba(15, 23, 42, 0.7);
+  --learn-card-border: rgba(99, 102, 241, 0.15);
+  --learn-accent: #6366f1;
+  --learn-accent-light: #818cf8;
+  --learn-accent-muted: rgba(99, 102, 241, 0.12);
 }
 
 * {
