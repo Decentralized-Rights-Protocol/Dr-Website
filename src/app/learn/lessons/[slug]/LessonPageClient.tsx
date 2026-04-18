@@ -359,7 +359,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
         <ReactMarkdown 
           components={{
             ...diagramComponents,
-            code({node, inline, className, children, ...props}) {
+            code({node, className, children, ...props}) {
               const match = /language-diagram-(.+)/.exec(className || '')
               if (match) {
                 const type = match[1];

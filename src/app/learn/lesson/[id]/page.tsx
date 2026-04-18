@@ -309,7 +309,7 @@ export default function LessonPage() {
           components={{
             // Add custom visual diagram logic if specific markers are found in content
             // For now, we'll inject them as examples or if the user wants to replace text patterns
-            code({node, inline, className, children, ...props}) {
+            code({node, className, children, ...props}) {
               const match = /language-diagram-(.+)/.exec(className || '')
               if (match) {
                 const type = match[1];
