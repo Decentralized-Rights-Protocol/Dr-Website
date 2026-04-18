@@ -218,7 +218,7 @@ export default function LessonPage() {
         </div>
         <div className="space-y-2">
           <h1 className="text-3xl font-bold text-white tracking-tight">Lesson Not Found</h1>
-          <p className="text-slate-400 max-w-sm">The lesson you're looking for doesn't exist or may have been moved.</p>
+          <p className="text-slate-400 max-w-sm">The lesson you&apos;re looking for doesn&apos;t exist or may have been moved.</p>
         </div>
         <Link href="/learn" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-900/20">
           <ArrowLeft className="w-4 h-4" />
@@ -456,7 +456,7 @@ export default function LessonPage() {
               <CheckCircle className="w-10 h-10" />
             </div>
             <h3 className="text-3xl font-black text-white mb-2">Lesson Completed!</h3>
-            <p className="text-slate-400 mb-8 max-w-sm mx-auto">Great work! You've mastered this module and earned your rewards.</p>
+            <p className="text-slate-400 mb-8 max-w-sm mx-auto">Great work! You&apos;ve mastered this module and earned your rewards.</p>
             
             <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-10">
               <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800">

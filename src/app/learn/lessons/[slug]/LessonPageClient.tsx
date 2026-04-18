@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { 
   ArrowLeft, 
   CheckCircle, 
@@ -518,7 +519,7 @@ export default function LessonPageClient({ lesson }: { lesson: LessonContent }) 
               <CheckCircle className="w-10 h-10" />
             </div>
             <h3 className="text-3xl font-black text-white mb-2">Lesson Completed!</h3>
-            <p className="text-slate-400 mb-8 max-w-sm mx-auto">Great work! You've mastered this module and earned your rewards.</p>
+            <p className="text-slate-400 mb-8 max-w-sm mx-auto">Great work! You&apos;ve mastered this module and earned your rewards.</p>
             
             <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-10">
               <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800">
