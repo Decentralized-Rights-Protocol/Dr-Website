@@ -405,9 +405,11 @@ What would you like to explore? Ask me anything about blockchain, DRP, or your c
                     }`}>
                     {message.type === 'user' 
                       ? message.content 
-                      : <ReactMarkdown className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-950 prose-pre:border prose-pre:border-slate-800">
-                          {message.content}
-                        </ReactMarkdown>
+                      : <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-950 prose-pre:border prose-pre:border-slate-800">
+                          <ReactMarkdown>
+                            {message.content}
+                          </ReactMarkdown>
+                        </div>
                     }
                   </div>
 
