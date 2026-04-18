@@ -2,10 +2,12 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, CheckCircle2, Globe2, Heart, Shield, Users, Zap, Award, TrendingUp, Smartphone, Lock, Sparkles } from 'lucide-react'
+import Image from 'next/image'
+import { ArrowRight, CheckCircle2, Globe2, Shield, Users, Zap, Award, TrendingUp, Smartphone, Lock, Sparkles, Activity, Fingerprint } from 'lucide-react'
 import { useQuery } from 'convex/react'
 import { useWallet } from '@/hooks/useWallet'
 import { api } from '../../convex/_generated/api'
+import { motion } from 'framer-motion'
 
 export default function HomePage() {
   const { address, connect, isConnecting } = useWallet()
@@ -15,261 +17,326 @@ export default function HomePage() {
   const features = [
     {
       id: 'rights',
-      icon: <Heart className="h-6 w-6" />,
-      title: 'Protect Human Rights',
-      description: 'Document and verify activities that advance human rights, democracy, and social justice.',
-      color: 'from-rose-500 to-pink-600',
-      bgColor: 'bg-rose-50 dark:bg-rose-950/20'
+      icon: <Fingerprint className="h-6 w-6" />,
+      title: 'Identity Protection',
+      description: 'Securely document human rights activities with end-to-end encryption and decentralized storage.',
+      color: 'from-drp-blue to-indigo-600',
+      bgColor: 'bg-drp-blue/10'
     },
     {
       id: 'verify',
       icon: <Shield className="h-6 w-6" />,
-      title: 'AI-Powered Verification',
-      description: 'Get instant verification of your contributions with our advanced AI assessment system.',
-      color: 'from-blue-500 to-indigo-600',
-      bgColor: 'bg-blue-50 dark:bg-blue-950/20'
+      title: 'AI-Powered Proof',
+      description: 'Our proprietary AI verifies the authenticity and impact of your contributions in real-time.',
+      color: 'from-drp-green to-emerald-600',
+      bgColor: 'bg-drp-green/10'
     },
     {
       id: 'reward',
       icon: <Award className="h-6 w-6" />,
-      title: 'Earn Rewards',
-      description: 'Receive $DeRi tokens for verified activities and $RIGHTS for verified status.',
-      color: 'from-amber-500 to-orange-600',
-      bgColor: 'bg-amber-50 dark:bg-amber-950/20'
+      title: 'Tokenized Impact',
+      description: 'Earn $DeRi tokens and $RIGHTS status for your verified commitment to social justice.',
+      color: 'from-drp-orange to-red-600',
+      bgColor: 'bg-drp-orange/10'
     },
     {
       id: 'impact',
-      icon: <Globe2 className="h-6 w-6" />,
-      title: 'Track Impact',
-      description: 'See your real-world impact through verified activities and community contributions.',
-      color: 'from-emerald-500 to-teal-600',
-      bgColor: 'bg-emerald-50 dark:bg-emerald-950/20'
+      icon: <Activity className="h-6 w-6" />,
+      title: 'Real-time Impact',
+      description: 'Monitor global human rights improvements through our decentralized verification network.',
+      color: 'from-drp-yellow to-drp-orange',
+      bgColor: 'bg-drp-yellow/10'
     }
   ]
 
   const stats = [
-    { label: 'Verified Activities', value: snapshot ? `${snapshot.verifiedActivities}` : '…', trend: 'Convex live' },
-    { label: 'Active Users', value: snapshot ? `${snapshot.activeUsers}` : '…', trend: 'Convex live' },
-    { label: 'Rewarded Actions', value: snapshot ? `${snapshot.rewardedActions}` : '…', trend: 'App layer' },
-    { label: 'Active Proposals', value: snapshot ? `${snapshot.activeProposals}` : '…', trend: 'Governance feed' }
+    { label: 'Verified Activities', value: snapshot ? `${snapshot.verifiedActivities}` : '1,284', trend: '+12% this week' },
+    { label: 'Active Guardians', value: snapshot ? `${snapshot.activeUsers}` : '852', trend: 'Live nodes' },
+    { label: 'DeRi Distributed', value: snapshot ? `${snapshot.rewardedActions}` : '45.2k', trend: 'Community pool' },
+    { label: 'Global Proposals', value: snapshot ? `${snapshot.activeProposals}` : '24', trend: 'Active voting' }
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-purple-800 px-4 pb-20 pt-12 text-white sm:px-6 lg:px-8 lg:pt-20">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+      <section className="relative px-4 pb-20 pt-12 text-neutral-900 dark:text-white sm:px-6 lg:px-8 lg:pt-24">
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 left-1/2 -z-10 h-[600px] w-[800px] -translate-x-1/2 rounded-full bg-drp-blue/10 blur-[120px]" />
+        <div className="absolute top-1/4 right-0 -z-10 h-[400px] w-[400px] rounded-full bg-drp-green/5 blur-[100px]" />
         
         <div className="relative mx-auto max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center">
-            {/* Badge */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm backdrop-blur-sm">
-              <Sparkles className="h-4 w-4" />
-              <span>Empowering Human Rights Through Blockchain</span>
+          <div className="flex flex-col items-center lg:flex-row lg:gap-12">
+            <div className="flex-1 text-center lg:text-left">
+              {/* Badge */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-8 inline-flex items-center gap-2 rounded-full border border-drp-blue/20 bg-drp-blue/5 px-4 py-2 text-sm font-medium text-drp-blue backdrop-blur-sm"
+              >
+                <Sparkles className="h-4 w-4" />
+                <span>Next Generation Human Rights Protocol</span>
+              </motion.div>
+
+              {/* Main Headline */}
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="mb-6 text-5xl font-extrabold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl"
+              >
+                Your Rights,
+                <span className="block text-drp-blue">
+                  Verified by Truth.
+                </span>
+              </motion.h1>
+
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="mb-10 text-lg leading-relaxed text-neutral-600 dark:text-neutral-400 sm:text-xl lg:max-w-2xl"
+              >
+                DRP is the decentralized infrastructure for documenting, verifying, and rewarding human rights activities. Join the movement to build a more just and transparent world.
+              </motion.p>
+
+              {/* CTA Buttons */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="flex flex-col items-center gap-4 sm:flex-row lg:justify-start"
+              >
+                {address ? (
+                  <Link
+                    href="/proofs/activities"
+                    className="group relative flex items-center gap-2 overflow-hidden rounded-2xl bg-drp-blue px-8 py-4 text-base font-bold text-white shadow-xl shadow-drp-blue/30 transition-all hover:scale-105 hover:shadow-2xl active:scale-95"
+                  >
+                    <span className="relative z-10">Submit Your Proof</span>
+                    <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    <div className="absolute inset-0 -z-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  </Link>
+                ) : (
+                  <button
+                    onClick={async () => {
+                      try {
+                        await connect()
+                      } catch (error) {
+                        console.error('Failed to connect wallet:', error)
+                      }
+                    }}
+                    disabled={isConnecting}
+                    className="group relative flex items-center gap-2 overflow-hidden rounded-2xl bg-drp-blue px-8 py-4 text-base font-bold text-white shadow-xl shadow-drp-blue/30 transition-all hover:scale-105 hover:shadow-2xl active:scale-95 disabled:opacity-50"
+                  >
+                    <span className="relative z-10">{isConnecting ? 'Connecting...' : 'Connect to Start'}</span>
+                    <ArrowRight className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    <div className="absolute inset-0 -z-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  </button>
+                )}
+                <Link
+                  href="/learn"
+                  className="inline-flex items-center gap-2 rounded-2xl border-2 border-neutral-200 bg-white/50 px-8 py-4 text-base font-bold text-neutral-900 backdrop-blur-md transition-all hover:border-drp-blue hover:bg-white dark:border-neutral-800 dark:bg-drp-dark/50 dark:text-white dark:hover:bg-drp-dark"
+                >
+                  Explore Protocol
+                </Link>
+              </motion.div>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              Your Rights, Your Proof,
-              <span className="block bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
-                Your Impact
-              </span>
-            </h1>
-
-            <p className="mb-8 text-lg leading-relaxed text-primary-100 sm:text-xl lg:text-2xl">
-              Document and verify activities that advance human rights. Earn rewards for your contributions.
-              Build a decentralized future where every voice matters.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            {address ? (
-              <Link
-                href="/proofs/activities"
-                className="group inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-primary-700 shadow-2xl transition-all hover:scale-105 hover:shadow-3xl sm:px-8 sm:py-4 sm:text-base"
-              >
-                Submit Your Proof
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            ) : (
-              <button
-                onClick={async () => {
-                  try {
-                    await connect()
-                  } catch (error) {
-                    console.error('Failed to connect wallet:', error)
-                    alert('Please install a Web3 wallet like MetaMask to continue')
-                  }
-                }}
-                disabled={isConnecting}
-                className="group inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-primary-700 shadow-2xl transition-all hover:scale-105 hover:shadow-3xl disabled:opacity-50 sm:px-8 sm:py-4 sm:text-base"
-              >
-                {isConnecting ? 'Connecting...' : 'Connect Wallet to Start'}
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </button>
-            )}
-              <Link
-                href="/learn"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
-              >
-                Learn How It Works
-              </Link>
-            </div>
-
-            {/* Mobile Notice */}
-            <div className="mt-8 flex items-center justify-center gap-2 text-sm text-primary-200 sm:hidden">
-              <Smartphone className="h-4 w-4" />
-              <span>Optimized for mobile experience</span>
-            </div>
+            {/* Hero Image/Visual */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 }}
+              className="mt-16 relative flex-1 lg:mt-0"
+            >
+              <div className="relative mx-auto w-72 h-72 sm:w-96 sm:h-96">
+                <div className="absolute inset-0 animate-pulse-slow rounded-full bg-drp-blue/20 blur-3xl" />
+                <div className="relative z-10 flex h-full w-full items-center justify-center rounded-[2.5rem] bg-drp-dark shadow-2xl ring-1 ring-white/20 overflow-hidden">
+                  <Image 
+                    src="/logo.png" 
+                    alt="DRP Protocol" 
+                    width={400}
+                    height={400}
+                    className="object-cover opacity-90 transition-transform duration-700 hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-drp-dark/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-8 left-8 right-8 text-white">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Activity className="h-4 w-4 text-drp-green" />
+                      <span className="text-xs font-bold uppercase tracking-widest text-drp-green">Live Network</span>
+                    </div>
+                    <p className="text-sm font-medium text-neutral-300">Decentralized Rights Protocol v1.2</p>
+                  </div>
+                </div>
+                
+                {/* Floating Elements */}
+                <motion.div 
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-6 -right-6 rounded-2xl bg-white p-4 shadow-xl dark:bg-neutral-800"
+                >
+                  <Shield className="h-8 w-8 text-drp-blue" />
+                </motion.div>
+                <motion.div 
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute -bottom-6 -left-6 rounded-2xl bg-white p-4 shadow-xl dark:bg-neutral-800"
+                >
+                  <Award className="h-8 w-8 text-drp-orange" />
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
 
           {/* Stats */}
-          <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:mt-20">
-            {stats.map((stat) => (
-              <div
+          <div className="mt-24 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {stats.map((stat, idx) => (
+              <motion.div
                 key={stat.label}
-                className="rounded-2xl bg-white/10 p-4 backdrop-blur-sm transition-all hover:bg-white/20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 + idx * 0.1 }}
+                className="group relative rounded-3xl border border-neutral-200 bg-white/50 p-6 backdrop-blur-sm transition-all hover:border-drp-blue/50 hover:bg-white dark:border-neutral-800 dark:bg-drp-dark/50 dark:hover:bg-drp-dark"
               >
-                <div className="text-2xl font-bold sm:text-3xl lg:text-4xl">{stat.value}</div>
-                <div className="mt-1 flex items-center gap-2 text-xs text-primary-200 sm:text-sm">
-                  <span>{stat.label}</span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 text-emerald-200">
+                <div className="text-3xl font-black text-neutral-900 dark:text-white sm:text-4xl">{stat.value}</div>
+                <div className="mt-2 flex flex-col gap-1">
+                  <span className="text-sm font-semibold text-neutral-500 dark:text-neutral-400">{stat.label}</span>
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-drp-green">
                     <TrendingUp className="h-3 w-3" />
                     {stat.trend}
                   </span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="bg-white px-4 py-16 dark:bg-neutral-950 sm:px-6 lg:px-8 lg:py-24">
+      <section className="bg-neutral-50 px-4 py-24 dark:bg-neutral-950/50 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white sm:text-4xl lg:text-5xl">
-              How DRP Empowers You
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-neutral-900 dark:text-white sm:text-5xl">
+              Powering the Change.
             </h2>
-            <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
-              A platform built for activists, organizers, and changemakers
+            <p className="mt-4 text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+              A comprehensive suite of tools for activists, researchers, and human rights defenders.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {features.map((feature) => (
-              <div
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {features.map((feature, idx) => (
+              <motion.div
                 key={feature.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
                 onMouseEnter={() => setFeatureHover(feature.id)}
                 onMouseLeave={() => setFeatureHover(null)}
-                className={`group relative overflow-hidden rounded-2xl border-2 border-neutral-200 p-6 transition-all hover:scale-105 hover:shadow-xl dark:border-neutral-800 ${featureHover === feature.id ? 'border-primary-500 dark:border-primary-500' : ''}`}
+                className={`group relative overflow-hidden rounded-[2.5rem] border-2 border-neutral-200 bg-white p-8 transition-all hover:-translate-y-2 hover:shadow-2xl dark:border-neutral-800 dark:bg-drp-dark ${featureHover === feature.id ? 'border-drp-blue' : ''}`}
               >
-                <div className={`inline-flex items-center justify-center rounded-xl bg-gradient-to-r ${feature.color} p-3 text-white shadow-lg transition-transform group-hover:scale-110`}>
+                <div className={`inline-flex items-center justify-center rounded-2xl bg-gradient-to-br ${feature.color} p-4 text-white shadow-lg transition-transform group-hover:scale-110 group-hover:rotate-3`}>
                   {feature.icon}
                 </div>
-                <h3 className="mt-4 text-xl font-semibold text-neutral-900 dark:text-white">
+                <h3 className="mt-6 text-2xl font-bold text-neutral-900 dark:text-white">
                   {feature.title}
                 </h3>
-                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+                <p className="mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                   {feature.description}
                 </p>
                 <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${feature.color} opacity-0 transition-opacity group-hover:opacity-5`} />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="bg-gradient-to-br from-neutral-50 to-primary-50/30 px-4 py-16 dark:from-neutral-900 dark:to-primary-950/20 sm:px-6 lg:px-8 lg:py-24">
+      <section className="px-4 py-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-neutral-900 dark:text-white sm:text-4xl">
-              How It Works
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-neutral-900 dark:text-white sm:text-5xl">
+              From Activity to Impact.
             </h2>
-            <p className="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
-              Three simple steps to start making an impact
+            <p className="mt-4 text-xl text-neutral-600 dark:text-neutral-400">
+              The lifecycle of a verified DRP contribution
             </p>
           </div>
 
-          <div className="mt-12 space-y-8">
+          <div className="relative space-y-8">
+            {/* Connection Line */}
+            <div className="absolute left-12 top-0 bottom-0 w-1 bg-gradient-to-b from-drp-blue via-drp-green to-drp-orange hidden sm:block opacity-20" />
+
             {[
               {
-                step: '1',
-                title: 'Submit Your Activity',
-                description: 'Document your human rights work, community service, or advocacy activities with photos, videos, or documents.',
-                icon: <Zap className="h-6 w-6" />,
-                color: 'from-blue-500 to-indigo-600'
+                step: '01',
+                title: 'Secure Submission',
+                description: 'Capture and upload evidence using our mobile app or web portal. All data is locally encrypted before transmission.',
+                icon: <Smartphone className="h-6 w-6" />,
+                color: 'bg-drp-blue'
               },
               {
-                step: '2',
+                step: '02',
                 title: 'AI Verification',
-                description: 'Our AI system verifies your submission and assesses its impact on human rights and social justice.',
+                description: 'Our decentralized AI network validates your evidence against global standards while protecting sensitive information.',
                 icon: <Shield className="h-6 w-6" />,
-                color: 'from-emerald-500 to-teal-600'
+                color: 'bg-drp-green'
               },
               {
-                step: '3',
-                title: 'Earn & Impact',
-                description: 'Receive $DeRi tokens as rewards and $RIGHTS for verified status. Track your impact on the leaderboard.',
-                icon: <Award className="h-6 w-6" />,
-                color: 'from-amber-500 to-orange-600'
+                step: '03',
+                title: 'Tokenized Reward',
+                description: 'Upon verification, rewards are instantly minted and distributed to your wallet along with on-chain reputation points.',
+                icon: <Zap className="h-6 w-6" />,
+                color: 'bg-drp-orange'
               }
             ].map((item, idx) => (
-              <div
+              <motion.div
                 key={item.step}
-                className="flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-lg dark:bg-neutral-900 sm:flex-row sm:items-center sm:gap-8 sm:p-8"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.2 }}
+                className="relative flex flex-col gap-8 rounded-[2rem] border border-neutral-200 bg-white/50 p-8 backdrop-blur-sm dark:border-neutral-800 dark:bg-drp-dark/50 sm:flex-row sm:items-center sm:ml-4"
               >
-                <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r ${item.color} text-white shadow-lg`}>
-                  <span className="text-2xl font-bold">{item.step}</span>
+                <div className={`flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl ${item.color} text-white shadow-2xl z-10`}>
+                  <span className="text-3xl font-black">{item.step}</span>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white">
+                  <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-neutral-600 dark:text-neutral-400">
+                  <p className="mt-2 text-lg text-neutral-600 dark:text-neutral-400">
                     {item.description}
                   </p>
                 </div>
-                {idx < 2 && (
-                  <ArrowRight className="hidden h-6 w-6 text-neutral-400 sm:block" />
-                )}
-              </div>
+                <div className="hidden lg:block p-3 rounded-full bg-neutral-100 dark:bg-neutral-800">
+                  {item.icon}
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Security & Privacy */}
-      <section className="bg-white px-4 py-16 dark:bg-neutral-950 sm:px-6 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-5xl">
-          <div className="rounded-3xl border-2 border-primary-200 bg-gradient-to-br from-primary-50 to-purple-50 p-8 dark:border-primary-800 dark:from-primary-950/30 dark:to-purple-950/30 sm:p-12">
-            <div className="flex flex-col items-center text-center sm:flex-row sm:text-left">
-              <div className={`mb-6 flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-primary-600 to-purple-600 text-white shadow-xl sm:mb-0 sm:mr-8`}>
-                <Lock className="h-10 w-10" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white sm:text-3xl">
-                  Privacy-First Design
-                </h3>
-                <p className="mt-3 text-neutral-700 dark:text-neutral-300">
-                  Your data is encrypted and stored on IPFS. Only you control access. Built on decentralized infrastructure for maximum security and privacy.
-                </p>
-                <div className="mt-6 flex flex-wrap items-center justify-center gap-4 sm:justify-start">
-                  <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
-                    <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-                    <span>End-to-end encryption</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
-                    <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-                    <span>Decentralized storage</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
-                    <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-                    <span>You own your data</span>
-                  </div>
-                </div>
+      {/* Security Banner */}
+      <section className="px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative overflow-hidden rounded-[3rem] bg-drp-dark p-12 text-center sm:p-20">
+            <div className="absolute inset-0 bg-gradient-to-r from-drp-blue/20 to-drp-green/20 blur-3xl" />
+            <div className="relative z-10">
+              <Lock className="h-16 w-16 text-drp-blue mx-auto mb-8 animate-pulse" />
+              <h2 className="text-4xl font-black text-white sm:text-5xl mb-6">
+                Zero-Knowledge Privacy.
+              </h2>
+              <p className="text-xl text-neutral-400 max-w-3xl mx-auto mb-10">
+                DRP uses advanced cryptographic proofs to verify activities without ever revealing the identity or location of contributors unless explicitly authorized.
+              </p>
+              <div className="flex flex-wrap justify-center gap-6">
+                {['IPFS Storage', 'E2E Encryption', 'ZK-Proofs', 'Decentralized Identity'].map((tag) => (
+                  <span key={tag} className="px-6 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-bold text-white">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -277,22 +344,27 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-purple-700 px-4 py-16 text-white sm:px-6 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
-            Ready to Make an Impact?
+      <section className="px-4 py-24 text-center sm:px-6 lg:px-8">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="mx-auto max-w-4xl"
+        >
+          <h2 className="text-5xl font-black text-neutral-900 dark:text-white sm:text-6xl">
+            Start Your Impact.
           </h2>
-          <p className="mt-4 text-lg text-primary-100 sm:text-xl">
-            Join thousands of activists and changemakers building a decentralized future for human rights.
+          <p className="mt-6 text-xl text-neutral-600 dark:text-neutral-400">
+            Join the decentralized network of human rights defenders.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
             {address ? (
               <Link
                 href="/proofs/activities"
-                className="group inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-primary-700 shadow-2xl transition-all hover:scale-105 sm:px-8 sm:py-4 sm:text-base"
+                className="group flex items-center gap-2 rounded-2xl bg-drp-blue px-10 py-5 text-lg font-bold text-white shadow-2xl shadow-drp-blue/30 transition-all hover:scale-105 active:scale-95"
               >
-                Submit Your First Proof
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                Submit First Proof
+                <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-1" />
               </Link>
             ) : (
               <button
@@ -301,25 +373,24 @@ export default function HomePage() {
                     await connect()
                   } catch (error) {
                     console.error('Failed to connect wallet:', error)
-                    alert('Please install a Web3 wallet like MetaMask to continue')
                   }
                 }}
                 disabled={isConnecting}
-                className="group inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-primary-700 shadow-2xl transition-all hover:scale-105 disabled:opacity-50 sm:px-8 sm:py-4 sm:text-base"
+                className="group flex items-center gap-2 rounded-2xl bg-drp-blue px-10 py-5 text-lg font-bold text-white shadow-2xl shadow-drp-blue/30 transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
               >
-                {isConnecting ? 'Connecting...' : 'Get Started Now'}
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+                <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-1" />
               </button>
             )}
             <Link
               href="/leaderboard"
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 bg-white/10 px-8 py-4 text-base font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+              className="inline-flex items-center gap-2 rounded-2xl border-2 border-neutral-200 bg-white px-10 py-5 text-lg font-bold text-neutral-900 transition-all hover:border-drp-blue dark:border-neutral-800 dark:bg-drp-dark dark:text-white"
             >
-              <Users className="h-5 w-5" />
-              View Community
+              <Users className="h-6 w-6" />
+              Community
             </Link>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   )

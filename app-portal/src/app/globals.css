@@ -6,56 +6,52 @@
   color-scheme: light dark;
 }
 
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  @apply bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100;
-  font-family: var(--font-sans, 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-a {
-  @apply text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 transition-colors;
-}
-
-/* Mobile-first improvements */
-@media (max-width: 640px) {
+@layer base {
   body {
-    font-size: 16px;
-    line-height: 1.6;
+    @apply bg-white text-neutral-900 antialiased selection:bg-drp-blue/20;
+    font-family: var(--font-sans, 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  }
+
+  .dark body {
+    @apply bg-drp-dark text-neutral-50;
   }
 }
 
-/* Smooth transitions */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+@layer components {
+  .glass-card {
+    @apply border border-white/20 bg-white/10 backdrop-blur-xl dark:border-white/5 dark:bg-white/5;
+  }
+  
+  .drp-button {
+    @apply relative flex items-center justify-center gap-2 overflow-hidden rounded-2xl bg-drp-blue px-6 py-3 font-bold text-white transition-all hover:scale-105 active:scale-95;
+  }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-neutral-100 dark:bg-neutral-900;
+  @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-300 dark:bg-neutral-700 rounded-full;
+  @apply bg-neutral-200 dark:bg-neutral-800 rounded-full hover:bg-neutral-300 dark:hover:bg-neutral-700;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-neutral-400 dark:bg-neutral-600;
+/* Animations */
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+* {
+  @apply transition-colors duration-200;
 }
 
