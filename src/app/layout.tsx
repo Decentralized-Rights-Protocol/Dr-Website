@@ -65,11 +65,14 @@ export const metadata: Metadata = {
     images: ['https://decentralizedrights.com/08_IFOPE_20x30.jpg'],
   },
   icons: {
-    icon: '/site-icon.png',
-    shortcut: '/site-icon.png',
-    apple: '/site-icon.png',
+    icon: [
+      { url: '/icons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icons/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/icons/apple-touch-icon.png',
   },
-  manifest: '/site.webmanifest',
+  manifest: '/icons/site.webmanifest',
   robots: {
     index: true,
     follow: true,
@@ -91,7 +94,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={cn("font-sans", inter.variable)}>
       <head>
-        <meta name="theme-color" content="#2563eb" />
+        <meta name="theme-color" content="#0A0A0A" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
