@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'https://dr-blockchain.onrender.com';
+export const API_BASE_URL = 'https://api.decentralizedrights.com';
