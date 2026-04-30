@@ -270,4 +270,19 @@ export default defineSchema({
       pqSig: v.optional(v.string()),
     }),
   }).index("by_index", ["index"]),
+
+  indexedProofs: defineTable({
+    proofHash: v.string(),
+    walletAddress: v.string(),
+    type: v.union(v.literal("PoST"), v.literal("PoAT")),
+    data: v.any(),
+    metadata: v.optional(v.any()),
+    timestamp: v.string(),
+    txHash: v.string(),
+    status: v.union(v.literal("Pending"), v.literal("Processing"), v.literal("Verified")),
+  })
+    .index("by_proof_hash", ["proofHash"])
+    .index("by_wallet", ["walletAddress"])
+    .index("by_type", ["type"])
+    .index("by_status", ["status"]),
 });

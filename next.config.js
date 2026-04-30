@@ -7,41 +7,21 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Enable Turbopack compatibility with empty config if no specific turbopack options needed
+  turbopack: {},
   // Explicitly set paths to use src directory
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')],
   },
-  // Exclude other project directories from root build
-  // These are separate Next.js projects with their own builds
-  webpack: (config, { isServer }) => {
-    // Exclude app-portal, explorer, api from root build
-    config.watchOptions = {
-      ...config.watchOptions,
-      ignored: [
-        '**/node_modules/**',
-        '**/.next/**',
-        '**/app-portal/**',
-        '**/explorer/**',
-        '**/api/**',
-      ],
-    };
-    return config;
-  },
-  // Skip app/ folder, use src/app/ only
-  // This is automatic in Next.js 14 but we'll be explicit
+  // Updated rewrites to reflect consolidated architecture
   async rewrites() {
     return [
-      {
-        source: '/explorer/:path*',
-        destination: 'https://explorer.decentralizedrights.com/:path*',
-      },
+      // Many of these are now local routes in src/app/
+      // If we still want to proxy some paths to external services, keep them here
+      // But for the consolidated repo, we prefer local routing
       {
         source: '/api-docs/:path*',
         destination: 'https://api.decentralizedrights.com/:path*',
-      },
-      {
-        source: '/dashboard/:path*',
-        destination: 'https://app.decentralizedrights.com/:path*',
       },
     ];
   },

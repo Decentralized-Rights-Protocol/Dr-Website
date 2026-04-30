@@ -10,6 +10,7 @@
     "type-check": "tsc --noEmit",
     "convex:dev": "convex dev",
     "convex:codegen": "convex dev --once",
+    "indexer": "node services/indexer.js",
     "predev": "convex dev --until-success && convex dashboard",
     "format": "prettier --write ."
   },

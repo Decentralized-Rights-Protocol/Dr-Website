@@ -10,12 +10,13 @@ import { ParticleBackground } from '@/components/explorer/ParticleBackground' //
 import { TransactionCard } from '@/components/explorer/TransactionCard' // Corrected path
 
 export default function ExplorerPage() {
-  const [activeTab, setActiveTab] = useState<'blocks' | 'transactions' | 'activities' | 'rankings' | 'elders'>('blocks')
+  const [activeTab, setActiveTab] = useState<'blocks' | 'transactions' | 'activities' | 'rankings' | 'elders' | 'proofs'>('blocks')
   const [blocks, setBlocks] = useState<Block[]>([])
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [activities, setActivities] = useState<ActivityFeedItem[]>([])
   const [rankings, setRankings] = useState<StatusRanking[]>([])
   const [elders, setElders] = useState<Elder[]>([])
+  const [proofs, setProofs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedActivity, setSelectedActivity] = useState<string | null>(null)
   const [aiSummary, setAiSummary] = useState<AISummary | null>(null)
@@ -62,6 +63,10 @@ export default function ExplorerPage() {
             ...prevStats,
             activeElders: data.active_elders || 0 // Assuming API returns active_elders
         }))
+      } else if (activeTab === 'proofs') {
+        const response = await fetch('/api/explorer/proofs?limit=50')
+        const data = await response.json()
+        setProofs(data)
       }
     } catch (error) {
       console.error('Failed to load data:', error)
@@ -276,6 +281,7 @@ export default function ExplorerPage() {
             { id: 'blocks', label: 'Blocks', icon: Globe },
             { id: 'transactions', label: 'Transactions', icon: Zap },
             { id: 'activities', label: 'Activity Feed', icon: Activity },
+            { id: 'proofs', label: 'Proofs', icon: Verified },
             { id: 'rankings', label: 'Status Rankings', icon: TrendingUp },
             { id: 'elders', label: 'Elders', icon: Users }
           ].map((tab) => (
@@ -294,7 +300,6 @@ export default function ExplorerPage() {
             </button>
           ))}
         </div>
-
         {/* Blocks Tab */}
         {activeTab === 'blocks' && (
           <div className="space-y-6">
@@ -771,8 +776,99 @@ export default function ExplorerPage() {
               </div>
             </Card>
           </div>
-        )}
-    </main>
+          )}
+
+          {/* Proofs Tab */}
+          {activeTab === 'proofs' && (
+          <div className="space-y-6">
+            <Card className="overflow-hidden border-purple-500/20 bg-[#06172d]/40 backdrop-blur-sm">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-purple-500/10 hover:bg-transparent">
+                      <TableHead className="text-gray-400 font-bold">Proof Hash</TableHead>
+                      <TableHead className="text-gray-400 font-bold">Type</TableHead>
+                      <TableHead className="text-gray-400 font-bold">Wallet</TableHead>
+                      <TableHead className="text-gray-400 font-bold">Timestamp</TableHead>
+                      <TableHead className="text-gray-400 font-bold">Transaction</TableHead>
+                      <TableHead className="text-gray-400 font-bold">Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {loading ? (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center py-20">
+                          <Loader2 className="h-8 w-8 animate-spin mx-auto text-purple-500 mb-2" />
+                          <p className="text-gray-400">Fetching proofs from protocol...</p>
+                        </TableCell>
+                      </TableRow>
+                    ) : proofs.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center py-20 text-gray-400">
+                          No proofs found in the protocol registry.
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      proofs.map((proof) => (
+                        <TableRow key={proof._id} className="border-purple-500/10 hover:bg-purple-500/5 transition-colors group">
+                          <TableCell className="font-mono text-xs">
+                            <div className="flex items-center gap-2">
+                              <span className="text-purple-300 font-bold">{formatHash(proof.proofHash)}</span>
+                              <button
+                                onClick={() => copyToClipboard(proof.proofHash)}
+                                className="text-gray-400 hover:text-purple-400 transition-colors"
+                              >
+                                {copiedHash === proof.proofHash ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                              </button>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <span className={cn(
+                              'px-2 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase border',
+                              proof.type === 'PoST' ? 'bg-purple-500/20 border-purple-500/40 text-purple-300' : 'bg-blue-500/20 border-blue-500/40 text-blue-300'
+                            )}>
+                              {proof.type}
+                            </span>
+                          </TableCell>
+                          <TableCell className="text-gray-400 font-mono text-xs">
+                            {formatAddress(proof.walletAddress)}
+                          </TableCell>
+                          <TableCell className="text-gray-400 text-xs font-medium">
+                            {new Date(proof.timestamp).toLocaleString()}
+                          </TableCell>
+                          <TableCell className="font-mono text-xs text-blue-400">
+                            {proof.txHash ? (
+                              <div className="flex items-center gap-1 hover:text-blue-300 transition-colors cursor-pointer">
+                                <span>{formatHash(proof.txHash, 6)}</span>
+                                <ExternalLink className="h-3 w-3" />
+                              </div>
+                            ) : (
+                              <span className="text-gray-600">Pending...</span>
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            <span className={cn(
+                              'px-2 py-1 rounded-full text-xs font-bold border flex items-center gap-1 w-fit',
+                              proof.status === 'Verified' ? 'bg-green-500/20 border-green-500/40 text-green-300' :
+                              proof.status === 'Processing' ? 'bg-yellow-500/20 border-yellow-500/40 text-yellow-300' :
+                              'bg-gray-500/20 border-gray-500/40 text-gray-300'
+                            )}>
+                              {proof.status === 'Verified' && <CheckCircle className="h-3 w-3" />}
+                              {proof.status === 'Processing' && <Loader2 className="h-3 w-3 animate-spin" />}
+                              {proof.status}
+                            </span>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+            </Card>
+          </div>
+          )}
+          </main>
+
     </div>
   )
 }

@@ -2,7 +2,8 @@
 
 import * as React from 'react'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { type ThemeProviderProps } from 'next-themes/dist/types'
+
+type ThemeProviderProps = React.ComponentProps<typeof NextThemesProvider>
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return (
@@ -10,12 +11,11 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
       attribute="class"
       defaultTheme="system"
       enableSystem
-      enableColorScheme
       disableTransitionOnChange
-      storageKey="drp-theme"
       {...props}
     >
       {children}
     </NextThemesProvider>
   )
 }
+
