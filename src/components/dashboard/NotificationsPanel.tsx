@@ -2,7 +2,7 @@
 
 import { Bell, ExternalLink } from 'lucide-react'
 import { useQuery } from 'convex/react'
-import { api } from '../../../convex/_generated/api'
+import { api } from '@/convex/_generated/api'
 
 interface NotificationsPanelProps {
   walletAddress: string | null

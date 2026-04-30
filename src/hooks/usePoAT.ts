@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useMutation } from 'convex/react'
 import { useAppStore } from '@/store/app-store'
-import { api } from '../../convex/_generated/api'
+import { api } from '@/convex/_generated/api'
 
 interface SubmitActivityInput {
   title: string

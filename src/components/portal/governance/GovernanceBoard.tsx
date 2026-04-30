@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Loader2, Vote } from 'lucide-react'
 import { useMutation, useQuery } from 'convex/react'
-import { api } from '../../../convex/_generated/api'
+import { api } from '@/convex/_generated/api'
 
 interface GovernanceBoardProps {
   walletAddress: string | null

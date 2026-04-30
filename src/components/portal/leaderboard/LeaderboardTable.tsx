@@ -2,7 +2,7 @@
 
 import { Crown, Loader2 } from 'lucide-react'
 import { useQuery } from 'convex/react'
-import { api } from '../../../convex/_generated/api'
+import { api } from '@/convex/_generated/api'
 
 export function LeaderboardTable() {
   const data = useQuery(api.metrics.listLeaderboard, {})

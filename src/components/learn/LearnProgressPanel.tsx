@@ -1,7 +1,7 @@
 'use client'
 
 import { useMutation, useQuery } from 'convex/react'
-import { api } from '../../../convex/_generated/api'
+import { api } from '@/convex/_generated/api'
 
 const modules = [
   { moduleSlug: 'digital-rights-foundations', lessonSlug: 'rights-charter-basics', title: 'Digital Rights Foundations', xp: 35 },

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { ShieldCheck } from 'lucide-react'
 import { useMutation, useQuery } from 'convex/react'
-import { api } from '../../../convex/_generated/api'
+import { api } from '@/convex/_generated/api'
 
 interface ReviewQueueProps {
   walletAddress: string | null

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Shield, Award, TrendingUp, Clock, Hash, CheckCircle2, User, Copy, Check } from 'lucide-react'
 import { useAppStore } from '@/store/app-store'
 import { useQuery } from 'convex/react'
-import { api } from '../../../convex/_generated/api'
+import { api } from '@/convex/_generated/api'
 
 export default function ProfilePage() {
   const address = useAppStore((state) => state.address)

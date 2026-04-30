@@ -9,7 +9,7 @@ import { useMutation as useConvexMutation } from 'convex/react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useWallet } from '@/hooks/useWallet'
 import { cn } from '@/lib/utils'
-import { api } from '../../../convex/_generated/api'
+import { api } from '@/convex/_generated/api'
 
 const navigationLinks = [
   { href: '/', label: 'Home' },

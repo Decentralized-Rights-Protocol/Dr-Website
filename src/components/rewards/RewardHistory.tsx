@@ -3,7 +3,7 @@
 import { Gift, Loader2 } from 'lucide-react'
 import { useQuery } from 'convex/react'
 import { useAppStore } from '@/store/app-store'
-import { api } from '../../../convex/_generated/api'
+import { api } from '@/convex/_generated/api'
 
 interface RewardLog {
   id: string | number
