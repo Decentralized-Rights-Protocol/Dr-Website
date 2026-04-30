@@ -1,5 +1,5 @@
 import { LeaderboardTable } from '@/components/leaderboard/LeaderboardTable'
-import { BadgeShareCard } from '@/components/community/BadgeShareCard'
+import { BadgeShareCard } from '@/components/portal/community/BadgeShareCard'
 
 export const metadata = {
   title: 'Community Leaderboard | DRP App Portal'

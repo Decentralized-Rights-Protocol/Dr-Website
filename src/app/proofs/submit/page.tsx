@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useProofSubmission } from '@/hooks/useProofSubmission'
 import { useWallet } from '@/hooks/useWallet'
-import { Card } from '@/components/ui/Card'
+import { Card } from '@/components/ui/card'
 import { CheckCircle2, Loader2, AlertCircle, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 

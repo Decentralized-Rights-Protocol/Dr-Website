@@ -1,4 +1,4 @@
-import { BadgeShareCard } from '@/components/community/BadgeShareCard'
+import { BadgeShareCard } from '@/components/portal/community/BadgeShareCard'
 
 export const metadata = {
   title: 'Share Your Progress | DRP App Portal'

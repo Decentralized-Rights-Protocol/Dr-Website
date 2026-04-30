@@ -15,7 +15,7 @@ import {
   Brain,
   ChevronRight
 } from "lucide-react";
-import { LessonSkeleton } from "@/components/learn/LessonSkeleton";
+import LessonSkeleton from "@/components/learn/LessonSkeleton";
 import ReactMarkdown from "react-markdown";
 
 // Helper for time formatting
