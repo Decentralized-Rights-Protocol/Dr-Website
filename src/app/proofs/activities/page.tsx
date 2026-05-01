@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { Youtube, Github, Globe, CheckCircle2, Database, Trash2, Link } from 'lucide-react'; // Added Link for tx hash
+import { Youtube, Github, Globe, CheckCircle2, Database, Trash2, Link, Clock, Hash } from 'lucide-react'; // Added Link for tx hash
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
@@ -85,37 +85,33 @@ export default function ActivitiesPage() {
       const data = await verificationResponse.json();
       // data is expected to contain { chain_tx_hash, status, score, reward, hash, signature }
       setVerificationResult(data);
+      return data;
     } catch (err) {
       console.error('Verification error:', err);
-      // Handle error display to user
+      return null;
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Call the internal Convex mutation with verified data
-  const createActivityRecord = useMutation(api.activities._createActivityRecord);
+  // Call the public Convex mutation with verified data
+  const submitActivity = useMutation(api.activities.submitActivity);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    let vResult = verificationResult;
     // If not verified yet, trigger verification first
-    if (!verificationResult) {
-      await verifyActivity();
-      // If verification was successful, verificationResult will be populated
-      if (!verificationResult) return; // Exit if verification failed
+    if (!vResult) {
+      vResult = await verifyActivity();
+      if (!vResult) return; // Exit if verification failed
     }
 
     setIsSubmitting(true);
     try {
-      // Ensure we have the verification data before proceeding
-      if (!verificationResult) throw new Error("Verification data is missing.");
-
-      const result = await createActivityRecord({
+      const result = await submitActivity({
         // Pass data received from the backend API
-        ...verificationResult,
-        // Map frontend selections to backend expectations if necessary, or pass directly
-        userId: 'user_id_placeholder', // This should be dynamically fetched from ctx.auth.getUserIdentity() in Convex
+        ...vResult,
         type: selectedType,
         category: selectedCategory,
         metadata: { title, url },
@@ -131,9 +127,16 @@ export default function ActivitiesPage() {
       setTimeout(() => setLastVerdict(null), 5000);
     } catch (err) {
       console.error('Convex submission error:', err);
-      // Handle error display to user
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'approved': return 'border-green-500 text-green-500 bg-green-500/10';
+      case 'rejected': return 'border-red-500 text-red-500 bg-red-500/10';
+      default: return 'border-yellow-500 text-yellow-500 bg-yellow-500/10';
     }
   };
 
@@ -294,15 +297,15 @@ export default function ActivitiesPage() {
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Recent Activities</h3>
           <div className="mt-4 space-y-4 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thumb-neutral-700 scrollbar-track-neutral-900">
             {activities && activities.length > 0 ? (
-              activities.map((activity) => (
-                <div key={activity.id} className="border-b border-neutral-700/50 pb-4 last:border-b-0 last:pb-0">
+              activities.map((activity: any) => (
+                <div key={activity._id} className="border-b border-neutral-700/50 pb-4 last:border-b-0 last:pb-0">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
-                      <h4 className="font-medium text-base text-neutral-100">{activity.title}</h4>
-                      <p className="text-xs text-neutral-400 line-clamp-1">{activity.description}</p>
+                      <h4 className="font-medium text-base text-neutral-100">{activity.metadata?.title || 'Untitled Activity'}</h4>
+                      <p className="text-xs text-neutral-400 line-clamp-1">{activity.proof}</p>
                     </div>
-                    <span className={cn('px-2 py-1 rounded text-xs font-semibold border', getStatusBadge(activity.verification_status))}>
-                      {activity.verification_status}
+                    <span className={cn('px-2 py-1 rounded text-xs font-semibold border', getStatusBadge(activity.status))}>
+                      {activity.status}
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-4 text-xs text-neutral-500">
@@ -320,7 +323,7 @@ export default function ActivitiesPage() {
                     )}
                     <div className="flex items-center gap-1">
                       <Clock className="h-3 w-3" />
-                      <span className="font-mono">{new Date(activity.timestamp).toLocaleString()}</span>
+                      <span className="font-mono">{new Date(activity.createdAt).toLocaleString()}</span>
                     </div>
                   </div>
                 </div>

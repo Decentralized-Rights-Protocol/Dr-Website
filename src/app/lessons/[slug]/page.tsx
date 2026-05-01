@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Youtube, Github, Globe, CheckCircle2, Database, Play, Youtube as YoutubeIcon, Link, Clock, User, Shield, TrendingUp, XCircle, Search, ExternalLink, Copy, Check, Sparkles, Verified } from 'lucide-react';
+import { Youtube, Github, Globe, CheckCircle2, Database, Play, Youtube as YoutubeIcon, Link, Clock, User, Shield, TrendingUp, XCircle, Search, ExternalLink, Copy, Check, Sparkles, Verified, Award, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery, useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
@@ -100,14 +100,14 @@ export default function LessonPage({ params }: { params: { slug: string } }) {
 
   // Placeholder for quiz submission logic
   const handleQuizAnswer = (questionId: string, answerIndex: number) => {
-    setQuizState(prev => ({ ...prev, answers: { ...prev.answers, [questionId]: answerIndex } }));
+    setQuizState((prev: any) => ({ ...prev, answers: { ...prev.answers, [questionId]: answerIndex } }));
   };
 
   const submitQuiz = async () => {
     if (!lesson) return;
 
     let score = 0;
-    lesson.quiz.questions.forEach(question => {
+    lesson.quiz.questions.forEach((question: any) => {
       if (quizState.answers[question.id] === question.correct) score++;
     });
 
@@ -143,7 +143,7 @@ export default function LessonPage({ params }: { params: { slug: string } }) {
       const verificationData = await verificationResponse.json();
       // verificationData is expected to contain { chain_tx_hash, status, score, reward, hash, signature }
 
-      setQuizState(prev => ({ ...prev, completed: true, score: finalScore, timeSpentSeconds: timeSpent, chainTxHash: verificationData.chain_tx_hash }));
+      setQuizState((prev: any) => ({ ...prev, completed: true, score: finalScore, timeSpentSeconds: timeSpent, chainTxHash: verificationData.chain_tx_hash }));
       setVerificationResult(verificationData); // Store verification result for display
       console.log('Verification successful:', verificationData);
 
@@ -157,16 +157,16 @@ export default function LessonPage({ params }: { params: { slug: string } }) {
 
   // Placeholder for activity submission to Convex
   // This will be called after successful verification and when the user confirms/submits
+  const submitActivity = useMutation(api.activities.submitActivity);
   const handleConvexSubmission = async () => {
     if (!lesson || !verificationResult) return;
 
     setIsSubmitting(true);
     try {
-      const result = await api.activities._createActivityRecord({
-        userId: 'user_id_placeholder', // Needs actual user ID from context
+      const result = await submitActivity({
         type: lesson.type,
         category: lesson.category,
-        metadata: { title, url: lesson.slug }, // Use lesson slug as URL for now
+        metadata: { title: lesson.title, url: lesson.slug }, // Use lesson slug as URL for now
         proof: `Completed lesson ${lesson.slug} with score ${quizState.score.toFixed(2)}%`,
         hash: verificationResult.hash,
         signature: verificationResult.signature,
@@ -258,11 +258,11 @@ export default function LessonPage({ params }: { params: { slug: string } }) {
             <div className="rounded-3xl border border-neutral-700 bg-neutral-900/60 p-6 md:p-8 shadow-xl space-y-6">
               <h3 className="text-2xl font-bold text-white">Quiz: {lesson.title}</h3>
               <p className="text-slate-400">Answer the following questions to complete the lesson.</p>
-              {lesson.quiz.questions.map((question, index) => (
+              {lesson.quiz.questions.map((question: any, index: number) => (
                 <div key={question.id} className="space-y-3">
                   <p className="text-lg font-medium text-white">{index + 1}. {question.text}</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {question.options.map((option, optionIndex) => (
+                    {question.options.map((option: any, optionIndex: number) => (
                       <button
                         key={optionIndex}
                         onClick={() => handleQuizAnswer(question.id, optionIndex)}

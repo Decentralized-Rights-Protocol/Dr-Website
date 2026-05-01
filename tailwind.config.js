@@ -93,6 +93,7 @@ module.exports = {
         // DRP specific colors
         drp: {
           blue: '#0D1B2A',
+          dark: '#0a0a0f',
           white: '#FFFFFF',
           purple: '#8B5CF6',
           teal: '#06B6D4',

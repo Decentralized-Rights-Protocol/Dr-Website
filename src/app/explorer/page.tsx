@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Activity, Award, CheckCircle2, Clock, Hash, Shield, TrendingUp, XCircle, Zap, Search, ExternalLink, Copy, Check, Sparkles, CheckCircle, Verified, Users, Globe } from 'lucide-react'
+import { Activity, Award, CheckCircle2, Clock, Hash, Shield, TrendingUp, XCircle, Zap, Search, ExternalLink, Copy, Check, Sparkles, CheckCircle, Verified, Users, Globe, Loader2 } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell } from '@/components/explorer/ui/Table'
 import { getTransactions, getActivityFeed, getAISummary, getStatusRankings, getBlocks, getElders, type Transaction, type ActivityFeedItem, type AISummary, type StatusRanking, type Block, type Elder } from '@/lib/api'

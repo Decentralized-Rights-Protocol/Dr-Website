@@ -64,7 +64,6 @@ export default function ProofSubmissionPage() {
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={() => {
-                setIsSuccess(false) // This is just local state in the hook, won't work like this but good for demo
                 window.location.reload()
               }}
               className="flex-1 py-3 px-4 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors"

@@ -50,9 +50,9 @@ export function WalletConnectButton() {
   const checkWalletConnection = useCallback(async () => {
     if (typeof window !== "undefined" && window.ethereum) {
       try {
-        const accounts = await window.ethereum.request({ method: "eth_accounts" });
+        const accounts = await (window.ethereum as any).request({ method: "eth_accounts" });
         if (accounts.length > 0) {
-          const chainId = await window.ethereum.request({ method: "eth_chainId" });
+          const chainId = await (window.ethereum as any).request({ method: "eth_chainId" });
           setWalletState({
             isConnected: true,
             address: accounts[0],
@@ -108,12 +108,12 @@ export function WalletConnectButton() {
     setIsConnecting(true);
     try {
       // Request account access
-      const accounts = await window.ethereum.request({
+      const accounts = await (window.ethereum as any).request({
         method: "eth_requestAccounts",
       });
 
       // Get chain ID
-      const chainId = await window.ethereum.request({ method: "eth_chainId" });
+      const chainId = await (window.ethereum as any).request({ method: "eth_chainId" });
       const networkName = getNetworkName(parseInt(chainId, 16));
 
       setWalletState({
@@ -130,8 +130,8 @@ export function WalletConnectButton() {
       } catch {}
 
       // Listen for account changes
-      window.ethereum.on("accountsChanged", handleAccountsChanged);
-      window.ethereum.on("chainChanged", handleChainChanged);
+      (window.ethereum as any).on("accountsChanged", handleAccountsChanged);
+      (window.ethereum as any).on("chainChanged", handleChainChanged);
 
     } catch (error: any) {
       console.error("Error connecting wallet:", error);
@@ -174,8 +174,8 @@ export function WalletConnectButton() {
     try { localStorage.removeItem('connectedWallet'); } catch {}
     // Remove event listeners
     if (window.ethereum) {
-      window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
-      window.ethereum.removeListener("chainChanged", handleChainChanged);
+      (window.ethereum as any).removeListener("accountsChanged", handleAccountsChanged);
+      (window.ethereum as any).removeListener("chainChanged", handleChainChanged);
     }
   }, [handleAccountsChanged, handleChainChanged]);
 
@@ -342,14 +342,5 @@ export function WalletConnectButton() {
     </div>
   );
 }
+export default WalletConnectButton;
 
-// Extend Window interface for ethereum
-declare global {
-  interface Window {
-    ethereum?: {
-      request: (args: { method: string; params?: any[] }) => Promise<any>;
-      on: (event: string, callback: (...args: any[]) => void) => void;
-      removeListener: (event: string, callback: (...args: any[]) => void) => void;
-    };
-  }
-}
