@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { AppProviders } from '@/components/providers'
 /* import { Inter } from "next/font/google"; */
 import { cn } from "@/lib/utils";
 import { ParticleBackground } from '@/components/particle-background'
@@ -97,18 +98,20 @@ export default function RootLayout({
         <meta name="theme-color" content="#0A0A0A" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">
-            <ParticleBackground />
-            <header>
-              <Navigation />
-            </header>
-            <main className="relative flex-1 z-10">{children}</main>
-            <footer>
-              <Footer />
-            </footer>
-          </div>
-        </ThemeProvider>
+        <AppProviders>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div className="relative flex min-h-screen flex-col">
+              <ParticleBackground />
+              <header>
+                <Navigation />
+              </header>
+              <main className="relative flex-1 z-10">{children}</main>
+              <footer>
+                <Footer />
+              </footer>
+            </div>
+          </ThemeProvider>
+        </AppProviders>
         <Analytics />
         <SpeedInsights />
       </body>

@@ -301,8 +301,8 @@ export async function getBlocks(params?: {
         })),
         total_blocks: blocks.length, // Placeholder, API should return actual total
         total_transactions: blocks.reduce((sum, block) => sum + block.transactions_count, 0), // Placeholder
-        page: params?.page || 1,
-        page_size: params?.page_size || 50
+        page: (params as any)?.page || 1,
+        page_size: (params as any)?.page_size || 50
     }
 }
 
@@ -351,8 +351,8 @@ export async function getElders(params?: {
         })),
         total: elders.length, // Placeholder, API should return actual total
         active_elders: elders.filter((e: any) => e.is_active).length, // Placeholder
-        page: params?.page || 1,
-        page_size: params?.page_size || 50
+        page: (params as any)?.page || 1,
+        page_size: (params as any)?.page_size || 50
     }
 }
 

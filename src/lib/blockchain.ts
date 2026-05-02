@@ -9,7 +9,7 @@ export class BlockchainService {
   /**
    * Submit proof to the blockchain
    */
-  async submitProof(proofHash, type, metadata) {
+  async submitProof(proofHash: string, type: string, metadata: any) {
     console.log(`[Blockchain] Submitting ${type} proof: ${proofHash}`);
     
     // Simulate network delay

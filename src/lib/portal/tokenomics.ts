@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 import { env } from '@/lib/env'
-import { CONTRACT_ADDRESSES, DRP_CHAIN_ID } from '@/lib/constants'
+import { CONTRACT_ADDRESSES, DRP_CHAIN_ID } from '@/lib/portal/constants'
 
 declare global {
   interface Window {
