@@ -5,11 +5,11 @@ import { Footer } from '@/components/footer'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { Inter } from "next/font/google";
+/* import { Inter } from "next/font/google"; */
 import { cn } from "@/lib/utils";
 import { ParticleBackground } from '@/components/particle-background'
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+/* const inter = Inter({subsets:['latin'],variable:'--font-sans'}); */
 
 export const metadata: Metadata = {
   title: {
@@ -92,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn("font-sans", inter.variable)}>
+    <html lang="en" suppressHydrationWarning className="font-sans">
       <head>
         <meta name="theme-color" content="#0A0A0A" />
       </head>

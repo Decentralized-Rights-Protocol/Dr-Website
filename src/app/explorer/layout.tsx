@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+/* import { Inter } from 'next/font/google' */
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-const inter = Inter({ subsets: ['latin'] })
+/* const inter = Inter({ subsets: ['latin'] }) */
 
 export const metadata: Metadata = {
   title: 'DRP Explorer | Blockchain Transparency & Trust',
@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body>
         {children}
         <Analytics />
         <SpeedInsights />
