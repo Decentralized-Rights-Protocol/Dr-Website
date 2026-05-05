@@ -65,8 +65,12 @@ export default function ExplorerPage() {
         }))
       } else if (activeTab === 'proofs') {
         const response = await fetch('/api/explorer/proofs?limit=50')
-        const data = await response.json()
-        setProofs(data)
+        if (response.ok) {
+          const data = await response.json()
+          setProofs(data || [])
+        } else {
+          setProofs([])
+        }
       }
     } catch (error) {
       console.error('Failed to load data:', error)

@@ -163,8 +163,9 @@ export async function getActivityFeed(params?: {
   if (params?.actor_id) searchParams.set('actor_id', params.actor_id)
 
   const query = searchParams.toString()
+  const path = `/api/v1/explorer/activity?${query}${query ? '&' : ''}limit=${params?.page_size || 50}`
   const response = await apiRequest<any[]>({
-    path: `/api/v1/explorer/activity${query ? `?${query}` : ''}&limit=${params?.page_size || 50}`,
+    path,
     method: 'GET'
   })
 

@@ -220,16 +220,21 @@ export default defineSchema({
     metadata: v.any(),
     proof: v.string(),
     hash: v.string(),
-    signature: v.object({
-      edSig: v.string(),
-      pqSig: v.optional(v.string()),
-    }),
+    signature: v.union(
+      v.string(),
+      v.object({
+        edSig: v.string(),
+        pqSig: v.optional(v.string()),
+      }),
+      v.object({
+        ed_sig: v.string(),
+        pq_sig: v.optional(v.string()),
+      })
+    ),
     status: v.union(v.literal("pending"), v.literal("approved"), v.literal("rejected"), v.literal("flagged")),
     score: v.number(),
-    reward: v.object({
-      deri: v.number(),
-      rights: v.number(),
-    }),
+    reward: v.any(),
+    chainTxHash: v.optional(v.string()),
     createdAt: v.string(),
   })
     .index("by_user", ["userId"])

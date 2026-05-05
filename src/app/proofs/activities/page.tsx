@@ -1,12 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { Youtube, Github, Globe, CheckCircle2, Database, Trash2, Link, Clock, Hash } from 'lucide-react'; // Added Link for tx hash
+import { Youtube, Github, Globe, CheckCircle2, Database, Trash2, Link, Clock, Hash, Loader2 } from 'lucide-react'; // Added Link for tx hash
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { Id } from '@/convex/_generated/dataModel';
 import { cn } from '@/lib/utils';
+import { useAppStore } from '@/store/app-store';
 
 // Mock data for categories and types, assuming these will be relevant
 const CATEGORIES = [
@@ -57,8 +58,14 @@ export default function ActivitiesPage() {
   const [lastVerdict, setLastVerdict] = useState<any>(null); // Stores result from Convex mutation
   const [verificationResult, setVerificationResult] = useState<any>(null); // Stores result from API verification
 
+  // Get wallet address from store
+  const walletAddress = useAppStore((state) => state.address);
+
   // Fetch existing activities
-  const activities = useQuery(api.activities.getActivities, { limit: 10 });
+  const activities = useQuery(api.activities.getActivities, { 
+    limit: 10,
+    walletAddress: walletAddress || undefined
+  });
 
   // Submit activity to our backend API for verification
   const verifyActivity = async () => {
@@ -296,7 +303,12 @@ export default function ActivitiesPage() {
         <section className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Recent Activities</h3>
           <div className="mt-4 space-y-4 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-thumb-neutral-700 scrollbar-track-neutral-900">
-            {activities && activities.length > 0 ? (
+            {activities === undefined ? (
+              <div className="flex flex-col items-center justify-center py-12 text-neutral-400">
+                <Loader2 className="h-8 w-8 animate-spin text-primary-500 mb-2" />
+                <p>Loading your activities...</p>
+              </div>
+            ) : activities.length > 0 ? (
               activities.map((activity: any) => (
                 <div key={activity._id} className="border-b border-neutral-700/50 pb-4 last:border-b-0 last:pb-0">
                   <div className="flex items-start justify-between mb-2">
@@ -329,7 +341,10 @@ export default function ActivitiesPage() {
                 </div>
               ))
             ) : (
-              <p className="text-center text-neutral-400 py-4">No recent activities found.</p>
+              <div className="flex flex-col items-center justify-center py-12 text-neutral-400">
+                <p>No recent activities found.</p>
+                {!walletAddress && <p className="text-xs mt-2 text-neutral-500">Connect your wallet to see your history.</p>}
+              </div>
             )}
           </div>
         </section>

@@ -13,7 +13,7 @@ export const _createActivityRecord = internalMutation({
     metadata: v.any(),
     proof: v.string(),
     hash: v.string(),
-    signature: v.string(),
+    signature: v.any(),
     status: v.string(), // Corresponds to PolicyEngine.verdict
     score: v.number(), // Corresponds to PolicyEngine.score
     reward: v.any(), // Corresponds to PolicyEngine.reward
@@ -29,7 +29,7 @@ export const _createActivityRecord = internalMutation({
       proof: args.proof,
       hash: args.hash,
       signature: args.signature,
-      status: args.status,
+      status: args.status as any,
       score: args.score,
       reward: args.reward,
       chainTxHash: args.chainTxHash, // Store the chain transaction hash
@@ -95,7 +95,7 @@ export const submitActivity = mutation({
     metadata: v.any(),
     proof: v.string(),
     hash: v.string(),
-    signature: v.string(),
+    signature: v.any(),
     status: v.string(), // Corresponds to FastAPI's verdict
     score: v.number(), // Corresponds to FastAPI's score
     reward: v.any(), // Corresponds to FastAPI's reward (e.g., { deri: number, rights: number })
@@ -120,40 +120,65 @@ export const submitActivity = mutation({
 });
 
 export const getActivities = query({
-  args: { limit: v.optional(v.number()) },
+  args: { 
+    limit: v.optional(v.number()),
+    walletAddress: v.optional(v.string()),
+  },
   handler: async (ctx, args) => {
+    let userId;
     const identity = await ctx.auth.getUserIdentity();
-    if (!identity) return [];
+    
+    if (identity) {
+      const user = await ctx.db
+        .query("users")
+        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", identity.address!))
+        .unique();
+      if (user) userId = user._id;
+    } else if (args.walletAddress) {
+      const user = await ctx.db
+        .query("users")
+        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", args.walletAddress!))
+        .unique();
+      if (user) userId = user._id;
+    }
 
-    const user = await ctx.db
-      .query("users")
-      .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", identity.address!))
-      .unique();
-    if (!user) return [];
+    if (!userId) return [];
 
     return await ctx.db
       .query("drpActivities")
-      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .withIndex("by_user", (q) => q.eq("userId", userId))
       .order("desc")
       .take(args.limit || 50);
   },
 });
 
 export const getUserBalance = query({
-  args: {},
-  handler: async (ctx) => {
+  args: {
+    walletAddress: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    let userId;
     const identity = await ctx.auth.getUserIdentity();
-    if (!identity) return { deri: 0, rights: 0 };
+    
+    if (identity) {
+      const user = await ctx.db
+        .query("users")
+        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", identity.address!))
+        .unique();
+      if (user) userId = user._id;
+    } else if (args.walletAddress) {
+      const user = await ctx.db
+        .query("users")
+        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", args.walletAddress!))
+        .unique();
+      if (user) userId = user._id;
+    }
 
-    const user = await ctx.db
-      .query("users")
-      .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", identity.address!))
-      .unique();
-    if (!user) return { deri: 0, rights: 0 };
+    if (!userId) return { deri: 0, rights: 0 };
 
     const balance = await ctx.db
       .query("drpBalances")
-      .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .withIndex("by_user", (q) => q.eq("userId", userId))
       .unique();
 
     return balance || { deri: 0, rights: 0 };

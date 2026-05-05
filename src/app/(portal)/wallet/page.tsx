@@ -14,10 +14,15 @@ import {
   ArrowDownLeft
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useAppStore } from '@/store/app-store';
 
 export default function WalletPage() {
-  const balance = useQuery(api.activities.getUserBalance);
-  const activities = useQuery(api.activities.getActivities, { limit: 5 });
+  const address = useAppStore((state) => state.address);
+  const balance = useQuery(api.activities.getUserBalance, { walletAddress: address || undefined });
+  const activities = useQuery(api.activities.getActivities, { 
+    limit: 5,
+    walletAddress: address || undefined
+  });
 
   return (
     <div className="space-y-10">
