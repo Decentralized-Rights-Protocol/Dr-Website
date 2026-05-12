@@ -112,7 +112,7 @@ export const submitActivity = mutation({
     if (!user) throw new Error("User not found");
 
     // Call the internal mutation to create the activity record
-    return await ctx.scheduler.run(api.activities._createActivityRecord, {
+    return await ctx.runMutation(api.activities._createActivityRecord, {
       userId: user._id,
       ...args,
     });
