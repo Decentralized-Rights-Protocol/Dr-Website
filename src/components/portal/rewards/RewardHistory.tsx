@@ -8,7 +8,7 @@ import { api } from '@/convex/_generated/api'
 interface RewardLog {
   id: string | number
   type: string
-  token: '$DeRi' | '$RIGHTS'
+  token: string
   amount: number
   createdAt: string
   txHash?: string

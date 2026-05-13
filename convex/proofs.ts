@@ -48,12 +48,14 @@ export const getExplorerProofs = query({
     walletAddress: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    let q = ctx.db.query("indexedProofs");
+    let q;
     
     if (args.type) {
-      q = q.withIndex("by_type", (q) => q.eq("type", args.type!));
+      q = ctx.db.query("indexedProofs").withIndex("by_type", (q) => q.eq("type", args.type!));
     } else if (args.walletAddress) {
-      q = q.withIndex("by_wallet", (q) => q.eq("walletAddress", args.walletAddress!));
+      q = ctx.db.query("indexedProofs").withIndex("by_wallet", (q) => q.eq("walletAddress", args.walletAddress!));
+    } else {
+      q = ctx.db.query("indexedProofs");
     }
     
     const results = await q.order("desc").take(args.limit || 50);

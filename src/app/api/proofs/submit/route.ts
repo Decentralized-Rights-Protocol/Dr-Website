@@ -5,10 +5,9 @@ import { api } from '@/convex/_generated/api';
 import { ethers } from 'ethers';
 import { blockchainService } from '@/lib/blockchain';
 
-const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
-
 export async function POST(request: NextRequest) {
   try {
+    const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
     const body = await request.json();
     const { userId, walletAddress, type, data, metadata, signature } = body;
 

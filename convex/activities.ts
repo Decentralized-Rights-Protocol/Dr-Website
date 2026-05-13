@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query, internalMutation } from "./_generated/server";
-import { api } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 
 /**
  * Submit a digital activity for verification and reward.
@@ -46,7 +46,6 @@ export const _createActivityRecord = internalMutation({
         activityHash: args.hash,
         category: args.category,
         reward: args.reward,
-        chainTxHash: args.chainTxHash, // Store the chain transaction hash
         timestamp: new Date().toISOString(),
       });
 
@@ -74,7 +73,7 @@ export const _createActivityRecord = internalMutation({
       // Check if we should mint a block (simplified: every N transactions)
       const pendingTxs = await ctx.db.query("drpTransactions").filter(q => q.eq(q.field("blockIndex"), undefined)).collect();
       if (pendingTxs.length >= 5) {
-        await ctx.scheduler.runAfter(0, api.blockchain.mintBlock, {});
+        await ctx.scheduler.runAfter(0, internal.blockchain.mintBlock, {});
       }
     }
 
@@ -101,7 +100,7 @@ export const submitActivity = mutation({
     reward: v.any(), // Corresponds to FastAPI's reward (e.g., { deri: number, rights: number })
     chainTxHash: v.optional(v.string()), // From FastAPI
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<any> => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Unauthorized");
 
@@ -112,7 +111,7 @@ export const submitActivity = mutation({
     if (!user) throw new Error("User not found");
 
     // Call the internal mutation to create the activity record
-    return await ctx.runMutation(api.activities._createActivityRecord, {
+    return await ctx.runMutation(internal.activities._createActivityRecord, {
       userId: user._id,
       ...args,
     });
