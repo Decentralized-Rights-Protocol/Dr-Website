@@ -50,68 +50,77 @@
 }
 
 :root {
-  /* Professional blockchain protocol colors */
-  --drp-blue: #0D1B2A;
-  --drp-white: #FFFFFF;
-  --drp-purple: #8B5CF6;
-  --drp-teal: #06B6D4;
+  /* Premium DRP Cinematic Palette */
+  --drp-bg: #050505;
+  --drp-surface: #0a0a0a;
+  --drp-border: rgba(255, 255, 255, 0.08);
+  
+  --drp-cyan: #00f2ff;
+  --drp-blue: #0066ff;
+  --drp-gold: #ffcc33;
+  --drp-purple: #8b5cf6;
+  
+  --drp-white: #ffffff;
+  --drp-gray: #a1a1aa;
 
-  /* Learn Section Tokens */
-  --learn-card-bg: rgba(15, 23, 42, 0.7);
-  --learn-card-border: rgba(99, 102, 241, 0.15);
-  --learn-accent: #6366f1;
-  --learn-accent-light: #818cf8;
-  --learn-accent-muted: rgba(99, 102, 241, 0.12);
-
-  /* Light theme */
-  --card: #F8FAFC;
-  --card-foreground: #0D1B2A;
-  --popover: #FFFFFF;
-  --popover-foreground: #0D1B2A;
-  --primary: #0D1B2A;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F1F5F9;
-  --secondary-foreground: #0D1B2A;
-  --muted: #F1F5F9;
-  --muted-foreground: #64748B;
-  --accent: #F1F5F9;
-  --accent-foreground: #0D1B2A;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --border: #E2E8F0;
-  --input: #E2E8F0;
-  --ring: #0D1B2A;
-  --radius: 0.5rem;
+  /* Shadcn-like variables mapped to cinematic theme */
+  --background: var(--drp-bg);
+  --foreground: var(--drp-white);
+  
+  --card: var(--drp-surface);
+  --card-foreground: var(--drp-white);
+  
+  --popover: var(--drp-surface);
+  --popover-foreground: var(--drp-white);
+  
+  --primary: var(--drp-cyan);
+  --primary-foreground: var(--drp-bg);
+  
+  --secondary: var(--drp-blue);
+  --secondary-foreground: var(--drp-white);
+  
+  --muted: #18181b;
+  --muted-foreground: var(--drp-gray);
+  
+  --accent: #27272a;
+  --accent-foreground: var(--drp-white);
+  
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  
+  --border: var(--drp-border);
+  --input: var(--drp-border);
+  --ring: var(--drp-cyan);
+  
+  --radius: 0.75rem;
 }
 
 .dark {
-  /* Dark theme */
-  --background: #0D1B2A;
-  --foreground: #FFFFFF;
-  --card: #1E293B;
-  --card-foreground: #FFFFFF;
-  --popover: #0D1B2A;
-  --popover-foreground: #FFFFFF;
-  --primary: #FFFFFF;
-  --primary-foreground: #0D1B2A;
-  --secondary: #1E293B;
-  --secondary-foreground: #FFFFFF;
-  --muted: #1E293B;
-  --muted-foreground: #94A3B8;
-  --accent: #1E293B;
-  --accent-foreground: #FFFFFF;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --border: #334155;
-  --input: #334155;
-  --ring: #FFFFFF;
+  --background: var(--drp-bg);
+  --foreground: var(--drp-white);
+  /* Dark mode is the default and only mode for the cinematic experience */
+}
 
-  /* Learn Section Tokens (Dark Optimized) */
-  --learn-card-bg: rgba(15, 23, 42, 0.7);
-  --learn-card-border: rgba(99, 102, 241, 0.15);
-  --learn-accent: #6366f1;
-  --learn-accent-light: #818cf8;
-  --learn-accent-muted: rgba(99, 102, 241, 0.12);
+body {
+  background-color: var(--drp-bg);
+  color: var(--drp-white);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-transform: tight;
+}
+
+.font-cinematic {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 800;
 }
 
 * {

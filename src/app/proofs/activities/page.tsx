@@ -58,18 +58,21 @@ export default function ActivitiesPage() {
   const [lastVerdict, setLastVerdict] = useState<any>(null); // Stores result from Convex mutation
   const [verificationResult, setVerificationResult] = useState<any>(null); // Stores result from API verification
 
-  // Get wallet address from store
-  const walletAddress = useAppStore((state) => state.address);
+  // Get wallet address from store and normalize it
+  const walletAddress = useAppStore((state) => state.address)?.toLowerCase();
 
-  // Fetch existing activities
+  // Fetch existing activities - ensure we pass the normalized address
   const activities = useQuery(api.activities.getActivities, { 
     limit: 10,
     walletAddress: walletAddress || undefined
   });
 
+  const [error, setError] = useState<string | null>(null);
+
   // Submit activity to our backend API for verification
   const verifyActivity = async () => {
     setIsSubmitting(true);
+    setError(null);
     try {
       const verificationResponse = await fetch('/api/submit-activity', {
         method: 'POST',
@@ -86,15 +89,15 @@ export default function ActivitiesPage() {
 
       if (!verificationResponse.ok) {
         const errorText = await verificationResponse.text();
-        throw new Error(`Verification failed: ${errorText}`);
+        throw new Error(errorText || 'Verification failed');
       }
 
       const data = await verificationResponse.json();
-      // data is expected to contain { chain_tx_hash, status, score, reward, hash, signature }
       setVerificationResult(data);
       return data;
-    } catch (err) {
+    } catch (err: any) {
       console.error('Verification error:', err);
+      setError(err.message || 'Failed to verify activity. Please try again.');
       return null;
     } finally {
       setIsSubmitting(false);
@@ -106,19 +109,24 @@ export default function ActivitiesPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
 
     let vResult = verificationResult;
     // If not verified yet, trigger verification first
     if (!vResult) {
       vResult = await verifyActivity();
-      if (!vResult) return; // Exit if verification failed
+      if (!vResult) return; 
     }
 
     setIsSubmitting(true);
     try {
       const result = await submitActivity({
-        // Pass data received from the backend API
-        ...vResult,
+        status: vResult.status,
+        score: vResult.score,
+        reward: vResult.reward,
+        chainTxHash: vResult.chainTxHash,
+        hash: vResult.hash,
+        signature: vResult.signature,
         type: selectedType,
         category: selectedCategory,
         metadata: { title, url },
@@ -126,14 +134,14 @@ export default function ActivitiesPage() {
       });
 
       setLastVerdict(result);
-      // Clear form and states after successful submission
       setTitle('');
       setProof('');
       setUrl('');
-      setVerificationResult(null); // Clear verification result after submission
+      setVerificationResult(null);
       setTimeout(() => setLastVerdict(null), 5000);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Convex submission error:', err);
+      setError(err.message || 'Failed to submit to ledger.');
     } finally {
       setIsSubmitting(false);
     }
@@ -241,6 +249,19 @@ export default function ActivitiesPage() {
                 className="w-full px-4 py-3 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
               />
             </div>
+
+            <AnimatePresence>
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-red-500 text-sm font-medium"
+                >
+                  {error}
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <AnimatePresence>
               {isSubmitting && (

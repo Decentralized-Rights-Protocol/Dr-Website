@@ -13,14 +13,22 @@ export function StatCard({ title, value, trendLabel, icon, accent }: StatCardPro
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm transition hover:border-primary-200 hover:shadow-lg dark:border-neutral-800/80 dark:bg-neutral-900/60 dark:hover:border-primary-600/50',
+        'relative group overflow-hidden rounded-[2rem] border border-white/5 bg-black/40 p-8 backdrop-blur-md transition-all hover:border-white/10 hover:bg-black/60',
         accent
       )}
     >
-      {icon && <div className="mb-3 text-primary-600 dark:text-primary-300">{icon}</div>}
-      <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">{title}</p>
-      <p className="mt-2 text-2xl font-semibold text-neutral-900 dark:text-neutral-100">{value}</p>
-      {trendLabel && <p className="mt-3 text-xs uppercase tracking-wide text-primary-600 dark:text-primary-300">{trendLabel}</p>}
+      <div className="absolute top-0 right-0 p-6 opacity-10 transition-opacity group-hover:opacity-20">
+        {icon}
+      </div>
+      <div className="relative z-10">
+        <p className="text-xs font-cinematic text-drp-gray opacity-60 mb-2">{title}</p>
+        <p className="text-4xl font-bold tracking-tight text-white mb-4">{value}</p>
+        {trendLabel && (
+          <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-drp-cyan opacity-80">
+            {trendLabel}
+          </p>
+        )}
+      </div>
     </div>
   )
 }

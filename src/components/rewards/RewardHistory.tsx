@@ -15,8 +15,8 @@ interface RewardLog {
 }
 
 export function RewardHistory() {
-  const walletAddress = useAppStore((state) => state.address)
-  const data = useQuery(api.metrics.getRewardHistory, { walletAddress })
+  const walletAddress = useAppStore((state) => state.address)?.toLowerCase()
+  const data = useQuery(api.metrics.getRewardHistory, { walletAddress: walletAddress ?? null })
 
   if (!data) {
     return (
