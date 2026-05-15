@@ -1,15 +1,4 @@
 {
-  "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "framework": "nextjs",
-  "installCommand": "npm install",
-  "env": {
-    "NEXT_PUBLIC_API_URL": "https://api.decentralizedrights.com",
-    "NEXT_PUBLIC_CHAIN_RPC": "https://rpc.decentralizedrights.com",
-    "CONVEX_DEPLOYMENT": "prod:grand-cassowary-235",
-    "NEXT_PUBLIC_CONVEX_URL": "https://grand-cassowary-235.convex.cloud",
-    "NEXT_PUBLIC_AI_URL": "https://ai.decentralizedrights.com",
-    "NEXT_PUBLIC_IPFS_URL": "https://ipfs.decentralizedrights.com"
-  }
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build"
 }
