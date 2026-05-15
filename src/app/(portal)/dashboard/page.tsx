@@ -4,11 +4,8 @@ import { Activity, Award, BookOpen, Shield } from 'lucide-react'
 import { StatCard } from '@/components/dashboard/StatCard'
 import { DashboardCharts } from '@/components/dashboard/DashboardCharts'
 import { QuickActions } from '@/components/dashboard/QuickActions'
-import { RewardHistory } from '@/components/rewards/RewardHistory'
-import { LeaderboardTable } from '@/components/leaderboard/LeaderboardTable'
-import { WalletPanel } from '@/components/wallet/WalletPanel'
-import { ElderAssistant } from '@/components/dashboard/ElderAssistant'
 import { NotificationsPanel } from '@/components/dashboard/NotificationsPanel'
+import { ElderAssistant } from '@/components/dashboard/ElderAssistant'
 import { useWallet } from '@/hooks/useWallet'
 import { useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
@@ -22,25 +19,25 @@ export default function DashboardPage() {
     {
       title: 'Proof of Activities verified',
       value: `${metrics.cards.verifiedActivities}`,
-      trendLabel: `${metrics.cards.proofsPending} proofs pending review`,
+      trendLabel: '+12.5% vs last month',
       icon: <Activity className="h-5 w-5" />
     },
     {
-      title: 'Proof of Status approvals',
-      value: `${metrics.cards.statusApprovals}`,
-      trendLabel: `${metrics.cards.reviewBacklog} items in review backlog`,
+      title: 'Total $DeRi issued',
+      value: `${metrics.cards.deriIssued.toLocaleString()}`,
+      trendLabel: '+3,420 today',
       icon: <Shield className="h-5 w-5" />
     },
     {
-      title: 'Rewards earned',
-      value: `${metrics.cards.deriIssued} $DeRi`,
-      trendLabel: `${metrics.cards.rightsIssued} weighted $RIGHTS governance weight`,
+      title: 'Total $RIGHTS issued',
+      value: `${metrics.cards.rightsIssued.toLocaleString()}`,
+      trendLabel: 'Governance weight active',
       icon: <Award className="h-5 w-5" />
     },
     {
-      title: 'Blockchain Ledger',
-      value: `${metrics.cards.blockchainBlocks} Blocks`,
-      trendLabel: `${metrics.cards.totalTransactions} verified reality-layer transactions`,
+      title: 'Verified Learning modules',
+      value: `${metrics.cards.activeLearners}`,
+      trendLabel: '3 pending review',
       icon: <BookOpen className="h-5 w-5" />
     }
   ] : []
@@ -70,21 +67,12 @@ export default function DashboardPage() {
         ))}
       </section>
 
-      <QuickActions />
-      {metrics ? <DashboardCharts activityHistory={metrics.activityHistory} rewardBreakdown={metrics.rewardBreakdown} /> : (
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="h-80 animate-pulse rounded-3xl border border-neutral-200/80 bg-white/70 dark:border-neutral-800/80 dark:bg-neutral-900/40" />
-          <div className="h-80 animate-pulse rounded-3xl border border-neutral-200/80 bg-white/70 dark:border-neutral-800/80 dark:bg-neutral-900/40" />
+      <div className="grid gap-8 lg:grid-cols-3">
+        <div className="lg:col-span-2 space-y-8">
+          <DashboardCharts metrics={metrics} />
+          <QuickActions />
         </div>
-      )}
-
-      <div className="grid gap-6 lg:grid-cols-[0.65fr_0.35fr]">
-        <div className="space-y-6">
-          <RewardHistory />
-          <LeaderboardTable />
-        </div>
-        <div className="space-y-6">
-          <WalletPanel />
+        <div className="space-y-8">
           <NotificationsPanel walletAddress={address} />
           <ElderAssistant />
         </div>

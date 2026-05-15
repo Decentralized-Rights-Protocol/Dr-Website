@@ -4,62 +4,51 @@ import { Activity, Award, GraduationCap, Scan, Share2, Wallet } from 'lucide-rea
 const actions = [
   {
     href: '/proofs/activities',
-    title: 'Submit activity proof',
-    description: 'Upload evidence of your humanitarian or civic contributions.',
+    title: 'Submit Proof',
+    description: 'Verify your contributions to the human network.',
     icon: Activity
   },
   {
     href: '/explorer',
-    title: 'Blockchain explorer',
-    description: 'Monitor the live DRP ledger, blocks, and reality layer transactions.',
+    title: 'Explorer',
+    description: 'Monitor the live DRP ledger in real-time.',
     icon: Scan
   },
   {
     href: '/rewards',
-    title: 'Review rewards',
-    description: 'Track $DeRi utility credits and $RIGHTS governance weight.',
+    title: 'Rewards',
+    description: 'Track your $DeRi and $RIGHTS earnings.',
     icon: Award
   },
   {
     href: '/learn',
-    title: 'Learn & earn',
-    description: 'Complete verified educational modules for bonus $DeRi.',
+    title: 'Learn',
+    description: 'Complete modules and earn protocol rewards.',
     icon: GraduationCap
-  },
-  {
-    href: '/community/share',
-    title: 'Share progress',
-    description: 'Broadcast your stewardship badge to X or LinkedIn.',
-    icon: Share2
   }
 ]
 
 export function QuickActions() {
   return (
-    <section className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
-      <header className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Quick actions</h3>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">Your most-used flows, arranged for rapid stewardship.</p>
-        </div>
-        <Link href="/dashboard" className="text-sm font-semibold text-primary-600 hover:text-primary-500 dark:text-primary-300">
-          Open full dashboard →
-        </Link>
+    <section className="rounded-[2.5rem] border border-white/5 bg-black/40 p-10 backdrop-blur-md">
+      <header className="mb-10">
+        <p className="text-[10px] font-cinematic text-drp-cyan opacity-60 mb-2">Protocol Access</p>
+        <h3 className="text-2xl font-bold text-white">Rapid Stewardship</h3>
       </header>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {actions.map(({ href, title, description, icon: Icon }) => (
           <Link
             key={href}
             href={href}
-            className="group flex flex-col gap-3 rounded-2xl border border-neutral-200/70 bg-gradient-to-br from-white to-neutral-50/80 p-4 transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-lg dark:border-neutral-800/70 dark:from-neutral-900/80 dark:to-neutral-950"
+            className="group relative rounded-[2rem] border border-white/5 bg-white/5 p-8 transition-all hover:bg-white/10 hover:border-white/20"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-500/10 text-primary-600 transition group-hover:bg-primary-500 group-hover:text-white dark:bg-primary-500/20 dark:text-primary-200">
-              <Icon className="h-5 w-5" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-drp-cyan/10 text-drp-cyan transition-transform group-hover:scale-110 mb-6">
+              <Icon className="h-6 w-6" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">{title}</p>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">{description}</p>
+              <p className="text-sm font-bold text-white mb-2">{title}</p>
+              <p className="text-xs text-drp-gray leading-relaxed">{description}</p>
             </div>
           </Link>
         ))}

@@ -4,11 +4,10 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
+  staticPageGenerationTimeout: 300, // Increase to 300 seconds
   images: {
     unoptimized: true,
   },
-  // Enable Turbopack compatibility with empty config if no specific turbopack options needed
-  turbopack: {},
   // Explicitly set paths to use src directory
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')],

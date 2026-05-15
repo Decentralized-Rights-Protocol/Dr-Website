@@ -1,9 +1,8 @@
 import Link from 'next/link'
-import { Download, Eye, ExternalLink, BookOpenText, ShieldCheck, Brain, Scale, Quote } from 'lucide-react'
+import { Download, Eye, ExternalLink, BookOpenText, ShieldCheck, Brain, Scale, Quote, ArrowRight } from 'lucide-react'
 import { StructuredData } from '@/components/seo/StructuredData'
 import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
 import { buildPageMetadata } from '@/lib/seo/seo'
-import * as React from 'react'
 import { WhitepaperActions } from '@/components/whitepaper/WhitepaperActions'
 
 export const metadata = buildPageMetadata({
@@ -30,45 +29,45 @@ export default function WhitepaperPage() {
       <StructuredData type="whitepaper" />
       <PremiumPage>
         <PremiumHero
-          badge="Protocol Research Portal"
-          title="DRP Whitepaper"
-          description="A rigorous technical and governance blueprint for the Decentralized Rights Protocol, including consensus architecture, sustainable economics, and quantum-safe security."
+          badge="Protocol Research"
+          title="DRP Whitepaper v0.9"
+          description="A rigorous technical blueprint for the Decentralized Rights Protocol, documenting consensus architecture, sustainable economics, and quantum-safe security."
           actions={<WhitepaperActions />}
         />
 
         <PremiumSection
-          eyebrow="Definition-first"
-          title="What the DRP whitepaper answers"
-          description="DRP is a human-rights-centered blockchain protocol. The whitepaper documents how AI-verified consensus, Proof of Status (PoST), and Proof of Activity (PoAT) work together to produce rights-aligned, auditable governance and participation."
+          eyebrow="Architecture"
+          title="The DRP Framework"
+          description="DRP is a human-rights-centered blockchain protocol. The whitepaper documents how AI-verified consensus, Proof of Status (PoST), and Proof of Activity (PoAT) work together."
         >
-          <div className="grid gap-4 md:grid-cols-3">
-            <article className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-300">
-              <strong className="text-white font-semibold">What is DRP?</strong>
-              <div className="mt-1">A proof-based trust and governance layer for human rights.</div>
-            </article>
-            <article className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-300">
-              <strong className="text-white font-semibold">How do PoST/PoAT work?</strong>
-              <div className="mt-1">Verified status and verified activity become auditable proofs.</div>
-            </article>
-            <article className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-300">
-              <strong className="text-white font-semibold">Why the focus on dignity?</strong>
-              <div className="mt-1">Governance is evaluated against rights baselines and sustainability.</div>
-            </article>
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              { title: 'The Protocol', body: 'A proof-based trust and governance layer for human rights.' },
+              { title: 'Consensus', body: 'Verified status and activity become auditable reality proofs.' },
+              { title: 'Dignity', body: 'Governance evaluated against rights baselines and sustainability.' },
+            ].map((item) => (
+              <article key={item.title} className="rounded-2xl border border-white/5 bg-white/[0.03] p-8 transition-all hover:bg-white/5">
+                <strong className="text-drp-cyan font-cinematic text-[10px] block mb-4 tracking-widest">{item.title}</strong>
+                <p className="text-sm text-drp-gray leading-relaxed">{item.body}</p>
+              </article>
+            ))}
           </div>
         </PremiumSection>
 
         <PremiumSection
           eyebrow="Research Index"
-          title="Navigate the Protocol"
-          description="A concise map of the whitepaper sections for fast investor, builder, and governance review."
+          title="Protocol Navigation"
+          description="A concise map of the whitepaper sections for investors, builders, and governance reviewers."
         >
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {sections.map((item, index) => (
               <div
                 key={item}
-                className="rounded-xl border border-white/10 bg-black/25 px-4 py-3 text-sm text-slate-200 transition hover:border-cyan-300/40 hover:bg-cyan-400/10"
+                className="rounded-2xl border border-white/5 bg-black/40 px-8 py-6 text-sm text-white transition-all hover:border-drp-cyan/40 hover:bg-drp-cyan/5 group"
               >
-                <span className="mr-2 text-cyan-200/80">{String(index + 1).padStart(2, '0')}</span>
+                <span className="mr-4 text-drp-cyan opacity-40 group-hover:opacity-100 transition-opacity font-cinematic">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
                 {item}
               </div>
             ))}
@@ -76,70 +75,31 @@ export default function WhitepaperPage() {
         </PremiumSection>
 
         <PremiumSection
-          eyebrow="Preview"
-          title="Read Before You Download"
-          description="Preview the official DRP whitepaper directly in-browser."
+          eyebrow="Interactive"
+          title="Live Preview"
+          description="Examine the official DRP whitepaper directly within the reality layer."
         >
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/35 p-3">
+          <div className="overflow-hidden rounded-[2.5rem] border border-white/5 bg-black/60 p-4 shadow-2xl">
             <iframe
               src="/whitepaper_v0.5.pdf#toolbar=1&navpanes=0&scrollbar=1"
-              className="h-[580px] w-full rounded-xl"
+              className="h-[700px] w-full rounded-[1.5rem]"
               title="DRP Whitepaper Preview"
             />
           </div>
         </PremiumSection>
 
-        <PremiumSection
-          eyebrow="Why Read"
-          title="Core Concepts and Strategic Value"
-          description="This paper is designed to align technical depth with governance legitimacy and long-term adoption clarity."
-        >
-          <div className="grid gap-4 md:grid-cols-2">
-            {[
-              { icon: ShieldCheck, title: 'Quantum-Safe by Design', body: 'NIST-aligned cryptographic posture with future-proof trust assumptions.' },
-              { icon: Brain, title: 'AI-Verified Participation', body: 'Consensus and contribution logic grounded in verified human activity.' },
-              { icon: Scale, title: 'Rights-Aligned Governance', body: 'Governance incentives built around fairness, accountability, and public impact.' },
-              { icon: BookOpenText, title: 'Deployable Architecture', body: 'Practical protocol layers and implementation pathways, not abstract theory.' },
-            ].map((item) => (
-              <article key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <item.icon className="h-5 w-5 text-cyan-200" />
-                <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
-                <p className="mt-2 text-sm text-slate-300">{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </PremiumSection>
-
-        <PremiumSection
-          eyebrow="References and Integrity"
-          title="Citations and Supporting Material"
-          description="Methodology and claims are grounded in public research, standards, and industry frameworks."
-        >
-          <div className="space-y-3 text-sm text-slate-300">
-            <p className="rounded-xl border border-white/10 bg-black/25 p-4">NIST Post-Quantum Cryptography standardization publications.</p>
-            <p className="rounded-xl border border-white/10 bg-black/25 p-4">Open blockchain governance literature and public consensus analyses.</p>
-            <p className="rounded-xl border border-white/10 bg-black/25 p-4">Sustainability and activity-based economic design references used by DRP economics.</p>
-            <div className="mt-6 rounded-2xl border border-amber-300/25 bg-amber-300/10 p-5">
-              <Quote className="h-5 w-5 text-amber-200" />
-              <p className="mt-2 text-amber-100">
-                Serious protocols are built on transparent assumptions. The DRP whitepaper is the canonical source for those assumptions.
-              </p>
-            </div>
-          </div>
-        </PremiumSection>
-
-        <section className="pb-20 pt-8">
+        <section className="pb-32 pt-16">
           <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
-            <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/15 via-blue-300/10 to-amber-300/10 p-8 text-center">
-              <h2 className="text-3xl font-semibold text-white">Continue the Deep Dive</h2>
-              <p className="mx-auto mt-4 max-w-2xl text-slate-300">
-                Use the whitepaper as your technical anchor, then move into docs and economics for implementation details.
+            <div className="rounded-[3rem] border border-white/5 bg-gradient-to-br from-drp-cyan/10 via-drp-blue/5 to-transparent p-16 text-center backdrop-blur-xl">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">Deep Dive into Economics</h2>
+              <p className="mx-auto max-w-2xl text-lg text-drp-gray mb-12">
+                After the whitepaper, explore the protocol implementation details and incentive structures.
               </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Link href="/docs" className="rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20">
+              <div className="flex flex-wrap justify-center gap-6">
+                <Link href="/docs" className="px-10 py-4 rounded-full border border-white/10 text-white font-cinematic text-xs hover:bg-white/5 transition-colors">
                   Explore Docs
                 </Link>
-                <Link href="/economics" className="rounded-xl border border-cyan-300/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">
+                <Link href="/economics" className="px-10 py-4 rounded-full bg-drp-cyan text-drp-bg font-cinematic text-xs font-bold hover:scale-105 transition-transform">
                   Review Economics
                 </Link>
               </div>

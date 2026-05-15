@@ -20,7 +20,6 @@ import type * as lib_drp_elders from "../lib/drp/elders.js";
 import type * as lib_drp_types from "../lib/drp/types.js";
 import type * as lib_time from "../lib/time.js";
 import type * as metrics from "../metrics.js";
-import type * as myFunctions from "../myFunctions.js";
 import type * as notifications from "../notifications.js";
 import type * as proofs from "../proofs.js";
 import type * as review from "../review.js";
@@ -47,7 +46,6 @@ declare const fullApi: ApiFromModules<{
   "lib/drp/types": typeof lib_drp_types;
   "lib/time": typeof lib_time;
   metrics: typeof metrics;
-  myFunctions: typeof myFunctions;
   notifications: typeof notifications;
   proofs: typeof proofs;
   review: typeof review;
