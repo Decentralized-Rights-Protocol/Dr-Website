@@ -3,16 +3,16 @@ import { StructuredData } from '@/components/seo/StructuredData'
 import { buildPageMetadata } from '@/lib/seo/seo'
 
 export const metadata = buildPageMetadata({
-  title: 'Decentralized Rights Protocol | Cinematic Web Experience',
+  title: 'Decentralized Rights Protocol | Infrastructure for Verified Rights',
   description:
-    'Experience the story of DRP. A cinematic journey through broken systems into a future of verified rights and human-centered technology.',
+    'DRP is a cinematic journey through broken systems into a future of verified rights, human-centered AI governance, and blockchain-backed dignity.',
   canonical: '/',
   ogImageUrl: 'https://decentralizedrights.com/og-cinematic.jpg',
 })
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-[#030308]">
       <StructuredData type="homepage" />
       <HumanParticleExperience />
     </main>
