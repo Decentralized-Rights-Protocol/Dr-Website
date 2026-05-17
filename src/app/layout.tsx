@@ -6,18 +6,15 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { AppProviders } from '@/components/providers'
-/* import { Inter } from "next/font/google"; */
-import { cn } from "@/lib/utils";
-import { ParticleBackground } from '@/components/particle-background'
-
-/* const inter = Inter({subsets:['latin'],variable:'--font-sans'}); */
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: {
     default: 'Decentralized Rights Protocol | Quantum-Safe Blockchain for Human Rights',
     template: '%s | Decentralized Rights Protocol',
   },
-  description: 'Decentralized Rights Protocol (DRP) is a quantum-safe blockchain platform that protects human rights through AI-verified consensus, Proof of Status (PoST), and Proof of Activity (PoAT). Built with NIST-approved post-quantum cryptography, DRP prioritizes human dignity, sustainability, and transparent governance.',
+  description:
+    'Decentralized Rights Protocol (DRP) is a quantum-safe blockchain platform that protects human rights through AI-verified consensus, Proof of Status (PoST), and Proof of Activity (PoAT). Built with NIST-approved post-quantum cryptography, DRP prioritizes human dignity, sustainability, and transparent governance.',
   keywords: [
     'decentralized rights protocol',
     'human rights infrastructure',
@@ -44,7 +41,8 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://decentralizedrights.com'),
   openGraph: {
     title: 'Decentralized Rights Protocol',
-    description: 'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
+    description:
+      'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
     url: 'https://decentralizedrights.com',
     siteName: 'Decentralized Rights Protocol',
     images: [
@@ -61,7 +59,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Decentralized Rights Protocol',
-    description: 'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
+    description:
+      'DRP — The Decentralized Rights Protocol that verifies human activity, promotes sustainability, and builds a trust-based global economy.',
     creator: '@De_Rights',
     images: ['https://decentralizedrights.com/08_IFOPE_20x30.jpg'],
   },
@@ -95,21 +94,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="font-sans">
       <head>
-        <meta name="theme-color" content="#0A0A0A" />
+        <meta name="theme-color" content="#030308" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
+        {/* Film grain noise overlay */}
+        <div className="noise-overlay" aria-hidden="true" />
         <AppProviders>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <ParticleBackground />
-              <header>
-                <Navigation />
-              </header>
-              <main className="relative flex-1 z-10">{children}</main>
-              <footer>
-                <Footer />
-              </footer>
-            </div>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} forcedTheme="dark">
+            {children}
           </ThemeProvider>
         </AppProviders>
         <Analytics />
