@@ -3,72 +3,81 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
-/* ─── Google Fonts ─────────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
 
-/* ─── Custom Keyframes ─────────────────────────────────────────────── */
-@keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes gradient-x {
-  0%, 100% { background-position: left center; }
-  50% { background-position: right center; }
-}
-
+/* Keyframes */
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Utility classes ──────────────────────────────────────────────── */
-.animate-gradient {
-  animation: gradient 4s linear infinite;
-  background-size: 200% auto;
-}
+.animate-gradient { animation: gradient 5s linear infinite; background-size: 200% auto; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-fadeup { animation: fade-up 0.6s ease-out both; }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out both;
-}
-
-/* ─── CSS Variables ────────────────────────────────────────────────── */
+/* Dark mode CSS vars (default) */
 :root {
-  --bg-primary: #030308;
-  --accent-cyan: #00d4ff;
-  --accent-purple: #7c3aed;
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255,255,255,0.5);
-  --text-muted: rgba(255,255,255,0.25);
-  --border-subtle: rgba(255,255,255,0.05);
+  --bg: #030308;
+  --bg-secondary: #0a0a14;
+  --accent: #00e5cc;
+  --accent-alt: #00bfff;
+  --text: #ffffff;
+  --text-muted: rgba(255,255,255,0.45);
+  --text-subtle: rgba(255,255,255,0.25);
+  --border: rgba(255,255,255,0.06);
 }
 
-* { box-sizing: border-box; }
+/* Light mode CSS vars */
+.light {
+  --bg: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --accent: #00c4af;
+  --accent-alt: #0099cc;
+  --text: #0a0a14;
+  --text-muted: rgba(10,10,20,0.60);
+  --text-subtle: rgba(10,10,20,0.35);
+  --border: rgba(10,10,20,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: 'Syne', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #030308; }
-::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.3); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0,212,255,0.6); }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(0,229,204,0.3); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,229,204,0.55); }
 
-::selection { background: rgba(0,212,255,0.2); color: white; }
+::selection { background: rgba(0,229,204,0.2); color: var(--text); }
+:focus-visible { outline: 2px solid #00e5cc; outline-offset: 2px; }
 
-:focus-visible { outline: 2px solid #00d4ff; outline-offset: 2px; }
+/* Film grain noise overlay */
+.noise-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+.light .noise-overlay { opacity: 0.008; }
