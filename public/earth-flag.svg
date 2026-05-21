@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="Flag of Earth, designed by Oskar Pernefeldt">
+  <title>Flag of Earth</title>
+  <desc>The International Flag of Planet Earth, designed by Oskar Pernefeldt (2015). Licensed under CC BY 4.0. flagofearth.com — Universal rights for all humanity.</desc>
   <rect width="900" height="600" fill="#006DB6"/>
   <circle cx="450" cy="300" r="220" fill="#1a9fe0" stroke="white" stroke-width="4"/>
   <ellipse cx="350" cy="240" rx="70" ry="55" fill="#2ecc71" opacity="0.9" transform="rotate(-20,350,240)"/>

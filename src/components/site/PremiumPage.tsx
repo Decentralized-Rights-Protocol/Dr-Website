@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 
-interface PremiumPageProps { children: ReactNode }
 interface PremiumSectionProps {
   id?: string
   eyebrow?: string
@@ -9,7 +8,7 @@ interface PremiumSectionProps {
   children?: ReactNode
 }
 
-export function PremiumPage({ children }: PremiumPageProps) {
+export function PremiumPage({ children }: { children: ReactNode }) {
   return (
     <div className="relative min-h-screen overflow-hidden bg-white dark:bg-[#030308] text-gray-900 dark:text-white">
       <div className="fixed inset-0 pointer-events-none">
@@ -37,7 +36,7 @@ export function PremiumHero({ badge, title, description, actions }: {
           </span>
           <h1 className="text-balance text-4xl md:text-6xl font-black tracking-tight text-gray-900 dark:text-white mb-8">{title}</h1>
           <p className="mx-auto max-w-3xl text-xl text-gray-500 dark:text-white/45 leading-relaxed mb-12">{description}</p>
-          {actions ? <div className="flex flex-wrap items-center justify-center gap-6">{actions}</div> : null}
+          {actions && <div className="flex flex-wrap items-center justify-center gap-6">{actions}</div>}
         </div>
       </PremiumContainer>
     </section>
@@ -48,13 +47,13 @@ export function PremiumSection({ id, eyebrow, title, description, children }: Pr
   return (
     <section id={id} className="py-12">
       <PremiumContainer>
-        <div className="border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-[#0a0a14] p-8 lg:p-12 transition-all hover:border-gray-200 dark:hover:border-white/12">
+        <div className="border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-[#0a0a14] p-8 lg:p-12 hover:border-gray-200 dark:hover:border-white/12 transition-all">
           <div className="max-w-4xl">
-            {eyebrow ? <p className="text-[10px] font-bold tracking-widest uppercase text-[#00e5cc] mb-4">{eyebrow}</p> : null}
+            {eyebrow && <p className="text-[10px] font-bold tracking-widest uppercase text-[#00e5cc] mb-4">{eyebrow}</p>}
             <h2 className="text-2xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">{title}</h2>
-            {description ? <p className="text-base text-gray-500 dark:text-white/45 leading-relaxed">{description}</p> : null}
+            {description && <p className="text-base text-gray-500 dark:text-white/45 leading-relaxed">{description}</p>}
           </div>
-          {children ? <div className="mt-10">{children}</div> : null}
+          {children && <div className="mt-10">{children}</div>}
         </div>
       </PremiumContainer>
     </section>
