@@ -1,34 +1,46 @@
-import { BadgeShareCard } from '@/components/portal/community/BadgeShareCard'
+'use client'
 
-export const metadata = {
-  title: 'Share Your Progress | DRP App Portal'
-}
+import Link from 'next/link'
+import { Share2, Twitter, Copy, CheckCheck, ArrowLeft } from 'lucide-react'
+import { useState } from 'react'
 
-export default function ShareProgressPage() {
+export default function SharePage() {
+  const [copied, setCopied] = useState(false)
+  const url = typeof window !== 'undefined' ? window.location.href.replace('/share', '') : 'https://app.decentralizedrights.com'
+
+  function copy() {
+    navigator.clipboard.writeText(url)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
   return (
-    <div className="space-y-6">
-      <header className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-300">Community</p>
-        <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-50">Amplify your verified impact</h1>
-        <p className="text-sm text-neutral-600 dark:text-neutral-300">
-          Generate a shareable badge once your Proof of Activity or Status is approved. Let fellow advocates know how you are advancing digital rights protections.
-        </p>
-      </header>
-
-      <BadgeShareCard
-        badgeTitle="Impact Steward – Level 3"
-        description="Use this personalised link to share your badge across X, LinkedIn, and partner channels."
-        shareUrl="https://app.decentralizedrights.com/badges/impact-steward"
-      />
-
-      <section className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
-        <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">Tips for storytelling</h2>
-        <ul className="mt-3 list-disc space-y-2 pl-6 text-sm text-neutral-600 dark:text-neutral-300">
-          <li>Highlight the community or beneficiaries impacted by your verified activity.</li>
-          <li>Share how DRP tools helped reduce verification friction or increased transparency.</li>
-          <li>Encourage peers to join via <span className="font-semibold text-primary-600 dark:text-primary-300">https://decentralizedrights.com/learn</span>.</li>
-        </ul>
-      </section>
-    </div>
+    <main className="min-h-screen bg-white dark:bg-[#030308] flex items-center justify-center px-6">
+      <div className="max-w-md w-full border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-[#0a0a14] p-8">
+        <div className="w-10 h-10 bg-[#00e5cc]/10 border border-[#00e5cc]/20 flex items-center justify-center mb-6">
+          <Share2 className="w-5 h-5 text-[#00e5cc]" />
+        </div>
+        <h1 className="text-xl font-black text-gray-900 dark:text-white mb-2">Share Your DRP Profile</h1>
+        <p className="text-sm text-gray-500 dark:text-white/40 mb-8">Share your verified rights status and activity score with the world.</p>
+        <div className="space-y-3">
+          <div className="flex gap-2">
+            <input readOnly value={url}
+              className="flex-1 px-3 py-2.5 text-xs bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-600 dark:text-white/50 font-mono" />
+            <button onClick={copy}
+              className="px-3 py-2.5 bg-[#00e5cc] text-black hover:bg-[#00bfff] transition-all">
+              {copied ? <CheckCheck className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            </button>
+          </div>
+          <a href={`https://twitter.com/intent/tweet?text=I'm+verified+on+DRP+%E2%80%94+the+Decentralized+Rights+Protocol.+%23DRP+%23HumanRights&url=${encodeURIComponent(url)}`}
+            target="_blank" rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full px-4 py-3 border border-gray-200 dark:border-white/10 text-sm text-gray-600 dark:text-white/50 hover:border-[#00e5cc]/40 hover:text-gray-900 dark:hover:text-white transition-all">
+            <Twitter className="w-4 h-4" /> Share on X / Twitter
+          </a>
+          <Link href="/profile" className="flex items-center justify-center gap-2 w-full px-4 py-3 text-xs text-gray-400 dark:text-white/30 hover:text-[#00e5cc] transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to Profile
+          </Link>
+        </div>
+      </div>
+    </main>
   )
 }
