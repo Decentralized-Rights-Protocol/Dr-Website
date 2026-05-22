@@ -28,15 +28,21 @@ export default function NewsletterTally() {
               <Sparkles className="w-3 h-3 text-[#00e5cc]" />
             </div>
             <p className="text-sm text-gray-500 dark:text-white/35 leading-relaxed max-w-sm">
-              Protocol updates, launches, and human-rights milestones — delivered straight to your inbox.
+              Protocol updates, launches, and human-rights milestones — straight to your inbox.
             </p>
           </div>
         </div>
-        <button data-tally-open="3xKMro" data-tally-layout="modal" data-tally-align-left="1"
-          data-tally-hide-title="1" data-tally-overlay="1" data-tally-emoji-text="👋" data-tally-emoji-animation="wave"
-          className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#00e5cc] text-black text-sm font-bold tracking-wide hover:bg-[#00bfff] transition-all duration-200 whitespace-nowrap">
+        <button
+          data-tally-open="3xKMro"
+          data-tally-layout="modal"
+          data-tally-align-left="1"
+          data-tally-hide-title="1"
+          data-tally-overlay="1"
+          data-tally-emoji-text="👋"
+          data-tally-emoji-animation="wave"
+          className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#00e5cc] text-black text-sm font-bold tracking-wide hover:bg-[#00bfff] transition-all whitespace-nowrap">
           <Mail className="w-4 h-4" />
-          Subscribe to Newsletter
+          Subscribe
         </button>
       </div>
     </div>
