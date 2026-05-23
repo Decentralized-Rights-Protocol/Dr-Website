@@ -30,40 +30,26 @@ const social = [
 
 const cols = [
   { title: 'Protocol', links: [
-    { label: 'About DRP', href: '/about' },
-    { label: 'How It Works', href: '/how-drp-works' },
-    { label: 'Why DRP?', href: '/why-drp' },
-    { label: 'AI Governance', href: '/ai-governance' },
-    { label: 'Quantum Security', href: '/quantum-security' },
-    { label: 'Philosophy', href: '/philosophy' },
-    { label: 'What is DRP?', href: '/what-is-drp' },
-    { label: 'FAQ', href: '/faq' },
+    { label: 'About DRP', href: '/about' }, { label: 'How It Works', href: '/how-drp-works' },
+    { label: 'Why DRP?', href: '/why-drp' }, { label: 'AI Governance', href: '/ai-governance' },
+    { label: 'Quantum Security', href: '/quantum-security' }, { label: 'Philosophy', href: '/philosophy' },
+    { label: 'What is DRP?', href: '/what-is-drp' }, { label: 'FAQ', href: '/faq' },
   ]},
   { title: 'Ecosystem', links: [
-    { label: 'Ecosystem', href: '/ecosystem' },
-    { label: 'Token Economy', href: '/tokens' },
-    { label: 'Economics', href: '/economics' },
-    { label: 'Tokenomics', href: '/economics/tokenomics' },
-    { label: 'Roadmap', href: '/roadmap' },
-    { label: 'Status', href: '/status' },
-    { label: 'DRP vs Ethereum', href: '/drp-vs-ethereum' },
-    { label: 'Human Rights Chain', href: '/human-rights-blockchain' },
+    { label: 'Ecosystem', href: '/ecosystem' }, { label: 'Token Economy', href: '/tokens' },
+    { label: 'Economics', href: '/economics' }, { label: 'Tokenomics', href: '/economics/tokenomics' },
+    { label: 'Roadmap', href: '/roadmap' }, { label: 'Status', href: '/status' },
+    { label: 'DRP vs Ethereum', href: '/drp-vs-ethereum' }, { label: 'Human Rights Chain', href: '/human-rights-blockchain' },
   ]},
   { title: 'Developers', links: [
-    { label: 'Documentation', href: '/docs' },
-    { label: 'Getting Started', href: '/docs/getting-started' },
-    { label: 'Protocol Spec', href: '/docs/protocol' },
-    { label: 'Security', href: '/docs/security' },
-    { label: 'Contributing', href: '/docs/contributing' },
-    { label: 'Examples', href: '/docs/examples' },
-    { label: 'API Reference', href: '/api' },
-    { label: 'GitHub', href: 'https://github.com/Decentralized-Rights-Protocol', external: true },
+    { label: 'Documentation', href: '/docs' }, { label: 'Getting Started', href: '/docs/getting-started' },
+    { label: 'Protocol Spec', href: '/docs/protocol' }, { label: 'Security', href: '/docs/security' },
+    { label: 'Contributing', href: '/docs/contributing' }, { label: 'Examples', href: '/docs/examples' },
+    { label: 'API Reference', href: '/api' }, { label: 'GitHub', href: 'https://github.com/Decentralized-Rights-Protocol', external: true },
   ]},
   { title: 'Learn', links: [
-    { label: 'Learn DRP', href: '/learn' },
-    { label: 'Whitepaper', href: '/whitepaper' },
-    { label: 'Glossary', href: '/glossary' },
-    { label: 'Community', href: '/community' },
+    { label: 'Learn DRP', href: '/learn' }, { label: 'Whitepaper', href: '/whitepaper' },
+    { label: 'Glossary', href: '/glossary' }, { label: 'Community', href: '/community' },
     { label: 'Blockchain Basics', href: '/lessons/what-is-blockchain' },
     { label: 'DRP Architecture', href: '/lessons/drp-architecture' },
   ]},
@@ -90,17 +76,22 @@ export function Footer() {
             <p className="text-gray-400 dark:text-white/35 text-sm leading-relaxed mb-4 max-w-[200px]">
               Decentralized Rights Protocol — verified rights for every human.
             </p>
-            {/* Flag of Earth */}
-            <div className="flex items-center gap-2 mb-2">
-              <Image src="/earth-flag.svg" alt="Flag of Earth, designed by Oskar Pernefeldt"
-                width={32} height={22} className="opacity-70 hover:opacity-100 transition-opacity rounded-sm"
-                title="Flag of Earth — Oskar Pernefeldt, 2015. CC BY 4.0" />
-              <span className="text-[10px] text-gray-400 dark:text-white/20 uppercase tracking-widest">One Planet</span>
-            </div>
+            {/* Flag of Earth — Official IFOPE */}
+            <Link href="/earth-flag" className="group block mb-2">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="relative w-[44px] h-[30px] overflow-hidden shrink-0">
+                  <Image src="/ifope/08_IFOPE_20x30.jpg"
+                    alt="International Flag of Planet Earth — Oskar Pernefeldt, 2015"
+                    fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <span className="text-[10px] text-gray-400 dark:text-white/20 uppercase tracking-widest group-hover:text-[#00e5cc] transition-colors">One Planet</span>
+              </div>
+            </Link>
             <p className="text-[9px] text-gray-400 dark:text-white/15 leading-snug mb-5 max-w-[190px]">
               Flag of Earth ©{' '}
               <a href="https://www.flagofearth.com" target="_blank" rel="noopener noreferrer"
-                className="underline hover:text-[#00e5cc] transition-colors">Oskar Pernefeldt</a>, 2015. CC BY 4.0
+                className="underline hover:text-[#00e5cc] transition-colors">Oskar Pernefeldt</a>,
+              {' 2015. CC BY 4.0'}
             </p>
             <div className="flex flex-wrap gap-2">
               {social.map(({ name, href, Icon }) => (
