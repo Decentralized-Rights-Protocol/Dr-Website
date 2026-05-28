@@ -1,294 +1,123 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import {
-  ArrowRight, BookOpen, Zap, Star, CheckCircle,
-  Trophy, Target, Award, Brain, Rocket, Shield,
-  ChevronRight, Users, Globe, Sparkles
-} from 'lucide-react'
-import { buildPageMetadata } from '@/lib/seo/seo'
-import NewsletterTally from '@/components/NewsletterTally'
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import { LESSONS, PATHS } from '@/data/lessons-index';
 
-export const metadata: Metadata = buildPageMetadata({
-  title: 'Learn DRP | Decentralized Rights Protocol',
-  description: 'Master the Decentralized Rights Protocol through 5 gamified learning paths. Earn $DeRi tokens, unlock badges, and gain on-chain credentials.',
-  canonical: '/learn',
-})
-
-const levels = [
-  { num: '01', title: 'Blockchain Foundations', color: '#00e5cc', bg: 'from-[#00e5cc]/10 to-[#00e5cc]/5', border: 'border-[#00e5cc]/30', href: '/lessons/what-is-blockchain', xp: 80, reward: '80 $DeRi', badge: '\uD83D\uDD17', badgeLabel: 'Chain Explorer',
-    lessons: [
-      { title: 'What is Blockchain?', duration: '25m', reward: '20', slug: 'what-is-blockchain' },
-      { title: 'Cryptography & Hashing', duration: '20m', reward: '15', slug: 'cryptography-and-hashing' },
-      { title: 'Consensus Mechanisms', duration: '25m', reward: '20', slug: 'consensus-mechanisms' },
-      { title: 'Smart Contracts 101', duration: '30m', reward: '25', slug: 'smart-contracts-101' },
-    ],
-    desc: 'Start here. Understand the fundamentals that power DRP and every modern blockchain.',
-  },
-  { num: '02', title: 'DRP Core Protocol', color: '#00bfff', bg: 'from-[#00bfff]/10 to-[#00bfff]/5', border: 'border-[#00bfff]/30', href: '/lessons/drp-architecture', xp: 100, reward: '95 $DeRi', badge: '\u26A1', badgeLabel: 'Protocol Scholar',
-    lessons: [
-      { title: 'DRP Architecture', duration: '25m', reward: '20', slug: 'drp-architecture' },
-      { title: 'Activity Proofs (PoAT)', duration: '35m', reward: '30', slug: 'activity-proofs' },
-      { title: 'Status Proofs (PoST)', duration: '25m', reward: '20', slug: 'post-poat-consensus' },
-      { title: 'Elder Quorum System', duration: '30m', reward: '25', slug: 'elder-quorum-system' },
-    ],
-    desc: 'Go deep on what makes DRP unique \u2014 the proof system, verification layer, and consensus.',
-  },
-  { num: '03', title: 'Building on DRP', color: '#a855f7', bg: 'from-purple-500/10 to-purple-500/5', border: 'border-purple-500/30', href: '/lessons/drp-development-kit', xp: 120, reward: '110 $DeRi', badge: '\uD83D\uDEE0\uFE0F', badgeLabel: 'DRP Builder',
-    lessons: [
-      { title: 'DRP Development Kit', duration: '30m', reward: '25', slug: 'drp-development-kit' },
-      { title: 'Building dApps', duration: '40m', reward: '35', slug: 'building-dapps' },
-      { title: 'Contributing to DRP', duration: '25m', reward: '20', slug: 'contributing-to-drp' },
-      { title: 'Testing & Deployment', duration: '35m', reward: '30', slug: 'testing-and-deployment' },
-    ],
-    desc: 'Start building. Integrate DRP proofs into your app and ship to testnet.',
-  },
-  { num: '04', title: 'Real-World Applications', color: '#f59e0b', bg: 'from-amber-500/10 to-amber-500/5', border: 'border-amber-500/30', href: '/lessons/identity-access-management', xp: 140, reward: '130 $DeRi', badge: '\uD83C\uDF0D', badgeLabel: 'Impact Pioneer',
-    lessons: [
-      { title: 'Identity & Access', duration: '30m', reward: '25', slug: 'identity-access-management' },
-      { title: 'Supply Chain', duration: '35m', reward: '30', slug: 'supply-chain-applications' },
-      { title: 'Cross-chain Interop', duration: '40m', reward: '35', slug: 'cross-chain-interoperability' },
-      { title: 'Enterprise Integration', duration: '35m', reward: '40', slug: 'enterprise-integration' },
-    ],
-    desc: 'See DRP in the wild. Real use cases across agriculture, healthcare, governance, and beyond.',
-  },
-  { num: '05', title: 'Advanced DRP', color: '#ffd700', bg: 'from-yellow-400/10 to-yellow-400/5', border: 'border-yellow-400/30', href: '/lessons/advanced-drp-concepts', xp: 200, reward: '200 $DeRi', badge: '\uD83D\uDC51', badgeLabel: 'DRP Elder',
-    lessons: [
-      { title: 'Advanced Concepts', duration: '45m', reward: '50', slug: 'advanced-drp-concepts' },
-      { title: 'Economic Models', duration: '40m', reward: '45', slug: 'economic-models' },
-      { title: 'Governance Mechanisms', duration: '35m', reward: '50', slug: 'governance-mechanisms' },
-      { title: 'Future of DRP', duration: '30m', reward: '55', slug: 'future-of-drp' },
-    ],
-    desc: 'For contributors and researchers. Go to the frontier of rights infrastructure.',
-  },
-]
+const TOTAL_XP = Object.values(LESSONS).reduce((sum, l) => sum + l.xp, 0);
+const TOTAL_DERI = Object.values(LESSONS).reduce((sum, l) => sum + l.deri, 0);
+const TOTAL_LESSONS = Object.keys(LESSONS).length;
 
 export default function LearnPage() {
+  const [activePath, setActivePath] = useState<number | null>(null);
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030308] text-gray-900 dark:text-white pt-20">
-      {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 py-20 border-b border-gray-100 dark:border-white/5">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-[#00e5cc]/40 bg-[#00e5cc]/8 mb-8">
-            <BookOpen className="w-3.5 h-3.5 text-[#00e5cc]" />
-            <span className="text-[#00e5cc] text-xs font-medium tracking-widest uppercase">Learning Hub</span>
+    <div className="min-h-screen text-white" style={{ background: 'linear-gradient(160deg,#050d1a,#0d1117)' }}>
+      <div className="relative overflow-hidden border-b border-white/10">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-10 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl" style={{ background: 'radial-gradient(#7c3aed,transparent)' }} />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-10 blur-3xl" style={{ background: 'radial-gradient(#0ea5e9,transparent)' }} />
+        </div>
+        <div className="relative max-w-5xl mx-auto px-4 py-16 sm:py-20 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#7c3aed44] bg-[#7c3aed11] text-[#a78bfa] text-sm font-semibold mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />DRP Learn — Gamified Education
           </div>
-          <h1 className="text-5xl sm:text-6xl font-black text-gray-900 dark:text-white leading-tight mb-6">
-            Learn DRP.<br /><span className="text-[#00e5cc]">Earn as you go.</span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
+            <span className="text-white">Master </span>
+            <span style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9,#10b981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Blockchain & DRP</span>
           </h1>
-          <p className="text-gray-600 dark:text-white/50 text-xl leading-relaxed mb-10 max-w-2xl">
-            Five structured learning paths, on-chain credentials, and real token rewards for every milestone.
+          <p className="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            From blockchain basics to advanced DRP architecture — earn XP, $DeRi tokens, and on-chain credentials with every lesson.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/lessons/what-is-blockchain"
-              className="group inline-flex items-center gap-3 px-7 py-4 bg-[#00e5cc] text-black font-bold text-sm tracking-wide hover:bg-[#00bfff] transition-all">
-              <Rocket className="w-4 h-4" /> Start Learning <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="https://app.decentralizedrights.com" target="_blank"
-              className="inline-flex items-center gap-3 px-7 py-4 border border-gray-200 dark:border-white/15 text-gray-600 dark:text-white/60 text-sm hover:border-[#00e5cc]/40 hover:text-gray-900 dark:hover:text-white transition-all">
-              <Trophy className="w-4 h-4" /> Track Progress in App
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="border-b border-gray-100 dark:border-white/5">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-100 dark:bg-white/5">
-            {[
-              { label: 'Lessons', value: '20', icon: BookOpen },
-              { label: 'Learning Paths', value: '5', icon: Target },
-              { label: '$DeRi to Earn', value: '615', icon: Zap },
-              { label: 'On-chain Badges', value: '5', icon: Award },
-            ].map(({ label, value, icon: Icon }) => (
-              <div key={label} className="bg-white dark:bg-[#030308] px-8 py-7 flex items-center gap-4">
-                <Icon className="w-5 h-5 text-[#00e5cc] shrink-0" />
-                <div>
-                  <div className="text-2xl font-black text-gray-900 dark:text-white">{value}</div>
-                  <div className="text-xs text-gray-400 dark:text-white/30 uppercase tracking-widest">{label}</div>
+          <div className="flex flex-wrap justify-center gap-5 mb-10">
+            {[{ icon: '📚', value: TOTAL_LESSONS, label: 'Lessons', color: '#0ea5e9' },{ icon: '⚡', value: TOTAL_XP.toLocaleString(), label: 'Total XP', color: '#f59e0b' },{ icon: '🪙', value: `${TOTAL_DERI} $DeRi`, label: 'Earnable', color: '#10b981' },{ icon: '🏆', value: '5', label: 'Certificates', color: '#7c3aed' }].map(s => (
+              <div key={s.label} className="flex items-center gap-3 px-5 py-3 rounded-2xl border border-white/10 bg-white/5">
+                <span className="text-2xl">{s.icon}</span>
+                <div className="text-left">
+                  <div className="font-extrabold text-lg" style={{ color: s.color }}>{s.value}</div>
+                  <div className="text-xs text-slate-500">{s.label}</div>
                 </div>
               </div>
             ))}
           </div>
+          <Link href="/lessons/what-is-blockchain" className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-white text-base transition-all hover:scale-105 active:scale-95 shadow-2xl" style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9)', boxShadow: '0 8px 32px #7c3aed55' }}>
+            Start Learning → Begin Path 1
+          </Link>
         </div>
-      </section>
+      </div>
 
-      {/* Why learn */}
-      <section className="border-b border-gray-100 dark:border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="flex items-center gap-2 mb-10">
-            <Sparkles className="w-4 h-4 text-[#00e5cc]" />
-            <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/30">Why Learn with DRP</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Zap, title: 'Earn $DeRi', desc: 'Every completed lesson rewards you with $DeRi utility tokens.', color: '#00e5cc' },
-              { icon: Star, title: 'XP & Badges', desc: 'Level up with XP, achievement badges, and unique role titles.', color: '#ffd700' },
-              { icon: CheckCircle, title: 'On-chain Creds', desc: 'Completed levels create verifiable proof of knowledge stored on-chain.', color: '#00bfff' },
-              { icon: Trophy, title: 'Unlock Features', desc: 'Learning progress unlocks app features and Elder-tier privileges.', color: '#a855f7' },
-            ].map(({ icon: Icon, title, desc, color }) => (
-              <div key={title} className="p-6 border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-[#0a0a14] hover:border-[#00e5cc]/30 transition-all">
-                <div className="w-10 h-10 flex items-center justify-center mb-5 border" style={{ borderColor: `${color}30`, backgroundColor: `${color}10` }}>
-                  <Icon className="w-5 h-5" style={{ color }} />
-                </div>
-                <h3 className="text-gray-900 dark:text-white font-bold mb-2 text-sm">{title}</h3>
-                <p className="text-xs text-gray-500 dark:text-white/35 leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
+      <div className="max-w-5xl mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">5 Learning Paths</h2>
+          <p className="text-slate-400 max-w-xl mx-auto">Progress through each path in order, or jump to what interests you. Every lesson earns XP and $DeRi tokens.</p>
         </div>
-      </section>
-
-      {/* Learning Paths */}
-      <section className="border-b border-gray-100 dark:border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="flex items-center gap-2 mb-10">
-            <Brain className="w-4 h-4 text-[#00e5cc]" />
-            <h2 className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/30">Learning Paths</h2>
-          </div>
-          <div className="space-y-6">
-            {levels.map((level) => (
-              <div key={level.num} className={`border ${level.border} bg-gradient-to-r ${level.bg} transition-all`}>
-                <div className="p-6 sm:p-8">
-                  <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                    <div className="lg:w-80 shrink-0">
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="text-4xl font-black" style={{ color: level.color, opacity: 0.25 }}>{level.num}</span>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-lg">{level.badge}</span>
-                            <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: level.color }}>{level.badgeLabel}</span>
-                          </div>
-                          <h3 className="text-xl font-black text-gray-900 dark:text-white">{level.title}</h3>
+        <div className="space-y-5">
+          {PATHS.map((path) => {
+            const pathLessons = path.lessons.map(slug => LESSONS[slug]).filter(Boolean);
+            const pathXP = pathLessons.reduce((sum, l) => sum + l.xp, 0);
+            const pathDeri = pathLessons.reduce((sum, l) => sum + l.deri, 0);
+            const isOpen = activePath === path.id;
+            return (
+              <div key={path.id} className="rounded-2xl border overflow-hidden transition-all" style={{ borderColor: path.color + (isOpen ? '66' : '22'), background: `linear-gradient(135deg,${path.color}0a,#0d111708)` }}>
+                <button className="w-full p-6 text-left" onClick={() => setActivePath(isOpen ? null : path.id)}>
+                  <div className="flex items-center justify-between gap-4 flex-wrap">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shrink-0 border" style={{ background: path.color+'22', borderColor: path.color+'44' }}>{path.icon}</div>
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-xs font-mono text-slate-500">PATH {path.id}</span>
+                          <span className="text-xs px-2 py-0.5 rounded-full font-semibold" style={{ background: path.color+'22', color: path.color }}>{pathLessons[0]?.difficulty}</span>
+                        </div>
+                        <h3 className="font-extrabold text-white text-lg">{path.name}</h3>
+                        <div className="flex items-center gap-3 mt-1 text-xs text-slate-400">
+                          <span>{path.lessons.length} lessons</span><span>·</span>
+                          <span className="text-[#f59e0b]">⚡ {pathXP} XP</span><span>·</span>
+                          <span className="text-[#10b981]">+{pathDeri} $DeRi</span>
                         </div>
                       </div>
-                      <p className="text-sm text-gray-500 dark:text-white/40 leading-relaxed mb-4">{level.desc}</p>
-                      <div className="flex items-center gap-4 mb-5">
-                        <div className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5" style={{ color: level.color }} /><span className="text-xs font-bold" style={{ color: level.color }}>{level.reward}</span></div>
-                        <div className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-[#ffd700]" /><span className="text-xs text-gray-400 dark:text-white/30">{level.xp} XP</span></div>
-                        <div className="flex items-center gap-1.5"><BookOpen className="w-3.5 h-3.5 text-gray-400 dark:text-white/30" /><span className="text-xs text-gray-400 dark:text-white/30">{level.lessons.length} lessons</span></div>
-                      </div>
-                      <Link href={level.href} className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold tracking-wide text-black transition-all" style={{ backgroundColor: level.color }}>
-                        Start Path {level.num} <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
                     </div>
-                    <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {level.lessons.map((lesson, lIdx) => (
-                        <Link key={lesson.slug} href={`/lessons/${lesson.slug}`}
-                          className="flex items-center gap-3 p-3.5 bg-white/60 dark:bg-[#030308]/50 border border-white/40 dark:border-white/5 hover:border-[#00e5cc]/30 transition-all">
-                          <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-black shrink-0"
-                            style={{ backgroundColor: `${level.color}20`, color: level.color }}>{lIdx + 1}</div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-sm font-semibold text-gray-900 dark:text-white truncate hover:text-[#00e5cc] transition-colors">{lesson.title}</div>
-                            <div className="flex items-center gap-2 mt-0.5">
-                              <span className="text-[11px] text-gray-400 dark:text-white/25">{lesson.duration}</span>
-                              <span className="text-[11px]" style={{ color: level.color }}>+{lesson.reward} $DeRi</span>
-                            </div>
+                    <div className="flex items-center gap-3">
+                      <Link href={`/lessons/${path.lessons[0]}`} onClick={e => e.stopPropagation()} className="px-4 py-2 rounded-xl font-semibold text-white text-sm transition-all hover:scale-105 shadow" style={{ background: `linear-gradient(135deg,${path.color},${path.color}cc)` }}>Start</Link>
+                      <span className="text-slate-500 text-sm transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
+                    </div>
+                  </div>
+                </button>
+                {isOpen && (
+                  <div className="px-6 pb-6 grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-white/5 pt-5">
+                    {pathLessons.map((lesson, li) => (
+                      <Link key={lesson.slug} href={`/lessons/${lesson.slug}`} className="flex items-start gap-3 p-4 rounded-xl border border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06] transition-all group">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 mt-0.5" style={{ background: path.color+'22', color: path.color }}>{li+1}</div>
+                        <div className="min-w-0">
+                          <div className="font-semibold text-white text-sm truncate">{lesson.title}</div>
+                          <div className="text-xs text-slate-500 mt-0.5 line-clamp-2">{lesson.subtitle}</div>
+                          <div className="flex items-center gap-2 mt-1.5 text-xs">
+                            <span className="text-slate-500">⏱ {lesson.duration}</span>
+                            <span className="text-[#f59e0b]">+{lesson.xp} XP</span>
+                            <span className="text-[#10b981]">+{lesson.deri} $DeRi</span>
                           </div>
-                          <ChevronRight className="w-3.5 h-3.5 text-gray-300 dark:text-white/20 shrink-0" />
-                        </Link>
-                      ))}
-                    </div>
+                        </div>
+                        <span className="text-slate-600 group-hover:text-slate-300 transition-colors ml-auto shrink-0 mt-1">→</span>
+                      </Link>
+                    ))}
                   </div>
-                </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-16 rounded-3xl p-8 sm:p-10 border border-[#7c3aed33] text-center" style={{ background: 'linear-gradient(135deg,#7c3aed12,#0ea5e908,#10b98108)' }}>
+          <h3 className="text-2xl font-extrabold text-white mb-3">Learn. Earn. Govern.</h3>
+          <p className="text-slate-400 max-w-2xl mx-auto mb-8">Every completed lesson earns you XP and $DeRi tokens. Complete all 5 paths to receive an on-chain DRP Learning Certificate — which counts toward your Activity Score and Elder eligibility.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            {[{ icon: '🧠', title: 'Learn', desc: 'Complete lessons across 5 progressive paths' },{ icon: '⚡', title: 'Earn', desc: `${TOTAL_XP.toLocaleString()} XP and ${TOTAL_DERI} $DeRi tokens available` },{ icon: '👑', title: 'Govern', desc: 'On-chain certificate contributes to Elder eligibility' }].map(item => (
+              <div key={item.title} className="rounded-2xl p-5 border border-white/10 bg-white/5">
+                <div className="text-3xl mb-2">{item.icon}</div>
+                <div className="font-bold text-white mb-1">{item.title}</div>
+                <div className="text-xs text-slate-400 leading-relaxed">{item.desc}</div>
               </div>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* AI Tutor + Leaderboard */}
-      <section className="border-b border-gray-100 dark:border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <div className="flex items-center gap-2 mb-3"><Trophy className="w-4 h-4 text-[#ffd700]" /><span className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/30">Global Leaderboard</span></div>
-              <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-4">Top Learners Worldwide</h2>
-              <p className="text-gray-500 dark:text-white/40 text-sm leading-relaxed mb-8">Compete globally, earn XP, and claim your spot on the on-chain leaderboard.</p>
-              <div className="space-y-2">
-                {[
-                  { rank: 1, name: 'Elder_Ghana', xp: 2480, badge: '\uD83D\uDC51' },
-                  { rank: 2, name: 'ChainBuilder_KE', xp: 1920, badge: '\uD83D\uDEE0\uFE0F' },
-                  { rank: 3, name: 'DRP_Pioneer', xp: 1650, badge: '\u26A1' },
-                  { rank: 4, name: 'RightsNode_NG', xp: 1240, badge: '\uD83D\uDD17' },
-                  { rank: 5, name: 'ProtocolSage', xp: 980, badge: '\uD83C\uDF0D' },
-                ].map((e) => (
-                  <div key={e.rank} className={`flex items-center gap-4 p-4 border ${e.rank === 1 ? 'border-[#ffd700]/30 bg-[#ffd700]/5' : 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-[#0a0a14]'}`}>
-                    <span className={`text-sm font-black w-6 text-center ${e.rank === 1 ? 'text-[#ffd700]' : 'text-gray-400 dark:text-white/25'}`}>#{e.rank}</span>
-                    <span className="text-lg">{e.badge}</span>
-                    <span className="flex-1 text-sm font-semibold text-gray-900 dark:text-white">{e.name}</span>
-                    <div className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-[#ffd700]" /><span className="text-xs font-bold text-gray-600 dark:text-white/50">{e.xp.toLocaleString()} XP</span></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="border border-[#00e5cc]/20 bg-gradient-to-br from-[#00e5cc]/5 via-transparent to-[#00bfff]/5 p-8">
-              <div className="w-12 h-12 bg-[#00e5cc]/10 border border-[#00e5cc]/20 flex items-center justify-center mb-6"><Brain className="w-6 h-6 text-[#00e5cc]" /></div>
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#00e5cc]/10 border border-[#00e5cc]/20 mb-4"><Sparkles className="w-3 h-3 text-[#00e5cc]" /><span className="text-[10px] font-bold tracking-widest uppercase text-[#00e5cc]">AI-Powered</span></div>
-              <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-3">Meet Your AI Tutor</h3>
-              <p className="text-gray-500 dark:text-white/40 text-sm leading-relaxed mb-6">Every lesson comes with an intelligent AI tutor that explains concepts in plain language and answers your questions.</p>
-              <ul className="space-y-3 mb-8">
-                {['Ask anything \u2014 no question is too basic','Diagrams explained in plain language','Quiz hints without spoiling the answer','DRP-specific context in every answer'].map((f) => (
-                  <li key={f} className="flex items-center gap-2.5 text-sm text-gray-600 dark:text-white/50"><CheckCircle className="w-4 h-4 text-[#00e5cc] shrink-0" />{f}</li>
-                ))}
-              </ul>
-              <Link href="/lessons/what-is-blockchain" className="inline-flex items-center gap-2 px-6 py-3 bg-[#00e5cc] text-black font-bold text-sm hover:bg-[#00bfff] transition-all">
-                <Brain className="w-4 h-4" /> Try AI Tutor Now
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Badges */}
-      <section className="border-b border-gray-100 dark:border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center gap-2 mb-3"><Award className="w-4 h-4 text-[#00e5cc]" /><span className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/30">Achievements</span></div>
-            <h2 className="text-3xl font-black text-gray-900 dark:text-white">Unlock Legendary Badges</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {[
-              { emoji: '\uD83D\uDD17', name: 'Chain Explorer', desc: 'Complete Path 01', color: '#00e5cc' },
-              { emoji: '\u26A1', name: 'Protocol Scholar', desc: 'Complete Path 02', color: '#00bfff' },
-              { emoji: '\uD83D\uDEE0\uFE0F', name: 'DRP Builder', desc: 'Complete Path 03', color: '#a855f7' },
-              { emoji: '\uD83C\uDF0D', name: 'Impact Pioneer', desc: 'Complete Path 04', color: '#f59e0b' },
-              { emoji: '\uD83D\uDC51', name: 'DRP Elder', desc: 'All 5 Paths', color: '#ffd700' },
-            ].map((badge) => (
-              <div key={badge.name} className="flex flex-col items-center p-6 border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-[#0a0a14] hover:border-[#00e5cc]/30 transition-all text-center">
-                <span className="text-4xl mb-3">{badge.emoji}</span>
-                <div className="text-xs font-bold text-gray-900 dark:text-white mb-1">{badge.name}</div>
-                <div className="text-[11px] text-gray-400 dark:text-white/25">{badge.desc}</div>
-                <div className="mt-3 w-full h-0.5" style={{ background: `linear-gradient(to right, transparent, ${badge.color}60, transparent)` }} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Links */}
-      <section className="border-b border-gray-100 dark:border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {[
-              { href: '/community', icon: Users, title: 'Join Community', desc: 'Connect with learners, builders, and Elders on Discord.', cta: 'Explore Community' },
-              { href: '/whitepaper', icon: Shield, title: 'Read the Whitepaper', desc: 'The full technical specification of the Decentralized Rights Protocol.', cta: 'Read Whitepaper' },
-              { href: '/glossary', icon: Globe, title: 'DRP Glossary', desc: 'Every DRP term, explained clearly. Your reference while you learn.', cta: 'Open Glossary' },
-            ].map(({ href, icon: Icon, title, desc, cta }) => (
-              <Link key={href} href={href} className="p-6 border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-[#0a0a14] hover:border-[#00e5cc]/30 transition-all">
-                <Icon className="w-5 h-5 text-[#00e5cc] mb-4" />
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">{title}</h3>
-                <p className="text-xs text-gray-500 dark:text-white/35 leading-relaxed">{desc}</p>
-                <div className="flex items-center gap-1 mt-4 text-[#00e5cc] text-xs font-semibold">{cta} <ChevronRight className="w-3.5 h-3.5" /></div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <NewsletterTally />
-      </section>
-    </main>
-  )
+      </div>
+    </div>
+  );
 }
