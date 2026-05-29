@@ -94,3 +94,19 @@ body {
   background-size: 128px 128px;
 }
 html:not(.dark) .noise-overlay { opacity: 0.008; }
+
+@layer base {
+  :root {
+    --background: 5 13 26;
+    --foreground: 255 255 255;
+    color-scheme: dark;
+  }
+  html {
+    background-color: #050d1a;
+    color: white;
+  }
+  body {
+    background-color: #050d1a;
+    min-height: 100vh;
+  }
+}
