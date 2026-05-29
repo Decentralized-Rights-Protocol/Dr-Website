@@ -65,15 +65,15 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-gray-100 dark:border-white/5 bg-white dark:bg-[#030308] text-gray-900 dark:text-white">
+    <footer className="border-t border-white/5 bg-[#030308] text-white">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10">
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5 group">
               <Image src="/logo.png" alt="DRP" width={28} height={28} className="opacity-80 group-hover:opacity-100 transition-opacity" />
-              <span className="font-bold tracking-widest text-xs uppercase text-gray-900 dark:text-white">DRP</span>
+              <span className="font-bold tracking-widest text-xs uppercase text-white">DRP</span>
             </Link>
-            <p className="text-gray-400 dark:text-white/35 text-sm leading-relaxed mb-4 max-w-[200px]">
+            <p className="text-white/40 text-sm leading-relaxed mb-4 max-w-[200px]">
               Decentralized Rights Protocol — verified rights for every human.
             </p>
             {/* Flag of Earth — Official IFOPE */}
@@ -84,10 +84,10 @@ export function Footer() {
                     alt="International Flag of Planet Earth — Oskar Pernefeldt, 2015"
                     fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <span className="text-[10px] text-gray-400 dark:text-white/20 uppercase tracking-widest group-hover:text-[#00e5cc] transition-colors">One Planet</span>
+                <span className="text-[10px] text-white/25 uppercase tracking-widest group-hover:text-[#00e5cc] transition-colors">One Planet</span>
               </div>
             </Link>
-            <p className="text-[9px] text-gray-400 dark:text-white/15 leading-snug mb-5 max-w-[190px]">
+            <p className="text-[9px] text-white/20 leading-snug mb-5 max-w-[190px]">
               Flag of Earth ©{' '}
               <a href="https://www.flagofearth.com" target="_blank" rel="noopener noreferrer"
                 className="underline hover:text-[#00e5cc] transition-colors">Oskar Pernefeldt</a>,
@@ -96,7 +96,7 @@ export function Footer() {
             <div className="flex flex-wrap gap-2">
               {social.map(({ name, href, Icon }) => (
                 <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name}
-                  className="w-9 h-9 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-400 dark:text-white/35 hover:border-[#00e5cc]/50 hover:text-[#00e5cc] transition-all">
+                  className="w-9 h-9 border border-white/10 flex items-center justify-center text-white/35 hover:border-[#00e5cc]/50 hover:text-[#00e5cc] transition-all">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
@@ -105,13 +105,13 @@ export function Footer() {
 
           {cols.map((col) => (
             <div key={col.title}>
-              <h4 className="text-xs font-bold tracking-widest uppercase text-gray-400 dark:text-white/25 mb-5">{col.title}</h4>
+              <h4 className="text-xs font-bold tracking-widest uppercase text-white/30 mb-5">{col.title}</h4>
               <ul className="space-y-2.5">
                 {col.links.map((l) => (
                   <li key={l.label}>
                     <Link href={l.href} target={(l as any).external ? '_blank' : undefined}
                       rel={(l as any).external ? 'noopener noreferrer' : undefined}
-                      className="text-sm text-gray-500 dark:text-white/35 hover:text-[#00e5cc] transition-colors flex items-center gap-1">
+                      className="text-sm text-white/40 hover:text-[#00e5cc] transition-colors flex items-center gap-1">
                       {l.label}
                       {(l as any).external && <ExternalLink className="w-2.5 h-2.5 opacity-40" />}
                     </Link>
@@ -122,17 +122,17 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-14 pt-10 border-t border-gray-100 dark:border-white/5">
+        <div className="mt-14 pt-10 border-t border-white/5">
           <NewsletterTally />
         </div>
       </div>
 
-      <div className="border-t border-gray-100 dark:border-white/5">
+      <div className="border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-400 dark:text-white/20">
+          <p className="text-xs text-white/25">
             © {new Date().getFullYear()} Decentralized Rights Protocol. Human Rights Infrastructure for the AI Age.
           </p>
-          <div className="flex items-center gap-6 text-xs text-gray-400 dark:text-white/20">
+          <div className="flex items-center gap-6 text-xs text-white/25">
             <Link href="/legal/privacy-policy" className="hover:text-[#00e5cc] transition-colors">Privacy</Link>
             <Link href="/legal/terms-of-service" className="hover:text-[#00e5cc] transition-colors">Terms</Link>
             <Link href="/status" className="hover:text-[#00e5cc] transition-colors flex items-center gap-1.5">
