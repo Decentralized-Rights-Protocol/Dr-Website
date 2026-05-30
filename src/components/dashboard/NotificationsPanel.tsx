@@ -9,7 +9,8 @@ interface NotificationsPanelProps {
 }
 
 export function NotificationsPanel({ walletAddress }: NotificationsPanelProps) {
-  const notifications = useQuery(api.notifications.listNotifications, { walletAddress })
+  const normalizedAddress = walletAddress?.toLowerCase() || null
+  const notifications = useQuery(api.notifications.listNotifications, { walletAddress: normalizedAddress })
 
   return (
     <section className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">

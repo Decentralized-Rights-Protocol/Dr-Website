@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { mutation, query, internalMutation } from "./_generated/server";
 import { api, internal } from "./_generated/api";
+import { normalizeWallet } from "./lib/domain";
 
 /**
  * Submit a digital activity for verification and reward.
@@ -130,13 +131,13 @@ export const getActivities = query({
     if (identity) {
       const user = await ctx.db
         .query("users")
-        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", identity.address!))
+        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", normalizeWallet(identity.address!)))
         .unique();
       if (user) userId = user._id;
     } else if (args.walletAddress) {
       const user = await ctx.db
         .query("users")
-        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", args.walletAddress!))
+        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", normalizeWallet(args.walletAddress!)))
         .unique();
       if (user) userId = user._id;
     }
@@ -162,13 +163,13 @@ export const getUserBalance = query({
     if (identity) {
       const user = await ctx.db
         .query("users")
-        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", identity.address!))
+        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", normalizeWallet(identity.address!)))
         .unique();
       if (user) userId = user._id;
     } else if (args.walletAddress) {
       const user = await ctx.db
         .query("users")
-        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", args.walletAddress!))
+        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", normalizeWallet(args.walletAddress!)))
         .unique();
       if (user) userId = user._id;
     }
