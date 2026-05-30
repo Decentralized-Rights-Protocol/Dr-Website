@@ -26,7 +26,7 @@ function ActivityRow({ tx }: { tx: any }) {
 
 export default function ExplorerPage() {
   const [search, setSearch] = useState('')
-  const activities = useQuery(api.proofs.listProofs, { limit: 50 })
+  const activities = useQuery(api.proofs.getExplorerProofs, { limit: 50 })
 
   const filtered = (activities ?? []).filter((a: any) =>
     !search || JSON.stringify(a).toLowerCase().includes(search.toLowerCase())
