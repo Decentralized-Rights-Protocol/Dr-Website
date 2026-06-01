@@ -11,19 +11,19 @@ function RankRow({ entry, rank }: { entry: any; rank: number }) {
       <span className={`text-sm font-black w-8 text-center ${rank === 1 ? 'text-[#ffd700]' : rank === 2 ? 'text-gray-400' : rank === 3 ? 'text-amber-600' : 'text-gray-400 dark:text-white/25'}`}>#{rank}</span>
       {rank === 1 ? <Crown className="w-4 h-4 text-[#ffd700] shrink-0" /> : rank <= 3 ? <Medal className="w-4 h-4 text-gray-400 shrink-0" /> : <div className="w-4" />}
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{entry.displayName ?? entry.walletAddress?.slice(0, 12) + '...' ?? 'Anonymous'}</p>
-        <p className="text-xs text-gray-400 dark:text-white/25 font-mono">{entry.walletAddress?.slice(0, 8)}...{entry.walletAddress?.slice(-4)}</p>
+        <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{entry.displayName || (entry.address ? entry.address.slice(0, 12) + '...' : 'Anonymous')}</p>
+        <p className="text-xs text-gray-400 dark:text-white/25 font-mono">{entry.address?.slice(0, 8)}...{entry.address?.slice(-4)}</p>
       </div>
       <div className="flex items-center gap-1.5 shrink-0">
         <Star className="w-3.5 h-3.5 text-[#ffd700]" />
-        <span className="text-sm font-bold text-gray-900 dark:text-white">{entry.activityScore?.toFixed(0) ?? 0}</span>
+        <span className="text-sm font-bold text-gray-900 dark:text-white">{entry.impactScore?.toFixed(0) ?? 0}</span>
       </div>
     </div>
   )
 }
 
 export default function LeaderboardPage() {
-  const leaderboard = useQuery(api.leaderboard.getLeaderboard)
+  const leaderboard = useQuery(api.metrics.listLeaderboard)
   return (
     <div className="space-y-6">
       <div>

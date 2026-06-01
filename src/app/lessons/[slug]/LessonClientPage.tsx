@@ -1,25 +1,49 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  CheckCircle2, 
+  Clock, 
+  Award, 
+  BookOpen, 
+  ArrowLeft, 
+  ArrowRight, 
+  Trophy, 
+  Zap, 
+  Shield,
+  MessageSquare,
+  ChevronRight,
+  Sparkles,
+  Layers,
+  Activity,
+  Code
+} from 'lucide-react';
 import type { Lesson, LessonSection } from '@/data/lessons-index';
+import { cn } from '@/lib/utils';
+
+// ─── Diagram Components ──────────────────────────────────────────────
 
 function FlowDiagram({ data }: { data: any }) {
   const nodes = data.nodes || [];
   const edges = data.edges || [];
   return (
-    <div className="overflow-x-auto pb-2">
-      <div className="flex flex-wrap items-center justify-center gap-2 min-w-max mx-auto px-2">
+    <div className="overflow-x-auto pb-4 custom-scrollbar">
+      <div className="flex flex-wrap items-center justify-center gap-4 min-w-max mx-auto px-4 py-6">
         {nodes.map((node: any, i: number) => (
-          <div key={node.id} className="flex items-center gap-2">
-            <div className="rounded-xl px-4 py-3 text-center font-semibold text-white text-sm min-w-[110px] transition-transform hover:scale-105"
-              style={{ background: `linear-gradient(135deg, ${node.color}, ${node.color}cc)`, boxShadow: `0 4px 20px ${node.color}44` }}>
-              <div className="whitespace-pre-line leading-tight text-sm">{node.label}</div>
-              {node.sublabel && <div className="text-xs mt-1 opacity-70 whitespace-pre-line">{node.sublabel}</div>}
-            </div>
+          <div key={node.id} className="flex items-center gap-4">
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              className="rounded-2xl px-6 py-4 text-center border border-white/10 bg-white/5 backdrop-blur-md min-w-[140px] shadow-2xl"
+              style={{ borderLeft: `4px solid ${node.color || '#00f2ff'}` }}
+            >
+              <div className="font-bold text-white text-sm whitespace-pre-line leading-tight">{node.label}</div>
+              {node.sublabel && <div className="text-[10px] mt-1.5 text-drp-gray/80 whitespace-pre-line leading-relaxed font-mono">{node.sublabel}</div>}
+            </motion.div>
             {i < nodes.length - 1 && (
-              <div className="flex flex-col items-center gap-0.5 text-slate-500 text-xs shrink-0">
-                <div className="text-base">→</div>
-                {edges[i]?.label && <div className="text-[10px] opacity-60 max-w-[50px] text-center leading-tight">{edges[i].label}</div>}
+              <div className="flex flex-col items-center gap-1 text-drp-cyan/40 shrink-0">
+                <ChevronRight className="h-5 w-5" />
+                {edges[i]?.label && <div className="text-[9px] font-cinematic uppercase tracking-widest max-w-[60px] text-center leading-tight">{edges[i].label}</div>}
               </div>
             )}
           </div>
@@ -32,12 +56,12 @@ function FlowDiagram({ data }: { data: any }) {
 function ComparisonDiagram({ data }: { data: any }) {
   if (data.columns && data.rows) {
     return (
-      <div className="overflow-x-auto rounded-2xl border border-white/10">
-        <table className="w-full text-sm min-w-[480px]">
+      <div className="overflow-x-auto rounded-3xl border border-white/5 bg-black/20 my-6">
+        <table className="w-full text-sm min-w-[600px] border-collapse">
           <thead>
             <tr className="bg-white/5">
               {data.columns.map((col: string, i: number) => (
-                <th key={i} className="px-4 py-3 text-left text-slate-300 font-semibold border-b border-white/10">{col}</th>
+                <th key={i} className="px-6 py-4 text-left text-drp-gray font-bold uppercase tracking-widest text-[10px] border-b border-white/5">{col}</th>
               ))}
             </tr>
           </thead>
@@ -45,7 +69,13 @@ function ComparisonDiagram({ data }: { data: any }) {
             {data.rows.map((row: string[], ri: number) => (
               <tr key={ri} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                 {row.map((cell: string, ci: number) => (
-                  <td key={ci} className={`px-4 py-3 ${ci === 0 ? 'font-semibold text-white' : 'text-slate-300'}`}>{cell}</td>
+                  <td key={ci} className={cn("px-6 py-4", ci === 0 ? 'font-bold text-drp-cyan' : 'text-drp-gray/90')}>
+                    {cell.includes('🟢') || cell.includes('🔴') ? (
+                       <span className={cn("px-2 py-0.5 rounded-full text-[10px] font-bold uppercase", 
+                        cell.includes('🟢') ? 'bg-emerald-400/10 text-emerald-400' : 'bg-rose-400/10 text-rose-400'
+                       )}>{cell.replace(/[🟢🔴]/g, '')}</span>
+                    ) : cell}
+                  </td>
                 ))}
               </tr>
             ))}
@@ -55,22 +85,29 @@ function ComparisonDiagram({ data }: { data: any }) {
     );
   }
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
       {[data.left, data.right].filter(Boolean).map((side: any, i: number) => (
-        <div key={i} className="rounded-2xl p-5 border transition-all hover:scale-[1.01]"
-          style={{ borderColor: side.color + '44', background: `linear-gradient(135deg, ${side.color}18, ${side.color}08)` }}>
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-2xl">{side.icon}</span>
-            <h4 className="font-bold text-white text-sm">{side.title}</h4>
+        <motion.div 
+          key={i} 
+          whileHover={{ y: -4 }}
+          className="rounded-3xl p-6 border border-white/5 bg-white/5 backdrop-blur-xl relative overflow-hidden group"
+        >
+          <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+            <span className="text-6xl">{side.icon}</span>
           </div>
-          <ul className="space-y-2">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-xl flex items-center justify-center text-lg bg-black/40 border border-white/10">{side.icon}</div>
+            <h4 className="font-bold text-white text-base tracking-tight">{side.title}</h4>
+          </div>
+          <ul className="space-y-3">
             {side.points.map((pt: string, pi: number) => (
-              <li key={pi} className="flex items-start gap-2 text-xs text-slate-300 font-mono leading-relaxed">
-                <span style={{ color: side.color }} className="mt-1 shrink-0">●</span>{pt}
+              <li key={pi} className="flex items-start gap-3 text-sm text-drp-gray/80 leading-relaxed">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: side.color }} />
+                {pt}
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
@@ -78,128 +115,104 @@ function ComparisonDiagram({ data }: { data: any }) {
 
 function StackDiagram({ data }: { data: any }) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-4 my-8 max-w-2xl mx-auto">
       {[...data.layers].reverse().map((layer: any, i: number) => (
-        <div key={i} className="rounded-2xl p-4 border transition-all hover:scale-[1.01]"
-          style={{ borderColor: layer.color + '44', background: `linear-gradient(135deg, ${layer.color}18, ${layer.color}08)` }}>
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-lg">{layer.icon}</span>
+        <motion.div 
+          key={i} 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: i * 0.1 }}
+          className="rounded-2xl p-5 border border-white/10 bg-white/5 backdrop-blur-md group hover:bg-white/10 transition-all"
+          style={{ borderLeft: `6px solid ${layer.color}` }}
+        >
+          <div className="flex items-center gap-4 mb-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl bg-black/40 border border-white/10">{layer.icon}</div>
             <div>
-              <div className="font-bold text-white text-sm">{layer.name}</div>
-              <div className="text-xs text-slate-400">{layer.description}</div>
+              <div className="font-bold text-white text-sm tracking-tight">{layer.name}</div>
+              <div className="text-[10px] text-drp-gray font-cinematic uppercase tracking-[0.2em]">{layer.description}</div>
             </div>
           </div>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-2">
             {layer.items.map((item: string, ii: number) => (
-              <span key={ii} className="px-2 py-1 rounded-lg text-xs font-mono text-white" style={{ background: layer.color + '33' }}>{item}</span>
+              <span key={ii} className="px-3 py-1 rounded-lg text-[10px] font-mono font-bold text-white/70 border border-white/5 bg-black/40" >
+                {item}
+              </span>
             ))}
           </div>
-        </div>
+        </motion.div>
       ))}
-      <div className="text-center text-slate-600 text-xs py-1">▲ Higher Layers · Lower Layers ▼</div>
-    </div>
-  );
-}
-
-function TimelineDiagram({ data }: { data: any }) {
-  const colors: Record<string, string> = { active: '#10b981', upcoming: '#0ea5e9', future: '#7c3aed' };
-  const labels: Record<string, string> = { active: '● Live', upcoming: '◎ Next', future: '○ Planned' };
-  return (
-    <div className="relative pl-10">
-      <div className="absolute left-4 top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#10b981] via-[#0ea5e9] to-[#7c3aed] rounded-full" />
-      <div className="space-y-4">
-        {data.events.map((ev: any, i: number) => {
-          const color = colors[ev.status] || '#64748b';
-          return (
-            <div key={i} className="relative">
-              <div className="absolute -left-6 w-4 h-4 rounded-full border-2" style={{ borderColor: color, background: color + '33', top: '14px' }} />
-              <div className="rounded-2xl p-4 border" style={{ borderColor: color + '33', background: `linear-gradient(135deg, ${color}12, ${color}06)` }}>
-                <div className="flex items-start justify-between flex-wrap gap-2 mb-2">
-                  <div>
-                    <span className="text-xs text-slate-500 font-mono mr-2">{ev.phase}</span>
-                    <span className="font-bold text-white">{ev.title}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-slate-400">{ev.date}</span>
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{ color, background: color + '22' }}>{labels[ev.status]}</span>
-                  </div>
-                </div>
-                <ul className="space-y-1">
-                  {ev.items.map((item: string, ii: number) => (
-                    <li key={ii} className="text-sm text-slate-300 flex items-center gap-2">
-                      <span style={{ color }} className="text-xs shrink-0">▸</span>{item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          );
-        })}
+      <div className="flex items-center justify-center gap-4 text-white/20 py-4 uppercase tracking-[0.5em] text-[8px] font-black">
+        <div className="h-px flex-1 bg-white/5" />
+        Application Interface Flow
+        <div className="h-px flex-1 bg-white/5" />
       </div>
     </div>
   );
 }
 
-function DiagramBlock({ section }: { section: LessonSection }) {
-  const d = section.diagramData as any;
-  return (
-    <div className="my-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
-      {section.title && (
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-1.5 h-6 rounded-full bg-gradient-to-b from-[#7c3aed] to-[#0ea5e9]" />
-          <h3 className="text-base font-bold text-white">{section.title}</h3>
-        </div>
-      )}
-      {section.content && <p className="text-slate-400 text-sm mb-4 leading-relaxed">{section.content}</p>}
-      {section.diagramType === 'flow' && <FlowDiagram data={d} />}
-      {section.diagramType === 'comparison' && <ComparisonDiagram data={d} />}
-      {section.diagramType === 'stack' && <StackDiagram data={d} />}
-      {section.diagramType === 'timeline' && <TimelineDiagram data={d} />}
-    </div>
-  );
-}
+// ─── Block Components ──────────────────────────────────────────────
 
 function CodeBlock({ section }: { section: LessonSection }) {
   const [copied, setCopied] = useState(false);
   const copy = () => { navigator.clipboard.writeText(section.code || ''); setCopied(true); setTimeout(() => setCopied(false), 2000); };
-  const langColor: Record<string, string> = { typescript: '#0ea5e9', javascript: '#f59e0b', solidity: '#7c3aed', python: '#10b981', bash: '#64748b', rust: '#f97316' };
-  const lang = section.language || 'code';
+  
   return (
-    <div className="my-8 rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-      <div className="flex items-center justify-between px-4 py-2.5 bg-white/5 border-b border-white/10">
+    <div className="my-8 rounded-3xl overflow-hidden border border-white/10 bg-black/60 shadow-2xl group">
+      <div className="flex items-center justify-between px-6 py-3 bg-white/5 border-b border-white/10">
         <div className="flex items-center gap-3">
-          <div className="flex gap-1.5">{['#ef4444','#f59e0b','#10b981'].map(c => <div key={c} className="w-3 h-3 rounded-full" style={{ background: c }} />)}</div>
-          {section.title && <span className="text-sm font-semibold text-white">{section.title}</span>}
-          <span className="px-2 py-0.5 rounded text-xs font-mono font-bold" style={{ background: (langColor[lang]||'#64748b') + '33', color: langColor[lang]||'#94a3b8' }}>{lang}</span>
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-rose-500/40" />
+            <div className="w-2.5 h-2.5 rounded-full bg-amber-500/40" />
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/40" />
+          </div>
+          {section.title && <span className="text-[10px] font-bold text-drp-gray uppercase tracking-widest">{section.title}</span>}
         </div>
-        <button onClick={copy} className="text-xs px-3 py-1 rounded-lg transition-all font-mono border"
-          style={{ background: copied ? '#10b98122' : 'transparent', color: copied ? '#10b981' : '#64748b', borderColor: copied ? '#10b98144' : '#ffffff11' }}>
-          {copied ? '✓ copied' : 'copy'}
-        </button>
+        <div className="flex items-center gap-3">
+          <span className="text-[9px] font-mono text-drp-cyan font-bold uppercase px-2 py-0.5 rounded bg-drp-cyan/10 border border-drp-cyan/20">{section.language || 'code'}</span>
+          <button onClick={copy} className="text-[9px] font-bold text-white/40 hover:text-drp-cyan transition-colors uppercase tracking-widest">
+            {copied ? 'Copied ✓' : 'Copy'}
+          </button>
+        </div>
       </div>
-      {section.content && <p className="text-slate-400 text-sm px-5 pt-4 pb-2 leading-relaxed">{section.content}</p>}
-      <pre className="px-5 py-4 overflow-x-auto bg-[#0a0f1a]">
-        <code className="text-slate-200 font-mono text-xs leading-relaxed">{section.code}</code>
+      <pre className="p-6 overflow-x-auto text-[13px] font-mono leading-relaxed custom-scrollbar bg-black/40">
+        <code className="text-drp-gray/90">
+          {section.code?.split('\n').map((line, i) => (
+            <div key={i} className="flex gap-4">
+              <span className="text-white/10 select-none w-4 text-right">{i + 1}</span>
+              <span>{line}</span>
+            </div>
+          ))}
+        </code>
       </pre>
     </div>
   );
 }
 
 function CalloutBlock({ section }: { section: LessonSection }) {
-  const styles: Record<string, { border: string; bg: string; icon: string }> = {
-    drp:     { border: '#7c3aed', bg: 'linear-gradient(135deg,#7c3aed18,#4c1d9508)', icon: '⚡' },
-    info:    { border: '#0ea5e9', bg: 'linear-gradient(135deg,#0ea5e918,#06407008)', icon: 'ℹ️' },
-    warning: { border: '#f59e0b', bg: 'linear-gradient(135deg,#f59e0b18,#92400e08)', icon: '⚠️' },
-    success: { border: '#10b981', bg: 'linear-gradient(135deg,#10b98118,#06503508)', icon: '✅' },
+  const styles: Record<string, { accent: string; icon: any }> = {
+    drp:     { accent: '#00f2ff', icon: Sparkles },
+    info:    { accent: '#3b82f6', icon: BookOpen },
+    warning: { accent: '#f59e0b', icon: Shield },
+    success: { accent: '#10b981', icon: CheckCircle2 },
   };
   const s = styles[section.calloutType || 'info'];
+  const Icon = s.icon;
+
   return (
-    <div className="my-8 rounded-2xl p-5 border-l-4" style={{ borderLeftColor: s.border, background: s.bg }}>
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-lg">{s.icon}</span>
-        <span className="font-bold text-white text-sm">{section.title}</span>
+    <div 
+      className="my-8 rounded-[2rem] p-8 border border-white/5 bg-black/40 backdrop-blur-xl relative overflow-hidden group"
+      style={{ borderLeft: `6px solid ${s.accent}` }}
+    >
+      <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+        <Icon className="w-24 h-24" />
       </div>
-      <p className="text-slate-300 text-sm leading-relaxed">{section.content}</p>
+      <div className="flex items-center gap-4 mb-4">
+        <div className="p-2 rounded-xl bg-white/5 border border-white/10 shadow-lg">
+          <Icon className="h-5 w-5" style={{ color: s.accent }} />
+        </div>
+        <h4 className="font-bold text-white text-lg tracking-tight">{section.title}</h4>
+      </div>
+      <p className="text-drp-gray leading-relaxed text-sm md:text-base">{section.content}</p>
     </div>
   );
 }
@@ -208,62 +221,103 @@ function QuizBlock({ section, onComplete }: { section: LessonSection; onComplete
   const [selected, setSelected] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
   const correct = section.quizAnswer ?? 0;
+
   return (
-    <div className="my-8 rounded-2xl border border-[#7c3aed33] overflow-hidden shadow-xl"
-      style={{ background: 'linear-gradient(135deg,#7c3aed0d,#1e1b4b0d)' }}>
-      <div className="flex items-center justify-between px-6 py-4 border-b border-[#7c3aed22]"
-        style={{ background: 'linear-gradient(90deg,#7c3aed18,transparent)' }}>
-        <div className="flex items-center gap-2">
-          <span className="text-xl">🧠</span>
-          <span className="font-bold text-white">{section.title || 'Knowledge Check'}</span>
+    <div className="my-12 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+      <div className="px-8 py-6 border-b border-white/10 bg-white/5 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-drp-cyan/20 border border-drp-cyan/30 flex items-center justify-center">
+            <Zap className="h-5 w-5 text-drp-cyan" />
+          </div>
+          <div>
+            <h3 className="font-bold text-white text-base leading-none mb-1">{section.title || 'Knowledge Check'}</h3>
+            <p className="text-[10px] font-cinematic text-drp-cyan tracking-widest uppercase opacity-60">Verification Phase</p>
+          </div>
         </div>
-        <span className="px-3 py-1 rounded-full text-xs bg-[#7c3aed33] text-[#a78bfa] font-semibold border border-[#7c3aed44]">Quiz</span>
+        <div className="hidden sm:block">
+           <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-white/5 text-white/40 uppercase tracking-widest border border-white/10">Quiz</span>
+        </div>
       </div>
-      <div className="p-6">
-        <p className="text-slate-200 font-medium mb-5 text-sm leading-relaxed">{section.content}</p>
-        <div className="space-y-2.5">
+      <div className="p-8">
+        <p className="text-white text-lg font-bold mb-8 leading-tight">{section.content}</p>
+        <div className="grid gap-4">
           {(section.quizOptions || []).map((opt, i) => {
-            let cls = 'border-white/10 bg-white/5 text-slate-300 hover:border-[#7c3aed66] hover:bg-[#7c3aed11] cursor-pointer';
+            let stateStyle = "border-white/5 bg-white/5 text-drp-gray hover:border-white/20 hover:bg-white/10";
             if (revealed) {
-              if (i === correct) cls = 'border-[#10b981] bg-[#10b98115] text-[#6ee7b7] cursor-default';
-              else if (i === selected) cls = 'border-[#ef4444] bg-[#ef444415] text-[#fca5a5] cursor-default';
-              else cls = 'border-white/5 bg-white/[0.02] text-slate-500 cursor-default';
-            } else if (selected === i) cls = 'border-[#7c3aed] bg-[#7c3aed22] text-white cursor-pointer';
+              if (i === correct) stateStyle = "border-emerald-500/50 bg-emerald-500/10 text-emerald-400";
+              else if (i === selected) stateStyle = "border-rose-500/50 bg-rose-500/10 text-rose-400";
+              else stateStyle = "opacity-40 border-white/5 bg-white/5 text-drp-gray";
+            } else if (selected === i) {
+              stateStyle = "border-drp-cyan bg-drp-cyan/10 text-drp-cyan";
+            }
+
             return (
-              <button key={i} onClick={() => !revealed && setSelected(i)}
-                className={`w-full text-left px-4 py-3 rounded-xl border transition-all text-sm font-medium ${cls}`}>
-                <span className="mr-3 font-mono text-xs opacity-50">{String.fromCharCode(65+i)}.</span>{opt}
-                {revealed && i === correct && <span className="ml-2 text-xs">✓</span>}
+              <button 
+                key={i} 
+                onClick={() => !revealed && setSelected(i)}
+                className={cn(
+                  "w-full text-left px-6 py-4 rounded-2xl border transition-all duration-300 font-medium text-sm flex items-center gap-4 group",
+                  stateStyle
+                )}
+              >
+                <div className={cn(
+                  "w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold border transition-colors",
+                  selected === i ? "border-current" : "border-white/10 bg-black/20"
+                )}>
+                  {String.fromCharCode(65+i)}
+                </div>
+                {opt}
+                {revealed && i === correct && <CheckCircle2 className="h-5 w-5 ml-auto text-emerald-400" />}
               </button>
             );
           })}
         </div>
-        {!revealed && selected !== null && (
-          <button onClick={() => { setRevealed(true); if (selected === correct && onComplete) onComplete(); }}
-            className="mt-5 w-full py-3 rounded-xl font-bold text-white text-sm transition-all hover:opacity-90"
-            style={{ background: 'linear-gradient(135deg,#7c3aed,#6d28d9)' }}>
-            Check Answer
-          </button>
-        )}
+        
+        <AnimatePresence>
+          {!revealed && selected !== null && (
+            <motion.button 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              onClick={() => { setRevealed(true); if (selected === correct && onComplete) onComplete(); }}
+              className="mt-8 w-full py-5 rounded-2xl font-bold text-black bg-white hover:bg-drp-cyan transition-all shadow-xl shadow-white/5 uppercase tracking-widest text-xs"
+            >
+              Verify Response
+            </motion.button>
+          )}
+        </AnimatePresence>
+
         {revealed && (
-          <div className={`mt-5 p-4 rounded-xl border text-sm ${selected === correct ? 'bg-[#10b98112] border-[#10b98133] text-[#6ee7b7]' : 'bg-[#ef444412] border-[#ef444433] text-[#fca5a5]'}`}>
-            <div className="font-bold mb-1.5">{selected === correct ? '🎉 Correct!' : "💡 Not quite — here's why:"}</div>
-            <p className="text-slate-300 text-sm leading-relaxed">{section.quizExplanation}</p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            className={cn(
+              "mt-8 p-6 rounded-2xl border backdrop-blur-md",
+              selected === correct ? 'bg-emerald-400/5 border-emerald-400/20 text-emerald-400' : 'bg-rose-400/5 border-rose-400/20 text-rose-400'
+            )}
+          >
+            <div className="flex items-center gap-2 font-bold mb-2">
+              {selected === correct ? '🎉 EXCELLENT' : '💡 PROTOCOL INSIGHT'}
+            </div>
+            <p className="text-sm text-drp-gray leading-relaxed">{section.quizExplanation}</p>
+          </motion.div>
         )}
       </div>
     </div>
   );
 }
 
+// ─── AI Tutor Sidebar ──────────────────────────────────────────────
+
 function AITutor({ lesson }: { lesson: Lesson }) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<{ role: 'user'|'ai'; text: string }[]>([
-    { role: 'ai', text: `Hey! I am your DRP AI Tutor for **${lesson.title}**. Ask me anything — concepts, diagrams, code, or how this connects to the real world. 🎓` },
+    { role: 'ai', text: `Greetings, Steward. I am the DRP Knowledge Core. How can I assist your study of **${lesson.title}**?` },
   ]);
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages, loading]);
 
   const send = async () => {
@@ -272,199 +326,412 @@ function AITutor({ lesson }: { lesson: Lesson }) {
     setMessages(prev => [...prev, { role: 'user', text: q }]);
     setLoading(true);
     try {
-      const res = await fetch('/api/ai-tutor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, lessonTitle: lesson.title, pathName: lesson.pathName }) });
+      const res = await fetch('/api/ai-tutor', { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify({ question: q, lessonTitle: lesson.title, pathName: lesson.pathName }) 
+      });
       const data = await res.json();
-      setMessages(prev => [...prev, { role: 'ai', text: data.answer || 'Let me think about that...' }]);
-    } catch { setMessages(prev => [...prev, { role: 'ai', text: 'Something went wrong — try again!' }]); }
+      setMessages(prev => [...prev, { role: 'ai', text: data.answer || 'Analyzing DRP datasets...' }]);
+    } catch { 
+      setMessages(prev => [...prev, { role: 'ai', text: 'Connection to Knowledge Core interrupted. Please retry.' }]); 
+    }
     setLoading(false);
   };
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl font-semibold text-white text-sm transition-all hover:scale-105 active:scale-95 shadow-2xl" style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9)', boxShadow: '0 8px 32px #7c3aed55' }}>
-        <span className="text-base">🤖</span><span className="hidden sm:inline">AI Tutor</span><span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
-      </button>
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:justify-end p-0 sm:p-6">
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setOpen(false)} />
-          <div className="relative w-full sm:w-[400px] h-[90vh] sm:h-[580px] rounded-t-3xl sm:rounded-3xl border border-white/10 flex flex-col overflow-hidden shadow-2xl" style={{ background: 'linear-gradient(160deg,#0d1117,#1e1b4b)' }}>
-            <div className="flex items-center gap-3 p-4 border-b border-white/10 shrink-0" style={{ background: 'linear-gradient(90deg,#7c3aed22,#0ea5e911)' }}>
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg shrink-0" style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9)' }}>🤖</div>
-              <div className="min-w-0">
-                <div className="font-bold text-white text-sm">DRP AI Tutor</div>
-                <div className="text-xs text-slate-400 truncate">{lesson.title}</div>
-              </div>
-              <div className="ml-auto flex items-center gap-2 shrink-0">
-                <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
-                <span className="text-xs text-[#6ee7b7] hidden sm:inline">Online</span>
-                <button onClick={() => setOpen(false)} className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all ml-1">✕</button>
-              </div>
-            </div>
-            <div className="flex-1 overflow-y-auto p-4 space-y-3">
-              {messages.map((m, i) => (
-                <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  {m.role === 'ai' && <div className="w-6 h-6 rounded-lg flex items-center justify-center text-xs shrink-0 mr-2 mt-0.5" style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9)' }}>🤖</div>}
-                  <div className={`max-w-[82%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${m.role === 'user' ? 'rounded-br-sm text-white' : 'rounded-bl-sm text-slate-200 border border-white/10'}`}
-                    style={m.role === 'user' ? { background: 'linear-gradient(135deg,#7c3aed,#6d28d9)' } : { background: 'rgba(255,255,255,0.05)' }}>
-                    {m.text}
-                  </div>
-                </div>
-              ))}
-              {loading && (
-                <div className="flex justify-start items-end gap-2">
-                  <div className="w-6 h-6 rounded-lg flex items-center justify-center text-xs shrink-0" style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9)' }}>🤖</div>
-                  <div className="px-4 py-3 rounded-2xl rounded-bl-sm bg-white/5 border border-white/10">
-                    <div className="flex gap-1">{[0,1,2].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: `${i*0.15}s` }} />)}</div>
-                  </div>
-                </div>
-              )}
-              <div ref={bottomRef} />
-            </div>
-            <div className="p-4 border-t border-white/10 shrink-0 space-y-2">
-              <div className="flex flex-wrap gap-1.5">
-                {['Explain simply','Real-world example?','How does DRP use this?','What next?'].map(h => (
-                  <button key={h} onClick={() => setInput(h)} className="text-xs px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:border-[#7c3aed55] transition-all">{h}</button>
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()} placeholder="Ask anything about this lesson..."
-                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-600 outline-none focus:border-[#7c3aed88] transition-colors" />
-                <button onClick={send} disabled={loading || !input.trim()} className="px-4 py-2.5 rounded-xl font-bold text-white text-sm transition-all disabled:opacity-30 hover:opacity-90" style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9)' }}>→</button>
-              </div>
-            </div>
+      <button 
+        onClick={() => setOpen(true)} 
+        className="fixed bottom-8 right-8 z-50 group"
+      >
+        <div className="relative">
+          <div className="absolute inset-0 bg-drp-cyan blur-2xl opacity-20 group-hover:opacity-40 transition-opacity" />
+          <div className="relative flex items-center gap-3 px-6 py-4 rounded-2xl font-bold text-black text-xs transition-all hover:scale-105 active:scale-95 shadow-2xl bg-white">
+            <Sparkles className="h-4 w-4" />
+            <span className="hidden sm:inline uppercase tracking-widest">DRP Knowledge Core</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           </div>
         </div>
-      )}
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <div className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center sm:justify-end p-0 sm:p-8">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md" 
+              onClick={() => setOpen(false)} 
+            />
+            <motion.div 
+              initial={{ opacity: 0, y: 100, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 100, scale: 0.95 }}
+              className="relative w-full sm:w-[450px] h-[90vh] sm:h-[650px] rounded-t-[2.5rem] sm:rounded-[2.5rem] border border-white/10 flex flex-col overflow-hidden shadow-2xl bg-[#05050a]"
+            >
+              <div className="p-6 border-b border-white/5 bg-white/5 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-drp-cyan/10 border border-drp-cyan/20 flex items-center justify-center">
+                    <Sparkles className="h-6 w-6 text-drp-cyan" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white text-base leading-tight">Knowledge Core</h4>
+                    <p className="text-[10px] font-cinematic text-drp-cyan tracking-widest uppercase opacity-60">Session Active</p>
+                  </div>
+                </div>
+                <button onClick={() => setOpen(false)} className="p-2 rounded-full hover:bg-white/10 transition-colors">
+                  <ArrowRight className="h-5 w-5 text-white/40 rotate-45" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+                {messages.map((m, i) => (
+                  <div key={i} className={cn("flex", m.role === 'user' ? 'justify-end' : 'justify-start')}>
+                    <div className={cn(
+                      "max-w-[85%] px-5 py-3 rounded-2xl text-sm leading-relaxed",
+                      m.role === 'user' 
+                        ? 'bg-drp-cyan text-black font-medium rounded-tr-sm' 
+                        : 'bg-white/5 border border-white/10 text-drp-gray/90 rounded-tl-sm'
+                    )}>
+                      {m.text}
+                    </div>
+                  </div>
+                ))}
+                {loading && (
+                  <div className="flex justify-start">
+                    <div className="px-5 py-4 rounded-2xl rounded-tl-sm bg-white/5 border border-white/10 flex gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-drp-cyan animate-bounce" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-drp-cyan animate-bounce [animation-delay:0.2s]" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-drp-cyan animate-bounce [animation-delay:0.4s]" />
+                    </div>
+                  </div>
+                )}
+                <div ref={bottomRef} />
+              </div>
+
+              <div className="p-6 border-t border-white/5 bg-white/5 space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  {['Explain simply','Use a metaphor','Historical context?'].map(h => (
+                    <button key={h} onClick={() => setInput(h)} className="text-[10px] font-bold px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/40 hover:text-drp-cyan hover:border-drp-cyan/40 transition-all uppercase tracking-widest">{h}</button>
+                  ))}
+                </div>
+                <div className="flex gap-3">
+                  <input 
+                    value={input} 
+                    onChange={e => setInput(e.target.value)} 
+                    onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()} 
+                    placeholder="Ask about DRP protocol details..."
+                    className="flex-1 bg-black/40 border border-white/10 rounded-2xl px-5 py-4 text-sm text-white placeholder-white/20 outline-none focus:border-drp-cyan/40 transition-colors" 
+                  />
+                  <button 
+                    onClick={send} 
+                    disabled={loading || !input.trim()} 
+                    className="w-14 rounded-2xl flex items-center justify-center bg-white text-black transition-all disabled:opacity-30 hover:bg-drp-cyan shadow-xl shadow-white/5"
+                  >
+                    <ArrowUpIcon className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
 
+function ArrowUpIcon(props: any) {
+  return (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+  )
+}
+
+// ─── Main Component ──────────────────────────────────────────────
+
 export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
   const [completed, setCompleted] = useState<Set<number>>(new Set());
-  const [xpGranted, setXpGranted] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
   const total = lesson.sections.length;
   const progress = total > 0 ? (completed.size / total) * 100 : 0;
-  const isComplete = completed.size >= Math.ceil(total * 0.8);
-  const diffColor = { Beginner: '#10b981', Intermediate: '#f59e0b', Advanced: '#ef4444' }[lesson.difficulty];
-  useEffect(() => { if (isComplete && !xpGranted) setXpGranted(true); }, [isComplete]);
-  const mark = (i: number) => setCompleted(prev => new Set([...prev, i]));
+  
+  const mark = (i: number) => {
+    const next = new Set(completed);
+    next.add(i);
+    setCompleted(next);
+    if (next.size >= Math.ceil(total * 0.8)) {
+      setIsFinished(true);
+    }
+  };
 
   return (
-    <div className="min-h-screen text-white" style={{ background: 'linear-gradient(160deg,#050d1a,#0d1117)' }}>
-      <div className="sticky top-0 z-40 border-b border-white/10 backdrop-blur-xl" style={{ background: 'linear-gradient(90deg,#050d1aee,#0d1117ee)' }}>
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3">
-          <Link href="/learn" className="text-slate-500 hover:text-white transition-colors text-sm shrink-0 flex items-center gap-1">← <span className="hidden sm:inline">Learn</span></Link>
+    <div className="min-h-screen bg-[#030308] text-white selection:bg-drp-cyan/30 selection:text-drp-cyan">
+      {/* Cinematic Top Progress Nav */}
+      <div className="sticky top-0 z-[100] border-b border-white/5 bg-black/60 backdrop-blur-2xl">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center gap-6">
+          <Link href="/learn" className="p-2 rounded-xl hover:bg-white/5 text-drp-gray hover:text-white transition-all">
+            <ArrowLeft className="h-5 w-5" />
+          </Link>
+          
           <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between mb-1 text-xs text-slate-500">
-              <span className="truncate">{lesson.pathIcon} {lesson.pathName} · Lesson {lesson.lessonNumber}</span>
-              <span className="shrink-0 ml-2">{Math.round(progress)}%</span>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+                <span className="text-xl">{lesson.pathIcon}</span>
+                <span className="text-[10px] font-cinematic text-drp-gray uppercase tracking-[0.3em] truncate">
+                  {lesson.pathName} · Module {lesson.lessonNumber}
+                </span>
+              </div>
+              <span className="text-[10px] font-bold text-drp-cyan uppercase tracking-widest">{Math.round(progress)}% Verified</span>
             </div>
-            <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
-              <div className="h-full rounded-full transition-all duration-700" style={{ width: `${progress}%`, background: 'linear-gradient(90deg,#7c3aed,#0ea5e9,#10b981)' }} />
+            <div className="h-1 rounded-full bg-white/5 overflow-hidden">
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                className="h-full bg-gradient-to-r from-drp-cyan via-blue-400 to-drp-cyan" 
+              />
             </div>
           </div>
-          <div className="flex items-center gap-2 shrink-0 text-xs font-bold">
-            <span className="text-[#f59e0b]">⚡{xpGranted ? `+${lesson.xp}` : lesson.xp} XP</span>
-            <span className="text-[#10b981] hidden sm:inline">+{lesson.deri} $DeRi</span>
+
+          <div className="hidden md:flex items-center gap-6 shrink-0">
+            <div className="flex flex-col items-end">
+              <span className="text-xs font-bold text-amber-400">+{lesson.deri} $DeRi</span>
+              <span className="text-[8px] font-cinematic text-amber-400/40 uppercase tracking-widest">Rewards</span>
+            </div>
+            <div className="w-px h-8 bg-white/10" />
+            <div className="flex flex-col items-end">
+              <span className="text-xs font-bold text-drp-cyan">+{lesson.xp} XP</span>
+              <span className="text-[8px] font-cinematic text-drp-cyan/40 uppercase tracking-widest">Experience</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-10">
-        <div className="mb-10">
-          <div className="flex flex-wrap gap-2 mb-4">
-            <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: diffColor+'22', color: diffColor }}>{lesson.difficulty}</span>
-            <span className="px-3 py-1 rounded-full text-xs bg-white/5 text-slate-400 border border-white/10">⏱ {lesson.duration}</span>
-            <span className="px-3 py-1 rounded-full text-xs bg-[#f59e0b22] text-[#f59e0b] border border-[#f59e0b33]">⚡ {lesson.xp} XP</span>
-            <span className="px-3 py-1 rounded-full text-xs bg-[#10b98122] text-[#10b981] border border-[#10b98133]">+{lesson.deri} $DeRi</span>
+      <main className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        {/* Hero Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-20 text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-drp-cyan uppercase tracking-widest mb-8">
+            <Zap className="h-3 w-3" />
+            {lesson.difficulty} Level Certification
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 leading-tight">{lesson.title}</h1>
-          <p className="text-slate-400 text-lg leading-relaxed">{lesson.subtitle}</p>
-          <div className="flex flex-wrap gap-2 mt-4">
-            {lesson.tags.map(tag => <span key={tag} className="px-2.5 py-1 rounded-full text-xs bg-[#7c3aed22] text-[#a78bfa] border border-[#7c3aed22]">{tag}</span>)}
-          </div>
-        </div>
-
-        <div className="mb-10 rounded-2xl p-6 border border-[#0ea5e933]" style={{ background: 'linear-gradient(135deg,#0ea5e912,#7c3aed08)' }}>
-          <h2 className="font-bold text-white mb-4 flex items-center gap-2 text-sm uppercase tracking-wider">
-            <span className="w-5 h-5 rounded-lg bg-[#0ea5e933] flex items-center justify-center text-[#38bdf8]">🎯</span>
-            What You Will Learn
-          </h2>
-          <ul className="space-y-2.5">
-            {lesson.keyTakeaways.map((t, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
-                <span className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5" style={{ background: '#0ea5e922', color: '#38bdf8' }}>{i+1}</span>{t}
-              </li>
+          <h1 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tight leading-none">
+            {lesson.title}
+          </h1>
+          <p className="text-lg md:text-xl text-drp-gray max-w-3xl mx-auto leading-relaxed font-medium">
+            {lesson.subtitle}
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-3 mt-10">
+            {lesson.tags.map(tag => (
+              <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold bg-white/5 text-white/40 border border-white/5 uppercase tracking-widest">
+                {tag}
+              </span>
             ))}
-          </ul>
-        </div>
+          </div>
+        </motion.div>
 
-        <div className="space-y-1">
+        {/* Key Takeaways Glass Card */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-20 rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-drp-cyan/5 to-blue-500/5 p-10 backdrop-blur-2xl relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 p-10 opacity-5">
+            <Trophy className="w-48 h-48 text-drp-cyan" />
+          </div>
+          <h2 className="text-lg font-bold text-white mb-8 flex items-center gap-3 uppercase tracking-widest">
+            <div className="w-2 h-6 rounded-full bg-drp-cyan" />
+            Module Objectives
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-6">
+            {lesson.keyTakeaways.map((t, i) => (
+              <div key={i} className="flex items-start gap-4">
+                <div className="w-6 h-6 rounded-full bg-drp-cyan/20 flex items-center justify-center text-[10px] font-bold text-drp-cyan shrink-0 mt-0.5">
+                  {i+1}
+                </div>
+                <p className="text-sm text-drp-gray leading-relaxed">{t}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Main Content Sections */}
+        <div className="space-y-4">
           {lesson.sections.map((section, i) => (
-            <div key={i}>
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="relative"
+            >
               {section.type === 'intro' && (
-                <div className="my-8 relative pl-6 py-1">
-                  <div className="absolute left-0 top-0 bottom-0 w-1 rounded-full bg-gradient-to-b from-[#7c3aed] to-[#0ea5e9]" />
-                  <p className="text-lg text-slate-300 leading-relaxed">{section.content}</p>
-                  <button onClick={() => mark(i)} className="mt-2 text-xs text-slate-600 hover:text-[#10b981] transition-colors flex items-center gap-1">
-                    {completed.has(i) ? '✓ Read' : '✓ Mark as read'}
+                <div className="py-12 border-l-2 border-white/5 pl-8 md:pl-12 my-8">
+                   <p className="text-xl md:text-2xl text-white/80 leading-relaxed font-medium italic">
+                    {section.content}
+                  </p>
+                  <button onClick={() => mark(i)} className="mt-8 flex items-center gap-2 text-[10px] font-bold text-drp-cyan uppercase tracking-widest group">
+                    <div className={cn("w-5 h-5 rounded-full border border-drp-cyan/30 flex items-center justify-center group-hover:bg-drp-cyan/10", completed.has(i) && "bg-drp-cyan text-black border-drp-cyan")}>
+                      {completed.has(i) && <CheckCircle2 className="h-3 w-3" />}
+                    </div>
+                    {completed.has(i) ? 'Verified' : 'Acknowledge Insight'}
                   </button>
                 </div>
               )}
+
               {section.type === 'concept' && (
-                <div className="my-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-white/20 transition-colors">
+                <div className="my-10 p-10 rounded-[2.5rem] border border-white/5 bg-white/5 backdrop-blur-xl group hover:border-white/20 transition-all">
                   {section.title && (
-                    <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-3">
-                      <span className="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-mono font-bold shrink-0" style={{ background: 'linear-gradient(135deg,#7c3aed33,#0ea5e922)', color: '#a78bfa' }}>{i+1}</span>
-                      {section.title}
-                    </h3>
+                    <div className="flex items-center justify-between mb-8">
+                      <h3 className="text-2xl font-bold text-white tracking-tight flex items-center gap-4">
+                        <span className="text-drp-cyan/20 font-black text-4xl">0{i+1}</span>
+                        {section.title}
+                      </h3>
+                      <div className="w-10 h-10 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center">
+                        <BookOpen className="h-5 w-5 text-drp-gray" />
+                      </div>
+                    </div>
                   )}
-                  <p className="text-slate-300 leading-relaxed">{section.content}</p>
-                  <div className="mt-4 flex justify-end">
-                    <button onClick={() => mark(i)} className="text-xs text-slate-600 hover:text-[#10b981] transition-colors px-3 py-1.5 rounded-lg hover:bg-[#10b98110]">
-                      {completed.has(i) ? '✓ Understood' : '✓ Got it'}
+                  <div className="prose prose-invert max-w-none">
+                    <p className="text-drp-gray leading-relaxed text-lg">
+                      {section.content}
+                    </p>
+                  </div>
+                  <div className="mt-10 pt-8 border-t border-white/5 flex justify-end">
+                    <button 
+                      onClick={() => mark(i)} 
+                      className={cn(
+                        "flex items-center gap-3 px-6 py-3 rounded-2xl font-bold text-[10px] uppercase tracking-widest transition-all",
+                        completed.has(i) 
+                          ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
+                          : "bg-white/5 text-white/40 border border-white/5 hover:bg-white/10 hover:text-white"
+                      )}
+                    >
+                      {completed.has(i) ? <><CheckCircle2 className="h-4 w-4" /> Concept Mastered</> : 'Verify Understanding'}
                     </button>
                   </div>
                 </div>
               )}
-              {section.type === 'diagram' && <DiagramBlock section={section} />}
+
+              {section.type === 'diagram' && (
+                <div className="my-12">
+                   {section.title && (
+                     <div className="flex items-center gap-3 mb-6">
+                       <Layers className="h-4 w-4 text-drp-cyan" />
+                       <h3 className="text-sm font-bold text-white uppercase tracking-widest">{section.title}</h3>
+                     </div>
+                   )}
+                   <div className="rounded-[2.5rem] border border-white/5 bg-black/40 p-2 overflow-hidden shadow-2xl">
+                     {section.diagramType === 'flow' && <FlowDiagram data={section.diagramData} />}
+                     {section.diagramType === 'comparison' && <ComparisonDiagram data={section.diagramData} />}
+                     {section.diagramType === 'stack' && <StackDiagram data={section.diagramData} />}
+                   </div>
+                   {section.content && <p className="mt-6 text-sm text-drp-gray/80 text-center max-w-2xl mx-auto leading-relaxed">{section.content}</p>}
+                </div>
+              )}
+
               {section.type === 'code' && <CodeBlock section={section} />}
               {section.type === 'callout' && <CalloutBlock section={section} />}
               {section.type === 'quiz' && <QuizBlock section={section} onComplete={() => mark(i)} />}
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {isComplete && (
-          <div className="mt-14 rounded-3xl p-8 text-center border border-[#10b98133] shadow-2xl" style={{ background: 'linear-gradient(135deg,#10b98115,#0ea5e912,#7c3aed10)' }}>
-            <div className="text-6xl mb-4">🏆</div>
-            <h2 className="text-2xl font-extrabold text-white mb-1">Lesson Complete!</h2>
-            <div className="flex justify-center gap-4 my-4">
-              <span className="text-2xl font-extrabold text-[#f59e0b]">+{lesson.xp} XP</span>
-              <span className="text-2xl font-extrabold text-[#10b981]">+{lesson.deri} $DeRi</span>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              {lesson.nextLesson
-                ? <Link href={`/lessons/${lesson.nextLesson}`} className="px-6 py-3 rounded-2xl font-bold text-white transition-all hover:scale-105 shadow-lg" style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9)', boxShadow: '0 8px 24px #7c3aed44' }}>Next Lesson →</Link>
-                : <Link href="/learn" className="px-6 py-3 rounded-2xl font-bold text-white transition-all hover:scale-105" style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9)' }}>🏆 All Lessons Complete!</Link>
-              }
-              <Link href="/learn" className="px-6 py-3 rounded-2xl font-semibold text-slate-300 border border-white/20 hover:border-white/40 transition-all">View All Paths</Link>
-            </div>
-          </div>
-        )}
+        {/* Completion Section */}
+        <AnimatePresence>
+          {isFinished && (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="mt-24 rounded-[3rem] p-12 text-center border border-drp-cyan/20 bg-gradient-to-b from-drp-cyan/10 to-transparent backdrop-blur-3xl shadow-3xl relative overflow-hidden"
+            >
+              <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-drp-cyan to-transparent" />
+              <div className="text-7xl mb-8">🎖️</div>
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">Lesson Certified</h2>
+              <p className="text-drp-gray text-lg mb-10 max-w-xl mx-auto">
+                You have successfully completed the protocol verification for this module. Your credentials have been updated.
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-8 mb-12">
+                <div className="text-center">
+                  <div className="text-3xl font-black text-amber-400">+{lesson.deri}</div>
+                  <div className="text-[10px] font-cinematic text-amber-400/40 uppercase tracking-widest mt-1">$DeRi Tokens</div>
+                </div>
+                <div className="w-px h-12 bg-white/10" />
+                <div className="text-center">
+                  <div className="text-3xl font-black text-drp-cyan">+{lesson.xp}</div>
+                  <div className="text-[10px] font-cinematic text-drp-cyan/40 uppercase tracking-widest mt-1">Steward XP</div>
+                </div>
+              </div>
 
-        <div className="mt-12 pt-8 border-t border-white/10 flex items-center justify-between gap-4 flex-wrap">
-          {lesson.prevLesson
-            ? <Link href={`/lessons/${lesson.prevLesson}`} className="flex items-center gap-2 px-5 py-3 rounded-2xl border border-white/10 text-slate-300 hover:border-[#7c3aed66] hover:text-white transition-all text-sm font-semibold">← Previous</Link>
-            : <Link href="/learn" className="flex items-center gap-2 px-5 py-3 rounded-2xl border border-white/10 text-slate-300 hover:border-white/20 transition-all text-sm">← All Paths</Link>
-          }
-          {lesson.nextLesson && (
-            <Link href={`/lessons/${lesson.nextLesson}`} className="flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-white text-sm transition-all hover:scale-105 shadow-lg" style={{ background: 'linear-gradient(135deg,#7c3aed,#0ea5e9)', boxShadow: '0 4px 20px #7c3aed44' }}>
-              Next Lesson →
-            </Link>
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                {lesson.nextLesson ? (
+                  <Link 
+                    href={`/lessons/${lesson.nextLesson}`} 
+                    className="px-10 py-5 rounded-2xl font-bold text-black bg-white hover:bg-drp-cyan transition-all flex items-center justify-center gap-3 group shadow-2xl shadow-white/5"
+                  >
+                    Next Protocol Module <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                ) : (
+                  <Link 
+                    href="/learn" 
+                    className="px-10 py-5 rounded-2xl font-bold text-black bg-white hover:bg-drp-cyan transition-all flex items-center justify-center gap-3 shadow-2xl shadow-white/5"
+                  >
+                    Academy Completed <Trophy className="h-5 w-5" />
+                  </Link>
+                )}
+                <Link 
+                  href="/learn" 
+                  className="px-10 py-5 rounded-2xl font-bold text-white border border-white/10 bg-white/5 hover:bg-white/10 transition-all"
+                >
+                  Return to Hub
+                </Link>
+              </div>
+            </motion.div>
           )}
-        </div>
+        </AnimatePresence>
+
+        {/* Footer Navigation */}
+        {!isFinished && (
+           <div className="mt-32 pt-12 border-t border-white/5 flex items-center justify-between">
+              {lesson.prevLesson ? (
+                <Link href={`/lessons/${lesson.prevLesson}`} className="flex items-center gap-3 text-drp-gray hover:text-white transition-colors group">
+                  <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-all">
+                    <ArrowLeft className="h-5 w-5" />
+                  </div>
+                  <div className="text-left">
+                    <div className="text-[8px] font-cinematic uppercase tracking-widest opacity-40">Previous</div>
+                    <div className="text-sm font-bold">Back to Security</div>
+                  </div>
+                </Link>
+              ) : <div />}
+
+              {lesson.nextLesson && (
+                <Link href={`/lessons/${lesson.nextLesson}`} className="flex items-center gap-3 text-drp-gray hover:text-white transition-colors group text-right">
+                  <div className="text-right">
+                    <div className="text-[8px] font-cinematic uppercase tracking-widest opacity-40">Next Module</div>
+                    <div className="text-sm font-bold">Consensus Engines</div>
+                  </div>
+                  <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center group-hover:border-drp-cyan/50 group-hover:text-drp-cyan transition-all">
+                    <ArrowRight className="h-5 w-5" />
+                  </div>
+                </Link>
+              )}
+           </div>
+        )}
+      </main>
+
+      {/* Background Cinematic Effects */}
+      <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-drp-cyan/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[150px]" />
       </div>
+
       <AITutor lesson={lesson} />
     </div>
   );

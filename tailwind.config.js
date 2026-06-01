@@ -97,6 +97,8 @@ module.exports = {
           white: '#FFFFFF',
           purple: '#8B5CF6',
           teal: '#06B6D4',
+          cyan: '#00f2ff',
+          gray: '#94a3b8',
         }
       },
       fontFamily: {

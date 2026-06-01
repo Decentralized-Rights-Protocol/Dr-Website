@@ -4,6 +4,7 @@ import { useQuery, useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { Vote, Clock, CheckCircle2, XCircle, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
+import { useAppStore } from '@/store/app-store'
 
 function ProposalCard({ p, onVote }: { p: any; onVote: (id: string, v: 'yes' | 'no') => void }) {
   const yesP = p.totalVotes > 0 ? Math.round((p.yesVotes / p.totalVotes) * 100) : 0
@@ -38,10 +39,12 @@ function ProposalCard({ p, onVote }: { p: any; onVote: (id: string, v: 'yes' | '
 }
 
 export default function GovernancePage() {
-  const proposals = useQuery(api.governance.listProposals)
-  const vote = useMutation(api.governance.castVote)
+  const address = useAppStore((state) => state.address)
+  const proposals = useQuery(api.governance.listGovernanceProposals)
+  const vote = useMutation(api.governance.createVoteRecord)
   async function handleVote(id: string, v: 'yes' | 'no') {
-    try { await vote({ proposalId: id as any, vote: v }) } catch {}
+    if (!address) return
+    try { await vote({ proposalId: id as any, choice: v, walletAddress: address }) } catch {}
   }
   return (
     <div className="space-y-6">

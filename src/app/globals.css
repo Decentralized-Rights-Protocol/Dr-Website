@@ -5,6 +5,44 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
 
+/* DRP v2 Design Tokens */
+:root {
+  --drp-void: #030308;
+  --drp-cyan: #00f2ff;
+  --drp-gold: #ffd700;
+  --drp-purple: #8b5cf6;
+  --drp-green: #00ff88;
+  --drp-red: #ff4040;
+  --font-display: 'Syne', system-ui, sans-serif;
+  
+  --bg: var(--drp-void);
+  --text: #ffffff;
+}
+
+/* Glass Components */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Glow Effects */
+.glow-cyan { text-shadow: 0 0 20px rgba(0, 242, 255, 0.5); }
+.glow-gold { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+
+/* Gradient Text */
+.text-gradient-cyan {
+  background: linear-gradient(to right, var(--drp-cyan), var(--drp-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
