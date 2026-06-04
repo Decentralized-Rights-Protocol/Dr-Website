@@ -47,10 +47,10 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
   if (loading) return <LessonSkeleton />;
   if (!lesson) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-[#030308] text-white p-8">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-8">
         <h1 className="text-4xl font-black mb-6">Protocol Fragment Not Found</h1>
         <p className="text-drp-gray mb-10 text-center max-w-md">The educational module you are seeking is either restricted or moved in the protocol hierarchy.</p>
-        <Link href="/learn" className="px-8 py-4 rounded-2xl bg-white text-black font-bold hover:bg-drp-cyan transition-all">Return to Academy Hub</Link>
+        <Link href="/learn" className="px-8 py-4 rounded-2xl bg-foreground text-background font-bold hover:bg-drp-cyan transition-all">Return to Academy Hub</Link>
       </div>
     );
   }
@@ -59,11 +59,11 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
   const lessonXP = 100;
 
   return (
-    <div className="min-h-screen bg-[#030308] text-white selection:bg-drp-cyan/30 selection:text-drp-cyan">
+    <div className="min-h-screen bg-background text-foreground selection:bg-drp-cyan/30 selection:text-drp-cyan">
       {/* Cinematic Top Progress Nav */}
-      <div className="sticky top-0 z-[100] border-b border-white/5 bg-black/60 backdrop-blur-2xl">
+      <div className="sticky top-0 z-[100] border-b border-foreground/5 bg-background/60 backdrop-blur-2xl">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center gap-6">
-          <Link href="/learn" className="p-2 rounded-xl hover:bg-white/5 text-drp-gray hover:text-white transition-all">
+          <Link href="/learn" className="p-2 rounded-xl hover:bg-foreground/5 text-drp-gray hover:text-foreground transition-all">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           
@@ -77,7 +77,7 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
               </div>
               <span className="text-[10px] font-bold text-drp-cyan uppercase tracking-widest">{completed ? '100% Verified' : 'Reading Session'}</span>
             </div>
-            <div className="h-1 rounded-full bg-white/5 overflow-hidden">
+            <div className="h-1 rounded-full bg-foreground/5 overflow-hidden">
               <motion.div 
                 animate={{ width: completed ? '100%' : '30%' }}
                 className="h-full bg-gradient-to-r from-drp-cyan to-blue-400" 
@@ -90,7 +90,7 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
               <span className="text-xs font-bold text-amber-400">+{lessonRewards} $DeRi</span>
               <span className="text-[8px] font-cinematic text-amber-400/40 uppercase tracking-widest">Rewards</span>
             </div>
-            <div className="w-px h-8 bg-white/10" />
+            <div className="w-px h-8 bg-foreground/10" />
             <div className="flex flex-col items-end">
               <span className="text-xs font-bold text-drp-cyan">+{lessonXP} XP</span>
               <span className="text-[8px] font-cinematic text-drp-cyan/40 uppercase tracking-widest">Experience</span>
@@ -106,11 +106,11 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
           animate={{ opacity: 1, y: 0 }}
           className="mb-20 text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-drp-cyan uppercase tracking-widest mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-[10px] font-bold text-drp-cyan uppercase tracking-widest mb-8">
             <Zap className="h-3 w-3" />
             Core Curriculum Module
           </div>
-          <h1 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tight leading-none">
+          <h1 className="text-4xl md:text-7xl font-black text-foreground mb-6 tracking-tight leading-none">
             {lesson.title || lessonId.replace(/-/g, ' ')}
           </h1>
           <p className="text-lg md:text-xl text-drp-gray max-w-3xl mx-auto leading-relaxed font-medium">
@@ -119,7 +119,7 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
         </motion.div>
 
         {/* Markdown Content Area */}
-        <div className="prose prose-invert max-w-none prose-p:text-drp-gray/90 prose-p:text-lg prose-p:leading-relaxed prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight prose-a:text-drp-cyan prose-strong:text-white prose-code:text-drp-cyan prose-code:bg-drp-cyan/10 prose-code:px-1 prose-code:rounded">
+        <div className="prose prose-invert max-w-none prose-p:text-drp-gray/90 prose-p:text-lg prose-p:leading-relaxed prose-headings:text-foreground prose-headings:font-bold prose-headings:tracking-tight prose-a:text-drp-cyan prose-strong:text-foreground prose-code:text-drp-cyan prose-code:bg-drp-cyan/10 prose-code:px-1 prose-code:rounded">
           <ReactMarkdown components={diagramComponents}>
             {lesson.content}
           </ReactMarkdown>
@@ -127,10 +127,10 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
 
         {/* Finish Button Section */}
         {!completed ? (
-          <div className="mt-20 flex justify-center border-t border-white/5 pt-12">
+          <div className="mt-20 flex justify-center border-t border-foreground/5 pt-12">
             <button 
               onClick={() => setCompleted(true)}
-              className="px-12 py-5 rounded-2xl font-bold text-black bg-white hover:bg-drp-cyan transition-all shadow-2xl shadow-white/5 uppercase tracking-widest text-xs"
+              className="px-12 py-5 rounded-2xl font-bold text-background bg-foreground hover:bg-drp-cyan transition-all shadow-2xl shadow-foreground/5 uppercase tracking-widest text-xs"
             >
               Mark Module as Complete
             </button>
@@ -143,7 +143,7 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
           >
             <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-drp-cyan to-transparent" />
             <div className="text-7xl mb-8">🎖️</div>
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">Module Certified</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4 tracking-tighter">Module Certified</h2>
             <p className="text-drp-gray text-lg mb-10 max-w-xl mx-auto">
               You have completed the reading for this curriculum module. Rewards have been allocated to your profile.
             </p>
@@ -153,7 +153,7 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
                 <div className="text-3xl font-black text-amber-400">+{lessonRewards}</div>
                 <div className="text-[10px] font-cinematic text-amber-400/40 uppercase tracking-widest mt-1">$DeRi Tokens</div>
               </div>
-              <div className="w-px h-12 bg-white/10" />
+              <div className="w-px h-12 bg-foreground/10" />
               <div className="text-center">
                 <div className="text-3xl font-black text-drp-cyan">+{lessonXP}</div>
                 <div className="text-[10px] font-cinematic text-drp-cyan/40 uppercase tracking-widest mt-1">Steward XP</div>
@@ -163,13 +163,13 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link 
                 href="/learn" 
-                className="px-10 py-5 rounded-2xl font-bold text-black bg-white hover:bg-drp-cyan transition-all flex items-center justify-center gap-3 shadow-2xl shadow-white/5"
+                className="px-10 py-5 rounded-2xl font-bold text-background bg-foreground hover:bg-drp-cyan transition-all flex items-center justify-center gap-3 shadow-2xl shadow-foreground/5"
               >
                 Continue Curriculum <Trophy className="h-5 w-5" />
               </Link>
               <Link 
                 href="/learn" 
-                className="px-10 py-5 rounded-2xl font-bold text-white border border-white/10 bg-white/5 hover:bg-white/10 transition-all"
+                className="px-10 py-5 rounded-2xl font-bold text-foreground border border-foreground/10 bg-foreground/5 hover:bg-foreground/10 transition-all"
               >
                 Return to Hub
               </Link>
@@ -178,9 +178,9 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
         )}
 
         {/* Footer Navigation */}
-        <div className="mt-32 pt-12 border-t border-white/5 flex items-center justify-between">
-            <Link href="/learn" className="flex items-center gap-3 text-drp-gray hover:text-white transition-colors group">
-                <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-all">
+        <div className="mt-32 pt-12 border-t border-foreground/5 flex items-center justify-between">
+            <Link href="/learn" className="flex items-center gap-3 text-drp-gray hover:text-foreground transition-colors group">
+                <div className="w-10 h-10 rounded-xl border border-foreground/10 flex items-center justify-center group-hover:border-foreground/30 transition-all">
                 <ArrowLeft className="h-5 w-5" />
                 </div>
                 <div className="text-left">

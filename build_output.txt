@@ -1,0 +1,129 @@
+
+> drp-website@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.3
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+ ⨯ ESLint: Invalid Options: - Unknown options: useEslintrc, extensions - 'extensions' has been removed.
+   Collecting page data ...
+   Generating static pages (0/95) ...
+   Generating static pages (23/95) 
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+   Generating static pages (47/95) 
+   Generating static pages (71/95) 
+ ✓ Generating static pages (95/95)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    219 kB          354 kB
+├ ○ /_not-found                          160 B          87.4 kB
+├ ○ /about                               244 B          94.3 kB
+├ ○ /ai-governance                       143 B          98.6 kB
+├ ○ /api                                 6.27 kB         107 kB
+├ ƒ /api/ai-tutor                        0 B                0 B
+├ ƒ /api/explorer/activity               0 B                0 B
+├ ƒ /api/explorer/blocks                 0 B                0 B
+├ ƒ /api/explorer/elders                 0 B                0 B
+├ ƒ /api/explorer/proofs                 0 B                0 B
+├ ƒ /api/explorer/rankings               0 B                0 B
+├ ƒ /api/explorer/summary                0 B                0 B
+├ ƒ /api/explorer/transactions           0 B                0 B
+├ ƒ /api/learn/complete                  0 B                0 B
+├ ○ /api/learn/dashboard                 0 B                0 B
+├ ○ /api/learn/debug                     0 B                0 B
+├ ○ /api/learn/leaderboard               0 B                0 B
+├ ƒ /api/learn/lesson/[id]               0 B                0 B
+├ ○ /api/learn/lessons                   0 B                0 B
+├ ƒ /api/learn/lessons/[slug]            0 B                0 B
+├ ○ /api/learn/progress                  0 B                0 B
+├ ƒ /api/proofs/submit                   0 B                0 B
+├ ƒ /api/reward/balance/[address]        0 B                0 B
+├ ƒ /api/reward/lesson-complete          0 B                0 B
+├ ƒ /api/submit-activity                 0 B                0 B
+├ ○ /app                                 687 B          87.9 kB
+├ ○ /community                           244 B          94.3 kB
+├ ○ /community/share                     2.1 kB         96.2 kB
+├ ○ /dashboard                           10.4 kB         348 kB
+├ ○ /docs                                244 B          94.3 kB
+├ ○ /docs/community                      244 B          94.3 kB
+├ ○ /docs/consensus                      246 B          94.3 kB
+├ ○ /docs/contributing                   244 B          94.3 kB
+├ ○ /docs/examples                       3.59 kB        97.6 kB
+├ ○ /docs/faq                            244 B          94.3 kB
+├ ○ /docs/getting-started                244 B          94.3 kB
+├ ○ /docs/protocol                       244 B          94.3 kB
+├ ○ /docs/repository                     244 B          94.3 kB
+├ ○ /docs/security                       244 B          94.3 kB
+├ ○ /drp-vs-ethereum                     143 B          98.6 kB
+├ ○ /earth-flag                          189 B          99.4 kB
+├ ○ /economics                           4.07 kB        98.1 kB
+├ ○ /economics/abe                       4.91 kB         139 kB
+├ ○ /economics/distribution              4.82 kB         139 kB
+├ ○ /economics/global                    4.05 kB         138 kB
+├ ○ /economics/governance                6.22 kB         140 kB
+├ ○ /economics/macro                     9.04 kB         226 kB
+├ ○ /economics/micro                     7.73 kB         225 kB
+├ ○ /economics/sre                       7.19 kB         141 kB
+├ ○ /economics/tokenomics                4.79 kB         139 kB
+├ ○ /ecosystem                           244 B          94.3 kB
+├ ○ /eldercore-privacy                   244 B          94.3 kB
+├ ○ /eldercore-terms                     244 B          94.3 kB
+├ ○ /explorer                            1.56 kB         114 kB
+├ ○ /faq                                 142 B          98.6 kB
+├ ○ /glossary                            3.15 kB        97.2 kB
+├ ○ /governance                          2.94 kB         115 kB
+├ ○ /how-drp-works                       143 B          98.6 kB
+├ ○ /human-rights-blockchain             142 B          98.6 kB
+├ ○ /leaderboard                         1.77 kB         114 kB
+├ ○ /learn                               244 B          94.3 kB
+├ ○ /legal/eldercore-privacy             245 B          94.3 kB
+├ ○ /legal/eldercore-terms               246 B          94.3 kB
+├ ○ /legal/privacy-policy                247 B          94.3 kB
+├ ○ /legal/terms-of-service              244 B          94.3 kB
+├ ● /lessons/[slug]                      47.9 kB         189 kB
+├   ├ /lessons/what-is-blockchain
+├   ├ /lessons/cryptography-and-hashing
+├   ├ /lessons/consensus-mechanisms
+├   └ [+17 more paths]
+├ ○ /login                               244 B          94.3 kB
+├ ○ /philosophy                          3.15 kB        97.2 kB
+├ ○ /privacy-policy                      244 B          94.3 kB
+├ ○ /profile                             4.28 kB         116 kB
+├ ○ /proofs/activities                   7.25 kB         265 kB
+├ ○ /quantum-security                    3.41 kB        97.5 kB
+├ ○ /review                              3.69 kB         222 kB
+├ ○ /rewards                             3.11 kB         115 kB
+├ ○ /roadmap                             244 B          94.3 kB
+├ ○ /robots.txt                          0 B                0 B
+├ ○ /sitemap.xml                         0 B                0 B
+├ ○ /status                              4.08 kB        91.3 kB
+├ ○ /terms-of-service                    244 B          94.3 kB
+├ ○ /tokens                              7.1 kB          101 kB
+├ ○ /wallet                              4.72 kB         263 kB
+├ ○ /what-is-drp                         143 B          98.6 kB
+├ ○ /whitepaper                          5.65 kB        99.7 kB
+└ ○ /why-drp                             21.3 kB         228 kB
++ First Load JS shared by all            87.2 kB
+  ├ chunks/7023-052f45552274c4db.js      31.6 kB
+  ├ chunks/fd9d1056-d2f6d2154559e344.js  53.6 kB
+  └ other shared chunks (total)          1.99 kB
+
+
+ƒ Middleware                             27.2 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses getStaticProps)
+ƒ  (Dynamic)  server-rendered on demand
+

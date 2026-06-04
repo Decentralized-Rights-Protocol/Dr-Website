@@ -369,20 +369,20 @@ function AITutor({ lesson }: { lesson: Lesson }) {
               initial={{ opacity: 0, y: 100, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 100, scale: 0.95 }}
-              className="relative w-full sm:w-[450px] h-[90vh] sm:h-[650px] rounded-t-[2.5rem] sm:rounded-[2.5rem] border border-white/10 flex flex-col overflow-hidden shadow-2xl bg-[#05050a]"
+              className="relative w-full sm:w-[450px] h-[90vh] sm:h-[650px] rounded-t-[2.5rem] sm:rounded-[2.5rem] border border-foreground/10 flex flex-col overflow-hidden shadow-2xl bg-card"
             >
-              <div className="p-6 border-b border-white/5 bg-white/5 flex items-center justify-between">
+              <div className="p-6 border-b border-foreground/5 bg-foreground/5 flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-drp-cyan/10 border border-drp-cyan/20 flex items-center justify-center">
                     <Sparkles className="h-6 w-6 text-drp-cyan" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white text-base leading-tight">Knowledge Core</h4>
+                    <h4 className="font-bold text-foreground text-base leading-tight">Knowledge Core</h4>
                     <p className="text-[10px] font-cinematic text-drp-cyan tracking-widest uppercase opacity-60">Session Active</p>
                   </div>
                 </div>
-                <button onClick={() => setOpen(false)} className="p-2 rounded-full hover:bg-white/10 transition-colors">
-                  <ArrowRight className="h-5 w-5 text-white/40 rotate-45" />
+                <button onClick={() => setOpen(false)} className="p-2 rounded-full hover:bg-foreground/10 transition-colors">
+                  <ArrowRight className="h-5 w-5 text-foreground/40 rotate-45" />
                 </button>
               </div>
 
@@ -393,7 +393,7 @@ function AITutor({ lesson }: { lesson: Lesson }) {
                       "max-w-[85%] px-5 py-3 rounded-2xl text-sm leading-relaxed",
                       m.role === 'user' 
                         ? 'bg-drp-cyan text-black font-medium rounded-tr-sm' 
-                        : 'bg-white/5 border border-white/10 text-drp-gray/90 rounded-tl-sm'
+                        : 'bg-foreground/5 border border-foreground/10 text-drp-gray/90 rounded-tl-sm'
                     )}>
                       {m.text}
                     </div>
@@ -401,7 +401,7 @@ function AITutor({ lesson }: { lesson: Lesson }) {
                 ))}
                 {loading && (
                   <div className="flex justify-start">
-                    <div className="px-5 py-4 rounded-2xl rounded-tl-sm bg-white/5 border border-white/10 flex gap-2">
+                    <div className="px-5 py-4 rounded-2xl rounded-tl-sm bg-foreground/5 border border-foreground/10 flex gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-drp-cyan animate-bounce" />
                       <div className="w-1.5 h-1.5 rounded-full bg-drp-cyan animate-bounce [animation-delay:0.2s]" />
                       <div className="w-1.5 h-1.5 rounded-full bg-drp-cyan animate-bounce [animation-delay:0.4s]" />
@@ -411,10 +411,10 @@ function AITutor({ lesson }: { lesson: Lesson }) {
                 <div ref={bottomRef} />
               </div>
 
-              <div className="p-6 border-t border-white/5 bg-white/5 space-y-4">
+              <div className="p-6 border-t border-foreground/5 bg-foreground/5 space-y-4">
                 <div className="flex flex-wrap gap-2">
                   {['Explain simply','Use a metaphor','Historical context?'].map(h => (
-                    <button key={h} onClick={() => setInput(h)} className="text-[10px] font-bold px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/40 hover:text-drp-cyan hover:border-drp-cyan/40 transition-all uppercase tracking-widest">{h}</button>
+                    <button key={h} onClick={() => setInput(h)} className="text-[10px] font-bold px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/40 hover:text-drp-cyan hover:border-drp-cyan/40 transition-all uppercase tracking-widest">{h}</button>
                   ))}
                 </div>
                 <div className="flex gap-3">
@@ -423,12 +423,12 @@ function AITutor({ lesson }: { lesson: Lesson }) {
                     onChange={e => setInput(e.target.value)} 
                     onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()} 
                     placeholder="Ask about DRP protocol details..."
-                    className="flex-1 bg-black/40 border border-white/10 rounded-2xl px-5 py-4 text-sm text-white placeholder-white/20 outline-none focus:border-drp-cyan/40 transition-colors" 
+                    className="flex-1 bg-black/40 border border-foreground/10 rounded-2xl px-5 py-4 text-sm text-foreground placeholder-foreground/20 outline-none focus:border-drp-cyan/40 transition-colors" 
                   />
                   <button 
                     onClick={send} 
                     disabled={loading || !input.trim()} 
-                    className="w-14 rounded-2xl flex items-center justify-center bg-white text-black transition-all disabled:opacity-30 hover:bg-drp-cyan shadow-xl shadow-white/5"
+                    className="w-14 rounded-2xl flex items-center justify-center bg-foreground text-background transition-all disabled:opacity-30 hover:bg-drp-cyan shadow-xl shadow-foreground/5"
                   >
                     <ArrowUpIcon className="h-5 w-5" />
                   </button>
@@ -466,11 +466,11 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#030308] text-white selection:bg-drp-cyan/30 selection:text-drp-cyan">
+    <div className="min-h-screen bg-background text-foreground selection:bg-drp-cyan/30 selection:text-drp-cyan">
       {/* Cinematic Top Progress Nav */}
-      <div className="sticky top-0 z-[100] border-b border-white/5 bg-black/60 backdrop-blur-2xl">
+      <div className="sticky top-0 z-[100] border-b border-foreground/5 bg-background/60 backdrop-blur-2xl">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center gap-6">
-          <Link href="/learn" className="p-2 rounded-xl hover:bg-white/5 text-drp-gray hover:text-white transition-all">
+          <Link href="/learn" className="p-2 rounded-xl hover:bg-foreground/5 text-drp-gray hover:text-foreground transition-all">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           
@@ -484,7 +484,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
               </div>
               <span className="text-[10px] font-bold text-drp-cyan uppercase tracking-widest">{Math.round(progress)}% Verified</span>
             </div>
-            <div className="h-1 rounded-full bg-white/5 overflow-hidden">
+            <div className="h-1 rounded-full bg-foreground/5 overflow-hidden">
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
@@ -498,7 +498,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
               <span className="text-xs font-bold text-amber-400">+{lesson.deri} $DeRi</span>
               <span className="text-[8px] font-cinematic text-amber-400/40 uppercase tracking-widest">Rewards</span>
             </div>
-            <div className="w-px h-8 bg-white/10" />
+            <div className="w-px h-8 bg-foreground/10" />
             <div className="flex flex-col items-end">
               <span className="text-xs font-bold text-drp-cyan">+{lesson.xp} XP</span>
               <span className="text-[8px] font-cinematic text-drp-cyan/40 uppercase tracking-widest">Experience</span>
@@ -514,11 +514,11 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
           animate={{ opacity: 1, y: 0 }}
           className="mb-20 text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-drp-cyan uppercase tracking-widest mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-[10px] font-bold text-drp-cyan uppercase tracking-widest mb-8">
             <Zap className="h-3 w-3" />
             {lesson.difficulty} Level Certification
           </div>
-          <h1 className="text-4xl md:text-7xl font-black text-white mb-6 tracking-tight leading-none">
+          <h1 className="text-4xl md:text-7xl font-black text-foreground mb-6 tracking-tight leading-none">
             {lesson.title}
           </h1>
           <p className="text-lg md:text-xl text-drp-gray max-w-3xl mx-auto leading-relaxed font-medium">
@@ -527,7 +527,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
           
           <div className="flex flex-wrap justify-center gap-3 mt-10">
             {lesson.tags.map(tag => (
-              <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold bg-white/5 text-white/40 border border-white/5 uppercase tracking-widest">
+              <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold bg-foreground/5 text-foreground/40 border border-foreground/5 uppercase tracking-widest">
                 {tag}
               </span>
             ))}
@@ -539,12 +539,12 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-20 rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-drp-cyan/5 to-blue-500/5 p-10 backdrop-blur-2xl relative overflow-hidden"
+          className="mb-20 rounded-[2.5rem] border border-foreground/10 bg-gradient-to-br from-drp-cyan/5 to-blue-500/5 p-10 backdrop-blur-2xl relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 p-10 opacity-5">
             <Trophy className="w-48 h-48 text-drp-cyan" />
           </div>
-          <h2 className="text-lg font-bold text-white mb-8 flex items-center gap-3 uppercase tracking-widest">
+          <h2 className="text-lg font-bold text-foreground mb-8 flex items-center gap-3 uppercase tracking-widest">
             <div className="w-2 h-6 rounded-full bg-drp-cyan" />
             Module Objectives
           </h2>
@@ -571,8 +571,8 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
               className="relative"
             >
               {section.type === 'intro' && (
-                <div className="py-12 border-l-2 border-white/5 pl-8 md:pl-12 my-8">
-                   <p className="text-xl md:text-2xl text-white/80 leading-relaxed font-medium italic">
+                <div className="py-12 border-l-2 border-foreground/5 pl-8 md:pl-12 my-8">
+                   <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed font-medium italic">
                     {section.content}
                   </p>
                   <button onClick={() => mark(i)} className="mt-8 flex items-center gap-2 text-[10px] font-bold text-drp-cyan uppercase tracking-widest group">
@@ -585,14 +585,14 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
               )}
 
               {section.type === 'concept' && (
-                <div className="my-10 p-10 rounded-[2.5rem] border border-white/5 bg-white/5 backdrop-blur-xl group hover:border-white/20 transition-all">
+                <div className="my-10 p-10 rounded-[2.5rem] border border-foreground/5 bg-foreground/5 backdrop-blur-xl group hover:border-foreground/20 transition-all">
                   {section.title && (
                     <div className="flex items-center justify-between mb-8">
-                      <h3 className="text-2xl font-bold text-white tracking-tight flex items-center gap-4">
+                      <h3 className="text-2xl font-bold text-foreground tracking-tight flex items-center gap-4">
                         <span className="text-drp-cyan/20 font-black text-4xl">0{i+1}</span>
                         {section.title}
                       </h3>
-                      <div className="w-10 h-10 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-2xl bg-black/40 border border-foreground/10 flex items-center justify-center">
                         <BookOpen className="h-5 w-5 text-drp-gray" />
                       </div>
                     </div>
@@ -602,14 +602,14 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                       {section.content}
                     </p>
                   </div>
-                  <div className="mt-10 pt-8 border-t border-white/5 flex justify-end">
+                  <div className="mt-10 pt-8 border-t border-foreground/5 flex justify-end">
                     <button 
                       onClick={() => mark(i)} 
                       className={cn(
                         "flex items-center gap-3 px-6 py-3 rounded-2xl font-bold text-[10px] uppercase tracking-widest transition-all",
                         completed.has(i) 
                           ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
-                          : "bg-white/5 text-white/40 border border-white/5 hover:bg-white/10 hover:text-white"
+                          : "bg-foreground/5 text-foreground/40 border border-foreground/5 hover:bg-foreground/10 hover:text-foreground"
                       )}
                     >
                       {completed.has(i) ? <><CheckCircle2 className="h-4 w-4" /> Concept Mastered</> : 'Verify Understanding'}
@@ -623,10 +623,10 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                    {section.title && (
                      <div className="flex items-center gap-3 mb-6">
                        <Layers className="h-4 w-4 text-drp-cyan" />
-                       <h3 className="text-sm font-bold text-white uppercase tracking-widest">{section.title}</h3>
+                       <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">{section.title}</h3>
                      </div>
                    )}
-                   <div className="rounded-[2.5rem] border border-white/5 bg-black/40 p-2 overflow-hidden shadow-2xl">
+                   <div className="rounded-[2.5rem] border border-foreground/5 bg-black/40 p-2 overflow-hidden shadow-2xl">
                      {section.diagramType === 'flow' && <FlowDiagram data={section.diagramData} />}
                      {section.diagramType === 'comparison' && <ComparisonDiagram data={section.diagramData} />}
                      {section.diagramType === 'stack' && <StackDiagram data={section.diagramData} />}
@@ -652,7 +652,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
             >
               <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-drp-cyan to-transparent" />
               <div className="text-7xl mb-8">🎖️</div>
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">Lesson Certified</h2>
+              <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4 tracking-tighter">Lesson Certified</h2>
               <p className="text-drp-gray text-lg mb-10 max-w-xl mx-auto">
                 You have successfully completed the protocol verification for this module. Your credentials have been updated.
               </p>
@@ -662,7 +662,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                   <div className="text-3xl font-black text-amber-400">+{lesson.deri}</div>
                   <div className="text-[10px] font-cinematic text-amber-400/40 uppercase tracking-widest mt-1">$DeRi Tokens</div>
                 </div>
-                <div className="w-px h-12 bg-white/10" />
+                <div className="w-px h-12 bg-foreground/10" />
                 <div className="text-center">
                   <div className="text-3xl font-black text-drp-cyan">+{lesson.xp}</div>
                   <div className="text-[10px] font-cinematic text-drp-cyan/40 uppercase tracking-widest mt-1">Steward XP</div>
@@ -673,21 +673,21 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                 {lesson.nextLesson ? (
                   <Link 
                     href={`/lessons/${lesson.nextLesson}`} 
-                    className="px-10 py-5 rounded-2xl font-bold text-black bg-white hover:bg-drp-cyan transition-all flex items-center justify-center gap-3 group shadow-2xl shadow-white/5"
+                    className="px-10 py-5 rounded-2xl font-bold text-background bg-foreground hover:bg-drp-cyan transition-all flex items-center justify-center gap-3 group shadow-2xl shadow-foreground/5"
                   >
                     Next Protocol Module <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 ) : (
                   <Link 
                     href="/learn" 
-                    className="px-10 py-5 rounded-2xl font-bold text-black bg-white hover:bg-drp-cyan transition-all flex items-center justify-center gap-3 shadow-2xl shadow-white/5"
+                    className="px-10 py-5 rounded-2xl font-bold text-background bg-foreground hover:bg-drp-cyan transition-all flex items-center justify-center gap-3 shadow-2xl shadow-foreground/5"
                   >
                     Academy Completed <Trophy className="h-5 w-5" />
                   </Link>
                 )}
                 <Link 
                   href="/learn" 
-                  className="px-10 py-5 rounded-2xl font-bold text-white border border-white/10 bg-white/5 hover:bg-white/10 transition-all"
+                  className="px-10 py-5 rounded-2xl font-bold text-foreground border border-foreground/10 bg-foreground/5 hover:bg-foreground/10 transition-all"
                 >
                   Return to Hub
                 </Link>
@@ -698,10 +698,10 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
 
         {/* Footer Navigation */}
         {!isFinished && (
-           <div className="mt-32 pt-12 border-t border-white/5 flex items-center justify-between">
+           <div className="mt-32 pt-12 border-t border-foreground/5 flex items-center justify-between">
               {lesson.prevLesson ? (
-                <Link href={`/lessons/${lesson.prevLesson}`} className="flex items-center gap-3 text-drp-gray hover:text-white transition-colors group">
-                  <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-all">
+                <Link href={`/lessons/${lesson.prevLesson}`} className="flex items-center gap-3 text-drp-gray hover:text-foreground transition-colors group">
+                  <div className="w-10 h-10 rounded-xl border border-foreground/10 flex items-center justify-center group-hover:border-foreground/30 transition-all">
                     <ArrowLeft className="h-5 w-5" />
                   </div>
                   <div className="text-left">
@@ -712,12 +712,12 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
               ) : <div />}
 
               {lesson.nextLesson && (
-                <Link href={`/lessons/${lesson.nextLesson}`} className="flex items-center gap-3 text-drp-gray hover:text-white transition-colors group text-right">
+                <Link href={`/lessons/${lesson.nextLesson}`} className="flex items-center gap-3 text-drp-gray hover:text-foreground transition-colors group text-right">
                   <div className="text-right">
                     <div className="text-[8px] font-cinematic uppercase tracking-widest opacity-40">Next Module</div>
                     <div className="text-sm font-bold">Consensus Engines</div>
                   </div>
-                  <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center group-hover:border-drp-cyan/50 group-hover:text-drp-cyan transition-all">
+                  <div className="w-10 h-10 rounded-xl border border-foreground/10 flex items-center justify-center group-hover:border-drp-cyan/50 group-hover:text-drp-cyan transition-all">
                     <ArrowRight className="h-5 w-5" />
                   </div>
                 </Link>
