@@ -1,9 +1,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "tailwindcss";
-@config "../../tailwind.config.js";
-
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+@config "../../tailwind.config.js";
 
 /* DRP Design Tokens */
 :root {
