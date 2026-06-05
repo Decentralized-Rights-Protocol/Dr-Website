@@ -89,7 +89,7 @@ export default function CommunityPage() {
       <section className="py-24 px-6 text-center bg-gray-50 dark:bg-transparent border-t border-gray-100 dark:border-white/5">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-4">Ready to contribute?</h2>
-          <p className="text-gray-500 dark:text-white/40 mb-10">Every contribution — code, research, advocacy — is tracked and rewarded through DRP's proof system.</p>
+          <p className="text-gray-500 dark:text-white/40 mb-10">Every contribution — code, research, advocacy — is tracked and rewarded through DRP&apos;s proof system.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/docs/contributing"
               className="inline-flex items-center gap-3 px-7 py-4 bg-[#00e5cc] text-black font-bold text-sm hover:bg-[#00bfff] transition-all">

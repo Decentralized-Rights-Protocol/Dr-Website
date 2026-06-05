@@ -138,7 +138,7 @@ export default function EarthFlagPage() {
               <Globe className="w-8 h-8 text-[#006DB6] mb-6" />
               <h3 className="text-xl font-black text-gray-900 dark:text-white mb-3">Why DRP Carries This Flag</h3>
               <p className="text-gray-500 dark:text-white/40 text-sm leading-relaxed">
-                The Flag of Earth embodies everything DRP stands for: no borders, no exclusion, rights for every human being on this planet. We carry it because our mission is planetary — to build rights infrastructure that serves all 8 billion people, starting with those most underserved. Whether you're in Ghana, Germany, or the International Space Station — DRP is for you.
+                The Flag of Earth embodies everything DRP stands for: no borders, no exclusion, rights for every human being on this planet. We carry it because our mission is planetary — to build rights infrastructure that serves all 8 billion people, starting with those most underserved. Whether you&apos;re in Ghana, Germany, or the International Space Station — DRP is for you.
               </p>
             </div>
             <div className="border border-[#00e5cc]/20 bg-[#00e5cc]/5 p-8">
