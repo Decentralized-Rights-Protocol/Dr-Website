@@ -15,6 +15,8 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'
+
 export default function LearnHubPage() {
   const allLessons = listAllLessons()
   

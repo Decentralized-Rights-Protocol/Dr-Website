@@ -77,16 +77,16 @@ export function Footer() {
               Decentralized Rights Protocol — verified rights for every human.
             </p>
             {/* Flag of Earth — Official IFOPE */}
-            <Link href="/earth-flag" className="group block mb-2">
+            <div className="group block mb-2">
               <div className="flex items-center gap-2 mb-1">
                 <div className="relative w-[44px] h-[30px] overflow-hidden shrink-0">
                   <Image src="/ifope/08_IFOPE_20x30.jpg"
                     alt="International Flag of Planet Earth — Oskar Pernefeldt, 2015"
                     fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <span className="text-[10px] text-foreground/25 uppercase tracking-widest group-hover:text-[#00e5cc] transition-colors">One Planet</span>
+                <span className="text-[10px] text-foreground/25 uppercase tracking-widest transition-colors">One Planet</span>
               </div>
-            </Link>
+            </div>
             <p className="text-[9px] text-foreground/20 leading-snug mb-5 max-w-[190px]">
               Flag of Earth ©{' '}
               <a href="https://www.flagofearth.com" target="_blank" rel="noopener noreferrer"
