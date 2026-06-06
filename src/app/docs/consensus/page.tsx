@@ -30,12 +30,12 @@ export default function ConsensusPage() {
 
         {/* Proof of Status */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-foreground mb-6">
+          <div className="glass rounded-[2rem] p-10 mb-8 border-l-4 border-purple-500">
             <div className="flex items-center gap-4 mb-4">
-              <Shield className="h-8 w-8" />
-              <h2 className="text-3xl font-bold">Proof of Status (PoS)</h2>
+              <Shield className="h-10 w-10 text-purple-400" />
+              <h2 className="text-3xl font-bold tracking-tight">Proof of Status (PoS)</h2>
             </div>
-            <p className="text-primary-100 text-lg">
+            <p className="text-muted-foreground text-lg leading-relaxed">
               Proof of Status verifies the identity and standing of participants in the DRP network. It ensures that only verified, legitimate users can participate in consensus and governance.
             </p>
           </div>
@@ -83,12 +83,12 @@ export default function ConsensusPage() {
 
         {/* Proof of Activities */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 text-foreground mb-6">
+          <div className="glass rounded-[2rem] p-10 mb-8 border-l-4 border-purple-500">
             <div className="flex items-center gap-4 mb-4">
-              <Activity className="h-8 w-8" />
-              <h2 className="text-3xl font-bold">Proof of Activities (PoA)</h2>
+              <Activity className="h-10 w-10 text-purple-400" />
+              <h2 className="text-3xl font-bold tracking-tight">Proof of Activities (PoA)</h2>
             </div>
-            <p className="text-purple-100 text-lg">
+            <p className="text-muted-foreground text-lg leading-relaxed">
               Proof of Activities rewards participants for meaningful contributions to the network, including node operation, governance participation, and community engagement.
             </p>
           </div>
@@ -122,12 +122,12 @@ export default function ConsensusPage() {
 
         {/* AI Verification */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-foreground mb-6">
+          <div className="glass rounded-[2rem] p-10 mb-8 border-l-4 border-cyan-500">
             <div className="flex items-center gap-4 mb-4">
-              <Brain className="h-8 w-8" />
-              <h2 className="text-3xl font-bold">AI Elders & Verification</h2>
+              <Brain className="h-10 w-10 text-cyan-400" />
+              <h2 className="text-3xl font-bold tracking-tight">AI Elders & Verification</h2>
             </div>
-            <p className="text-blue-100 text-lg">
+            <p className="text-muted-foreground text-lg leading-relaxed">
               Advanced AI systems verify activities, detect fraud, and ensure the integrity of the consensus mechanism.
             </p>
           </div>

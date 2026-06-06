@@ -604,23 +604,21 @@ export default function MicroeconomicsPage() {
       </section>
 
       {/* Callout: Economic Intuition */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950">
+      <section className="py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-4xl mx-auto glass rounded-[2rem] p-10 border border-blue-500/20"
           >
-            <div className="bg-white dark:bg-neutral-800 rounded-xl p-8 border border-blue-200 dark:border-blue-900 shadow-lg">
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-4">
-                Economic Intuition
-              </h3>
-              <p className="text-lg text-neutral-700 dark:text-neutral-300">
-                The DRP microeconomic model creates a <strong className="text-neutral-900 dark:text-foreground">self-organizing economy</strong> where individual incentives align with collective welfare. Unlike traditional markets where value extraction creates winners and losers, DRP&apos;s activity-based model ensures that value flows to those who create it. Specialization emerges naturally, status is earned through contribution, and fraud is disincentivized through economic penalties. The result is a <strong className="text-neutral-900 dark:text-foreground">meritocratic equilibrium</strong> that rewards value creation while ensuring basic rights are met for all participants.
-              </p>
-            </div>
+            <h3 className="text-2xl font-bold text-foreground mb-4">
+              Economic Intuition
+            </h3>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              The DRP microeconomic model creates a <strong className="text-foreground">self-organizing economy</strong> where individual incentives align with collective welfare. Unlike traditional markets where value extraction creates winners and losers, DRP&apos;s activity-based model ensures that value flows to those who create it. Specialization emerges naturally, status is earned through contribution, and fraud is disincentivized through economic penalties. The result is a <strong className="text-foreground">meritocratic equilibrium</strong> that rewards value creation while ensuring basic rights are met for all participants.
+            </p>
           </motion.div>
         </div>
       </section>

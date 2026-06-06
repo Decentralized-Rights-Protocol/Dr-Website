@@ -500,11 +500,30 @@ function ArrowUpIcon(props: any) {
   )
 }
 
+function LoadingSpinner() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+      <div className="w-12 h-12 rounded-full border-4 border-drp-cyan/20 border-t-drp-cyan animate-spin" />
+      <p className="text-sm font-cinematic text-drp-cyan tracking-widest uppercase">Initializing Module...</p>
+    </div>
+  );
+}
+
 // ─── Main Component ──────────────────────────────────────────────
 
 export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
   const [completed, setCompleted] = useState<Set<number>>(new Set());
   const [isFinished, setIsFinished] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate initial loading
+    const timer = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <LoadingSpinner />;
+
   const total = lesson.sections.length;
   const progress = total > 0 ? (completed.size / total) * 100 : 0;
   
