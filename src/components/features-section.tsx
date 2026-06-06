@@ -83,7 +83,7 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
     >
       <div className="flex items-start justify-between mb-4">
         <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${feature.color} group-hover:scale-110 transition-transform duration-300`}>
-          <feature.icon className="h-6 w-6 text-white" />
+          <feature.icon className="h-6 w-6 text-foreground" />
         </div>
         <button
           onClick={(event) => {
@@ -97,7 +97,7 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
           <Info className="h-4 w-4" />
         </button>
       </div>
-      <h3 className="text-lg font-semibold text-white mb-2">
+      <h3 className="text-lg font-semibold text-foreground mb-2">
         {feature.name}
       </h3>
       <p className="text-sm text-neutral-300 leading-relaxed mb-3">
@@ -105,7 +105,7 @@ function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
       </p>
 
       {showDetails && (
-        <div className="mt-4 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
+        <div className="mt-4 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-foreground/10">
           <p className="text-xs text-neutral-300 leading-relaxed">
             {feature.details}
           </p>
@@ -134,7 +134,7 @@ export function FeaturesSection() {
       
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl animate-fade-in-up">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl animate-fade-in-up">
             Revolutionary Features
           </h2>
           <p className="mt-6 text-lg leading-8 text-neutral-300 animate-fade-in-up delay-200">
@@ -152,7 +152,7 @@ export function FeaturesSection() {
         <div className="mt-16 text-center animate-fade-in-up delay-1000">
           <Link
             href="/docs"
-            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-white font-semibold hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-foreground font-semibold hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
           >
             <span>Explore the Technology</span>
             <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

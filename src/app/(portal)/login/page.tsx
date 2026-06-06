@@ -26,7 +26,7 @@ export default function LoginPage() {
         </div>
 
         <div className="space-y-4">
-          <button className="w-full rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:-translate-y-0.5">
+          <button className="w-full rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-3 text-sm font-semibold text-foreground shadow-lg transition-transform hover:-translate-y-0.5">
             Connect Wallet
           </button>
           <div className="relative">

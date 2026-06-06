@@ -24,10 +24,10 @@ export function PillarCard({ icon: Icon, title, description, index }: PillarCard
       
       <div className="relative">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 mb-6 group-hover:scale-110 transition-transform duration-300">
-          <Icon className="h-8 w-8 text-white" />
+          <Icon className="h-8 w-8 text-foreground" />
         </div>
         
-        <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+        <h3 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-4">
           {title}
         </h3>
         

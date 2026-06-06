@@ -25,8 +25,8 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-black text-gray-900 dark:text-white mb-1">Dashboard</h1>
-        <p className="text-sm text-gray-500 dark:text-white/40">Your DRP activity overview</p>
+        <h1 className="text-2xl font-black text-foreground mb-1">Dashboard</h1>
+        <p className="text-sm text-gray-500 dark:text-foreground/40">Your DRP activity overview</p>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s) => <StatCard key={s.title} {...s} />)}

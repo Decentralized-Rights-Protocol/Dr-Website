@@ -92,7 +92,7 @@ export default function TokensPage() {
               name="$DeRi"
               symbol="Utility Token"
               description="Powers on-chain actions, activity proofs, transaction validation fees, and participation in PoA/PoAT. Earned through verified work, clean energy usage, learning proofs, and community contributions. Used to access DRP Apps, services, and third-party integrations."
-              icon={<Zap className="w-8 h-8 text-white" />}
+              icon={<Zap className="w-8 h-8 text-foreground" />}
               features={[
                 { icon: <Zap className="w-5 h-5" />, label: 'Utility & Transactions' },
                 { icon: <LinkIcon className="w-5 h-5" />, label: 'On-chain Actions' },
@@ -107,7 +107,7 @@ export default function TokensPage() {
               name="$RIGHTS"
               symbol="Governance Token"
               description="Represents the six pillars: Rights, Integrity, Governance, Humanity, Trust, Sustainability. Enables voting and decision-making across the DRP ecosystem. Used by community panels, Elders, and the AI governance system to shape the protocol&apos;s future."
-              icon={<Sparkles className="w-8 h-8 text-white" />}
+              icon={<Sparkles className="w-8 h-8 text-foreground" />}
               features={[
                 { icon: <Building2 className="w-5 h-5" />, label: 'Governance & Voting' },
                 { icon: <Sparkles className="w-5 h-5" />, label: 'AI Alignment' },

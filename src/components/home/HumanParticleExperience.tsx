@@ -282,14 +282,14 @@ export function HumanParticleExperience() {
         <nav className="px-8 pt-7 flex items-center justify-between pointer-events-auto">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: scene.accent, boxShadow: `0 0 20px ${scene.accent}60` }}>
-              <span className="text-xs font-black text-black">D</span>
+              <span className="text-xs font-black text-background">D</span>
             </div>
-            <span className="text-white font-semibold tracking-tight text-sm">Decentralized Rights Protocol</span>
+            <span className="text-foreground font-semibold tracking-tight text-sm">Decentralized Rights Protocol</span>
           </div>
           <div className="flex items-center gap-6 text-sm">
-            <Link href="/whitepaper" className="text-white/60 hover:text-white transition-colors">Whitepaper</Link>
-            <Link href="/docs" className="text-white/60 hover:text-white transition-colors">Docs</Link>
-            <Link href="https://app.decentralizedrights.com" className="px-4 py-1.5 rounded-full text-black font-semibold text-xs transition-all" style={{ background: scene.accent, boxShadow: `0 0 16px ${scene.accent}50` }}>Launch App</Link>
+            <Link href="/whitepaper" className="text-foreground/60 hover:text-foreground transition-colors">Whitepaper</Link>
+            <Link href="/docs" className="text-foreground/60 hover:text-foreground transition-colors">Docs</Link>
+            <Link href="https://app.decentralizedrights.com" className="px-4 py-1.5 rounded-full text-background font-semibold text-xs transition-all" style={{ background: scene.accent, boxShadow: `0 0 16px ${scene.accent}50` }}>Launch App</Link>
           </div>
         </nav>
 
@@ -313,12 +313,12 @@ export function HumanParticleExperience() {
               </div>
 
               {/* Headline */}
-              <h1 className="text-5xl md:text-6xl font-black text-white leading-none tracking-tight mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+              <h1 className="text-5xl md:text-6xl font-black text-foreground leading-none tracking-tight mb-4" style={{ fontFamily: 'var(--font-display)' }}>
                 {scene.headline}
               </h1>
 
               {/* Sub */}
-              <p className="text-lg text-white/60 leading-relaxed mb-8 max-w-xl">
+              <p className="text-lg text-foreground/60 leading-relaxed mb-8 max-w-xl">
                 {scene.sub}
               </p>
 
@@ -334,7 +334,7 @@ export function HumanParticleExperience() {
                   </Link>
                   <Link
                     href="https://app.decentralizedrights.com"
-                    className="px-6 py-3 rounded-full font-semibold text-sm border text-white transition-all hover:bg-white/10"
+                    className="px-6 py-3 rounded-full font-semibold text-sm border text-foreground transition-all hover:bg-white/10"
                     style={{ borderColor: 'rgba(255,255,255,0.2)' }}
                   >
                     Explore the App →
@@ -347,7 +347,7 @@ export function HumanParticleExperience() {
                 <motion.div
                   animate={{ y: [0, 8, 0] }}
                   transition={{ repeat: Infinity, duration: 2 }}
-                  className="flex items-center gap-2 text-white/30 text-xs"
+                  className="flex items-center gap-2 text-foreground/30 text-xs"
                 >
                   <span>Scroll to explore</span>
                   <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
@@ -388,7 +388,7 @@ function LandingSections() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-14">
             <p className="text-xs font-mono uppercase tracking-widest text-[#00f2ff] mb-3">Protocol Capabilities</p>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-4xl md:text-5xl font-black text-foreground tracking-tight leading-tight">
               Every layer designed<br/>for human rights.
             </h2>
           </div>
@@ -401,12 +401,12 @@ function LandingSections() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.07, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="group relative rounded-2xl p-6 border border-white/5 hover:border-white/10 transition-all duration-300"
+                className="group relative rounded-2xl p-6 border border-foreground/5 hover:border-foreground/10 transition-all duration-300"
                 style={{ background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(8px)' }}
               >
                 <div className="mb-4 text-2xl" style={{ color: c.color }}>{c.icon}</div>
-                <h3 className="text-white font-bold mb-2 tracking-tight">{c.label}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{c.desc}</p>
+                <h3 className="text-foreground font-bold mb-2 tracking-tight">{c.label}</h3>
+                <p className="text-foreground/50 text-sm leading-relaxed">{c.desc}</p>
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: `radial-gradient(circle at 50% 100%, ${c.color}08 0%, transparent 70%)` }} />
               </motion.div>
             ))}
@@ -415,12 +415,12 @@ function LandingSections() {
       </section>
 
       {/* How it works */}
-      <section className="px-6 md:px-16 py-20 border-t border-white/5">
+      <section className="px-6 md:px-16 py-20 border-t border-foreground/5">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <p className="text-xs font-mono uppercase tracking-widest text-[#ffd700] mb-3">How It Works</p>
-              <h2 className="text-4xl font-black text-white tracking-tight mb-6">Three steps to<br/>verified trust.</h2>
+              <h2 className="text-4xl font-black text-foreground tracking-tight mb-6">Three steps to<br/>verified trust.</h2>
               <div className="space-y-6">
                 {[
                   { n: '01', t: 'Verify Status', d: 'Institutions and participants issue attestations with clear trust boundaries and consent controls.' },
@@ -428,12 +428,12 @@ function LandingSections() {
                   { n: '03', t: 'Govern Transparently', d: 'Governance flows through AI-supported review with fully auditable decision logic.' },
                 ].map((step) => (
                   <div key={step.n} className="flex gap-5">
-                    <div className="shrink-0 w-10 h-10 rounded-full border border-white/10 flex items-center justify-center">
-                      <span className="text-xs font-mono text-white/40">{step.n}</span>
+                    <div className="shrink-0 w-10 h-10 rounded-full border border-foreground/10 flex items-center justify-center">
+                      <span className="text-xs font-mono text-foreground/40">{step.n}</span>
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">{step.t}</h4>
-                      <p className="text-white/50 text-sm leading-relaxed">{step.d}</p>
+                      <h4 className="text-foreground font-semibold mb-1">{step.t}</h4>
+                      <p className="text-foreground/50 text-sm leading-relaxed">{step.d}</p>
                     </div>
                   </div>
                 ))}
@@ -448,13 +448,13 @@ function LandingSections() {
                     { label: 'Rights verified', value: '9,203', color: '#8b5cf6' },
                     { label: 'Governance proposals', value: '78', color: '#00ff88' },
                   ].map((stat) => (
-                    <div key={stat.label} className="flex items-center justify-between py-3 border-b border-white/5">
-                      <span className="text-white/50 text-sm font-mono">{stat.label}</span>
+                    <div key={stat.label} className="flex items-center justify-between py-3 border-b border-foreground/5">
+                      <span className="text-foreground/50 text-sm font-mono">{stat.label}</span>
                       <span className="font-black text-xl tabular-nums" style={{ color: stat.color }}>{stat.value}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-6 text-xs font-mono text-white/20 uppercase tracking-widest">Testnet — live data</div>
+                <div className="mt-6 text-xs font-mono text-foreground/20 uppercase tracking-widest">Testnet — live data</div>
               </div>
             </div>
           </div>
@@ -462,13 +462,13 @@ function LandingSections() {
       </section>
 
       {/* Sector grid */}
-      <section className="px-6 md:px-16 py-20 border-t border-white/5">
+      <section className="px-6 md:px-16 py-20 border-t border-foreground/5">
         <div className="max-w-6xl mx-auto">
           <p className="text-xs font-mono uppercase tracking-widest text-[#8b5cf6] mb-3">Deployment Sectors</p>
-          <h2 className="text-4xl font-black text-white tracking-tight mb-12">Built for every<br/>sector of society.</h2>
+          <h2 className="text-4xl font-black text-foreground tracking-tight mb-12">Built for every<br/>sector of society.</h2>
           <div className="flex flex-wrap gap-3">
             {sectors.map((s) => (
-              <div key={s} className="px-5 py-2.5 rounded-full border border-white/8 text-white/60 text-sm hover:border-white/20 hover:text-white transition-all cursor-default">
+              <div key={s} className="px-5 py-2.5 rounded-full border border-white/8 text-foreground/60 text-sm hover:border-white/20 hover:text-foreground transition-all cursor-default">
                 {s}
               </div>
             ))}
@@ -477,25 +477,25 @@ function LandingSections() {
       </section>
 
       {/* CTA banner */}
-      <section className="px-6 md:px-16 py-28 border-t border-white/5">
+      <section className="px-6 md:px-16 py-28 border-t border-foreground/5">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight mb-6">
+          <h2 className="text-5xl md:text-6xl font-black text-foreground tracking-tight mb-6">
             Build the rights<br/>infrastructure of tomorrow.
           </h2>
-          <p className="text-white/50 text-lg mb-10 max-w-xl mx-auto">
+          <p className="text-foreground/50 text-lg mb-10 max-w-xl mx-auto">
             DRP is open, modular, and designed for institutional deployment. Read the whitepaper or launch the app today.
           </p>
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <Link
               href="/whitepaper"
-              className="px-8 py-3.5 rounded-full font-bold text-sm bg-[#00f2ff] text-black hover:bg-[#00d9e8] transition-all hover:scale-105"
+              className="px-8 py-3.5 rounded-full font-bold text-sm bg-[#00f2ff] text-background hover:bg-[#00d9e8] transition-all hover:scale-105"
               style={{ boxShadow: '0 0 32px rgba(0,242,255,0.3)' }}
             >
               Read Whitepaper
             </Link>
             <Link
               href="/docs"
-              className="px-8 py-3.5 rounded-full font-bold text-sm border border-white/15 text-white hover:bg-white/5 transition-all"
+              className="px-8 py-3.5 rounded-full font-bold text-sm border border-foreground/15 text-foreground hover:bg-white/5 transition-all"
             >
               View Documentation →
             </Link>
@@ -504,23 +504,23 @@ function LandingSections() {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 md:px-16 py-12 border-t border-white/5">
+      <footer className="px-6 md:px-16 py-12 border-t border-foreground/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <div className="w-6 h-6 rounded-full bg-[#00f2ff] flex items-center justify-center">
-                <span className="text-xs font-black text-black">D</span>
+                <span className="text-xs font-black text-background">D</span>
               </div>
-              <span className="text-white font-semibold text-sm">Decentralized Rights Protocol</span>
+              <span className="text-foreground font-semibold text-sm">Decentralized Rights Protocol</span>
             </div>
-            <p className="text-white/30 text-xs">Infrastructure for verified rights. © {new Date().getFullYear()}</p>
+            <p className="text-foreground/30 text-xs">Infrastructure for verified rights. © {new Date().getFullYear()}</p>
           </div>
-          <div className="flex gap-8 text-sm text-white/40">
-            <Link href="/whitepaper" className="hover:text-white transition-colors">Whitepaper</Link>
-            <Link href="/docs" className="hover:text-white transition-colors">Docs</Link>
-            <Link href="/tokens" className="hover:text-white transition-colors">Tokens</Link>
-            <Link href="/roadmap" className="hover:text-white transition-colors">Roadmap</Link>
-            <Link href="/legal/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
+          <div className="flex gap-8 text-sm text-foreground/40">
+            <Link href="/whitepaper" className="hover:text-foreground transition-colors">Whitepaper</Link>
+            <Link href="/docs" className="hover:text-foreground transition-colors">Docs</Link>
+            <Link href="/tokens" className="hover:text-foreground transition-colors">Tokens</Link>
+            <Link href="/roadmap" className="hover:text-foreground transition-colors">Roadmap</Link>
+            <Link href="/legal/privacy-policy" className="hover:text-foreground transition-colors">Privacy</Link>
           </div>
         </div>
       </footer>

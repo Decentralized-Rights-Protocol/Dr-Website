@@ -117,7 +117,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
       {/* Modal */}
       <div className="relative bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
+        <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-foreground">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-1 hover:bg-white/20 rounded-full transition-colors"
@@ -142,7 +142,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
             <div className="text-center py-8">
               <div className="flex flex-col items-center gap-x-4">
                 <Loader2 className="h-8 w-8 animate-spin text-blue-500 mb-4" />
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
                   Processing Reward...
                 </h3>
                 <p className="text-sm text-neutral-600 dark:text-neutral-300">
@@ -162,7 +162,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
                     Reward Sent Successfully!
                   </h3>
                   
@@ -189,7 +189,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                         Transaction Hash:
                       </p>
                       <div className="bg-neutral-100 dark:bg-neutral-700 rounded-md p-2 mb-2">
-                        <p className="font-mono text-xs text-neutral-900 dark:text-white break-all">
+                        <p className="font-mono text-xs text-neutral-900 dark:text-foreground break-all">
                           {rewardResult.transaction_hash}
                         </p>
                       </div>
@@ -217,7 +217,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
                     Reward Failed
                   </h3>
                   
@@ -235,7 +235,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                   
                   <button
                     onClick={processReward}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-foreground py-2 px-4 rounded-md text-sm font-medium transition-colors"
                   >
                     Try Again
                   </button>
@@ -252,7 +252,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                 </div>
               </div>
               
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
                 Ready to Claim Reward
               </h3>
               
@@ -262,7 +262,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
               
               <button
                 onClick={processReward}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-2 px-4 rounded-md text-sm font-medium transition-all duration-200 hover:scale-105"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-foreground py-2 px-4 rounded-md text-sm font-medium transition-all duration-200 hover:scale-105"
               >
                 Claim Reward
               </button>

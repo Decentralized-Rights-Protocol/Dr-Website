@@ -92,9 +92,9 @@ export default function EconomicsPage() {
             { icon: Shield, title: 'Rights-Backed Distribution', body: 'Economic rails prioritize dignity and fairness.' },
             { icon: Sparkles, title: 'Sustainability Incentives', body: 'Environmental and social value are first-class metrics.' },
           ].map((item) => (
-            <article key={item.title} className="rounded-2xl border border-white/10 bg-black/25 p-5">
+            <article key={item.title} className="rounded-2xl border border-foreground/10 bg-black/25 p-5">
               <item.icon className="h-5 w-5 text-cyan-200" />
-              <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
+              <h3 className="mt-3 text-lg font-semibold text-foreground">{item.title}</h3>
               <p className="mt-2 text-sm text-slate-300">{item.body}</p>
             </article>
           ))}
@@ -107,12 +107,12 @@ export default function EconomicsPage() {
             <Link
               key={page.href}
               href={page.href}
-              className="group block h-full rounded-2xl border border-white/10 bg-black/30 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-400/10"
+              className="group block h-full rounded-2xl border border-foreground/10 bg-black/30 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-cyan-400/10"
             >
               <div className={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${page.color}`}>
-                <page.icon className="h-8 w-8 text-white" />
+                <page.icon className="h-8 w-8 text-foreground" />
               </div>
-              <h3 className="text-xl font-semibold text-white">{page.title}</h3>
+              <h3 className="text-xl font-semibold text-foreground">{page.title}</h3>
               <p className="mt-3 text-sm text-slate-300">{page.description}</p>
               <div className="mt-4 flex items-center font-medium text-cyan-200">
                 Open module
@@ -126,13 +126,13 @@ export default function EconomicsPage() {
       <section className="pb-20 pt-8">
         <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
           <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/15 via-blue-300/10 to-indigo-300/10 p-8 text-center">
-            <h2 className="text-3xl font-semibold text-white">Go from Theory to Governance</h2>
+            <h2 className="text-3xl font-semibold text-foreground">Go from Theory to Governance</h2>
             <p className="mx-auto mt-4 max-w-2xl text-slate-300">
               Continue with whitepaper details or inspect ecosystem activity through explorer tooling.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link href="/whitepaper" className="inline-flex items-center rounded-xl border border-cyan-300/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">Read Whitepaper</Link>
-              <Link href="/explorer" className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Open Explorer</Link>
+              <Link href="/explorer" className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/10">Open Explorer</Link>
             </div>
           </div>
         </div>

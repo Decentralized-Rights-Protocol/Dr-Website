@@ -86,7 +86,7 @@ export function FAQ({ items = defaultFAQs, title = 'Frequently Asked Questions',
       />
       <section className={`py-16 ${className}`}>
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
+          <h2 className="text-3xl font-bold text-neutral-900 dark:text-foreground mb-8 text-center">
             {title}
           </h2>
           <div className="space-y-4">
@@ -101,7 +101,7 @@ export function FAQ({ items = defaultFAQs, title = 'Frequently Asked Questions',
                   aria-expanded={openIndex === index}
                   aria-controls={`faq-answer-${index}`}
                 >
-                  <span className="font-semibold text-neutral-900 dark:text-white pr-4">
+                  <span className="font-semibold text-neutral-900 dark:text-foreground pr-4">
                     {item.question}
                   </span>
                   {openIndex === index ? (

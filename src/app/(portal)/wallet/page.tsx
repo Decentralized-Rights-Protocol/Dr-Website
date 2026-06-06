@@ -40,7 +40,7 @@ export default function WalletPage() {
           <div className="grid gap-4 md:grid-cols-2">
             <motion.div 
               whileHover={{ y: -5 }}
-              className="rounded-3xl bg-gradient-to-br from-primary-600 to-indigo-700 p-8 text-white shadow-xl"
+              className="rounded-3xl bg-gradient-to-br from-primary-600 to-indigo-700 p-8 text-foreground shadow-xl"
             >
               <div className="flex items-center justify-between">
                 <div className="rounded-xl bg-white/20 p-2">
@@ -57,7 +57,7 @@ export default function WalletPage() {
 
             <motion.div 
               whileHover={{ y: -5 }}
-              className="rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-950 p-8 text-white shadow-xl"
+              className="rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-950 p-8 text-foreground shadow-xl"
             >
               <div className="flex items-center justify-between">
                 <div className="rounded-xl bg-white/10 p-2">

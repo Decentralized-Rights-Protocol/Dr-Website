@@ -63,7 +63,7 @@ export default function ABEPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
-            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-foreground"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Economics Overview
@@ -82,10 +82,10 @@ export default function ABEPage() {
             className="max-w-4xl mx-auto text-center"
           >
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 mb-8">
-              <TrendingUp className="h-6 w-6 text-white" />
-              <span className="text-xl font-bold text-white">Core Equation</span>
+              <TrendingUp className="h-6 w-6 text-foreground" />
+              <span className="text-xl font-bold text-foreground">Core Equation</span>
             </div>
-            <h2 className="text-5xl font-bold text-white mb-6">
+            <h2 className="text-5xl font-bold text-foreground mb-6">
               Value = Verified Human Activity + Sustainable Contribution
             </h2>
             <p className="text-xl text-neutral-300 mb-8">
@@ -106,12 +106,12 @@ export default function ABEPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               How DRP Verifies Activity Without Cameras or Microphones
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-lg text-neutral-300 mb-6">
-                Unlike surveillance capitalism, DRP verifies activity through <strong className="text-white">proof systems</strong> 
+                Unlike surveillance capitalism, DRP verifies activity through <strong className="text-foreground">proof systems</strong> 
                 that respect privacy and dignity:
               </p>
               <div className="grid md:grid-cols-2 gap-6 mt-8">
@@ -141,7 +141,7 @@ export default function ABEPage() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700"
                   >
-                    <h3 className="text-xl font-bold text-white mb-3">
+                    <h3 className="text-xl font-bold text-foreground mb-3">
                       {item.title}
                     </h3>
                     <p className="text-neutral-300">
@@ -165,7 +165,7 @@ export default function ABEPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Contribution Proofs: Learning, Work, Health, Civic Actions
             </h2>
             <p className="text-xl text-neutral-300 mb-8">
@@ -182,9 +182,9 @@ export default function ABEPage() {
                   className="group p-8 rounded-2xl bg-gradient-to-br from-white to-neutral-50 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-700 hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-300"
                 >
                   <div className={`inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${type.color} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <type.icon className="h-8 w-8 text-white" />
+                    <type.icon className="h-8 w-8 text-foreground" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">
                     {type.title}
                   </h3>
                   <p className="text-neutral-300">
@@ -212,7 +212,7 @@ export default function ABEPage() {
                 <Leaf className="h-5 w-5 text-green-600 dark:text-green-400" />
                 <span className="text-sm font-medium text-green-700 dark:text-green-300">Sustainability Rewards</span>
               </div>
-              <h2 className="text-4xl font-bold text-white mb-6">
+              <h2 className="text-4xl font-bold text-foreground mb-6">
                 Green Scoring Proofs: Renewable Usage, Low Carbon Footprint
               </h2>
               <p className="text-xl text-neutral-300">
@@ -232,11 +232,11 @@ export default function ABEPage() {
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
                       <div className="p-3 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600">
-                        <CheckCircle className="h-6 w-6 text-white" />
+                        <CheckCircle className="h-6 w-6 text-foreground" />
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">
+                      <h3 className="text-xl font-bold text-foreground mb-2">
                         {proof.title}
                       </h3>
                       <p className="text-neutral-300">
@@ -261,7 +261,7 @@ export default function ABEPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-12 text-center">
+            <h2 className="text-4xl font-bold text-foreground mb-12 text-center">
               Effort → Verification → Rewards
             </h2>
             <div className="relative">
@@ -281,9 +281,9 @@ export default function ABEPage() {
                     className="flex flex-col items-center"
                   >
                     <div className={`p-8 rounded-2xl bg-gradient-to-br ${step.color} mb-4`}>
-                      <step.icon className="h-12 w-12 text-white" />
+                      <step.icon className="h-12 w-12 text-foreground" />
                     </div>
-                    <span className="text-lg font-semibold text-white">
+                    <span className="text-lg font-semibold text-foreground">
                       {step.label}
                     </span>
                     {index < 2 && (
@@ -320,7 +320,7 @@ export default function ABEPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Ready to Explore Tokenomics?
             </h2>
             <p className="text-xl text-blue-100 mb-8">

@@ -15,9 +15,9 @@ export function DashboardCharts({ metrics }: DashboardChartsProps) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      <div className="rounded-[2rem] border border-white/5 bg-black/40 p-10 backdrop-blur-md">
+      <div className="rounded-[2rem] border border-foreground/5 bg-black/40 p-10 backdrop-blur-md">
         <p className="text-[10px] font-cinematic text-drp-cyan opacity-60 mb-2">Protocol Velocity</p>
-        <h3 className="text-xl font-bold text-white mb-6">Activity Timeline</h3>
+        <h3 className="text-xl font-bold text-foreground mb-6">Activity Timeline</h3>
         <div className="h-64 w-full">
           <ResponsiveContainer>
             <AreaChart data={activityHistory}>
@@ -39,9 +39,9 @@ export function DashboardCharts({ metrics }: DashboardChartsProps) {
         </div>
       </div>
 
-      <div className="rounded-[2rem] border border-white/5 bg-black/40 p-10 backdrop-blur-md">
+      <div className="rounded-[2rem] border border-foreground/5 bg-black/40 p-10 backdrop-blur-md">
         <p className="text-[10px] font-cinematic text-drp-purple opacity-60 mb-2">Asset Distribution</p>
-        <h3 className="text-xl font-bold text-white mb-6">Reward Composition</h3>
+        <h3 className="text-xl font-bold text-foreground mb-6">Reward Composition</h3>
         <div className="h-64 w-full">
           <ResponsiveContainer>
             <BarChart data={rewardBreakdown}>

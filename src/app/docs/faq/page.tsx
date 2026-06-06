@@ -65,7 +65,7 @@ export default function FAQPage() {
         <div className="mb-12">
           <div className="flex items-center gap-4 mb-4">
             <HelpCircle className="h-12 w-12 text-primary-600 dark:text-primary-400" />
-            <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+            <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-foreground sm:text-5xl">
               Frequently Asked Questions
             </h1>
           </div>
@@ -81,7 +81,7 @@ export default function FAQPage() {
               key={index}
               className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 hover:shadow-lg transition-shadow"
             >
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3">
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">
                 {faq.question}
               </h3>
               <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -93,20 +93,20 @@ export default function FAQPage() {
 
         {/* Still Have Questions */}
         <div className="mt-16 p-6 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-200 dark:border-primary-800">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Still Have Questions?</h3>
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Still Have Questions?</h3>
           <p className="text-neutral-600 dark:text-neutral-400 mb-4">
             Can&rsquo;t find the answer you&rsquo;re looking for? Reach out to our community:
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
               href="/docs/community"
-              className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-primary-600 text-foreground rounded-lg hover:bg-primary-700 transition-colors"
             >
               Join Community
             </Link>
             <Link
               href="/docs"
-              className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-foreground rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
             >
               Browse Documentation
             </Link>

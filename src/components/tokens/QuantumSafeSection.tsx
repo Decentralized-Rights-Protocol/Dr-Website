@@ -81,7 +81,7 @@ export function QuantumSafeSection() {
             <span className="text-sm font-medium text-primary-300">Quantum-Resistant Security</span>
           </div>
           
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-foreground mb-4">
             Protected by{' '}
             <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
               Quantum-Resistant Signature Protocol
@@ -96,9 +96,9 @@ export function QuantumSafeSection() {
         <div className="grid md:grid-cols-3 gap-6 mt-12">
           <div className="bg-neutral-900/50 backdrop-blur-xl border border-neutral-800 rounded-2xl p-6 text-center hover:border-primary-500/50 transition-colors">
             <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mx-auto mb-4">
-              <Lock className="w-7 h-7 text-white" />
+              <Lock className="w-7 h-7 text-foreground" />
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Post-Quantum Cryptography</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">Post-Quantum Cryptography</h3>
             <p className="text-sm text-neutral-400">
               Advanced algorithms resistant to quantum attacks
             </p>
@@ -106,9 +106,9 @@ export function QuantumSafeSection() {
 
           <div className="bg-neutral-900/50 backdrop-blur-xl border border-neutral-800 rounded-2xl p-6 text-center hover:border-primary-500/50 transition-colors">
             <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-cyan-700 rounded-xl flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-7 h-7 text-white" />
+              <Shield className="w-7 h-7 text-foreground" />
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Future-Proof Security</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">Future-Proof Security</h3>
             <p className="text-sm text-neutral-400">
               Designed to withstand next-generation computing threats
             </p>
@@ -116,9 +116,9 @@ export function QuantumSafeSection() {
 
           <div className="bg-neutral-900/50 backdrop-blur-xl border border-neutral-800 rounded-2xl p-6 text-center hover:border-primary-500/50 transition-colors">
             <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center mx-auto mb-4">
-              <Zap className="w-7 h-7 text-white" />
+              <Zap className="w-7 h-7 text-foreground" />
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">High Performance</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-2">High Performance</h3>
             <p className="text-sm text-neutral-400">
               Efficient quantum-safe signatures without compromising speed
             </p>

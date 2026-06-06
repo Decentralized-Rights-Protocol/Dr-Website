@@ -36,7 +36,7 @@ export function IdentityTrigger({ learnerTitle, progressPercentage, level }: Ide
             </div>
             <div>
               <p className="text-xs text-neutral-400 uppercase tracking-wide">Your Title</p>
-              <p className="text-lg font-bold text-white">{learnerTitle || getTitleForLevel(level)}</p>
+              <p className="text-lg font-bold text-foreground">{learnerTitle || getTitleForLevel(level)}</p>
             </div>
           </div>
           <div className="text-right">
@@ -47,9 +47,9 @@ export function IdentityTrigger({ learnerTitle, progressPercentage, level }: Ide
       </div>
 
       {/* Progress Visibility */}
-      <div className="bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-3">
+      <div className="bg-white/5 backdrop-blur-sm rounded-lg border border-foreground/10 p-3">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-semibold text-white">Your Progress</span>
+          <span className="text-sm font-semibold text-foreground">Your Progress</span>
           <span className="text-sm text-neutral-300">{progressPercentage.toFixed(0)}%</span>
         </div>
         <div className="w-full bg-neutral-800 rounded-full h-2">

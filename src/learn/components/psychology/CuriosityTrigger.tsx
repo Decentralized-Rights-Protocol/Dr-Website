@@ -27,7 +27,7 @@ export function CuriosityTrigger({ lessonTitle, whyItMatters, rewardAmount }: Cu
         <div className="flex items-start gap-3">
           <LightBulbIcon className="h-6 w-6 text-yellow-400 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
-            <h3 className="text-sm font-semibold text-white mb-1">Why This Matters</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-1">Why This Matters</h3>
             <p className="text-sm text-neutral-200 leading-relaxed">{whyItMatters}</p>
           </div>
         </div>

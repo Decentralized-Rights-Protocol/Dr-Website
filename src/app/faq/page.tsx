@@ -79,7 +79,7 @@ export default function FAQRootPage() {
           <div className="mt-0 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href="/what-is-drp"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               What is DRP? <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
@@ -91,7 +91,7 @@ export default function FAQRootPage() {
             </Link>
             <Link
               href="/glossary"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               Glossary <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

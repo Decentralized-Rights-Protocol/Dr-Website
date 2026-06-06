@@ -78,7 +78,7 @@ export default function MacroeconomicsPage() {
             className="max-w-5xl mx-auto space-y-8"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-white mb-4">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
                 1. Money Supply Model
               </h2>
               <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
@@ -91,7 +91,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    The DRP money supply <strong className="text-neutral-900 dark:text-white">M(t)</strong> at time <em>t</em> is determined by:
+                    The DRP money supply <strong className="text-neutral-900 dark:text-foreground">M(t)</strong> at time <em>t</em> is determined by:
                   </p>
                   
                   <LaTeXEquation
@@ -127,7 +127,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>M2 (Broad Money):</strong> M1 + tokens locked in staking, governance, or time-locked contracts</li>
                   </ul>
                   <p>
-                    The protocol monitors <strong className="text-neutral-900 dark:text-white">velocity (V)</strong>—the rate at which tokens circulate—to determine if money supply growth is excessive. High velocity with stable prices indicates healthy economic activity; high velocity with rising prices indicates inflationary pressure.
+                    The protocol monitors <strong className="text-neutral-900 dark:text-foreground">velocity (V)</strong>—the rate at which tokens circulate—to determine if money supply growth is excessive. High velocity with stable prices indicates healthy economic activity; high velocity with rising prices indicates inflationary pressure.
                   </p>
                 </>
               }
@@ -148,7 +148,7 @@ export default function MacroeconomicsPage() {
             className="max-w-5xl mx-auto space-y-8"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-white mb-4">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
                 2. Inflation & Stabilization Tools
               </h2>
               <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
@@ -190,7 +190,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    <strong className="text-neutral-900 dark:text-white">Quiz friction</strong> is DRP&apos;s primary velocity management tool:
+                    <strong className="text-neutral-900 dark:text-foreground">Quiz friction</strong> is DRP&apos;s primary velocity management tool:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Mechanism:</strong> Before accessing high-value activities or rewards, agents must complete knowledge quizzes</li>
@@ -199,7 +199,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Quality Filter:</strong> Quizzes ensure agents understand activities, reducing low-quality participation that could inflate M without corresponding Y growth</li>
                   </ul>
                   <p>
-                    This is a form of <strong className="text-neutral-900 dark:text-white">non-monetary policy:</strong> instead of adjusting interest rates (which don&apos;t exist in DRP), the protocol adjusts friction to manage velocity. It&apos;s inspired by <strong className="text-neutral-900 dark:text-white">mechanism design theory</strong> and creates a self-regulating system.
+                    This is a form of <strong className="text-neutral-900 dark:text-foreground">non-monetary policy:</strong> instead of adjusting interest rates (which don&apos;t exist in DRP), the protocol adjusts friction to manage velocity. It&apos;s inspired by <strong className="text-neutral-900 dark:text-foreground">mechanism design theory</strong> and creates a self-regulating system.
                   </p>
                 </>
               }
@@ -218,7 +218,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Reward Modulation:</strong> Reward weights can be adjusted algorithmically. During high-inflation periods, weights may decrease, reducing token issuance per unit of activity</li>
                   </ul>
                   <p>
-                    These adjustments are <strong className="text-neutral-900 dark:text-white">algorithmic and transparent:</strong> the protocol publishes difficulty and reward parameters, allowing agents to anticipate changes. This creates predictable monetary policy that agents can plan around, similar to how central banks publish interest rate targets.
+                    These adjustments are <strong className="text-neutral-900 dark:text-foreground">algorithmic and transparent:</strong> the protocol publishes difficulty and reward parameters, allowing agents to anticipate changes. This creates predictable monetary policy that agents can plan around, similar to how central banks publish interest rate targets.
                   </p>
                 </>
               }
@@ -239,7 +239,7 @@ export default function MacroeconomicsPage() {
             className="max-w-5xl mx-auto space-y-8"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-white mb-4">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
                 3. Output, Productivity & Employment
               </h2>
               <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
@@ -280,7 +280,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    DRP achieves <strong className="text-neutral-900 dark:text-white">full employment</strong> through its activity-based model:
+                    DRP achieves <strong className="text-neutral-900 dark:text-foreground">full employment</strong> through its activity-based model:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Universal Participation:</strong> All agents can engage in verified activity, regardless of traditional employment status</li>
@@ -289,7 +289,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Low Barriers to Entry:</strong> Unlike traditional labor markets with high entry barriers, DRP activities are accessible to all</li>
                   </ul>
                   <p>
-                    This creates a <strong className="text-neutral-900 dark:text-white">post-scarcity employment model:</strong> the economy can absorb unlimited participation because output (verified activity) expands with participation. There&apos;s no fixed number of &quot;jobs&quot;—the economy creates opportunities as agents engage.
+                    This creates a <strong className="text-neutral-900 dark:text-foreground">post-scarcity employment model:</strong> the economy can absorb unlimited participation because output (verified activity) expands with participation. There&apos;s no fixed number of &quot;jobs&quot;—the economy creates opportunities as agents engage.
                   </p>
                 </>
               }
@@ -310,7 +310,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Network Effects:</strong> As more agents join, network value increases, creating positive externalities that boost productivity</li>
                   </ul>
                   <p>
-                    The economy undergoes <strong className="text-neutral-900 dark:text-white">structural transformation:</strong> as agents develop skills and technology improves, the composition of output shifts toward higher-value activities. This is similar to traditional economic development (agriculture → industry → services) but accelerated and more inclusive, as the learn-to-earn model ensures all agents can participate in the transformation.
+                    The economy undergoes <strong className="text-neutral-900 dark:text-foreground">structural transformation:</strong> as agents develop skills and technology improves, the composition of output shifts toward higher-value activities. This is similar to traditional economic development (agriculture → industry → services) but accelerated and more inclusive, as the learn-to-earn model ensures all agents can participate in the transformation.
                   </p>
                 </>
               }
@@ -331,7 +331,7 @@ export default function MacroeconomicsPage() {
             className="max-w-5xl mx-auto space-y-8"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-white mb-4">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
                 4. Fiscal & Monetary Policy in DRP
               </h2>
               <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
@@ -344,7 +344,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    <strong className="text-neutral-900 dark:text-white">Fiscal policy</strong> in DRP refers to resource allocation and spending decisions:
+                    <strong className="text-neutral-900 dark:text-foreground">Fiscal policy</strong> in DRP refers to resource allocation and spending decisions:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Reward Allocation:</strong> AI determines reward weights for different activity types, effectively allocating resources to incentivize desired behaviors (e.g., higher weights for sustainability activities)</li>
@@ -353,7 +353,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Rights-Based Spending:</strong> A portion of protocol resources is automatically allocated to rights-based distribution, ensuring basic needs are met</li>
                   </ul>
                   <p>
-                    This is <strong className="text-neutral-900 dark:text-white">algorithmic fiscal policy:</strong> decisions are made by transparent algorithms and governance, not by discretionary central authorities. AI assists in optimization, but humans (through governance) set priorities and constraints.
+                    This is <strong className="text-neutral-900 dark:text-foreground">algorithmic fiscal policy:</strong> decisions are made by transparent algorithms and governance, not by discretionary central authorities. AI assists in optimization, but humans (through governance) set priorities and constraints.
                   </p>
                 </>
               }
@@ -365,7 +365,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    <strong className="text-neutral-900 dark:text-white">Monetary policy</strong> in DRP manages money supply and velocity:
+                    <strong className="text-neutral-900 dark:text-foreground">Monetary policy</strong> in DRP manages money supply and velocity:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Difficulty Adjustment:</strong> Protocol automatically adjusts task difficulty based on velocity and inflation metrics</li>
@@ -374,7 +374,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Verification Cost Adjustment:</strong> Costs adjust to fine-tune activity levels and effective money supply</li>
                   </ul>
                   <p>
-                    Policy transmission works through <strong className="text-neutral-900 dark:text-white">expectations and incentives:</strong> when agents observe difficulty increases or quiz friction, they adjust behavior, reducing activity and velocity. This creates a self-regulating system where policy changes automatically propagate through agent behavior.
+                    Policy transmission works through <strong className="text-neutral-900 dark:text-foreground">expectations and incentives:</strong> when agents observe difficulty increases or quiz friction, they adjust behavior, reducing activity and velocity. This creates a self-regulating system where policy changes automatically propagate through agent behavior.
                   </p>
                 </>
               }
@@ -395,7 +395,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>AI Explainability:</strong> AI-driven decisions must be explainable and auditable</li>
                   </ul>
                   <p>
-                    These constraints ensure that policy serves human welfare and rights, not just economic efficiency. The system is designed to be <strong className="text-neutral-900 dark:text-white">transparent and democratic,</strong> with governance providing human oversight of algorithmic policy.
+                    These constraints ensure that policy serves human welfare and rights, not just economic efficiency. The system is designed to be <strong className="text-neutral-900 dark:text-foreground">transparent and democratic,</strong> with governance providing human oversight of algorithmic policy.
                   </p>
                 </>
               }
@@ -416,7 +416,7 @@ export default function MacroeconomicsPage() {
             className="max-w-5xl mx-auto space-y-8"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-white mb-4">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
                 5. Inequality Dynamics & Redistribution
               </h2>
               <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
@@ -429,7 +429,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    Unlike traditional systems where wealth inequality compounds (rich get richer), DRP&apos;s status accrual creates <strong className="text-neutral-900 dark:text-white">pathways for upward mobility:</strong>
+                    Unlike traditional systems where wealth inequality compounds (rich get richer), DRP&apos;s status accrual creates <strong className="text-neutral-900 dark:text-foreground">pathways for upward mobility:</strong>
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Earned Status:</strong> Status is earned through activity, not inherited or purchased</li>
@@ -438,7 +438,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Activity Credits:</strong> Non-transferable reputation ensures status reflects genuine contribution</li>
                   </ul>
                   <p>
-                    This creates a <strong className="text-neutral-900 dark:text-white">meritocratic system</strong> where inequality reflects differences in contribution, not differences in initial endowments or extraction of surplus value.
+                    This creates a <strong className="text-neutral-900 dark:text-foreground">meritocratic system</strong> where inequality reflects differences in contribution, not differences in initial endowments or extraction of surplus value.
                   </p>
                 </>
               }
@@ -459,7 +459,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Community Service Rewards:</strong> Activities that benefit communities receive higher rewards, creating positive externalities</li>
                   </ul>
                   <p>
-                    This is not traditional redistribution (taking from rich, giving to poor) but <strong className="text-neutral-900 dark:text-white">rights-based allocation:</strong> resources are allocated based on human rights and contribution, not market power. The system ensures that even those who cannot contribute economically (due to age, disability, or circumstances) receive support as a matter of right.
+                    This is not traditional redistribution (taking from rich, giving to poor) but <strong className="text-neutral-900 dark:text-foreground">rights-based allocation:</strong> resources are allocated based on human rights and contribution, not market power. The system ensures that even those who cannot contribute economically (due to age, disability, or circumstances) receive support as a matter of right.
                   </p>
                 </>
               }
@@ -471,7 +471,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    DRP tracks inequality using the <strong className="text-neutral-900 dark:text-white">Gini coefficient</strong> (0 = perfect equality, 1 = perfect inequality):
+                    DRP tracks inequality using the <strong className="text-neutral-900 dark:text-foreground">Gini coefficient</strong> (0 = perfect equality, 1 = perfect inequality):
                   </p>
                   <div className="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-lg mb-4">
                     <p className="mb-4">
@@ -493,7 +493,7 @@ export default function MacroeconomicsPage() {
                     <li>Activity credits (prevents status purchase)</li>
                   </ul>
                   <p>
-                    Creates a more equal distribution than traditional markets while still rewarding contribution. The system is designed to <strong className="text-neutral-900 dark:text-white">reduce inequality over time</strong> as more agents participate and status pathways become established.
+                    Creates a more equal distribution than traditional markets while still rewarding contribution. The system is designed to <strong className="text-neutral-900 dark:text-foreground">reduce inequality over time</strong> as more agents participate and status pathways become established.
                   </p>
                   <p className="text-xs text-neutral-500 dark:text-neutral-500 mt-4 italic">
                     * Gini values are illustrative. Replace with real data from protocol analytics.
@@ -517,7 +517,7 @@ export default function MacroeconomicsPage() {
             className="max-w-5xl mx-auto space-y-8"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-white mb-4">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
                 6. International & Systemic Effects
               </h2>
               <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
@@ -530,7 +530,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    DRP tokens function as a <strong className="text-neutral-900 dark:text-white">post-national currency:</strong>
+                    DRP tokens function as a <strong className="text-neutral-900 dark:text-foreground">post-national currency:</strong>
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Borderless Transactions:</strong> Agents can transact across borders without currency conversion or traditional banking</li>
@@ -539,7 +539,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>SDG Alignment:</strong> Global SDG goals create shared objectives that unite agents across borders</li>
                   </ul>
                   <p>
-                    This creates a <strong className="text-neutral-900 dark:text-white">global economic commons</strong> where value flows based on contribution and rights, not nationality or geopolitical power. The system enables remittances, cross-border trade, and global collaboration without traditional financial intermediaries.
+                    This creates a <strong className="text-neutral-900 dark:text-foreground">global economic commons</strong> where value flows based on contribution and rights, not nationality or geopolitical power. The system enables remittances, cross-border trade, and global collaboration without traditional financial intermediaries.
                   </p>
                 </>
               }
@@ -560,7 +560,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Asset Portability:</strong> Agents can move assets between chains without losing status or reputation</li>
                   </ul>
                   <p>
-                    This creates a <strong className="text-neutral-900 dark:text-white">resilient, multi-chain economy</strong> that isn&apos;t dependent on a single blockchain. If one chain experiences issues, agents can migrate to others, maintaining economic continuity.
+                    This creates a <strong className="text-neutral-900 dark:text-foreground">resilient, multi-chain economy</strong> that isn&apos;t dependent on a single blockchain. If one chain experiences issues, agents can migrate to others, maintaining economic continuity.
                   </p>
                 </>
               }
@@ -581,7 +581,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Reduced Dead Capital:</strong> Unlike traditional systems where lost keys mean permanent loss, DRP can recover assets, reducing dead capital</li>
                   </ul>
                   <p>
-                    This creates a <strong className="text-neutral-900 dark:text-white">more efficient economy</strong> where capital doesn&apos;t get permanently lost. However, the protocol must balance recovery mechanisms with security—too-easy recovery could enable fraud, while too-difficult recovery reduces trust.
+                    This creates a <strong className="text-neutral-900 dark:text-foreground">more efficient economy</strong> where capital doesn&apos;t get permanently lost. However, the protocol must balance recovery mechanisms with security—too-easy recovery could enable fraud, while too-difficult recovery reduces trust.
                   </p>
                 </>
               }
@@ -602,7 +602,7 @@ export default function MacroeconomicsPage() {
             className="max-w-5xl mx-auto space-y-8"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-white mb-4">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
                 7. Long-Term Stability & Shocks
               </h2>
               <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
@@ -615,7 +615,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    <strong className="text-neutral-900 dark:text-white">Supply shocks</strong> occur when many agents go offline (e.g., internet outages, natural disasters):
+                    <strong className="text-neutral-900 dark:text-foreground">Supply shocks</strong> occur when many agents go offline (e.g., internet outages, natural disasters):
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Impact:</strong> Activity drops → money supply growth slows → potential deflationary pressure</li>
@@ -624,7 +624,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Recovery:</strong> As agents return, activity normalizes and difficulty readjusts</li>
                   </ul>
                   <p>
-                    The system is <strong className="text-neutral-900 dark:text-white">resilient to supply shocks</strong> because it can adjust difficulty and maintain rights-based distribution even when activity drops. Unlike traditional economies that may collapse during crises, DRP can maintain basic functionality.
+                    The system is <strong className="text-neutral-900 dark:text-foreground">resilient to supply shocks</strong> because it can adjust difficulty and maintain rights-based distribution even when activity drops. Unlike traditional economies that may collapse during crises, DRP can maintain basic functionality.
                   </p>
                 </>
               }
@@ -637,7 +637,7 @@ export default function MacroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    <strong className="text-neutral-900 dark:text-white">Demand shocks</strong> occur when agents dump tokens (e.g., speculative attacks, panic selling):
+                    <strong className="text-neutral-900 dark:text-foreground">Demand shocks</strong> occur when agents dump tokens (e.g., speculative attacks, panic selling):
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Impact:</strong> Token price drops → velocity increases → potential inflationary pressure</li>
@@ -646,7 +646,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Recovery:</strong> As panic subsides, velocity normalizes and friction adjusts</li>
                   </ul>
                   <p>
-                    The system is <strong className="text-neutral-900 dark:text-white">resistant to demand shocks</strong> because velocity controls can quickly respond. Additionally, the rights-based framework creates a floor: even during panics, basic distribution continues, maintaining trust.
+                    The system is <strong className="text-neutral-900 dark:text-foreground">resistant to demand shocks</strong> because velocity controls can quickly respond. Additionally, the rights-based framework creates a floor: even during panics, basic distribution continues, maintaining trust.
                   </p>
                 </>
               }
@@ -670,7 +670,7 @@ export default function MacroeconomicsPage() {
                     <li><strong>Governance Oversight:</strong> Human governance provides oversight of algorithmic systems, preventing runaway automation</li>
                   </ul>
                   <p>
-                    These factors create a <strong className="text-neutral-900 dark:text-white">robust, adaptive system</strong> that can withstand shocks while maintaining core functionality. The system is designed for long-term sustainability, not short-term optimization.
+                    These factors create a <strong className="text-neutral-900 dark:text-foreground">robust, adaptive system</strong> that can withstand shocks while maintaining core functionality. The system is designed for long-term sustainability, not short-term optimization.
                   </p>
                 </>
               }
@@ -692,14 +692,14 @@ export default function MacroeconomicsPage() {
             className="max-w-4xl mx-auto"
           >
             <div className="bg-white dark:bg-neutral-800 rounded-xl p-8 border border-blue-200 dark:border-blue-900 shadow-lg">
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-4">
                 Macroeconomic Intuition
               </h3>
               <p className="text-lg text-neutral-700 dark:text-neutral-300 mb-4">
-                The DRP macroeconomic model creates a <strong className="text-neutral-900 dark:text-white">self-stabilizing, rights-based economy</strong> that differs fundamentally from traditional systems. Money supply expands with real activity, not arbitrary central bank decisions. Inflation is controlled through velocity management (quiz friction) rather than interest rates. Output includes non-market activities and sustainability contributions, creating a broader measure of economic value.
+                The DRP macroeconomic model creates a <strong className="text-neutral-900 dark:text-foreground">self-stabilizing, rights-based economy</strong> that differs fundamentally from traditional systems. Money supply expands with real activity, not arbitrary central bank decisions. Inflation is controlled through velocity management (quiz friction) rather than interest rates. Output includes non-market activities and sustainability contributions, creating a broader measure of economic value.
               </p>
               <p className="text-lg text-neutral-700 dark:text-neutral-300">
-                The system is designed for <strong className="text-neutral-900 dark:text-white">long-term stability and resilience:</strong> it can withstand supply and demand shocks through adaptive mechanisms, maintains rights-based distribution even during crises, and operates as a post-national currency that enables global economic integration. The result is a macroeconomic system that serves human welfare and environmental sustainability, not just economic growth metrics.
+                The system is designed for <strong className="text-neutral-900 dark:text-foreground">long-term stability and resilience:</strong> it can withstand supply and demand shocks through adaptive mechanisms, maintains rights-based distribution even during crises, and operates as a post-national currency that enables global economic integration. The result is a macroeconomic system that serves human welfare and environmental sustainability, not just economic growth metrics.
               </p>
             </div>
           </motion.div>

@@ -21,6 +21,8 @@ import {
 } from 'lucide-react';
 import type { Lesson, LessonSection } from '@/data/lessons-index';
 import { cn } from '@/lib/utils';
+import ReactMarkdown from 'react-markdown';
+import { diagramComponents } from '@/components/learn/AsciiDiagramReplacer';
 
 // ─── Diagram Components ──────────────────────────────────────────────
 
@@ -34,11 +36,11 @@ function FlowDiagram({ data }: { data: any }) {
           <div key={node.id} className="flex items-center gap-4">
             <motion.div 
               whileHover={{ scale: 1.02 }}
-              className="rounded-2xl px-6 py-4 text-center border border-white/10 bg-white/5 backdrop-blur-md min-w-[140px] shadow-2xl"
+              className="rounded-2xl px-6 py-4 text-center border border-foreground/10 bg-foreground/5 backdrop-blur-md min-w-[140px] shadow-2xl"
               style={{ borderLeft: `4px solid ${node.color || '#00f2ff'}` }}
             >
-              <div className="font-bold text-white text-sm whitespace-pre-line leading-tight">{node.label}</div>
-              {node.sublabel && <div className="text-[10px] mt-1.5 text-drp-gray/80 whitespace-pre-line leading-relaxed font-mono">{node.sublabel}</div>}
+              <div className="font-bold text-foreground text-sm whitespace-pre-line leading-tight">{node.label}</div>
+              {node.sublabel && <div className="text-xs mt-1.5 text-drp-gray/80 whitespace-pre-line leading-relaxed font-mono">{node.sublabel}</div>}
             </motion.div>
             {i < nodes.length - 1 && (
               <div className="flex flex-col items-center gap-1 text-drp-cyan/40 shrink-0">
@@ -56,22 +58,22 @@ function FlowDiagram({ data }: { data: any }) {
 function ComparisonDiagram({ data }: { data: any }) {
   if (data.columns && data.rows) {
     return (
-      <div className="overflow-x-auto rounded-3xl border border-white/5 bg-black/20 my-6">
+      <div className="overflow-x-auto rounded-3xl border border-foreground/5 bg-black/20 my-6">
         <table className="w-full text-sm min-w-[600px] border-collapse">
           <thead>
-            <tr className="bg-white/5">
+            <tr className="bg-foreground/5">
               {data.columns.map((col: string, i: number) => (
-                <th key={i} className="px-6 py-4 text-left text-drp-gray font-bold uppercase tracking-widest text-[10px] border-b border-white/5">{col}</th>
+                <th key={i} className="px-6 py-4 text-left text-drp-gray font-bold uppercase tracking-widest text-xs border-b border-foreground/5">{col}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {data.rows.map((row: string[], ri: number) => (
-              <tr key={ri} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+              <tr key={ri} className="border-b border-foreground/5 hover:bg-foreground/5 transition-colors">
                 {row.map((cell: string, ci: number) => (
                   <td key={ci} className={cn("px-6 py-4", ci === 0 ? 'font-bold text-drp-cyan' : 'text-drp-gray/90')}>
                     {cell.includes('🟢') || cell.includes('🔴') ? (
-                       <span className={cn("px-2 py-0.5 rounded-full text-[10px] font-bold uppercase", 
+                       <span className={cn("px-2 py-0.5 rounded-full text-xs font-bold uppercase", 
                         cell.includes('🟢') ? 'bg-emerald-400/10 text-emerald-400' : 'bg-rose-400/10 text-rose-400'
                        )}>{cell.replace(/[🟢🔴]/g, '')}</span>
                     ) : cell}
@@ -90,14 +92,14 @@ function ComparisonDiagram({ data }: { data: any }) {
         <motion.div 
           key={i} 
           whileHover={{ y: -4 }}
-          className="rounded-3xl p-6 border border-white/5 bg-white/5 backdrop-blur-xl relative overflow-hidden group"
+          className="rounded-3xl p-6 border border-foreground/5 bg-foreground/5 backdrop-blur-xl relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
             <span className="text-6xl">{side.icon}</span>
           </div>
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center text-lg bg-black/40 border border-white/10">{side.icon}</div>
-            <h4 className="font-bold text-white text-base tracking-tight">{side.title}</h4>
+            <div className="w-8 h-8 rounded-xl flex items-center justify-center text-lg bg-card/40 border border-foreground/10">{side.icon}</div>
+            <h4 className="font-bold text-foreground text-base tracking-tight">{side.title}</h4>
           </div>
           <ul className="space-y-3">
             {side.points.map((pt: string, pi: number) => (
@@ -122,29 +124,29 @@ function StackDiagram({ data }: { data: any }) {
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ delay: i * 0.1 }}
-          className="rounded-2xl p-5 border border-white/10 bg-white/5 backdrop-blur-md group hover:bg-white/10 transition-all"
+          className="rounded-2xl p-5 border border-foreground/10 bg-foreground/5 backdrop-blur-md group hover:bg-white/10 transition-all"
           style={{ borderLeft: `6px solid ${layer.color}` }}
         >
           <div className="flex items-center gap-4 mb-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl bg-black/40 border border-white/10">{layer.icon}</div>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl bg-card/40 border border-foreground/10">{layer.icon}</div>
             <div>
-              <div className="font-bold text-white text-sm tracking-tight">{layer.name}</div>
-              <div className="text-[10px] text-drp-gray font-cinematic uppercase tracking-[0.2em]">{layer.description}</div>
+              <div className="font-bold text-foreground text-sm tracking-tight">{layer.name}</div>
+              <div className="text-xs text-drp-gray font-cinematic uppercase tracking-[0.2em]">{layer.description}</div>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
             {layer.items.map((item: string, ii: number) => (
-              <span key={ii} className="px-3 py-1 rounded-lg text-[10px] font-mono font-bold text-white/70 border border-white/5 bg-black/40" >
+              <span key={ii} className="px-3 py-1 rounded-lg text-xs font-mono font-bold text-foreground/70 border border-foreground/5 bg-card/40" >
                 {item}
               </span>
             ))}
           </div>
         </motion.div>
       ))}
-      <div className="flex items-center justify-center gap-4 text-white/20 py-4 uppercase tracking-[0.5em] text-[8px] font-black">
-        <div className="h-px flex-1 bg-white/5" />
+      <div className="flex items-center justify-center gap-4 text-foreground/20 py-4 uppercase tracking-[0.5em] text-xs font-black">
+        <div className="h-px flex-1 bg-foreground/5" />
         Application Interface Flow
-        <div className="h-px flex-1 bg-white/5" />
+        <div className="h-px flex-1 bg-foreground/5" />
       </div>
     </div>
   );
@@ -157,28 +159,28 @@ function CodeBlock({ section }: { section: LessonSection }) {
   const copy = () => { navigator.clipboard.writeText(section.code || ''); setCopied(true); setTimeout(() => setCopied(false), 2000); };
   
   return (
-    <div className="my-8 rounded-3xl overflow-hidden border border-white/10 bg-black/60 shadow-2xl group">
-      <div className="flex items-center justify-between px-6 py-3 bg-white/5 border-b border-white/10">
+    <div className="my-8 rounded-3xl overflow-hidden border border-foreground/10 bg-black/60 shadow-2xl group">
+      <div className="flex items-center justify-between px-6 py-3 bg-foreground/5 border-b border-foreground/10">
         <div className="flex items-center gap-3">
           <div className="flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-rose-500/40" />
             <div className="w-2.5 h-2.5 rounded-full bg-amber-500/40" />
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/40" />
           </div>
-          {section.title && <span className="text-[10px] font-bold text-drp-gray uppercase tracking-widest">{section.title}</span>}
+          {section.title && <span className="text-xs font-bold text-drp-gray uppercase tracking-widest">{section.title}</span>}
         </div>
         <div className="flex items-center gap-3">
           <span className="text-[9px] font-mono text-drp-cyan font-bold uppercase px-2 py-0.5 rounded bg-drp-cyan/10 border border-drp-cyan/20">{section.language || 'code'}</span>
-          <button onClick={copy} className="text-[9px] font-bold text-white/40 hover:text-drp-cyan transition-colors uppercase tracking-widest">
+          <button onClick={copy} className="text-[9px] font-bold text-foreground/40 hover:text-drp-cyan transition-colors uppercase tracking-widest">
             {copied ? 'Copied ✓' : 'Copy'}
           </button>
         </div>
       </div>
-      <pre className="p-6 overflow-x-auto text-[13px] font-mono leading-relaxed custom-scrollbar bg-black/40">
+      <pre className="p-6 overflow-x-auto text-[13px] font-mono leading-relaxed custom-scrollbar bg-card/40">
         <code className="text-drp-gray/90">
           {section.code?.split('\n').map((line, i) => (
             <div key={i} className="flex gap-4">
-              <span className="text-white/10 select-none w-4 text-right">{i + 1}</span>
+              <span className="text-foreground/10 select-none w-4 text-right">{i + 1}</span>
               <span>{line}</span>
             </div>
           ))}
@@ -200,17 +202,17 @@ function CalloutBlock({ section }: { section: LessonSection }) {
 
   return (
     <div 
-      className="my-8 rounded-[2rem] p-8 border border-white/5 bg-black/40 backdrop-blur-xl relative overflow-hidden group"
+      className="my-8 rounded-[2rem] p-8 border border-foreground/5 bg-card/40 backdrop-blur-xl relative overflow-hidden group"
       style={{ borderLeft: `6px solid ${s.accent}` }}
     >
       <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
         <Icon className="w-24 h-24" />
       </div>
       <div className="flex items-center gap-4 mb-4">
-        <div className="p-2 rounded-xl bg-white/5 border border-white/10 shadow-lg">
+        <div className="p-2 rounded-xl bg-foreground/5 border border-foreground/10 shadow-lg">
           <Icon className="h-5 w-5" style={{ color: s.accent }} />
         </div>
-        <h4 className="font-bold text-white text-lg tracking-tight">{section.title}</h4>
+        <h4 className="font-bold text-foreground text-lg tracking-tight">{section.title}</h4>
       </div>
       <p className="text-drp-gray leading-relaxed text-sm md:text-base">{section.content}</p>
     </div>
@@ -223,30 +225,30 @@ function QuizBlock({ section, onComplete }: { section: LessonSection; onComplete
   const correct = section.quizAnswer ?? 0;
 
   return (
-    <div className="my-12 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
-      <div className="px-8 py-6 border-b border-white/10 bg-white/5 flex items-center justify-between">
+    <div className="my-12 rounded-[2.5rem] border border-foreground/10 bg-foreground/5 backdrop-blur-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+      <div className="px-8 py-6 border-b border-foreground/10 bg-foreground/5 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-drp-cyan/20 border border-drp-cyan/30 flex items-center justify-center">
             <Zap className="h-5 w-5 text-drp-cyan" />
           </div>
           <div>
-            <h3 className="font-bold text-white text-base leading-none mb-1">{section.title || 'Knowledge Check'}</h3>
-            <p className="text-[10px] font-cinematic text-drp-cyan tracking-widest uppercase opacity-60">Verification Phase</p>
+            <h3 className="font-bold text-foreground text-base leading-none mb-1">{section.title || 'Knowledge Check'}</h3>
+            <p className="text-xs font-cinematic text-drp-cyan tracking-widest uppercase opacity-60">Verification Phase</p>
           </div>
         </div>
         <div className="hidden sm:block">
-           <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-white/5 text-white/40 uppercase tracking-widest border border-white/10">Quiz</span>
+           <span className="px-3 py-1 rounded-full text-xs font-bold bg-foreground/5 text-foreground/40 uppercase tracking-widest border border-foreground/10">Quiz</span>
         </div>
       </div>
       <div className="p-8">
-        <p className="text-white text-lg font-bold mb-8 leading-tight">{section.content}</p>
+        <p className="text-foreground text-lg font-bold mb-8 leading-tight">{section.content}</p>
         <div className="grid gap-4">
           {(section.quizOptions || []).map((opt, i) => {
-            let stateStyle = "border-white/5 bg-white/5 text-drp-gray hover:border-white/20 hover:bg-white/10";
+            let stateStyle = "border-foreground/5 bg-foreground/5 text-drp-gray hover:border-white/20 hover:bg-white/10";
             if (revealed) {
               if (i === correct) stateStyle = "border-emerald-500/50 bg-emerald-500/10 text-emerald-400";
               else if (i === selected) stateStyle = "border-rose-500/50 bg-rose-500/10 text-rose-400";
-              else stateStyle = "opacity-40 border-white/5 bg-white/5 text-drp-gray";
+              else stateStyle = "opacity-40 border-foreground/5 bg-foreground/5 text-drp-gray";
             } else if (selected === i) {
               stateStyle = "border-drp-cyan bg-drp-cyan/10 text-drp-cyan";
             }
@@ -262,7 +264,7 @@ function QuizBlock({ section, onComplete }: { section: LessonSection; onComplete
               >
                 <div className={cn(
                   "w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold border transition-colors",
-                  selected === i ? "border-current" : "border-white/10 bg-black/20"
+                  selected === i ? "border-current" : "border-foreground/10 bg-black/20"
                 )}>
                   {String.fromCharCode(65+i)}
                 </div>
@@ -280,7 +282,7 @@ function QuizBlock({ section, onComplete }: { section: LessonSection; onComplete
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               onClick={() => { setRevealed(true); if (selected === correct && onComplete) onComplete(); }}
-              className="mt-8 w-full py-5 rounded-2xl font-bold text-black bg-white hover:bg-drp-cyan transition-all shadow-xl shadow-white/5 uppercase tracking-widest text-xs"
+              className="mt-8 w-full py-5 rounded-2xl font-bold text-background bg-white hover:bg-drp-cyan transition-all shadow-xl shadow-white/5 uppercase tracking-widest text-xs"
             >
               Verify Response
             </motion.button>
@@ -347,7 +349,7 @@ function AITutor({ lesson }: { lesson: Lesson }) {
       >
         <div className="relative">
           <div className="absolute inset-0 bg-drp-cyan blur-2xl opacity-20 group-hover:opacity-40 transition-opacity" />
-          <div className="relative flex items-center gap-3 px-6 py-4 rounded-2xl font-bold text-black text-xs transition-all hover:scale-105 active:scale-95 shadow-2xl bg-white">
+          <div className="relative flex items-center gap-3 px-6 py-4 rounded-2xl font-bold text-background text-xs transition-all hover:scale-105 active:scale-95 shadow-2xl bg-white">
             <Sparkles className="h-4 w-4" />
             <span className="hidden sm:inline uppercase tracking-widest">DRP Knowledge Core</span>
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -378,7 +380,7 @@ function AITutor({ lesson }: { lesson: Lesson }) {
                   </div>
                   <div>
                     <h4 className="font-bold text-foreground text-base leading-tight">Knowledge Core</h4>
-                    <p className="text-[10px] font-cinematic text-drp-cyan tracking-widest uppercase opacity-60">Session Active</p>
+                    <p className="text-xs font-cinematic text-drp-cyan tracking-widest uppercase opacity-60">Session Active</p>
                   </div>
                 </div>
                 <button onClick={() => setOpen(false)} className="p-2 rounded-full hover:bg-foreground/10 transition-colors">
@@ -392,7 +394,7 @@ function AITutor({ lesson }: { lesson: Lesson }) {
                     <div className={cn(
                       "max-w-[85%] px-5 py-3 rounded-2xl text-sm leading-relaxed",
                       m.role === 'user' 
-                        ? 'bg-drp-cyan text-black font-medium rounded-tr-sm' 
+                        ? 'bg-drp-cyan text-background font-medium rounded-tr-sm' 
                         : 'bg-foreground/5 border border-foreground/10 text-drp-gray/90 rounded-tl-sm'
                     )}>
                       {m.text}
@@ -414,7 +416,7 @@ function AITutor({ lesson }: { lesson: Lesson }) {
               <div className="p-6 border-t border-foreground/5 bg-foreground/5 space-y-4">
                 <div className="flex flex-wrap gap-2">
                   {['Explain simply','Use a metaphor','Historical context?'].map(h => (
-                    <button key={h} onClick={() => setInput(h)} className="text-[10px] font-bold px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/40 hover:text-drp-cyan hover:border-drp-cyan/40 transition-all uppercase tracking-widest">{h}</button>
+                    <button key={h} onClick={() => setInput(h)} className="text-xs font-bold px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/40 hover:text-drp-cyan hover:border-drp-cyan/40 transition-all uppercase tracking-widest">{h}</button>
                   ))}
                 </div>
                 <div className="flex gap-3">
@@ -423,7 +425,7 @@ function AITutor({ lesson }: { lesson: Lesson }) {
                     onChange={e => setInput(e.target.value)} 
                     onKeyDown={e => e.key === 'Enter' && !e.shiftKey && send()} 
                     placeholder="Ask about DRP protocol details..."
-                    className="flex-1 bg-black/40 border border-foreground/10 rounded-2xl px-5 py-4 text-sm text-foreground placeholder-foreground/20 outline-none focus:border-drp-cyan/40 transition-colors" 
+                    className="flex-1 bg-card/40 border border-foreground/10 rounded-2xl px-5 py-4 text-sm text-foreground placeholder-foreground/20 outline-none focus:border-drp-cyan/40 transition-colors" 
                   />
                   <button 
                     onClick={send} 
@@ -478,11 +480,11 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
                 <span className="text-xl">{lesson.pathIcon}</span>
-                <span className="text-[10px] font-cinematic text-drp-gray uppercase tracking-[0.3em] truncate">
+                <span className="text-xs font-cinematic text-drp-gray uppercase tracking-[0.3em] truncate">
                   {lesson.pathName} · Module {lesson.lessonNumber}
                 </span>
               </div>
-              <span className="text-[10px] font-bold text-drp-cyan uppercase tracking-widest">{Math.round(progress)}% Verified</span>
+              <span className="text-xs font-bold text-drp-cyan uppercase tracking-widest">{Math.round(progress)}% Verified</span>
             </div>
             <div className="h-1 rounded-full bg-foreground/5 overflow-hidden">
               <motion.div 
@@ -496,12 +498,12 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
           <div className="hidden md:flex items-center gap-6 shrink-0">
             <div className="flex flex-col items-end">
               <span className="text-xs font-bold text-amber-400">+{lesson.deri} $DeRi</span>
-              <span className="text-[8px] font-cinematic text-amber-400/40 uppercase tracking-widest">Rewards</span>
+              <span className="text-xs font-cinematic text-amber-400/40 uppercase tracking-widest">Rewards</span>
             </div>
             <div className="w-px h-8 bg-foreground/10" />
             <div className="flex flex-col items-end">
               <span className="text-xs font-bold text-drp-cyan">+{lesson.xp} XP</span>
-              <span className="text-[8px] font-cinematic text-drp-cyan/40 uppercase tracking-widest">Experience</span>
+              <span className="text-xs font-cinematic text-drp-cyan/40 uppercase tracking-widest">Experience</span>
             </div>
           </div>
         </div>
@@ -514,7 +516,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
           animate={{ opacity: 1, y: 0 }}
           className="mb-20 text-center"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-[10px] font-bold text-drp-cyan uppercase tracking-widest mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-xs font-bold text-drp-cyan uppercase tracking-widest mb-8">
             <Zap className="h-3 w-3" />
             {lesson.difficulty} Level Certification
           </div>
@@ -527,7 +529,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
           
           <div className="flex flex-wrap justify-center gap-3 mt-10">
             {lesson.tags.map(tag => (
-              <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold bg-foreground/5 text-foreground/40 border border-foreground/5 uppercase tracking-widest">
+              <span key={tag} className="px-3 py-1 rounded-full text-xs font-bold bg-foreground/5 text-foreground/40 border border-foreground/5 uppercase tracking-widest">
                 {tag}
               </span>
             ))}
@@ -551,7 +553,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
           <div className="grid sm:grid-cols-2 gap-6">
             {lesson.keyTakeaways.map((t, i) => (
               <div key={i} className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-drp-cyan/20 flex items-center justify-center text-[10px] font-bold text-drp-cyan shrink-0 mt-0.5">
+                <div className="w-6 h-6 rounded-full bg-drp-cyan/20 flex items-center justify-center text-xs font-bold text-drp-cyan shrink-0 mt-0.5">
                   {i+1}
                 </div>
                 <p className="text-sm text-drp-gray leading-relaxed">{t}</p>
@@ -572,11 +574,13 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
             >
               {section.type === 'intro' && (
                 <div className="py-12 border-l-2 border-foreground/5 pl-8 md:pl-12 my-8">
-                   <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed font-medium italic">
-                    {section.content}
-                  </p>
-                  <button onClick={() => mark(i)} className="mt-8 flex items-center gap-2 text-[10px] font-bold text-drp-cyan uppercase tracking-widest group">
-                    <div className={cn("w-5 h-5 rounded-full border border-drp-cyan/30 flex items-center justify-center group-hover:bg-drp-cyan/10", completed.has(i) && "bg-drp-cyan text-black border-drp-cyan")}>
+                   <div className="text-xl md:text-2xl text-foreground/80 leading-relaxed font-medium italic prose dark:prose-invert max-w-none">
+                     <ReactMarkdown components={diagramComponents}>
+                      {section.content}
+                    </ReactMarkdown>
+                  </div>
+                  <button onClick={() => mark(i)} className="mt-8 flex items-center gap-2 text-xs font-bold text-drp-cyan uppercase tracking-widest group">
+                    <div className={cn("w-5 h-5 rounded-full border border-drp-cyan/30 flex items-center justify-center group-hover:bg-drp-cyan/10", completed.has(i) && "bg-drp-cyan text-background border-drp-cyan")}>
                       {completed.has(i) && <CheckCircle2 className="h-3 w-3" />}
                     </div>
                     {completed.has(i) ? 'Verified' : 'Acknowledge Insight'}
@@ -592,21 +596,21 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                         <span className="text-drp-cyan/20 font-black text-4xl">0{i+1}</span>
                         {section.title}
                       </h3>
-                      <div className="w-10 h-10 rounded-2xl bg-black/40 border border-foreground/10 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-2xl bg-card/40 border border-foreground/10 flex items-center justify-center">
                         <BookOpen className="h-5 w-5 text-drp-gray" />
                       </div>
                     </div>
                   )}
-                  <div className="prose prose-invert max-w-none">
-                    <p className="text-drp-gray leading-relaxed text-lg">
+                  <div className="prose dark:prose-invert max-w-none">
+                    <ReactMarkdown components={diagramComponents} className="text-drp-gray leading-relaxed text-lg max-w-none">
                       {section.content}
-                    </p>
+                    </ReactMarkdown>
                   </div>
                   <div className="mt-10 pt-8 border-t border-foreground/5 flex justify-end">
                     <button 
                       onClick={() => mark(i)} 
                       className={cn(
-                        "flex items-center gap-3 px-6 py-3 rounded-2xl font-bold text-[10px] uppercase tracking-widest transition-all",
+                        "flex items-center gap-3 px-6 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all",
                         completed.has(i) 
                           ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
                           : "bg-foreground/5 text-foreground/40 border border-foreground/5 hover:bg-foreground/10 hover:text-foreground"
@@ -626,12 +630,12 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                        <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">{section.title}</h3>
                      </div>
                    )}
-                   <div className="rounded-[2.5rem] border border-foreground/5 bg-black/40 p-2 overflow-hidden shadow-2xl">
+                   <div className="rounded-[2.5rem] border border-foreground/5 bg-card/40 p-2 overflow-hidden shadow-2xl">
                      {section.diagramType === 'flow' && <FlowDiagram data={section.diagramData} />}
                      {section.diagramType === 'comparison' && <ComparisonDiagram data={section.diagramData} />}
                      {section.diagramType === 'stack' && <StackDiagram data={section.diagramData} />}
                    </div>
-                   {section.content && <p className="mt-6 text-sm text-drp-gray/80 text-center max-w-2xl mx-auto leading-relaxed">{section.content}</p>}
+                   {section.content && <ReactMarkdown components={diagramComponents} className="mt-6 text-sm text-drp-gray/80 text-center max-w-2xl mx-auto leading-relaxed prose dark:prose-invert max-w-none">{section.content}</ReactMarkdown>}
                 </div>
               )}
 
@@ -648,7 +652,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="mt-24 rounded-[3rem] p-12 text-center border border-drp-cyan/20 bg-gradient-to-b from-drp-cyan/10 to-transparent backdrop-blur-3xl shadow-3xl relative overflow-hidden"
+              className="mt-24 rounded-[3rem] p-12 text-center border border-drp-cyan/20 bg-gradient-to-b from-drp-cyan/10 to-transparent backdrop-blur-3xl shadow-2xl relative overflow-hidden"
             >
               <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-drp-cyan to-transparent" />
               <div className="text-7xl mb-8">🎖️</div>
@@ -660,12 +664,12 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
               <div className="flex flex-wrap justify-center gap-8 mb-12">
                 <div className="text-center">
                   <div className="text-3xl font-black text-amber-400">+{lesson.deri}</div>
-                  <div className="text-[10px] font-cinematic text-amber-400/40 uppercase tracking-widest mt-1">$DeRi Tokens</div>
+                  <div className="text-xs font-cinematic text-amber-400/40 uppercase tracking-widest mt-1">$DeRi Tokens</div>
                 </div>
                 <div className="w-px h-12 bg-foreground/10" />
                 <div className="text-center">
                   <div className="text-3xl font-black text-drp-cyan">+{lesson.xp}</div>
-                  <div className="text-[10px] font-cinematic text-drp-cyan/40 uppercase tracking-widest mt-1">Steward XP</div>
+                  <div className="text-xs font-cinematic text-drp-cyan/40 uppercase tracking-widest mt-1">Steward XP</div>
                 </div>
               </div>
 
@@ -705,7 +709,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                     <ArrowLeft className="h-5 w-5" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[8px] font-cinematic uppercase tracking-widest opacity-40">Previous</div>
+                    <div className="text-xs font-cinematic uppercase tracking-widest opacity-40">Previous</div>
                     <div className="text-sm font-bold">Back to Security</div>
                   </div>
                 </Link>
@@ -714,7 +718,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
               {lesson.nextLesson && (
                 <Link href={`/lessons/${lesson.nextLesson}`} className="flex items-center gap-3 text-drp-gray hover:text-foreground transition-colors group text-right">
                   <div className="text-right">
-                    <div className="text-[8px] font-cinematic uppercase tracking-widest opacity-40">Next Module</div>
+                    <div className="text-xs font-cinematic uppercase tracking-widest opacity-40">Next Module</div>
                     <div className="text-sm font-bold">Consensus Engines</div>
                   </div>
                   <div className="w-10 h-10 rounded-xl border border-foreground/10 flex items-center justify-center group-hover:border-drp-cyan/50 group-hover:text-drp-cyan transition-all">

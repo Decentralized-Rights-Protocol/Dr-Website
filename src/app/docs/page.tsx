@@ -75,7 +75,7 @@ export default function DocsPage() {
         title="Launch a Node in Minutes"
         description="Clone the repository, install dependencies, and run your first DRP testnet node."
       >
-        <div className="mb-6 rounded-xl border border-white/10 bg-black/35 p-4 font-mono text-sm">
+        <div className="mb-6 rounded-xl border border-foreground/10 bg-black/35 p-4 font-mono text-sm">
           <div className="text-neutral-400"># Clone the DRP Blockchain repository</div>
           <div className="text-green-400">git clone https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain.git</div>
           <div className="text-neutral-400 mt-2"># Install dependencies</div>
@@ -95,13 +95,13 @@ export default function DocsPage() {
             <Link
               key={section.title}
               href={section.href}
-              className="group relative rounded-2xl border border-white/10 bg-black/30 p-8 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-cyan-400/10"
+              className="group relative rounded-2xl border border-foreground/10 bg-black/30 p-8 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-cyan-400/10"
             >
               <div className="flex items-center gap-x-4 mb-4">
                 <div className={`${section.color} rounded-lg p-3`}>
-                  <section.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                  <section.icon className="h-6 w-6 text-foreground" aria-hidden="true" />
                 </div>
-                <h3 className="text-lg font-semibold text-white transition-colors group-hover:text-cyan-100">{section.title}</h3>
+                <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-cyan-100">{section.title}</h3>
               </div>
               <p className="mb-4 text-slate-300">{section.description}</p>
               <div className="space-y-1">
@@ -119,21 +119,21 @@ export default function DocsPage() {
 
       <PremiumSection eyebrow="Support and Contributions" title="Build and Improve with the Community">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-black/25 p-8">
-            <h3 className="mb-4 text-xl font-semibold text-white">Need Help?</h3>
+          <div className="rounded-2xl border border-foreground/10 bg-black/25 p-8">
+            <h3 className="mb-4 text-xl font-semibold text-foreground">Need Help?</h3>
             <p className="mb-6 text-slate-300">Join our community channels and use the FAQ for rapid answers.</p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link href="/community" className="inline-flex items-center rounded-lg border border-cyan-300/40 bg-cyan-300/90 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">Join Community</Link>
-              <Link href="/docs/faq" className="inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20">View FAQ</Link>
+              <Link href="/docs/faq" className="inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-white/20">View FAQ</Link>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-black/25 p-8">
-            <h3 className="mb-4 text-xl font-semibold text-white">Contribute</h3>
+          <div className="rounded-2xl border border-foreground/10 bg-black/25 p-8">
+            <h3 className="mb-4 text-xl font-semibold text-foreground">Contribute</h3>
             <p className="mb-6 text-slate-300">Help improve docs and developer onboarding quality.</p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain/docs" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-lg border border-cyan-300/40 bg-cyan-300/90 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">Edit on GitHub</Link>
-              <Link href="/docs/contributing" className="inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20">Contributing Guide</Link>
+              <Link href="/docs/contributing" className="inline-flex items-center rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-white/20">Contributing Guide</Link>
             </div>
           </div>
         </div>

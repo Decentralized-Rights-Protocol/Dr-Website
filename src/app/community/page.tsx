@@ -27,38 +27,38 @@ const roles = [
 
 export default function CommunityPage() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030308] text-gray-900 dark:text-white pt-20">
-      <section className="max-w-6xl mx-auto px-6 py-20 border-b border-gray-100 dark:border-white/5">
+    <main className="min-h-screen bg-background text-foreground pt-20">
+      <section className="max-w-6xl mx-auto px-6 py-20 border-b border-gray-100 dark:border-foreground/5">
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-[#00e5cc]/40 bg-[#00e5cc]/8 mb-8">
             <Users className="w-3.5 h-3.5 text-[#00e5cc]" />
             <span className="text-[#00e5cc] text-xs font-medium tracking-widest uppercase">Community</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl font-black text-gray-900 dark:text-white leading-tight mb-6">
+          <h1 className="text-5xl sm:text-6xl font-black text-foreground leading-tight mb-6">
             Build the future of rights — together.
           </h1>
-          <p className="text-gray-600 dark:text-white/50 text-lg leading-relaxed mb-10">
+          <p className="text-gray-600 dark:text-foreground/50 text-lg leading-relaxed mb-10">
             DRP is a protocol built by its community. Researchers, engineers, advocates, and validators worldwide are shaping the infrastructure for human rights in the digital age.
           </p>
           <Link href="https://discord.gg/zbWg92AnQQ" target="_blank" rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 px-7 py-4 bg-[#00e5cc] text-black font-bold text-sm tracking-wide hover:bg-[#00bfff] transition-all duration-300">
+            className="group inline-flex items-center gap-3 px-7 py-4 bg-[#00e5cc] text-background font-bold text-sm tracking-wide hover:bg-[#00bfff] transition-all duration-300">
             Join Discord <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-24 border-b border-gray-100 dark:border-white/5">
+      <section className="max-w-6xl mx-auto px-6 py-24 border-b border-gray-100 dark:border-foreground/5">
         <div className="mb-14">
           <span className="text-xs tracking-[0.3em] uppercase text-[#00e5cc]/70 mb-4 block">Connect</span>
-          <h2 className="text-4xl font-black text-gray-900 dark:text-white">Find your platform</h2>
+          <h2 className="text-4xl font-black text-foreground">Find your platform</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {channels.map((c) => (
             <a key={c.title} href={c.href} target="_blank" rel="noopener noreferrer"
-              className="group block p-7 border border-gray-100 dark:border-white/5 hover:border-[#00e5cc]/30 bg-gray-50 dark:bg-white/[0.02] hover:bg-gray-100 dark:hover:bg-white/[0.04] transition-all duration-300">
+              className="group block p-7 border border-gray-100 dark:border-foreground/5 hover:border-[#00e5cc]/30 bg-gray-50 dark:bg-white/[0.02] hover:bg-gray-100 dark:hover:bg-white/[0.04] transition-all duration-300">
               <div className="text-3xl mb-5">{c.emoji}</div>
-              <h3 className="text-gray-900 dark:text-white font-bold text-lg mb-3">{c.title}</h3>
-              <p className="text-gray-500 dark:text-white/40 text-sm leading-relaxed mb-6">{c.desc}</p>
+              <h3 className="text-foreground font-bold text-lg mb-3">{c.title}</h3>
+              <p className="text-gray-500 dark:text-foreground/40 text-sm leading-relaxed mb-6">{c.desc}</p>
               <div className="inline-flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all" style={{ color: c.color }}>
                 {c.cta} <ArrowRight className="w-3.5 h-3.5" />
               </div>
@@ -67,17 +67,17 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-24 border-b border-gray-100 dark:border-white/5">
+      <section className="max-w-6xl mx-auto px-6 py-24 border-b border-gray-100 dark:border-foreground/5">
         <div className="mb-14">
           <span className="text-xs tracking-[0.3em] uppercase text-[#00e5cc]/70 mb-4 block">Who You Are</span>
-          <h2 className="text-4xl font-black text-gray-900 dark:text-white">Every role matters</h2>
+          <h2 className="text-4xl font-black text-foreground">Every role matters</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-100 dark:bg-white/5">
           {roles.map((r, i) => (
-            <div key={r.title} className="bg-white dark:bg-[#030308] p-10">
-              <div className="text-xs font-mono text-gray-300 dark:text-white/15 mb-5">{String(i + 1).padStart(2, '0')}</div>
-              <h3 className="text-xl font-black text-gray-900 dark:text-white mb-4">{r.title}</h3>
-              <p className="text-gray-500 dark:text-white/40 text-sm leading-relaxed mb-8">{r.desc}</p>
+            <div key={r.title} className="bg-background p-10">
+              <div className="text-xs font-mono text-gray-300 dark:text-foreground/15 mb-5">{String(i + 1).padStart(2, '0')}</div>
+              <h3 className="text-xl font-black text-foreground mb-4">{r.title}</h3>
+              <p className="text-gray-500 dark:text-foreground/40 text-sm leading-relaxed mb-8">{r.desc}</p>
               <Link href={r.href} className="inline-flex items-center gap-2 text-[#00e5cc] text-sm hover:gap-4 transition-all">
                 {r.action} <ArrowRight className="w-4 h-4" />
               </Link>
@@ -86,17 +86,17 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      <section className="py-24 px-6 text-center bg-gray-50 dark:bg-transparent border-t border-gray-100 dark:border-white/5">
+      <section className="py-24 px-6 text-center bg-gray-50 dark:bg-transparent border-t border-gray-100 dark:border-foreground/5">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-4xl font-black text-gray-900 dark:text-white mb-4">Ready to contribute?</h2>
-          <p className="text-gray-500 dark:text-white/40 mb-10">Every contribution — code, research, advocacy — is tracked and rewarded through DRP&apos;s proof system.</p>
+          <h2 className="text-4xl font-black text-foreground mb-4">Ready to contribute?</h2>
+          <p className="text-gray-500 dark:text-foreground/40 mb-10">Every contribution — code, research, advocacy — is tracked and rewarded through DRP&apos;s proof system.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/docs/contributing"
-              className="inline-flex items-center gap-3 px-7 py-4 bg-[#00e5cc] text-black font-bold text-sm hover:bg-[#00bfff] transition-all">
+              className="inline-flex items-center gap-3 px-7 py-4 bg-[#00e5cc] text-background font-bold text-sm hover:bg-[#00bfff] transition-all">
               Contribution Guide <ArrowRight className="w-4 h-4" />
             </Link>
             <Link href="https://github.com/Decentralized-Rights-Protocol" target="_blank"
-              className="inline-flex items-center gap-3 px-7 py-4 border border-gray-200 dark:border-white/15 text-gray-600 dark:text-white/60 text-sm hover:text-gray-900 dark:hover:text-white transition-colors">
+              className="inline-flex items-center gap-3 px-7 py-4 border border-gray-200 dark:border-foreground/15 text-gray-600 dark:text-foreground/60 text-sm hover:text-gray-900 dark:hover:text-foreground transition-colors">
               View GitHub <ExternalLink className="w-4 h-4" />
             </Link>
           </div>

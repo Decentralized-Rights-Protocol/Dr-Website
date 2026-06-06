@@ -35,7 +35,7 @@ export function LevelBadge({ size = 'md', className = '' }: LevelBadgeProps) {
   return (
     <div className={`relative ${className}`}>
       <div
-        className={`${sizeClasses[size]} rounded-full bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 flex items-center justify-center text-white font-bold shadow-lg border-4 border-white dark:border-gray-800 transition-transform hover:scale-110`}
+        className={`${sizeClasses[size]} rounded-full bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 flex items-center justify-center text-foreground font-bold shadow-lg border-4 border-white dark:border-gray-800 transition-transform hover:scale-110`}
       >
         <span>{level}</span>
       </div>

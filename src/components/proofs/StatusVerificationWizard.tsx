@@ -210,7 +210,7 @@ export function StatusVerificationWizard() {
               <button
                 type="button"
                 onClick={nextStep}
-                className="rounded-xl bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-neutral-800 dark:bg-neutral-50 dark:text-neutral-900"
+                className="rounded-xl bg-neutral-900 px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-neutral-800 dark:bg-neutral-50 dark:text-neutral-900"
               >
                 Continue
               </button>
@@ -219,7 +219,7 @@ export function StatusVerificationWizard() {
               <button
                 type="submit"
                 disabled={mutation.isPending}
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 px-5 py-2 text-sm font-semibold text-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {mutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
                 Submit for review

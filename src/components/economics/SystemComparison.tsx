@@ -32,7 +32,7 @@ export function SystemComparison() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+          <h2 className="text-4xl font-bold text-neutral-900 dark:text-foreground mb-4">
             Old System vs DRP System
           </h2>
           <p className="text-xl text-neutral-600 dark:text-neutral-300">
@@ -84,7 +84,7 @@ export function SystemComparison() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="p-4 rounded-full bg-gradient-to-r from-red-500 to-green-500"
             >
-              <ArrowRight className="h-8 w-8 text-white" />
+              <ArrowRight className="h-8 w-8 text-foreground" />
             </motion.div>
           </div>
 

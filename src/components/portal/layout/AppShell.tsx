@@ -53,7 +53,7 @@ export function AppShell({ children }: AppShellProps) {
               />
             </div>
             <div className="hidden sm:block">
-              <p className="text-lg font-bold tracking-tight text-neutral-900 dark:text-white">DRP</p>
+              <p className="text-lg font-bold tracking-tight text-neutral-900 dark:text-foreground">DRP</p>
               <p className="text-[10px] font-medium uppercase tracking-widest text-neutral-500 dark:text-neutral-400">Decentralized Rights</p>
             </div>
           </Link>
@@ -86,7 +86,7 @@ export function AppShell({ children }: AppShellProps) {
             {address ? (
               <Link
                 href="/dashboard"
-                className="flex items-center gap-2 rounded-xl bg-drp-blue px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-drp-blue/20 transition-all hover:scale-105 hover:bg-drp-blue/90 active:scale-95"
+                className="flex items-center gap-2 rounded-xl bg-drp-blue px-5 py-2.5 text-sm font-bold text-foreground shadow-lg shadow-drp-blue/20 transition-all hover:scale-105 hover:bg-drp-blue/90 active:scale-95"
               >
                 <User className="h-4 w-4" />
                 <span className="hidden lg:inline">Dashboard</span>
@@ -101,7 +101,7 @@ export function AppShell({ children }: AppShellProps) {
                   }
                 }}
                 disabled={isConnecting}
-                className="flex items-center gap-2 rounded-xl bg-drp-blue px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-drp-blue/20 transition-all hover:scale-105 hover:bg-drp-blue/90 active:scale-95 disabled:opacity-50"
+                className="flex items-center gap-2 rounded-xl bg-drp-blue px-5 py-2.5 text-sm font-bold text-foreground shadow-lg shadow-drp-blue/20 transition-all hover:scale-105 hover:bg-drp-blue/90 active:scale-95 disabled:opacity-50"
               >
                 <Wallet className="h-4 w-4" />
                 {isConnecting ? 'Connecting...' : <span className="hidden lg:inline">Connect Wallet</span>}
@@ -146,7 +146,7 @@ export function AppShell({ children }: AppShellProps) {
                   <Link
                     href="/dashboard"
                     onClick={() => setIsMobileNavOpen(false)}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-drp-blue py-4 text-base font-bold text-white shadow-lg shadow-drp-blue/20"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-drp-blue py-4 text-base font-bold text-foreground shadow-lg shadow-drp-blue/20"
                   >
                     <User className="h-5 w-5" />
                     Dashboard
@@ -162,7 +162,7 @@ export function AppShell({ children }: AppShellProps) {
                       }
                     }}
                     disabled={isConnecting}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-drp-blue py-4 text-base font-bold text-white shadow-lg shadow-drp-blue/20 disabled:opacity-50"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-drp-blue py-4 text-base font-bold text-foreground shadow-lg shadow-drp-blue/20 disabled:opacity-50"
                   >
                     <Wallet className="h-5 w-5" />
                     {isConnecting ? 'Connecting...' : 'Connect Wallet'}
@@ -186,26 +186,26 @@ export function AppShell({ children }: AppShellProps) {
                 <Image src="/logo.png" alt="DRP Logo" fill className="object-cover" />
               </div>
               <div>
-                <p className="text-lg font-bold text-neutral-900 dark:text-white">DRP</p>
+                <p className="text-lg font-bold text-neutral-900 dark:text-foreground">DRP</p>
                 <p className="text-xs text-neutral-500">Engineered for human rights.</p>
               </div>
             </div>
             
             <div className="flex flex-wrap justify-center gap-8">
               <div className="flex flex-col gap-3">
-                <p className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white">Platform</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-foreground">Platform</p>
                 <Link href="/dashboard" className="text-sm text-neutral-500 hover:text-drp-blue dark:text-neutral-400">Dashboard</Link>
                 <Link href="/governance" className="text-sm text-neutral-500 hover:text-drp-blue dark:text-neutral-400">Governance</Link>
                 <Link href="/review" className="text-sm text-neutral-500 hover:text-drp-blue dark:text-neutral-400">Review</Link>
               </div>
               <div className="flex flex-col gap-3">
-                <p className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white">Resources</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-foreground">Resources</p>
                 <Link href="/docs" className="text-sm text-neutral-500 hover:text-drp-blue dark:text-neutral-400">Documentation</Link>
                 <Link href="/learn" className="text-sm text-neutral-500 hover:text-drp-blue dark:text-neutral-400">Learn</Link>
                 <Link href="/roadmap" className="text-sm text-neutral-500 hover:text-drp-blue dark:text-neutral-400">Roadmap</Link>
               </div>
               <div className="flex flex-col gap-3">
-                <p className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white">Legal</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-foreground">Legal</p>
                 <Link href="/privacy" className="text-sm text-neutral-500 hover:text-drp-blue dark:text-neutral-400">Privacy Policy</Link>
                 <Link href="/terms" className="text-sm text-neutral-500 hover:text-drp-blue dark:text-neutral-400">Terms of Service</Link>
               </div>

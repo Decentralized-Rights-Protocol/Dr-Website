@@ -66,7 +66,7 @@ export default function ProfilePage() {
         <div className="rounded-3xl border border-neutral-200/80 bg-white/90 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-12 w-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-              <User className="h-6 w-6 text-white" />
+              <User className="h-6 w-6 text-foreground" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50">User Summary</h2>
@@ -115,7 +115,7 @@ export default function ProfilePage() {
         <div className="rounded-3xl border border-neutral-200/80 bg-white/90 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-              <TrendingUp className="h-6 w-6 text-white" />
+              <TrendingUp className="h-6 w-6 text-foreground" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50">PoST Score</h2>

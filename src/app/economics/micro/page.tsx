@@ -70,7 +70,7 @@ export default function MicroeconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               1. Agents & Roles
             </h2>
             <p className="text-lg text-neutral-300 mb-8">
@@ -86,7 +86,7 @@ export default function MicroeconomicsPage() {
                       Individuals are the primary value creators in the DRP economy. They engage in verified activities—work, learning, community service, and sustainable practices—that generate economic value.
                     </p>
                     <p className="mb-4">
-                      <strong className="text-neutral-900 dark:text-white">Incentives:</strong> Individuals are motivated by:
+                      <strong className="text-neutral-900 dark:text-foreground">Incentives:</strong> Individuals are motivated by:
                     </p>
                     <ul className="list-disc pl-6 space-y-2 mb-4">
                       <li>Direct token rewards ($DeRi) for verified activity</li>
@@ -95,7 +95,7 @@ export default function MicroeconomicsPage() {
                       <li>Reputation capital that compounds over time, creating long-term value</li>
                     </ul>
                     <p>
-                      <strong className="text-neutral-900 dark:text-white">Behavioral Pattern:</strong> Rational agents optimize their activity mix to maximize utility, balancing effort, reward, and status. Specialization emerges as agents discover comparative advantages in specific activity types (e.g., technical skills, community building, sustainability practices).
+                      <strong className="text-neutral-900 dark:text-foreground">Behavioral Pattern:</strong> Rational agents optimize their activity mix to maximize utility, balancing effort, reward, and status. Specialization emerges as agents discover comparative advantages in specific activity types (e.g., technical skills, community building, sustainability practices).
                     </p>
                   </>
                 }
@@ -111,7 +111,7 @@ export default function MicroeconomicsPage() {
                       Producers create applications, services, and infrastructure that facilitate activity and generate transaction value. They operate within the DRP ecosystem, earning revenue through transaction fees, premium features, and ecosystem grants.
                     </p>
                     <p className="mb-4">
-                      <strong className="text-neutral-900 dark:text-white">Incentives:</strong> Producers are motivated by:
+                      <strong className="text-neutral-900 dark:text-foreground">Incentives:</strong> Producers are motivated by:
                     </p>
                     <ul className="list-disc pl-6 space-y-2 mb-4">
                       <li>Transaction fees from app usage (denominated in $DeRi or $RIGHTS)</li>
@@ -120,7 +120,7 @@ export default function MicroeconomicsPage() {
                       <li>Governance influence through $RIGHTS token holdings</li>
                     </ul>
                     <p>
-                      <strong className="text-neutral-900 dark:text-white">Behavioral Pattern:</strong> Producers compete on quality, user experience, and alignment with DRP values. The rights-based framework creates positive externalities: apps that enhance human dignity and sustainability receive preferential treatment, creating a virtuous cycle.
+                      <strong className="text-neutral-900 dark:text-foreground">Behavioral Pattern:</strong> Producers compete on quality, user experience, and alignment with DRP values. The rights-based framework creates positive externalities: apps that enhance human dignity and sustainability receive preferential treatment, creating a virtuous cycle.
                     </p>
                   </>
                 }
@@ -136,7 +136,7 @@ export default function MicroeconomicsPage() {
                       The Protocol acts as the economic infrastructure, providing verification, governance, and monetary policy. AI Elders verify activity, detect fraud, and maintain system integrity. Governance (via $RIGHTS holders) sets parameters, allocates resources, and responds to shocks.
                     </p>
                     <p className="mb-4">
-                      <strong className="text-neutral-900 dark:text-white">Incentives:</strong> The Protocol is designed to:
+                      <strong className="text-neutral-900 dark:text-foreground">Incentives:</strong> The Protocol is designed to:
                     </p>
                     <ul className="list-disc pl-6 space-y-2 mb-4">
                       <li>Maximize verified human activity and rights fulfillment</li>
@@ -145,7 +145,7 @@ export default function MicroeconomicsPage() {
                       <li>Promote sustainability and reduce inequality</li>
                     </ul>
                     <p>
-                      <strong className="text-neutral-900 dark:text-white">Behavioral Pattern:</strong> The Protocol operates as a transparent, algorithmic system. AI Elders use explainable AI to verify activity, with human oversight ensuring fairness. Governance decisions are made through transparent voting, with $RIGHTS holders incentivized to act in the long-term interest of the ecosystem.
+                      <strong className="text-neutral-900 dark:text-foreground">Behavioral Pattern:</strong> The Protocol operates as a transparent, algorithmic system. AI Elders use explainable AI to verify activity, with human oversight ensuring fairness. Governance decisions are made through transparent voting, with $RIGHTS holders incentivized to act in the long-term interest of the ecosystem.
                     </p>
                   </>
                 }
@@ -167,7 +167,7 @@ export default function MicroeconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               2. Goods & Tokens
             </h2>
             <p className="text-lg text-neutral-300 mb-8">
@@ -180,7 +180,7 @@ export default function MicroeconomicsPage() {
                 description={
                   <>
                     <p className="mb-4">
-                      <strong className="text-neutral-900 dark:text-white">Functions:</strong>
+                      <strong className="text-neutral-900 dark:text-foreground">Functions:</strong>
                     </p>
                     <ul className="list-disc pl-6 space-y-2 mb-4">
                       <li><strong>Medium of Exchange:</strong> Used for transactions, app fees, and payments within the DRP ecosystem</li>
@@ -189,7 +189,7 @@ export default function MicroeconomicsPage() {
                       <li><strong>Reward Mechanism:</strong> Primary token issued for verified activity</li>
                     </ul>
                     <p>
-                      <strong className="text-neutral-900 dark:text-white">Behavior:</strong> $DeRi supply expands algorithmically based on verified activity. Demand is driven by transaction needs, app usage, and speculative holdings. The protocol manages velocity through quiz-based friction, preventing excessive hoarding while maintaining liquidity.
+                      <strong className="text-neutral-900 dark:text-foreground">Behavior:</strong> $DeRi supply expands algorithmically based on verified activity. Demand is driven by transaction needs, app usage, and speculative holdings. The protocol manages velocity through quiz-based friction, preventing excessive hoarding while maintaining liquidity.
                     </p>
                   </>
                 }
@@ -202,7 +202,7 @@ export default function MicroeconomicsPage() {
                 description={
                   <>
                     <p className="mb-4">
-                      <strong className="text-neutral-900 dark:text-white">Functions:</strong>
+                      <strong className="text-neutral-900 dark:text-foreground">Functions:</strong>
                     </p>
                     <ul className="list-disc pl-6 space-y-2 mb-4">
                       <li><strong>Governance Rights:</strong> Holders vote on protocol parameters, resource allocation, and policy changes</li>
@@ -211,7 +211,7 @@ export default function MicroeconomicsPage() {
                       <li><strong>Reputation Mechanism:</strong> Accrued through verified activity and community contribution</li>
                     </ul>
                     <p>
-                      <strong className="text-neutral-900 dark:text-white">Behavior:</strong> $RIGHTS are earned through Proof of Status (PoS), which rewards consistent, high-quality activity. Unlike $DeRi, $RIGHTS are not primarily used for transactions but for governance and status. This creates a two-tier system: utility ($DeRi) and governance ($RIGHTS), aligning incentives with long-term ecosystem health.
+                      <strong className="text-neutral-900 dark:text-foreground">Behavior:</strong> $RIGHTS are earned through Proof of Status (PoS), which rewards consistent, high-quality activity. Unlike $DeRi, $RIGHTS are not primarily used for transactions but for governance and status. This creates a two-tier system: utility ($DeRi) and governance ($RIGHTS), aligning incentives with long-term ecosystem health.
                     </p>
                   </>
                 }
@@ -227,7 +227,7 @@ export default function MicroeconomicsPage() {
                       Activity Credits are non-transferable tokens that represent verified contribution history. They serve as reputation capital, unlocking privileges, reducing verification costs, and signaling trustworthiness.
                     </p>
                     <p className="mb-4">
-                      <strong className="text-neutral-900 dark:text-white">Functions:</strong>
+                      <strong className="text-neutral-900 dark:text-foreground">Functions:</strong>
                     </p>
                     <ul className="list-disc pl-6 space-y-2 mb-4">
                       <li><strong>Reputation Capital:</strong> Cannot be bought or sold, only earned through activity</li>
@@ -236,7 +236,7 @@ export default function MicroeconomicsPage() {
                       <li><strong>Trust Signal:</strong> Enables reputation-based matching and reduced friction</li>
                     </ul>
                     <p>
-                      <strong className="text-neutral-900 dark:text-white">Behavior:</strong> Activity Credits create a commitment mechanism: agents cannot simply purchase status, they must earn it through sustained contribution. This prevents Sybil attacks and ensures that reputation reflects genuine value creation.
+                      <strong className="text-neutral-900 dark:text-foreground">Behavior:</strong> Activity Credits create a commitment mechanism: agents cannot simply purchase status, they must earn it through sustained contribution. This prevents Sybil attacks and ensures that reputation reflects genuine value creation.
                     </p>
                   </>
                 }
@@ -258,11 +258,11 @@ export default function MicroeconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               3. Supply & Demand in DRP
             </h2>
             <p className="text-lg text-neutral-300 mb-8">
-              Unlike traditional markets, DRP features <strong className="text-white">algorithmic supply</strong> driven by verified activity, creating a unique supply-demand dynamic.
+              Unlike traditional markets, DRP features <strong className="text-foreground">algorithmic supply</strong> driven by verified activity, creating a unique supply-demand dynamic.
             </p>
 
             <EconomicsCard
@@ -309,7 +309,7 @@ export default function MicroeconomicsPage() {
                     <li><strong>Network Effects:</strong> As more agents join, network value increases, driving demand</li>
                   </ul>
                   <p>
-                    The protocol balances supply and demand through <strong className="text-neutral-900 dark:text-white">algorithmic monetary policy:</strong> when velocity is too high (indicating excessive token creation relative to economic activity), difficulty increases and quiz friction is applied, reducing effective supply growth.
+                    The protocol balances supply and demand through <strong className="text-neutral-900 dark:text-foreground">algorithmic monetary policy:</strong> when velocity is too high (indicating excessive token creation relative to economic activity), difficulty increases and quiz friction is applied, reducing effective supply growth.
                   </p>
                 </>
               }
@@ -329,7 +329,7 @@ export default function MicroeconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               4. Price Mechanisms & Market Design
             </h2>
             <p className="text-lg text-neutral-300 mb-8">
@@ -341,7 +341,7 @@ export default function MicroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    Unlike traditional markets with continuous price discovery, DRP uses <strong className="text-neutral-900 dark:text-white">algorithmic pricing</strong> based on:
+                    Unlike traditional markets with continuous price discovery, DRP uses <strong className="text-neutral-900 dark:text-foreground">algorithmic pricing</strong> based on:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Activity-Based Valuation:</strong> Token rewards are calculated algorithmically based on activity type, quality, and verification score</li>
@@ -349,7 +349,7 @@ export default function MicroeconomicsPage() {
                     <li><strong>Time-Weighted Scoring:</strong> Recent activity may be weighted more heavily, preventing gaming through historical accumulation</li>
                   </ul>
                   <p>
-                    This creates <strong className="text-neutral-900 dark:text-white">predictable, transparent pricing</strong> that reduces information asymmetry and prevents market manipulation.
+                    This creates <strong className="text-neutral-900 dark:text-foreground">predictable, transparent pricing</strong> that reduces information asymmetry and prevents market manipulation.
                   </p>
                 </>
               }
@@ -361,7 +361,7 @@ export default function MicroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    DRP implements a form of <strong className="text-neutral-900 dark:text-white">reputation-based price discrimination</strong> that benefits high-status agents:
+                    DRP implements a form of <strong className="text-neutral-900 dark:text-foreground">reputation-based price discrimination</strong> that benefits high-status agents:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Lower Verification Costs:</strong> Agents with high activity credits pay lower fees</li>
@@ -369,7 +369,7 @@ export default function MicroeconomicsPage() {
                     <li><strong>Higher Reward Multipliers:</strong> Consistent, high-quality activity receives bonus rewards</li>
                   </ul>
                   <p>
-                    This is not traditional price discrimination (which benefits sellers) but <strong className="text-neutral-900 dark:text-white">merit-based differentiation</strong> that rewards genuine contribution. It creates incentives for long-term engagement and quality over quantity.
+                    This is not traditional price discrimination (which benefits sellers) but <strong className="text-neutral-900 dark:text-foreground">merit-based differentiation</strong> that rewards genuine contribution. It creates incentives for long-term engagement and quality over quantity.
                   </p>
                 </>
               }
@@ -381,7 +381,7 @@ export default function MicroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    One of DRP&apos;s most innovative mechanisms is the use of <strong className="text-neutral-900 dark:text-white">gating quizzes</strong> to manage token velocity:
+                    One of DRP&apos;s most innovative mechanisms is the use of <strong className="text-neutral-900 dark:text-foreground">gating quizzes</strong> to manage token velocity:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Friction Mechanism:</strong> Before accessing high-value activities or rewards, agents must complete knowledge quizzes</li>
@@ -390,7 +390,7 @@ export default function MicroeconomicsPage() {
                     <li><strong>Difficulty Tuning:</strong> Quiz difficulty adjusts based on system velocity: high velocity → harder quizzes → reduced participation → lower velocity</li>
                   </ul>
                   <p>
-                    This is inspired by <strong className="text-neutral-900 dark:text-white">mechanism design theory</strong> and <strong className="text-neutral-900 dark:text-white">game-theoretic signaling:</strong> agents who are willing to invest time in quizzes signal commitment and reduce the likelihood of malicious behavior. The mechanism is transparent and algorithmic, preventing arbitrary gatekeeping.
+                    This is inspired by <strong className="text-neutral-900 dark:text-foreground">mechanism design theory</strong> and <strong className="text-neutral-900 dark:text-foreground">game-theoretic signaling:</strong> agents who are willing to invest time in quizzes signal commitment and reduce the likelihood of malicious behavior. The mechanism is transparent and algorithmic, preventing arbitrary gatekeeping.
                   </p>
                 </>
               }
@@ -410,7 +410,7 @@ export default function MicroeconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               5. Incentives & Anti-Fraud
             </h2>
             <p className="text-lg text-neutral-300 mb-8">
@@ -431,7 +431,7 @@ export default function MicroeconomicsPage() {
                     <li><strong>Adaptive Learning:</strong> The system learns from new fraud patterns, improving detection over time</li>
                   </ul>
                   <p>
-                    This creates a <strong className="text-neutral-900 dark:text-white">trust layer</strong> that maintains system integrity without requiring surveillance of all agents.
+                    This creates a <strong className="text-neutral-900 dark:text-foreground">trust layer</strong> that maintains system integrity without requiring surveillance of all agents.
                   </p>
                 </>
               }
@@ -453,7 +453,7 @@ export default function MicroeconomicsPage() {
                     <li><strong>Reputation Damage:</strong> Fraud records are transparent, affecting future opportunities</li>
                   </ul>
                   <p>
-                    The <strong className="text-neutral-900 dark:text-white">expected cost of fraud</strong> must exceed the expected benefit, creating a strong disincentive. The system is designed to be forgiving for honest mistakes (which are distinguished from intentional fraud through AI analysis) while being harsh on systematic abuse.
+                    The <strong className="text-neutral-900 dark:text-foreground">expected cost of fraud</strong> must exceed the expected benefit, creating a strong disincentive. The system is designed to be forgiving for honest mistakes (which are distinguished from intentional fraud through AI analysis) while being harsh on systematic abuse.
                   </p>
                 </>
               }
@@ -466,7 +466,7 @@ export default function MicroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    Verification costs serve as <strong className="text-neutral-900 dark:text-white">micro-level policy levers</strong> that can be adjusted to:
+                    Verification costs serve as <strong className="text-neutral-900 dark:text-foreground">micro-level policy levers</strong> that can be adjusted to:
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Manage Activity Levels:</strong> Higher costs reduce low-quality participation; lower costs encourage engagement</li>
@@ -475,7 +475,7 @@ export default function MicroeconomicsPage() {
                     <li><strong>Balance Supply:</strong> Adjusting verification costs affects effective token supply, providing fine-grained monetary control</li>
                   </ul>
                   <p>
-                    This is a form of <strong className="text-neutral-900 dark:text-white">algorithmic fiscal policy</strong> at the micro level: the protocol can adjust verification costs in response to economic conditions, similar to how central banks adjust interest rates.
+                    This is a form of <strong className="text-neutral-900 dark:text-foreground">algorithmic fiscal policy</strong> at the micro level: the protocol can adjust verification costs in response to economic conditions, similar to how central banks adjust interest rates.
                   </p>
                 </>
               }
@@ -496,7 +496,7 @@ export default function MicroeconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               6. Micro Outcomes & Comparative Advantage
             </h2>
             <p className="text-lg text-neutral-300 mb-8">
@@ -508,7 +508,7 @@ export default function MicroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    Agents naturally specialize in activities where they have <strong className="text-neutral-900 dark:text-white">comparative advantage:</strong>
+                    Agents naturally specialize in activities where they have <strong className="text-neutral-900 dark:text-foreground">comparative advantage:</strong>
                   </p>
                   <ul className="list-disc pl-6 space-y-2 mb-4">
                     <li><strong>Technical Skills:</strong> Developers, data scientists, and engineers focus on high-value technical activities</li>
@@ -517,7 +517,7 @@ export default function MicroeconomicsPage() {
                     <li><strong>Education:</strong> Educators and learners engage in learn-to-earn activities</li>
                   </ul>
                   <p>
-                    The protocol rewards <strong className="text-neutral-900 dark:text-white">skill premiums:</strong> high-quality, specialized activity receives higher reward multipliers. This creates incentives for skill development and efficient specialization, similar to traditional labor markets but without the extraction of surplus value by capital owners.
+                    The protocol rewards <strong className="text-neutral-900 dark:text-foreground">skill premiums:</strong> high-quality, specialized activity receives higher reward multipliers. This creates incentives for skill development and efficient specialization, similar to traditional labor markets but without the extraction of surplus value by capital owners.
                   </p>
                 </>
               }
@@ -529,7 +529,7 @@ export default function MicroeconomicsPage() {
               description={
                 <>
                   <p className="mb-4">
-                    Status accrual creates a <strong className="text-neutral-900 dark:text-white">differentiated equilibrium:</strong> agents with high status receive premium access and lower costs, while new agents face higher barriers but have clear pathways to status improvement.
+                    Status accrual creates a <strong className="text-neutral-900 dark:text-foreground">differentiated equilibrium:</strong> agents with high status receive premium access and lower costs, while new agents face higher barriers but have clear pathways to status improvement.
                   </p>
                   <p className="mb-4">
                     This creates multiple equilibria:
@@ -540,7 +540,7 @@ export default function MicroeconomicsPage() {
                     <li><strong>New Agents:</strong> Higher costs, basic access, but clear status improvement pathways</li>
                   </ul>
                   <p>
-                    Unlike traditional systems where status is inherited or purchased, DRP status is <strong className="text-neutral-900 dark:text-white">earned through contribution,</strong> creating a meritocratic equilibrium that rewards value creation.
+                    Unlike traditional systems where status is inherited or purchased, DRP status is <strong className="text-neutral-900 dark:text-foreground">earned through contribution,</strong> creating a meritocratic equilibrium that rewards value creation.
                   </p>
                 </>
               }
@@ -549,18 +549,18 @@ export default function MicroeconomicsPage() {
 
             {/* Agent Payoffs Table */}
             <div className="mt-8 bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">
                 Agent Payoff Matrix
               </h3>
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse">
                   <thead>
                     <tr className="border-b border-neutral-200 dark:border-neutral-700">
-                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-white">Agent Type</th>
-                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-white">Activity Level</th>
-                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-white">Expected Reward</th>
-                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-white">Status Accrual</th>
-                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-white">Verification Cost</th>
+                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-foreground">Agent Type</th>
+                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-foreground">Activity Level</th>
+                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-foreground">Expected Reward</th>
+                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-foreground">Status Accrual</th>
+                      <th className="text-left py-3 px-4 font-semibold text-neutral-900 dark:text-foreground">Verification Cost</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -614,11 +614,11 @@ export default function MicroeconomicsPage() {
             className="max-w-4xl mx-auto"
           >
             <div className="bg-white dark:bg-neutral-800 rounded-xl p-8 border border-blue-200 dark:border-blue-900 shadow-lg">
-              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-4">
                 Economic Intuition
               </h3>
               <p className="text-lg text-neutral-700 dark:text-neutral-300">
-                The DRP microeconomic model creates a <strong className="text-neutral-900 dark:text-white">self-organizing economy</strong> where individual incentives align with collective welfare. Unlike traditional markets where value extraction creates winners and losers, DRP&apos;s activity-based model ensures that value flows to those who create it. Specialization emerges naturally, status is earned through contribution, and fraud is disincentivized through economic penalties. The result is a <strong className="text-neutral-900 dark:text-white">meritocratic equilibrium</strong> that rewards value creation while ensuring basic rights are met for all participants.
+                The DRP microeconomic model creates a <strong className="text-neutral-900 dark:text-foreground">self-organizing economy</strong> where individual incentives align with collective welfare. Unlike traditional markets where value extraction creates winners and losers, DRP&apos;s activity-based model ensures that value flows to those who create it. Specialization emerges naturally, status is earned through contribution, and fraud is disincentivized through economic penalties. The result is a <strong className="text-neutral-900 dark:text-foreground">meritocratic equilibrium</strong> that rewards value creation while ensuring basic rights are met for all participants.
               </p>
             </div>
           </motion.div>

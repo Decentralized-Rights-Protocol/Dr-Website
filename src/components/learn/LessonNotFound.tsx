@@ -33,7 +33,7 @@ export function LessonNotFound() {
         
         <div className="mb-6">
           <BookOpen className="h-16 w-16 text-blue-500 mx-auto mb-4 animate-bounce" />
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2">
             Lesson Not Found
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
@@ -44,7 +44,7 @@ export function LessonNotFound() {
         <div className="space-y-4">
           <Link
             href="/learn"
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-foreground font-semibold px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
           >
             <Sparkles className="h-5 w-5" />
             Browse Lessons
@@ -52,7 +52,7 @@ export function LessonNotFound() {
           
           <Link
             href="/learn"
-            className="inline-flex items-center justify-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium transition-colors"
+            className="inline-flex items-center justify-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-foreground font-medium transition-colors"
           >
             <ArrowLeft className="h-5 w-5" />
             Back to Learn

@@ -90,13 +90,13 @@ export default function GlossaryPage() {
         >
           <dl className="mt-6 grid gap-4 sm:grid-cols-2">
             {terms.map((t) => (
-              <div key={t.term} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <div key={t.term} className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
                 <dt className="flex items-center gap-3">
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-300/15">
                     {t.linkHref ? <BookOpen className="h-5 w-5 text-cyan-200" aria-hidden="true" /> : null}
                     {!t.linkHref ? <ShieldCheck className="h-5 w-5 text-cyan-200" aria-hidden="true" /> : null}
                   </span>
-                  <span className="text-lg font-semibold text-white">{t.term}</span>
+                  <span className="text-lg font-semibold text-foreground">{t.term}</span>
                 </dt>
                 <dd className="mt-3 text-sm leading-relaxed text-slate-300">
                   {t.definition}{' '}
@@ -116,10 +116,10 @@ export default function GlossaryPage() {
             <Link href="/how-drp-works" className="inline-flex items-center justify-between rounded-xl border border-cyan-300/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">
               How DRP works <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <Link href="/faq" className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20">
+            <Link href="/faq" className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20">
               FAQ <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <Link href="/drp-vs-ethereum" className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20">
+            <Link href="/drp-vs-ethereum" className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20">
               DRP vs Ethereum <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>

@@ -25,7 +25,7 @@ export function BlockchainFlowDiagram({ title, caption, className = '' }: Diagra
       className={`my-8 ${className}`}
     >
       <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
-        {title && <h3 className="text-lg font-semibold text-white mb-4">{title}</h3>}
+        {title && <h3 className="text-lg font-semibold text-foreground mb-4">{title}</h3>}
         <svg viewBox="0 0 800 300" className="w-full h-auto max-w-4xl">
           <defs>
             <marker id="blockArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
@@ -74,7 +74,7 @@ export function HashingPipelineDiagram({ title, caption, className = '' }: Diagr
       className={`my-8 ${className}`}
     >
       <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
-        {title && <h3 className="text-lg font-semibold text-white mb-4">{title}</h3>}
+        {title && <h3 className="text-lg font-semibold text-foreground mb-4">{title}</h3>}
         <svg viewBox="0 0 700 200" className="w-full h-auto max-w-4xl">
           <defs>
             <marker id="hashArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
@@ -118,7 +118,7 @@ export function PoATFlowDiagram({ title, caption, className = '' }: DiagramProps
       className={`my-8 ${className}`}
     >
       <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
-        {title && <h3 className="text-lg font-semibold text-white mb-4">{title}</h3>}
+        {title && <h3 className="text-lg font-semibold text-foreground mb-4">{title}</h3>}
         <svg viewBox="0 0 700 300" className="w-full h-auto max-w-4xl">
           <defs>
             <marker id="poatArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
@@ -172,7 +172,7 @@ export function GovernanceFlowDiagram({ title, caption, className = '' }: Diagra
       className={`my-8 ${className}`}
     >
       <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
-        {title && <h3 className="text-lg font-semibold text-white mb-4">{title}</h3>}
+        {title && <h3 className="text-lg font-semibold text-foreground mb-4">{title}</h3>}
         <svg viewBox="0 0 700 250" className="w-full h-auto max-w-4xl">
           <defs>
             <marker id="govArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
@@ -216,7 +216,7 @@ export function EconomicCycleDiagram({ title, caption, className = '' }: Diagram
       className={`my-8 ${className}`}
     >
       <div className="bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6">
-        {title && <h3 className="text-lg font-semibold text-white mb-4">{title}</h3>}
+        {title && <h3 className="text-lg font-semibold text-foreground mb-4">{title}</h3>}
         <svg viewBox="0 0 600 400" className="w-full h-auto max-w-3xl">
           <defs>
             <marker id="econArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">

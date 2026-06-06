@@ -19,7 +19,7 @@ export function Loading() {
         {/* Animated DRP Logo */}
         <div className="relative mb-8">
           <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-r from-primary-600 to-secondary-600 flex items-center justify-center animate-pulse-glow">
-            <span className="text-white font-bold text-2xl">DRP</span>
+            <span className="text-foreground font-bold text-2xl">DRP</span>
           </div>
           {/* Orbiting elements */}
           <div className="absolute inset-0 animate-spin">
@@ -31,7 +31,7 @@ export function Loading() {
         </div>
 
         {/* Loading Text */}
-        <div className="text-white text-xl font-semibold mb-2">
+        <div className="text-foreground text-xl font-semibold mb-2">
           Loading{dots}
         </div>
         <div className="text-neutral-300 text-sm">

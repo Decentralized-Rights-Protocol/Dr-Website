@@ -58,7 +58,7 @@ export default function SREPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
-            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-foreground"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Economics Overview
@@ -76,7 +76,7 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               What is the Sustainable Rights Economy?
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -88,7 +88,7 @@ export default function SREPage() {
               </p>
               <p className="text-lg text-neutral-300 mb-6">
                 In the SRE, distribution is not based on ownership of capital or extraction of resources, 
-                but on <strong className="text-white">verified contribution</strong> 
+                but on <strong className="text-foreground">verified contribution</strong> 
                 to human development, sustainability, and community well-being.
               </p>
             </div>
@@ -106,7 +106,7 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               How Rights-Backed Distribution Works
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -116,10 +116,10 @@ export default function SREPage() {
                 human being has inherent rights to:
               </p>
               <ul className="list-disc pl-6 space-y-3 text-neutral-300 mb-6">
-                <li><strong className="text-white">Basic Needs:</strong> Food, water, shelter, healthcare, education</li>
-                <li><strong className="text-white">Dignity:</strong> Recognition of human worth and contribution</li>
-                <li><strong className="text-white">Participation:</strong> Voice in economic and governance decisions</li>
-                <li><strong className="text-white">Development:</strong> Opportunity to develop capabilities and flourish</li>
+                <li><strong className="text-foreground">Basic Needs:</strong> Food, water, shelter, healthcare, education</li>
+                <li><strong className="text-foreground">Dignity:</strong> Recognition of human worth and contribution</li>
+                <li><strong className="text-foreground">Participation:</strong> Voice in economic and governance decisions</li>
+                <li><strong className="text-foreground">Development:</strong> Opportunity to develop capabilities and flourish</li>
               </ul>
               <p className="text-lg text-neutral-300">
                 Distribution algorithms prioritize these rights, ensuring that even those who cannot 
@@ -141,7 +141,7 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               AI Scoring: Contribution, Sustainability, Learning, Community Service
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -176,7 +176,7 @@ export default function SREPage() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 border border-blue-200 dark:border-blue-900"
                   >
-                    <h3 className="text-xl font-bold text-white mb-3">
+                    <h3 className="text-xl font-bold text-foreground mb-3">
                       {item.title}
                     </h3>
                     <p className="text-neutral-300">
@@ -200,7 +200,7 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Clean Incentives: Renewable Energy, Good Behavior, Verified Effort
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -236,11 +236,11 @@ export default function SREPage() {
                   >
                     <div className="flex-shrink-0">
                       <div className="p-3 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600">
-                        <item.icon className="h-6 w-6 text-white" />
+                        <item.icon className="h-6 w-6 text-foreground" />
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">
+                      <h3 className="text-xl font-bold text-foreground mb-2">
                         {item.title}
                       </h3>
                       <p className="text-neutral-300">
@@ -266,7 +266,7 @@ export default function SREPage() {
             className="max-w-6xl mx-auto"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-white mb-4">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
                 SDG Integration: Mapping DRP Mechanisms to UN Goals
               </h2>
               <p className="text-xl text-neutral-300 mb-2">
@@ -281,7 +281,7 @@ export default function SREPage() {
             <div className="mb-12 overflow-x-auto">
               <table className="w-full border-collapse bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-lg">
                 <thead>
-                  <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                  <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-foreground">
                     <th className="px-6 py-4 text-left font-semibold">SDG Goal</th>
                     <th className="px-6 py-4 text-left font-semibold">DRP Mechanism</th>
                     <th className="px-6 py-4 text-left font-semibold">Input Metrics</th>
@@ -293,10 +293,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 text-foreground font-bold flex items-center justify-center">
                           1
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">No Poverty</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">No Poverty</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -317,10 +317,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 text-foreground font-bold flex items-center justify-center">
                           2
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Zero Hunger</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Zero Hunger</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -341,10 +341,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 text-foreground font-bold flex items-center justify-center">
                           3
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Good Health</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Good Health</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -365,10 +365,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-pink-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-pink-500 text-foreground font-bold flex items-center justify-center">
                           4
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Quality Education</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Quality Education</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -389,10 +389,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 text-foreground font-bold flex items-center justify-center">
                           7
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Affordable Energy</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Affordable Energy</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -413,10 +413,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-600 to-pink-600 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-600 to-pink-600 text-foreground font-bold flex items-center justify-center">
                           8
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Decent Work</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Decent Work</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -437,10 +437,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 text-foreground font-bold flex items-center justify-center">
                           9
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Innovation</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Innovation</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -461,10 +461,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 text-foreground font-bold flex items-center justify-center">
                           10
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Reduced Inequality</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Reduced Inequality</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -485,10 +485,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-amber-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-amber-500 text-foreground font-bold flex items-center justify-center">
                           11
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Sustainable Cities</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Sustainable Cities</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -509,10 +509,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 text-foreground font-bold flex items-center justify-center">
                           12
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Responsible Consumption</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Responsible Consumption</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -533,10 +533,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-500 text-foreground font-bold flex items-center justify-center">
                           16
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Peace & Justice</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Peace & Justice</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -557,10 +557,10 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 text-white font-bold flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 text-foreground font-bold flex items-center justify-center">
                           17
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-white">Partnerships</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">Partnerships</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -590,7 +590,7 @@ export default function SREPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mb-12"
             >
-              <h3 className="text-2xl font-bold text-white mb-6 text-center">
+              <h3 className="text-2xl font-bold text-foreground mb-6 text-center">
                 DRP → SDG Impact Flow
               </h3>
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl p-8 border border-blue-200 dark:border-blue-900">
@@ -598,7 +598,7 @@ export default function SREPage() {
                   {/* Input Layer */}
                   <div className="text-center">
                     <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 mb-3 shadow-md">
-                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">Inputs</h4>
+                      <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">Inputs</h4>
                       <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1 text-left">
                         <li>• Verified Activities</li>
                         <li>• Rights Claims</li>
@@ -618,7 +618,7 @@ export default function SREPage() {
                   {/* DRP Mechanisms */}
                   <div className="text-center">
                     <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 mb-3 shadow-md">
-                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">DRP Mechanisms</h4>
+                      <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">DRP Mechanisms</h4>
                       <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1 text-left">
                         <li>• AI Scoring</li>
                         <li>• Rights-Based Distribution</li>
@@ -638,7 +638,7 @@ export default function SREPage() {
                   {/* Output Layer */}
                   <div className="text-center">
                     <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 mb-3 shadow-md">
-                      <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">Economic Outputs</h4>
+                      <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">Economic Outputs</h4>
                       <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1 text-left">
                         <li>• Wealth Distribution</li>
                         <li>• Access to Resources</li>
@@ -680,7 +680,7 @@ export default function SREPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="text-4xl font-bold text-foreground mb-4">
               The Four Pillars of SRE
             </h2>
             <p className="text-xl text-neutral-300">
@@ -705,7 +705,7 @@ export default function SREPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Ready to Learn More?
             </h2>
             <p className="text-xl text-blue-100 mb-8">
@@ -720,7 +720,7 @@ export default function SREPage() {
               </Link>
               <Link
                 href="/economics/tokenomics"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white rounded-xl hover:bg-white/10 transition-all duration-300"
+                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-foreground border-2 border-white rounded-xl hover:bg-white/10 transition-all duration-300"
               >
                 Tokenomics
               </Link>

@@ -30,7 +30,7 @@ export function UnderstandingTrigger({
         {keyConcepts.map((concept, index) => (
           <div 
             key={index}
-            className="bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-3 hover:bg-white/10 transition-colors"
+            className="bg-white/5 backdrop-blur-sm rounded-lg border border-foreground/10 p-3 hover:bg-white/10 transition-colors"
           >
             <div className="flex items-start gap-2">
               <AcademicCapIcon className="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5" />

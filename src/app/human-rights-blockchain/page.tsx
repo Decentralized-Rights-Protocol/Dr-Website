@@ -48,33 +48,33 @@ export default function HumanRightsBlockchainPage() {
 
         <PremiumSection eyebrow="Entity-first explanation" title="Rights are part of the protocol, not a slogan">
           <div className="grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <HeartHandshake className="h-6 w-6 text-pink-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Rights baselines</h3>
+                <h3 className="text-lg font-semibold text-foreground">Rights baselines</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">Protocol behavior evaluates proposals against dignity and rights baselines.</p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-6 w-6 text-amber-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Proof over authority</h3>
+                <h3 className="text-lg font-semibold text-foreground">Proof over authority</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">PoST/PoAT turn status and activity into auditable proofs that reduce fraud and abuse.</p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <Sparkles className="h-6 w-6 text-cyan-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">AI in service of humanity</h3>
+                <h3 className="text-lg font-semibold text-foreground">AI in service of humanity</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">AI Elders help validate integrity and summarize risks under human accountability.</p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-cyan-300/20 text-cyan-100" aria-hidden="true">
                   →
                 </span>
-                <h3 className="text-lg font-semibold text-white">Sustainability aligned</h3>
+                <h3 className="text-lg font-semibold text-foreground">Sustainability aligned</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">Incentives target sustainable participation and long-term community well-being.</p>
             </article>
@@ -85,13 +85,13 @@ export default function HumanRightsBlockchainPage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href="/proof-of-status"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               Proof of Status (PoST) <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
               href="/proof-of-activity"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               Proof of Activity (PoAT) <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

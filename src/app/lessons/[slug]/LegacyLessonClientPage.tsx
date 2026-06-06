@@ -119,7 +119,7 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
         </motion.div>
 
         {/* Markdown Content Area */}
-        <div className="prose prose-invert max-w-none prose-p:text-drp-gray/90 prose-p:text-lg prose-p:leading-relaxed prose-headings:text-foreground prose-headings:font-bold prose-headings:tracking-tight prose-a:text-drp-cyan prose-strong:text-foreground prose-code:text-drp-cyan prose-code:bg-drp-cyan/10 prose-code:px-1 prose-code:rounded">
+        <div className="prose dark:prose-invert max-w-none prose-p:text-drp-gray/90 prose-p:text-lg prose-p:leading-relaxed prose-headings:text-foreground prose-headings:font-bold prose-headings:tracking-tight prose-a:text-drp-cyan prose-strong:text-foreground prose-code:text-drp-cyan prose-code:bg-drp-cyan/10 prose-code:px-1 prose-code:rounded">
           <ReactMarkdown components={diagramComponents}>
             {lesson.content}
           </ReactMarkdown>

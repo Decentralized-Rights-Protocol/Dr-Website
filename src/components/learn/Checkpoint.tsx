@@ -52,7 +52,7 @@ export function Checkpoint({
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <h3 className={`text-lg font-semibold ${
-                completed ? 'text-green-400' : 'text-white'
+                completed ? 'text-green-400' : 'text-foreground'
               }`}>
                 {title}
               </h3>
@@ -71,7 +71,7 @@ export function Checkpoint({
 
         {/* Progress Indicator */}
         {!completed && (
-          <div className="mt-4 pt-4 border-t border-white/10">
+          <div className="mt-4 pt-4 border-t border-foreground/10">
             <div className="flex items-center gap-2">
               <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
                 <motion.div

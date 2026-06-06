@@ -220,7 +220,7 @@ export function WalletConnectButton() {
         className={cn(
           "flex items-center gap-x-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200",
           "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700",
-          "text-white shadow-lg hover:shadow-xl",
+          "text-foreground shadow-lg hover:shadow-xl",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           "hover:scale-105 active:scale-95"
         )}
@@ -256,7 +256,7 @@ export function WalletConnectButton() {
           <div className="p-4">
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-neutral-900 dark:text-white">
+              <h3 className="text-sm font-semibold text-neutral-900 dark:text-foreground">
                 Wallet Connected
               </h3>
               <div className="flex items-center gap-x-1 text-xs text-green-600 dark:text-green-400">
@@ -269,7 +269,7 @@ export function WalletConnectButton() {
             <div className="mb-4">
               <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-1">Address</p>
               <div className="flex items-center justify-between bg-neutral-50 dark:bg-neutral-700 rounded-md p-2">
-                <span className="font-mono text-xs text-neutral-900 dark:text-white">
+                <span className="font-mono text-xs text-neutral-900 dark:text-foreground">
                   {walletState.address}
                 </span>
                 <button
@@ -285,7 +285,7 @@ export function WalletConnectButton() {
             <div className="mb-4">
               <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-1">Network</p>
               <div className="bg-neutral-50 dark:bg-neutral-700 rounded-md p-2">
-                <span className="text-xs text-neutral-900 dark:text-white">
+                <span className="text-xs text-neutral-900 dark:text-foreground">
                   {walletState.networkName}
                 </span>
               </div>
@@ -304,7 +304,7 @@ export function WalletConnectButton() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-x-2">
                       <Coins className="h-4 w-4 text-blue-500" />
-                      <span className="text-sm font-semibold text-neutral-900 dark:text-white">
+                      <span className="text-sm font-semibold text-neutral-900 dark:text-foreground">
                         {typeof deriBalance.balance_formatted === 'number' ? deriBalance.balance_formatted.toFixed(2) : deriBalance.balance_formatted} {deriBalance.symbol}
                       </span>
                     </div>

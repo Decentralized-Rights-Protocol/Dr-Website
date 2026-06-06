@@ -80,7 +80,7 @@ export function TokenCard({ name, symbol, description, icon, features, variant, 
               {icon}
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-white">{name}</h3>
+              <h3 className="text-2xl font-bold text-foreground">{name}</h3>
               <p className="text-sm text-neutral-400">{symbol}</p>
             </div>
           </div>

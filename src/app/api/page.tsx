@@ -234,7 +234,7 @@ export default function ApiLandingPage() {
       <header className="sticky top-0 z-30 border-b border-neutral-200/80 bg-white/90 backdrop-blur dark:border-neutral-800/70 dark:bg-neutral-950/80">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-500 text-white shadow-lg">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-500 text-foreground shadow-lg">
               <Key className="h-4 w-4" />
             </div>
             <div>
@@ -252,7 +252,7 @@ export default function ApiLandingPage() {
             href="https://tally.so/r/3xKMro"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-2 text-sm font-semibold text-white shadow-lg transition hover:bg-primary-500"
+            className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-2 text-sm font-semibold text-foreground shadow-lg transition hover:bg-primary-500"
           >
             <Sparkles className="h-4 w-4" />
             Request API Key

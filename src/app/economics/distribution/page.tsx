@@ -17,7 +17,7 @@ export default function DistributionPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
-            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-foreground"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Economics Overview
@@ -35,7 +35,7 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               How DRP Distributes Value
             </h2>
             <p className="text-xl text-neutral-300 mb-8">
@@ -65,7 +65,7 @@ export default function DistributionPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="p-6 rounded-xl bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-700"
                 >
-                  <h3 className="text-xl font-bold text-white mb-3">
+                  <h3 className="text-xl font-bold text-foreground mb-3">
                     {item.title}
                   </h3>
                   <p className="text-neutral-300">
@@ -88,7 +88,7 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Demand Scoring and AI Integrity Checks
             </h2>
             <p className="text-lg text-neutral-300 mb-6">
@@ -128,7 +128,7 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Quality Control: The Quality Goods Network
             </h2>
             <p className="text-lg text-neutral-300 mb-6">
@@ -162,7 +162,7 @@ export default function DistributionPage() {
                   className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700"
                 >
                   <item.icon className="h-10 w-10 text-blue-500 mb-4" />
-                  <h3 className="text-xl font-bold text-white mb-2">
+                  <h3 className="text-xl font-bold text-foreground mb-2">
                     {item.title}
                   </h3>
                   <p className="text-neutral-300">
@@ -185,12 +185,12 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Supply Chain Redesign: Local-First and Rights-Weighted
             </h2>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-white mb-3">
+                <h3 className="text-xl font-bold text-foreground mb-3">
                   Local-First Distribution
                 </h3>
                 <p className="text-neutral-300">
@@ -199,7 +199,7 @@ export default function DistributionPage() {
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-white mb-3">
+                <h3 className="text-xl font-bold text-foreground mb-3">
                   AI Demand Prediction
                 </h3>
                 <p className="text-neutral-300">
@@ -208,7 +208,7 @@ export default function DistributionPage() {
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-white mb-3">
+                <h3 className="text-xl font-bold text-foreground mb-3">
                   Rights-Weighted Allocation
                 </h3>
                 <p className="text-neutral-300">
@@ -217,7 +217,7 @@ export default function DistributionPage() {
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-white mb-3">
+                <h3 className="text-xl font-bold text-foreground mb-3">
                   Transparent Routing
                 </h3>
                 <p className="text-neutral-300">
@@ -240,33 +240,33 @@ export default function DistributionPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <h2 className="text-3xl font-bold text-white mb-8">
+            <h2 className="text-3xl font-bold text-foreground mb-8">
               AI → Fair Allocation → Delivery
             </h2>
             <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
               <div className="flex flex-col items-center">
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 mb-3">
-                  <Cpu className="h-10 w-10 text-white" />
+                  <Cpu className="h-10 w-10 text-foreground" />
                 </div>
-                <span className="font-semibold text-white">AI Demand Engine</span>
+                <span className="font-semibold text-foreground">AI Demand Engine</span>
               </div>
               <div className="text-4xl text-neutral-400">→</div>
               <div className="flex flex-col items-center">
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 mb-3">
-                  <Scale className="h-10 w-10 text-white" />
+                  <Scale className="h-10 w-10 text-foreground" />
                 </div>
-                <span className="font-semibold text-white">Fair Allocation</span>
+                <span className="font-semibold text-foreground">Fair Allocation</span>
               </div>
               <div className="text-4xl text-neutral-400">→</div>
               <div className="flex flex-col items-center">
                 <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 mb-3">
-                  <Truck className="h-10 w-10 text-white" />
+                  <Truck className="h-10 w-10 text-foreground" />
                 </div>
-                <span className="font-semibold text-white">Delivery Network</span>
+                <span className="font-semibold text-foreground">Delivery Network</span>
               </div>
             </div>
 
-            <h3 className="text-3xl font-bold text-white mb-6">
+            <h3 className="text-3xl font-bold text-foreground mb-6">
               Quality Goods Network Model
             </h3>
             <p className="text-lg text-neutral-300 mb-8">
@@ -296,7 +296,7 @@ export default function DistributionPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Explore Governance & Global Impact
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -308,7 +308,7 @@ export default function DistributionPage() {
               </Link>
               <Link
                 href="/economics/global"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white rounded-xl hover:bg-white/10 transition-all duration-300"
+                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-foreground border-2 border-white rounded-xl hover:bg-white/10 transition-all duration-300"
               >
                 Global Economics
               </Link>

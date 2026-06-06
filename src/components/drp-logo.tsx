@@ -29,7 +29,7 @@ export function DRPLogo({ className, size = 'md', variant = 'horizontal' }: DRPL
         sizeClasses[size],
         className
       )}>
-        <div className="flex flex-col items-center text-white font-bold leading-tight">
+        <div className="flex flex-col items-center text-foreground font-bold leading-tight">
           <span className={cn('font-extrabold', textSizeClasses[size])}>D</span>
           <span className={cn('font-extrabold', textSizeClasses[size])}>R</span>
           <span className={cn('font-extrabold', textSizeClasses[size])}>P</span>
@@ -45,7 +45,7 @@ export function DRPLogo({ className, size = 'md', variant = 'horizontal' }: DRPL
       className
     )}>
       <span className={cn(
-        'text-white font-bold tracking-wider',
+        'text-foreground font-bold tracking-wider',
         textSizeClasses[size]
       )}>
         DRP

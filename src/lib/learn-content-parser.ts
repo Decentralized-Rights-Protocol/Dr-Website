@@ -43,7 +43,7 @@ export function parseQuestionsFromContent(content: string): ParsedQuestion[] {
   questionBlocks.forEach((block, blockIndex) => {
     // Extract individual questions - more flexible regex
     // Matches: Question header, question text, options, correct answer
-    const questionRegex = /(?:###\s+Question\s+\d+)\s*\n([^A-Z]+?)\n\n([A-Z]\)[^\n]+(?:\n[A-Z]\)[^\n]+)*)\s*\n\n\*\*Correct\s+Answer:\s+([A-Z])\*\*(?:\s*-\s*([^\n]+(?:\n[^\n]+)*))?/gi
+    const questionRegex = /(?:###\s+Question\s+\d+)\s*\n([\s\S]+?)\n\n([A-Z]\)[^\n]+(?:\n[A-Z]\)[^\n]+)*)\s*\n\n\*\*Correct\s+Answer:\s+([A-Z])\*\*(?:\s*-\s*([^\n]+(?:\n[^\n]+)*))?/gi
     
     let match
     while ((match = questionRegex.exec(block)) !== null) {

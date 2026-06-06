@@ -22,7 +22,7 @@ export function TokenFlowDiagram() {
   return (
     <div className="py-12 bg-gradient-to-br from-neutral-50 to-blue-50 dark:from-neutral-900 dark:to-blue-950/20 rounded-2xl">
       <div className="px-8">
-        <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
+        <h3 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-8 text-center">
           Token Flow in DRP Economy
         </h3>
         
@@ -39,7 +39,7 @@ export function TokenFlowDiagram() {
               {/* From */}
               <div className="flex flex-col items-center gap-2">
                 <div className={`p-4 rounded-xl bg-gradient-to-br ${flow.from.color} to-blue-600`}>
-                  <flow.from.icon className="h-8 w-8 text-white" />
+                  <flow.from.icon className="h-8 w-8 text-foreground" />
                 </div>
                 <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300 text-center max-w-[120px]">
                   {flow.from.label}
@@ -52,7 +52,7 @@ export function TokenFlowDiagram() {
               {/* To */}
               <div className="flex flex-col items-center gap-2">
                 <div className={`p-4 rounded-xl bg-gradient-to-br ${flow.to.color} to-purple-600`}>
-                  <flow.to.icon className="h-8 w-8 text-white" />
+                  <flow.to.icon className="h-8 w-8 text-foreground" />
                 </div>
                 <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300 text-center max-w-[120px]">
                   {flow.to.label}

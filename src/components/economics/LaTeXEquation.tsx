@@ -56,7 +56,7 @@ export function LaTeXEquation({
           <ul className="list-disc pl-6 space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
             {variables.map((variable, index) => (
               <li key={index}>
-                <span className="font-mono font-semibold text-neutral-900 dark:text-white">
+                <span className="font-mono font-semibold text-neutral-900 dark:text-foreground">
                   {variable.symbol}:
                 </span>{' '}
                 {variable.description}

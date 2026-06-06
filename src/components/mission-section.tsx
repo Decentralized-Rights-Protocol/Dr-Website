@@ -40,7 +40,7 @@ export function MissionSection() {
       
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-none">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl animate-fade-in-up">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl animate-fade-in-up">
             Our Mission
           </h2>
           <p className="mt-4 text-lg leading-8 text-neutral-300 animate-fade-in-up delay-200">
@@ -55,7 +55,7 @@ export function MissionSection() {
               className="flex flex-col animate-fade-in-up group hover:scale-105 transition-transform duration-300"
               style={{ animationDelay: `${300 + index * 100}ms` }}
             >
-              <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-white group-hover:text-primary-400 transition-colors">
+              <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-foreground group-hover:text-primary-400 transition-colors">
                 <value.icon className="h-5 w-5 flex-none text-primary-400 group-hover:text-primary-300 transition-colors" aria-hidden="true" />
                 {value.name}
               </dt>

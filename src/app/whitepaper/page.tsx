@@ -46,7 +46,7 @@ export default function WhitepaperPage() {
               { title: 'Consensus', body: 'Verified status and activity become auditable reality proofs.' },
               { title: 'Dignity', body: 'Governance evaluated against rights baselines and sustainability.' },
             ].map((item) => (
-              <article key={item.title} className="rounded-2xl border border-white/5 bg-white/[0.03] p-8 transition-all hover:bg-white/5">
+              <article key={item.title} className="rounded-2xl border border-foreground/5 bg-white/[0.03] p-8 transition-all hover:bg-white/5">
                 <strong className="text-drp-cyan font-cinematic text-[10px] block mb-4 tracking-widest">{item.title}</strong>
                 <p className="text-sm text-drp-gray leading-relaxed">{item.body}</p>
               </article>
@@ -63,7 +63,7 @@ export default function WhitepaperPage() {
             {sections.map((item, index) => (
               <div
                 key={item}
-                className="rounded-2xl border border-white/5 bg-black/40 px-8 py-6 text-sm text-white transition-all hover:border-drp-cyan/40 hover:bg-drp-cyan/5 group"
+                className="rounded-2xl border border-foreground/5 bg-black/40 px-8 py-6 text-sm text-foreground transition-all hover:border-drp-cyan/40 hover:bg-drp-cyan/5 group"
               >
                 <span className="mr-4 text-drp-cyan opacity-40 group-hover:opacity-100 transition-opacity font-cinematic">
                   {String(index + 1).padStart(2, '0')}
@@ -79,7 +79,7 @@ export default function WhitepaperPage() {
           title="Live Preview"
           description="Examine the official DRP whitepaper directly within the reality layer."
         >
-          <div className="overflow-hidden rounded-[2.5rem] border border-white/5 bg-black/60 p-4 shadow-2xl">
+          <div className="overflow-hidden rounded-[2.5rem] border border-foreground/5 bg-black/60 p-4 shadow-2xl">
             <iframe
               src="/whitepaper_v0.5.pdf#toolbar=1&navpanes=0&scrollbar=1"
               className="h-[700px] w-full rounded-[1.5rem]"
@@ -90,13 +90,13 @@ export default function WhitepaperPage() {
 
         <section className="pb-32 pt-16">
           <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
-            <div className="rounded-[3rem] border border-white/5 bg-gradient-to-br from-drp-cyan/10 via-drp-blue/5 to-transparent p-16 text-center backdrop-blur-xl">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">Deep Dive into Economics</h2>
+            <div className="rounded-[3rem] border border-foreground/5 bg-gradient-to-br from-drp-cyan/10 via-drp-blue/5 to-transparent p-16 text-center backdrop-blur-xl">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8">Deep Dive into Economics</h2>
               <p className="mx-auto max-w-2xl text-lg text-drp-gray mb-12">
                 After the whitepaper, explore the protocol implementation details and incentive structures.
               </p>
               <div className="flex flex-wrap justify-center gap-6">
-                <Link href="/docs" className="px-10 py-4 rounded-full border border-white/10 text-white font-cinematic text-xs hover:bg-white/5 transition-colors">
+                <Link href="/docs" className="px-10 py-4 rounded-full border border-foreground/10 text-foreground font-cinematic text-xs hover:bg-white/5 transition-colors">
                   Explore Docs
                 </Link>
                 <Link href="/economics" className="px-10 py-4 rounded-full bg-drp-cyan text-drp-bg font-cinematic text-xs font-bold hover:scale-105 transition-transform">

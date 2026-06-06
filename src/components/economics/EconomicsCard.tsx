@@ -31,7 +31,7 @@ export function EconomicsCard({
           {icon}
         </div>
       )}
-      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+      <h3 className="text-xl font-bold text-neutral-900 dark:text-foreground mb-3">
         {title}
       </h3>
       <div className="text-neutral-600 dark:text-neutral-300 prose prose-sm dark:prose-invert max-w-none">

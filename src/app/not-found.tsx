@@ -45,7 +45,7 @@ export default function NotFound() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/" className="inline-flex items-center justify-center gap-3 px-7 py-4 bg-[#00e5cc] text-black font-bold text-sm tracking-wide hover:bg-foreground hover:text-background transition-all duration-300">
+            <Link href="/" className="inline-flex items-center justify-center gap-3 px-7 py-4 bg-[#00e5cc] text-background font-bold text-sm tracking-wide hover:bg-foreground hover:text-background transition-all duration-300">
               <ArrowLeft className="w-4 h-4" /> Back to Home
             </Link>
             <Link href="/docs" className="inline-flex items-center justify-center gap-3 px-7 py-4 border border-foreground/15 text-foreground/55 text-sm hover:text-foreground hover:border-[#00e5cc]/30 transition-all duration-300">

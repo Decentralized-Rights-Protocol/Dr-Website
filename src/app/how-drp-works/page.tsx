@@ -48,37 +48,37 @@ export default function HowDRPWorksPage() {
 
         <PremiumSection eyebrow="Step-by-step flow" title="DRP’s proof pipeline">
           <div className="grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <Fingerprint className="h-6 w-6 text-cyan-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">1) Verify status (PoST)</h3>
+                <h3 className="text-lg font-semibold text-foreground">1) Verify status (PoST)</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Institutions and participants provide proofs of verified credentials. PoST encodes status signals without exposing private data.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <Search className="h-6 w-6 text-blue-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">2) Record activity (PoAT)</h3>
+                <h3 className="text-lg font-semibold text-foreground">2) Record activity (PoAT)</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Participants submit evidence of meaningful contributions. PoAT links outcomes to accountable actors and timestamps.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <Sparkles className="h-6 w-6 text-amber-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">3) Validate integrity (AI Elders)</h3>
+                <h3 className="text-lg font-semibold text-foreground">3) Validate integrity (AI Elders)</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 AI Elders triage and validate proof quality, detect anomalies, and provide explainable review outputs for validators.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="h-6 w-6 text-pink-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">4) Govern transparently</h3>
+                <h3 className="text-lg font-semibold text-foreground">4) Govern transparently</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Rights-aligned governance evaluates proposals against dignity and sustainability baselines, then records decisions on-chain.
@@ -91,13 +91,13 @@ export default function HowDRPWorksPage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href="/proof-of-status"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               Proof of Status (PoST) <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
               href="/proof-of-activity"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               Proof of Activity (PoAT) <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
@@ -109,7 +109,7 @@ export default function HowDRPWorksPage() {
             </Link>
             <Link
               href="/human-rights-blockchain"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               Human-rights blockchain <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

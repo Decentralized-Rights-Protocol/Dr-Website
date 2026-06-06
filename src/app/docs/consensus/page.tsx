@@ -20,7 +20,7 @@ export default function ConsensusPage() {
         </Link>
 
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl mb-4">
+          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-foreground sm:text-5xl mb-4">
             Consensus & AI Verification
           </h1>
           <p className="text-xl text-neutral-600 dark:text-neutral-400">
@@ -30,7 +30,7 @@ export default function ConsensusPage() {
 
         {/* Proof of Status */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-white mb-6">
+          <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-foreground mb-6">
             <div className="flex items-center gap-4 mb-4">
               <Shield className="h-8 w-8" />
               <h2 className="text-3xl font-bold">Proof of Status (PoS)</h2>
@@ -41,7 +41,7 @@ export default function ConsensusPage() {
           </div>
 
           <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 mb-6">
-            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">How It Works</h3>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-4">How It Works</h3>
             <ul className="space-y-3 text-neutral-600 dark:text-neutral-400">
               <li className="flex items-start gap-3">
                 <span className="text-primary-600 dark:text-primary-400 font-bold">1.</span>
@@ -63,7 +63,7 @@ export default function ConsensusPage() {
           </div>
 
           <div className="bg-neutral-50 dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3">Status Levels</h3>
+            <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">Status Levels</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-4 bg-white dark:bg-neutral-900 rounded-lg">
                 <div className="font-bold text-primary-600 dark:text-primary-400 mb-2">Basic</div>
@@ -83,7 +83,7 @@ export default function ConsensusPage() {
 
         {/* Proof of Activities */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 text-white mb-6">
+          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 text-foreground mb-6">
             <div className="flex items-center gap-4 mb-4">
               <Activity className="h-8 w-8" />
               <h2 className="text-3xl font-bold">Proof of Activities (PoA)</h2>
@@ -94,26 +94,26 @@ export default function ConsensusPage() {
           </div>
 
           <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 mb-6">
-            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">Activity Types</h3>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-4">Activity Types</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
                 <Zap className="h-6 w-6 text-yellow-500 mb-2" />
-                <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">Node Operation</h4>
+                <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">Node Operation</h4>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">Running and maintaining network nodes</p>
               </div>
               <div className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
                 <Users className="h-6 w-6 text-blue-500 mb-2" />
-                <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">Governance</h4>
+                <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">Governance</h4>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">Participating in voting and proposals</p>
               </div>
               <div className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
                 <Code className="h-6 w-6 text-green-500 mb-2" />
-                <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">Development</h4>
+                <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">Development</h4>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">Contributing code and improvements</p>
               </div>
               <div className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
                 <Brain className="h-6 w-6 text-purple-500 mb-2" />
-                <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">Community</h4>
+                <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">Community</h4>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">Engaging and educating others</p>
               </div>
             </div>
@@ -122,7 +122,7 @@ export default function ConsensusPage() {
 
         {/* AI Verification */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white mb-6">
+          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-foreground mb-6">
             <div className="flex items-center gap-4 mb-4">
               <Brain className="h-8 w-8" />
               <h2 className="text-3xl font-bold">AI Elders & Verification</h2>
@@ -133,28 +133,28 @@ export default function ConsensusPage() {
           </div>
 
           <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">AI Verification Process</h3>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-4">AI Verification Process</h3>
             <div className="space-y-4">
               <div className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
-                <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">1. Activity Analysis</h4>
+                <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">1. Activity Analysis</h4>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
                   AI systems analyze patterns in user activities to detect genuine contributions versus automated or fraudulent behavior.
                 </p>
               </div>
               <div className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
-                <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">2. Fraud Detection</h4>
+                <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">2. Fraud Detection</h4>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
                   Machine learning models identify suspicious patterns, sybil attacks, and attempts to game the system.
                 </p>
               </div>
               <div className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
-                <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">3. Reputation Scoring</h4>
+                <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">3. Reputation Scoring</h4>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
                   AI assigns reputation scores based on consistency, quality, and impact of contributions over time.
                 </p>
               </div>
               <div className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
-                <h4 className="font-semibold text-neutral-900 dark:text-white mb-2">4. Consensus Participation</h4>
+                <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">4. Consensus Participation</h4>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
                   Verified users with high reputation scores participate in consensus decisions with weighted voting power.
                 </p>
@@ -165,7 +165,7 @@ export default function ConsensusPage() {
 
         {/* Technical Details */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Technical Implementation</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">Technical Implementation</h2>
           <div className="bg-neutral-900 rounded-xl p-6 font-mono text-sm text-green-400">
             <div className="space-y-2">
               <div className="text-neutral-400"># Consensus Algorithm</div>
@@ -184,20 +184,20 @@ export default function ConsensusPage() {
 
         {/* Next Steps */}
         <div className="mt-12 p-6 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-200 dark:border-primary-800">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Next Steps</h3>
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Next Steps</h3>
           <p className="text-neutral-600 dark:text-neutral-400 mb-4">
             Ready to implement consensus in your DRP application? Check out our examples and API documentation.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
               href="/docs/examples"
-              className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-primary-600 text-foreground rounded-lg hover:bg-primary-700 transition-colors"
             >
               View Examples
             </Link>
             <Link
               href="/docs"
-              className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-foreground rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
             >
               More Documentation
             </Link>

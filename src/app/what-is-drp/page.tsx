@@ -48,37 +48,37 @@ export default function WhatIsDRPPage() {
           description="DRP is designed to make trust explainable and verifiable: proofs replace assumptions, and AI helps produce audit-ready decisions under human oversight."
         >
           <div className="grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <Fingerprint className="h-6 w-6 text-cyan-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Proof of Status (PoST)</h3>
+                <h3 className="text-lg font-semibold text-foreground">Proof of Status (PoST)</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Verifies credentials and reputation signals without exposing private data, supporting governance weighting and access control.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <BrainCircuit className="h-6 w-6 text-blue-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">AI-verified consensus</h3>
+                <h3 className="text-lg font-semibold text-foreground">AI-verified consensus</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Uses AI Elders to triage, verify, and explain integrity checks so participation becomes audit-ready—not just claimed.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <HeartHandshake className="h-6 w-6 text-pink-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Proof of Activity (PoAT)</h3>
+                <h3 className="text-lg font-semibold text-foreground">Proof of Activity (PoAT)</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Records verifiable human activity to reward meaningful contribution and help allocate resources more equitably.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-6 w-6 text-amber-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Rights-aligned governance</h3>
+                <h3 className="text-lg font-semibold text-foreground">Rights-aligned governance</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Evaluates decisions against rights baselines, aiming to protect dignity while preserving transparency and accountability.
@@ -97,19 +97,19 @@ export default function WhatIsDRPPage() {
             </Link>
             <Link
               href="/proof-of-status"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               Proof of Status (PoST) <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
               href="/proof-of-activity"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               Proof of Activity (PoAT) <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
               href="/faq"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               FAQ <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

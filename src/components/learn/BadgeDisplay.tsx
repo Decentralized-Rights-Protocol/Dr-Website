@@ -40,7 +40,7 @@ export function BadgeDisplay({ className = '', showUnlockedOnly = false }: Badge
           {badge.unlocked ? (
             <>
               <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs">✓</span>
+                <span className="text-foreground text-xs">✓</span>
               </div>
               <Image
                 src={badge.icon}
@@ -55,7 +55,7 @@ export function BadgeDisplay({ className = '', showUnlockedOnly = false }: Badge
               <span className="text-gray-400 text-2xl">?</span>
             </div>
           )}
-          <h4 className="text-sm font-semibold text-center text-gray-900 dark:text-white">
+          <h4 className="text-sm font-semibold text-center text-foreground">
             {badge.name}
           </h4>
           <p className="text-xs text-center text-gray-600 dark:text-gray-400 mt-1">

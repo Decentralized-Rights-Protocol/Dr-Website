@@ -49,7 +49,7 @@ export function QuickLinks() {
       
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl animate-fade-in-up">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl animate-fade-in-up">
             Get Started with DRP
           </h2>
           <p className="mt-4 text-lg leading-8 text-neutral-300 animate-fade-in-up delay-200">
@@ -66,10 +66,10 @@ export function QuickLinks() {
             >
               <div className="flex items-center gap-x-4">
                 <div className={`${link.color} p-2 rounded-lg group-hover:scale-110 transition-transform`}>
-                  <link.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                  <link.icon className="h-6 w-6 text-foreground" aria-hidden="true" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-white group-hover:text-primary-300 transition-colors">
+                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary-300 transition-colors">
                     {link.name}
                   </h3>
                   <p className="mt-2 text-sm text-neutral-300">

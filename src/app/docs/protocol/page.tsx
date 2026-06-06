@@ -132,7 +132,7 @@ export default function ProtocolPage() {
             <div className="flex items-center space-x-4">
               <Link
                 href="/docs"
-                className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors"
+                className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-foreground transition-colors"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Documentation
@@ -151,7 +151,7 @@ export default function ProtocolPage() {
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         {/* Title Section */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl mb-6">
+          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-foreground sm:text-5xl mb-6">
             DRP Protocol Documentation
           </h1>
           <p className="text-xl text-neutral-600 dark:text-neutral-300 mb-8 max-w-4xl mx-auto">
@@ -165,7 +165,7 @@ export default function ProtocolPage() {
               href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-primary-600 to-secondary-600 rounded-xl hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 hover:scale-105 shadow-lg"
+              className="inline-flex items-center px-6 py-3 text-lg font-semibold text-foreground bg-gradient-to-r from-primary-600 to-secondary-600 rounded-xl hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 hover:scale-105 shadow-lg"
             >
               <Code className="mr-3 h-5 w-5" />
               View Source Code
@@ -183,13 +183,13 @@ export default function ProtocolPage() {
 
         {/* Technical Specifications */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
+          <h2 className="text-3xl font-bold text-neutral-900 dark:text-foreground mb-8 text-center">
             Technical Specifications
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {technicalSpecs.map((category, index) => (
               <div key={index} className="bg-white dark:bg-neutral-800 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 p-6">
-                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-6 text-center">
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-6 text-center">
                   {category.category}
                 </h3>
                 <div className="space-y-4">
@@ -198,7 +198,7 @@ export default function ProtocolPage() {
                       <span className="text-neutral-600 dark:text-neutral-300 font-medium">
                         {spec.name}
                       </span>
-                      <span className="text-neutral-900 dark:text-white font-semibold">
+                      <span className="text-neutral-900 dark:text-foreground font-semibold">
                         {spec.value}
                       </span>
                     </div>
@@ -211,7 +211,7 @@ export default function ProtocolPage() {
 
         {/* Protocol Sections */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-8 text-center">
+          <h2 className="text-3xl font-bold text-neutral-900 dark:text-foreground mb-8 text-center">
             Protocol Components
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -221,9 +221,9 @@ export default function ProtocolPage() {
                 className="group bg-white dark:bg-neutral-800 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${section.color} mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <section.icon className="h-6 w-6 text-white" />
+                  <section.icon className="h-6 w-6 text-foreground" />
                 </div>
-                <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-3">
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-3">
                   {section.title}
                 </h3>
                 <p className="text-neutral-600 dark:text-neutral-300 mb-4 text-sm leading-relaxed">
@@ -244,12 +244,12 @@ export default function ProtocolPage() {
 
         {/* Implementation Guide */}
         <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-700 p-8 mb-16">
-          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white mb-6 text-center">
+          <h2 className="text-3xl font-bold text-neutral-900 dark:text-foreground mb-6 text-center">
             Quick Start Implementation
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
+              <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-4">
                 Prerequisites
               </h3>
               <ul className="space-y-2 text-neutral-600 dark:text-neutral-300">
@@ -261,7 +261,7 @@ export default function ProtocolPage() {
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">
+              <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-4">
                 Installation Steps
               </h3>
               <div className="bg-neutral-900 rounded-lg p-4 text-sm font-mono text-green-400">
@@ -277,7 +277,7 @@ export default function ProtocolPage() {
         </div>
 
         {/* API Reference */}
-        <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-white">
+        <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-foreground">
           <h2 className="text-3xl font-bold mb-6 text-center">
             API Reference
           </h2>
@@ -299,7 +299,7 @@ export default function ProtocolPage() {
               href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain/tree/main/examples"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 transition-colors"
+              className="inline-flex items-center px-6 py-3 text-lg font-semibold text-foreground border-2 border-white/30 rounded-xl hover:bg-white/10 transition-colors"
             >
               <BookOpen className="mr-3 h-5 w-5" />
               Code Examples

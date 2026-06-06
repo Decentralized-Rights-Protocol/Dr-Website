@@ -48,39 +48,39 @@ export default function DRPVSEthereumPage() {
 
         <PremiumSection eyebrow="Key differences" title="Where DRP changes the design equation">
           <div className="grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-6 w-6 text-amber-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Rights-aligned governance</h3>
+                <h3 className="text-lg font-semibold text-foreground">Rights-aligned governance</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 DRP evaluates proposals against rights baselines and ties decisions to verifiable participation signals.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <Scale className="h-6 w-6 text-cyan-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Proof of Status + Activity</h3>
+                <h3 className="text-lg font-semibold text-foreground">Proof of Status + Activity</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 PoST/PoAT connect identity and contribution evidence to governance and reward logic in a structured, auditable way.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <Zap className="h-6 w-6 text-blue-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">AI-verified integrity checks</h3>
+                <h3 className="text-lg font-semibold text-foreground">AI-verified integrity checks</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 AI Elders help validate proof quality and detect anomalies, generating explainable review outputs.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-cyan-300/20 text-cyan-100" aria-hidden="true">
                   →
                 </span>
-                <h3 className="text-lg font-semibold text-white">Activity-based incentives</h3>
+                <h3 className="text-lg font-semibold text-foreground">Activity-based incentives</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 DRP aims to align rewards with real contributions and sustainability rather than only with transaction throughput.
@@ -93,13 +93,13 @@ export default function DRPVSEthereumPage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href="/proof-of-status"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               PoST <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
               href="/proof-of-activity"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               PoAT <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

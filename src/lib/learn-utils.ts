@@ -27,34 +27,34 @@ export interface LessonFile {
  */
 export const CURRICULUM_ORDER: Record<number, string[]> = {
   1: [
-    'what-is-blockchain',        // 1-1
-    'cryptography-and-hashing',     // 1-2
-    'consensus-mechanisms',     // 1-3
-    'smart-contracts-101'       // 1-4
+    'what-is-blockchain',
+    'cryptography-and-hashing',
+    'consensus-mechanisms',
+    'smart-contracts-101'
   ],
   2: [
-    'drp-architecture',         // 2-1
-    'post-poat-consensus',       // 2-2
-    'elder-quorum-system',      // 2-3
-    'activity-proofs'           // 2-4
+    'drp-architecture',
+    'activity-proofs',
+    'post-poat-consensus',
+    'elder-quorum-system'
   ],
   3: [
-    'drp-development-kit',      // 3-1
-    'building-dapps',           // 3-2
-    'contributing-to-drp',      // 3-3
-    'testing-and-deployment'        // 3-4
+    'drp-development-kit',
+    'building-dapps',
+    'contributing-to-drp',
+    'testing-and-deployment'
   ],
   4: [
-    'enterprise-integration',   // 4-1
-    'supply-chain-applications', // 4-2
-    'identity-access-management', // 4-3
-    'cross-chain-interoperability' // 4-4
+    'identity-access-management',
+    'supply-chain-applications',
+    'enterprise-integration',
+    'cross-chain-interoperability'
   ],
   5: [
-    'advanced-drp-concepts',    // 5-1
-    'governance-mechanisms',    // 5-2
-    'economic-models',          // 5-3
-    'future-of-drp'             // 5-4
+    'advanced-drp-concepts',
+    'economic-models',
+    'governance-mechanisms',
+    'future-of-drp'
   ]
 }
 

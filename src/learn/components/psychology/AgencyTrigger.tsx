@@ -32,7 +32,7 @@ export function AgencyTrigger({
         <div className="flex items-start gap-3">
           <RocketLaunchIcon className="h-6 w-6 text-orange-400 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
-            <h3 className="text-sm font-semibold text-white mb-1">Your Mission</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-1">Your Mission</h3>
             <p className="text-sm text-neutral-200 leading-relaxed mb-2">{missionDescription}</p>
             {poatCheckpoint && (
               <div className="mt-3 flex items-center gap-2 bg-orange-500/20 rounded px-2 py-1">
@@ -48,8 +48,8 @@ export function AgencyTrigger({
 
       {/* Real-World Use Cases */}
       {useCases.length > 0 && (
-        <div className="bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-4">
-          <h4 className="text-sm font-semibold text-white mb-3">Real-World Applications</h4>
+        <div className="bg-white/5 backdrop-blur-sm rounded-lg border border-foreground/10 p-4">
+          <h4 className="text-sm font-semibold text-foreground mb-3">Real-World Applications</h4>
           <ul className="space-y-2">
             {useCases.map((useCase, index) => (
               <li key={index} className="flex items-start gap-2 text-sm text-neutral-200">

@@ -181,7 +181,7 @@ export function ComparisonChart({ className, chartType = 'bar' }: ComparisonChar
     if (active && payload && payload.length) {
       return (
         <div className="bg-white dark:bg-neutral-800 p-3 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700">
-          <p className="font-semibold text-neutral-900 dark:text-white">{label}</p>
+          <p className="font-semibold text-neutral-900 dark:text-foreground">{label}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} style={{ color: entry.color }} className="text-sm">
               {entry.dataKey}: {entry.value}%
@@ -203,8 +203,8 @@ export function ComparisonChart({ className, chartType = 'bar' }: ComparisonChar
             className={cn(
               "px-4 py-2 rounded-md text-sm font-medium transition-all duration-200",
               activeChart === 'bar'
-                ? "bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-sm"
-                : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                ? "bg-white dark:bg-neutral-700 text-neutral-900 dark:text-foreground shadow-sm"
+                : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-foreground"
             )}
           >
             Bar Chart
@@ -214,8 +214,8 @@ export function ComparisonChart({ className, chartType = 'bar' }: ComparisonChar
             className={cn(
               "px-4 py-2 rounded-md text-sm font-medium transition-all duration-200",
               activeChart === 'radar'
-                ? "bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-sm"
-                : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                ? "bg-white dark:bg-neutral-700 text-neutral-900 dark:text-foreground shadow-sm"
+                : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-foreground"
             )}
           >
             Radar Chart

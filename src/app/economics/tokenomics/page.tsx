@@ -18,7 +18,7 @@ export default function TokenomicsPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
-            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-foreground"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Economics Overview
@@ -36,7 +36,7 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               The Dual Token Architecture
             </h2>
             <p className="text-xl text-neutral-300 mb-8">
@@ -54,7 +54,7 @@ export default function TokenomicsPage() {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600">
-                    <Shield className="h-8 w-8 text-white" />
+                    <Shield className="h-8 w-8 text-foreground" />
                   </div>
                   <div>
                     <h3 className="text-3xl font-bold text-indigo-900 dark:text-indigo-100">
@@ -93,7 +93,7 @@ export default function TokenomicsPage() {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-4 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600">
-                    <Coins className="h-8 w-8 text-white" />
+                    <Coins className="h-8 w-8 text-foreground" />
                   </div>
                   <div>
                     <h3 className="text-3xl font-bold text-purple-900 dark:text-purple-100">
@@ -136,7 +136,7 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-8 text-center">
+            <h2 className="text-4xl font-bold text-foreground mb-8 text-center">
               Token Flows Through the Economy
             </h2>
             <TokenFlowDiagram />
@@ -154,7 +154,7 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Fair Launch, No VC Dominance
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -194,11 +194,11 @@ export default function TokenomicsPage() {
                   >
                     <div className="flex-shrink-0">
                       <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
-                        <item.icon className="h-6 w-6 text-white" />
+                        <item.icon className="h-6 w-6 text-foreground" />
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2">
+                      <h3 className="text-xl font-bold text-foreground mb-2">
                         {item.title}
                       </h3>
                       <p className="text-neutral-300">
@@ -223,7 +223,7 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-8 text-center">
+            <h2 className="text-4xl font-bold text-foreground mb-8 text-center">
               Staking, Governance, and Access Control
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
@@ -256,9 +256,9 @@ export default function TokenomicsPage() {
                   className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700"
                 >
                   <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br ${item.color} mb-4`}>
-                    <item.icon className="h-6 w-6 text-white" />
+                    <item.icon className="h-6 w-6 text-foreground" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">
+                  <h3 className="text-xl font-bold text-foreground mb-3">
                     {item.title}
                   </h3>
                   <p className="text-neutral-300">
@@ -281,7 +281,7 @@ export default function TokenomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-12 text-center">
+            <h2 className="text-4xl font-bold text-foreground mb-12 text-center">
               Rights Layer → Activity Layer → Distribution Layer
             </h2>
             <div className="space-y-6">
@@ -315,11 +315,11 @@ export default function TokenomicsPage() {
                 >
                   <div className="flex items-center gap-6">
                     <div className={`p-6 rounded-xl bg-gradient-to-br ${layer.color}`}>
-                      <TrendingUp className="h-8 w-8 text-white" />
+                      <TrendingUp className="h-8 w-8 text-foreground" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-2">
-                        <h3 className="text-2xl font-bold text-white">
+                        <h3 className="text-2xl font-bold text-foreground">
                           {layer.layer}
                         </h3>
                         <span className="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium">
@@ -347,7 +347,7 @@ export default function TokenomicsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Explore Distribution & Governance
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -359,7 +359,7 @@ export default function TokenomicsPage() {
               </Link>
               <Link
                 href="/economics/governance"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white rounded-xl hover:bg-white/10 transition-all duration-300"
+                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-foreground border-2 border-white rounded-xl hover:bg-white/10 transition-all duration-300"
               >
                 Governance Model
               </Link>

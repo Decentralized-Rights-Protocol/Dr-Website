@@ -156,7 +156,7 @@ export default function ExamplesPage() {
         </Link>
 
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl mb-4">
+          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-foreground sm:text-5xl mb-4">
             Examples & Demos
           </h1>
           <p className="text-xl text-neutral-600 dark:text-neutral-400">
@@ -165,7 +165,7 @@ export default function ExamplesPage() {
         </div>
 
         {/* Quick Start */}
-        <div className="mb-16 p-8 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-white">
+        <div className="mb-16 p-8 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl text-foreground">
           <div className="flex items-center gap-4 mb-4">
             <Terminal className="h-8 w-8" />
             <h2 className="text-2xl font-bold">Quick Start</h2>
@@ -189,7 +189,7 @@ export default function ExamplesPage() {
             <section key={index} className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-2">
+                  <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-2">
                     {example.title}
                   </h3>
                   <p className="text-neutral-600 dark:text-neutral-400">
@@ -206,7 +206,7 @@ export default function ExamplesPage() {
                 </pre>
                 <button
                   onClick={() => handleCopy(example.code, index)}
-                  className="absolute top-4 right-4 p-2 bg-neutral-800 hover:bg-neutral-700 rounded-lg text-neutral-400 hover:text-white transition-colors"
+                  className="absolute top-4 right-4 p-2 bg-neutral-800 hover:bg-neutral-700 rounded-lg text-neutral-400 hover:text-foreground transition-colors"
                   title="Copy code"
                 >
                   {copiedIndex === index ? (
@@ -224,7 +224,7 @@ export default function ExamplesPage() {
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="p-6 bg-neutral-50 dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
             <BookOpen className="h-8 w-8 text-primary-600 dark:text-primary-400 mb-4" />
-            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
               Full Documentation
             </h3>
             <p className="text-neutral-600 dark:text-neutral-400 mb-4">
@@ -240,7 +240,7 @@ export default function ExamplesPage() {
           </div>
           <div className="p-6 bg-neutral-50 dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
             <Code className="h-8 w-8 text-secondary-600 dark:text-secondary-400 mb-4" />
-            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
               GitHub Repository
             </h3>
             <p className="text-neutral-600 dark:text-neutral-400 mb-4">

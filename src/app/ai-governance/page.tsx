@@ -52,39 +52,39 @@ export default function AIGovernancePage() {
           description="AI Elders are specialized agents tasked with monitoring integrity—helping communities review evidence with more clarity and consistency."
         >
           <div className="grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <BrainCircuit className="h-6 w-6 text-cyan-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Integrity triage</h3>
+                <h3 className="text-lg font-semibold text-foreground">Integrity triage</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Detects proof anomalies and potential abuse patterns so review workflows can focus on what matters.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-6 w-6 text-amber-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Rights constraints</h3>
+                <h3 className="text-lg font-semibold text-foreground">Rights constraints</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Helps enforce baselines so proposals can be evaluated against dignity, privacy, and sustainability norms.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <Sparkles className="h-6 w-6 text-pink-200" aria-hidden="true" />
-                <h3 className="text-lg font-semibold text-white">Explainable summaries</h3>
+                <h3 className="text-lg font-semibold text-foreground">Explainable summaries</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Produces reviewable outputs that can be audited and used to inform human governance discussions.
               </p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-6">
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-cyan-300/20 text-cyan-100" aria-hidden="true">
                   →
                 </span>
-                <h3 className="text-lg font-semibold text-white">Human accountability</h3>
+                <h3 className="text-lg font-semibold text-foreground">Human accountability</h3>
               </div>
               <p className="mt-3 text-sm text-slate-300">
                 Final authority remains with transparent governance processes that record public rationales.
@@ -97,13 +97,13 @@ export default function AIGovernancePage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href="/proof-of-status"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               PoST <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
               href="/proof-of-activity"
-              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center justify-between rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/20"
             >
               PoAT <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>

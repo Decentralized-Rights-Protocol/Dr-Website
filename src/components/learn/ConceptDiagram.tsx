@@ -63,14 +63,14 @@ export function ConceptDiagram({
       viewport={{ once: true }}
       className={cn("my-12 group", className)}
     >
-      <div className="relative rounded-[2.5rem] border border-white/10 bg-black/40 p-10 backdrop-blur-3xl overflow-hidden shadow-2xl">
+      <div className="relative rounded-[2.5rem] border border-border bg-card/40 p-10 backdrop-blur-3xl overflow-hidden shadow-2xl">
         {/* Cinematic background accents */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-drp-cyan/5 rounded-full blur-[100px] pointer-events-none" />
         
         {title && (
           <div className="flex items-center gap-3 mb-8">
             <div className="w-1.5 h-6 rounded-full bg-drp-cyan shadow-[0_0_12px_rgba(0,242,255,0.5)]" />
-            <h3 className="text-sm font-bold text-white uppercase tracking-[0.2em]">{title}</h3>
+            <h3 className="text-sm font-bold text-foreground uppercase tracking-[0.2em]">{title}</h3>
           </div>
         )}
         
@@ -136,7 +136,7 @@ function FlowDiagram({ data }: { data?: Record<string, unknown> }) {
               x={x}
               y={120}
               textAnchor="middle"
-              className="text-[12px] fill-white font-bold"
+              className="text-[12px] fill-foreground font-bold"
             >
               {step}
             </text>
@@ -187,7 +187,8 @@ function LayersDiagram({ data }: { data?: Record<string, unknown> }) {
               width={width}
               height="70"
               rx="16"
-              fill="rgba(255,255,255,0.03)"
+              fill="currentColor"
+              className="fill-foreground/5"
               stroke={index === 0 ? COLORS.primary : COLORS.gray}
               strokeWidth="1.5"
               strokeOpacity={index === 0 ? 0.8 : 0.2}
@@ -203,7 +204,7 @@ function LayersDiagram({ data }: { data?: Record<string, unknown> }) {
               x={x + width / 2}
               y={y + 42}
               textAnchor="middle"
-              className="text-[14px] fill-white font-bold"
+              className="text-[14px] fill-foreground font-bold"
             >
               {layer}
             </text>
@@ -226,11 +227,11 @@ function LoopDiagram({ data }: { data?: Record<string, unknown> }) {
       </defs>
       
       {/* Background ring */}
-      <circle cx="250" cy="250" r="180" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="40" />
+      <circle cx="250" cy="250" r="180" fill="none" stroke="currentColor" className="stroke-foreground/5" strokeWidth="40" />
       
       {/* Central node */}
-      <circle cx="250" cy="250" r="80" fill={COLORS.void} stroke={COLORS.primary} strokeWidth="2" strokeOpacity="0.5" />
-      <text x="250" y="245" textAnchor="middle" className="text-[14px] fill-white font-bold">Protocol</text>
+      <circle cx="250" cy="250" r="80" fill="currentColor" className="fill-background" stroke={COLORS.primary} strokeWidth="2" strokeOpacity="0.5" />
+      <text x="250" y="245" textAnchor="middle" className="text-[14px] fill-foreground font-bold">Protocol</text>
       <text x="250" y="265" textAnchor="middle" className="text-[10px] fill-drp-cyan font-cinematic uppercase tracking-widest">Core</text>
       
       {/* Animated Orbitals */}
@@ -246,20 +247,20 @@ function LoopDiagram({ data }: { data?: Record<string, unknown> }) {
       />
       
       <g>
-         <rect x="210" y="30" width="80" height="30" rx="15" fill={COLORS.void} stroke={COLORS.primary} strokeWidth="1" />
-         <text x="250" y="50" textAnchor="middle" className="text-[9px] fill-white font-bold uppercase">Activity</text>
+         <rect x="210" y="30" width="80" height="30" rx="15" fill="currentColor" className="fill-background" stroke={COLORS.primary} strokeWidth="1" />
+         <text x="250" y="50" textAnchor="middle" className="text-[9px] fill-foreground font-bold uppercase">Activity</text>
       </g>
       <g>
-         <rect x="410" y="235" width="80" height="30" rx="15" fill={COLORS.void} stroke={COLORS.warning} strokeWidth="1" />
-         <text x="450" y="255" textAnchor="middle" className="text-[9px] fill-white font-bold uppercase">Proof</text>
+         <rect x="410" y="235" width="80" height="30" rx="15" fill="currentColor" className="fill-background" stroke={COLORS.warning} strokeWidth="1" />
+         <text x="450" y="255" textAnchor="middle" className="text-[9px] fill-foreground font-bold uppercase">Proof</text>
       </g>
       <g>
-         <rect x="210" y="440" width="80" height="30" rx="15" fill={COLORS.void} stroke={COLORS.success} strokeWidth="1" />
-         <text x="250" y="460" textAnchor="middle" className="text-[9px] fill-white font-bold uppercase">Reward</text>
+         <rect x="210" y="440" width="80" height="30" rx="15" fill="currentColor" className="fill-background" stroke={COLORS.success} strokeWidth="1" />
+         <text x="250" y="460" textAnchor="middle" className="text-[9px] fill-foreground font-bold uppercase">Reward</text>
       </g>
       <g>
-         <rect x="10" y="235" width="80" height="30" rx="15" fill={COLORS.void} stroke={COLORS.accent} strokeWidth="1" />
-         <text x="50" y="255" textAnchor="middle" className="text-[9px] fill-white font-bold uppercase">Status</text>
+         <rect x="10" y="235" width="80" height="30" rx="15" fill="currentColor" className="fill-background" stroke={COLORS.accent} strokeWidth="1" />
+         <text x="50" y="255" textAnchor="middle" className="text-[9px] fill-foreground font-bold uppercase">Status</text>
       </g>
     </svg>
   )
@@ -278,24 +279,24 @@ function ArchitectureDiagram({ data }: { data?: Record<string, unknown> }) {
       
       {/* Application Layer */}
       <rect x="50" y="40" width="500" height="70" rx="20" fill="rgba(0,242,255,0.05)" stroke={COLORS.primary} strokeWidth="1.5" strokeOpacity="0.4" />
-      <text x="300" y="82" textAnchor="middle" className="text-[16px] fill-white font-black uppercase tracking-[0.2em]">Application Layer</text>
+      <text x="300" y="82" textAnchor="middle" className="text-[16px] fill-foreground font-black uppercase tracking-[0.2em]">Application Layer</text>
       
       {/* Protocol Layer */}
       <rect x="70" y="130" width="460" height="70" rx="20" fill="rgba(59,130,246,0.05)" stroke={COLORS.secondary} strokeWidth="1.5" strokeOpacity="0.4" />
-      <text x="300" y="172" textAnchor="middle" className="text-[16px] fill-white font-black uppercase tracking-[0.2em]">Protocol Layer</text>
+      <text x="300" y="172" textAnchor="middle" className="text-[16px] fill-foreground font-black uppercase tracking-[0.2em]">Protocol Layer</text>
       
       {/* Consensus Layer */}
       <rect x="90" y="220" width="420" height="70" rx="20" fill="rgba(168,85,247,0.05)" stroke={COLORS.accent} strokeWidth="1.5" strokeOpacity="0.4" />
-      <text x="300" y="262" textAnchor="middle" className="text-[16px] fill-white font-black uppercase tracking-[0.2em]">Consensus Layer</text>
+      <text x="300" y="262" textAnchor="middle" className="text-[16px] fill-foreground font-black uppercase tracking-[0.2em]">Consensus Layer</text>
       
       {/* Network Layer */}
       <rect x="110" y="310" width="380" height="70" rx="20" fill="rgba(148,163,184,0.05)" stroke={COLORS.gray} strokeWidth="1.5" strokeOpacity="0.4" />
-      <text x="300" y="352" textAnchor="middle" className="text-[16px] fill-white font-black uppercase tracking-[0.2em]">Network Layer</text>
+      <text x="300" y="352" textAnchor="middle" className="text-[16px] fill-foreground font-black uppercase tracking-[0.2em]">Network Layer</text>
       
       {/* Connecting vertical line */}
-      <line x1="300" y1="110" x2="300" y2="130" stroke="white" strokeWidth="1" strokeOpacity="0.1" strokeDasharray="4,4" />
-      <line x1="300" y1="200" x2="300" y2="220" stroke="white" strokeWidth="1" strokeOpacity="0.1" strokeDasharray="4,4" />
-      <line x1="300" y1="290" x2="300" y2="310" stroke="white" strokeWidth="1" strokeOpacity="0.1" strokeDasharray="4,4" />
+      <line x1="300" y1="110" x2="300" y2="130" stroke="currentColor" className="stroke-foreground/10" strokeWidth="1" strokeDasharray="4,4" />
+      <line x1="300" y1="200" x2="300" y2="220" stroke="currentColor" className="stroke-foreground/10" strokeWidth="1" strokeDasharray="4,4" />
+      <line x1="300" y1="290" x2="300" y2="310" stroke="currentColor" className="stroke-foreground/10" strokeWidth="1" strokeDasharray="4,4" />
     </svg>
   )
 }
@@ -312,12 +313,12 @@ function EconomicDiagram({ data }: { data?: Record<string, unknown> }) {
 
       {/* Activity Node */}
       <circle cx="160" cy="200" r="70" fill="rgba(59,130,246,0.05)" stroke={COLORS.secondary} strokeWidth="2" />
-      <text x="160" y="195" textAnchor="middle" className="text-[14px] fill-white font-bold">Active Stewards</text>
+      <text x="160" y="195" textAnchor="middle" className="text-[14px] fill-foreground font-bold">Active Stewards</text>
       <text x="160" y="215" textAnchor="middle" className="text-[10px] fill-drp-gray font-cinematic uppercase tracking-widest">Input</text>
       
       {/* Rewards Node */}
       <circle cx="480" cy="200" r="70" fill="rgba(0,255,136,0.05)" stroke={COLORS.success} strokeWidth="2" />
-      <text x="480" y="195" textAnchor="middle" className="text-[14px] fill-white font-bold">$DeRi / $RIGHTS</text>
+      <text x="480" y="195" textAnchor="middle" className="text-[14px] fill-foreground font-bold">$DeRi / $RIGHTS</text>
       <text x="480" y="215" textAnchor="middle" className="text-[10px] fill-emerald-400 font-cinematic uppercase tracking-widest">Outcome</text>
       
       {/* Primary Flow */}
@@ -344,25 +345,25 @@ function GovernanceDiagram({ data }: { data?: Record<string, unknown> }) {
     <svg viewBox="0 0 600 400" className="w-full h-auto max-w-3xl">
       {/* Elder Quorum Hub */}
       <rect x="200" y="40" width="200" height="100" rx="30" fill="rgba(168,85,247,0.05)" stroke={COLORS.accent} strokeWidth="2" />
-      <text x="300" y="90" textAnchor="middle" className="text-[18px] fill-white font-black tracking-tight">ELDER QUORUM</text>
+      <text x="300" y="90" textAnchor="middle" className="text-[18px] fill-foreground font-black tracking-tight">ELDER QUORUM</text>
       <text x="300" y="115" textAnchor="middle" className="text-[9px] fill-drp-gray font-cinematic uppercase tracking-[0.3em]">Governance Hub</text>
       
       {/* Branches */}
       <g transform="translate(80, 240)">
-        <rect x="0" y="0" width="120" height="80" rx="20" fill="rgba(255,255,255,0.03)" stroke={COLORS.gray} strokeWidth="1" strokeOpacity="0.2" />
-        <text x="60" y="35" textAnchor="middle" className="text-[12px] fill-white font-bold">Proposals</text>
+        <rect x="0" y="0" width="120" height="80" rx="20" fill="currentColor" className="fill-foreground/5" stroke={COLORS.gray} strokeWidth="1" strokeOpacity="0.2" />
+        <text x="60" y="35" textAnchor="middle" className="text-[12px] fill-foreground font-bold">Proposals</text>
         <text x="60" y="55" textAnchor="middle" className="text-[9px] fill-drp-gray font-cinematic uppercase tracking-widest">Initiation</text>
       </g>
       
       <g transform="translate(240, 240)">
-        <rect x="0" y="0" width="120" height="80" rx="20" fill="rgba(255,255,255,0.03)" stroke={COLORS.gray} strokeWidth="1" strokeOpacity="0.2" />
-        <text x="60" y="35" textAnchor="middle" className="text-[12px] fill-white font-bold">Voting</text>
+        <rect x="0" y="0" width="120" height="80" rx="20" fill="currentColor" className="fill-foreground/5" stroke={COLORS.gray} strokeWidth="1" strokeOpacity="0.2" />
+        <text x="60" y="35" textAnchor="middle" className="text-[12px] fill-foreground font-bold">Voting</text>
         <text x="60" y="55" textAnchor="middle" className="text-[9px] fill-drp-gray font-cinematic uppercase tracking-widest">Consensus</text>
       </g>
       
       <g transform="translate(400, 240)">
-        <rect x="0" y="0" width="120" height="80" rx="20" fill="rgba(255,255,255,0.03)" stroke={COLORS.gray} strokeWidth="1" strokeOpacity="0.2" />
-        <text x="60" y="35" textAnchor="middle" className="text-[12px] fill-white font-bold">Execution</text>
+        <rect x="0" y="0" width="120" height="80" rx="20" fill="currentColor" className="fill-foreground/5" stroke={COLORS.gray} strokeWidth="1" strokeOpacity="0.2" />
+        <text x="60" y="35" textAnchor="middle" className="text-[12px] fill-foreground font-bold">Execution</text>
         <text x="60" y="55" textAnchor="middle" className="text-[9px] fill-drp-gray font-cinematic uppercase tracking-widest">Commitment</text>
       </g>
 
@@ -394,11 +395,11 @@ function ConsensusDiagram({ data }: { data?: Record<string, unknown> }) {
       
       {/* Center Agreement */}
       <circle cx="300" cy="200" r="60" fill="rgba(0,242,255,0.05)" stroke={COLORS.primary} strokeWidth="2" />
-      <text x="300" y="195" textAnchor="middle" className="text-[14px] fill-white font-black tracking-widest uppercase">Consensus</text>
+      <text x="300" y="195" textAnchor="middle" className="text-[14px] fill-foreground font-black tracking-widest uppercase">Consensus</text>
       <text x="300" y="215" textAnchor="middle" className="text-[9px] fill-drp-cyan font-cinematic uppercase tracking-widest">Verified</text>
       
       {/* Exterior Ring */}
-      <circle cx="300" cy="200" r="170" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" strokeDasharray="10,10" />
+      <circle cx="300" cy="200" r="170" fill="none" stroke="currentColor" className="stroke-foreground/5" strokeWidth="1" strokeDasharray="10,10" />
     </svg>
   )
 }
@@ -422,7 +423,7 @@ function PipelineDiagram({ data }: { data?: Record<string, unknown> }) {
               strokeWidth="1.5"
               strokeOpacity="0.3"
              />
-             <text x={x} y={125} textAnchor="middle" className="text-[12px] fill-white font-bold">{stage}</text>
+             <text x={x} y={125} textAnchor="middle" className="text-[12px] fill-foreground font-bold">{stage}</text>
              
              {!isLast && (
                <line x1={x+60} y1={120} x2={x+100} y2={120} stroke={COLORS.success} strokeWidth="1" strokeOpacity="0.2" strokeDasharray="4,4" />

@@ -71,7 +71,7 @@ export function TokenComparisonTable() {
                 key={index}
                 className="bg-neutral-900/30 hover:bg-neutral-900/50 transition-colors duration-200"
               >
-                <td className="py-4 px-6 text-sm font-medium text-white whitespace-nowrap">
+                <td className="py-4 px-6 text-sm font-medium text-foreground whitespace-nowrap">
                   {row.category}
                 </td>
                 <td className="py-4 px-6 text-sm text-neutral-300">

@@ -47,11 +47,11 @@ export function BadgeShareCard({ badgeTitle, description, shareUrl }: BadgeShare
             type="text"
             value={shareUrl}
             readOnly
-            className="flex-1 rounded-lg border border-neutral-300 bg-neutral-50 px-4 py-2 text-sm text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+            className="flex-1 rounded-lg border border-neutral-300 bg-neutral-50 px-4 py-2 text-sm text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-foreground"
           />
           <button
             onClick={handleCopy}
-            className="flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 transition-colors"
+            className="flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-foreground hover:bg-primary-700 transition-colors"
           >
             {copied ? (
               <>

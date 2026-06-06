@@ -24,10 +24,10 @@ export default function NewsletterTally() {
           </div>
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="text-sm font-bold tracking-wide text-gray-900 dark:text-white uppercase">Stay in the Loop</h3>
+              <h3 className="text-sm font-bold tracking-wide text-foreground uppercase">Stay in the Loop</h3>
               <Sparkles className="w-3 h-3 text-[#00e5cc]" />
             </div>
-            <p className="text-sm text-gray-500 dark:text-white/35 leading-relaxed max-w-sm">
+            <p className="text-sm text-gray-500 dark:text-foreground/35 leading-relaxed max-w-sm">
               Protocol updates, launches, and human-rights milestones — straight to your inbox.
             </p>
           </div>
@@ -40,7 +40,7 @@ export default function NewsletterTally() {
           data-tally-overlay="1"
           data-tally-emoji-text="👋"
           data-tally-emoji-animation="wave"
-          className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#00e5cc] text-black text-sm font-bold tracking-wide hover:bg-[#00bfff] transition-all whitespace-nowrap">
+          className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#00e5cc] text-background text-sm font-bold tracking-wide hover:bg-[#00bfff] transition-all whitespace-nowrap">
           <Mail className="w-4 h-4" />
           Subscribe
         </button>

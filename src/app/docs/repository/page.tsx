@@ -20,7 +20,7 @@ export default function RepositoryPage() {
         </Link>
 
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl mb-4">
+          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-foreground sm:text-5xl mb-4">
             Repository Structure
           </h1>
           <p className="text-xl text-neutral-600 dark:text-neutral-400">
@@ -30,7 +30,7 @@ export default function RepositoryPage() {
 
         {/* Overview */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-white mb-6">
+          <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-foreground mb-6">
             <div className="flex items-center gap-4 mb-4">
               <Folder className="h-8 w-8" />
               <h2 className="text-3xl font-bold">Codebase Overview</h2>
@@ -43,12 +43,12 @@ export default function RepositoryPage() {
 
         {/* Directory Structure */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Directory Structure</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">Directory Structure</h2>
           <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
             <div className="space-y-4 font-mono text-sm">
               <div className="flex items-center gap-2">
                 <Folder className="h-4 w-4 text-blue-500" />
-                <span className="text-neutral-900 dark:text-white">src/</span>
+                <span className="text-neutral-900 dark:text-foreground">src/</span>
               </div>
               <div className="ml-6 space-y-2">
                 <div className="flex items-center gap-2">
@@ -80,7 +80,7 @@ export default function RepositoryPage() {
               
               <div className="flex items-center gap-2 pt-4">
                 <Package className="h-4 w-4 text-blue-500" />
-                <span className="text-neutral-900 dark:text-white">tests/</span>
+                <span className="text-neutral-900 dark:text-foreground">tests/</span>
               </div>
               <div className="ml-6 space-y-2">
                 <div className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export default function RepositoryPage() {
 
               <div className="flex items-center gap-2 pt-4">
                 <FileText className="h-4 w-4 text-blue-500" />
-                <span className="text-neutral-900 dark:text-white">docs/</span>
+                <span className="text-neutral-900 dark:text-foreground">docs/</span>
               </div>
               <div className="ml-6 space-y-2">
                 <div className="flex items-center gap-2">
@@ -107,22 +107,22 @@ export default function RepositoryPage() {
 
         {/* Key Files */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Key Files</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">Key Files</h2>
           <div className="space-y-4">
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">requirements.txt</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">requirements.txt</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm">
                 Lists all Python dependencies required to run the DRP node. Install with <code className="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">pip install -r requirements.txt</code>
               </p>
             </div>
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">README.md</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">README.md</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm">
                 Main project documentation including setup instructions, architecture overview, and contribution guidelines.
               </p>
             </div>
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">src/node.py</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">src/node.py</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm">
                 Entry point for running a DRP node. Handles initialization, peer connections, and consensus participation.
               </p>
@@ -132,28 +132,28 @@ export default function RepositoryPage() {
 
         {/* Module Descriptions */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Module Descriptions</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">Module Descriptions</h2>
           <div className="space-y-4">
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Consensus Module</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Consensus Module</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-2">
                 Implements Proof of Status and Proof of Activity consensus mechanisms with AI verification.
               </p>
             </div>
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Cryptography Module</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Cryptography Module</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-2">
                 Post-quantum cryptographic implementations using CRYSTALS-Kyber and CRYSTALS-Dilithium.
               </p>
             </div>
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">AI Module</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">AI Module</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-2">
                 AI Elder implementations for verification, fraud detection, and network optimization.
               </p>
             </div>
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Network Module</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Network Module</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-2">
                 P2P networking layer for node communication and blockchain synchronization.
               </p>
@@ -163,7 +163,7 @@ export default function RepositoryPage() {
 
         {/* GitHub Link */}
         <div className="mt-12 p-6 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-200 dark:border-primary-800">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Explore the Repository</h3>
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Explore the Repository</h3>
           <p className="text-neutral-600 dark:text-neutral-400 mb-4">
             View the full source code and contribute to the project on GitHub.
           </p>
@@ -171,7 +171,7 @@ export default function RepositoryPage() {
             href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+            className="inline-flex items-center px-4 py-2 bg-primary-600 text-foreground rounded-lg hover:bg-primary-700 transition-colors"
           >
             View on GitHub
           </a>

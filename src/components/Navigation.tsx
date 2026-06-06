@@ -117,7 +117,7 @@ export default function Navigation() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <Link href="https://app.decentralizedrights.com" target="_blank"
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold tracking-widest uppercase bg-[#00e5cc] text-black hover:bg-[#00bfff] transition-all">
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold tracking-widest uppercase bg-[#00e5cc] text-background hover:bg-[#00bfff] transition-all">
             Launch App <ExternalLink className="w-3 h-3" />
           </Link>
           <button onClick={() => setOpen(!open)} className="lg:hidden w-8 h-8 flex items-center justify-center text-gray-600 dark:text-foreground/50" aria-label="Toggle menu">
@@ -153,7 +153,7 @@ export default function Navigation() {
             ))}
             <div className="pt-4 border-t border-gray-100 dark:border-foreground/5">
               <Link href="https://app.decentralizedrights.com" target="_blank"
-                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-3 text-xs font-bold tracking-widest uppercase bg-[#00e5cc] text-black hover:bg-[#00bfff] transition-all">
+                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-3 text-xs font-bold tracking-widest uppercase bg-[#00e5cc] text-background hover:bg-[#00bfff] transition-all">
                 Launch App <ExternalLink className="w-3 h-3" />
               </Link>
             </div>

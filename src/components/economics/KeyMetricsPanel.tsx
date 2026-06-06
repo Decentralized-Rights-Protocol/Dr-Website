@@ -48,7 +48,7 @@ export function KeyMetricsPanel({ metrics, title = 'Key Metrics', className = ''
       transition={{ duration: 0.5 }}
       className={`bg-white dark:bg-neutral-800 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700 ${className}`}
     >
-      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
+      <h3 className="text-xl font-bold text-neutral-900 dark:text-foreground mb-6">
         {title}
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -74,7 +74,7 @@ export function KeyMetricsPanel({ metrics, title = 'Key Metrics', className = ''
                 </div>
               )}
             </div>
-            <div className="text-2xl font-bold text-neutral-900 dark:text-white mb-1">
+            <div className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-1">
               {metric.value}
             </div>
             <div className="text-sm text-neutral-600 dark:text-neutral-400">

@@ -35,7 +35,7 @@ export function EconomicsHero({ title, subtitle, description }: EconomicsHeroPro
             <span className="text-sm font-medium text-blue-300">DRP Economics</span>
           </motion.div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
             {title}
           </h1>
           
@@ -67,7 +67,7 @@ export function EconomicsHero({ title, subtitle, description }: EconomicsHeroPro
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                className="flex flex-col items-center gap-2 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10"
+                className="flex flex-col items-center gap-2 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-foreground/10"
               >
                 <Icon className="h-8 w-8 text-blue-400" />
                 <span className="text-sm text-blue-200 text-center">{label}</span>

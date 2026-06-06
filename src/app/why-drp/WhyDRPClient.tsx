@@ -64,20 +64,20 @@ export function WhyDRPClient() {
         description="DRP is designed to verify status and contribution with proof mechanisms (PoST/PoAT) reviewed by AI Elders—so governance is explainable, audit-ready, and rights-aligned."
       >
         <div className="grid gap-4 md:grid-cols-2">
-          <article className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-base font-semibold text-white">PoST verifies identity and status</h3>
+          <article className="rounded-xl border border-foreground/10 bg-white/[0.03] p-5">
+            <h3 className="text-base font-semibold text-foreground">PoST verifies identity and status</h3>
             <p className="mt-2 text-sm text-slate-300">Credential proofs and reputation signals for governance weighting.</p>
           </article>
-          <article className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-base font-semibold text-white">PoAT verifies meaningful activity</h3>
+          <article className="rounded-xl border border-foreground/10 bg-white/[0.03] p-5">
+            <h3 className="text-base font-semibold text-foreground">PoAT verifies meaningful activity</h3>
             <p className="mt-2 text-sm text-slate-300">Evidence of real contribution to support rewards and equitable participation.</p>
           </article>
-          <article className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-base font-semibold text-white">AI Elders validate integrity</h3>
+          <article className="rounded-xl border border-foreground/10 bg-white/[0.03] p-5">
+            <h3 className="text-base font-semibold text-foreground">AI Elders validate integrity</h3>
             <p className="mt-2 text-sm text-slate-300">An explainable review layer for anomalies and proof quality.</p>
           </article>
-          <article className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-base font-semibold text-white">Governance is rights-aligned</h3>
+          <article className="rounded-xl border border-foreground/10 bg-white/[0.03] p-5">
+            <h3 className="text-base font-semibold text-foreground">Governance is rights-aligned</h3>
             <p className="mt-2 text-sm text-slate-300">Decisions are evaluated against dignity and sustainability baselines.</p>
           </article>
         </div>
@@ -99,7 +99,7 @@ export function WhyDRPClient() {
                 >
                   <advantage.icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">{advantage.title}</h3>
+                <h3 className="text-lg font-semibold text-foreground">{advantage.title}</h3>
               </div>
               <p className="text-neutral-300">{advantage.description}</p>
             </div>
@@ -118,7 +118,7 @@ export function WhyDRPClient() {
               onClick={() => setViewMode('table')}
               className={cn(
                 'flex items-center gap-x-2 rounded-md px-4 py-2 text-sm font-medium transition-all duration-200',
-                viewMode === 'table' ? 'bg-cyan-400 text-slate-900 shadow-sm' : 'text-gray-300 hover:text-white',
+                viewMode === 'table' ? 'bg-cyan-400 text-slate-900 shadow-sm' : 'text-gray-300 hover:text-foreground',
               )}
               type="button"
             >
@@ -129,7 +129,7 @@ export function WhyDRPClient() {
               onClick={() => setViewMode('chart')}
               className={cn(
                 'flex items-center gap-x-2 rounded-md px-4 py-2 text-sm font-medium transition-all duration-200',
-                viewMode === 'chart' ? 'bg-cyan-400 text-slate-900 shadow-sm' : 'text-gray-300 hover:text-white',
+                viewMode === 'chart' ? 'bg-cyan-400 text-slate-900 shadow-sm' : 'text-gray-300 hover:text-foreground',
               )}
               type="button"
             >
@@ -146,7 +146,7 @@ export function WhyDRPClient() {
       <section className="pb-20 pt-8">
         <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
           <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/15 via-blue-300/10 to-amber-300/10 p-8 text-center">
-            <h2 className="text-3xl font-semibold text-white">Ready to Build on the Future Stack?</h2>
+            <h2 className="text-3xl font-semibold text-foreground">Ready to Build on the Future Stack?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-slate-300">
               Dive into the whitepaper and learning modules to understand DRP from architecture to implementation.
             </p>
@@ -160,7 +160,7 @@ export function WhyDRPClient() {
               </Link>
               <Link
                 href="/learn"
-                className="inline-flex items-center gap-x-2 rounded-xl border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white transition hover:bg-white/20"
+                className="inline-flex items-center gap-x-2 rounded-xl border border-white/20 bg-white/10 px-8 py-4 font-semibold text-foreground transition hover:bg-white/20"
               >
                 Start Learning
                 <Star className="h-5 w-5" />

@@ -20,7 +20,7 @@ export default function CommunityPage() {
         </Link>
 
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl mb-4">
+          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-foreground sm:text-5xl mb-4">
             Community
           </h1>
           <p className="text-xl text-neutral-600 dark:text-neutral-400">
@@ -30,7 +30,7 @@ export default function CommunityPage() {
 
         {/* Community Channels */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-white mb-6">
+          <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-foreground mb-6">
             <div className="flex items-center gap-4 mb-4">
               <Users className="h-8 w-8" />
               <h2 className="text-3xl font-bold">Join Our Community</h2>
@@ -44,7 +44,7 @@ export default function CommunityPage() {
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
               <div className="flex items-center gap-3 mb-4">
                 <MessageCircle className="h-6 w-6 text-purple-500" />
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">Discord</h3>
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground">Discord</h3>
               </div>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
                 Join our Discord server for real-time discussions, support, and announcements.
@@ -53,7 +53,7 @@ export default function CommunityPage() {
                 href="https://discord.gg/k8auUAqF"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm"
+                className="inline-flex items-center px-4 py-2 bg-purple-600 text-foreground rounded-lg hover:bg-purple-700 transition-colors text-sm"
               >
                 Join Discord
               </a>
@@ -61,8 +61,8 @@ export default function CommunityPage() {
 
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
               <div className="flex items-center gap-3 mb-4">
-                <Github className="h-6 w-6 text-neutral-900 dark:text-white" />
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">GitHub</h3>
+                <Github className="h-6 w-6 text-neutral-900 dark:text-foreground" />
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground">GitHub</h3>
               </div>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
                 Contribute to the codebase, report issues, and track development progress.
@@ -71,7 +71,7 @@ export default function CommunityPage() {
                 href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors text-sm"
+                className="inline-flex items-center px-4 py-2 bg-neutral-900 dark:bg-white text-foreground dark:text-neutral-900 rounded-lg hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors text-sm"
               >
                 View Repository
               </a>
@@ -81,10 +81,10 @@ export default function CommunityPage() {
 
         {/* Ways to Contribute */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Ways to Contribute</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">Ways to Contribute</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3">Code Contributions</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">Code Contributions</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
                 Submit pull requests, fix bugs, or add new features to the DRP codebase.
               </p>
@@ -97,7 +97,7 @@ export default function CommunityPage() {
             </div>
 
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3">Documentation</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">Documentation</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
                 Help improve documentation, write tutorials, or translate content.
               </p>
@@ -110,14 +110,14 @@ export default function CommunityPage() {
             </div>
 
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3">Testing</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">Testing</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
                 Run nodes, test features, and report bugs or issues you encounter.
               </p>
             </div>
 
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-3">Research</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">Research</h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
                 Contribute research, propose improvements, or analyze protocol performance.
               </p>
@@ -127,19 +127,19 @@ export default function CommunityPage() {
 
         {/* Getting Help */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Getting Help</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">Getting Help</h2>
           <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
             <div className="flex items-start gap-3">
               <HelpCircle className="h-6 w-6 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" />
               <div>
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Need Help?</h3>
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Need Help?</h3>
                 <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
                   If you&rsquo;re stuck or have questions, check out our FAQ or reach out to the community:
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href="/docs/faq"
-                    className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm"
+                    className="inline-flex items-center px-4 py-2 bg-primary-600 text-foreground rounded-lg hover:bg-primary-700 transition-colors text-sm"
                   >
                     View FAQ
                   </Link>
@@ -147,7 +147,7 @@ export default function CommunityPage() {
                     href="https://discord.gg/k8auUAqF"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors text-sm"
+                    className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-foreground rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors text-sm"
                   >
                     Ask on Discord
                   </a>

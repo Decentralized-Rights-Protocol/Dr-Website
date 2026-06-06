@@ -17,7 +17,7 @@ export default function GlobalEconomicsPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
           <Link
             href="/economics"
-            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+            className="inline-flex items-center text-sm font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-foreground"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Economics Overview
@@ -35,7 +35,7 @@ export default function GlobalEconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               A New Global Economy for All Stakeholders
             </h2>
             <p className="text-lg text-neutral-300 mb-8">
@@ -44,7 +44,7 @@ export default function GlobalEconomicsPage() {
             </p>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-foreground mb-2">
                   For Governments
                 </h3>
                 <p className="text-neutral-300">
@@ -53,7 +53,7 @@ export default function GlobalEconomicsPage() {
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-foreground mb-2">
                   For Communities
                 </h3>
                 <p className="text-neutral-300">
@@ -62,7 +62,7 @@ export default function GlobalEconomicsPage() {
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-foreground mb-2">
                   For Businesses
                 </h3>
                 <p className="text-neutral-300">
@@ -71,7 +71,7 @@ export default function GlobalEconomicsPage() {
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-foreground mb-2">
                   For the Global South
                 </h3>
                 <p className="text-neutral-300">
@@ -94,7 +94,7 @@ export default function GlobalEconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Why WEF Stakeholders Will Care
             </h2>
             <p className="text-lg text-neutral-300 mb-6">
@@ -120,7 +120,7 @@ export default function GlobalEconomicsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               From Broken Capitalism to Verified Contribution
             </h2>
             <p className="text-lg text-neutral-300 mb-6">
@@ -156,7 +156,7 @@ export default function GlobalEconomicsPage() {
             <div className="grid md:grid-cols-3 gap-6 mt-8">
               <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
                 <Users className="h-8 w-8 text-blue-500 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-foreground mb-2">
                   Human Development
                 </h3>
                 <p className="text-neutral-300">
@@ -165,7 +165,7 @@ export default function GlobalEconomicsPage() {
               </div>
               <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
                 <Globe className="h-8 w-8 text-purple-500 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-foreground mb-2">
                   Rights-Based Economics
                 </h3>
                 <p className="text-neutral-300">
@@ -174,7 +174,7 @@ export default function GlobalEconomicsPage() {
               </div>
               <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
                 <Leaf className="h-8 w-8 text-green-500 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-foreground mb-2">
                   Green Incentives
                 </h3>
                 <p className="text-neutral-300">
@@ -195,7 +195,7 @@ export default function GlobalEconomicsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold text-white mb-6">
+            <h2 className="text-4xl font-bold text-foreground mb-6">
               Connect Economics to Reality
             </h2>
             <p className="text-xl text-blue-100 mb-8">

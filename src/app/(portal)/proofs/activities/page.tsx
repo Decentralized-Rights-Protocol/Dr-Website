@@ -201,7 +201,7 @@ export default function ActivitiesPage() {
             <button
               type="submit"
               disabled={isSubmitting || !normalizedAddress}
-              className="w-full rounded-xl bg-primary-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-primary-700 disabled:opacity-50"
+              className="w-full rounded-xl bg-primary-600 px-6 py-3 text-sm font-bold text-foreground transition hover:bg-primary-700 disabled:opacity-50"
             >
               {!normalizedAddress ? 'Connect Wallet to Submit' : isSubmitting ? 'Verifying with Elders...' : 'Submit Activity Proof'}
             </button>
@@ -270,7 +270,7 @@ export default function ActivitiesPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-neutral-200/80 bg-gradient-to-br from-primary-600 to-indigo-700 p-6 text-white shadow-lg">
+          <div className="rounded-3xl border border-neutral-200/80 bg-gradient-to-br from-primary-600 to-indigo-700 p-6 text-foreground shadow-lg">
             <h4 className="font-bold">Elders Verification</h4>
             <p className="mt-2 text-sm opacity-90">
               Every activity is hashed using SHA3-512 and signed with a post-quantum resistant simulation (Dilithium).

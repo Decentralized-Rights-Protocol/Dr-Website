@@ -20,7 +20,7 @@ export default function GettingStartedPage() {
         </Link>
 
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl mb-4">
+          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-foreground sm:text-5xl mb-4">
             Getting Started
           </h1>
           <p className="text-xl text-neutral-600 dark:text-neutral-400">
@@ -30,7 +30,7 @@ export default function GettingStartedPage() {
 
         {/* Prerequisites */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-white mb-6">
+          <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-foreground mb-6">
             <div className="flex items-center gap-4 mb-4">
               <CheckCircle className="h-8 w-8" />
               <h2 className="text-3xl font-bold">Prerequisites</h2>
@@ -45,7 +45,7 @@ export default function GettingStartedPage() {
               <li className="flex items-start gap-3">
                 <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-1">Python 3.10 or higher</h3>
+                  <h3 className="font-semibold text-neutral-900 dark:text-foreground mb-1">Python 3.10 or higher</h3>
                   <p className="text-neutral-600 dark:text-neutral-400 text-sm">
                     DRP is built with Python. Check your version with <code className="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">python --version</code>
                   </p>
@@ -54,7 +54,7 @@ export default function GettingStartedPage() {
               <li className="flex items-start gap-3">
                 <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-1">Git</h3>
+                  <h3 className="font-semibold text-neutral-900 dark:text-foreground mb-1">Git</h3>
                   <p className="text-neutral-600 dark:text-neutral-400 text-sm">
                     Required for cloning the repository. Install from <a href="https://git-scm.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 hover:underline">git-scm.com</a>
                   </p>
@@ -63,7 +63,7 @@ export default function GettingStartedPage() {
               <li className="flex items-start gap-3">
                 <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-1">pip (Python package manager)</h3>
+                  <h3 className="font-semibold text-neutral-900 dark:text-foreground mb-1">pip (Python package manager)</h3>
                   <p className="text-neutral-600 dark:text-neutral-400 text-sm">
                     Usually comes with Python. Verify with <code className="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">pip --version</code>
                   </p>
@@ -72,7 +72,7 @@ export default function GettingStartedPage() {
               <li className="flex items-start gap-3">
                 <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h3 className="font-semibold text-neutral-900 dark:text-white mb-1">Virtual Environment (recommended)</h3>
+                  <h3 className="font-semibold text-neutral-900 dark:text-foreground mb-1">Virtual Environment (recommended)</h3>
                   <p className="text-neutral-600 dark:text-neutral-400 text-sm">
                     Use <code className="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">venv</code> or <code className="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">virtualenv</code> to isolate dependencies
                   </p>
@@ -84,7 +84,7 @@ export default function GettingStartedPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 text-white mb-6">
+          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 text-foreground mb-6">
             <div className="flex items-center gap-4 mb-4">
               <Terminal className="h-8 w-8" />
               <h2 className="text-3xl font-bold">Installation</h2>
@@ -96,7 +96,7 @@ export default function GettingStartedPage() {
 
           <div className="space-y-6">
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">Step 1: Clone the Repository</h3>
+              <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-4">Step 1: Clone the Repository</h3>
               <div className="bg-neutral-900 rounded-lg p-4 font-mono text-sm">
                 <div className="text-neutral-400"># Clone the DRP Blockchain repository</div>
                 <div className="text-green-400 mt-2">git clone https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain.git</div>
@@ -106,7 +106,7 @@ export default function GettingStartedPage() {
             </div>
 
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">Step 2: Create Virtual Environment</h3>
+              <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-4">Step 2: Create Virtual Environment</h3>
               <div className="bg-neutral-900 rounded-lg p-4 font-mono text-sm">
                 <div className="text-neutral-400"># Create virtual environment</div>
                 <div className="text-green-400 mt-2">python -m venv venv</div>
@@ -119,7 +119,7 @@ export default function GettingStartedPage() {
             </div>
 
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">Step 3: Install Dependencies</h3>
+              <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-4">Step 3: Install Dependencies</h3>
               <div className="bg-neutral-900 rounded-lg p-4 font-mono text-sm">
                 <div className="text-neutral-400"># Install required packages</div>
                 <div className="text-green-400 mt-2">pip install -r requirements.txt</div>
@@ -133,7 +133,7 @@ export default function GettingStartedPage() {
 
         {/* Running Your First Node */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white mb-6">
+          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-foreground mb-6">
             <div className="flex items-center gap-4 mb-4">
               <Rocket className="h-8 w-8" />
               <h2 className="text-3xl font-bold">Running Your First Node</h2>
@@ -144,7 +144,7 @@ export default function GettingStartedPage() {
           </div>
 
           <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-            <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-4">Start Testnet Node</h3>
+            <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-4">Start Testnet Node</h3>
             <div className="bg-neutral-900 rounded-lg p-4 font-mono text-sm mb-4">
               <div className="text-neutral-400"># Run the testnet node</div>
               <div className="text-green-400 mt-2">python src/node.py</div>
@@ -163,7 +163,7 @@ export default function GettingStartedPage() {
 
         {/* Configuration */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Configuration</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">Configuration</h2>
           <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
             <p className="text-neutral-600 dark:text-neutral-400 mb-4">
               DRP nodes can be configured through environment variables or configuration files. Key settings include:
@@ -187,26 +187,26 @@ export default function GettingStartedPage() {
 
         {/* Next Steps */}
         <div className="mt-12 p-6 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-200 dark:border-primary-800">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Next Steps</h3>
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Next Steps</h3>
           <p className="text-neutral-600 dark:text-neutral-400 mb-4">
             Now that your node is running, explore these resources to learn more about DRP:
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
               href="/docs/consensus"
-              className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-primary-600 text-foreground rounded-lg hover:bg-primary-700 transition-colors"
             >
               Learn About Consensus
             </Link>
             <Link
               href="/docs/examples"
-              className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-foreground rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
             >
               View Code Examples
             </Link>
             <Link
               href="/docs"
-              className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-foreground rounded-lg border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
             >
               Browse Documentation
             </Link>

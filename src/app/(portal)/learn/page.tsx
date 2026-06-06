@@ -64,7 +64,7 @@ export default function LearnHubPage() {
   return (
     <div className="space-y-12 pb-20">
       {/* Header Section */}
-      <header className="relative rounded-[2.5rem] border border-white/5 bg-black/60 p-12 backdrop-blur-xl overflow-hidden">
+      <header className="relative rounded-[2.5rem] border border-border bg-card/60 p-12 backdrop-blur-xl overflow-hidden">
         <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none">
           <GraduationCap className="w-64 h-64 text-drp-cyan" />
         </div>
@@ -75,7 +75,7 @@ export default function LearnHubPage() {
             </div>
             <p className="text-xs font-cinematic text-drp-cyan tracking-[0.4em]">Academy v1.0</p>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white max-w-4xl leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold text-foreground max-w-4xl leading-tight">
             Learn DRP. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-drp-cyan to-blue-400">
               Earn Protocol Rewards.
@@ -87,15 +87,15 @@ export default function LearnHubPage() {
           </p>
           
           <div className="mt-10 flex flex-wrap gap-4">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 border border-border text-xs font-medium text-foreground">
               <CheckCircle2 className="h-4 w-4 text-emerald-400" />
               20+ Modules
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 border border-border text-xs font-medium text-foreground">
               <Trophy className="h-4 w-4 text-amber-400" />
               500+ $DeRi Potential
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 border border-border text-xs font-medium text-foreground">
               <Zap className="h-4 w-4 text-cyan-400" />
               Industry Verified
             </div>
@@ -116,12 +116,12 @@ export default function LearnHubPage() {
                   <div className={cn("inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-4", level.bg, level.color, level.border, "border")}>
                     {level.name}
                   </div>
-                  <h2 className="text-3xl font-bold text-white">{level.title}</h2>
+                  <h2 className="text-3xl font-bold text-foreground">{level.title}</h2>
                   <p className="mt-2 text-drp-gray max-w-2xl">{level.description}</p>
                 </div>
                 <div className="hidden md:block text-right">
-                  <p className="text-2xl font-bold text-white/20">{levelLessons.length}</p>
-                  <p className="text-[10px] font-cinematic text-white/10 tracking-widest uppercase">Modules</p>
+                  <p className="text-2xl font-bold text-foreground/20">{levelLessons.length}</p>
+                  <p className="text-[10px] font-cinematic text-foreground/10 tracking-widest uppercase">Modules</p>
                 </div>
               </div>
 
@@ -130,7 +130,7 @@ export default function LearnHubPage() {
                   <Link
                     key={lesson.slug}
                     href={`/lessons/${lesson.slug}`}
-                    className="group relative flex flex-col justify-between rounded-[2rem] border border-white/5 bg-white/5 p-8 transition-all hover:bg-white/10 hover:border-white/20"
+                    className="group relative flex flex-col justify-between rounded-[2rem] border border-border bg-foreground/5 p-8 transition-all hover:bg-foreground/10 hover:border-foreground/20"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-6">
@@ -142,7 +142,7 @@ export default function LearnHubPage() {
                           15m
                         </div>
                       </div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-drp-cyan transition-colors mb-3">
+                      <h3 className="text-lg font-bold text-foreground group-hover:text-drp-cyan transition-colors mb-3">
                         {lesson.title}
                       </h3>
                       <p className="text-xs text-drp-gray leading-relaxed line-clamp-2 mb-6">
@@ -150,7 +150,7 @@ export default function LearnHubPage() {
                       </p>
                     </div>
                     
-                    <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                    <div className="flex items-center justify-between pt-6 border-t border-border">
                       <div className="flex items-center gap-2">
                         <div className="h-5 w-5 rounded-full bg-amber-400/20 flex items-center justify-center">
                           <Trophy className="h-3 w-3 text-amber-400" />
@@ -159,7 +159,7 @@ export default function LearnHubPage() {
                           20 $DeRi
                         </span>
                       </div>
-                      <div className="p-2 rounded-full bg-white/5 group-hover:bg-drp-cyan group-hover:text-black transition-all">
+                      <div className="p-2 rounded-full bg-foreground/5 group-hover:bg-drp-cyan group-hover:text-background transition-all">
                         <ChevronRight className="h-4 w-4" />
                       </div>
                     </div>
@@ -172,10 +172,10 @@ export default function LearnHubPage() {
       </div>
 
       {/* Stats/CTA Footer */}
-      <section className="rounded-[2.5rem] border border-white/5 bg-gradient-to-br from-drp-cyan/10 to-blue-500/10 p-12 backdrop-blur-xl">
+      <section className="rounded-[2.5rem] border border-border bg-gradient-to-br from-drp-cyan/10 to-blue-500/10 p-12 backdrop-blur-xl">
         <div className="grid gap-12 md:grid-cols-2 items-center">
           <div>
-            <h3 className="text-3xl font-bold text-white mb-6">Why learn with DRP?</h3>
+            <h3 className="text-3xl font-bold text-foreground mb-6">Why learn with DRP?</h3>
             <ul className="space-y-4">
               {[
                 'Verified on-chain credentials for your profile',
@@ -190,14 +190,14 @@ export default function LearnHubPage() {
               ))}
             </ul>
           </div>
-          <div className="bg-black/40 rounded-3xl p-8 border border-white/10">
-            <h4 className="text-xl font-bold text-white mb-4">Start your journey today</h4>
+          <div className="bg-card/40 rounded-3xl p-8 border border-border">
+            <h4 className="text-xl font-bold text-foreground mb-4">Start your journey today</h4>
             <p className="text-sm text-drp-gray mb-8">
               Join 2,500+ global stewards who are building a more transparent and equitable future.
             </p>
             <Link 
               href="/lessons/what-is-blockchain"
-              className="block w-full text-center py-4 rounded-2xl bg-white text-black font-bold hover:bg-drp-cyan transition-colors"
+              className="block w-full text-center py-4 rounded-2xl bg-foreground text-background font-bold hover:bg-drp-cyan transition-colors"
             >
               Take First Lesson
             </Link>

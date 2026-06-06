@@ -83,7 +83,7 @@ export function ThinkFirstQuestion({
           <LightBulbIcon className="h-6 w-6 text-yellow-400" />
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-white mb-2">Think First</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-2">Think First</h3>
           <p className="text-neutral-200 leading-relaxed">{question}</p>
         </div>
       </div>
@@ -114,7 +114,7 @@ export function ThinkFirstQuestion({
                 } ${isRevealed && !isQuizMode ? 'cursor-default' : 'cursor-pointer'}`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold text-white">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm font-semibold text-foreground">
                     {String.fromCharCode(65 + index)}
                   </span>
                   <span className="text-neutral-200 flex-1">{option}</span>
@@ -134,7 +134,7 @@ export function ThinkFirstQuestion({
 
       {/* Reflection/Scenario Prompt */}
       {(type === 'reflection' || type === 'scenario') && (
-        <div className="mb-6 p-4 bg-white/5 rounded-md border border-white/10">
+        <div className="mb-6 p-4 bg-white/5 rounded-md border border-foreground/10">
           <p className="text-sm text-neutral-300 italic">
             Take a moment to think about this before revealing the answer...
           </p>
@@ -171,7 +171,7 @@ export function ThinkFirstQuestion({
                 <div className="p-4 bg-green-500/10 border border-green-400/30 rounded-md">
                   <div className="flex items-start gap-3">
                     <span className="text-green-400 font-semibold">Correct Answer:</span>
-                    <span className="text-white">
+                    <span className="text-foreground">
                       {String.fromCharCode(65 + (correctAnswer as number))}: {options[correctAnswer as number]}
                     </span>
                   </div>

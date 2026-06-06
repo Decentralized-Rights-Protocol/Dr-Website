@@ -55,7 +55,7 @@ export function RevealAnswer({
                 <h4 className="text-green-400 font-semibold">{label}:</h4>
                 <button
                   onClick={() => setIsRevealed(false)}
-                  className="text-neutral-400 hover:text-white transition-colors"
+                  className="text-neutral-400 hover:text-foreground transition-colors"
                   aria-label="Hide answer"
                 >
                   <EyeSlashIcon className="h-5 w-5" />
@@ -63,7 +63,7 @@ export function RevealAnswer({
               </div>
               
               <div className="p-4 bg-green-500/10 border border-green-400/30 rounded-md">
-                <div className="text-white leading-relaxed">
+                <div className="text-foreground leading-relaxed">
                   {typeof answer === 'string' ? (
                     <p>{answer}</p>
                   ) : (

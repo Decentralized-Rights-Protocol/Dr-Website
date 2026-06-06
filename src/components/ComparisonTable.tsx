@@ -164,7 +164,7 @@ export function ComparisonTable({ className }: ComparisonTableProps) {
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-neutral-200 dark:border-neutral-700">
-              <th className="text-left py-4 px-6 font-semibold text-neutral-900 dark:text-white">
+              <th className="text-left py-4 px-6 font-semibold text-neutral-900 dark:text-foreground">
                 Feature
               </th>
               {blockchains.map((blockchain) => (
@@ -192,7 +192,7 @@ export function ComparisonTable({ className }: ComparisonTableProps) {
                   onMouseEnter={() => setHoveredFeature(row.feature)}
                   onMouseLeave={() => setHoveredFeature(null)}
                 >
-                  <td className="py-4 px-6 font-medium text-neutral-900 dark:text-white">
+                  <td className="py-4 px-6 font-medium text-neutral-900 dark:text-foreground">
                     <div className="flex items-center gap-x-2">
                       {row.feature}
                       {row.details && (
@@ -253,7 +253,7 @@ export function ComparisonTable({ className }: ComparisonTableProps) {
             key={row.feature}
             className="bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-4"
           >
-            <h3 className="font-semibold text-neutral-900 dark:text-white mb-3 flex items-center gap-x-2">
+            <h3 className="font-semibold text-neutral-900 dark:text-foreground mb-3 flex items-center gap-x-2">
               {row.feature}
               {row.details && (
                 <button

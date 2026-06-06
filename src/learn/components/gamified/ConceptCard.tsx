@@ -45,7 +45,7 @@ export function ConceptCard({
           </div>
         )}
         <div className="flex-1">
-          <h4 className="font-semibold text-white mb-1">{title}</h4>
+          <h4 className="font-semibold text-foreground mb-1">{title}</h4>
           <p className="text-sm text-neutral-200 leading-relaxed">{description}</p>
         </div>
       </div>

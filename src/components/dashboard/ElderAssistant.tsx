@@ -72,7 +72,7 @@ export function ElderAssistant() {
         />
         <button
           type="submit"
-          className="rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:shadow-md"
+          className="rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-semibold text-foreground shadow-sm transition hover:shadow-md"
         >
           Share
         </button>

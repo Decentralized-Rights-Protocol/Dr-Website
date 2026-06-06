@@ -28,12 +28,12 @@ export default function PhilosophyPage() {
           description="DRP’s philosophy is simple: trust should be grounded in verifiable proofs. PoST and PoAT translate identity and activity into auditable evidence so governance can be rights-aligned and accountable."
         >
           <div className="grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <h3 className="text-base font-semibold text-white">PoST: verified status</h3>
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-5">
+              <h3 className="text-base font-semibold text-foreground">PoST: verified status</h3>
               <p className="mt-2 text-sm text-slate-300">Governance weighting based on credential proofs, not influence.</p>
             </article>
-            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <h3 className="text-base font-semibold text-white">PoAT: verified activity</h3>
+            <article className="rounded-2xl border border-foreground/10 bg-white/[0.03] p-5">
+              <h3 className="text-base font-semibold text-foreground">PoAT: verified activity</h3>
               <p className="mt-2 text-sm text-slate-300">Rewards based on meaningful contribution and transparent evidence.</p>
             </article>
           </div>
@@ -50,9 +50,9 @@ export default function PhilosophyPage() {
               { icon: ShieldCheck, title: 'Verifiable Trust', body: 'PoAT and PoST move trust from claims to proofs.' },
               { icon: Compass, title: 'Stewardship Governance', body: 'Governance serves long-term communities, not short-term extraction.' },
             ].map((item) => (
-              <article key={item.title} className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <article key={item.title} className="rounded-2xl border border-foreground/10 bg-black/25 p-5">
                 <item.icon className="h-5 w-5 text-cyan-200" />
-                <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
+                <h3 className="mt-3 text-lg font-semibold text-foreground">{item.title}</h3>
                 <p className="mt-2 text-sm text-slate-300">{item.body}</p>
               </article>
             ))}
@@ -72,7 +72,7 @@ export default function PhilosophyPage() {
               'Growth without exploitation: incentives reward useful, sustainable contribution.',
               'AI in service of humanity: transparent assistance with human oversight.',
             ].map((line) => (
-              <p key={line} className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-300">
+              <p key={line} className="rounded-xl border border-foreground/10 bg-white/[0.03] px-4 py-3 text-sm text-slate-300">
                 {line}
               </p>
             ))}
@@ -91,7 +91,7 @@ export default function PhilosophyPage() {
               'Ecological and regenerative economics',
               'AI ethics and privacy-by-design frameworks',
             ].map((item) => (
-              <article key={item} className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <article key={item} className="rounded-2xl border border-foreground/10 bg-black/25 p-5">
                 <Sparkles className="h-5 w-5 text-cyan-200" />
                 <p className="mt-3 text-sm text-slate-300">{item}</p>
               </article>
@@ -102,7 +102,7 @@ export default function PhilosophyPage() {
         <section className="pb-20 pt-8">
           <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
             <div className="rounded-3xl border border-cyan-300/20 bg-gradient-to-r from-cyan-300/15 via-blue-300/10 to-indigo-300/10 p-8 text-center">
-              <h2 className="text-3xl font-semibold text-white">Explore the Mission in Action</h2>
+              <h2 className="text-3xl font-semibold text-foreground">Explore the Mission in Action</h2>
               <p className="mx-auto mt-4 max-w-2xl text-slate-300">
                 Move from philosophy to architecture, economics, and governance implementation.
               </p>
@@ -110,7 +110,7 @@ export default function PhilosophyPage() {
                 <Link href="/about" className="inline-flex items-center rounded-xl border border-cyan-300/40 bg-cyan-300/90 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200">
                   About DRP
                 </Link>
-                <Link href="/economics" className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                <Link href="/economics" className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/10">
                   Explore Economics
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>

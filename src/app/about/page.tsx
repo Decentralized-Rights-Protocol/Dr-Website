@@ -30,9 +30,9 @@ export default function AboutPage() {
             { icon: ShieldCheck, title: 'Trust by Design', body: 'Security, transparency, and governance are built into system primitives.' },
             { icon: Sparkles, title: 'Future-Ready', body: 'A protocol architecture designed for AI-era and quantum-era realities.' },
           ].map((item) => (
-            <article key={item.title} className="rounded-[2rem] border border-white/5 bg-white/5 p-8 transition-all hover:bg-white/10">
+            <article key={item.title} className="rounded-[2rem] border border-foreground/5 bg-white/5 p-8 transition-all hover:bg-white/10">
               <item.icon className="h-8 w-8 text-drp-cyan mb-6" />
-              <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
+              <h3 className="text-xl font-bold text-foreground mb-4">{item.title}</h3>
               <p className="text-sm text-drp-gray leading-relaxed">{item.body}</p>
             </article>
           ))}
@@ -51,7 +51,7 @@ export default function AboutPage() {
             'AI should augment fairness and verification, with transparent human oversight.',
             'Global systems must be accessible, sustainable, and institution-ready.',
           ].map((principle) => (
-            <div key={principle} className="rounded-2xl border border-white/5 bg-white/[0.02] px-8 py-4 text-sm text-drp-gray">
+            <div key={principle} className="rounded-2xl border border-foreground/5 bg-white/[0.02] px-8 py-4 text-sm text-drp-gray">
               {principle}
             </div>
           ))}
@@ -60,8 +60,8 @@ export default function AboutPage() {
 
       <section className="pb-32 pt-16">
         <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
-          <div className="rounded-[3rem] border border-white/5 bg-gradient-to-br from-drp-cyan/10 via-drp-blue/5 to-transparent p-16 text-center backdrop-blur-xl">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">Join the Mission</h2>
+          <div className="rounded-[3rem] border border-foreground/5 bg-gradient-to-br from-drp-cyan/10 via-drp-blue/5 to-transparent p-16 text-center backdrop-blur-xl">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8">Join the Mission</h2>
             <p className="mx-auto max-w-2xl text-lg text-drp-gray mb-12">
               Whether you are a builder, institution, researcher, or advocate, DRP is designed for collaborative progress.
             </p>
@@ -69,7 +69,7 @@ export default function AboutPage() {
               <Link href="/community" className="px-10 py-4 rounded-full bg-drp-cyan text-drp-bg font-cinematic text-xs font-bold hover:scale-105 transition-transform">
                 Join Community
               </Link>
-              <Link href="/whitepaper" className="px-10 py-4 rounded-full border border-white/10 text-white font-cinematic text-xs hover:bg-white/5 transition-colors">
+              <Link href="/whitepaper" className="px-10 py-4 rounded-full border border-foreground/10 text-foreground font-cinematic text-xs hover:bg-white/5 transition-colors">
                 Read Whitepaper
                 <ArrowRight className="ml-2 h-4 w-4 inline" />
               </Link>

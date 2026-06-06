@@ -11,7 +11,7 @@ export function DRPLoader({ size = 'md', label }: { size?: 'sm' | 'md' | 'lg'; l
   return (
     <div className="flex flex-col items-center justify-center gap-3">
       <svg width={dim} height={dim} viewBox={`0 0 ${dim} ${dim}`} className="animate-spin" style={{ animationDuration: '1.2s' }}>
-        <circle cx={dim/2} cy={dim/2} r={r} fill="none" stroke="currentColor" strokeWidth={stroke} className="text-gray-100 dark:text-white/10" />
+        <circle cx={dim/2} cy={dim/2} r={r} fill="none" stroke="currentColor" strokeWidth={stroke} className="text-gray-100 dark:text-foreground/10" />
         <circle cx={dim/2} cy={dim/2} r={r} fill="none" stroke="url(#drp-grad)" strokeWidth={stroke}
           strokeDasharray={`${circ * 0.7} ${circ * 0.3}`} strokeLinecap="round"
           transform={`rotate(-90 ${dim/2} ${dim/2})`} />
@@ -22,7 +22,7 @@ export function DRPLoader({ size = 'md', label }: { size?: 'sm' | 'md' | 'lg'; l
           </linearGradient>
         </defs>
       </svg>
-      {label && <span className="text-xs text-gray-400 dark:text-white/30 tracking-widest uppercase animate-pulse">{label}</span>}
+      {label && <span className="text-xs text-gray-400 dark:text-foreground/30 tracking-widest uppercase animate-pulse">{label}</span>}
     </div>
   )
 }
@@ -43,12 +43,12 @@ export function DRPPageLoader({ message = 'Loading...' }: { message?: string }) 
     return () => clearInterval(t)
   }, [])
   return (
-    <div className="fixed inset-0 bg-white dark:bg-[#030308] flex flex-col items-center justify-center z-50">
+    <div className="fixed inset-0 bg-background flex flex-col items-center justify-center z-50">
       <div className="relative mb-8">
         <DRPLoader size="lg" />
         <div className="absolute inset-0 rounded-full bg-[#00e5cc]/10 blur-xl animate-pulse" />
       </div>
-      <p className="text-sm text-gray-400 dark:text-white/30 tracking-widest uppercase font-medium">
+      <p className="text-sm text-gray-400 dark:text-foreground/30 tracking-widest uppercase font-medium">
         {message.replace(/\.+$/, '')}{dots}
       </p>
     </div>
@@ -57,7 +57,7 @@ export function DRPPageLoader({ message = 'Loading...' }: { message?: string }) 
 
 export function DashboardCardSkeleton() {
   return (
-    <div className="border border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-[#0a0a14] p-6 space-y-4">
+    <div className="border border-gray-100 dark:border-foreground/5 bg-gray-50 dark:bg-[#0a0a14] p-6 space-y-4">
       <div className="flex items-center gap-3">
         <DRPSkeleton className="w-10 h-10 rounded-sm" />
         <div className="flex-1 space-y-2">

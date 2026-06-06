@@ -1,4 +1,4 @@
-import { HumanParticleExperience } from '@/components/home/HumanParticleExperience'
+import { DRPHomePage } from '@/components/home/DRPHomePage'
 import { StructuredData } from '@/components/seo/StructuredData'
 import { buildPageMetadata } from '@/lib/seo/seo'
 
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <StructuredData type="homepage" />
-      <HumanParticleExperience />
+      <DRPHomePage />
     </>
   )
 }

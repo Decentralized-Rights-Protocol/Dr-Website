@@ -78,7 +78,7 @@ export function TokenEconomy() {
               
               <div className="relative z-10">
                 <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <i className={`${token.icon} text-2xl text-white`}></i>
+                  <i className={`${token.icon} text-2xl text-foreground`}></i>
                 </div>
                 
                 <h3 className="text-2xl font-bold mb-2 text-text-primary">
@@ -127,7 +127,7 @@ export function TokenEconomy() {
               className="bg-card-bg border border-border-color rounded-xl p-6 text-center hover:border-primary hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className={`${mechanic.icon} text-xl text-white`}></i>
+                <i className={`${mechanic.icon} text-xl text-foreground`}></i>
               </div>
               
               <h4 className="text-lg font-semibold mb-3 text-text-primary">

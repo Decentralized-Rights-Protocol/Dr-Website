@@ -30,7 +30,7 @@ export function StewardshipTrigger({
         <div className="flex items-start gap-3">
           <ScaleIcon className="h-6 w-6 text-indigo-400 flex-shrink-0 mt-0.5" />
           <div className="flex-1">
-            <h3 className="text-sm font-semibold text-white mb-1">Your Governance Role</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-1">Your Governance Role</h3>
             <p className="text-sm text-neutral-200 leading-relaxed">{governanceRole}</p>
             {rightsEligible && (
               <div className="mt-3 flex items-center gap-2 bg-indigo-500/20 rounded px-2 py-1">
@@ -46,8 +46,8 @@ export function StewardshipTrigger({
 
       {/* Ethical Scenarios */}
       {ethicalScenarios.length > 0 && (
-        <div className="bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 p-4">
-          <h4 className="text-sm font-semibold text-white mb-3">Ethical Considerations</h4>
+        <div className="bg-white/5 backdrop-blur-sm rounded-lg border border-foreground/10 p-4">
+          <h4 className="text-sm font-semibold text-foreground mb-3">Ethical Considerations</h4>
           <ul className="space-y-3">
             {ethicalScenarios.map((scenario, index) => (
               <li key={index} className="flex items-start gap-2 text-sm text-neutral-200">

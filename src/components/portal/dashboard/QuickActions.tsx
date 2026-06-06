@@ -54,7 +54,7 @@ export function QuickActions() {
             href={href}
             className="group flex flex-col gap-3 rounded-2xl border border-neutral-200/70 bg-gradient-to-br from-white to-neutral-50/80 p-4 transition hover:-translate-y-0.5 hover:border-primary-200 hover:shadow-lg dark:border-neutral-800/70 dark:from-neutral-900/80 dark:to-neutral-950"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-500/10 text-primary-600 transition group-hover:bg-primary-500 group-hover:text-white dark:bg-primary-500/20 dark:text-primary-200">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-500/10 text-primary-600 transition group-hover:bg-primary-500 group-hover:text-foreground dark:bg-primary-500/20 dark:text-primary-200">
               <Icon className="h-5 w-5" />
             </div>
             <div>

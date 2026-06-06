@@ -23,10 +23,10 @@ export default function TermsOfServicePage() {
     <div className="min-h-screen py-12" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
       <div className="container mx-auto px-4 max-w-4xl">
         <section className="mb-10 text-center">
-          <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg">
+          <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 text-foreground shadow-lg">
             <ShieldCheck className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-neutral-900 dark:text-white">Terms of Service</h1>
+          <h1 className="text-4xl font-bold text-neutral-900 dark:text-foreground">Terms of Service</h1>
           <p className="mt-3 text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
             The terms that govern your use of DRP websites, applications, smart contracts, and services.
           </p>
