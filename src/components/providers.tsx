@@ -29,7 +29,7 @@ export function AppProviders({ children }: AppProvidersProps) {
   }))
 
   return (
-    <ThemeProvider>
+    <>
       {!convex ? (
         <div className="flex min-h-screen items-center justify-center bg-white px-6 text-center text-sm text-neutral-600 dark:bg-neutral-950 dark:text-neutral-300">
           Set `NEXT_PUBLIC_CONVEX_URL` in Vercel or `.env.local` before loading the DRP app portal.
@@ -42,6 +42,6 @@ export function AppProviders({ children }: AppProvidersProps) {
         </QueryClientProvider>
       </ConvexProvider>
       )}
-    </ThemeProvider>
+    </>
   )
 }

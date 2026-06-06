@@ -7,7 +7,7 @@ export const LESSONS: Record<string, Lesson> = {
   'what-is-blockchain': {
     slug: 'what-is-blockchain', title: 'What is Blockchain?',
     subtitle: 'The foundational distributed ledger technology powering DRP and modern Web3',
-    path: 1, pathName: 'Blockchain Foundations', pathIcon: '🔗',
+    path: 1, pathName: 'Blockchain Foundations', pathIcon: 'Link',
     lessonNumber: 1, duration: '25 min', xp: 80, deri: 20, difficulty: 'Beginner',
     prerequisites: [], tags: ['Blockchain', 'Distributed Ledger', 'Fundamentals', 'Web3'],
     prevLesson: null, nextLesson: 'cryptography-and-hashing',
@@ -28,7 +28,7 @@ export const LESSONS: Record<string, Lesson> = {
   'cryptography-and-hashing': {
     slug: 'cryptography-and-hashing', title: 'Cryptography & Hashing',
     subtitle: 'The mathematical security layer that makes blockchain trustless and tamper-proof',
-    path: 1, pathName: 'Blockchain Foundations', pathIcon: '🔗',
+    path: 1, pathName: 'Blockchain Foundations', pathIcon: 'Link',
     lessonNumber: 2, duration: '20 min', xp: 70, deri: 15, difficulty: 'Beginner',
     prerequisites: ['what-is-blockchain'], tags: ['Cryptography', 'Hashing', 'SHA-256', 'Public Key', 'Security'],
     prevLesson: 'what-is-blockchain', nextLesson: 'consensus-mechanisms',
@@ -47,7 +47,7 @@ export const LESSONS: Record<string, Lesson> = {
   'consensus-mechanisms': {
     slug: 'consensus-mechanisms', title: 'Consensus Mechanisms',
     subtitle: 'How thousands of independent nodes agree on a single version of truth',
-    path: 1, pathName: 'Blockchain Foundations', pathIcon: '🔗',
+    path: 1, pathName: 'Blockchain Foundations', pathIcon: 'Link',
     lessonNumber: 3, duration: '25 min', xp: 80, deri: 20, difficulty: 'Beginner',
     prerequisites: ['what-is-blockchain'], tags: ['Consensus','PoW','PoS','PoAT','PoST'],
     prevLesson: 'cryptography-and-hashing', nextLesson: 'smart-contracts-101',
@@ -56,7 +56,7 @@ export const LESSONS: Record<string, Lesson> = {
       { type: 'intro', content: 'If thousands of computers hold a copy of the blockchain, how do they agree on which blocks are valid? This is the consensus problem — solving it makes blockchain possible. DRP invents its own mechanism designed around human activity.' },
       { type: 'concept', title: 'Proof of Work (PoW)', content: "Bitcoin approach: make block creation computationally expensive. Miners race to solve a puzzle. The winner adds the block and earns a reward. Attacking requires 51% of global computing power — secure, but burns massive electricity." },
       { type: 'concept', title: 'Proof of Stake (PoS)', content: "Ethereum approach: validators stake (lock up) crypto as collateral. Chosen proportionally to stake. Far more energy-efficient — Ethereum energy use dropped 99.95% after switching. DRP builds on this but adds a human dimension." },
-      { type: 'diagram', title: 'Consensus Mechanisms Compared', diagramType: 'comparison', content: 'PoW, PoS, and DRP compared on key metrics.', diagramData: { columns: ['Mechanism','Security Model','Energy','Human Factor','DRP Use'], rows: [['⛏️ PoW','Computational cost','🔴 Very High','❌ None','Not used'],['💎 PoS','Economic stake','🟢 Low','❌ None','Base layer'],['🏃 PoAT','Real-world activity','🟢 Low','✅ Core','Primary'],['🪪 PoST','Verified identity','🟢 Low','✅ Core','Primary']] } },
+      { type: 'diagram', title: 'Consensus Mechanisms Compared', diagramType: 'comparison', content: 'PoW, PoS, and DRP compared on key metrics.', diagramData: { columns: ['Mechanism','Security Model','Energy','Human Factor','DRP Use'], rows: [['Pickaxe PoW','Computational cost','🔴 Very High','❌ None','Not used'],['Gem PoS','Economic stake','🟢 Low','❌ None','Base layer'],['Activity PoAT','Real-world activity','🟢 Low','✅ Core','Primary'],['IdCard PoST','Verified identity','🟢 Low','✅ Core','Primary']] } },
       { type: 'callout', calloutType: 'drp', title: 'DRP Innovation: Proof of Activity (PoAT)', content: 'DRP asks you to prove real human activity — farming, teaching, healthcare, civic participation. Verified by AI scoring and peer witnesses. The more you contribute to society, the more governance weight you earn.' },
       { type: 'quiz', title: 'Quick Check', content: 'Why did Ethereum switch from Proof of Work to Proof of Stake?', quizOptions: ['PoS is faster','PoS reduced energy consumption by ~99.95% while maintaining security','PoS allows more validators','PoW was banned'], quizAnswer: 1, quizExplanation: 'The Ethereum Merge in September 2022 cut energy usage by ~99.95%. Environmental sustainability was the primary driver.' },
     ],
@@ -65,7 +65,7 @@ export const LESSONS: Record<string, Lesson> = {
   'smart-contracts-101': {
     slug: 'smart-contracts-101', title: 'Smart Contracts 101',
     subtitle: 'Self-executing code that runs on-chain without intermediaries',
-    path: 1, pathName: 'Blockchain Foundations', pathIcon: '🔗',
+    path: 1, pathName: 'Blockchain Foundations', pathIcon: 'Link',
     lessonNumber: 4, duration: '30 min', xp: 90, deri: 25, difficulty: 'Beginner',
     prerequisites: ['what-is-blockchain','cryptography-and-hashing'], tags: ['Smart Contracts','Solidity','DApps','Automation'],
     prevLesson: 'consensus-mechanisms', nextLesson: 'drp-architecture',
@@ -83,14 +83,14 @@ export const LESSONS: Record<string, Lesson> = {
   'drp-architecture': {
     slug: 'drp-architecture', title: 'DRP Architecture',
     subtitle: 'The layered system design that powers the Decentralized Rights Protocol',
-    path: 2, pathName: 'DRP Core Protocol', pathIcon: '⚡',
+    path: 2, pathName: 'DRP Core Protocol', pathIcon: 'Zap',
     lessonNumber: 1, duration: '25 min', xp: 80, deri: 20, difficulty: 'Intermediate',
     prerequisites: ['smart-contracts-101'], tags: ['Architecture','Cosmos SDK','OrbitDB','Layers'],
     prevLesson: 'smart-contracts-101', nextLesson: 'activity-proofs',
     keyTakeaways: ['DRP has 4 layers: Network, Consensus, Application, and Interface','Built on Cosmos SDK for modular, interoperable blockchain infrastructure','OrbitDB provides decentralized off-chain storage for large proof data','Post-quantum cryptography is baked into every layer from the start'],
     sections: [
       { type: 'intro', content: 'DRP is not a single piece of software — it is a layered system where each layer has a specific responsibility. Understanding the architecture helps you see how proof submission, consensus, storage, and governance all interact.' },
-      { type: 'diagram', title: 'DRP System Architecture', diagramType: 'stack', content: 'Four distinct layers, each building on the one below — from raw network communication up to end-user interfaces.', diagramData: { layers: [{ name: 'Interface Layer', color: '#00f2ff', icon: '🖥️', items: ['Web App','Mobile App','Developer APIs','Discord Bot'], description: 'User-facing entry points' },{ name: 'Application Layer', color: '#0ea5e9', icon: '⚙️', items: ['Smart Contracts','AI Scoring Engine','Rights Registry','Token Distribution'], description: 'Business logic and DRP protocols' },{ name: 'Consensus Layer', color: '#10b981', icon: '🤝', items: ['PoAT Engine','PoST Engine','Elder Quorum','Validator Network'], description: 'Agreement on valid state' },{ name: 'Network Layer', color: '#f59e0b', icon: '🌐', items: ['Cosmos SDK','P2P Networking','OrbitDB','IPFS Storage'], description: 'Raw communication and data' }] } },
+      { type: 'diagram', title: 'DRP System Architecture', diagramType: 'stack', content: 'Four distinct layers, each building on the one below — from raw network communication up to end-user interfaces.', diagramData: { layers: [{ name: 'Interface Layer', color: '#00f2ff', icon: 'Monitor', items: ['Web App','Mobile App','Developer APIs','Discord Bot'], description: 'User-facing entry points' },{ name: 'Application Layer', color: '#0ea5e9', icon: 'Settings', items: ['Smart Contracts','AI Scoring Engine','Rights Registry','Token Distribution'], description: 'Business logic and DRP protocols' },{ name: 'Consensus Layer', color: '#10b981', icon: 'Handshake', items: ['PoAT Engine','PoST Engine','Elder Quorum','Validator Network'], description: 'Agreement on valid state' },{ name: 'Network Layer', color: '#f59e0b', icon: '🌐', items: ['Cosmos SDK','P2P Networking','OrbitDB','IPFS Storage'], description: 'Raw communication and data' }] } },
       { type: 'concept', title: 'Why Cosmos SDK?', content: 'DRP is built on the Cosmos SDK — the same framework powering Cosmos Hub, Osmosis, and dozens of other chains. Cosmos gives DRP: modular architecture, native cross-chain communication via IBC, production-proven security, and a Tendermint BFT consensus base that DRP extends with PoAT/PoST.' },
       { type: 'concept', title: 'OrbitDB: Decentralized Storage', content: 'On-chain storage is expensive. Large proof documents and evidence live in OrbitDB — a peer-to-peer database built on IPFS. Data is content-addressed (identified by its hash). The on-chain layer stores only cryptographic commitments to this off-chain data.' },
       { type: 'callout', calloutType: 'drp', title: 'The AI Scoring Engine', content: 'Sitting within the Application Layer, the AI scoring engine evaluates submitted activity proofs — checking for fraud patterns and assigning trust scores that influence consensus weight. This is the Governance by Contribution model in action.' },
@@ -101,7 +101,7 @@ export const LESSONS: Record<string, Lesson> = {
   'activity-proofs': {
     slug: 'activity-proofs', title: 'Activity Proofs (PoAT)',
     subtitle: 'Proof of Activity — how DRP verifies real human contribution',
-    path: 2, pathName: 'DRP Core Protocol', pathIcon: '⚡',
+    path: 2, pathName: 'DRP Core Protocol', pathIcon: 'Zap',
     lessonNumber: 2, duration: '35 min', xp: 100, deri: 30, difficulty: 'Intermediate',
     prerequisites: ['drp-architecture'], tags: ['PoAT','Activity','Verification','Governance'],
     prevLesson: 'drp-architecture', nextLesson: 'post-poat-consensus',
@@ -118,7 +118,7 @@ export const LESSONS: Record<string, Lesson> = {
   'post-poat-consensus': {
     slug: 'post-poat-consensus', title: 'Status Proofs (PoST)',
     subtitle: 'Proof of Status — verified identity and social standing on DRP',
-    path: 2, pathName: 'DRP Core Protocol', pathIcon: '⚡',
+    path: 2, pathName: 'DRP Core Protocol', pathIcon: 'Zap',
     lessonNumber: 3, duration: '25 min', xp: 80, deri: 20, difficulty: 'Intermediate',
     prerequisites: ['activity-proofs'], tags: ['PoST','Identity','Status','ZKP','Privacy'],
     prevLesson: 'activity-proofs', nextLesson: 'elder-quorum-system',
@@ -134,7 +134,7 @@ export const LESSONS: Record<string, Lesson> = {
   'elder-quorum-system': {
     slug: 'elder-quorum-system', title: 'Elder Quorum System',
     subtitle: 'DRP governance layer — decentralized decision-making by verified contributors',
-    path: 2, pathName: 'DRP Core Protocol', pathIcon: '⚡',
+    path: 2, pathName: 'DRP Core Protocol', pathIcon: 'Zap',
     lessonNumber: 4, duration: '30 min', xp: 90, deri: 25, difficulty: 'Intermediate',
     prerequisites: ['post-poat-consensus'], tags: ['Governance','Elder Quorum','Voting','DAO'],
     prevLesson: 'post-poat-consensus', nextLesson: 'drp-development-kit',
@@ -151,7 +151,7 @@ export const LESSONS: Record<string, Lesson> = {
   'drp-development-kit': {
     slug: 'drp-development-kit', title: 'DRP Development Kit',
     subtitle: 'Tools, SDKs, and APIs to start building on DRP today',
-    path: 3, pathName: 'Building on DRP', pathIcon: '🛠️',
+    path: 3, pathName: 'Building on DRP', pathIcon: 'Hammer',
     lessonNumber: 1, duration: '30 min', xp: 90, deri: 25, difficulty: 'Intermediate',
     prerequisites: ['elder-quorum-system'], tags: ['SDK','API','Development','JavaScript','Python'],
     prevLesson: 'elder-quorum-system', nextLesson: 'building-dapps',
@@ -168,7 +168,7 @@ export const LESSONS: Record<string, Lesson> = {
   'building-dapps': {
     slug: 'building-dapps', title: 'Building dApps on DRP',
     subtitle: 'Build decentralized applications that leverage DRP rights infrastructure',
-    path: 3, pathName: 'Building on DRP', pathIcon: '🛠️',
+    path: 3, pathName: 'Building on DRP', pathIcon: 'Hammer',
     lessonNumber: 2, duration: '40 min', xp: 110, deri: 35, difficulty: 'Intermediate',
     prerequisites: ['drp-development-kit'], tags: ['dApp','React','Web3','Integration'],
     prevLesson: 'drp-development-kit', nextLesson: 'contributing-to-drp',
@@ -184,7 +184,7 @@ export const LESSONS: Record<string, Lesson> = {
   'contributing-to-drp': {
     slug: 'contributing-to-drp', title: 'Contributing to DRP',
     subtitle: 'How to become a core contributor to the DRP open-source ecosystem',
-    path: 3, pathName: 'Building on DRP', pathIcon: '🛠️',
+    path: 3, pathName: 'Building on DRP', pathIcon: 'Hammer',
     lessonNumber: 3, duration: '25 min', xp: 80, deri: 20, difficulty: 'Intermediate',
     prerequisites: ['building-dapps'], tags: ['Open Source','Contributing','GitHub','Community'],
     prevLesson: 'building-dapps', nextLesson: 'testing-and-deployment',
@@ -200,7 +200,7 @@ export const LESSONS: Record<string, Lesson> = {
   'testing-and-deployment': {
     slug: 'testing-and-deployment', title: 'Testing & Deployment',
     subtitle: 'Smart contract auditing, testnet deployment, and production launch on DRP',
-    path: 3, pathName: 'Building on DRP', pathIcon: '🛠️',
+    path: 3, pathName: 'Building on DRP', pathIcon: 'Hammer',
     lessonNumber: 4, duration: '35 min', xp: 100, deri: 30, difficulty: 'Intermediate',
     prerequisites: ['contributing-to-drp'], tags: ['Testing','Deployment','Auditing','Security'],
     prevLesson: 'contributing-to-drp', nextLesson: 'identity-access-management',
@@ -217,7 +217,7 @@ export const LESSONS: Record<string, Lesson> = {
   'identity-access-management': {
     slug: 'identity-access-management', title: 'Identity & Access Management',
     subtitle: 'DRP as the identity layer for fair, verifiable access control',
-    path: 4, pathName: 'Real-World Applications', pathIcon: '🌍',
+    path: 4, pathName: 'Real-World Applications', pathIcon: 'Globe',
     lessonNumber: 1, duration: '30 min', xp: 90, deri: 25, difficulty: 'Intermediate',
     prerequisites: ['testing-and-deployment'], tags: ['Identity','SSI','Access Control','Privacy'],
     prevLesson: 'testing-and-deployment', nextLesson: 'supply-chain-applications',
@@ -233,14 +233,14 @@ export const LESSONS: Record<string, Lesson> = {
   'supply-chain-applications': {
     slug: 'supply-chain-applications', title: 'Supply Chain Applications',
     subtitle: 'Transparent, verifiable supply chains using DRP activity proofs',
-    path: 4, pathName: 'Real-World Applications', pathIcon: '🌍',
+    path: 4, pathName: 'Real-World Applications', pathIcon: 'Globe',
     lessonNumber: 2, duration: '35 min', xp: 100, deri: 30, difficulty: 'Intermediate',
     prerequisites: ['identity-access-management'], tags: ['Supply Chain','Agriculture','Traceability','Farmers'],
     prevLesson: 'identity-access-management', nextLesson: 'cross-chain-interoperability',
     keyTakeaways: ['DRP tracks human activity at every supply chain node — farm to consumer','Farmers earn PoAT proofs creating verifiable production records','Consumers can trace products to the exact verified contributor','Ethical sourcing becomes cryptographically verifiable, not just claimed'],
     sections: [
       { type: 'intro', content: '"Ethical sourcing", "fair trade", "sustainably grown" — these labels are everywhere but unverifiable. DRP changes this by creating a chain of activity proofs from production to consumer, where every human hand that touched a product has a verifiable, permanent record.' },
-      { type: 'diagram', title: 'DRP Supply Chain Flow', diagramType: 'flow', content: 'From farm to consumer, each participant contribution is recorded as a PoAT proof — creating an unbreakable chain of custody.', diagramData: { nodes: [{ id: 'a', label: '🌾 Farmer', sublabel: 'PoAT: Agricultural\nKwame, Ghana', color: '#10b981' },{ id: 'b', label: '🏭 Processor', sublabel: 'PoAT: Industrial\nVerified facility', color: '#0ea5e9' },{ id: 'c', label: '🚛 Transport', sublabel: 'PoAT: Logistics\nRoute verified', color: '#f59e0b' },{ id: 'd', label: '🏪 Retailer', sublabel: 'PoST: Licensed\nRetail verified', color: '#00f2ff' },{ id: 'e', label: '👤 Consumer', sublabel: 'Scans → full\nproof chain', color: '#ec4899' }], edges: [{ from: 'a', to: 'b', label: 'harvested' },{ from: 'b', to: 'c', label: 'packaged' },{ from: 'c', to: 'd', label: 'delivered' },{ from: 'd', to: 'e', label: 'sold' }] } },
+      { type: 'diagram', title: 'DRP Supply Chain Flow', diagramType: 'flow', content: 'From farm to consumer, each participant contribution is recorded as a PoAT proof — creating an unbreakable chain of custody.', diagramData: { nodes: [{ id: 'a', label: 'Sprout Farmer', sublabel: 'PoAT: Agricultural\nKwame, Ghana', color: '#10b981' },{ id: 'b', label: 'Factory Processor', sublabel: 'PoAT: Industrial\nVerified facility', color: '#0ea5e9' },{ id: 'c', label: 'Truck Transport', sublabel: 'PoAT: Logistics\nRoute verified', color: '#f59e0b' },{ id: 'd', label: 'Store Retailer', sublabel: 'PoST: Licensed\nRetail verified', color: '#00f2ff' },{ id: 'e', label: 'User Consumer', sublabel: 'Scans → full\nproof chain', color: '#ec4899' }], edges: [{ from: 'a', to: 'b', label: 'harvested' },{ from: 'b', to: 'c', label: 'packaged' },{ from: 'c', to: 'd', label: 'delivered' },{ from: 'd', to: 'e', label: 'sold' }] } },
       { type: 'quiz', title: 'Supply Chain Quiz', content: 'How would DRP make an "ethically sourced" claim actually verifiable?', quizOptions: ['Publishing a PDF report each year','Storing PoAT proofs from each farmer on-chain — scannable by anyone, anytime','Getting a third-party certification sticker','By the company signing an oath'], quizAnswer: 1, quizExplanation: 'With DRP, each farmer has on-chain PoAT proofs for their agricultural work. Anyone — consumers, journalists, regulators — can verify the claim without trusting the company word.' },
     ],
   },
@@ -248,7 +248,7 @@ export const LESSONS: Record<string, Lesson> = {
   'cross-chain-interoperability': {
     slug: 'cross-chain-interoperability', title: 'Cross-Chain Interoperability',
     subtitle: 'How DRP proofs travel across blockchains via IBC and bridge protocols',
-    path: 4, pathName: 'Real-World Applications', pathIcon: '🌍',
+    path: 4, pathName: 'Real-World Applications', pathIcon: 'Globe',
     lessonNumber: 3, duration: '40 min', xp: 110, deri: 35, difficulty: 'Advanced',
     prerequisites: ['supply-chain-applications'], tags: ['IBC','Interoperability','Cosmos','Cross-chain'],
     prevLesson: 'supply-chain-applications', nextLesson: 'enterprise-integration',
@@ -264,7 +264,7 @@ export const LESSONS: Record<string, Lesson> = {
   'enterprise-integration': {
     slug: 'enterprise-integration', title: 'Enterprise Integration',
     subtitle: 'Integrating DRP into institutional systems — NGOs, governments, corporations',
-    path: 4, pathName: 'Real-World Applications', pathIcon: '🌍',
+    path: 4, pathName: 'Real-World Applications', pathIcon: 'Globe',
     lessonNumber: 4, duration: '35 min', xp: 110, deri: 40, difficulty: 'Advanced',
     prerequisites: ['cross-chain-interoperability'], tags: ['Enterprise','NGO','Government','API','Compliance'],
     prevLesson: 'cross-chain-interoperability', nextLesson: 'advanced-drp-concepts',
@@ -281,7 +281,7 @@ export const LESSONS: Record<string, Lesson> = {
   'advanced-drp-concepts': {
     slug: 'advanced-drp-concepts', title: 'Advanced DRP Concepts',
     subtitle: 'Deep technical dive — post-quantum security, ZKPs, and protocol internals',
-    path: 5, pathName: 'DRP Elder', pathIcon: '👑',
+    path: 5, pathName: 'DRP Elder', pathIcon: 'Crown',
     lessonNumber: 1, duration: '45 min', xp: 150, deri: 50, difficulty: 'Advanced',
     prerequisites: ['enterprise-integration'], tags: ['Post-Quantum','ZKP','CRYSTALS','Advanced'],
     prevLesson: 'enterprise-integration', nextLesson: 'economic-models',
@@ -290,7 +290,7 @@ export const LESSONS: Record<string, Lesson> = {
       { type: 'intro', content: 'Welcome to the Elder track. This is where we go deep on the cryptographic and algorithmic foundations that make DRP secure, private, and future-proof. This lesson assumes comfort with cryptography fundamentals.' },
       { type: 'concept', title: 'CRYSTALS-Kyber: Post-Quantum Key Exchange', content: 'Traditional key exchange (Diffie-Hellman, ECDH) relies on discrete logarithm problems — which quantum computers can solve using Shor algorithm. CRYSTALS-Kyber is a NIST-standardized key encapsulation mechanism based on the Module Learning With Errors (MLWE) problem. No known quantum algorithm achieves a meaningful speedup against MLWE. DRP uses Kyber-1024 (highest security level).' },
       { type: 'concept', title: 'CRYSTALS-Dilithium: Post-Quantum Signatures', content: 'Where Kyber handles key exchange, Dilithium handles digital signatures. Also lattice-based (MLWE), NIST-standardized. DRP uses Dilithium3 for all transaction signing. Signatures are ~2.5KB (larger than ECDSA 64 bytes) — the trade-off for 30+ years of quantum resistance.' },
-      { type: 'diagram', title: 'DRP Security Stack', diagramType: 'stack', content: 'Every layer of DRP security, from hash function to governance.', diagramData: { layers: [{ name: 'Governance Security', color: '#00f2ff', icon: '👑', items: ['Elder Quorum 66% threshold','Time-locked proposals','Emergency pause mechanism'], description: 'Human governance layer' },{ name: 'Application Security', color: '#0ea5e9', icon: '⚙️', items: ['Smart contract audits','AI fraud detection','Rate limiting + replay protection'], description: 'Protocol logic security' },{ name: 'Signature Layer', color: '#10b981', icon: '✍️', items: ['CRYSTALS-Dilithium3','2.5KB signatures','Quantum-resistant'], description: 'Transaction authentication' },{ name: 'Key Exchange', color: '#f59e0b', icon: '🔑', items: ['CRYSTALS-Kyber-1024','MLWE hardness','NIST standardized'], description: 'Secure channel establishment' },{ name: 'Hash Foundation', color: '#ef4444', icon: '#', items: ['SHA3-256 primary','SHA-256 fallback','Keccak-256 for EVM compat'], description: 'Foundational fingerprinting' }] } },
+      { type: 'diagram', title: 'DRP Security Stack', diagramType: 'stack', content: 'Every layer of DRP security, from hash function to governance.', diagramData: { layers: [{ name: 'Governance Security', color: '#00f2ff', icon: 'Crown', items: ['Elder Quorum 66% threshold','Time-locked proposals','Emergency pause mechanism'], description: 'Human governance layer' },{ name: 'Application Security', color: '#0ea5e9', icon: 'Settings', items: ['Smart contract audits','AI fraud detection','Rate limiting + replay protection'], description: 'Protocol logic security' },{ name: 'Signature Layer', color: '#10b981', icon: 'Pen', items: ['CRYSTALS-Dilithium3','2.5KB signatures','Quantum-resistant'], description: 'Transaction authentication' },{ name: 'Key Exchange', color: '#f59e0b', icon: 'Key', items: ['CRYSTALS-Kyber-1024','MLWE hardness','NIST standardized'], description: 'Secure channel establishment' },{ name: 'Hash Foundation', color: '#ef4444', icon: '#', items: ['SHA3-256 primary','SHA-256 fallback','Keccak-256 for EVM compat'], description: 'Foundational fingerprinting' }] } },
       { type: 'callout', calloutType: 'drp', title: 'Federated AI Scoring', content: 'DRP AI scoring engine uses federated learning — the model trains on participants data without that data ever leaving their devices. Only gradient updates are aggregated on-chain. Privacy and accuracy simultaneously.' },
       { type: 'quiz', title: 'Advanced Cryptography Quiz', content: 'Why does DRP use SHA3-256 as its primary hash function instead of SHA-256?', quizOptions: ['SHA3-256 is faster','SHA3-256 uses a completely different internal structure (Keccak sponge) providing diversity against attacks that might affect SHA-2','SHA-256 is deprecated','SHA3-256 produces shorter hashes'], quizAnswer: 1, quizExplanation: 'SHA3-256 (Keccak) uses a fundamentally different construction compared to SHA-256 (Merkle-Damgard). A theoretical weakness in SHA-2 would not apply to SHA-3. Design diversity is prudent security engineering for a protocol designed to last decades.' },
     ],
@@ -299,7 +299,7 @@ export const LESSONS: Record<string, Lesson> = {
   'economic-models': {
     slug: 'economic-models', title: 'DRP Economic Models',
     subtitle: '$RIGHTS, $DeRi, tokenomics, and the incentive architecture of DRP',
-    path: 5, pathName: 'DRP Elder', pathIcon: '👑',
+    path: 5, pathName: 'DRP Elder', pathIcon: 'Crown',
     lessonNumber: 2, duration: '40 min', xp: 140, deri: 45, difficulty: 'Advanced',
     prerequisites: ['advanced-drp-concepts'], tags: ['Tokenomics','$RIGHTS','$DeRi','Economics'],
     prevLesson: 'advanced-drp-concepts', nextLesson: 'governance-mechanisms',
@@ -308,7 +308,7 @@ export const LESSONS: Record<string, Lesson> = {
       { type: 'intro', content: 'Token economics determine who is incentivized to do what. Get them wrong and you get speculation, plutocracy, or abandonment. DRP dual-token model was designed with one goal: align financial incentives with human welfare contribution.' },
       { type: 'concept', title: '$RIGHTS: The Governance Token', content: '$RIGHTS is DRP governance token. It is NOT primarily traded for profit — it represents verified contribution and governance participation rights. $RIGHTS is earned through: accumulated PoAT proofs, Elder Quorum participation, and long-term protocol contribution. $RIGHTS cannot be purchased directly on open markets at launch — it must be earned. This prevents governance capture by wealthy actors.' },
       { type: 'concept', title: '$DeRi: The Utility Token', content: '$DeRi is DRP utility token — liquid, tradeable, and earned through learning, activity, and participation. Used for: paying transaction fees on DRP, accessing premium API features, tipping contributors, and governance proposals (requiring a $DeRi deposit to prevent spam). You earn $DeRi by completing these lessons.' },
-      { type: 'diagram', title: 'Dual Token Economic Flow', diagramType: 'flow', content: 'How $RIGHTS and $DeRi flow through the DRP ecosystem.', diagramData: { nodes: [{ id: 'a', label: '🏃 Human\nActivity', sublabel: 'PoAT proofs', color: '#10b981' },{ id: 'b', label: '⚡ $DeRi\nEarned', sublabel: 'Utility token', color: '#f59e0b' },{ id: 'c', label: '🗳️ $RIGHTS\nAccumulated', sublabel: 'Governance token', color: '#00f2ff' },{ id: 'd', label: '👑 Elder\nQuorum', sublabel: 'Protocol decisions', color: '#ec4899' },{ id: 'e', label: '⚙️ DRP\nServices', sublabel: 'Fees in $DeRi', color: '#0ea5e9' }], edges: [{ from: 'a', to: 'b', label: 'rewards' },{ from: 'a', to: 'c', label: 'earns governance' },{ from: 'c', to: 'd', label: 'enables voting' },{ from: 'b', to: 'e', label: 'pays for' },{ from: 'e', to: 'a', label: 'funds' }] } },
+      { type: 'diagram', title: 'Dual Token Economic Flow', diagramType: 'flow', content: 'How $RIGHTS and $DeRi flow through the DRP ecosystem.', diagramData: { nodes: [{ id: 'a', label: 'Activity Human\nActivity', sublabel: 'PoAT proofs', color: '#10b981' },{ id: 'b', label: 'Zap $DeRi\nEarned', sublabel: 'Utility token', color: '#f59e0b' },{ id: 'c', label: '🗳️ $RIGHTS\nAccumulated', sublabel: 'Governance token', color: '#00f2ff' },{ id: 'd', label: 'Crown Elder\nQuorum', sublabel: 'Protocol decisions', color: '#ec4899' },{ id: 'e', label: 'Settings DRP\nServices', sublabel: 'Fees in $DeRi', color: '#0ea5e9' }], edges: [{ from: 'a', to: 'b', label: 'rewards' },{ from: 'a', to: 'c', label: 'earns governance' },{ from: 'c', to: 'd', label: 'enables voting' },{ from: 'b', to: 'e', label: 'pays for' },{ from: 'e', to: 'a', label: 'funds' }] } },
       { type: 'quiz', title: 'Economics Quiz', content: 'Why can $RIGHTS not be purchased directly on open markets at DRP launch?', quizOptions: ['Technical limitation','To prevent plutocracy — wealthy actors buying governance power without contributing to human welfare','Regulatory concerns','$RIGHTS has no monetary value'], quizAnswer: 1, quizExplanation: 'If $RIGHTS could be bought, someone with enough money could purchase control of a human rights protocol — defeating its purpose entirely. The earn through contribution only model is a deliberate anti-plutocracy design decision.' },
     ],
   },
@@ -316,14 +316,14 @@ export const LESSONS: Record<string, Lesson> = {
   'governance-mechanisms': {
     slug: 'governance-mechanisms', title: 'Governance Mechanisms',
     subtitle: 'Deep dive into DRP decentralized governance architecture',
-    path: 5, pathName: 'DRP Elder', pathIcon: '👑',
+    path: 5, pathName: 'DRP Elder', pathIcon: 'Crown',
     lessonNumber: 3, duration: '35 min', xp: 140, deri: 50, difficulty: 'Advanced',
     prerequisites: ['economic-models'], tags: ['Governance','DRIP','Voting','Proposals','On-Chain'],
     prevLesson: 'economic-models', nextLesson: 'future-of-drp',
     keyTakeaways: ['All governance is on-chain — proposals, votes, and execution are transparent','Three-tier governance: Community Proposals → Elder Review → On-chain Execution','Emergency mechanisms protect the protocol during critical security events','AI Elders can propose but not vote — they assist human decision-making'],
     sections: [
       { type: 'intro', content: 'Governance is how a decentralized protocol evolves without a CEO. Done right, it is the most powerful decision-making system in existence — transparent, accountable, and resistant to capture. DRP governance is a three-tier system with checks at every level.' },
-      { type: 'diagram', title: 'DRP Governance Flow', diagramType: 'flow', content: 'From community idea to on-chain protocol change — the full DRP governance process.', diagramData: { nodes: [{ id: 'a', label: '💡 Community\nIdea', sublabel: 'Forum discussion', color: '#00f2ff' },{ id: 'b', label: '📋 DRIP\nProposal', sublabel: '$DeRi deposit required', color: '#0ea5e9' },{ id: 'c', label: '👑 Elder\nReview', sublabel: '14-day deliberation', color: '#f59e0b' },{ id: 'd', label: '🗳️ On-chain\nVote', sublabel: '7-day window', color: '#10b981' },{ id: 'e', label: '⏰ 48hr\nTimelock', sublabel: 'Emergency veto window', color: '#ec4899' },{ id: 'f', label: '⚙️ Auto\nExecution', sublabel: 'Smart contract executes', color: '#10b981' }], edges: [{ from: 'a', to: 'b', label: 'formalize' },{ from: 'b', to: 'c', label: 'submit' },{ from: 'c', to: 'd', label: 'approve for vote' },{ from: 'd', to: 'e', label: 'if 66% pass' },{ from: 'e', to: 'f', label: 'if no veto' }] } },
+      { type: 'diagram', title: 'DRP Governance Flow', diagramType: 'flow', content: 'From community idea to on-chain protocol change — the full DRP governance process.', diagramData: { nodes: [{ id: 'a', label: '💡 Community\nIdea', sublabel: 'Forum discussion', color: '#00f2ff' },{ id: 'b', label: '📋 DRIP\nProposal', sublabel: '$DeRi deposit required', color: '#0ea5e9' },{ id: 'c', label: 'Crown Elder\nReview', sublabel: '14-day deliberation', color: '#f59e0b' },{ id: 'd', label: '🗳️ On-chain\nVote', sublabel: '7-day window', color: '#10b981' },{ id: 'e', label: '⏰ 48hr\nTimelock', sublabel: 'Emergency veto window', color: '#ec4899' },{ id: 'f', label: 'Settings Auto\nExecution', sublabel: 'Smart contract executes', color: '#10b981' }], edges: [{ from: 'a', to: 'b', label: 'formalize' },{ from: 'b', to: 'c', label: 'submit' },{ from: 'c', to: 'd', label: 'approve for vote' },{ from: 'd', to: 'e', label: 'if 66% pass' },{ from: 'e', to: 'f', label: 'if no veto' }] } },
       { type: 'callout', calloutType: 'warning', title: 'Emergency Governance', content: 'For critical security vulnerabilities, the Security Council (5 senior Elders) can pause specific contracts for up to 72 hours. The full Elder Quorum must then vote within 72 hours to approve the fix or lift the pause. No single entity has unilateral power.' },
       { type: 'quiz', title: 'Governance Quiz', content: 'What is the purpose of the 48-hour timelock between a successful governance vote and execution?', quizOptions: ['To give developers time to write the code','To allow an emergency veto window — if a malicious proposal somehow passed, the community can respond','Required by regulation','To allow validators to prepare'], quizAnswer: 1, quizExplanation: 'The timelock is a final safety valve. Even if a malicious proposal achieved 66% votes through a coordinated attack, the 48-hour window allows the broader community and Security Council to identify and veto it before execution.' },
     ],
@@ -332,7 +332,7 @@ export const LESSONS: Record<string, Lesson> = {
   'future-of-drp': {
     slug: 'future-of-drp', title: 'The Future of DRP',
     subtitle: 'Roadmap, vision, and the long-term impact of rights infrastructure',
-    path: 5, pathName: 'DRP Elder', pathIcon: '👑',
+    path: 5, pathName: 'DRP Elder', pathIcon: 'Crown',
     lessonNumber: 4, duration: '30 min', xp: 150, deri: 55, difficulty: 'Advanced',
     prerequisites: ['governance-mechanisms'], tags: ['Roadmap','Vision','Future','Impact','Global'],
     prevLesson: 'governance-mechanisms', nextLesson: null,
@@ -351,9 +351,9 @@ export const LESSON_SLUGS = Object.keys(LESSONS);
 export const getLessonBySlug = (slug: string): Lesson | undefined => LESSONS[slug];
 
 export const PATHS = [
-  { id: 1, name: 'Blockchain Foundations', icon: '🔗', color: '#0ea5e9', lessons: ['what-is-blockchain','cryptography-and-hashing','consensus-mechanisms','smart-contracts-101'] },
-  { id: 2, name: 'DRP Core Protocol', icon: '⚡', color: '#00f2ff', lessons: ['drp-architecture','activity-proofs','post-poat-consensus','elder-quorum-system'] },
-  { id: 3, name: 'Building on DRP', icon: '🛠️', color: '#10b981', lessons: ['drp-development-kit','building-dapps','contributing-to-drp','testing-and-deployment'] },
-  { id: 4, name: 'Real-World Applications', icon: '🌍', color: '#f59e0b', lessons: ['identity-access-management','supply-chain-applications','cross-chain-interoperability','enterprise-integration'] },
-  { id: 5, name: 'DRP Elder', icon: '👑', color: '#ec4899', lessons: ['advanced-drp-concepts','economic-models','governance-mechanisms','future-of-drp'] },
+  { id: 1, name: 'Blockchain Foundations', icon: 'Link', color: '#0ea5e9', lessons: ['what-is-blockchain','cryptography-and-hashing','consensus-mechanisms','smart-contracts-101'] },
+  { id: 2, name: 'DRP Core Protocol', icon: 'Zap', color: '#00f2ff', lessons: ['drp-architecture','activity-proofs','post-poat-consensus','elder-quorum-system'] },
+  { id: 3, name: 'Building on DRP', icon: 'Hammer', color: '#10b981', lessons: ['drp-development-kit','building-dapps','contributing-to-drp','testing-and-deployment'] },
+  { id: 4, name: 'Real-World Applications', icon: 'Globe', color: '#f59e0b', lessons: ['identity-access-management','supply-chain-applications','cross-chain-interoperability','enterprise-integration'] },
+  { id: 5, name: 'DRP Elder', icon: 'Crown', color: '#ec4899', lessons: ['advanced-drp-concepts','economic-models','governance-mechanisms','future-of-drp'] },
 ];

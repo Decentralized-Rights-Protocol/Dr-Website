@@ -58,6 +58,16 @@ export default function LearnHubPage() {
       color: 'text-purple-400',
       bg: 'bg-purple-400/10',
       border: 'border-purple-400/20'
+    },
+    { 
+      id: 5, 
+      name: 'Level 5: Elder Tier', 
+      title: 'Protocol Stewardship',
+      description: 'Advanced DRP concepts, economic security, and the future of decentralized rights.', 
+      icon: Trophy,
+      color: 'text-amber-400',
+      bg: 'bg-amber-400/10',
+      border: 'border-amber-400/20'
     }
   ]
 

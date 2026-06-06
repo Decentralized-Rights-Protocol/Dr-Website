@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Shield, Zap, Globe, Lock, Users, CheckCircle, ChevronRight } from 'lucide-react'
+import { IconRenderer } from '@/components/ui/IconRenderer'
 
 // ─── Fade-in section wrapper ─────────────────────────────────────────
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -282,12 +283,12 @@ function Tokens() {
 // ─── ECOSYSTEM ───────────────────────────────────────────────────────
 function Ecosystem() {
   const items = [
-    { emoji: '🌾', title: 'Agriculture', desc: 'Farmers verify crop yields, land rights, and supply chain contributions.', href: '/ecosystem' },
-    { emoji: '📚', title: 'Education', desc: 'Students prove learning milestones and skill acquisition on-chain.', href: '/ecosystem' },
-    { emoji: '🏥', title: 'Healthcare', desc: 'Health workers document service delivery in underserved communities.', href: '/ecosystem' },
-    { emoji: '⚖️', title: 'Governance', desc: 'Citizens participate in verified democratic and policy processes.', href: '/ecosystem' },
-    { emoji: '♻️', title: 'Sustainability', desc: 'Environmental actions earn verifiable green credentials.', href: '/ecosystem' },
-    { emoji: '🏗️', title: 'Infrastructure', desc: 'Community builders prove contribution to public goods projects.', href: '/ecosystem' },
+    { icon: 'Sprout', title: 'Agriculture', desc: 'Farmers verify crop yields, land rights, and supply chain contributions.', href: '/ecosystem' },
+    { icon: 'BookOpen', title: 'Education', desc: 'Students prove learning milestones and skill acquisition on-chain.', href: '/ecosystem' },
+    { icon: 'Monitor', title: 'Healthcare', desc: 'Health workers document service delivery in underserved communities.', href: '/ecosystem' },
+    { icon: 'Scale', title: 'Governance', desc: 'Citizens participate in verified democratic and policy processes.', href: '/ecosystem' },
+    { icon: 'Recycle', title: 'Sustainability', desc: 'Environmental actions earn verifiable green credentials.', href: '/ecosystem' },
+    { icon: 'Hammer', title: 'Infrastructure', desc: 'Community builders prove contribution to public goods projects.', href: '/ecosystem' },
   ]
   return (
     <section className="py-32 px-6 border-t border-foreground/5">
@@ -305,7 +306,9 @@ function Ecosystem() {
           {items.map((item, i) => (
             <FadeIn key={item.title} delay={i * 0.05}>
               <Link href={item.href} className="group block p-6 border border-foreground/5 hover:border-[var(--drp-cyan)]/30 bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-all duration-400">
-                <div className="text-3xl mb-4">{item.emoji}</div>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-background/50 border border-foreground/10 mb-6 group-hover:border-[var(--drp-cyan)]/50 transition-colors">
+                  <IconRenderer name={item.icon} className="w-6 h-6 text-[var(--drp-cyan)]" />
+                </div>
                 <h3 className="text-foreground font-semibold mb-2">{item.title}</h3>
                 <p className="text-sm text-foreground/40 leading-relaxed">{item.desc}</p>
               </Link>
@@ -378,17 +381,20 @@ function Community() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-foreground/5">
           {[
-            { emoji: '📖', title: 'Learn DRP', desc: 'Understand the protocol from the ground up. From rights theory to smart contract architecture.', href: '/learn', cta: 'Start learning' },
-            { emoji: '⚙️', title: 'Build on DRP', desc: 'Access the protocol docs, API references, and SDK to integrate DRP into your application.', href: '/docs', cta: 'Read the docs' },
-            { emoji: '🤝', title: 'Join Community', desc: 'Connect with builders, researchers, and rights advocates shaping the future of human governance.', href: '/community', cta: 'Get involved' },
+            { icon: 'BookOpen', title: 'Learn DRP', desc: 'Understand the protocol from the ground up. From rights theory to smart contract architecture.', href: '/learn', cta: 'Start learning' },
+            { icon: 'Settings', title: 'Build on DRP', desc: 'Access the protocol docs, API references, and SDK to integrate DRP into your application.', href: '/docs', cta: 'Read the docs' },
+            { icon: 'Handshake', title: 'Join Community', desc: 'Connect with builders, researchers, and rights advocates shaping the future of human governance.', href: '/community', cta: 'Get involved' },
           ].map((c, i) => (
             <FadeIn key={c.title} delay={i * 0.06}>
               <Link href={c.href} className="group block bg-background p-10 hover:bg-foreground/[0.025] transition-colors duration-500 h-full">
-                <div className="text-4xl mb-6">{c.emoji}</div>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-background/50 border border-foreground/10 mb-6 group-hover:border-[var(--drp-cyan)]/50 transition-colors">
+                  <IconRenderer name={c.icon} className="w-6 h-6 text-[var(--drp-cyan)]" />
+                </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">{c.title}</h3>
-                <p className="text-sm text-foreground/40 leading-relaxed mb-6">{c.desc}</p>
-                <div className="inline-flex items-center gap-2 text-[var(--drp-cyan)] text-sm group-hover:gap-4 transition-all">{c.cta} <ArrowRight className="w-4 h-4" /></div>
+                <p className="text-sm text-foreground/50 leading-relaxed mb-6">{c.desc}</p>
+                <div className="text-xs font-semibold text-[var(--drp-cyan)] group-hover:gap-2 transition-all">{c.cta} <ArrowRight className="inline w-3 h-3" /></div>
               </Link>
+
             </FadeIn>
           ))}
         </div>

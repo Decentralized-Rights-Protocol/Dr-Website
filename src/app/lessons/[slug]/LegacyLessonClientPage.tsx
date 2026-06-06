@@ -16,6 +16,7 @@ import {
 import ReactMarkdown from 'react-markdown';
 import { diagramComponents } from '@/components/learn/AsciiDiagramReplacer';
 import { cn } from '@/lib/utils';
+import { IconRenderer } from '@/components/ui/IconRenderer';
 import LessonSkeleton from '@/components/learn/LessonSkeleton';
 
 export default function LegacyLessonClientPage({ lessonId }: { lessonId: string }) {
@@ -70,7 +71,7 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
-                <span className="text-xl">📚</span>
+                <IconRenderer name="BookOpen" className="h-5 w-5 text-drp-gray" />
                 <span className="text-[10px] font-cinematic text-drp-gray uppercase tracking-[0.3em] truncate">
                   Academy Module · {lessonId.replace(/-/g, ' ')}
                 </span>
@@ -142,7 +143,7 @@ export default function LegacyLessonClientPage({ lessonId }: { lessonId: string 
             className="mt-24 rounded-[3rem] p-12 text-center border border-drp-cyan/20 bg-gradient-to-b from-drp-cyan/10 to-transparent backdrop-blur-3xl shadow-3xl relative overflow-hidden"
           >
             <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-drp-cyan to-transparent" />
-            <div className="text-7xl mb-8">🎖️</div>
+            <Medal className="w-24 h-24 mb-8 text-amber-400" />
             <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4 tracking-tighter">Module Certified</h2>
             <p className="text-drp-gray text-lg mb-10 max-w-xl mx-auto">
               You have completed the reading for this curriculum module. Rewards have been allocated to your profile.

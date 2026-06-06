@@ -17,7 +17,9 @@ import {
   Sparkles,
   Layers,
   Activity,
-  Code
+  Code,
+  PartyPopper,
+  Lightbulb
 } from 'lucide-react';
 import type { Lesson, LessonSection } from '@/data/lessons-index';
 import { cn } from '@/lib/utils';
@@ -148,6 +150,52 @@ function StackDiagram({ data }: { data: any }) {
         Application Interface Flow
         <div className="h-px flex-1 bg-foreground/5" />
       </div>
+    </div>
+  );
+}
+
+function TimelineDiagram({ data }: { data: any }) {
+  const events = data.events || [];
+  return (
+    <div className="space-y-8 my-8 max-w-4xl mx-auto px-4">
+      {events.map((event: any, i: number) => (
+        <motion.div 
+          key={i} 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: i * 0.1 }}
+          className="relative flex gap-8 group"
+        >
+          {/* Vertical Line */}
+          {i < events.length - 1 && (
+            <div className="absolute left-[27px] top-14 bottom-[-32px] w-0.5 bg-gradient-to-b from-drp-cyan/30 to-transparent" />
+          )}
+          
+          <div className="flex flex-col items-center">
+            <div className={cn(
+              "w-14 h-14 rounded-2xl flex items-center justify-center font-bold text-xs border-2 transition-all",
+              event.status === 'active' ? "bg-drp-cyan text-background border-drp-cyan shadow-[0_0_20px_rgba(0,242,255,0.3)]" : "bg-card/40 text-foreground/40 border-foreground/10"
+            )}>
+              {event.phase}
+            </div>
+          </div>
+          
+          <div className="flex-1 pb-12">
+            <div className="flex items-center gap-3 mb-2">
+              <h4 className="text-xl font-bold text-foreground tracking-tight">{event.title}</h4>
+              <span className="px-2 py-0.5 rounded-full bg-foreground/5 border border-foreground/10 text-[9px] font-bold text-drp-gray uppercase tracking-widest">{event.date}</span>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2">
+              {event.items.map((item: string, ii: number) => (
+                <div key={ii} className="flex items-start gap-2 text-sm text-drp-gray/80">
+                  <div className="w-1.5 h-1.5 rounded-full bg-drp-cyan/40 mt-1.5 shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      ))}
     </div>
   );
 }
@@ -299,7 +347,8 @@ function QuizBlock({ section, onComplete }: { section: LessonSection; onComplete
             )}
           >
             <div className="flex items-center gap-2 font-bold mb-2">
-              {selected === correct ? '🎉 EXCELLENT' : '💡 PROTOCOL INSIGHT'}
+              {selected === correct ? <PartyPopper className="h-5 w-5" /> : <Lightbulb className="h-5 w-5" />}
+              {selected === correct ? 'EXCELLENT' : 'PROTOCOL INSIGHT'}
             </div>
             <p className="text-sm text-drp-gray leading-relaxed">{section.quizExplanation}</p>
           </motion.div>
@@ -634,6 +683,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                      {section.diagramType === 'flow' && <FlowDiagram data={section.diagramData} />}
                      {section.diagramType === 'comparison' && <ComparisonDiagram data={section.diagramData} />}
                      {section.diagramType === 'stack' && <StackDiagram data={section.diagramData} />}
+                     {section.diagramType === 'timeline' && <TimelineDiagram data={section.diagramData} />}
                    </div>
                    {section.content && <ReactMarkdown components={diagramComponents} className="mt-6 text-sm text-drp-gray/80 text-center max-w-2xl mx-auto leading-relaxed prose dark:prose-invert max-w-none">{section.content}</ReactMarkdown>}
                 </div>
@@ -655,7 +705,7 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
               className="mt-24 rounded-[3rem] p-12 text-center border border-drp-cyan/20 bg-gradient-to-b from-drp-cyan/10 to-transparent backdrop-blur-3xl shadow-2xl relative overflow-hidden"
             >
               <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-drp-cyan to-transparent" />
-              <div className="text-7xl mb-8">🎖️</div>
+              <Medal className="w-24 h-24 mb-8 text-amber-400" />
               <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4 tracking-tighter">Lesson Certified</h2>
               <p className="text-drp-gray text-lg mb-10 max-w-xl mx-auto">
                 You have successfully completed the protocol verification for this module. Your credentials have been updated.
