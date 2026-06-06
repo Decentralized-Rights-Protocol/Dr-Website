@@ -19,7 +19,8 @@ import {
   Activity,
   Code,
   PartyPopper,
-  Lightbulb
+  Lightbulb,
+  Medal
 } from 'lucide-react';
 import type { Lesson, LessonSection } from '@/data/lessons-index';
 import { cn } from '@/lib/utils';
@@ -650,8 +651,8 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                       </div>
                     </div>
                   )}
-                  <div className="prose dark:prose-invert max-w-none">
-                    <ReactMarkdown components={diagramComponents} className="text-drp-gray leading-relaxed text-lg max-w-none">
+                  <div className="prose dark:prose-invert max-w-none text-drp-gray leading-relaxed text-lg">
+                    <ReactMarkdown components={diagramComponents}>
                       {section.content}
                     </ReactMarkdown>
                   </div>
@@ -685,7 +686,13 @@ export default function LessonClientPage({ lesson }: { lesson: Lesson }) {
                      {section.diagramType === 'stack' && <StackDiagram data={section.diagramData} />}
                      {section.diagramType === 'timeline' && <TimelineDiagram data={section.diagramData} />}
                    </div>
-                   {section.content && <ReactMarkdown components={diagramComponents} className="mt-6 text-sm text-drp-gray/80 text-center max-w-2xl mx-auto leading-relaxed prose dark:prose-invert max-w-none">{section.content}</ReactMarkdown>}
+                   {section.content && (
+                     <div className="mt-6 text-sm text-drp-gray/80 text-center max-w-2xl mx-auto leading-relaxed prose dark:prose-invert max-w-none">
+                       <ReactMarkdown components={diagramComponents}>
+                         {section.content}
+                       </ReactMarkdown>
+                     </div>
+                   )}
                 </div>
               )}
 

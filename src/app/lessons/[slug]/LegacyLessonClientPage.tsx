@@ -11,7 +11,8 @@ import {
   BookOpen, 
   Zap,
   Sparkles,
-  Trophy
+  Trophy,
+  Medal
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { diagramComponents } from '@/components/learn/AsciiDiagramReplacer';
