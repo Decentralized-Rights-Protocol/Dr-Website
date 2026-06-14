@@ -80,7 +80,7 @@ export function Footer() {
             <div className="group block mb-2">
               <div className="flex items-center gap-2 mb-1">
                 <div className="relative w-[44px] h-[30px] overflow-hidden shrink-0">
-                  <Image src="/ifope/08_IFOPE_20x30.jpg"
+                  <Image src="/08_IFOPE_20x30.jpg"
                     alt="International Flag of Planet Earth — Oskar Pernefeldt, 2015"
                     fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                 </div>

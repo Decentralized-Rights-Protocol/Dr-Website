@@ -21,10 +21,10 @@ export default function LessonPage({ params }: { params: { slug: string } }) {
   // Try the new cinematic lesson system first
   const cinematicLesson = getLessonBySlug(slug);
   if (cinematicLesson) {
-    return <LessonClientPage lesson={cinematicLesson} />;
+    return <LessonClientPage key={slug} lesson={cinematicLesson} />;
   }
 
   // Fallback to the legacy MDX-based system for the other 20+ lessons
   // This ensures all existing educational content remains accessible
-  return <LegacyLessonClientPage lessonId={slug} />;
+  return <LegacyLessonClientPage key={slug} lessonId={slug} />;
 }
