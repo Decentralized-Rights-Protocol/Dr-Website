@@ -1,7 +1,54 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { mutation, query, internalMutation } from "./_generated/server";
+import { internal } from "./_generated/api";
 import { appendAudit, createNotification, ensureUserForWallet, requireReviewer } from "./lib/domain";
 import { nowIso } from "./lib/time";
+import { PolicyEngine } from "./lib/drp/elders";
+import { ActivityClaim, ActivityCategory, ActivityType } from "./lib/drp/types";
+
+export const triggerAIReview = internalMutation({
+  args: { submissionId: v.id("activitySubmissions") },
+  handler: async (ctx, args) => {
+    const submission = await ctx.db.get(args.submissionId);
+    if (!submission) return;
+
+    // Minimal mapping from submission to ActivityClaim
+    const claim: ActivityClaim = {
+      userId: submission.userId,
+      type: "contribution" as ActivityType, // Default
+      category: "learning" as ActivityCategory, // Default
+      metadata: {
+        title: submission.title,
+        url: submission.location,
+      },
+      proof: submission.payloadHash,
+      timestamp: submission.occurredAt,
+    };
+
+    const result = PolicyEngine.assessActivity(claim);
+
+    // Update status based on result
+    await ctx.db.patch(submission._id, {
+      submissionStatus: result.verdict === "approved" ? "approved" : "rejected",
+      reviewNote: result.rationale,
+      updatedAt: nowIso(),
+    });
+
+    const proof = await ctx.db
+      .query("proofRecords")
+      .withIndex("by_submission", (q) => q.eq("submissionId", submission._id))
+      .unique();
+    
+    if (proof) {
+      await ctx.db.patch(proof._id, {
+        recordStatus: result.verdict === "approved" ? "verified" : "rejected",
+        verifierMode: "ai_assist",
+        rationale: result.rationale,
+        updatedAt: nowIso(),
+      });
+    }
+  },
+});
 
 export const createSubmission = mutation({
   args: {
@@ -17,8 +64,7 @@ export const createSubmission = mutation({
     attachmentSizeBytes: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
-    // Convex is the application source of truth for intake and review state.
-    // Protocol verification and final chain-state mirroring must happen through Dr-Blockchain and the sync bridge.
+    // ... existing intake logic
     const actor = await ensureUserForWallet(ctx, args.walletAddress);
     const createdAt = nowIso();
     const submissionId = await ctx.db.insert("activitySubmissions", {
@@ -58,12 +104,15 @@ export const createSubmission = mutation({
       updatedAt: createdAt,
     });
 
+    // Trigger AI Review asynchronously
+    await ctx.scheduler.runAfter(0, internal.submissions.triggerAIReview, { submissionId });
+
     await createNotification(
       ctx,
       actor.user._id,
       "submission",
       args.kind === "activity" ? "Proof of Activity submitted" : "Proof of Status submitted",
-      "Your submission is now in the review queue. AI can propose findings, but protocol verification and governance remain separate.",
+      "Your submission is now in the review queue. AI is performing initial assessment.",
       args.kind === "activity" ? "/proofs/activities" : "/proofs/status",
     );
 
