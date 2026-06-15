@@ -34,24 +34,6 @@ The DRP website is designed as a continuous storytelling journey through 6 stage
     - Fixed activity verification submission workflow with robust error handling.
     - Optimized 3D performance with instanced rendering and hardware-aware scaling.
 
-## 🚀 Development & Deployment
-
-### Local Setup
-1. Clone the repo
-2. `npm install --legacy-peer-deps`
-3. `npx convex dev`
-4. `npm run dev`
-
-### Production Build
-```bash
-npm run build
-```
-
-### Vercel Deployment
-Ensure the following environment variables are set:
-- `NEXT_PUBLIC_CONVEX_URL`
-- `NEXT_PUBLIC_AI_URL`
-- `CONVEX_DEPLOYMENT`
 
 ## ⚖️ License
 
