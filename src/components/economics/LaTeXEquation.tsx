@@ -1,30 +1,30 @@
-'use client'
+"use client";
 
-import { BlockMath, InlineMath } from 'react-katex'
-import 'katex/dist/katex.min.css'
+import { BlockMath, InlineMath } from "react-katex";
+import "katex/dist/katex.min.css";
 
 interface LaTeXEquationProps {
-  equation: string
-  label?: string
-  explanation?: string
-  variables?: Array<{ symbol: string; description: string }>
-  inline?: boolean
-  className?: string
+  equation: string;
+  label?: string;
+  explanation?: string;
+  variables?: Array<{ symbol: string; description: string }>;
+  inline?: boolean;
+  className?: string;
 }
 
 /**
  * LaTeX Equation Component
  * Renders mathematical equations using KaTeX with Overleaf-style formatting
  */
-export function LaTeXEquation({ 
-  equation, 
-  label, 
-  explanation, 
-  variables, 
+export function LaTeXEquation({
+  equation,
+  label,
+  explanation,
+  variables,
   inline = false,
-  className = '' 
+  className = "",
 }: LaTeXEquationProps) {
-  const MathComponent = inline ? InlineMath : BlockMath
+  const MathComponent = inline ? InlineMath : BlockMath;
 
   return (
     <div className={`my-6 ${className}`}>
@@ -33,7 +33,7 @@ export function LaTeXEquation({
           {label}
         </div>
       )}
-      
+
       <div className="bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700 rounded-lg p-6 overflow-x-auto">
         <div className="flex flex-col items-center">
           {inline ? (
@@ -58,7 +58,7 @@ export function LaTeXEquation({
               <li key={index}>
                 <span className="font-mono font-semibold text-neutral-900 dark:text-foreground">
                   {variable.symbol}:
-                </span>{' '}
+                </span>{" "}
                 {variable.description}
               </li>
             ))}
@@ -74,6 +74,5 @@ export function LaTeXEquation({
         </div>
       )}
     </div>
-  )
+  );
 }
-

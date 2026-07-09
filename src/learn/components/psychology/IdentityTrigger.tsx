@@ -1,7 +1,7 @@
 /**
  * Identity Trigger Component (Level 3)
  * Psychology Goal: Create belonging and self-identification
- * 
+ *
  * Features:
  * - Learner titles/roles
  * - Progress visibility
@@ -9,21 +9,25 @@
  * - Visual badges
  */
 
-import React from 'react'
-import { UserGroupIcon, TrophyIcon } from '@heroicons/react/24/outline'
+import React from "react";
+import { UserGroupIcon, TrophyIcon } from "@heroicons/react/24/outline";
 
 interface IdentityTriggerProps {
-  learnerTitle: string
-  progressPercentage: number
-  level: number
+  learnerTitle: string;
+  progressPercentage: number;
+  level: number;
 }
 
-export function IdentityTrigger({ learnerTitle, progressPercentage, level }: IdentityTriggerProps) {
+export function IdentityTrigger({
+  learnerTitle,
+  progressPercentage,
+  level,
+}: IdentityTriggerProps) {
   const getTitleForLevel = (level: number): string => {
-    if (level >= 3) return 'DRP Contributor'
-    if (level >= 2) return 'DRP Learner'
-    return 'DRP Explorer'
-  }
+    if (level >= 3) return "DRP Contributor";
+    if (level >= 2) return "DRP Learner";
+    return "DRP Explorer";
+  };
 
   return (
     <div className="mb-6 space-y-4">
@@ -35,8 +39,12 @@ export function IdentityTrigger({ learnerTitle, progressPercentage, level }: Ide
               <UserGroupIcon className="h-6 w-6 text-purple-300" />
             </div>
             <div>
-              <p className="text-xs text-neutral-400 uppercase tracking-wide">Your Title</p>
-              <p className="text-lg font-bold text-foreground">{learnerTitle || getTitleForLevel(level)}</p>
+              <p className="text-xs text-neutral-400 uppercase tracking-wide">
+                Your Title
+              </p>
+              <p className="text-lg font-bold text-foreground">
+                {learnerTitle || getTitleForLevel(level)}
+              </p>
             </div>
           </div>
           <div className="text-right">
@@ -49,20 +57,24 @@ export function IdentityTrigger({ learnerTitle, progressPercentage, level }: Ide
       {/* Progress Visibility */}
       <div className="bg-white/5 backdrop-blur-sm rounded-lg border border-foreground/10 p-3">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-semibold text-foreground">Your Progress</span>
-          <span className="text-sm text-neutral-300">{progressPercentage.toFixed(0)}%</span>
+          <span className="text-sm font-semibold text-foreground">
+            Your Progress
+          </span>
+          <span className="text-sm text-neutral-300">
+            {progressPercentage.toFixed(0)}%
+          </span>
         </div>
         <div className="w-full bg-neutral-800 rounded-full h-2">
-          <div 
+          <div
             className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500"
             style={{ width: `${progressPercentage}%` }}
           />
         </div>
         <p className="text-xs text-neutral-400 mt-2">
-          Your progress is visible to the community. Keep learning to advance your status!
+          Your progress is visible to the community. Keep learning to advance
+          your status!
         </p>
       </div>
     </div>
-  )
+  );
 }
-

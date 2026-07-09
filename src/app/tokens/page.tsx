@@ -1,18 +1,25 @@
-import { RightsAnimation } from '@/components/tokens/RightsAnimation'
-import { TokenCard } from '@/components/tokens/TokenCard'
-import { TokenComparisonTable } from '@/components/tokens/TokenComparisonTable'
-import { QuantumSafeSection } from '@/components/tokens/QuantumSafeSection'
-import { Zap, Link as LinkIcon, Award, Building2, Sparkles, Shield } from 'lucide-react'
-import Link from 'next/link'
-import { StructuredData } from '@/components/seo/StructuredData'
-import { buildPageMetadata } from '@/lib/seo/seo'
+import { RightsAnimation } from "@/components/tokens/RightsAnimation";
+import { TokenCard } from "@/components/tokens/TokenCard";
+import { TokenComparisonTable } from "@/components/tokens/TokenComparisonTable";
+import { QuantumSafeSection } from "@/components/tokens/QuantumSafeSection";
+import {
+  Zap,
+  Link as LinkIcon,
+  Award,
+  Building2,
+  Sparkles,
+  Shield,
+} from "lucide-react";
+import Link from "next/link";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { buildPageMetadata } from "@/lib/seo/seo";
 
 export const metadata = buildPageMetadata({
-  title: 'DRP Tokens | RIGHTS & DeRi',
+  title: "DRP Tokens | RIGHTS & DeRi",
   description:
-    'Learn how DRP uses a dual-token economy: $RIGHTS for governance and voting, and $DeRi for utility, participation rewards, and on-chain activity proofs.',
-  canonical: '/tokens',
-})
+    "Learn how DRP uses a dual-token economy: $RIGHTS for governance and voting, and $DeRi for utility, participation rewards, and on-chain activity proofs.",
+  canonical: "/tokens",
+});
 
 export default function TokensPage() {
   return (
@@ -20,7 +27,6 @@ export default function TokensPage() {
       <StructuredData />
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-32 pb-24 bg-gradient-to-br from-primary/30 via-accent/20 to-secondary/30">
-        
         {/* Background Grid */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20"></div>
 
@@ -40,7 +46,8 @@ export default function TokensPage() {
               </span>
             </h1>
             <p className="mt-6 text-xl leading-8 text-foreground/80 animate-fade-in-up delay-200">
-              Powering Rights, Integrity, Governance, Humanity, Trust and Sustainability
+              Powering Rights, Integrity, Governance, Humanity, Trust and
+              Sustainability
             </p>
 
             {/* CTAs */}
@@ -51,7 +58,18 @@ export default function TokensPage() {
               >
                 <span className="flex items-center gap-2">
                   Read Whitepaper
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                  >
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
@@ -61,7 +79,13 @@ export default function TokensPage() {
                 href="/docs"
                 className="group text-sm font-semibold leading-6 text-foreground hover:text-foreground/80 transition-colors duration-300"
               >
-                Explore DRP <span className="group-hover:translate-x-1 transition-transform inline-block" aria-hidden="true">→</span>
+                Explore DRP{" "}
+                <span
+                  className="group-hover:translate-x-1 transition-transform inline-block"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
               </Link>
             </div>
           </div>
@@ -81,7 +105,8 @@ export default function TokensPage() {
               Two Tokens, One Vision
             </h2>
             <p className="mt-6 text-lg leading-8 text-foreground/70">
-              A dual-token system designed to power the DRP ecosystem with utility and governance
+              A dual-token system designed to power the DRP ecosystem with
+              utility and governance
             </p>
           </div>
 
@@ -94,9 +119,18 @@ export default function TokensPage() {
               description="Powers on-chain actions, activity proofs, transaction validation fees, and participation in PoA/PoAT. Earned through verified work, clean energy usage, learning proofs, and community contributions. Used to access DRP Apps, services, and third-party integrations."
               icon={<Zap className="w-8 h-8 text-foreground" />}
               features={[
-                { icon: <Zap className="w-5 h-5" />, label: 'Utility & Transactions' },
-                { icon: <LinkIcon className="w-5 h-5" />, label: 'On-chain Actions' },
-                { icon: <Award className="w-5 h-5" />, label: 'Activity Rewards' },
+                {
+                  icon: <Zap className="w-5 h-5" />,
+                  label: "Utility & Transactions",
+                },
+                {
+                  icon: <LinkIcon className="w-5 h-5" />,
+                  label: "On-chain Actions",
+                },
+                {
+                  icon: <Award className="w-5 h-5" />,
+                  label: "Activity Rewards",
+                },
               ]}
               variant="deri"
               glowColor="blue"
@@ -106,12 +140,21 @@ export default function TokensPage() {
             <TokenCard
               name="$RIGHTS"
               symbol="Governance Token"
-              description="Represents the six pillars: Rights, Integrity, Governance, Humanity, Trust, Sustainability. Enables voting and decision-making across the DRP ecosystem. Used by community panels, Elders, and the AI governance system to shape the protocol&apos;s future."
+              description="Represents the six pillars: Rights, Integrity, Governance, Humanity, Trust, Sustainability. Enables voting and decision-making across the DRP ecosystem. Used by community panels, Elders, and the AI governance system to shape the protocol's future."
               icon={<Sparkles className="w-8 h-8 text-foreground" />}
               features={[
-                { icon: <Building2 className="w-5 h-5" />, label: 'Governance & Voting' },
-                { icon: <Sparkles className="w-5 h-5" />, label: 'AI Alignment' },
-                { icon: <Shield className="w-5 h-5" />, label: 'Protocol Rules' },
+                {
+                  icon: <Building2 className="w-5 h-5" />,
+                  label: "Governance & Voting",
+                },
+                {
+                  icon: <Sparkles className="w-5 h-5" />,
+                  label: "AI Alignment",
+                },
+                {
+                  icon: <Shield className="w-5 h-5" />,
+                  label: "Protocol Rules",
+                },
               ]}
               variant="rights"
               glowColor="amber"
@@ -152,7 +195,8 @@ export default function TokensPage() {
               </span>
             </h2>
             <p className="text-xl leading-8 text-foreground/80 mb-10">
-              Join us in creating a future where human rights are protected, verified, and advanced through blockchain technology.
+              Join us in creating a future where human rights are protected,
+              verified, and advanced through blockchain technology.
             </p>
 
             {/* Action Buttons */}
@@ -163,7 +207,18 @@ export default function TokensPage() {
               >
                 <span className="flex items-center gap-2">
                   Join Testnet
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 group-hover:translate-x-1 transition-transform">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  >
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
@@ -175,7 +230,18 @@ export default function TokensPage() {
               >
                 <span className="flex items-center gap-2">
                   Follow Development
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 group-hover:translate-x-1 transition-transform">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  >
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
@@ -187,7 +253,18 @@ export default function TokensPage() {
               >
                 <span className="flex items-center gap-2">
                   Learn More
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 group-hover:translate-x-1 transition-transform">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  >
                     <path d="M5 12h14"></path>
                     <path d="m12 5 7 7-7 7"></path>
                   </svg>
@@ -198,6 +275,5 @@ export default function TokensPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
-

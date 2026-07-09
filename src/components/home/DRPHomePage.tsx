@@ -1,14 +1,31 @@
-'use client'
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { motion, useInView } from 'framer-motion'
-import { ArrowRight, Shield, Zap, Globe, Lock, Users, CheckCircle, ChevronRight } from 'lucide-react'
-import { IconRenderer } from '@/components/ui/IconRenderer'
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import {
+  ArrowRight,
+  Shield,
+  Zap,
+  Globe,
+  Lock,
+  Users,
+  CheckCircle,
+  ChevronRight,
+} from "lucide-react";
+import { IconRenderer } from "@/components/ui/IconRenderer";
 
 // ─── Fade-in section wrapper ─────────────────────────────────────────
-function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+function FadeIn({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
@@ -18,34 +35,44 @@ function FadeIn({ children, delay = 0, className = '' }: { children: React.React
     >
       {children}
     </motion.div>
-  )
+  );
 }
 
 // ─── Animated counter ────────────────────────────────────────────────
-function Counter({ end, suffix = '' }: { end: number; suffix?: string }) {
-  const [val, setVal] = useState(0)
+function Counter({ end, suffix = "" }: { end: number; suffix?: string }) {
+  const [val, setVal] = useState(0);
   useEffect(() => {
-    let start = 0
-    const step = end / 60
+    let start = 0;
+    const step = end / 60;
     const timer = setInterval(() => {
-      start += step
-      if (start >= end) { setVal(end); clearInterval(timer) }
-      else setVal(Math.floor(start))
-    }, 16)
-    return () => clearInterval(timer)
-  }, [end])
-  return <span>{val.toLocaleString()}{suffix}</span>
+      start += step;
+      if (start >= end) {
+        setVal(end);
+        clearInterval(timer);
+      } else setVal(Math.floor(start));
+    }, 16);
+    return () => clearInterval(timer);
+  }, [end]);
+  return (
+    <span>
+      {val.toLocaleString()}
+      {suffix}
+    </span>
+  );
 }
 
 // ─── Gradient orb background ────────────────────────────────────────
 function GradientOrbs() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
+    <div
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+      aria-hidden
+    >
       <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-drp-blue/10 blur-[120px]" />
       <div className="absolute top-[10%] right-[-15%] w-[500px] h-[500px] rounded-full bg-drp-blue/10 blur-[100px]" />
       <div className="absolute bottom-[5%] left-[20%] w-[400px] h-[400px] rounded-full bg-drp-blue/5 blur-[80px]" />
     </div>
-  )
+  );
 }
 
 // ─── Grid overlay ────────────────────────────────────────────────────
@@ -58,10 +85,10 @@ function GridOverlay() {
           linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px),
           linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px)
         `,
-        backgroundSize: '60px 60px',
+        backgroundSize: "60px 60px",
       }}
     />
-  )
+  );
 }
 
 // ─── HERO ────────────────────────────────────────────────────────────
@@ -84,7 +111,10 @@ function Hero() {
         <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold text-foreground leading-[1.04] tracking-tight max-w-5xl mx-auto">
           Infrastructure for
           <br />
-          <span className="bg-gradient-to-r from-drp-cyan via-blue-500 to-drp-cyan bg-clip-text text-transparent animate-gradient" style={{backgroundSize:'200% auto'}}>
+          <span
+            className="bg-gradient-to-r from-drp-cyan via-blue-500 to-drp-cyan bg-clip-text text-transparent animate-gradient"
+            style={{ backgroundSize: "200% auto" }}
+          >
             Verified Rights
           </span>
         </h1>
@@ -92,20 +122,25 @@ function Hero() {
 
       <FadeIn delay={0.16}>
         <p className="mt-8 text-lg sm:text-xl text-foreground/50 max-w-2xl mx-auto leading-relaxed">
-          DRP is a blockchain protocol that verifies human activity, attests identity,
-          and enables fair resource distribution — starting with Ghana, built for the world.
+          DRP is a blockchain protocol that verifies human activity, attests
+          identity, and enables fair resource distribution — starting with
+          Ghana, built for the world.
         </p>
       </FadeIn>
 
       <FadeIn delay={0.24}>
         <div className="mt-12 flex flex-col sm:flex-row gap-4 items-center justify-center">
-          <Link href="/about"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-drp-blue text-white font-semibold text-sm tracking-wide hover:bg-foreground hover:text-background transition-all duration-300">
+          <Link
+            href="/about"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-drp-blue text-white font-semibold text-sm tracking-wide hover:bg-foreground hover:text-background transition-all duration-300"
+          >
             Explore the Protocol
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
-          <Link href="/whitepaper"
-            className="inline-flex items-center gap-3 px-8 py-4 border border-foreground/20 text-foreground/70 font-medium text-sm tracking-wide hover:border-drp-cyan/50 hover:text-foreground transition-all duration-300">
+          <Link
+            href="/whitepaper"
+            className="inline-flex items-center gap-3 px-8 py-4 border border-foreground/20 text-foreground/70 font-medium text-sm tracking-wide hover:border-drp-cyan/50 hover:text-foreground transition-all duration-300"
+          >
             Read Whitepaper
           </Link>
         </div>
@@ -114,39 +149,67 @@ function Hero() {
       <FadeIn delay={0.32}>
         <div className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-px bg-foreground/5 border border-foreground/5">
           {[
-            { label: 'UN SDGs Aligned', val: 11, suffix: '' },
-            { label: 'Protocol Version', val: 5, suffix: '.0' },
-            { label: 'Countries Targeted', val: 54, suffix: '+' },
-            { label: 'PQC Algorithms', val: 2, suffix: '' },
+            { label: "UN SDGs Aligned", val: 11, suffix: "" },
+            { label: "Protocol Version", val: 5, suffix: ".0" },
+            { label: "Countries Targeted", val: 54, suffix: "+" },
+            { label: "PQC Algorithms", val: 2, suffix: "" },
           ].map((s, i) => (
             <div key={i} className="bg-background px-8 py-6 text-center">
               <div className="text-3xl font-bold text-foreground mb-1">
                 <Counter end={s.val} suffix={s.suffix} />
               </div>
-              <div className="text-xs text-foreground/30 tracking-widest uppercase">{s.label}</div>
+              <div className="text-xs text-foreground/30 tracking-widest uppercase">
+                {s.label}
+              </div>
             </div>
           ))}
         </div>
       </FadeIn>
     </section>
-  )
+  );
 }
 
 // ─── HOW IT WORKS ────────────────────────────────────────────────────
 function HowItWorks() {
   const steps = [
-    { num: '01', title: 'Submit Activity', desc: 'Users document real-world actions — farming, education, healthcare, civic work. Every activity generates a verifiable proof.', href: '/about', accent: 'var(--drp-cyan)' },
-    { num: '02', title: 'AI Verification', desc: 'DRP\'s AI scoring engine validates submissions using contextual, privacy-preserving models. No personal data exposed.', href: '/ai-governance', accent: 'var(--drp-purple)' },
-    { num: '03', title: 'On-Chain Attestation', desc: 'Verified proofs are written to the blockchain — immutable, auditable, permanent. Rights infrastructure that cannot be erased.', href: '/docs/protocol', accent: 'var(--drp-cyan)' },
-    { num: '04', title: 'Access & Rewards', desc: 'Verified participants earn $DeRi tokens, unlock services, and gain governance power via $RIGHTS. Contribution becomes currency.', href: '/tokens', accent: '#ffd700' },
-  ]
+    {
+      num: "01",
+      title: "Submit Activity",
+      desc: "Users document real-world actions — farming, education, healthcare, civic work. Every activity generates a verifiable proof.",
+      href: "/about",
+      accent: "var(--drp-cyan)",
+    },
+    {
+      num: "02",
+      title: "AI Verification",
+      desc: "DRP's AI scoring engine validates submissions using contextual, privacy-preserving models. No personal data exposed.",
+      href: "/ai-governance",
+      accent: "var(--drp-purple)",
+    },
+    {
+      num: "03",
+      title: "On-Chain Attestation",
+      desc: "Verified proofs are written to the blockchain — immutable, auditable, permanent. Rights infrastructure that cannot be erased.",
+      href: "/docs/protocol",
+      accent: "var(--drp-cyan)",
+    },
+    {
+      num: "04",
+      title: "Access & Rewards",
+      desc: "Verified participants earn $DeRi tokens, unlock services, and gain governance power via $RIGHTS. Contribution becomes currency.",
+      href: "/tokens",
+      accent: "#ffd700",
+    },
+  ];
 
   return (
     <section className="relative py-32 px-6 border-t border-foreground/5">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
           <div className="mb-16">
-            <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">How It Works</span>
+            <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">
+              How It Works
+            </span>
             <h2 className="text-4xl sm:text-5xl font-bold text-foreground max-w-xl leading-tight">
               From activity to verified right in four steps
             </h2>
@@ -155,11 +218,23 @@ function HowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-foreground/5">
           {steps.map((s, i) => (
             <FadeIn key={s.num} delay={i * 0.07}>
-              <Link href={s.href} className="group block bg-background p-8 hover:bg-foreground/[0.025] transition-colors duration-500 h-full">
-                <span className="text-5xl font-bold text-foreground/5 font-mono block mb-6">{s.num}</span>
-                <div className="w-8 h-[2px] mb-5 transition-all duration-500 group-hover:w-14" style={{ backgroundColor: s.accent }} />
-                <h3 className="text-lg font-semibold text-foreground mb-3">{s.title}</h3>
-                <p className="text-sm text-foreground/40 leading-relaxed">{s.desc}</p>
+              <Link
+                href={s.href}
+                className="group block bg-background p-8 hover:bg-foreground/[0.025] transition-colors duration-500 h-full"
+              >
+                <span className="text-5xl font-bold text-foreground/5 font-mono block mb-6">
+                  {s.num}
+                </span>
+                <div
+                  className="w-8 h-[2px] mb-5 transition-all duration-500 group-hover:w-14"
+                  style={{ backgroundColor: s.accent }}
+                />
+                <h3 className="text-lg font-semibold text-foreground mb-3">
+                  {s.title}
+                </h3>
+                <p className="text-sm text-foreground/40 leading-relaxed">
+                  {s.desc}
+                </p>
                 <div className="mt-6 flex items-center gap-2 text-xs text-foreground/30 group-hover:text-[var(--drp-cyan)] transition-colors">
                   Learn more <ChevronRight className="w-3 h-3" />
                 </div>
@@ -169,19 +244,55 @@ function HowItWorks() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── CORE PILLARS ────────────────────────────────────────────────────
 function Pillars() {
   const pillars = [
-    { icon: Shield, title: 'Proof of Status', desc: 'Portable, privacy-preserving attestations that verify trust, identity, and capability across institutions and borders.', href: '/about', color: 'var(--drp-cyan)' },
-    { icon: Zap, title: 'Proof of Activity', desc: 'On-chain evidence of meaningful participation. Contributions become permanent, immutable records of human impact.', href: '/about', color: 'var(--drp-purple)' },
-    { icon: Users, title: 'AI Governance', desc: 'Decision-support agents improve transparency, proposal quality, and institutional memory. Human judgment, amplified.', href: '/ai-governance', color: 'var(--drp-cyan)' },
-    { icon: Lock, title: 'Post-Quantum Security', desc: 'CRYSTALS-Kyber and Dilithium cryptography ensures your rights infrastructure survives the quantum era.', href: '/docs/security', color: '#ffd700' },
-    { icon: Globe, title: 'UN SDG Alignment', desc: 'Every protocol decision maps to Sustainable Development Goals — a rights infrastructure that advances human flourishing.', href: '/ecosystem', color: '#00ff88' },
-    { icon: CheckCircle, title: 'Transparent Verification', desc: 'Verifiable, auditable flows for identity and action provenance. No black boxes, no gatekeepers.', href: '/docs/protocol', color: 'var(--drp-cyan)' },
-  ]
+    {
+      icon: Shield,
+      title: "Proof of Status",
+      desc: "Portable, privacy-preserving attestations that verify trust, identity, and capability across institutions and borders.",
+      href: "/about",
+      color: "var(--drp-cyan)",
+    },
+    {
+      icon: Zap,
+      title: "Proof of Activity",
+      desc: "On-chain evidence of meaningful participation. Contributions become permanent, immutable records of human impact.",
+      href: "/about",
+      color: "var(--drp-purple)",
+    },
+    {
+      icon: Users,
+      title: "AI Governance",
+      desc: "Decision-support agents improve transparency, proposal quality, and institutional memory. Human judgment, amplified.",
+      href: "/ai-governance",
+      color: "var(--drp-cyan)",
+    },
+    {
+      icon: Lock,
+      title: "Post-Quantum Security",
+      desc: "CRYSTALS-Kyber and Dilithium cryptography ensures your rights infrastructure survives the quantum era.",
+      href: "/docs/security",
+      color: "#ffd700",
+    },
+    {
+      icon: Globe,
+      title: "UN SDG Alignment",
+      desc: "Every protocol decision maps to Sustainable Development Goals — a rights infrastructure that advances human flourishing.",
+      href: "/ecosystem",
+      color: "#00ff88",
+    },
+    {
+      icon: CheckCircle,
+      title: "Transparent Verification",
+      desc: "Verifiable, auditable flows for identity and action provenance. No black boxes, no gatekeepers.",
+      href: "/docs/protocol",
+      color: "var(--drp-cyan)",
+    },
+  ];
 
   return (
     <section className="relative py-32 px-6 border-t border-foreground/5 overflow-hidden">
@@ -189,7 +300,9 @@ function Pillars() {
       <div className="max-w-6xl mx-auto relative">
         <FadeIn>
           <div className="mb-16">
-            <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">Core Protocol</span>
+            <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">
+              Core Protocol
+            </span>
             <h2 className="text-4xl sm:text-5xl font-bold text-foreground max-w-xl leading-tight">
               Six pillars of a rights-first infrastructure
             </h2>
@@ -197,25 +310,37 @@ function Pillars() {
         </FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-foreground/5">
           {pillars.map((p, i) => {
-            const Icon = p.icon
+            const Icon = p.icon;
             return (
               <FadeIn key={p.title} delay={i * 0.06}>
-                <Link href={p.href} className="group block bg-background p-8 hover:bg-foreground/[0.025] transition-all duration-500 h-full">
-                  <div className="w-10 h-10 border flex items-center justify-center mb-6 transition-all duration-500"
-                    style={{ borderColor: p.color + '40', backgroundColor: p.color + '10' }}>
+                <Link
+                  href={p.href}
+                  className="group block bg-background p-8 hover:bg-foreground/[0.025] transition-all duration-500 h-full"
+                >
+                  <div
+                    className="w-10 h-10 border flex items-center justify-center mb-6 transition-all duration-500"
+                    style={{
+                      borderColor: p.color + "40",
+                      backgroundColor: p.color + "10",
+                    }}
+                  >
                     <Icon className="w-5 h-5" style={{ color: p.color }} />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-3">{p.title}</h3>
-                  <p className="text-sm text-foreground/40 leading-relaxed">{p.desc}</p>
+                  <h3 className="text-lg font-semibold text-foreground mb-3">
+                    {p.title}
+                  </h3>
+                  <p className="text-sm text-foreground/40 leading-relaxed">
+                    {p.desc}
+                  </p>
                   <div className="mt-5 w-6 h-[1px] bg-foreground/10 group-hover:w-12 group-hover:bg-[var(--drp-cyan)]/50 transition-all duration-500" />
                 </Link>
               </FadeIn>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── TOKEN ECONOMY ───────────────────────────────────────────────────
@@ -225,8 +350,12 @@ function Tokens() {
       <div className="max-w-6xl mx-auto">
         <FadeIn>
           <div className="mb-16">
-            <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">Token Economy</span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-foreground max-w-xl leading-tight">Two tokens, one mission</h2>
+            <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">
+              Token Economy
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-foreground max-w-xl leading-tight">
+              Two tokens, one mission
+            </h2>
           </div>
         </FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-foreground/5">
@@ -237,127 +366,261 @@ function Tokens() {
                   <span className="text-[#ffd700] font-bold text-sm">R</span>
                 </div>
                 <div>
-                  <div className="text-foreground font-bold text-xl">$RIGHTS</div>
-                  <div className="text-foreground/30 text-sm">Governance Token</div>
+                  <div className="text-foreground font-bold text-xl">
+                    $RIGHTS
+                  </div>
+                  <div className="text-foreground/30 text-sm">
+                    Governance Token
+                  </div>
                 </div>
               </div>
-              <p className="text-foreground/50 leading-relaxed mb-6">The governance backbone of DRP. $RIGHTS holders vote on protocol upgrades, resource allocation, and policy decisions.</p>
+              <p className="text-foreground/50 leading-relaxed mb-6">
+                The governance backbone of DRP. $RIGHTS holders vote on protocol
+                upgrades, resource allocation, and policy decisions.
+              </p>
               <ul className="space-y-2 mb-8">
-                {['Protocol voting power', 'Elder Council access', 'Treasury governance', 'Policy proposals'].map(f => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-foreground/40">
+                {[
+                  "Protocol voting power",
+                  "Elder Council access",
+                  "Treasury governance",
+                  "Policy proposals",
+                ].map((f) => (
+                  <li
+                    key={f}
+                    className="flex items-center gap-3 text-sm text-foreground/40"
+                  >
                     <div className="w-1 h-1 rounded-full bg-[#ffd700]" /> {f}
                   </li>
                 ))}
               </ul>
-              <Link href="/tokens" className="inline-flex items-center gap-2 text-[#ffd700] text-sm hover:gap-4 transition-all">Token details <ArrowRight className="w-4 h-4" /></Link>
+              <Link
+                href="/tokens"
+                className="inline-flex items-center gap-2 text-[#ffd700] text-sm hover:gap-4 transition-all"
+              >
+                Token details <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </FadeIn>
           <FadeIn delay={0.08}>
             <div className="bg-background p-10 border-l-2 border-[var(--drp-cyan)] h-full">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full border-2 border-[var(--drp-cyan)] flex items-center justify-center">
-                  <span className="text-[var(--drp-cyan)] font-bold text-sm">D</span>
+                  <span className="text-[var(--drp-cyan)] font-bold text-sm">
+                    D
+                  </span>
                 </div>
                 <div>
                   <div className="text-foreground font-bold text-xl">$DeRi</div>
-                  <div className="text-foreground/30 text-sm">Utility Token</div>
+                  <div className="text-foreground/30 text-sm">
+                    Utility Token
+                  </div>
                 </div>
               </div>
-              <p className="text-foreground/50 leading-relaxed mb-6">The fuel of the DRP ecosystem. $DeRi is earned through verified activity and spent to access services and unlock capabilities.</p>
+              <p className="text-foreground/50 leading-relaxed mb-6">
+                The fuel of the DRP ecosystem. $DeRi is earned through verified
+                activity and spent to access services and unlock capabilities.
+              </p>
               <ul className="space-y-2 mb-8">
-                {['Proof submission fees', 'Service access passes', 'Activity rewards', 'Cross-border transfers'].map(f => (
-                  <li key={f} className="flex items-center gap-3 text-sm text-foreground/40">
-                    <div className="w-1 h-1 rounded-full bg-[var(--drp-cyan)]" /> {f}
+                {[
+                  "Proof submission fees",
+                  "Service access passes",
+                  "Activity rewards",
+                  "Cross-border transfers",
+                ].map((f) => (
+                  <li
+                    key={f}
+                    className="flex items-center gap-3 text-sm text-foreground/40"
+                  >
+                    <div className="w-1 h-1 rounded-full bg-[var(--drp-cyan)]" />{" "}
+                    {f}
                   </li>
                 ))}
               </ul>
-              <Link href="/tokens" className="inline-flex items-center gap-2 text-[var(--drp-cyan)] text-sm hover:gap-4 transition-all">Token details <ArrowRight className="w-4 h-4" /></Link>
+              <Link
+                href="/tokens"
+                className="inline-flex items-center gap-2 text-[var(--drp-cyan)] text-sm hover:gap-4 transition-all"
+              >
+                Token details <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </FadeIn>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── ECOSYSTEM ───────────────────────────────────────────────────────
 function Ecosystem() {
   const items = [
-    { icon: 'Sprout', title: 'Agriculture', desc: 'Farmers verify crop yields, land rights, and supply chain contributions.', href: '/ecosystem' },
-    { icon: 'BookOpen', title: 'Education', desc: 'Students prove learning milestones and skill acquisition on-chain.', href: '/ecosystem' },
-    { icon: 'Monitor', title: 'Healthcare', desc: 'Health workers document service delivery in underserved communities.', href: '/ecosystem' },
-    { icon: 'Scale', title: 'Governance', desc: 'Citizens participate in verified democratic and policy processes.', href: '/ecosystem' },
-    { icon: 'Recycle', title: 'Sustainability', desc: 'Environmental actions earn verifiable green credentials.', href: '/ecosystem' },
-    { icon: 'Hammer', title: 'Infrastructure', desc: 'Community builders prove contribution to public goods projects.', href: '/ecosystem' },
-  ]
+    {
+      icon: "Sprout",
+      title: "Agriculture",
+      desc: "Farmers verify crop yields, land rights, and supply chain contributions.",
+      href: "/ecosystem",
+    },
+    {
+      icon: "BookOpen",
+      title: "Education",
+      desc: "Students prove learning milestones and skill acquisition on-chain.",
+      href: "/ecosystem",
+    },
+    {
+      icon: "Monitor",
+      title: "Healthcare",
+      desc: "Health workers document service delivery in underserved communities.",
+      href: "/ecosystem",
+    },
+    {
+      icon: "Scale",
+      title: "Governance",
+      desc: "Citizens participate in verified democratic and policy processes.",
+      href: "/ecosystem",
+    },
+    {
+      icon: "Recycle",
+      title: "Sustainability",
+      desc: "Environmental actions earn verifiable green credentials.",
+      href: "/ecosystem",
+    },
+    {
+      icon: "Hammer",
+      title: "Infrastructure",
+      desc: "Community builders prove contribution to public goods projects.",
+      href: "/ecosystem",
+    },
+  ];
   return (
     <section className="py-32 px-6 border-t border-foreground/5">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">Ecosystem</span>
-              <h2 className="text-4xl sm:text-5xl font-bold text-foreground max-w-lg leading-tight">Rights infrastructure for every human activity</h2>
+              <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">
+                Ecosystem
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold text-foreground max-w-lg leading-tight">
+                Rights infrastructure for every human activity
+              </h2>
             </div>
-            <Link href="/ecosystem" className="inline-flex items-center gap-2 text-foreground/40 text-sm hover:text-[var(--drp-cyan)] transition-colors shrink-0">View full ecosystem <ArrowRight className="w-4 h-4" /></Link>
+            <Link
+              href="/ecosystem"
+              className="inline-flex items-center gap-2 text-foreground/40 text-sm hover:text-[var(--drp-cyan)] transition-colors shrink-0"
+            >
+              View full ecosystem <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </FadeIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {items.map((item, i) => (
             <FadeIn key={item.title} delay={i * 0.05}>
-              <Link href={item.href} className="group block p-6 border border-foreground/5 hover:border-[var(--drp-cyan)]/30 bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-all duration-400">
+              <Link
+                href={item.href}
+                className="group block p-6 border border-foreground/5 hover:border-[var(--drp-cyan)]/30 bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-all duration-400"
+              >
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-background/50 border border-foreground/10 mb-6 group-hover:border-[var(--drp-cyan)]/50 transition-colors">
-                  <IconRenderer name={item.icon} className="w-6 h-6 text-[var(--drp-cyan)]" />
+                  <IconRenderer
+                    name={item.icon}
+                    className="w-6 h-6 text-[var(--drp-cyan)]"
+                  />
                 </div>
-                <h3 className="text-foreground font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-foreground/40 leading-relaxed">{item.desc}</p>
+                <h3 className="text-foreground font-semibold mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-foreground/40 leading-relaxed">
+                  {item.desc}
+                </p>
               </Link>
             </FadeIn>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── ROADMAP ─────────────────────────────────────────────────────────
 function Roadmap() {
   const phases = [
-    { phase: 'Phase 0', title: 'Genesis', status: 'complete', desc: 'Protocol design, whitepaper v0.5, smart contract architecture, team formation.' },
-    { phase: 'Phase 1', title: 'Testnet', status: 'active', desc: 'DRP testnet launch, proof submission MVP, AI scoring engine, community onboarding.' },
-    { phase: 'Phase 2', title: 'Mainnet Alpha', status: 'upcoming', desc: 'Mainnet deployment, token launch, partner integrations, Ghana pilot program.' },
-    { phase: 'Phase 3', title: 'Expansion', status: 'upcoming', desc: 'Pan-African rollout, UN SDG verification, cross-chain bridges, AI Elder deployment.' },
-  ]
+    {
+      phase: "Phase 0",
+      title: "Genesis",
+      status: "complete",
+      desc: "Protocol design, whitepaper v0.5, smart contract architecture, team formation.",
+    },
+    {
+      phase: "Phase 1",
+      title: "Testnet",
+      status: "active",
+      desc: "DRP testnet launch, proof submission MVP, AI scoring engine, community onboarding.",
+    },
+    {
+      phase: "Phase 2",
+      title: "Mainnet Alpha",
+      status: "upcoming",
+      desc: "Mainnet deployment, token launch, partner integrations, Ghana pilot program.",
+    },
+    {
+      phase: "Phase 3",
+      title: "Expansion",
+      status: "upcoming",
+      desc: "Pan-African rollout, UN SDG verification, cross-chain bridges, AI Elder deployment.",
+    },
+  ];
   return (
     <section className="relative py-32 px-6 border-t border-foreground/5 overflow-hidden">
       <GradientOrbs />
       <div className="max-w-6xl mx-auto relative">
         <FadeIn>
           <div className="mb-16">
-            <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">Roadmap</span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-foreground max-w-xl leading-tight">The path to a verified world</h2>
+            <span className="text-xs tracking-[0.3em] uppercase text-[var(--drp-cyan)]/70 mb-4 block">
+              Roadmap
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-foreground max-w-xl leading-tight">
+              The path to a verified world
+            </h2>
           </div>
         </FadeIn>
         <div className="space-y-0">
           {phases.map((p, i) => (
             <FadeIn key={p.phase} delay={i * 0.08}>
               <div className="flex flex-col lg:flex-row items-start gap-6 py-8 border-b border-foreground/5 last:border-b-0">
-                <div className="lg:w-24 shrink-0"><span className="text-xs font-mono text-foreground/20">{p.phase}</span></div>
+                <div className="lg:w-24 shrink-0">
+                  <span className="text-xs font-mono text-foreground/20">
+                    {p.phase}
+                  </span>
+                </div>
                 <div className="flex items-start gap-6 flex-1">
                   <div className="relative shrink-0 mt-1">
-                    <div className={`w-3 h-3 rounded-full border-2 ${
-                      p.status === 'complete' ? 'bg-[#00ff88] border-[#00ff88]' :
-                      p.status === 'active' ? 'bg-[var(--drp-cyan)] border-[var(--drp-cyan)] shadow-[0_0_12px_var(--drp-cyan)]' :
-                      'bg-transparent border-foreground/20'
-                    }`} />
+                    <div
+                      className={`w-3 h-3 rounded-full border-2 ${
+                        p.status === "complete"
+                          ? "bg-[#00ff88] border-[#00ff88]"
+                          : p.status === "active"
+                            ? "bg-[var(--drp-cyan)] border-[var(--drp-cyan)] shadow-[0_0_12px_var(--drp-cyan)]"
+                            : "bg-transparent border-foreground/20"
+                      }`}
+                    />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-lg font-semibold text-foreground">{p.title}</h3>
-                      {p.status === 'active' && <span className="text-xs px-2 py-0.5 bg-[var(--drp-cyan)]/15 text-[var(--drp-cyan)] border border-[var(--drp-cyan)]/30">Live</span>}
-                      {p.status === 'complete' && <span className="text-xs px-2 py-0.5 bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/20">Complete</span>}
+                      <h3 className="text-lg font-semibold text-foreground">
+                        {p.title}
+                      </h3>
+                      {p.status === "active" && (
+                        <span className="text-xs px-2 py-0.5 bg-[var(--drp-cyan)]/15 text-[var(--drp-cyan)] border border-[var(--drp-cyan)]/30">
+                          Live
+                        </span>
+                      )}
+                      {p.status === "complete" && (
+                        <span className="text-xs px-2 py-0.5 bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/20">
+                          Complete
+                        </span>
+                      )}
                     </div>
-                    <p className="text-sm text-foreground/40 leading-relaxed max-w-xl">{p.desc}</p>
+                    <p className="text-sm text-foreground/40 leading-relaxed max-w-xl">
+                      {p.desc}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -366,12 +629,17 @@ function Roadmap() {
         </div>
         <FadeIn delay={0.2}>
           <div className="mt-10">
-            <Link href="/roadmap" className="inline-flex items-center gap-3 text-foreground/40 text-sm hover:text-[var(--drp-cyan)] transition-colors">View full roadmap <ArrowRight className="w-4 h-4" /></Link>
+            <Link
+              href="/roadmap"
+              className="inline-flex items-center gap-3 text-foreground/40 text-sm hover:text-[var(--drp-cyan)] transition-colors"
+            >
+              View full roadmap <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </FadeIn>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── COMMUNITY ───────────────────────────────────────────────────────
@@ -381,26 +649,55 @@ function Community() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-foreground/5">
           {[
-            { icon: 'BookOpen', title: 'Learn DRP', desc: 'Understand the protocol from the ground up. From rights theory to smart contract architecture.', href: '/learn', cta: 'Start learning' },
-            { icon: 'Settings', title: 'Build on DRP', desc: 'Access the protocol docs, API references, and SDK to integrate DRP into your application.', href: '/docs', cta: 'Read the docs' },
-            { icon: 'Handshake', title: 'Join Community', desc: 'Connect with builders, researchers, and rights advocates shaping the future of human governance.', href: '/community', cta: 'Get involved' },
+            {
+              icon: "BookOpen",
+              title: "Learn DRP",
+              desc: "Understand the protocol from the ground up. From rights theory to smart contract architecture.",
+              href: "/learn",
+              cta: "Start learning",
+            },
+            {
+              icon: "Settings",
+              title: "Build on DRP",
+              desc: "Access the protocol docs, API references, and SDK to integrate DRP into your application.",
+              href: "/docs",
+              cta: "Read the docs",
+            },
+            {
+              icon: "Handshake",
+              title: "Join Community",
+              desc: "Connect with builders, researchers, and rights advocates shaping the future of human governance.",
+              href: "/community",
+              cta: "Get involved",
+            },
           ].map((c, i) => (
             <FadeIn key={c.title} delay={i * 0.06}>
-              <Link href={c.href} className="group block bg-background p-10 hover:bg-foreground/[0.025] transition-colors duration-500 h-full">
+              <Link
+                href={c.href}
+                className="group block bg-background p-10 hover:bg-foreground/[0.025] transition-colors duration-500 h-full"
+              >
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-background/50 border border-foreground/10 mb-6 group-hover:border-[var(--drp-cyan)]/50 transition-colors">
-                  <IconRenderer name={c.icon} className="w-6 h-6 text-[var(--drp-cyan)]" />
+                  <IconRenderer
+                    name={c.icon}
+                    className="w-6 h-6 text-[var(--drp-cyan)]"
+                  />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3">{c.title}</h3>
-                <p className="text-sm text-foreground/50 leading-relaxed mb-6">{c.desc}</p>
-                <div className="text-xs font-semibold text-[var(--drp-cyan)] group-hover:gap-2 transition-all">{c.cta} <ArrowRight className="inline w-3 h-3" /></div>
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  {c.title}
+                </h3>
+                <p className="text-sm text-foreground/50 leading-relaxed mb-6">
+                  {c.desc}
+                </p>
+                <div className="text-xs font-semibold text-[var(--drp-cyan)] group-hover:gap-2 transition-all">
+                  {c.cta} <ArrowRight className="inline w-3 h-3" />
+                </div>
               </Link>
-
             </FadeIn>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── FINAL CTA ───────────────────────────────────────────────────────
@@ -410,27 +707,44 @@ function FinalCTA() {
       <GradientOrbs />
       <div className="max-w-4xl mx-auto text-center relative">
         <FadeIn>
-          <Image src="/DRP.png" alt="DRP Logo" width={64} height={64} className="mx-auto mb-8 opacity-80" />
+          <Image
+            src="/DRP.png"
+            alt="DRP Logo"
+            width={64}
+            height={64}
+            className="mx-auto mb-8 opacity-80"
+          />
           <h2 className="text-5xl sm:text-6xl font-bold text-foreground leading-[1.05] mb-6">
             The future of rights is
             <br />
-            <span className="bg-gradient-to-r from-[var(--drp-cyan)] to-[var(--drp-purple)] bg-clip-text text-transparent">verifiable</span>
+            <span className="bg-gradient-to-r from-[var(--drp-cyan)] to-[var(--drp-purple)] bg-clip-text text-transparent">
+              verifiable
+            </span>
           </h2>
           <p className="text-foreground/40 mb-12 max-w-lg mx-auto text-lg leading-relaxed">
-            Join the protocol. Submit your first proof. Be part of the infrastructure that makes human rights legible, portable, and permanent.
+            Join the protocol. Submit your first proof. Be part of the
+            infrastructure that makes human rights legible, portable, and
+            permanent.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/about" className="group inline-flex items-center gap-3 px-8 py-4 bg-[var(--drp-cyan)] text-background font-semibold text-sm tracking-wide hover:bg-foreground hover:text-background transition-all duration-300">
-              Explore DRP <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <Link
+              href="/about"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-[var(--drp-cyan)] text-background font-semibold text-sm tracking-wide hover:bg-foreground hover:text-background transition-all duration-300"
+            >
+              Explore DRP{" "}
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
-            <Link href="https://app.decentralizedrights.com" className="inline-flex items-center gap-3 px-8 py-4 border border-foreground/20 text-foreground/70 font-medium text-sm tracking-wide hover:border-[var(--drp-cyan)]/50 hover:text-foreground transition-all duration-300">
+            <Link
+              href="https://app.decentralizedrights.com"
+              className="inline-flex items-center gap-3 px-8 py-4 border border-foreground/20 text-foreground/70 font-medium text-sm tracking-wide hover:border-[var(--drp-cyan)]/50 hover:text-foreground transition-all duration-300"
+            >
               Launch App <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </FadeIn>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── ROOT EXPORT ─────────────────────────────────────────────────────
@@ -446,5 +760,5 @@ export function DRPHomePage() {
       <Community />
       <FinalCTA />
     </main>
-  )
+  );
 }

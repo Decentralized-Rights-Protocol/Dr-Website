@@ -2,9 +2,9 @@ name: Security & Quality Checks
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   security-checks:
@@ -31,5 +31,3 @@ jobs:
 
       - name: Run npm audit (high severity and above)
         run: npm audit --audit-level=high
-
-

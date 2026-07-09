@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 interface RevealAnswerProps {
-  answer: string | React.ReactNode
-  explanation?: string
-  label?: string
-  className?: string
+  answer: string | React.ReactNode;
+  explanation?: string;
+  label?: string;
+  className?: string;
 }
 
 /**
@@ -18,10 +18,10 @@ interface RevealAnswerProps {
 export function RevealAnswer({
   answer,
   explanation,
-  label = 'Answer',
-  className = ''
+  label = "Answer",
+  className = "",
 }: RevealAnswerProps) {
-  const [isRevealed, setIsRevealed] = useState(false)
+  const [isRevealed, setIsRevealed] = useState(false);
 
   return (
     <div className={`my-6 ${className}`}>
@@ -45,7 +45,7 @@ export function RevealAnswer({
         ) : (
           <motion.div
             initial={{ opacity: 0, height: 0, y: -10 }}
-            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            animate={{ opacity: 1, height: "auto", y: 0 }}
             exit={{ opacity: 0, height: 0, y: -10 }}
             transition={{ duration: 0.3 }}
             className="border-t border-white/20 pt-4 mt-4"
@@ -61,14 +61,10 @@ export function RevealAnswer({
                   <EyeSlashIcon className="h-5 w-5" />
                 </button>
               </div>
-              
+
               <div className="p-4 bg-green-500/10 border border-green-400/30 rounded-md">
                 <div className="text-foreground leading-relaxed">
-                  {typeof answer === 'string' ? (
-                    <p>{answer}</p>
-                  ) : (
-                    answer
-                  )}
+                  {typeof answer === "string" ? <p>{answer}</p> : answer}
                 </div>
               </div>
 
@@ -79,8 +75,12 @@ export function RevealAnswer({
                   transition={{ delay: 0.2 }}
                   className="p-4 bg-blue-500/10 border border-blue-400/30 rounded-md"
                 >
-                  <h5 className="text-blue-400 font-semibold mb-2">Explanation:</h5>
-                  <p className="text-neutral-200 leading-relaxed">{explanation}</p>
+                  <h5 className="text-blue-400 font-semibold mb-2">
+                    Explanation:
+                  </h5>
+                  <p className="text-neutral-200 leading-relaxed">
+                    {explanation}
+                  </p>
                 </motion.div>
               )}
             </div>
@@ -88,6 +88,5 @@ export function RevealAnswer({
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }
-

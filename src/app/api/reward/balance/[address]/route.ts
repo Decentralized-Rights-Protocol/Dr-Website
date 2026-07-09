@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ address: string }> }
+  { params }: { params: Promise<{ address: string }> },
 ) {
   try {
     const { address } = await params;
@@ -10,19 +10,22 @@ export async function GET(
     // Validate address format
     if (!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) {
       return NextResponse.json(
-        { error: 'Invalid wallet address format' },
-        { status: 400 }
+        { error: "Invalid wallet address format" },
+        { status: 400 },
       );
     }
 
     // Forward request to FastAPI backend
-    const backendUrl = process.env.LEARN_API_URL || 'http://localhost:8001';
-    const response = await fetch(`${backendUrl}/api/reward/balance/${address}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    const backendUrl = process.env.LEARN_API_URL || "http://localhost:8001";
+    const response = await fetch(
+      `${backendUrl}/api/reward/balance/${address}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
 
     if (!response.ok) {
       throw new Error(`Backend responded with status: ${response.status}`);
@@ -30,16 +33,15 @@ export async function GET(
 
     const data = await response.json();
     return NextResponse.json(data);
-
   } catch (error) {
-    console.error('Error fetching user balance:', error);
+    console.error("Error fetching user balance:", error);
     // Return a successful response with default values instead of 500 error
     return NextResponse.json({
       balance: 0,
-      balance_formatted: 0.00, // Return as number, not string
-      symbol: 'DeRi-TEST',
-      network: 'testnet',
-      message: 'Balance service temporarily unavailable'
+      balance_formatted: 0.0, // Return as number, not string
+      symbol: "DeRi-TEST",
+      network: "testnet",
+      message: "Balance service temporarily unavailable",
     });
   }
 }

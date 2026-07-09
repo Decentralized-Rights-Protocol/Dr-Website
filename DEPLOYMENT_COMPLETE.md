@@ -56,23 +56,28 @@ vercel --prod --yes
 For each project, add environment variables:
 
 **Main Site** (`src/`):
+
 - `NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com`
 - `NEXT_PUBLIC_BLOCKCHAIN_RPC=https://rpc.decentralizedrights.com`
 - `NEXT_PUBLIC_AI_URL=https://ai.decentralizedrights.com`
 - `NEXT_PUBLIC_IPFS_URL=https://ipfs.decentralizedrights.com`
 
 **App Portal** (`app-portal/`):
+
 - Same as Main Site plus:
 - `NEXT_PUBLIC_RPC_URL=https://rpc.decentralizedrights.com`
 - `NEXT_PUBLIC_CHAIN_ID=31337`
 
 **Explorer** (`explorer/`):
+
 - Same as Main Site
 
 **API Docs** (`api/`):
+
 - `NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com`
 
 **Backend API** (`backend/drp-website-api/`):
+
 - `BLOCKCHAIN_RPC_URL=https://rpc.decentralizedrights.com`
 - `DATABASE_URL=[your-database-url]`
 - `REDIS_URL=[your-redis-url]`
@@ -118,4 +123,3 @@ In Vercel Dashboard for each project:
 
 **Status**: ✅ 4/5 Projects Deployed Successfully
 **Last Updated**: 2024-11-30
-

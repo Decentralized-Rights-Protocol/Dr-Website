@@ -91,30 +91,35 @@ npx hardhat run scripts/deploy.js --network <network>
 ## 📚 Curriculum Levels
 
 ### Level 1: Blockchain Foundations
+
 - What is Blockchain?
 - Cryptography & Hashing
 - Consensus Mechanisms
 - Smart Contracts 101
 
 ### Level 2: DRP in Action
+
 - DRP Architecture
 - PoST & PoAT Consensus
 - Elder Quorum System
 - Activity Proofs
 
 ### Level 3: Building & Contributing
+
 - DRP Development Kit
 - Building DApps
 - Contributing to DRP
 - Testing & Deployment
 
 ### Level 4: Real-World Integration
+
 - Enterprise Integration
 - Supply Chain Applications
 - Identity & Access Management
 - Cross-Chain Interoperability
 
 ### Level 5: Mastery & Governance
+
 - Advanced DRP Concepts
 - Governance Mechanisms
 - Economic Models
@@ -123,24 +128,28 @@ npx hardhat run scripts/deploy.js --network <network>
 ## 🎮 Features
 
 ### Interactive Learning
+
 - **Lesson Cards**: Visual progress tracking
 - **Quiz Interface**: Multiple choice and practical assessments
 - **Progress Tracker**: Real-time learning analytics
 - **Certificate NFTs**: Blockchain-verified achievements
 
 ### Reward System
+
 - **$DeRi Tokens**: Earned for lesson completion
 - **Score-based Rewards**: Higher scores = more tokens
 - **Streak Bonuses**: Consistent learning rewards
 - **Achievement Badges**: Special recognition for milestones
 
 ### AI Integration
+
 - **DRP Learning Assistant**: Personalized tutoring
 - **Context-aware Help**: Understands current lesson
 - **Interactive Q&A**: Natural language questions
 - **Learning Style Adaptation**: Adjusts to user preferences
 
 ### Social Features
+
 - **Leaderboards**: Global and weekly rankings
 - **Achievement Sharing**: Show off your progress
 - **Community Challenges**: Collaborative learning goals
@@ -149,28 +158,33 @@ npx hardhat run scripts/deploy.js --network <network>
 ## 🔧 API Endpoints
 
 ### User Management
+
 - `POST /users/register` - Register new user
 - `GET /progress/{wallet_address}` - Get user progress
 - `GET /achievements/{wallet_address}` - Get user achievements
 
 ### Learning Content
+
 - `GET /lessons` - Get all lessons
 - `GET /lessons/{lesson_id}` - Get specific lesson
 - `POST /quiz/submit` - Submit quiz answers
 
 ### Social Features
+
 - `GET /leaderboard` - Get leaderboard data
 - `GET /dashboard` - Get dashboard analytics
 
 ## 🎯 Smart Contract Features
 
 ### Proof of Knowledge (PoK) Contract
+
 - **NFT Certificates**: Unique tokens for each completed lesson
 - **Reward Distribution**: Automated $DeRi token payouts
 - **Achievement Tracking**: On-chain progress records
 - **Verification System**: Tamper-proof completion records
 
 ### Key Functions
+
 - `completeLesson()` - Record lesson completion and mint certificate
 - `claimRewards()` - Claim accumulated $DeRi tokens
 - `getUserProgress()` - Query user's learning history
@@ -179,6 +193,7 @@ npx hardhat run scripts/deploy.js --network <network>
 ## 🎨 UI Components
 
 ### Core Components
+
 - **LessonCard**: Displays lesson information and progress
 - **QuizInterface**: Interactive quiz with multiple choice questions
 - **ProgressBar**: Visual progress tracking
@@ -186,6 +201,7 @@ npx hardhat run scripts/deploy.js --network <network>
 - **LeaderboardTable**: Shows rankings and statistics
 
 ### Navigation
+
 - **LevelSelector**: Choose learning level
 - **ModuleNavigation**: Browse lesson modules
 - **ProgressTracker**: View overall progress
@@ -194,12 +210,14 @@ npx hardhat run scripts/deploy.js --network <network>
 ## 🔐 Security Features
 
 ### Smart Contract Security
+
 - **ReentrancyGuard**: Prevents reentrancy attacks
 - **Ownable**: Admin-only functions protected
 - **Input Validation**: All inputs validated
 - **Emergency Functions**: Admin can pause/withdraw if needed
 
 ### API Security
+
 - **CORS Protection**: Configured for specific origins
 - **Input Sanitization**: All inputs cleaned and validated
 - **Rate Limiting**: Prevents abuse
@@ -208,12 +226,14 @@ npx hardhat run scripts/deploy.js --network <network>
 ## 📊 Analytics & Monitoring
 
 ### Learning Analytics
+
 - **Completion Rates**: Track lesson completion
 - **Time Spent**: Monitor learning engagement
 - **Score Distribution**: Analyze quiz performance
 - **User Retention**: Measure learning persistence
 
 ### System Monitoring
+
 - **API Performance**: Response times and error rates
 - **Smart Contract Events**: Track on-chain activities
 - **User Growth**: Monitor platform adoption
@@ -222,12 +242,14 @@ npx hardhat run scripts/deploy.js --network <network>
 ## 🚀 Deployment
 
 ### Frontend (Vercel)
+
 ```bash
 # Deploy to Vercel
 vercel --prod
 ```
 
 ### Backend (Railway/Heroku)
+
 ```bash
 # Deploy to Railway
 railway deploy
@@ -237,6 +259,7 @@ git push heroku main
 ```
 
 ### Smart Contracts (Ethereum/Polygon)
+
 ```bash
 # Deploy to mainnet
 npx hardhat run scripts/deploy.js --network mainnet

@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react'
-import { PremiumPage, PremiumContainer } from '@/components/site/PremiumPage'
+import type { ReactNode } from "react";
+import { PremiumPage, PremiumContainer } from "@/components/site/PremiumPage";
 
 export default function EconomicsLayout({ children }: { children: ReactNode }) {
   return (
@@ -8,5 +8,5 @@ export default function EconomicsLayout({ children }: { children: ReactNode }) {
         <PremiumContainer>{children}</PremiumContainer>
       </div>
     </PremiumPage>
-  )
+  );
 }

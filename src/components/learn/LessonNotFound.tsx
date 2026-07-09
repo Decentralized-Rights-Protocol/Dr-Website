@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { BookOpen, ArrowLeft, Sparkles } from 'lucide-react'
+import Link from "next/link";
+import { BookOpen, ArrowLeft, Sparkles } from "lucide-react";
 
 export function LessonNotFound() {
   return (
@@ -15,7 +15,7 @@ export function LessonNotFound() {
           <div className="absolute inset-0 text-9xl font-bold text-blue-500/20 blur-2xl">
             404
           </div>
-          
+
           {/* Floating particles */}
           {[...Array(20)].map((_, i) => (
             <div
@@ -30,17 +30,18 @@ export function LessonNotFound() {
             />
           ))}
         </div>
-        
+
         <div className="mb-6">
           <BookOpen className="h-16 w-16 text-blue-500 mx-auto mb-4 animate-bounce" />
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Lesson Not Found
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
-            The lesson you&apos;re looking for doesn&apos;t exist or may have been moved.
+            The lesson you&apos;re looking for doesn&apos;t exist or may have
+            been moved.
           </p>
         </div>
-        
+
         <div className="space-y-4">
           <Link
             href="/learn"
@@ -49,7 +50,7 @@ export function LessonNotFound() {
             <Sparkles className="h-5 w-5" />
             Browse Lessons
           </Link>
-          
+
           <Link
             href="/learn"
             className="inline-flex items-center justify-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-foreground font-medium transition-colors"
@@ -60,6 +61,5 @@ export function LessonNotFound() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

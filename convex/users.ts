@@ -1,6 +1,10 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { ensureUserForWallet, findProfileByWallet, normalizeWallet } from "./lib/domain";
+import {
+  ensureUserForWallet,
+  findProfileByWallet,
+  normalizeWallet,
+} from "./lib/domain";
 import { nowIso } from "./lib/time";
 
 export const touchWalletSession = mutation({
@@ -63,7 +67,11 @@ export const getProfileByWallet = query({
 export const promoteWalletRole = mutation({
   args: {
     walletAddress: v.string(),
-    role: v.union(v.literal("member"), v.literal("reviewer"), v.literal("admin")),
+    role: v.union(
+      v.literal("member"),
+      v.literal("reviewer"),
+      v.literal("admin"),
+    ),
   },
   handler: async (ctx, args) => {
     const record = await ensureUserForWallet(ctx, args.walletAddress);

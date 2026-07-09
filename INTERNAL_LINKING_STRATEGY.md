@@ -10,22 +10,20 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 
 ### Hub Pages (High Authority, Link Targets)
 
-**Primary Hubs:
+\*\*Primary Hubs:
+
 1. **Homepage (/)** - Main entry point, highest authority
 2. **Whitepaper (/whitepaper)** - Technical authority, comprehensive information
 3. **Philosophy (/philosophy)** - Foundational principles, high trust
 4. **Governance (/economics/governance)** - Governance authority
 
-**Secondary Hubs:**
-5. **Economics (/economics)** - Economic model authority
-6. **Documentation (/docs)** - Technical documentation hub
-7. **Learn (/learn)** - Educational content hub
+**Secondary Hubs:** 5. **Economics (/economics)** - Economic model authority 6. **Documentation (/docs)** - Technical documentation hub 7. **Learn (/learn)** - Educational content hub
 
 ### Spoke Pages (Supporting Content, Link Sources)
 
-- Individual economics pages (/economics/*)
-- Learn modules (/learn/*)
-- Documentation pages (/docs/*)
+- Individual economics pages (/economics/\*)
+- Learn modules (/learn/\*)
+- Documentation pages (/docs/\*)
 - Community page (/community)
 - Token pages (/tokens)
 - Roadmap (/roadmap)
@@ -37,6 +35,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 2.1 Homepage Linking
 
 **Must Link To:**
+
 - Philosophy page (at least once)
 - Whitepaper (at least once)
 - Governance page (if relevant)
@@ -44,6 +43,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 - Key concepts (PoST, PoAT, RIGHTS token, DeRi token)
 
 **Should Link To:**
+
 - Documentation (/docs)
 - Learn modules (/learn)
 - Community (/community)
@@ -52,6 +52,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 **Link Count:** 8-12 internal links
 
 **Anchor Text Examples:**
+
 - "DRP philosophy" → /philosophy
 - "technical whitepaper" → /whitepaper
 - "Proof of Status (PoST)" → /learn or /economics/governance
@@ -61,12 +62,14 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 2.2 Philosophy Page Linking
 
 **Must Link To:**
+
 - Whitepaper (technical details)
 - Governance page (implementation)
 - Economics pages (economic model)
 - Homepage (navigation)
 
 **Should Link To:**
+
 - Learn modules (educational content)
 - Documentation (technical details)
 - Community (participation)
@@ -74,6 +77,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 **Link Count:** 6-10 internal links
 
 **Anchor Text Examples:**
+
 - "technical specifications" → /whitepaper
 - "governance model" → /economics/governance
 - "economic framework" → /economics
@@ -83,6 +87,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 2.3 Whitepaper Page Linking
 
 **Must Link To:**
+
 - Philosophy (foundational principles)
 - Governance (governance model)
 - Economics pages (tokenomics)
@@ -90,6 +95,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 - Homepage (navigation)
 
 **Should Link To:**
+
 - Learn modules (educational content)
 - Community (participation)
 - Roadmap (future plans)
@@ -97,6 +103,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 **Link Count:** 8-12 internal links
 
 **Anchor Text Examples:**
+
 - "philosophical foundations" → /philosophy
 - "governance mechanisms" → /economics/governance
 - "token economics" → /economics/tokenomics
@@ -106,12 +113,14 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 2.4 Governance Page Linking
 
 **Must Link To:**
+
 - Philosophy (governance principles)
 - Economics pages (token distribution)
 - Whitepaper (technical specifications)
 - Homepage (navigation)
 
 **Should Link To:**
+
 - Community (participation)
 - Learn modules (educational content)
 - Documentation (guides)
@@ -119,6 +128,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 **Link Count:** 6-10 internal links
 
 **Anchor Text Examples:**
+
 - "governance principles" → /philosophy
 - "RIGHTS token distribution" → /economics/tokenomics
 - "technical specifications" → /whitepaper
@@ -128,12 +138,14 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 2.5 Economics Pages Linking
 
 **Must Link To:**
+
 - Governance (governance model)
 - Whitepaper (technical details)
 - Philosophy (economic principles)
 - Homepage (navigation)
 
 **Should Link To:**
+
 - Learn modules (educational content)
 - Documentation (guides)
 - Token pages (/tokens)
@@ -141,6 +153,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 **Link Count:** 5-8 internal links per page
 
 **Anchor Text Examples:**
+
 - "governance model" → /economics/governance
 - "technical whitepaper" → /whitepaper
 - "economic principles" → /philosophy
@@ -150,11 +163,13 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 2.6 Learn Modules Linking
 
 **Must Link To:**
+
 - Homepage (navigation)
 - Related learn modules
 - Documentation (technical details)
 
 **Should Link To:**
+
 - Whitepaper (comprehensive information)
 - Philosophy (principles)
 - Economics pages (economic models)
@@ -162,6 +177,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 **Link Count:** 4-8 internal links per module
 
 **Anchor Text Examples:**
+
 - "DRP homepage" → /
 - "Proof of Status" → related learn module
 - "technical documentation" → /docs
@@ -170,11 +186,13 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 2.7 Documentation Pages Linking
 
 **Must Link To:**
+
 - Homepage (navigation)
 - Related documentation pages
 - Whitepaper (comprehensive information)
 
 **Should Link To:**
+
 - Learn modules (educational content)
 - Economics pages (economic models)
 - Governance (governance details)
@@ -182,6 +200,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 **Link Count:** 5-10 internal links per page
 
 **Anchor Text Examples:**
+
 - "DRP homepage" → /
 - "API documentation" → related docs
 - "technical whitepaper" → /whitepaper
@@ -194,17 +213,20 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 3.1 Best Practices
 
 **Use Descriptive, Keyword-Rich Anchor Text:**
+
 - ✅ "Proof of Status (PoST)" instead of "click here"
 - ✅ "DRP governance model" instead of "this page"
 - ✅ "quantum-safe blockchain" instead of "more info"
 - ✅ "RIGHTS token" instead of "token"
 
 **Include Context:**
+
 - ✅ "Learn about DRP's Proof of Status mechanism"
 - ✅ "Read the technical whitepaper for details"
 - ✅ "Explore DRP governance participation"
 
 **Avoid:**
+
 - ❌ Generic terms: "click here", "read more", "this"
 - ❌ Over-optimized exact match keywords
 - ❌ Too many internal links (max 5-7 per section)
@@ -212,36 +234,42 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 3.2 Anchor Text Examples by Concept
 
 **Proof of Status (PoST):**
+
 - "Proof of Status (PoST)"
 - "DRP's identity verification mechanism"
 - "PoST consensus mechanism"
 - Link to: /learn, /economics/governance, /whitepaper
 
 **Proof of Activity (PoAT):**
+
 - "Proof of Activity (PoAT)"
 - "activity verification mechanism"
 - "PoAT consensus"
 - Link to: /learn, /economics/abe, /whitepaper
 
 **RIGHTS Token:**
+
 - "RIGHTS token"
 - "DRP governance token"
 - "RIGHTS token governance"
 - Link to: /economics/tokenomics, /economics/governance
 
 **DeRi Token:**
+
 - "DeRi token"
 - "DRP utility token"
 - "DeRi token utility"
 - Link to: /economics/tokenomics, /economics/abe
 
 **Governance:**
+
 - "DRP governance"
 - "decentralized governance"
 - "governance model"
 - Link to: /economics/governance, /philosophy
 
 **Quantum-Safe:**
+
 - "quantum-safe cryptography"
 - "post-quantum security"
 - "quantum-safe blockchain"
@@ -254,6 +282,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 4.1 When to Link
 
 **Link When:**
+
 - First mention of a key concept (PoST, PoAT, RIGHTS, DeRi)
 - Explaining a concept that has a dedicated page
 - Referencing technical details available elsewhere
@@ -261,6 +290,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 - Connecting related concepts
 
 **Don't Link When:**
+
 - Concept is already explained on current page
 - Link would interrupt reading flow
 - Too many links in a single paragraph (max 2-3)
@@ -284,6 +314,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 5.1 Above the Fold
 
 **Include:**
+
 - Navigation links (always)
 - Key concept links (first mention)
 - Primary CTA links (whitepaper, docs)
@@ -293,6 +324,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 5.2 In Content
 
 **Include:**
+
 - Contextual concept links
 - Related page links
 - Educational resource links
@@ -302,6 +334,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 5.3 Footer/Sidebar
 
 **Include:**
+
 - Navigation links
 - Related pages
 - Quick links
@@ -311,6 +344,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 5.4 Call-to-Action Sections
 
 **Include:**
+
 - Primary action links (whitepaper, docs, community)
 - Related resource links
 - Next step links
@@ -363,6 +397,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 7.1 Relevance
 
 **Ensure:**
+
 - Links are contextually relevant
 - Linked pages provide value
 - Links enhance understanding
@@ -371,6 +406,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 7.2 Authority
 
 **Prioritize:**
+
 - Hub pages (homepage, whitepaper, philosophy)
 - Authoritative pages (governance, economics)
 - Comprehensive pages (documentation)
@@ -378,6 +414,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 7.3 Freshness
 
 **Maintain:**
+
 - Links to current content
 - Updated links as content changes
 - Removed links to deleted pages
@@ -386,6 +423,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ### 7.4 User Experience
 
 **Optimize:**
+
 - Clear anchor text
 - Logical link placement
 - Appropriate link density
@@ -396,6 +434,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 ## 8. Implementation Checklist
 
 ### Phase 1: Core Pages (Week 1-2)
+
 - [ ] Add links to homepage
 - [ ] Add links to philosophy page
 - [ ] Add links to whitepaper page
@@ -403,6 +442,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 - [ ] Verify all links work
 
 ### Phase 2: Supporting Pages (Week 3-4)
+
 - [ ] Add links to economics pages
 - [ ] Add links to learn modules
 - [ ] Add links to documentation
@@ -410,6 +450,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 - [ ] Verify link quality
 
 ### Phase 3: Optimization (Week 5-6)
+
 - [ ] Review link distribution
 - [ ] Optimize anchor text
 - [ ] Add contextual links
@@ -417,6 +458,7 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 - [ ] Test user experience
 
 ### Phase 4: Monitoring (Ongoing)
+
 - [ ] Monitor link performance
 - [ ] Track user navigation
 - [ ] Update links as needed
@@ -468,5 +510,4 @@ This document outlines the internal linking strategy to optimize SEO, improve us
 
 ---
 
-*This internal linking strategy should be implemented gradually and monitored regularly for optimal results.*
-
+_This internal linking strategy should be implemented gradually and monitored regularly for optimal results._

@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import Link from 'next/link'
-import { ArrowRight, Download, Users, Shield, Globe } from 'lucide-react'
+import * as React from "react";
+import Link from "next/link";
+import { ArrowRight, Download, Users, Shield, Globe } from "lucide-react";
 
 const stats = [
-  { label: 'Active Users', value: '10K+', icon: Users },
-  { label: 'Countries', value: '50+', icon: Globe },
-  { label: 'Security Score', value: '99.9%', icon: Shield },
-]
+  { label: "Active Users", value: "10K+", icon: Users },
+  { label: "Countries", value: "50+", icon: Globe },
+  { label: "Security Score", value: "99.9%", icon: Shield },
+];
 
 export function Hero() {
   return (
@@ -42,9 +42,9 @@ export function Hero() {
 
           {/* Subtitle */}
           <p className="animate-fade-in mx-auto mb-8 max-w-3xl text-xl leading-relaxed text-foreground/70 sm:text-2xl">
-            The Decentralized Rights Protocol (DRP) is building a quantum-safe, 
-            transparent platform to protect, verify, and advance human rights globally 
-            using cutting-edge blockchain technology.
+            The Decentralized Rights Protocol (DRP) is building a quantum-safe,
+            transparent platform to protect, verify, and advance human rights
+            globally using cutting-edge blockchain technology.
           </p>
 
           {/* CTA Buttons */}
@@ -76,8 +76,12 @@ export function Hero() {
                 <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-gradient-to-r from-primary/10 to-accent/10 backdrop-blur-sm">
                   <stat.icon className="h-8 w-8 text-foreground" />
                 </div>
-                <div className="mb-2 text-4xl font-bold text-foreground">{stat.value}</div>
-                <div className="text-sm font-medium text-foreground/70">{stat.label}</div>
+                <div className="mb-2 text-4xl font-bold text-foreground">
+                  {stat.value}
+                </div>
+                <div className="text-sm font-medium text-foreground/70">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -91,5 +95,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

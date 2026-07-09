@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { Download, Eye, ExternalLink } from 'lucide-react'
-import { trackDRPEvent } from '@/lib/analytics'
+import * as React from "react";
+import { Download, Eye, ExternalLink } from "lucide-react";
+import { trackDRPEvent } from "@/lib/analytics";
 
 export function WhitepaperActions(): JSX.Element {
   const onDownload = React.useCallback(() => {
-    trackDRPEvent('whitepaper_download', { source: 'hero' })
-  }, [])
+    trackDRPEvent("whitepaper_download", { source: "hero" });
+  }, []);
   const onRead = React.useCallback(() => {
-    trackDRPEvent('whitepaper_download', { source: 'preview' })
-  }, [])
+    trackDRPEvent("whitepaper_download", { source: "preview" });
+  }, []);
   return (
     <>
       <a
@@ -34,6 +34,5 @@ export function WhitepaperActions(): JSX.Element {
         <ExternalLink className="ml-2 h-4 w-4" />
       </a>
     </>
-  )
+  );
 }
-

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -12,13 +12,13 @@ export function createProxyRoute({ pathPrefix }: ProxyOptions) {
     const query = searchParams.toString();
 
     // Construct the external API URL
-    const externalApiPath = `${pathPrefix}${query ? `?${query}` : ''}`;
+    const externalApiPath = `${pathPrefix}${query ? `?${query}` : ""}`;
     const apiUrl = `${NEXT_PUBLIC_API_URL}${externalApiPath}`;
 
     try {
       const response = await fetch(apiUrl, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
@@ -30,7 +30,9 @@ export function createProxyRoute({ pathPrefix }: ProxyOptions) {
       const data = await response.json();
       return NextResponse.json(data);
     } catch (error: any) {
-      return new NextResponse('Internal Server Error: ' + error.message, { status: 500 });
+      return new NextResponse("Internal Server Error: " + error.message, {
+        status: 500,
+      });
     }
   };
 }

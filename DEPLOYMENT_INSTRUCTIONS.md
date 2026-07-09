@@ -12,7 +12,7 @@
 
 # This will verify:
 # ✅ Main site builds
-# ✅ App portal builds  
+# ✅ App portal builds
 # ✅ Explorer builds
 # ✅ API docs build
 ```
@@ -54,6 +54,7 @@ vercel --prod
 ```
 
 **Verify Backend:**
+
 ```bash
 curl https://api.decentralizedrights.com/health
 ```
@@ -140,6 +141,7 @@ For **EACH** project in Vercel Dashboard:
 2. Add the following variables:
 
 ### Main Site (`src/`)
+
 ```env
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 NEXT_PUBLIC_BLOCKCHAIN_RPC=https://rpc.decentralizedrights.com
@@ -149,6 +151,7 @@ NEXT_PUBLIC_LEARN_URL=https://decentralizedrights.com/learn
 ```
 
 ### App Portal (`app-portal/`)
+
 ```env
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 NEXT_PUBLIC_BLOCKCHAIN_RPC=https://rpc.decentralizedrights.com
@@ -160,6 +163,7 @@ NEXT_PUBLIC_LEARN_URL=https://decentralizedrights.com/learn
 ```
 
 ### Explorer (`explorer/`)
+
 ```env
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 NEXT_PUBLIC_BLOCKCHAIN_RPC=https://rpc.decentralizedrights.com
@@ -168,6 +172,7 @@ NEXT_PUBLIC_IPFS_URL=https://ipfs.decentralizedrights.com
 ```
 
 ### API Docs (`api/`)
+
 ```env
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 ```
@@ -256,6 +261,7 @@ docker-compose logs -f api
 ### Using Docker Swarm or Kubernetes
 
 The Dockerfile is production-ready for:
+
 - Docker Swarm
 - Kubernetes
 - AWS ECS
@@ -265,6 +271,7 @@ The Dockerfile is production-ready for:
 ## 📋 Deployment Checklist
 
 ### Pre-Deployment
+
 - [x] All code implemented
 - [x] All components created
 - [x] Build scripts ready
@@ -272,6 +279,7 @@ The Dockerfile is production-ready for:
 - [ ] Build tests passed locally
 
 ### Deployment Steps
+
 - [ ] Backend API deployed (Docker or Vercel)
 - [ ] Main site deployed to Vercel
 - [ ] App portal deployed to Vercel
@@ -282,6 +290,7 @@ The Dockerfile is production-ready for:
 - [ ] SSL certificates active
 
 ### Post-Deployment
+
 - [ ] All URLs accessible
 - [ ] API endpoints working
 - [ ] Frontend-backend connections verified
@@ -292,16 +301,19 @@ The Dockerfile is production-ready for:
 ## 🚨 Troubleshooting
 
 ### Build Failures
+
 - Check Node.js version (18+)
 - Clear `.next` folders: `rm -rf .next`
 - Clear node_modules: `rm -rf node_modules && npm install`
 
 ### API Connection Issues
+
 - Verify environment variables are set
 - Check CORS settings in backend
 - Verify API URL is correct
 
 ### Docker Issues
+
 - Check Docker daemon is running
 - Verify .env file exists
 - Check port availability
@@ -328,4 +340,3 @@ The Dockerfile is production-ready for:
 
 **Status**: ✅ Ready for Deployment
 **Last Updated**: 2024
-

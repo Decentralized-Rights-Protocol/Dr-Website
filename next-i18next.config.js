@@ -1,12 +1,11 @@
 module.exports = {
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
   fallbackLng: {
-    default: ['en'],
+    default: ["en"],
   },
   debug: false,
-  reloadOnPrerender: process.env.NODE_ENV === 'development',
-}
-
+  reloadOnPrerender: process.env.NODE_ENV === "development",
+};

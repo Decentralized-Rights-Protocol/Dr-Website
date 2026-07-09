@@ -23,9 +23,11 @@ X-API-Key: <api_key>
 ### 1. Health & Status
 
 #### GET `/health`
+
 Health check endpoint.
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -44,13 +46,16 @@ Health check endpoint.
 ### 2. Tokens
 
 #### GET `/api/v1/tokens/balance/{address}`
+
 Get token balance for an address.
 
 **Parameters:**
+
 - `address` (path) - Wallet address (0x...)
 - `token_type` (query) - Token type: `RIGHTS` or `DERI` (default: `DERI`)
 
 **Response:**
+
 ```json
 {
   "address": "0x...",
@@ -64,12 +69,15 @@ Get token balance for an address.
 ```
 
 #### GET `/api/v1/tokens/balances/{address}`
+
 Get all token balances (both RIGHTS and DERI).
 
 #### GET `/api/v1/tokens/rights/{address}`
+
 Get rights information for an address.
 
 **Response:**
+
 ```json
 {
   "address": "0x...",
@@ -80,9 +88,11 @@ Get rights information for an address.
 ```
 
 #### POST `/api/v1/tokens/transfer`
+
 Transfer tokens between addresses.
 
 **Request:**
+
 ```json
 {
   "from_address": "0x...",
@@ -98,9 +108,11 @@ Transfer tokens between addresses.
 ### 3. Activities
 
 #### POST `/api/v1/activities/submit`
+
 Submit an activity (PoAT) or status (PoST) claim.
 
 **Request:**
+
 ```json
 {
   "title": "Activity Title",
@@ -115,6 +127,7 @@ Submit an activity (PoAT) or status (PoST) claim.
 ```
 
 **Response:**
+
 ```json
 {
   "submission_id": "uuid",
@@ -126,9 +139,11 @@ Submit an activity (PoAT) or status (PoST) claim.
 ```
 
 #### GET `/api/v1/activities/status/{submission_id}`
+
 Get status of an activity submission.
 
 #### GET `/api/v1/activities/user/{actor_id}`
+
 Get all activities for a user.
 
 ---
@@ -136,9 +151,11 @@ Get all activities for a user.
 ### 4. Governance
 
 #### POST `/api/v1/governance/proposals`
+
 Create a new governance proposal.
 
 **Request:**
+
 ```json
 {
   "title": "Proposal Title",
@@ -150,20 +167,25 @@ Create a new governance proposal.
 ```
 
 #### GET `/api/v1/governance/proposals`
+
 List all proposals with optional filtering.
 
 **Query Parameters:**
+
 - `status` - Filter by status (draft, active, passed, rejected)
 - `limit` - Maximum results (default: 50)
 - `offset` - Pagination offset
 
 #### GET `/api/v1/governance/proposals/{proposal_id}`
+
 Get a specific proposal.
 
 #### POST `/api/v1/governance/proposals/{proposal_id}/vote`
+
 Vote on a proposal.
 
 **Request:**
+
 ```json
 {
   "voter": "0x...",
@@ -173,6 +195,7 @@ Vote on a proposal.
 ```
 
 #### GET `/api/v1/governance/proposals/{proposal_id}/results`
+
 Get detailed voting results.
 
 ---
@@ -180,13 +203,16 @@ Get detailed voting results.
 ### 5. Notifications
 
 #### GET `/api/v1/notifications/{user_address}`
+
 Get notifications for a user.
 
 **Query Parameters:**
+
 - `unread_only` - Only return unread notifications
 - `limit` - Maximum results (default: 50)
 
 **Response:**
+
 ```json
 [
   {
@@ -203,9 +229,11 @@ Get notifications for a user.
 ```
 
 #### POST `/api/v1/notifications/{notification_id}/read`
+
 Mark notification as read.
 
 #### WS `/api/v1/notifications/ws/{user_address}`
+
 WebSocket endpoint for real-time notifications.
 
 ---
@@ -213,9 +241,11 @@ WebSocket endpoint for real-time notifications.
 ### 6. AI Service
 
 #### POST `/api/v1/ai/query`
+
 Query AI for information or guidance.
 
 **Request:**
+
 ```json
 {
   "query": "What is DRP?",
@@ -225,6 +255,7 @@ Query AI for information or guidance.
 ```
 
 **Response:**
+
 ```json
 {
   "answer": "DRP is...",
@@ -235,9 +266,11 @@ Query AI for information or guidance.
 ```
 
 #### POST `/api/v1/ai/recommendations`
+
 Get AI-powered recommendations.
 
 **Request:**
+
 ```json
 {
   "user_address": "0x...",
@@ -246,9 +279,11 @@ Get AI-powered recommendations.
 ```
 
 #### POST `/api/v1/ai/explain`
+
 Get explanation of a concept.
 
 **Query Parameters:**
+
 - `concept` - Concept to explain
 - `user_level` - beginner, intermediate, advanced
 
@@ -257,23 +292,29 @@ Get explanation of a concept.
 ### 7. Explorer
 
 #### GET `/api/v1/explorer/transactions`
+
 Get recent transactions.
 
 **Query Parameters:**
+
 - `address` - Filter by address (optional)
 - `limit` - Maximum results (default: 50)
 - `offset` - Pagination offset
 
 #### GET `/api/v1/explorer/transactions/{tx_hash}`
+
 Get specific transaction details.
 
 #### GET `/api/v1/explorer/blocks`
+
 Get recent blocks.
 
 #### GET `/api/v1/explorer/activity`
+
 Get activity feed (transactions, activities, governance).
 
 #### GET `/api/v1/explorer/stats`
+
 Get explorer statistics.
 
 ---
@@ -281,9 +322,11 @@ Get explorer statistics.
 ### 8. Users
 
 #### GET `/api/v1/users/{address}`
+
 Get user profile.
 
 **Response:**
+
 ```json
 {
   "address": "0x...",
@@ -299,6 +342,7 @@ Get user profile.
 ```
 
 #### PUT `/api/v1/users/{address}`
+
 Update user profile.
 
 ---
@@ -367,8 +411,7 @@ This tests all endpoints and frontend connectivity.
 ## Support
 
 For issues or questions:
+
 - GitHub Issues: [repository-url]/issues
 - Documentation: https://api.decentralizedrights.com/docs
 - Community: [community-link]
-
-

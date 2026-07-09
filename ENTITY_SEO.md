@@ -13,6 +13,7 @@ This document helps DRP become a recognized entity in Google's Knowledge Graph a
 **Entity Type:** Organization / Protocol / Blockchain Network
 
 **Primary Attributes:**
+
 - **Name:** Decentralized Rights Protocol
 - **Acronym:** DRP
 - **Type:** Blockchain Protocol / Software Application
@@ -354,11 +355,13 @@ Decentralized Rights Protocol (DRP)
 ### 5.1 Canonical Name Usage
 
 **Always use:**
+
 - "Decentralized Rights Protocol" (full name on first mention)
 - "DRP" (acronym for subsequent mentions)
 - Never use variations like "DRP Protocol" (redundant)
 
 **Examples:**
+
 - ✅ "Decentralized Rights Protocol (DRP) is a quantum-safe blockchain..."
 - ✅ "DRP uses Proof of Status and Proof of Activity..."
 - ❌ "DRP Protocol" or "The DRP"
@@ -383,34 +386,41 @@ Founded on the philosophy that technology should serve humanity, DRP creates a t
 ### 5.3 Attribute Descriptions
 
 **Technology:**
+
 - "DRP uses NIST-approved post-quantum cryptography including CRYSTALS-Kyber for key encapsulation and CRYSTALS-Dilithium for digital signatures."
 - "DRP implements a hybrid consensus mechanism combining Proof of Stake + Time (PoST) and Proof of Activity (PoAT)."
 
 **Economics:**
+
 - "DRP uses a dual-token economy: RIGHTS tokens for governance and DeRi tokens for utility."
 - "DRP implements a Sustainable Rights Economy (SRE) and Activity-Based Economy (ABE) that reward real-world contributions."
 
 **Governance:**
+
 - "DRP operates as a Decentralized Autonomous Organization (DAO) with token-weighted voting and community-driven proposals."
 - "DRP governance uses RIGHTS tokens for voting power, ensuring decentralized decision-making."
 
 **Philosophy:**
+
 - "DRP is built on principles of human rights protection, sustainability, and transparent governance."
 - "DRP implements principles from the Universal Declaration of Human Rights and UN Sustainable Development Goals."
 
 ### 5.4 Relationship Descriptions
 
 **Parent Relationships:**
+
 - "DRP is a blockchain protocol designed for human rights protection."
 - "DRP is part of the Web3 infrastructure ecosystem."
 - "DRP implements sustainable technology practices."
 
 **Child Relationships:**
+
 - "Proof of Status (PoST) is DRP's identity verification mechanism."
 - "RIGHTS token is DRP's governance token."
 - "AI Elders operate on the DRP network."
 
 **Peer Relationships:**
+
 - "DRP offers a quantum-safe alternative to Ethereum."
 - "DRP shares governance focus with Polkadot but prioritizes human rights."
 - "DRP prioritizes sustainability over Solana's focus on speed."
@@ -593,5 +603,4 @@ Founded on the philosophy that technology should serve humanity, DRP creates a t
 
 ---
 
-*This document should be updated regularly as DRP evolves and entity recognition improves.*
-
+_This document should be updated regularly as DRP evolves and entity recognition improves._

@@ -3,6 +3,7 @@
 ## ✅ Completed Tasks
 
 ### 1. Fixed Repeated Questions & Answers ✅
+
 - **Replaced `generateQuizForLesson`** with `getQuestionsForLesson` in all places
   - Updated `src/app/learn/lessons/[slug]/page.tsx`
   - Updated `src/app/api/learn/lesson/[id]/route.ts`
@@ -11,6 +12,7 @@
 - **Deprecated**: `generateQuizForLesson` function marked as deprecated
 
 ### 2. Added Option Shuffling ✅
+
 - **Created**: `src/learn/utils/quiz-helpers.ts` with shuffling utilities
   - `shuffleArray()` - Fisher-Yates shuffle algorithm
   - `shuffleStringOptions()` - Shuffles options while preserving correct answer index
@@ -18,6 +20,7 @@
 - **Result**: Answer options are now randomized per question render, preventing memorization of option positions
 
 ### 3. Psychology Triggers Implementation ✅
+
 - **Created 5 Psychology Trigger Components**:
   - `CuriosityTrigger` (Level 1) - "Why this matters" banner, low-risk quiz messaging
   - `UnderstandingTrigger` (Level 2) - Key concepts cards, mastery feedback
@@ -28,22 +31,26 @@
 - **Location**: `src/learn/components/psychology/`
 
 ### 4. Verification Functions ✅
+
 - **Enhanced**: `verifyNoDuplicates()` in `src/learn/data/questions/index.ts`
-- **Added**: `verifyQuestionIdFormat()` to check L{level}_{LESSON}_Q{num} format compliance
+- **Added**: `verifyQuestionIdFormat()` to check L{level}\_{LESSON}\_Q{num} format compliance
 - **Result**: Can now verify question uniqueness and ID format compliance
 
 ## 🔄 Remaining Tasks (Can be done incrementally)
 
 ### 3. Question ID Format Update (Pending)
+
 **Current Format**: `q1-1-1`, `q2-1-1`, etc.
 **Target Format**: `L1_BLOCKCHAIN_Q1`, `L2_DRP_ARCHITECTURE_Q1`, etc.
 
-**Status**: 
+**Status**:
+
 - Verification function created
 - ~100 questions need ID updates across 5 files
 - Can be done incrementally or with a migration script
 
 **Files to Update**:
+
 - `src/learn/data/questions/level-1-questions.ts` (20 questions)
 - `src/learn/data/questions/level-2-questions.ts` (20 questions)
 - `src/learn/data/questions/level-3-questions.ts` (20 questions)
@@ -51,7 +58,9 @@
 - `src/learn/data/questions/level-5-questions.ts` (20 questions)
 
 ### 4. Split Quiz Data into Per-Lesson Files (Pending)
-**Current Structure**: 
+
+**Current Structure**:
+
 ```
 src/learn/data/questions/
   ├─ level-1-questions.ts (all Level 1 lessons)
@@ -60,6 +69,7 @@ src/learn/data/questions/
 ```
 
 **Target Structure**:
+
 ```
 src/learn/data/questions/
   ├─ level-1/
@@ -75,7 +85,8 @@ src/learn/data/questions/
   └─ ...
 ```
 
-**Status**: 
+**Status**:
+
 - This is a large refactor affecting file structure
 - Would require updating imports in `index.ts`
 - Can be done incrementally, one level at a time
@@ -101,4 +112,3 @@ src/learn/data/questions/
 2. **Optional**: Split quiz files into per-lesson structure (incremental refactor)
 3. **Test**: Verify all lessons load correctly with unique questions
 4. **Deploy**: Push changes to GitHub and deploy to Vercel
-

@@ -8,6 +8,7 @@ A human-rights-centered blockchain infrastructure for dignity, accountability, a
 ## 🎭 Cinematic Experience
 
 The DRP website is designed as a continuous storytelling journey through 6 stages of protocol evolution:
+
 1. **Broken Systems**: Fragmented trust and chaotic isolation.
 2. **The Realization**: Slowing down to find clarity in dignity.
 3. **Human Network**: Transforming abstract nodes into a connected human network.
@@ -30,10 +31,9 @@ The DRP website is designed as a continuous storytelling journey through 6 stage
 - **Cinematic Camera**: Scroll-driven camera work that guides the user through the 3D environment.
 - **Protocol Command Center**: A premium dashboard for stewardship, activity verification, and rewards tracking.
 - **Functional Reliability**:
-    - Resolved infinite loading in recent activities through address normalization.
-    - Fixed activity verification submission workflow with robust error handling.
-    - Optimized 3D performance with instanced rendering and hardware-aware scaling.
-
+  - Resolved infinite loading in recent activities through address normalization.
+  - Fixed activity verification submission workflow with robust error handling.
+  - Optimized 3D performance with instanced rendering and hardware-aware scaling.
 
 ## ⚖️ License
 

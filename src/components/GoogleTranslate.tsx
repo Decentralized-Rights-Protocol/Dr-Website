@@ -1,20 +1,20 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 declare global {
   interface Window {
     google: {
       translate: {
         TranslateElement: {
-          new (config: any, elementId: string): void
+          new (config: any, elementId: string): void;
           InlineLayout: {
-            SIMPLE: number
-          }
-        }
-      }
-    }
-    googleTranslateElementInit: () => void
+            SIMPLE: number;
+          };
+        };
+      };
+    };
+    googleTranslateElementInit: () => void;
   }
 }
 
@@ -25,27 +25,30 @@ export function GoogleTranslate() {
       if (window.google?.translate?.TranslateElement) {
         new window.google.translate.TranslateElement(
           {
-            pageLanguage: 'en',
-            includedLanguages: 'en,fr,es,ar,zh,sw,pt,de,ru,hi,ko,ja,it',
-            layout: window.google.translate.TranslateElement.InlineLayout?.SIMPLE || 0,
+            pageLanguage: "en",
+            includedLanguages: "en,fr,es,ar,zh,sw,pt,de,ru,hi,ko,ja,it",
+            layout:
+              window.google.translate.TranslateElement.InlineLayout?.SIMPLE ||
+              0,
             autoDisplay: false,
           },
-          'google_translate_element'
-        )
+          "google_translate_element",
+        );
       }
-    }
+    };
 
     // Load Google Translate script if not already loaded
-    if (!document.getElementById('google-translate-script')) {
-      const script = document.createElement('script')
-      script.id = 'google-translate-script'
-      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
-      script.async = true
-      document.body.appendChild(script)
+    if (!document.getElementById("google-translate-script")) {
+      const script = document.createElement("script");
+      script.id = "google-translate-script";
+      script.src =
+        "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
     } else if (window.google?.translate?.TranslateElement) {
-      window.googleTranslateElementInit()
+      window.googleTranslateElementInit();
     }
-  }, [])
+  }, []);
 
   return (
     <div className="flex items-center">
@@ -78,6 +81,5 @@ export function GoogleTranslate() {
         }
       `}</style>
     </div>
-  )
+  );
 }
-

@@ -1,40 +1,45 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Sparkles } from 'lucide-react'
+import { useState } from "react";
+import { Sparkles } from "lucide-react";
 
 const sampleSuggestions = [
-  'Submit your latest community activity to earn +25 $DeRi.',
-  'Complete the renewable energy module for a sustainability boost.',
-  'Invite a verified partner to unlock collaborative governance slots.'
-]
+  "Submit your latest community activity to earn +25 $DeRi.",
+  "Complete the renewable energy module for a sustainability boost.",
+  "Invite a verified partner to unlock collaborative governance slots.",
+];
 
 type ElderMessage = {
-  role: 'assistant' | 'user'
-  content: string
-}
+  role: "assistant" | "user";
+  content: string;
+};
 
 export function ElderAssistant() {
-  const [prompt, setPrompt] = useState('')
+  const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState<ElderMessage[]>([
     {
-      role: 'assistant',
-      content: 'Welcome back! I am Elder AI, here to help you manage your proofs and rewards.'
-    }
-  ])
+      role: "assistant",
+      content:
+        "Welcome back! I am Elder AI, here to help you manage your proofs and rewards.",
+    },
+  ]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    if (!prompt.trim()) return
+    event.preventDefault();
+    if (!prompt.trim()) return;
 
-    const userMessage: ElderMessage = { role: 'user', content: prompt }
-    setMessages((prev) => [...prev, userMessage])
+    const userMessage: ElderMessage = { role: "user", content: prompt };
+    setMessages((prev) => [...prev, userMessage]);
     // Placeholder assistant response – replace with AI API integration.
-    const syntheticResponse = sampleSuggestions[Math.floor(Math.random() * sampleSuggestions.length)]
-    const assistantMessage: ElderMessage = { role: 'assistant', content: syntheticResponse }
-    setMessages((prev) => [...prev, assistantMessage])
-    setPrompt('')
-  }
+    const syntheticResponse =
+      sampleSuggestions[Math.floor(Math.random() * sampleSuggestions.length)];
+    const assistantMessage: ElderMessage = {
+      role: "assistant",
+      content: syntheticResponse,
+    };
+    setMessages((prev) => [...prev, assistantMessage]);
+    setPrompt("");
+  };
 
   return (
     <section className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
@@ -43,19 +48,26 @@ export function ElderAssistant() {
           <Sparkles className="h-5 w-5" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Elder AI assistant</h3>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">Ask for guidance on proofs, rewards, and impact planning.</p>
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+            Elder AI assistant
+          </h3>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            Ask for guidance on proofs, rewards, and impact planning.
+          </p>
         </div>
       </header>
 
-      <div className="mt-4 space-y-3 overflow-y-auto rounded-2xl bg-neutral-50/80 p-4 dark:bg-neutral-900/60" style={{ maxHeight: '18rem' }}>
+      <div
+        className="mt-4 space-y-3 overflow-y-auto rounded-2xl bg-neutral-50/80 p-4 dark:bg-neutral-900/60"
+        style={{ maxHeight: "18rem" }}
+      >
         {messages.map((message, index) => (
           <div
             key={`${message.role}-${index}`}
             className={
-              message.role === 'assistant'
-                ? 'text-sm text-neutral-700 dark:text-neutral-200'
-                : 'text-sm font-medium text-primary-700 dark:text-primary-200'
+              message.role === "assistant"
+                ? "text-sm text-neutral-700 dark:text-neutral-200"
+                : "text-sm font-medium text-primary-700 dark:text-primary-200"
             }
           >
             {message.content}
@@ -78,5 +90,5 @@ export function ElderAssistant() {
         </button>
       </form>
     </section>
-  )
+  );
 }

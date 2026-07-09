@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { motion } from 'framer-motion'
-import { LightBulbIcon } from '@heroicons/react/24/outline'
+import React from "react";
+import { motion } from "framer-motion";
+import { LightBulbIcon } from "@heroicons/react/24/outline";
 
 interface DidYouKnowProps {
-  fact: string
-  className?: string
+  fact: string;
+  className?: string;
 }
 
 /**
  * DidYouKnow - Highlight box for interesting facts
  * Friendly, engaging way to share additional knowledge
  */
-export function DidYouKnow({ fact, className = '' }: DidYouKnowProps) {
+export function DidYouKnow({ fact, className = "" }: DidYouKnowProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -32,6 +32,5 @@ export function DidYouKnow({ fact, className = '' }: DidYouKnowProps) {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
-

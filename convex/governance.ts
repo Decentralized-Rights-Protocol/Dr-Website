@@ -1,10 +1,26 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { appendAudit, createNotification, ensureUserForWallet, findProfileByWallet } from "./lib/domain";
+import {
+  appendAudit,
+  createNotification,
+  ensureUserForWallet,
+  findProfileByWallet,
+} from "./lib/domain";
 import { nowIso } from "./lib/time";
 
-function computeVoteWeight(input: { statusScore: number; governanceWeight: number; completedModules: number }) {
-  return Math.max(1, Math.round(input.governanceWeight + input.statusScore / 20 + input.completedModules * 0.5));
+function computeVoteWeight(input: {
+  statusScore: number;
+  governanceWeight: number;
+  completedModules: number;
+}) {
+  return Math.max(
+    1,
+    Math.round(
+      input.governanceWeight +
+        input.statusScore / 20 +
+        input.completedModules * 0.5,
+    ),
+  );
 }
 
 export const listGovernanceProposals = query({
@@ -42,7 +58,9 @@ export const createVoteRecord = mutation({
     choice: v.union(v.literal("yes"), v.literal("no"), v.literal("abstain")),
     rationale: v.optional(v.string()),
     isSimulated: v.optional(v.boolean()),
-    source: v.optional(v.union(v.literal("app"), v.literal("mock"), v.literal("protocol_sync"))),
+    source: v.optional(
+      v.union(v.literal("app"), v.literal("mock"), v.literal("protocol_sync")),
+    ),
   },
   handler: async (ctx, args) => {
     const actor = await ensureUserForWallet(ctx, args.walletAddress);
@@ -53,17 +71,25 @@ export const createVoteRecord = mutation({
 
     const existingVote = await ctx.db
       .query("votes")
-      .withIndex("by_proposal_wallet", (q) => q.eq("proposalId", proposal._id).eq("walletAddress", actor.linkedWallet.address))
+      .withIndex("by_proposal_wallet", (q) =>
+        q
+          .eq("proposalId", proposal._id)
+          .eq("walletAddress", actor.linkedWallet.address),
+      )
       .unique();
     if (existingVote) {
-      throw new Error("This wallet has already recorded a vote for the proposal.");
+      throw new Error(
+        "This wallet has already recorded a vote for the proposal.",
+      );
     }
 
     const progress = await ctx.db
       .query("learnProgress")
       .withIndex("by_user", (q) => q.eq("userId", actor.user._id))
       .collect();
-    const completedModules = progress.filter((item) => item.completionStatus === "completed").length;
+    const completedModules = progress.filter(
+      (item) => item.completionStatus === "completed",
+    ).length;
     const weight = computeVoteWeight({
       statusScore: actor.profile.statusScore,
       governanceWeight: actor.profile.governanceWeight,
@@ -85,7 +111,8 @@ export const createVoteRecord = mutation({
     await ctx.db.patch(proposal._id, {
       yesWeight: proposal.yesWeight + (args.choice === "yes" ? weight : 0),
       noWeight: proposal.noWeight + (args.choice === "no" ? weight : 0),
-      abstainWeight: proposal.abstainWeight + (args.choice === "abstain" ? weight : 0),
+      abstainWeight:
+        proposal.abstainWeight + (args.choice === "abstain" ? weight : 0),
       participationCount: proposal.participationCount + 1,
       updatedAt: nowIso(),
     });
@@ -126,7 +153,10 @@ export const bootstrapProposal = mutation({
   },
   handler: async (ctx, args) => {
     const proposer = await ensureUserForWallet(ctx, args.proposerWallet);
-    const slug = args.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    const slug = args.title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
     const proposalId = await ctx.db.insert("governanceProposals", {
       slug,
       title: args.title,

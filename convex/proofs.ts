@@ -31,7 +31,11 @@ export const updateProofTx = mutation({
   args: {
     proofId: v.id("indexedProofs"),
     txHash: v.string(),
-    status: v.union(v.literal("Pending"), v.literal("Processing"), v.literal("Verified")),
+    status: v.union(
+      v.literal("Pending"),
+      v.literal("Processing"),
+      v.literal("Verified"),
+    ),
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.proofId, {
@@ -49,15 +53,21 @@ export const getExplorerProofs = query({
   },
   handler: async (ctx, args) => {
     let q;
-    
+
     if (args.type) {
-      q = ctx.db.query("indexedProofs").withIndex("by_type", (q) => q.eq("type", args.type!));
+      q = ctx.db
+        .query("indexedProofs")
+        .withIndex("by_type", (q) => q.eq("type", args.type!));
     } else if (args.walletAddress) {
-      q = ctx.db.query("indexedProofs").withIndex("by_wallet", (q) => q.eq("walletAddress", args.walletAddress!));
+      q = ctx.db
+        .query("indexedProofs")
+        .withIndex("by_wallet", (q) =>
+          q.eq("walletAddress", args.walletAddress!),
+        );
     } else {
       q = ctx.db.query("indexedProofs");
     }
-    
+
     const results = await q.order("desc").take(args.limit || 50);
     return results;
   },

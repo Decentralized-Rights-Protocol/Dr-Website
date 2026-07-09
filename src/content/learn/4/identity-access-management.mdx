@@ -25,6 +25,7 @@ Traditional identity systems have critical flaws:
 - **Identity Theft**: Stolen credentials cause significant harm
 
 DRP IAM addresses these by:
+
 - **Self-Sovereign Identity**: Users control their own identity data
 - **Decentralized Storage**: No single point of failure
 - **Privacy by Design**: Users choose what to share
@@ -67,6 +68,7 @@ DRP IAM addresses these by:
 ### Decentralized Identifiers (DIDs)
 
 **DID Structure**:
+
 ```
 did:drp:1234567890abcdef
 
@@ -77,50 +79,57 @@ Components:
 ```
 
 **DID Document**:
+
 ```json
 {
   "@context": "https://www.w3.org/ns/did/v1",
   "id": "did:drp:1234567890abcdef",
-  "verificationMethod": [{
-    "id": "did:drp:1234567890abcdef#keys-1",
-    "type": "EcdsaSecp256k1VerificationKey2019",
-    "controller": "did:drp:1234567890abcdef",
-    "publicKeyMultibase": "z6Mk..."
-  }],
+  "verificationMethod": [
+    {
+      "id": "did:drp:1234567890abcdef#keys-1",
+      "type": "EcdsaSecp256k1VerificationKey2019",
+      "controller": "did:drp:1234567890abcdef",
+      "publicKeyMultibase": "z6Mk..."
+    }
+  ],
   "authentication": ["#keys-1"],
-  "service": [{
-    "id": "#service-1",
-    "type": "DRPIdentityService",
-    "serviceEndpoint": "https://identity.drp.network"
-  }]
+  "service": [
+    {
+      "id": "#service-1",
+      "type": "DRPIdentityService",
+      "serviceEndpoint": "https://identity.drp.network"
+    }
+  ]
 }
 ```
 
 ### Verifiable Credentials
 
 **Credential Structure**:
+
 ```typescript
 interface VerifiableCredential {
-  "@context": string[]
-  id: string
-  type: string[]
-  issuer: string // DID of issuer
-  issuanceDate: string
+  "@context": string[];
+  id: string;
+  type: string[];
+  issuer: string; // DID of issuer
+  issuanceDate: string;
   credentialSubject: {
-    id: string // DID of subject
-    [key: string]: any // Claim data
-  }
+    id: string; // DID of subject
+    [key: string]: any; // Claim data
+  };
   proof: {
-    type: string
-    created: string
-    proofPurpose: string
-    verificationMethod: string
-    jws: string // JSON Web Signature
-  }
+    type: string;
+    created: string;
+    proofPurpose: string;
+    verificationMethod: string;
+    jws: string; // JSON Web Signature
+  };
 }
 ```
 
 **Example Credential**:
+
 ```json
 {
   "@context": [
@@ -255,29 +264,30 @@ User Wants to Access Service
 **Scenario**: Government issues digital identity credentials
 
 **Implementation**:
+
 ```typescript
 // Government issues identity credential
 const identityCredential = await drpClient.identity.issueCredential({
-  issuer: 'did:drp:government-123',
-  subject: 'did:drp:citizen-456',
+  issuer: "did:drp:government-123",
+  subject: "did:drp:citizen-456",
   claims: {
-    name: 'John Doe',
-    dateOfBirth: '1990-01-01',
-    nationality: 'Country X',
-    idNumber: 'ID-123456789'
+    name: "John Doe",
+    dateOfBirth: "1990-01-01",
+    nationality: "Country X",
+    idNumber: "ID-123456789",
   },
-  expirationDate: '2034-01-01'
-})
+  expirationDate: "2034-01-01",
+});
 
 // Citizen stores in wallet
-await wallet.storeCredential(identityCredential)
+await wallet.storeCredential(identityCredential);
 
 // Use for services
 const proof = await wallet.createProof({
   credential: identityCredential,
-  reveal: ['name', 'dateOfBirth'], // Only reveal what's needed
-  hide: ['idNumber'] // Keep private
-})
+  reveal: ["name", "dateOfBirth"], // Only reveal what's needed
+  hide: ["idNumber"], // Keep private
+});
 ```
 
 ### 2. Professional Credentials
@@ -285,28 +295,30 @@ const proof = await wallet.createProof({
 **Scenario**: Professional organizations issue certifications
 
 **Benefits**:
+
 - Instant verification
 - No fake credentials
 - Portable across borders
 - Lifetime record
 
 **Example**:
+
 ```typescript
 // Medical board issues license
 const medicalLicense = await drpClient.identity.issueCredential({
-  issuer: 'did:drp:medical-board',
-  subject: 'did:drp:doctor-789',
+  issuer: "did:drp:medical-board",
+  subject: "did:drp:doctor-789",
   claims: {
-    licenseNumber: 'MD-12345',
-    specialty: 'Cardiology',
-    issueDate: '2020-01-15',
-    expirationDate: '2025-01-15',
-    status: 'active'
-  }
-})
+    licenseNumber: "MD-12345",
+    specialty: "Cardiology",
+    issueDate: "2020-01-15",
+    expirationDate: "2025-01-15",
+    status: "active",
+  },
+});
 
 // Hospital verifies license
-const isValid = await drpClient.identity.verifyCredential(medicalLicense)
+const isValid = await drpClient.identity.verifyCredential(medicalLicense);
 ```
 
 ### 3. Access Control for DApps
@@ -314,18 +326,19 @@ const isValid = await drpClient.identity.verifyCredential(medicalLicense)
 **Scenario**: DApp needs to verify user attributes
 
 **Implementation**:
+
 ```typescript
 // User wants to access age-restricted content
 const ageProof = await wallet.createZeroKnowledgeProof({
   credential: ageCredential,
-  claim: 'age',
-  predicate: '>=',
+  claim: "age",
+  predicate: ">=",
   value: 18,
-  reveal: false // Don't reveal exact age
-})
+  reveal: false, // Don't reveal exact age
+});
 
 // DApp verifies
-const hasAccess = await drpClient.identity.verifyProof(ageProof)
+const hasAccess = await drpClient.identity.verifyProof(ageProof);
 if (hasAccess) {
   // Grant access to content
 }
@@ -336,12 +349,14 @@ if (hasAccess) {
 **Scenario**: Financial services need identity verification
 
 **Benefits**:
+
 - Reusable KYC credentials
 - Privacy-preserving
 - Instant verification
 - Reduced costs
 
 **Flow**:
+
 ```
 1. User completes KYC with Bank A
 2. Bank A issues KYC credential
@@ -355,52 +370,54 @@ if (hasAccess) {
 ### Role-Based Access Control (RBAC)
 
 **Implementation**:
+
 ```typescript
 // Define roles
 const roles = {
-  admin: ['read', 'write', 'delete'],
-  editor: ['read', 'write'],
-  viewer: ['read']
-}
+  admin: ["read", "write", "delete"],
+  editor: ["read", "write"],
+  viewer: ["read"],
+};
 
 // Issue role credential
 const roleCredential = await drpClient.identity.issueCredential({
-  issuer: 'did:drp:organization-123',
-  subject: 'did:drp:user-456',
+  issuer: "did:drp:organization-123",
+  subject: "did:drp:user-456",
   claims: {
-    role: 'editor',
-    permissions: ['read', 'write'],
-    organization: 'Example Corp'
-  }
-})
+    role: "editor",
+    permissions: ["read", "write"],
+    organization: "Example Corp",
+  },
+});
 
 // Check access
 const hasPermission = await drpClient.accessControl.checkPermission(
-  'did:drp:user-456',
-  'write'
-)
+  "did:drp:user-456",
+  "write",
+);
 ```
 
 ### Attribute-Based Access Control (ABAC)
 
 **Fine-Grained Control**:
+
 ```typescript
 // Access based on multiple attributes
 const accessPolicy = {
-  resource: 'sensitive-data',
+  resource: "sensitive-data",
   conditions: {
-    role: 'researcher',
-    clearance: 'level-3',
-    department: 'R&D',
-    location: 'authorized-facility'
-  }
-}
+    role: "researcher",
+    clearance: "level-3",
+    department: "R&D",
+    location: "authorized-facility",
+  },
+};
 
 // User must prove all attributes
 const proof = await wallet.createCompositeProof({
   credentials: [roleCredential, clearanceCredential, locationCredential],
-  policy: accessPolicy
-})
+  policy: accessPolicy,
+});
 ```
 
 ## Privacy Features
@@ -408,36 +425,38 @@ const proof = await wallet.createCompositeProof({
 ### Zero-Knowledge Proofs
 
 **Selective Disclosure**:
+
 ```typescript
 // Prove age without revealing exact age
 const ageProof = await wallet.createZKProof({
   credential: ageCredential,
-  statement: 'age >= 21',
-  reveal: false
-})
+  statement: "age >= 21",
+  reveal: false,
+});
 
 // Prove membership without revealing identity
 const membershipProof = await wallet.createZKProof({
   credential: membershipCredential,
-  statement: 'isMember == true',
-  reveal: ['membershipStatus'],
-  hide: ['memberId', 'name']
-})
+  statement: "isMember == true",
+  reveal: ["membershipStatus"],
+  hide: ["memberId", "name"],
+});
 ```
 
 ### Revocation
 
 **Credential Revocation**:
+
 ```typescript
 // Revoke credential
 await drpClient.identity.revokeCredential({
-  credentialId: 'credential-123',
-  reason: 'License suspended',
-  revoker: 'did:drp:authority-123'
-})
+  credentialId: "credential-123",
+  reason: "License suspended",
+  revoker: "did:drp:authority-123",
+});
 
 // Check revocation status
-const isRevoked = await drpClient.identity.checkRevocation('credential-123')
+const isRevoked = await drpClient.identity.checkRevocation("credential-123");
 ```
 
 ## Key Takeaways
@@ -453,52 +472,57 @@ const isRevoked = await drpClient.identity.checkRevocation('credential-123')
 ## Quiz
 
 ### Question 1
+
 What is a key advantage of self-sovereign identity on DRP?
 
 A) Centralized control by governments  
 B) Users control their own identity data, stored decentralized  
 C) Only works on one platform  
-D) Requires passwords  
+D) Requires passwords
 
 **Correct Answer: B** - Self-sovereign identity gives users control over their identity data, which is stored decentralized rather than in centralized databases.
 
 ### Question 2
+
 What is a DID (Decentralized Identifier)?
 
 A) A password  
 B) A unique, portable identifier that resolves to a DID document with public keys and service endpoints  
 C) An encryption key  
-D) A username  
+D) A username
 
 **Correct Answer: B** - A DID is a unique identifier (like did:drp:123) that resolves to a DID document containing public keys, authentication methods, and service endpoints.
 
 ### Question 3
+
 How do zero-knowledge proofs enhance privacy in identity management?
 
 A) They hide all information  
 B) They allow proving claims (like age >= 18) without revealing the exact value or other data  
 C) They encrypt everything  
-D) They require passwords  
+D) They require passwords
 
 **Correct Answer: B** - Zero-knowledge proofs enable proving statements (like "age >= 18") without revealing the exact age or other unnecessary information.
 
 ### Question 4
+
 What is a Verifiable Credential?
 
 A) A password  
 B) A cryptographically signed credential issued by a trusted party that can be verified by anyone  
 C) An encryption method  
-D) A username  
+D) A username
 
 **Correct Answer: B** - Verifiable Credentials are cryptographically signed documents issued by trusted parties (like universities, governments) that can be verified by anyone.
 
 ### Question 5
+
 How does DRP IAM improve upon traditional identity systems?
 
 A) By centralizing all data  
 B) By giving users control, eliminating single points of failure, enabling privacy, and providing interoperability  
 C) By requiring more passwords  
-D) By slowing down verification  
+D) By slowing down verification
 
 **Correct Answer: B** - DRP IAM improves traditional systems by giving users control, eliminating centralized databases (single points of failure), enabling privacy-preserving verification, and working across different platforms.
 

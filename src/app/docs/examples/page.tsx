@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { Code, Terminal, BookOpen, ArrowLeft, Copy } from 'lucide-react'
-import { useState } from 'react'
+import Link from "next/link";
+import { Code, Terminal, BookOpen, ArrowLeft, Copy } from "lucide-react";
+import { useState } from "react";
 
 const codeExamples = [
   {
-    title: 'Basic Node Setup',
-    description: 'Initialize and run a DRP node',
-    language: 'python',
+    title: "Basic Node Setup",
+    description: "Initialize and run a DRP node",
+    language: "python",
     code: `# Install dependencies
 pip install -r requirements.txt
 
@@ -25,9 +25,9 @@ node = DRPNode(
 node.start()`,
   },
   {
-    title: 'Proof of Status Verification',
-    description: 'Verify user status in the network',
-    language: 'python',
+    title: "Proof of Status Verification",
+    description: "Verify user status in the network",
+    language: "python",
     code: `from drp.consensus import verify_status
 
 # Verify user status
@@ -41,9 +41,9 @@ else:
     print("User status not verified")`,
   },
   {
-    title: 'Submit Activity Proof',
-    description: 'Submit proof of activity for rewards',
-    language: 'python',
+    title: "Submit Activity Proof",
+    description: "Submit proof of activity for rewards",
+    language: "python",
     code: `from drp.consensus import submit_activity
 
 # Create activity proof
@@ -66,9 +66,9 @@ else:
     print(f"Activity rejected: {result.reason}")`,
   },
   {
-    title: 'Post-Quantum Key Generation',
-    description: 'Generate quantum-safe cryptographic keys',
-    language: 'python',
+    title: "Post-Quantum Key Generation",
+    description: "Generate quantum-safe cryptographic keys",
+    language: "python",
     code: `from drp.crypto import generate_kyber_keys
 
 # Generate CRYSTALS-Kyber key pair
@@ -80,9 +80,9 @@ print(f"Private Key: {private_key.hex()}")
 # Key pair is quantum-resistant and ready for use`,
   },
   {
-    title: 'Transaction Signing',
-    description: 'Sign a transaction with post-quantum signature',
-    language: 'python',
+    title: "Transaction Signing",
+    description: "Sign a transaction with post-quantum signature",
+    language: "python",
     code: `from drp.crypto import sign_transaction, verify_signature
 
 # Create transaction
@@ -106,9 +106,9 @@ else:
     print("Invalid signature")`,
   },
   {
-    title: 'AI Verification Check',
-    description: 'Check AI verification status for activity',
-    language: 'python',
+    title: "AI Verification Check",
+    description: "Check AI verification status for activity",
+    language: "python",
     code: `from drp.ai import AIElder
 
 # Initialize AI Elder
@@ -129,20 +129,20 @@ if verification.is_legitimate:
 else:
     print(f"Activity flagged: {verification.reason}")`,
   },
-]
+];
 
 export default function ExamplesPage() {
-  const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
   const handleCopy = async (code: string, index: number) => {
     try {
-      await navigator.clipboard.writeText(code)
-      setCopiedIndex(index)
-      setTimeout(() => setCopiedIndex(null), 2000)
+      await navigator.clipboard.writeText(code);
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 2000);
     } catch (err) {
-      console.error('Failed to copy:', err)
+      console.error("Failed to copy:", err);
     }
-  }
+  };
 
   return (
     <div className="py-24 sm:py-32">
@@ -160,7 +160,8 @@ export default function ExamplesPage() {
             Examples & Demos
           </h1>
           <p className="text-xl text-neutral-600 dark:text-neutral-400">
-            Practical code examples to get you started with the Decentralized Rights Protocol.
+            Practical code examples to get you started with the Decentralized
+            Rights Protocol.
           </p>
         </div>
 
@@ -171,13 +172,19 @@ export default function ExamplesPage() {
             <h2 className="text-2xl font-bold">Quick Start</h2>
           </div>
           <p className="text-primary-100 mb-6">
-            Clone the repository and run the testnet node to get started immediately.
+            Clone the repository and run the testnet node to get started
+            immediately.
           </p>
           <div className="bg-neutral-900/50 p-4 rounded-lg font-mono text-sm mb-6">
             <div className="text-neutral-400"># Clone repository</div>
-            <div className="text-green-400">git clone https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain.git</div>
+            <div className="text-green-400">
+              git clone
+              https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain.git
+            </div>
             <div className="text-neutral-400 mt-2"># Install dependencies</div>
-            <div className="text-green-400">pip install -r requirements.txt</div>
+            <div className="text-green-400">
+              pip install -r requirements.txt
+            </div>
             <div className="text-neutral-400 mt-2"># Run testnet node</div>
             <div className="text-blue-400">python src/node.py</div>
           </div>
@@ -186,7 +193,10 @@ export default function ExamplesPage() {
         {/* Code Examples */}
         <div className="space-y-12">
           {codeExamples.map((example, index) => (
-            <section key={index} className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
+            <section
+              key={index}
+              className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700"
+            >
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h3 className="text-xl font-semibold text-neutral-900 dark:text-foreground mb-2">
@@ -202,7 +212,9 @@ export default function ExamplesPage() {
               </div>
               <div className="relative">
                 <pre className="bg-neutral-900 rounded-lg p-4 overflow-x-auto">
-                  <code className="text-green-400 text-sm font-mono">{example.code}</code>
+                  <code className="text-green-400 text-sm font-mono">
+                    {example.code}
+                  </code>
                 </pre>
                 <button
                   onClick={() => handleCopy(example.code, index)}
@@ -259,5 +271,5 @@ export default function ExamplesPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

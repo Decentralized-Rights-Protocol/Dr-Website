@@ -30,6 +30,7 @@ Without cryptography, blockchain would be just a distributed database. Cryptogra
 A hash function is a one-way mathematical function that takes input of any size and produces a fixed-size output (hash). Key properties:
 
 **Essential Properties:**
+
 1. **Deterministic**: Same input always produces same output
 2. **Fast Computation**: Hash can be calculated quickly
 3. **One-Way**: Cannot reverse to get original input
@@ -49,6 +50,7 @@ Output: "a3f5d8e2b1c9..."
 ```
 
 **Example:**
+
 - Input: `"Hello"`
 - SHA-256 Hash: `185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969`
 
@@ -60,16 +62,19 @@ Notice how one character change produces a completely different hash!
 ### Hash Function Types
 
 **SHA-256 (Used in Bitcoin):**
+
 - 256-bit output (64 hexadecimal characters)
 - Very secure, widely used
 - Part of SHA-2 family
 
 **Keccak-256 (Used in Ethereum):**
+
 - 256-bit output
 - Part of SHA-3 family
 - Different internal structure
 
 **Blake2b (Used in some blockchains):**
+
 - Faster than SHA-256
 - More secure against certain attacks
 - Configurable output size
@@ -114,6 +119,7 @@ Merkle trees efficiently hash large amounts of data:
 ```
 
 **Benefits:**
+
 - Efficient verification: Only need to check path to root
 - Tamper detection: Any data change affects root hash
 - Scalability: Works with millions of transactions
@@ -138,6 +144,7 @@ Digital signatures provide authentication and non-repudiation:
 ```
 
 **Process:**
+
 1. **Key Generation**: Create public/private key pair
 2. **Signing**: Use private key to sign message hash
 3. **Verification**: Anyone can verify using public key
@@ -167,12 +174,14 @@ Digital signatures provide authentication and non-repudiation:
 ### 2. Password Storage
 
 **Traditional (Insecure):**
+
 ```
 Password: "MyPassword123"
 Stored: "MyPassword123" ← If database hacked, passwords exposed!
 ```
 
 **With Hashing (Secure):**
+
 ```
 Password: "MyPassword123"
 Hashed: "a3f5d8e2b1c9..." ← Even if hacked, original password unknown
@@ -193,6 +202,7 @@ Hashed: "a3f5d8e2b1c9..." ← Even if hacked, original password unknown
 ### 4. Proof of Work (Mining)
 
 **Bitcoin Mining Process:**
+
 ```
 Block Data + Nonce
       ↓
@@ -247,52 +257,57 @@ DRP may use ZKPs for:
 ## Quiz
 
 ### Question 1
+
 What is the primary purpose of a cryptographic hash function in blockchain?
 
 A) To encrypt transaction data  
 B) To create a fixed-size, unique fingerprint of data  
 C) To store user passwords  
-D) To generate random numbers  
+D) To generate random numbers
 
 **Correct Answer: B** - Hash functions create unique fingerprints (hashes) of data, enabling integrity verification and block chaining.
 
 ### Question 2
+
 What happens if you change even one character in the input to a hash function?
 
 A) The hash output remains the same  
 B) The hash output changes completely (avalanche effect)  
 C) The hash function fails  
-D) Only the first character of the hash changes  
+D) Only the first character of the hash changes
 
 **Correct Answer: B** - The avalanche effect ensures that any input change produces a completely different hash output.
 
 ### Question 3
+
 In digital signatures, what key is used to verify a signature?
 
 A) Private key  
 B) Public key  
 C) Both private and public keys  
-D) A shared secret key  
+D) A shared secret key
 
 **Correct Answer: B** - The public key is used to verify signatures, allowing anyone to verify without needing the private key.
 
 ### Question 4
+
 What is a Merkle tree used for in blockchain?
 
 A) Storing transaction data  
 B) Efficiently hashing and verifying large amounts of data  
 C) Encrypting block contents  
-D) Generating random nonces  
+D) Generating random nonces
 
 **Correct Answer: B** - Merkle trees efficiently hash large datasets and enable quick verification of individual transactions by checking the path to the root.
 
 ### Question 5
+
 Why are hash functions considered "one-way"?
 
 A) They can only process data in one direction  
 B) It's computationally infeasible to reverse the hash to get the original input  
 C) They only work with text data  
-D) They require a special key to reverse  
+D) They require a special key to reverse
 
 **Correct Answer: B** - One-way means that while it's easy to compute a hash from input, it's computationally infeasible to determine the original input from just the hash.
 

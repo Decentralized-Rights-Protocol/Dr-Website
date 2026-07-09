@@ -15,7 +15,9 @@ export function buildDisplayName(address: string) {
 export async function findLinkedWallet(ctx: DrpCtx, walletAddress: string) {
   return await ctx.db
     .query("linkedWallets")
-    .withIndex("by_address", (q) => q.eq("address", normalizeWallet(walletAddress)))
+    .withIndex("by_address", (q) =>
+      q.eq("address", normalizeWallet(walletAddress)),
+    )
     .unique();
 }
 
@@ -38,7 +40,10 @@ export async function findProfileByWallet(ctx: DrpCtx, walletAddress: string) {
   return { linkedWallet, user, profile };
 }
 
-export async function ensureUserForWallet(ctx: MutationCtx, walletAddress: string) {
+export async function ensureUserForWallet(
+  ctx: MutationCtx,
+  walletAddress: string,
+) {
   const normalized = normalizeWallet(walletAddress);
   const existing = await findProfileByWallet(ctx, normalized);
   if (existing) {
@@ -97,7 +102,9 @@ export async function ensureUserForWallet(ctx: MutationCtx, walletAddress: strin
 export async function requireReviewer(ctx: MutationCtx, walletAddress: string) {
   const record = await ensureUserForWallet(ctx, walletAddress);
   if (!["admin", "reviewer"].includes(record.profile.role)) {
-    throw new Error("Reviewer access is not enabled for this wallet. Configure role assignment before using admin flows.");
+    throw new Error(
+      "Reviewer access is not enabled for this wallet. Configure role assignment before using admin flows.",
+    );
   }
   return record;
 }
@@ -134,7 +141,9 @@ export async function appendAudit(
 ) {
   return await ctx.db.insert("auditLog", {
     actorUserId: input.actorUserId,
-    actorWallet: input.actorWallet ? normalizeWallet(input.actorWallet) : undefined,
+    actorWallet: input.actorWallet
+      ? normalizeWallet(input.actorWallet)
+      : undefined,
     eventType: input.eventType,
     entityType: input.entityType,
     entityId: input.entityId,

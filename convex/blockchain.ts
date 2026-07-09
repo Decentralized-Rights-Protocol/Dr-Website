@@ -17,28 +17,30 @@ export const mintBlock = internalMutation({
     if (pendingTransactions.length === 0) return null;
 
     // 2. Get latest block for previous hash
-    const latestBlock = await ctx.db
-      .query("drpBlocks")
-      .order("desc")
-      .first();
+    const latestBlock = await ctx.db.query("drpBlocks").order("desc").first();
 
     const newIndex = (latestBlock?.index ?? -1) + 1;
-    const previousHash = latestBlock?.blockHash ?? "0000000000000000000000000000000000000000000000000000000000000000";
+    const previousHash =
+      latestBlock?.blockHash ??
+      "0000000000000000000000000000000000000000000000000000000000000000";
 
     // 3. Calculate PoAT Score (average score of activities in this block)
     // For demo, we just use a default or sum up rewards
-    const totalDeri = pendingTransactions.reduce((acc, tx) => acc + tx.reward.deri, 0);
+    const totalDeri = pendingTransactions.reduce(
+      (acc, tx) => acc + tx.reward.deri,
+      0,
+    );
     const poatScore = Math.min(100, totalDeri / pendingTransactions.length);
 
     // 4. Create block content and hash it
     const blockContent = {
       index: newIndex,
       timestamp: new Date().toISOString(),
-      transactions: pendingTransactions.map(tx => tx.txId),
+      transactions: pendingTransactions.map((tx) => tx.txId),
       previousHash,
       poatScore,
     };
-    
+
     const blockHash = hashData(blockContent);
     const signature = signData(blockHash);
 
@@ -84,7 +86,7 @@ export const getBlockchainStats = query({
   handler: async (ctx) => {
     const blocks = await ctx.db.query("drpBlocks").collect();
     const txs = await ctx.db.query("drpTransactions").collect();
-    
+
     const totalDeri = txs.reduce((acc, tx) => acc + tx.reward.deri, 0);
     const totalRights = txs.reduce((acc, tx) => acc + tx.reward.rights, 0);
 

@@ -18,6 +18,7 @@ This document outlines the process for migrating the DRP Learn-to-Earn system fr
 ## Pre-Migration Checklist
 
 ### Smart Contract Preparation
+
 - [ ] Audit DeRiTestToken contract for mainnet deployment
 - [ ] Update contract parameters (supply, reward rates, limits)
 - [ ] Prepare mainnet DeRiToken contract (remove "Test" suffix)
@@ -25,6 +26,7 @@ This document outlines the process for migrating the DRP Learn-to-Earn system fr
 - [ ] Configure gas optimization for mainnet
 
 ### Infrastructure Preparation
+
 - [ ] Set up mainnet RPC endpoints
 - [ ] Configure mainnet wallet with sufficient ETH for gas
 - [ ] Set up monitoring and alerting for mainnet
@@ -32,6 +34,7 @@ This document outlines the process for migrating the DRP Learn-to-Earn system fr
 - [ ] Configure SSL certificates for production domains
 
 ### Data Preparation
+
 - [ ] Export all testnet user data from ScyllaDB
 - [ ] Validate data integrity and completeness
 - [ ] Prepare user migration scripts
@@ -61,14 +64,14 @@ Update the mainnet contract with production parameters:
 contract DeRiToken is ERC20, Ownable, ReentrancyGuard, Pausable {
     // Production supply: 1 billion tokens
     uint256 public constant INITIAL_SUPPLY = 1_000_000_000 * 10**18;
-    
+
     // Production reward rates (higher than testnet)
     uint256 public constant LESSON_COMPLETION = 50 * 10**18;  // 50 tokens
     uint256 public constant QUIZ_PERFECT = 25 * 10**18;      // 25 tokens
     uint256 public constant ACHIEVEMENT_UNLOCK = 100 * 10**18; // 100 tokens
     uint256 public constant LEVEL_COMPLETION = 200 * 10**18;  // 200 tokens
     uint256 public constant STREAK_BONUS = 75 * 10**18;      // 75 tokens
-    
+
     // Production daily limits
     uint256 public constant DAILY_REWARD_CAP = 100_000 * 10**18; // 100K tokens
     uint256 public constant MAX_REWARD_PER_TX = 5_000 * 10**18;  // 5K tokens
@@ -94,23 +97,23 @@ from scylladb_integration import ScyllaDBManager
 
 def export_testnet_data():
     db = ScyllaDBManager()
-    
+
     # Export user stats
     user_stats = db.session.execute("SELECT * FROM user_stats")
-    
+
     # Export reward logs
     reward_logs = db.session.execute("SELECT * FROM reward_logs")
-    
+
     # Export achievements
     achievements = db.session.execute("SELECT * FROM achievements")
-    
+
     # Save to JSON files
     with open('testnet_user_stats.json', 'w') as f:
         json.dump([dict(row) for row in user_stats], f, default=str)
-    
+
     with open('testnet_reward_logs.json', 'w') as f:
         json.dump([dict(row) for row in reward_logs], f, default=str)
-    
+
     with open('testnet_achievements.json', 'w') as f:
         json.dump([dict(row) for row in achievements], f, default=str)
 
@@ -124,15 +127,15 @@ def migrate_user_data():
     # Load testnet data
     with open('testnet_user_stats.json', 'r') as f:
         testnet_stats = json.load(f)
-    
+
     # Connect to mainnet database
     mainnet_db = ScyllaDBManager(mainnet_config)
-    
+
     # Migrate user statistics
     for user_stat in testnet_stats:
         # Convert testnet rewards to mainnet equivalent
         mainnet_rewards = convert_rewards_to_mainnet(user_stat['total_rewards_earned'])
-        
+
         # Insert into mainnet database
         mainnet_db.session.execute("""
             INSERT INTO user_stats (
@@ -168,27 +171,27 @@ def convert_rewards_to_mainnet(testnet_rewards):
 ```python
 def airdrop_mainnet_tokens():
     """Airdrop mainnet tokens to users based on testnet activity"""
-    
+
     # Load user data
     with open('testnet_user_stats.json', 'r') as f:
         user_stats = json.load(f)
-    
+
     # Connect to mainnet contract
     mainnet_contract = get_mainnet_contract()
-    
+
     # Airdrop tokens to each user
     for user_stat in user_stats:
         wallet_address = user_stat['wallet_address']
         testnet_rewards = user_stat['total_rewards_earned']
         mainnet_rewards = convert_rewards_to_mainnet(testnet_rewards)
-        
+
         # Send airdrop transaction
         tx = mainnet_contract.functions.distributeReward(
             wallet_address,
             mainnet_rewards,
             "testnet_migration_airdrop"
         )
-        
+
         # Wait for transaction confirmation
         receipt = tx.wait()
         print(f"Airdropped {mainnet_rewards} tokens to {wallet_address}")
@@ -256,20 +259,20 @@ class ProductionConfig:
     NETWORK_NAME = "mainnet"
     RPC_URL = "https://mainnet.infura.io/v3/YOUR_INFURA_KEY"
     CHAIN_ID = 1
-    
+
     # Contract configuration
     CONTRACT_ADDRESS = "0x..."  # Mainnet contract address
-    
+
     # Security configuration
     SIGNER_PRIVATE_KEY = os.getenv("SIGNER_PRIVATE_KEY")
     SIGNER_ADDRESS = os.getenv("SIGNER_ADDRESS")
-    
+
     # Database configuration
     SCYLLA_HOSTS = ["prod-scylla-1", "prod-scylla-2", "prod-scylla-3"]
     SCYLLA_USERNAME = os.getenv("SCYLLA_USERNAME")
     SCYLLA_PASSWORD = os.getenv("SCYLLA_PASSWORD")
     SCYLLA_SSL = True
-    
+
     # API configuration
     API_BASE_URL = "https://api.drp-protocol.org"
     CORS_ORIGINS = ["https://drp-protocol.org", "https://learn.drp-protocol.org"]
@@ -291,13 +294,13 @@ class ProductionConfig:
 contract DeRiToken is ERC20, AccessControl {
     bytes32 public constant REWARD_DISTRIBUTOR = keccak256("REWARD_DISTRIBUTOR");
     bytes32 public constant ADMIN = keccak256("ADMIN");
-    
+
     constructor() {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(ADMIN, msg.sender);
     }
-    
-    function distributeReward(address recipient, uint256 amount, string memory reason) 
+
+    function distributeReward(address recipient, uint256 amount, string memory reason)
         external onlyRole(REWARD_DISTRIBUTOR) {
         // Reward distribution logic
     }
@@ -334,7 +337,7 @@ active_users_gauge = Gauge('active_users_total', 'Total active users')
 def monitor_reward_distribution(amount, success):
     reward_distribution_counter.inc()
     reward_amount_histogram.observe(amount)
-    
+
     if not success:
         logging.error(f"Reward distribution failed: {amount}")
         # Send alert to monitoring system
@@ -362,7 +365,7 @@ npx hardhat test test/security/
 async def test_reward_distribution():
     # Test with small amounts first
     test_amount = 1 * 10**18  # 1 token
-    
+
     response = await reward_service.distribute_reward(
         RewardRequest(
             wallet_address="0x...",
@@ -370,7 +373,7 @@ async def test_reward_distribution():
             score=100
         )
     )
-    
+
     assert response.success == True
     assert response.transaction_hash is not None
 ```
@@ -392,7 +395,7 @@ async def load_test_rewards():
                 'score': 90
             })
             tasks.append(task)
-        
+
         results = await asyncio.gather(*tasks)
         success_count = sum(1 for r in results if r.status == 200)
         print(f"Success rate: {success_count/100*100}%")
@@ -512,7 +515,7 @@ groups:
           severity: critical
         annotations:
           summary: "High reward distribution failure rate"
-          
+
       - alert: LowUserActivity
         expr: active_users_total < 100
         for: 10m
@@ -527,6 +530,7 @@ groups:
 This migration guide provides a comprehensive framework for moving the DRP Learn-to-Earn system from testnet to mainnet. The key to a successful migration is thorough preparation, careful execution, and continuous monitoring.
 
 Remember to:
+
 - Test everything thoroughly before going live
 - Have rollback procedures ready
 - Monitor system health continuously

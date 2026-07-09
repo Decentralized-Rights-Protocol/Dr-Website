@@ -1,11 +1,28 @@
-export type ActivityCategory = "learning" | "developer" | "content" | "productivity" | "web3";
+export type ActivityCategory =
+  | "learning"
+  | "developer"
+  | "content"
+  | "productivity"
+  | "web3";
 
-export type ActivityType = 
-  | "reading" | "video" | "course" | "notes" // Learning
-  | "commit" | "pr" | "repo" | "contribution" // Developer
-  | "blog" | "social" | "video_upload" | "design" // Content
-  | "task" | "document" | "time_track" // Productivity
-  | "wallet_tx" | "contract_call"; // Web3
+export type ActivityType =
+  | "reading"
+  | "video"
+  | "course"
+  | "notes" // Learning
+  | "commit"
+  | "pr"
+  | "repo"
+  | "contribution" // Developer
+  | "blog"
+  | "social"
+  | "video_upload"
+  | "design" // Content
+  | "task"
+  | "document"
+  | "time_track" // Productivity
+  | "wallet_tx"
+  | "contract_call"; // Web3
 
 export interface ActivityMetadata {
   url?: string;

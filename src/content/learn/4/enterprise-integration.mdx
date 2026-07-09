@@ -25,6 +25,7 @@ Enterprises face unique challenges:
 - **Integration Complexity**: Multiple systems must work together
 
 DRP enterprise integration addresses these by:
+
 - **API-First Design**: RESTful APIs for easy integration
 - **Compliance Support**: Built-in compliance features
 - **Scalability Solutions**: Layer 2 and scaling technologies
@@ -69,27 +70,29 @@ DRP enterprise integration addresses these by:
 **Purpose**: Single entry point for all DRP interactions
 
 **Benefits**:
+
 - Centralized authentication
 - Rate limiting
 - Request routing
 - Monitoring and logging
 
 **Implementation**:
+
 ```typescript
 // Enterprise API Gateway
 class DRPEnterpriseGateway {
   async registerRights(contentData: ContentData) {
     // Validate enterprise credentials
-    await this.authenticate()
-    
+    await this.authenticate();
+
     // Transform enterprise format to DRP format
-    const drpFormat = this.transformToDRP(contentData)
-    
+    const drpFormat = this.transformToDRP(contentData);
+
     // Submit to DRP
-    const result = await this.drpClient.rights.register(drpFormat)
-    
+    const result = await this.drpClient.rights.register(drpFormat);
+
     // Transform response back
-    return this.transformToEnterprise(result)
+    return this.transformToEnterprise(result);
   }
 }
 ```
@@ -99,6 +102,7 @@ class DRPEnterpriseGateway {
 **Purpose**: Asynchronous integration through events
 
 **Flow**:
+
 ```
 Enterprise System Event
         ↓
@@ -114,24 +118,25 @@ Update Enterprise System
 ```
 
 **Example**:
+
 ```typescript
 // Event-driven integration
-eventBus.on('content.created', async (event) => {
-  const contentData = event.payload
-  
+eventBus.on("content.created", async (event) => {
+  const contentData = event.payload;
+
   // Register on DRP
   const rights = await drpClient.rights.register({
     contentHash: contentData.hash,
     owner: contentData.owner,
-    royaltyRate: contentData.royaltyRate
-  })
-  
+    royaltyRate: contentData.royaltyRate,
+  });
+
   // Emit response event
-  eventBus.emit('drp.rights.registered', {
+  eventBus.emit("drp.rights.registered", {
     enterpriseId: contentData.id,
-    drpRightsId: rights.rightsId
-  })
-})
+    drpRightsId: rights.rightsId,
+  });
+});
 ```
 
 #### 3. Batch Processing
@@ -139,28 +144,29 @@ eventBus.on('content.created', async (event) => {
 **Purpose**: Handle high-volume transactions efficiently
 
 **Implementation**:
+
 ```typescript
 class BatchProcessor {
-  private queue: Transaction[] = []
-  private batchSize = 100
-  private interval = 5000 // 5 seconds
+  private queue: Transaction[] = [];
+  private batchSize = 100;
+  private interval = 5000; // 5 seconds
 
   async addTransaction(tx: Transaction) {
-    this.queue.push(tx)
-    
+    this.queue.push(tx);
+
     if (this.queue.length >= this.batchSize) {
-      await this.processBatch()
+      await this.processBatch();
     }
   }
 
   async processBatch() {
-    const batch = this.queue.splice(0, this.batchSize)
-    
+    const batch = this.queue.splice(0, this.batchSize);
+
     // Use DRP batch API
-    const results = await drpClient.batch.process(batch)
-    
+    const results = await drpClient.batch.process(batch);
+
     // Handle results
-    await this.handleResults(results)
+    await this.handleResults(results);
   }
 }
 ```
@@ -170,21 +176,22 @@ class BatchProcessor {
 #### 1. Authentication & Authorization
 
 **Enterprise SSO Integration**:
+
 ```typescript
 // SAML/OAuth integration
 class EnterpriseAuth {
   async authenticate(samlToken: string) {
     // Validate SAML token
-    const user = await this.validateSAML(samlToken)
-    
+    const user = await this.validateSAML(samlToken);
+
     // Map to DRP account
-    const drpAccount = await this.getDRPAccount(user)
-    
+    const drpAccount = await this.getDRPAccount(user);
+
     return {
       enterpriseUser: user,
       drpAccount: drpAccount,
-      permissions: this.getPermissions(user)
-    }
+      permissions: this.getPermissions(user),
+    };
   }
 }
 ```
@@ -192,17 +199,18 @@ class EnterpriseAuth {
 #### 2. Rate Limiting & Quotas
 
 **Implementation**:
+
 ```typescript
 class RateLimiter {
   async checkLimit(enterpriseId: string, operation: string) {
-    const limit = await this.getLimit(enterpriseId, operation)
-    const usage = await this.getUsage(enterpriseId, operation)
-    
+    const limit = await this.getLimit(enterpriseId, operation);
+    const usage = await this.getUsage(enterpriseId, operation);
+
     if (usage >= limit) {
-      throw new Error('Rate limit exceeded')
+      throw new Error("Rate limit exceeded");
     }
-    
-    await this.incrementUsage(enterpriseId, operation)
+
+    await this.incrementUsage(enterpriseId, operation);
   }
 }
 ```
@@ -210,18 +218,19 @@ class RateLimiter {
 #### 3. Webhook Support
 
 **Enterprise Webhooks**:
+
 ```typescript
 // DRP events → Enterprise webhooks
-drpClient.on('rights.registered', async (event) => {
-  const enterpriseMapping = await getEnterpriseMapping(event.rightsId)
-  
+drpClient.on("rights.registered", async (event) => {
+  const enterpriseMapping = await getEnterpriseMapping(event.rightsId);
+
   await webhookClient.send(enterpriseMapping.webhookUrl, {
-    event: 'rights.registered',
+    event: "rights.registered",
     enterpriseId: enterpriseMapping.enterpriseId,
     drpRightsId: event.rightsId,
-    timestamp: event.timestamp
-  })
-})
+    timestamp: event.timestamp,
+  });
+});
 ```
 
 ### Compliance & Governance
@@ -229,6 +238,7 @@ drpClient.on('rights.registered', async (event) => {
 #### 1. Audit Logging
 
 **Comprehensive Logging**:
+
 ```typescript
 class AuditLogger {
   async log(action: string, details: any) {
@@ -239,8 +249,8 @@ class AuditLogger {
       action: action,
       details: details,
       blockchainTx: details.txHash,
-      ipAddress: details.ipAddress
-    })
+      ipAddress: details.ipAddress,
+    });
   }
 }
 ```
@@ -248,15 +258,16 @@ class AuditLogger {
 #### 2. Data Privacy
 
 **GDPR Compliance**:
+
 ```typescript
 class PrivacyManager {
   async handleDataRequest(userId: string, requestType: string) {
-    if (requestType === 'export') {
+    if (requestType === "export") {
       // Export all user data
-      return await this.exportUserData(userId)
-    } else if (requestType === 'delete') {
+      return await this.exportUserData(userId);
+    } else if (requestType === "delete") {
       // Handle deletion (blockchain data is immutable)
-      return await this.handleDeletionRequest(userId)
+      return await this.handleDeletionRequest(userId);
     }
   }
 }
@@ -265,19 +276,20 @@ class PrivacyManager {
 #### 3. Regulatory Reporting
 
 **Automated Reporting**:
+
 ```typescript
 class RegulatoryReporter {
   async generateReport(period: string, jurisdiction: string) {
-    const transactions = await this.getTransactions(period)
-    const filtered = this.filterByJurisdiction(transactions, jurisdiction)
-    
+    const transactions = await this.getTransactions(period);
+    const filtered = this.filterByJurisdiction(transactions, jurisdiction);
+
     return {
       totalTransactions: filtered.length,
       totalVolume: this.calculateVolume(filtered),
       rightsRegistrations: this.countRegistrations(filtered),
       royaltyDistributions: this.countRoyalties(filtered),
-      complianceStatus: this.checkCompliance(filtered)
-    }
+      complianceStatus: this.checkCompliance(filtered),
+    };
   }
 }
 ```
@@ -344,12 +356,14 @@ Enterprise Systems          DRP Blockchain
 **Scenario**: Large media company wants to manage digital rights on DRP
 
 **Integration**:
+
 - Connect existing CMS to DRP
 - Automatically register all new content
 - Track consumption across platforms
 - Distribute royalties automatically
 
 **Benefits**:
+
 - Transparent rights management
 - Automated royalty distribution
 - Reduced administrative costs
@@ -360,12 +374,14 @@ Enterprise Systems          DRP Blockchain
 **Scenario**: Record label integrates DRP for artist management
 
 **Integration**:
+
 - Artist contracts stored on DRP
 - Automatic royalty splits
 - Real-time revenue tracking
 - Transparent accounting
 
 **Benefits**:
+
 - Fair artist compensation
 - Automated accounting
 - Reduced disputes
@@ -376,12 +392,14 @@ Enterprise Systems          DRP Blockchain
 **Scenario**: Software company uses DRP for licensing
 
 **Integration**:
+
 - License management on DRP
 - Automated license validation
 - Usage tracking
 - Revenue distribution
 
 **Benefits**:
+
 - Secure license management
 - Automated enforcement
 - Transparent usage tracking
@@ -392,18 +410,21 @@ Enterprise Systems          DRP Blockchain
 ### Enterprise Security Requirements
 
 **1. Access Control**:
+
 - Role-based access control (RBAC)
 - Multi-factor authentication
 - IP whitelisting
 - API key management
 
 **2. Data Protection**:
+
 - Encryption at rest and in transit
 - Key management
 - Secure key storage
 - Data backup and recovery
 
 **3. Network Security**:
+
 - VPN requirements
 - Private network connections
 - Firewall rules
@@ -416,6 +437,7 @@ Enterprise Systems          DRP Blockchain
 **Purpose**: Handle high transaction volumes
 
 **Solutions**:
+
 - State channels for frequent transactions
 - Sidechains for enterprise-specific chains
 - Rollups for batch processing
@@ -426,6 +448,7 @@ Enterprise Systems          DRP Blockchain
 **Purpose**: Reduce blockchain queries
 
 **Implementation**:
+
 - Cache frequently accessed data
 - Invalidate on updates
 - Use CDN for static data
@@ -444,52 +467,57 @@ Enterprise Systems          DRP Blockchain
 ## Quiz
 
 ### Question 1
+
 What is the primary purpose of an API Gateway in enterprise DRP integration?
 
 A) To mine blocks  
 B) To provide a single entry point for DRP interactions with centralized authentication and routing  
 C) To store all data  
-D) To encrypt transactions  
+D) To encrypt transactions
 
 **Correct Answer: B** - An API Gateway provides a centralized entry point with authentication, rate limiting, routing, and monitoring capabilities.
 
 ### Question 2
+
 Why is event-driven integration useful for enterprises?
 
 A) It's faster than other methods  
 B) It enables asynchronous processing and decouples systems  
 C) It's required by law  
-D) It's the only integration method  
+D) It's the only integration method
 
 **Correct Answer: B** - Event-driven integration enables asynchronous processing, decouples systems, and supports scalable, resilient architectures.
 
 ### Question 3
+
 What is batch processing used for in enterprise integration?
 
 A) To slow down transactions  
 B) To efficiently handle high-volume transactions by grouping them  
 C) To store data  
-D) To encrypt data  
+D) To encrypt data
 
 **Correct Answer: B** - Batch processing groups multiple transactions together to process them efficiently, reducing costs and improving throughput.
 
 ### Question 4
+
 What compliance features are important for enterprise integration?
 
 A) Only encryption  
 B) Audit logging, data privacy (GDPR), and regulatory reporting  
 C) Only authentication  
-D) No compliance needed  
+D) No compliance needed
 
 **Correct Answer: B** - Enterprises require audit logging for accountability, data privacy features for GDPR compliance, and regulatory reporting for legal obligations.
 
 ### Question 5
+
 What is a hybrid architecture in enterprise DRP integration?
 
 A) Only blockchain storage  
 B) Combining on-chain data (rights, proofs) with off-chain data (metadata, files)  
 C) Only traditional databases  
-D) No architecture needed  
+D) No architecture needed
 
 **Correct Answer: B** - Hybrid architecture stores immutable rights and proofs on-chain while keeping large files and metadata off-chain for efficiency.
 

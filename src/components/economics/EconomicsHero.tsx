@@ -1,17 +1,27 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { TrendingUp, Globe, Shield, Sparkles } from 'lucide-react'
+import { motion } from "framer-motion";
+import { TrendingUp, Globe, Shield, Sparkles } from "lucide-react";
 
 interface EconomicsHeroProps {
-  title: string
-  subtitle: string
-  description?: string
+  title: string;
+  subtitle: string;
+  description?: string;
 }
 
-export function EconomicsHero({ title, subtitle, description }: EconomicsHeroProps) {
+export function EconomicsHero({
+  title,
+  subtitle,
+  description,
+}: EconomicsHeroProps) {
   return (
-    <div className="relative overflow-hidden py-24 sm:py-32" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
+    <div
+      className="relative overflow-hidden py-24 sm:py-32"
+      style={{
+        background:
+          "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)",
+      }}
+    >
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
@@ -32,13 +42,15 @@ export function EconomicsHero({ title, subtitle, description }: EconomicsHeroPro
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
           >
             <Sparkles className="h-4 w-4 text-blue-400" />
-            <span className="text-sm font-medium text-blue-300">DRP Economics</span>
+            <span className="text-sm font-medium text-blue-300">
+              DRP Economics
+            </span>
           </motion.div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
             {title}
           </h1>
-          
+
           <p className="text-xl sm:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
             {subtitle}
           </p>
@@ -57,10 +69,10 @@ export function EconomicsHero({ title, subtitle, description }: EconomicsHeroPro
             className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4 max-w-2xl mx-auto"
           >
             {[
-              { Icon: TrendingUp, label: 'Sustainable Growth' },
-              { Icon: Globe, label: 'Global Impact' },
-              { Icon: Shield, label: 'Rights-Backed' },
-              { Icon: Sparkles, label: 'AI-Verified' },
+              { Icon: TrendingUp, label: "Sustainable Growth" },
+              { Icon: Globe, label: "Global Impact" },
+              { Icon: Shield, label: "Rights-Backed" },
+              { Icon: Sparkles, label: "AI-Verified" },
             ].map(({ Icon, label }, index) => (
               <motion.div
                 key={label}
@@ -70,13 +82,14 @@ export function EconomicsHero({ title, subtitle, description }: EconomicsHeroPro
                 className="flex flex-col items-center gap-2 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-foreground/10"
               >
                 <Icon className="h-8 w-8 text-blue-400" />
-                <span className="text-sm text-blue-200 text-center">{label}</span>
+                <span className="text-sm text-blue-200 text-center">
+                  {label}
+                </span>
               </motion.div>
             ))}
           </motion.div>
         </motion.div>
       </div>
     </div>
-  )
+  );
 }
-

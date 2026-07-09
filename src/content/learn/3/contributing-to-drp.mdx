@@ -25,6 +25,7 @@ Open-source projects thrive on community contributions:
 - **Recognition**: Contributors gain reputation and rewards
 
 Contributing to DRP enables you to:
+
 - Shape protocol development
 - Build your reputation in the ecosystem
 - Earn $DeRi rewards for contributions
@@ -38,6 +39,7 @@ Contributing to DRP enables you to:
 #### 1. Code Contributions
 
 **Areas for Contribution**:
+
 - Smart contract improvements
 - SDK enhancements
 - Tooling and utilities
@@ -45,6 +47,7 @@ Contributing to DRP enables you to:
 - Performance optimizations
 
 **Process**:
+
 ```
 1. Find Issue or Feature
       ↓
@@ -66,6 +69,7 @@ Contributing to DRP enables you to:
 #### 2. Documentation
 
 **Documentation Types**:
+
 - API documentation
 - Tutorial guides
 - Code examples
@@ -77,6 +81,7 @@ Contributing to DRP enables you to:
 #### 3. Proposals
 
 **Proposal Types**:
+
 - Protocol upgrades (DRP Improvement Proposals - DRIPs)
 - Parameter adjustments
 - New features
@@ -87,6 +92,7 @@ Contributing to DRP enables you to:
 #### 4. Community Support
 
 **Ways to Help**:
+
 - Answer questions in forums
 - Help new developers
 - Create educational content
@@ -115,6 +121,7 @@ npm run node
 #### 2. Find Contribution Opportunities
 
 **Ways to Find Issues**:
+
 - GitHub Issues labeled "good first issue"
 - Community discussions
 - Feature requests
@@ -122,6 +129,7 @@ npm run node
 - Documentation gaps
 
 **Example Workflow**:
+
 ```bash
 # Browse issues
 gh issue list --label "good first issue"
@@ -136,12 +144,14 @@ git checkout -b fix/issue-123
 #### 3. Development Workflow
 
 **Branch Naming**:
+
 - `feature/description`: New features
 - `fix/description`: Bug fixes
 - `docs/description`: Documentation
 - `refactor/description`: Code refactoring
 
 **Commit Messages**:
+
 ```
 feat: Add royalty distribution batching
 fix: Resolve gas estimation error
@@ -171,12 +181,14 @@ git checkout -b feature/my-contribution
 #### 3. Make Changes
 
 **Follow Coding Standards**:
+
 - Use TypeScript for type safety
 - Follow existing code style
 - Write self-documenting code
 - Add comments for complex logic
 
 **Example**:
+
 ```typescript
 /**
  * Calculates royalty distribution for multiple recipients
@@ -186,7 +198,7 @@ git checkout -b feature/my-contribution
  */
 export function calculateRoyalties(
   amount: bigint,
-  recipients: Recipient[]
+  recipients: Recipient[],
 ): bigint[] {
   // Implementation
 }
@@ -195,48 +207,55 @@ export function calculateRoyalties(
 #### 4. Write Tests
 
 **Test Requirements**:
+
 - Unit tests for new functions
 - Integration tests for features
 - Edge case coverage
 - Maintain existing test coverage
 
 **Example**:
+
 ```typescript
-describe('calculateRoyalties', () => {
-  it('should distribute correctly', () => {
-    const amount = parseEther('100')
+describe("calculateRoyalties", () => {
+  it("should distribute correctly", () => {
+    const amount = parseEther("100");
     const recipients = [
-      { address: '0x1', share: 80 },
-      { address: '0x2', share: 20 }
-    ]
-    
-    const result = calculateRoyalties(amount, recipients)
-    
-    expect(result[0]).toBe(parseEther('80'))
-    expect(result[1]).toBe(parseEther('20'))
-  })
-})
+      { address: "0x1", share: 80 },
+      { address: "0x2", share: 20 },
+    ];
+
+    const result = calculateRoyalties(amount, recipients);
+
+    expect(result[0]).toBe(parseEther("80"));
+    expect(result[1]).toBe(parseEther("20"));
+  });
+});
 ```
 
 #### 5. Submit Pull Request
 
 **PR Template**:
+
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Testing
+
 - [ ] Unit tests added/updated
 - [ ] Integration tests pass
 - [ ] Manual testing completed
 
 ## Checklist
+
 - [ ] Code follows style guidelines
 - [ ] Self-review completed
 - [ ] Comments added for complex code
@@ -248,7 +267,8 @@ Brief description of changes
 #### Types of Documentation
 
 **1. API Documentation**:
-```typescript
+
+````typescript
 /**
  * Registers digital rights for content
  * @param contentHash - SHA-256 hash of the content
@@ -264,15 +284,17 @@ Brief description of changes
  * })
  * ```
  */
-```
+````
 
 **2. Tutorial Guides**:
+
 - Step-by-step instructions
 - Code examples
 - Common pitfalls
 - Best practices
 
 **3. Architecture Documentation**:
+
 - System design
 - Component interactions
 - Data flows
@@ -283,32 +305,41 @@ Brief description of changes
 #### DRP Improvement Proposals (DRIPs)
 
 **Proposal Structure**:
+
 ```markdown
 # DRIP-001: Title
 
 ## Summary
+
 Brief overview
 
 ## Motivation
+
 Why this change is needed
 
 ## Specification
+
 Detailed technical specification
 
 ## Implementation
+
 Implementation details
 
 ## Security Considerations
+
 Security implications
 
 ## Backward Compatibility
+
 Impact on existing systems
 
 ## References
+
 Related issues, discussions
 ```
 
 **Submission Process**:
+
 1. Draft proposal
 2. Discuss in community forum
 3. Refine based on feedback
@@ -321,6 +352,7 @@ Related issues, discussions
 #### Forum Participation
 
 **Ways to Contribute**:
+
 - Answer questions
 - Share knowledge
 - Provide feedback
@@ -329,6 +361,7 @@ Related issues, discussions
 #### Educational Content
 
 **Content Types**:
+
 - Blog posts
 - Video tutorials
 - Code examples
@@ -339,6 +372,7 @@ Related issues, discussions
 #### Translation
 
 **Process**:
+
 1. Identify documentation to translate
 2. Create translation branch
 3. Translate content
@@ -429,6 +463,7 @@ Contributions
 **Issue**: Gas estimation fails for large royalty distributions
 
 **Contribution**:
+
 1. Identified root cause
 2. Fixed gas estimation algorithm
 3. Added test cases
@@ -441,6 +476,7 @@ Contributions
 **Feature**: Batch royalty distribution
 
 **Contribution**:
+
 1. Designed batch distribution system
 2. Implemented smart contract changes
 3. Updated SDK
@@ -453,6 +489,7 @@ Contributions
 **Issue**: SDK documentation incomplete
 
 **Contribution**:
+
 1. Reviewed all SDK functions
 2. Added comprehensive JSDoc comments
 3. Created usage examples
@@ -465,16 +502,19 @@ Contributions
 ### Contribution Rewards
 
 **Code Contributions**:
+
 - $DeRi tokens based on contribution value
 - Recognition in release notes
 - Contributor badge
 
 **Documentation**:
+
 - Activity proof rewards
 - Community recognition
 - Enhanced reputation
 
 **Proposals**:
+
 - Reward if proposal accepted
 - Implementation rewards
 - Governance participation
@@ -482,12 +522,14 @@ Contributions
 ### Building Reputation
 
 **Ways to Build Reputation**:
+
 - Consistent contributions
 - High-quality code
 - Helpful community support
 - Successful proposals
 
 **Benefits**:
+
 - Higher reward rates
 - Governance influence
 - Career opportunities
@@ -532,52 +574,57 @@ Contributions
 ## Quiz
 
 ### Question 1
+
 What is the typical workflow for code contributions to DRP?
 
 A) Directly push to main branch  
 B) Fork, create branch, make changes, test, submit PR, code review, merge  
 C) Only submit issues  
-D) Email changes to maintainers  
+D) Email changes to maintainers
 
 **Correct Answer: B** - The standard workflow involves forking the repository, creating a feature branch, making and testing changes, submitting a pull request, undergoing code review, and then merging.
 
 ### Question 2
+
 What are DRIPs?
 
 A) A type of cryptocurrency  
 B) DRP Improvement Proposals for protocol changes  
 C) A testing framework  
-D) A deployment tool  
+D) A deployment tool
 
 **Correct Answer: B** - DRIPs (DRP Improvement Proposals) are structured proposals for protocol upgrades, parameter changes, and new features.
 
 ### Question 3
+
 Why is writing tests important for code contributions?
 
 A) Tests are optional  
 B) Tests ensure code works correctly and prevent regressions  
 C) Tests slow down development  
-D) Tests are only for production code  
+D) Tests are only for production code
 
 **Correct Answer: B** - Tests verify that code works correctly, prevent regressions, and maintain code quality standards.
 
 ### Question 4
+
 What types of contributions are rewarded in DRP?
 
 A) Only code contributions  
 B) Code, documentation, proposals, and community support  
 C) Only financial contributions  
-D) Only bug reports  
+D) Only bug reports
 
 **Correct Answer: B** - DRP rewards various types of contributions including code, documentation, proposals, and community support through Activity Proofs and other mechanisms.
 
 ### Question 5
+
 How can you find contribution opportunities?
 
 A) Only by being invited  
 B) Through GitHub issues, community discussions, and identifying gaps  
 C) Only through paid contracts  
-D) Contributions are not accepted  
+D) Contributions are not accepted
 
 **Correct Answer: B** - You can find opportunities through GitHub issues (especially "good first issue" labels), community discussions, feature requests, and by identifying documentation or code gaps.
 

@@ -1,19 +1,22 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
-const APP_URL = 'https://app.decentralizedrights.com'
+const APP_URL = "https://app.decentralizedrights.com";
 
 export default function AppRedirect() {
   useEffect(() => {
-    window.location.replace(APP_URL)
-  }, [])
+    window.location.replace(APP_URL);
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4 text-center">
-      <h1 className="text-3xl font-bold text-neutral-900 dark:text-foreground">Redirecting to the DRP App…</h1>
+      <h1 className="text-3xl font-bold text-neutral-900 dark:text-foreground">
+        Redirecting to the DRP App…
+      </h1>
       <p className="mt-3 max-w-md text-base text-neutral-600 dark:text-neutral-300">
-        You will be redirected automatically. If the redirect does not happen, tap the button below to continue.
+        You will be redirected automatically. If the redirect does not happen,
+        tap the button below to continue.
       </p>
       <a
         href={APP_URL}
@@ -22,5 +25,5 @@ export default function AppRedirect() {
         Continue to App
       </a>
     </div>
-  )
+  );
 }

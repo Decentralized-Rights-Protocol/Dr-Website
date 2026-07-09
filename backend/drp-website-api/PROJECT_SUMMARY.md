@@ -39,17 +39,20 @@ backend/drp-website-api/
 ### 2. API Endpoints Created
 
 #### Tokens (4 endpoints)
+
 - ✅ Get token balance by address
 - ✅ Get all token balances
 - ✅ Get rights information
 - ✅ Transfer tokens
 
 #### Activities (3 endpoints)
+
 - ✅ Submit activity/status claim
 - ✅ Get submission status
 - ✅ Get user activities
 
 #### Governance (5 endpoints)
+
 - ✅ Create proposal
 - ✅ List proposals
 - ✅ Get proposal details
@@ -57,6 +60,7 @@ backend/drp-website-api/
 - ✅ Get voting results
 
 #### Notifications (4 endpoints + WebSocket)
+
 - ✅ Get notifications
 - ✅ Mark as read
 - ✅ Delete notification
@@ -64,12 +68,14 @@ backend/drp-website-api/
 - ✅ WebSocket real-time notifications
 
 #### AI Service (4 endpoints)
+
 - ✅ AI query with RAG
 - ✅ Get recommendations
 - ✅ Explain concepts
 - ✅ Health check
 
 #### Explorer (5 endpoints)
+
 - ✅ Get transactions
 - ✅ Get transaction details
 - ✅ Get blocks
@@ -77,12 +83,14 @@ backend/drp-website-api/
 - ✅ Get explorer stats
 
 #### Users (2 endpoints)
+
 - ✅ Get user profile
 - ✅ Update user profile
 
 ### 3. Services Architecture
 
 #### BlockchainService
+
 - Handles all blockchain RPC interactions
 - Token balance queries
 - Transaction submissions
@@ -91,6 +99,7 @@ backend/drp-website-api/
 - Governance operations
 
 #### AIService
+
 - Multi-provider AI support (HuggingFace, OpenAI, Google AI, LLaMA)
 - Activity assessment
 - RAG-based Q&A
@@ -98,6 +107,7 @@ backend/drp-website-api/
 - Concept explanations
 
 #### CacheService
+
 - Redis integration for fast lookups
 - TTL-based caching
 - Cache invalidation
@@ -106,12 +116,14 @@ backend/drp-website-api/
 ### 4. Deployment Configuration
 
 #### Docker
+
 - ✅ Multi-stage Dockerfile
 - ✅ Docker Compose with PostgreSQL and Redis
 - ✅ Health checks configured
 - ✅ Non-root user for security
 
 #### Vercel
+
 - ✅ Serverless function configuration
 - ✅ Python 3.11 runtime
 - ✅ Route handling for API
@@ -120,6 +132,7 @@ backend/drp-website-api/
 ### 5. Testing & Validation
 
 #### Test Script
+
 - ✅ Health check tests
 - ✅ All endpoint connectivity tests
 - ✅ Frontend accessibility tests
@@ -175,6 +188,7 @@ See `.env.example` for complete list. Key variables:
 ### Optional AI Providers
 
 The system supports multiple AI providers:
+
 - **HuggingFace** - Default, free tier available
 - **OpenAI** - GPT models
 - **Google AI** - Gemini models
@@ -217,21 +231,31 @@ python tests/test_connectivity.py
 ### Connecting Frontends
 
 #### Main Portal (decentralizedrights.com)
+
 ```javascript
-const response = await fetch('https://api.decentralizedrights.com/api/v1/tokens/balance/0x...');
+const response = await fetch(
+  "https://api.decentralizedrights.com/api/v1/tokens/balance/0x...",
+);
 ```
 
 #### Explorer (explorer.decentralizedrights.com)
+
 ```javascript
-const response = await fetch('https://api.decentralizedrights.com/api/v1/explorer/transactions');
+const response = await fetch(
+  "https://api.decentralizedrights.com/api/v1/explorer/transactions",
+);
 ```
 
 #### App Portal (app.decentralizedrights.com)
+
 ```javascript
-const response = await fetch('https://api.decentralizedrights.com/api/v1/activities/submit', {
-  method: 'POST',
-  body: JSON.stringify(submission)
-});
+const response = await fetch(
+  "https://api.decentralizedrights.com/api/v1/activities/submit",
+  {
+    method: "POST",
+    body: JSON.stringify(submission),
+  },
+);
 ```
 
 ## Next Steps
@@ -319,4 +343,3 @@ const response = await fetch('https://api.decentralizedrights.com/api/v1/activit
 - Test scripts for validation
 
 The API is ready for development and testing. Next steps are to configure environment variables, connect to actual blockchain services, and deploy to production.
-

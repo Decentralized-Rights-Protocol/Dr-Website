@@ -1,8 +1,17 @@
-'use client'
+"use client";
 
-import { ShieldCheckIcon, LockClosedIcon, CpuChipIcon, CubeIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
+import {
+  ShieldCheckIcon,
+  LockClosedIcon,
+  CpuChipIcon,
+  CubeIcon,
+} from "@heroicons/react/24/outline";
+import Link from "next/link";
+import {
+  PremiumPage,
+  PremiumHero,
+  PremiumSection,
+} from "@/components/site/PremiumPage";
 
 export default function QuantumSecurityPage() {
   return (
@@ -26,9 +35,10 @@ export default function QuantumSecurityPage() {
                 Quantum-Resistant Signatures
               </h3>
               <p className="text-slate-300 leading-relaxed">
-                As quantum computing advances, traditional cryptographic systems face unprecedented threats.
-                DRP employs post-quantum cryptography to ensure your rights and data remain secure,
-                even against future quantum computers.
+                As quantum computing advances, traditional cryptographic systems
+                face unprecedented threats. DRP employs post-quantum
+                cryptography to ensure your rights and data remain secure, even
+                against future quantum computers.
               </p>
             </div>
           </div>
@@ -39,20 +49,20 @@ export default function QuantumSecurityPage() {
                 The Quantum Threat
               </h3>
               <p className="text-slate-300">
-                Quantum computers can break current encryption algorithms like RSA and ECC,
-                potentially compromising all existing cryptographic protections. DRP addresses this
-                threat proactively.
+                Quantum computers can break current encryption algorithms like
+                RSA and ECC, potentially compromising all existing cryptographic
+                protections. DRP addresses this threat proactively.
               </p>
             </div>
-            
+
             <div className="bg-purple-900/20 rounded-lg border border-purple-300/20 p-6">
               <h3 className="text-xl font-semibold text-foreground mb-2">
                 DRP&apos;s Solution
               </h3>
               <p className="text-slate-300">
-                We use quantum-resistant signature schemes including hash-based cryptography,
-                lattice-based cryptography, and post-quantum secure key exchange protocols
-                recommended by NIST.
+                We use quantum-resistant signature schemes including hash-based
+                cryptography, lattice-based cryptography, and post-quantum
+                secure key exchange protocols recommended by NIST.
               </p>
             </div>
           </div>
@@ -66,9 +76,10 @@ export default function QuantumSecurityPage() {
                 Hash-Based Cryptography
               </h3>
               <p className="text-slate-300 leading-relaxed">
-                DRP leverages proven hash-based cryptographic schemes that remain secure
-                against both classical and quantum attacks. These methods rely on the
-                one-way properties of cryptographic hash functions.
+                DRP leverages proven hash-based cryptographic schemes that
+                remain secure against both classical and quantum attacks. These
+                methods rely on the one-way properties of cryptographic hash
+                functions.
               </p>
             </div>
           </div>
@@ -79,9 +90,9 @@ export default function QuantumSecurityPage() {
                 Merkle Tree Structures
               </h3>
               <p className="text-slate-300">
-                Our signature schemes use Merkle trees to create efficient, stateless
-                hash-based signatures. Each signature is unique and cannot be forged,
-                even with unlimited computational power.
+                Our signature schemes use Merkle trees to create efficient,
+                stateless hash-based signatures. Each signature is unique and
+                cannot be forged, even with unlimited computational power.
               </p>
             </div>
 
@@ -90,9 +101,9 @@ export default function QuantumSecurityPage() {
                 One-Time Signatures (OTS)
               </h3>
               <p className="text-slate-300">
-                We use Winternitz One-Time Signatures combined with Merkle trees to
-                create efficient, quantum-resistant signature schemes that scale
-                to billions of transactions.
+                We use Winternitz One-Time Signatures combined with Merkle trees
+                to create efficient, quantum-resistant signature schemes that
+                scale to billions of transactions.
               </p>
             </div>
 
@@ -101,15 +112,18 @@ export default function QuantumSecurityPage() {
                 Post-Quantum Security Guarantees
               </h3>
               <p className="text-slate-300">
-                Our cryptographic choices are based on mathematical problems that are
-                believed to be hard even for quantum computers, providing long-term
-                security guarantees for human rights data.
+                Our cryptographic choices are based on mathematical problems
+                that are believed to be hard even for quantum computers,
+                providing long-term security guarantees for human rights data.
               </p>
             </div>
           </div>
         </PremiumSection>
 
-        <PremiumSection eyebrow="Governance Security" title="AI ElderCore Governance">
+        <PremiumSection
+          eyebrow="Governance Security"
+          title="AI ElderCore Governance"
+        >
           <div className="flex items-start gap-4 mb-6">
             <CpuChipIcon className="w-12 h-12 text-purple-500 flex-shrink-0" />
             <div>
@@ -117,9 +131,9 @@ export default function QuantumSecurityPage() {
                 AI ElderCore Governance
               </h3>
               <p className="text-slate-300 leading-relaxed">
-                DRP combines quantum-safe cryptography with AI-powered governance
-                through the ElderCore system, creating a robust, transparent, and
-                future-proof governance mechanism.
+                DRP combines quantum-safe cryptography with AI-powered
+                governance through the ElderCore system, creating a robust,
+                transparent, and future-proof governance mechanism.
               </p>
             </div>
           </div>
@@ -164,7 +178,9 @@ export default function QuantumSecurityPage() {
           <h2 className="text-3xl font-bold mb-4">Technical Implementation</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="rounded-xl border border-foreground/10 bg-black/25 p-4">
-              <h3 className="text-xl font-semibold mb-2">Cryptographic Algorithms</h3>
+              <h3 className="text-xl font-semibold mb-2">
+                Cryptographic Algorithms
+              </h3>
               <ul className="space-y-1 text-slate-200">
                 <li>• SPHINCS+ (hash-based signatures)</li>
                 <li>• XMSS (eXtended Merkle Signature Scheme)</li>
@@ -194,6 +210,5 @@ export default function QuantumSecurityPage() {
         </div>
       </div>
     </PremiumPage>
-  )
+  );
 }
-

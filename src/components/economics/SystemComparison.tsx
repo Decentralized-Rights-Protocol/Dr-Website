@@ -1,26 +1,26 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { ArrowRight, X, Check } from 'lucide-react'
+import { motion } from "framer-motion";
+import { ArrowRight, X, Check } from "lucide-react";
 
 export function SystemComparison() {
   const oldSystem = [
-    'Extraction-based economy',
-    'AI as ruler (surveillance)',
-    'Centralized control',
-    'Inequality by design',
-    'Environmental degradation',
-    'Human dignity ignored',
-  ]
+    "Extraction-based economy",
+    "AI as ruler (surveillance)",
+    "Centralized control",
+    "Inequality by design",
+    "Environmental degradation",
+    "Human dignity ignored",
+  ];
 
   const newSystem = [
-    'Activity-verified economy',
-    'AI as auditor (transparency)',
-    'Decentralized governance',
-    'Rights-based distribution',
-    'Sustainability rewarded',
-    'Human dignity as metric',
-  ]
+    "Activity-verified economy",
+    "AI as auditor (transparency)",
+    "Decentralized governance",
+    "Rights-based distribution",
+    "Sustainability rewarded",
+    "Human dignity as metric",
+  ];
 
   return (
     <div className="py-16 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-950">
@@ -124,6 +124,5 @@ export function SystemComparison() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

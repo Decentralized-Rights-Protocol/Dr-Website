@@ -1,44 +1,60 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { TrendingUp, TrendingDown, Activity, DollarSign, Users, Zap, Shield } from 'lucide-react'
+import { motion } from "framer-motion";
+import {
+  TrendingUp,
+  TrendingDown,
+  Activity,
+  DollarSign,
+  Users,
+  Zap,
+  Shield,
+} from "lucide-react";
 
 interface Metric {
-  label: string
-  value: string | number
-  change?: string
-  trend?: 'up' | 'down' | 'neutral'
-  icon?: React.ReactNode
+  label: string;
+  value: string | number;
+  change?: string;
+  trend?: "up" | "down" | "neutral";
+  icon?: React.ReactNode;
 }
 
 interface KeyMetricsPanelProps {
-  metrics: Metric[]
-  title?: string
-  className?: string
+  metrics: Metric[];
+  title?: string;
+  className?: string;
 }
 
-export function KeyMetricsPanel({ metrics, title = 'Key Metrics', className = '' }: KeyMetricsPanelProps) {
-  const getIcon = (trend?: 'up' | 'down' | 'neutral') => {
+export function KeyMetricsPanel({
+  metrics,
+  title = "Key Metrics",
+  className = "",
+}: KeyMetricsPanelProps) {
+  const getIcon = (trend?: "up" | "down" | "neutral") => {
     switch (trend) {
-      case 'up':
-        return <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
-      case 'down':
-        return <TrendingDown className="h-4 w-4 text-red-600 dark:text-red-400" />
+      case "up":
+        return (
+          <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
+        );
+      case "down":
+        return (
+          <TrendingDown className="h-4 w-4 text-red-600 dark:text-red-400" />
+        );
       default:
-        return null
+        return null;
     }
-  }
+  };
 
-  const getChangeColor = (trend?: 'up' | 'down' | 'neutral') => {
+  const getChangeColor = (trend?: "up" | "down" | "neutral") => {
     switch (trend) {
-      case 'up':
-        return 'text-green-600 dark:text-green-400'
-      case 'down':
-        return 'text-red-600 dark:text-red-400'
+      case "up":
+        return "text-green-600 dark:text-green-400";
+      case "down":
+        return "text-red-600 dark:text-red-400";
       default:
-        return 'text-neutral-600 dark:text-neutral-400'
+        return "text-neutral-600 dark:text-neutral-400";
     }
-  }
+  };
 
   return (
     <motion.div
@@ -68,7 +84,9 @@ export function KeyMetricsPanel({ metrics, title = 'Key Metrics', className = ''
                 </div>
               )}
               {metric.change && (
-                <div className={`flex items-center gap-1 text-sm font-medium ${getChangeColor(metric.trend)}`}>
+                <div
+                  className={`flex items-center gap-1 text-sm font-medium ${getChangeColor(metric.trend)}`}
+                >
                   {getIcon(metric.trend)}
                   <span>{metric.change}</span>
                 </div>
@@ -85,8 +103,9 @@ export function KeyMetricsPanel({ metrics, title = 'Key Metrics', className = ''
       </div>
       {/* Comment for developer: Replace mock metrics with real data from API/backend */}
       <p className="text-xs text-neutral-500 dark:text-neutral-500 mt-4 italic">
-        * Metrics shown are mock values. Connect to real-time data sources in production.
+        * Metrics shown are mock values. Connect to real-time data sources in
+        production.
       </p>
     </motion.div>
-  )
+  );
 }

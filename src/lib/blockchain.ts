@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 
 /**
  * Mock Blockchain Service for DRP
@@ -11,24 +11,28 @@ export class BlockchainService {
    */
   async submitProof(proofHash: string, type: string, metadata: any) {
     console.log(`[Blockchain] Submitting ${type} proof: ${proofHash}`);
-    
+
     // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Simulate Cosmos/EVM transaction
-    const txHash = '0x' + crypto.getRandomValues(new Uint8Array(32)).reduce((a, b) => a + b.toString(16).padStart(2, '0'), '');
+    const txHash =
+      "0x" +
+      crypto
+        .getRandomValues(new Uint8Array(32))
+        .reduce((a, b) => a + b.toString(16).padStart(2, "0"), "");
     const blockNumber = Math.floor(Math.random() * 1000000);
 
     return {
       txHash,
       blockNumber,
-      success: true
+      success: true,
     };
   }
 
   /**
    * In a real Cosmos implementation, it would look like this:
-   * 
+   *
    * async submitToCosmos(proofHash, type, metadata) {
    *   const client = await SigningStargateClient.connectWithSigner(rpc, offlineSigner);
    *   const msg = {

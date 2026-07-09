@@ -1,39 +1,50 @@
-import Link from 'next/link'
-import { Activity, Award, GraduationCap, Scan, Share2, Wallet } from 'lucide-react'
+import Link from "next/link";
+import {
+  Activity,
+  Award,
+  GraduationCap,
+  Scan,
+  Share2,
+  Wallet,
+} from "lucide-react";
 
 const actions = [
   {
-    href: '/proofs/activities',
-    title: 'Submit Proof',
-    description: 'Verify your contributions to the human network.',
-    icon: Activity
+    href: "/proofs/activities",
+    title: "Submit Proof",
+    description: "Verify your contributions to the human network.",
+    icon: Activity,
   },
   {
-    href: '/explorer',
-    title: 'Explorer',
-    description: 'Monitor the live DRP ledger in real-time.',
-    icon: Scan
+    href: "/explorer",
+    title: "Explorer",
+    description: "Monitor the live DRP ledger in real-time.",
+    icon: Scan,
   },
   {
-    href: '/rewards',
-    title: 'Rewards',
-    description: 'Track your $DeRi and $RIGHTS earnings.',
-    icon: Award
+    href: "/rewards",
+    title: "Rewards",
+    description: "Track your $DeRi and $RIGHTS earnings.",
+    icon: Award,
   },
   {
-    href: '/learn',
-    title: 'Learn',
-    description: 'Complete modules and earn protocol rewards.',
-    icon: GraduationCap
-  }
-]
+    href: "/learn",
+    title: "Learn",
+    description: "Complete modules and earn protocol rewards.",
+    icon: GraduationCap,
+  },
+];
 
 export function QuickActions() {
   return (
     <section className="rounded-[2.5rem] border border-foreground/5 bg-black/40 p-10 backdrop-blur-md">
       <header className="mb-10">
-        <p className="text-[10px] font-cinematic text-drp-cyan opacity-60 mb-2">Protocol Access</p>
-        <h3 className="text-2xl font-bold text-foreground">Rapid Stewardship</h3>
+        <p className="text-[10px] font-cinematic text-drp-cyan opacity-60 mb-2">
+          Protocol Access
+        </p>
+        <h3 className="text-2xl font-bold text-foreground">
+          Rapid Stewardship
+        </h3>
       </header>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -48,11 +59,13 @@ export function QuickActions() {
             </div>
             <div>
               <p className="text-sm font-bold text-foreground mb-2">{title}</p>
-              <p className="text-xs text-drp-gray leading-relaxed">{description}</p>
+              <p className="text-xs text-drp-gray leading-relaxed">
+                {description}
+              </p>
             </div>
           </Link>
         ))}
       </div>
     </section>
-  )
+  );
 }

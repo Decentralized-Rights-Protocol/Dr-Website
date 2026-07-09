@@ -1,15 +1,15 @@
 export interface LessonSection {
-  type: 'intro' | 'concept' | 'diagram' | 'code' | 'quiz' | 'callout';
+  type: "intro" | "concept" | "diagram" | "code" | "quiz" | "callout";
   title?: string;
   content: string;
   code?: string;
   language?: string;
-  diagramType?: 'flow' | 'comparison' | 'timeline' | 'stack';
+  diagramType?: "flow" | "comparison" | "timeline" | "stack";
   diagramData?: Record<string, unknown>;
   quizOptions?: string[];
   quizAnswer?: number;
   quizExplanation?: string;
-  calloutType?: 'info' | 'warning' | 'success' | 'drp';
+  calloutType?: "info" | "warning" | "success" | "drp";
 }
 
 export interface Lesson {
@@ -23,7 +23,7 @@ export interface Lesson {
   duration: string;
   xp: number;
   deri: number;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
   prerequisites: string[];
   tags: string[];
   sections: LessonSection[];

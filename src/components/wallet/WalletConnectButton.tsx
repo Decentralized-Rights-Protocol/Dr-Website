@@ -1,7 +1,14 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { Wallet, LogOut, Copy, ExternalLink, Coins, CheckCircle } from "lucide-react";
+import {
+  Wallet,
+  LogOut,
+  Copy,
+  ExternalLink,
+  Coins,
+  CheckCircle,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface WalletState {
@@ -25,7 +32,7 @@ export function WalletConnectButton() {
     address: null,
     balance: null,
     chainId: null,
-    networkName: null
+    networkName: null,
   });
   const [deriBalance, setDeriBalance] = useState<DeRiBalance | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
@@ -50,15 +57,19 @@ export function WalletConnectButton() {
   const checkWalletConnection = useCallback(async () => {
     if (typeof window !== "undefined" && window.ethereum) {
       try {
-        const accounts = await (window.ethereum as any).request({ method: "eth_accounts" });
+        const accounts = await (window.ethereum as any).request({
+          method: "eth_accounts",
+        });
         if (accounts.length > 0) {
-          const chainId = await (window.ethereum as any).request({ method: "eth_chainId" });
+          const chainId = await (window.ethereum as any).request({
+            method: "eth_chainId",
+          });
           setWalletState({
             isConnected: true,
             address: accounts[0],
             balance: null, // Will be loaded separately
             chainId: parseInt(chainId, 16),
-            networkName: getNetworkName(parseInt(chainId, 16))
+            networkName: getNetworkName(parseInt(chainId, 16)),
           });
         }
       } catch (error) {
@@ -74,30 +85,33 @@ export function WalletConnectButton() {
         address: null,
         balance: null,
         chainId: null,
-        networkName: null
+        networkName: null,
       });
       setDeriBalance(null);
       setShowDropdown(false);
       try {
-        localStorage.removeItem('connectedWallet');
+        localStorage.removeItem("connectedWallet");
       } catch {}
       return;
     }
 
-    setWalletState(prev => ({ ...prev, address: accounts[0] }));
+    setWalletState((prev) => ({ ...prev, address: accounts[0] }));
     try {
-      localStorage.setItem('connectedWallet', accounts[0]);
+      localStorage.setItem("connectedWallet", accounts[0]);
     } catch {}
   }, []);
 
-  const handleChainChanged = useCallback((chainId: string) => {
-    const newChainId = parseInt(chainId, 16);
-    setWalletState(prev => ({
-      ...prev,
-      chainId: newChainId,
-      networkName: getNetworkName(newChainId)
-    }));
-  }, [getNetworkName]);
+  const handleChainChanged = useCallback(
+    (chainId: string) => {
+      const newChainId = parseInt(chainId, 16);
+      setWalletState((prev) => ({
+        ...prev,
+        chainId: newChainId,
+        networkName: getNetworkName(newChainId),
+      }));
+    },
+    [getNetworkName],
+  );
 
   const connectWallet = useCallback(async () => {
     if (typeof window === "undefined" || !window.ethereum) {
@@ -113,7 +127,9 @@ export function WalletConnectButton() {
       });
 
       // Get chain ID
-      const chainId = await (window.ethereum as any).request({ method: "eth_chainId" });
+      const chainId = await (window.ethereum as any).request({
+        method: "eth_chainId",
+      });
       const networkName = getNetworkName(parseInt(chainId, 16));
 
       setWalletState({
@@ -121,18 +137,17 @@ export function WalletConnectButton() {
         address: accounts[0],
         balance: null,
         chainId: parseInt(chainId, 16),
-        networkName
+        networkName,
       });
 
       // Persist for reward flows
       try {
-        localStorage.setItem('connectedWallet', accounts[0]);
+        localStorage.setItem("connectedWallet", accounts[0]);
       } catch {}
 
       // Listen for account changes
       (window.ethereum as any).on("accountsChanged", handleAccountsChanged);
       (window.ethereum as any).on("chainChanged", handleChainChanged);
-
     } catch (error: any) {
       console.error("Error connecting wallet:", error);
       if (error.code === 4001) {
@@ -150,12 +165,19 @@ export function WalletConnectButton() {
 
     setIsLoadingBalance(true);
     try {
-      const response = await fetch(`/api/reward/balance/${walletState.address}`);
+      const response = await fetch(
+        `/api/reward/balance/${walletState.address}`,
+      );
       const data = await response.json();
       setDeriBalance(data);
     } catch (error) {
       console.error("Error loading DeRi balance:", error);
-      setDeriBalance({ balance: 0, balance_formatted: 0, symbol: "DeRi-TEST", error: "Failed to load balance" });
+      setDeriBalance({
+        balance: 0,
+        balance_formatted: 0,
+        symbol: "DeRi-TEST",
+        error: "Failed to load balance",
+      });
     } finally {
       setIsLoadingBalance(false);
     }
@@ -167,15 +189,23 @@ export function WalletConnectButton() {
       address: null,
       balance: null,
       chainId: null,
-      networkName: null
+      networkName: null,
     });
     setDeriBalance(null);
     setShowDropdown(false);
-    try { localStorage.removeItem('connectedWallet'); } catch {}
+    try {
+      localStorage.removeItem("connectedWallet");
+    } catch {}
     // Remove event listeners
     if (window.ethereum) {
-      (window.ethereum as any).removeListener("accountsChanged", handleAccountsChanged);
-      (window.ethereum as any).removeListener("chainChanged", handleChainChanged);
+      (window.ethereum as any).removeListener(
+        "accountsChanged",
+        handleAccountsChanged,
+      );
+      (window.ethereum as any).removeListener(
+        "chainChanged",
+        handleChainChanged,
+      );
     }
   }, [handleAccountsChanged, handleChainChanged]);
 
@@ -204,11 +234,16 @@ export function WalletConnectButton() {
 
   const getExplorerUrl = (address: string, chainId: number) => {
     switch (chainId) {
-      case 1: return `https://etherscan.io/address/${address}`;
-      case 11155111: return `https://sepolia.etherscan.io/address/${address}`;
-      case 137: return `https://polygonscan.com/address/${address}`;
-      case 80001: return `https://mumbai.polygonscan.com/address/${address}`;
-      default: return `https://etherscan.io/address/${address}`;
+      case 1:
+        return `https://etherscan.io/address/${address}`;
+      case 11155111:
+        return `https://sepolia.etherscan.io/address/${address}`;
+      case 137:
+        return `https://polygonscan.com/address/${address}`;
+      case 80001:
+        return `https://mumbai.polygonscan.com/address/${address}`;
+      default:
+        return `https://etherscan.io/address/${address}`;
     }
   };
 
@@ -222,7 +257,7 @@ export function WalletConnectButton() {
           "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700",
           "text-foreground shadow-lg hover:shadow-xl",
           "disabled:opacity-50 disabled:cursor-not-allowed",
-          "hover:scale-105 active:scale-95"
+          "hover:scale-105 active:scale-95",
         )}
       >
         <Wallet className="h-4 w-4" />
@@ -246,7 +281,11 @@ export function WalletConnectButton() {
         {deriBalance && (
           <div className="flex items-center gap-x-1 text-xs text-green-600 dark:text-green-400">
             <Coins className="h-3 w-3" />
-            <span>{typeof deriBalance.balance_formatted === 'number' ? deriBalance.balance_formatted.toFixed(2) : deriBalance.balance_formatted}</span>
+            <span>
+              {typeof deriBalance.balance_formatted === "number"
+                ? deriBalance.balance_formatted.toFixed(2)
+                : deriBalance.balance_formatted}
+            </span>
           </div>
         )}
       </button>
@@ -264,10 +303,12 @@ export function WalletConnectButton() {
                 <span>Connected</span>
               </div>
             </div>
-            
+
             {/* Address */}
             <div className="mb-4">
-              <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-1">Address</p>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-1">
+                Address
+              </p>
               <div className="flex items-center justify-between bg-neutral-50 dark:bg-neutral-700 rounded-md p-2">
                 <span className="font-mono text-xs text-neutral-900 dark:text-foreground">
                   {walletState.address}
@@ -280,32 +321,41 @@ export function WalletConnectButton() {
                 </button>
               </div>
             </div>
-            
+
             {/* Network */}
             <div className="mb-4">
-              <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-1">Network</p>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-1">
+                Network
+              </p>
               <div className="bg-neutral-50 dark:bg-neutral-700 rounded-md p-2">
                 <span className="text-xs text-neutral-900 dark:text-foreground">
                   {walletState.networkName}
                 </span>
               </div>
             </div>
-            
+
             {/* DeRi Balance */}
             <div className="mb-4">
-              <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-1">DeRi Balance</p>
+              <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-1">
+                DeRi Balance
+              </p>
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-md p-2">
                 {isLoadingBalance ? (
                   <div className="flex items-center gap-x-2">
                     <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-500"></div>
-                    <span className="text-xs text-neutral-600 dark:text-neutral-300">Loading...</span>
+                    <span className="text-xs text-neutral-600 dark:text-neutral-300">
+                      Loading...
+                    </span>
                   </div>
                 ) : deriBalance ? (
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-x-2">
                       <Coins className="h-4 w-4 text-blue-500" />
                       <span className="text-sm font-semibold text-neutral-900 dark:text-foreground">
-                        {typeof deriBalance.balance_formatted === 'number' ? deriBalance.balance_formatted.toFixed(2) : deriBalance.balance_formatted} {deriBalance.symbol}
+                        {typeof deriBalance.balance_formatted === "number"
+                          ? deriBalance.balance_formatted.toFixed(2)
+                          : deriBalance.balance_formatted}{" "}
+                        {deriBalance.symbol}
                       </span>
                     </div>
                     {deriBalance.error && (
@@ -313,21 +363,28 @@ export function WalletConnectButton() {
                     )}
                   </div>
                 ) : (
-                  <span className="text-xs text-neutral-600 dark:text-neutral-300">No balance data</span>
+                  <span className="text-xs text-neutral-600 dark:text-neutral-300">
+                    No balance data
+                  </span>
                 )}
               </div>
             </div>
-            
+
             {/* Actions */}
             <div className="flex gap-x-2">
               <button
-                onClick={() => window.open(getExplorerUrl(walletState.address!, walletState.chainId!), '_blank')}
+                onClick={() =>
+                  window.open(
+                    getExplorerUrl(walletState.address!, walletState.chainId!),
+                    "_blank",
+                  )
+                }
                 className="flex-1 flex items-center justify-center gap-x-1 px-3 py-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 rounded-md transition-colors"
               >
                 <ExternalLink className="h-3 w-3" />
                 <span>View on Explorer</span>
               </button>
-              
+
               <button
                 onClick={disconnectWallet}
                 className="flex-1 flex items-center justify-center gap-x-1 px-3 py-2 text-xs font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-md transition-colors"
@@ -343,4 +400,3 @@ export function WalletConnectButton() {
   );
 }
 export default WalletConnectButton;
-

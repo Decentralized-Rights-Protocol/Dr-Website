@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { motion } from 'framer-motion'
-import { CheckCircleIcon, FlagIcon } from '@heroicons/react/24/outline'
+import React from "react";
+import { motion } from "framer-motion";
+import { CheckCircleIcon, FlagIcon } from "@heroicons/react/24/outline";
 
 interface CheckpointProps {
-  title: string
-  description?: string
-  completed?: boolean
-  position?: 'start' | 'middle' | 'end'
-  className?: string
+  title: string;
+  description?: string;
+  completed?: boolean;
+  position?: "start" | "middle" | "end";
+  className?: string;
 }
 
 /**
@@ -21,8 +21,8 @@ export function Checkpoint({
   title,
   description,
   completed = false,
-  position = 'middle',
-  className = ''
+  position = "middle",
+  className = "",
 }: CheckpointProps) {
   return (
     <motion.div
@@ -32,28 +32,34 @@ export function Checkpoint({
       transition={{ duration: 0.5 }}
       className={`my-8 ${className}`}
     >
-      <div className={`relative bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border-2 ${
-        completed ? 'border-green-400' : 'border-white/20'
-      } p-6`}>
+      <div
+        className={`relative bg-white/10 dark:bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg border-2 ${
+          completed ? "border-green-400" : "border-white/20"
+        } p-6`}
+      >
         {/* Checkpoint Icon */}
         <div className="flex items-start gap-4">
-          <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
-            completed 
-              ? 'bg-green-500/20 border-2 border-green-400' 
-              : 'bg-blue-500/20 border-2 border-blue-400'
-          }`}>
+          <div
+            className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+              completed
+                ? "bg-green-500/20 border-2 border-green-400"
+                : "bg-blue-500/20 border-2 border-blue-400"
+            }`}
+          >
             {completed ? (
               <CheckCircleIcon className="h-6 w-6 text-green-400" />
             ) : (
               <FlagIcon className="h-6 w-6 text-blue-400" />
             )}
           </div>
-          
+
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <h3 className={`text-lg font-semibold ${
-                completed ? 'text-green-400' : 'text-foreground'
-              }`}>
+              <h3
+                className={`text-lg font-semibold ${
+                  completed ? "text-green-400" : "text-foreground"
+                }`}
+              >
                 {title}
               </h3>
               {completed && (
@@ -62,7 +68,7 @@ export function Checkpoint({
                 </span>
               )}
             </div>
-            
+
             {description && (
               <p className="text-neutral-300 leading-relaxed">{description}</p>
             )}
@@ -76,7 +82,7 @@ export function Checkpoint({
               <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
-                  whileInView={{ width: '0%' }}
+                  whileInView={{ width: "0%" }}
                   viewport={{ once: true }}
                   className="h-full bg-blue-400 rounded-full"
                 />
@@ -87,6 +93,5 @@ export function Checkpoint({
         )}
       </div>
     </motion.div>
-  )
+  );
 }
-

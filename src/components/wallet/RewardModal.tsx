@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { X, Coins, CheckCircle, ExternalLink, Loader2, Gift } from "lucide-react";
+import {
+  X,
+  Coins,
+  CheckCircle,
+  ExternalLink,
+  Loader2,
+  Gift,
+} from "lucide-react";
 
 interface RewardModalProps {
   isOpen: boolean;
@@ -37,21 +44,21 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
 
     try {
       // Get wallet address from localStorage or wallet state
-      const walletAddress = localStorage.getItem('connectedWallet');
+      const walletAddress = localStorage.getItem("connectedWallet");
       if (!walletAddress) {
-        throw new Error('No wallet connected');
+        throw new Error("No wallet connected");
       }
 
-      const response = await fetch('/api/reward/lesson-complete', {
-        method: 'POST',
+      const response = await fetch("/api/reward/lesson-complete", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           wallet_address: walletAddress,
           lesson_id: rewardData.lessonId,
-          score: rewardData.score || 0
-        })
+          score: rewardData.score || 0,
+        }),
       });
 
       const result: RewardResponse = await response.json();
@@ -65,11 +72,11 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
         }, 3000);
       }
     } catch (error) {
-      console.error('Error processing reward:', error);
+      console.error("Error processing reward:", error);
       setRewardResult({
         success: false,
-        message: 'Failed to process reward',
-        error: error instanceof Error ? error.message : 'Unknown error'
+        message: "Failed to process reward",
+        error: error instanceof Error ? error.message : "Unknown error",
       });
     } finally {
       setIsProcessing(false);
@@ -95,12 +102,20 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
 
   const getActivityDisplayName = (activity: string) => {
     switch (activity) {
-      case 'lesson_completion': return 'Lesson Completion';
-      case 'quiz_perfect': return 'Perfect Quiz Score';
-      case 'achievement_unlock': return 'Achievement Unlocked';
-      case 'level_completion': return 'Level Completed';
-      case 'streak_bonus': return 'Streak Bonus';
-      default: return activity.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+      case "lesson_completion":
+        return "Lesson Completion";
+      case "quiz_perfect":
+        return "Perfect Quiz Score";
+      case "achievement_unlock":
+        return "Achievement Unlocked";
+      case "level_completion":
+        return "Level Completed";
+      case "streak_bonus":
+        return "Streak Bonus";
+      default:
+        return activity
+          .replace("_", " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase());
     }
   };
 
@@ -109,11 +124,11 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
-      
+
       {/* Modal */}
       <div className="relative bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
         {/* Header */}
@@ -124,14 +139,16 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
           >
             <X className="h-5 w-5" />
           </button>
-          
+
           <div className="flex items-center gap-x-3">
             <div className="p-2 bg-white/20 rounded-full">
               <Gift className="h-6 w-6" />
             </div>
             <div>
               <h2 className="text-xl font-bold">Reward Earned!</h2>
-              <p className="text-blue-100 text-sm">You&rsquo;ve completed a learning activity</p>
+              <p className="text-blue-100 text-sm">
+                You&rsquo;ve completed a learning activity
+              </p>
             </div>
           </div>
         </div>
@@ -161,20 +178,23 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                       <CheckCircle className="h-8 w-8 text-green-500" />
                     </div>
                   </div>
-                  
+
                   <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
                     Reward Sent Successfully!
                   </h3>
-                  
+
                   <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg p-4 mb-4">
                     <div className="flex items-center justify-center gap-x-2 mb-2">
                       <Coins className="h-5 w-5 text-green-500" />
                       <span className="text-2xl font-bold text-green-600 dark:text-green-400">
-                        {rewardResult.reward_amount ? (rewardResult.reward_amount / 10 ** 18).toFixed(2) : '0'} DeRi
+                        {rewardResult.reward_amount
+                          ? (rewardResult.reward_amount / 10 ** 18).toFixed(2)
+                          : "0"}{" "}
+                        DeRi
                       </span>
                     </div>
                     <p className="text-sm text-neutral-600 dark:text-neutral-300">
-                      {getActivityDisplayName(rewardData?.activity || '')}
+                      {getActivityDisplayName(rewardData?.activity || "")}
                     </p>
                     {rewardData?.score && (
                       <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
@@ -216,15 +236,15 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                       <X className="h-8 w-8 text-red-500" />
                     </div>
                   </div>
-                  
+
                   <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
                     Reward Failed
                   </h3>
-                  
+
                   <p className="text-sm text-red-600 dark:text-red-400 mb-4">
                     {rewardResult.message}
                   </p>
-                  
+
                   {rewardResult.error && (
                     <div className="bg-red-50 dark:bg-red-900/20 rounded-md p-3 mb-4">
                       <p className="text-xs text-red-700 dark:text-red-300">
@@ -232,7 +252,7 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                       </p>
                     </div>
                   )}
-                  
+
                   <button
                     onClick={processReward}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-foreground py-2 px-4 rounded-md text-sm font-medium transition-colors"
@@ -251,15 +271,16 @@ export function RewardModal({ isOpen, onClose, rewardData }: RewardModalProps) {
                   <Gift className="h-8 w-8 text-blue-500" />
                 </div>
               </div>
-              
+
               <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
                 Ready to Claim Reward
               </h3>
-              
+
               <p className="text-sm text-neutral-600 dark:text-neutral-300 mb-4">
-                You&rsquo;ve earned {rewardData?.amount} DeRi tokens for completing this activity!
+                You&rsquo;ve earned {rewardData?.amount} DeRi tokens for
+                completing this activity!
               </p>
-              
+
               <button
                 onClick={processReward}
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-foreground py-2 px-4 rounded-md text-sm font-medium transition-all duration-200 hover:scale-105"

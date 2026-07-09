@@ -1,82 +1,49 @@
-'use client'
+import { useState } from "react";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { submitReadingProof } from "@/lib/drp-api";
 
-import { useState } from 'react'
-import { ethers } from 'ethers'
-import { useAppStore } from '@/store/app-store'
+export const useProofSubmission = (userId: string, walletAddress: string) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
-interface ProofSubmissionInput {
-  type: 'PoST' | 'PoAT'
-  data: any
-  metadata?: any
-}
+  const submitToConvex = useMutation(api.proofs.submitProof);
 
-export function useProofSubmission() {
-  const address = useAppStore((state) => state.address)
-  const [isPending, setIsPending] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [txHash, setTxHash] = useState<string | null>(null)
-  const [error, setError] = useState<Error | null>(null)
-
-  const submitProof = async ({ type, data, metadata }: ProofSubmissionInput) => {
-    setIsPending(true)
-    setIsSuccess(false)
-    setTxHash(null)
-    setError(null)
-
-    if (!address) {
-      const err = new Error('Wallet not connected')
-      setError(err)
-      setIsPending(false)
-      throw err
-    }
+  const submitProof = async (
+    proofData: any,
+    signature: string,
+    token: string,
+  ) => {
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
 
     try {
-      // 1. Prepare message to sign
-      const message = JSON.stringify(data, Object.keys(data).sort());
-      
-      // 2. Request signature from wallet
-      if (!window.ethereum) throw new Error('No ethereum provider found');
-      const provider = new ethers.BrowserProvider(window.ethereum as any);
-      const signer = await provider.getSigner();
-      const signature = await signer.signMessage(message);
+      // 1. Submit to Backend for Verification (PoAT generation)
+      const verificationResult = await submitReadingProof(proofData, token);
 
-      // 3. Call Submission API
-      const response = await fetch('/api/proofs/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId: address, // Using address as userId for now
-          walletAddress: address,
-          type,
-          data,
-          metadata,
-          signature
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Submission failed');
+      if (!verificationResult.passed) {
+        throw new Error("Verification failed");
       }
 
-      const result = await response.json();
-      setTxHash(result.txHash);
-      setIsSuccess(true);
-      return result;
+      // 2. Submit to Convex for Indexing
+      await submitToConvex({
+        userId,
+        walletAddress,
+        type: "PoAT",
+        data: verificationResult,
+        proofHash: verificationResult.record_hash,
+        timestamp: new Date().toISOString(),
+      });
+
+      setSuccess(true);
     } catch (err: any) {
-      console.error('Proof submission failed:', err);
-      setError(err);
-      throw err;
+      setError(err.message || "Submission failed");
     } finally {
-      setIsPending(false);
+      setLoading(false);
     }
   };
 
-  return {
-    submitProof,
-    isPending,
-    isSuccess,
-    txHash,
-    error
-  };
-}
+  return { submitProof, loading, error, success };
+};

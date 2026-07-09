@@ -212,4 +212,3 @@ curl http://localhost:8000/health
 - Check `README.md` for detailed documentation
 - See `API_DOCUMENTATION.md` for endpoint details
 - Review `PROJECT_SUMMARY.md` for architecture overview
-

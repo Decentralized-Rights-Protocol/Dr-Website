@@ -25,6 +25,7 @@ Building on blockchain can be challenging:
 - **Deployment Complexity**: Complex deployment processes
 
 The DRP SDK addresses these by:
+
 - **Simplified APIs**: High-level abstractions over smart contracts
 - **Comprehensive Tools**: Complete development toolkit
 - **Clear Documentation**: Extensive guides and examples
@@ -61,21 +62,23 @@ The DRP SDK is organized into modular components:
 **Purpose**: Main interface for interacting with DRP
 
 **Features**:
+
 - Connection management
 - Transaction signing
 - Event listening
 - Error handling
 
 **Example**:
+
 ```typescript
-import { DRPClient } from '@drp/sdk'
+import { DRPClient } from "@drp/sdk";
 
 const client = new DRPClient({
-  network: 'mainnet',
-  privateKey: process.env.PRIVATE_KEY
-})
+  network: "mainnet",
+  privateKey: process.env.PRIVATE_KEY,
+});
 
-await client.connect()
+await client.connect();
 ```
 
 #### 2. Rights Management
@@ -83,26 +86,28 @@ await client.connect()
 **Purpose**: Interact with rights registry and management
 
 **Features**:
+
 - Register digital rights
 - Transfer rights
 - Query ownership
 - Manage royalties
 
 **Example**:
-```typescript
-import { RightsManager } from '@drp/sdk'
 
-const rightsManager = new RightsManager(client)
+```typescript
+import { RightsManager } from "@drp/sdk";
+
+const rightsManager = new RightsManager(client);
 
 // Register content
 const rights = await rightsManager.registerContent({
-  contentHash: '0xabc123...',
+  contentHash: "0xabc123...",
   royaltyRate: 10, // 10%
   metadata: {
-    title: 'My Song',
-    artist: 'Artist Name'
-  }
-})
+    title: "My Song",
+    artist: "Artist Name",
+  },
+});
 ```
 
 #### 3. Activity Proof System
@@ -110,25 +115,29 @@ const rights = await rightsManager.registerContent({
 **Purpose**: Create and submit activity proofs
 
 **Features**:
+
 - Generate proofs
 - Sign activities
 - Submit to network
 - Track proof status
 
 **Example**:
-```typescript
-import { ActivityProof } from '@drp/sdk'
 
-const proof = new ActivityProof(client)
+```typescript
+import { ActivityProof } from "@drp/sdk";
+
+const proof = new ActivityProof(client);
 
 // Create content creation proof
 const creationProof = await proof.createContentProof({
-  contentHash: '0xabc123...',
-  contentType: 'music',
-  metadata: { /* ... */ }
-})
+  contentHash: "0xabc123...",
+  contentType: "music",
+  metadata: {
+    /* ... */
+  },
+});
 
-await proof.submit(creationProof)
+await proof.submit(creationProof);
 ```
 
 #### 4. Royalty Engine
@@ -136,26 +145,28 @@ await proof.submit(creationProof)
 **Purpose**: Handle royalty calculations and distribution
 
 **Features**:
+
 - Calculate royalties
 - Distribute payments
 - Track revenue
 - Multi-party splits
 
 **Example**:
-```typescript
-import { RoyaltyEngine } from '@drp/sdk'
 
-const royaltyEngine = new RoyaltyEngine(client)
+```typescript
+import { RoyaltyEngine } from "@drp/sdk";
+
+const royaltyEngine = new RoyaltyEngine(client);
 
 // Distribute royalties
 await royaltyEngine.distribute({
-  contentHash: '0xabc123...',
-  amount: '1000000000000000000', // 1 token
+  contentHash: "0xabc123...",
+  amount: "1000000000000000000", // 1 token
   recipients: [
-    { address: '0x...', share: 80 },
-    { address: '0x...', share: 20 }
-  ]
-})
+    { address: "0x...", share: 80 },
+    { address: "0x...", share: 20 },
+  ],
+});
 ```
 
 ### Installation and Setup
@@ -170,6 +181,7 @@ await royaltyEngine.distribute({
 #### Installation
 
 **JavaScript/TypeScript**:
+
 ```bash
 npm install @drp/sdk
 # or
@@ -177,6 +189,7 @@ yarn add @drp/sdk
 ```
 
 **Python**:
+
 ```bash
 pip install drp-sdk
 ```
@@ -186,15 +199,15 @@ pip install drp-sdk
 ```typescript
 // config.ts
 export const drpConfig = {
-  network: process.env.DRP_NETWORK || 'testnet',
+  network: process.env.DRP_NETWORK || "testnet",
   rpcUrl: process.env.DRP_RPC_URL,
   privateKey: process.env.PRIVATE_KEY,
   contracts: {
-    rightsRegistry: '0x...',
-    royaltyEngine: '0x...',
-    activityProof: '0x...'
-  }
-}
+    rightsRegistry: "0x...",
+    royaltyEngine: "0x...",
+    activityProof: "0x...",
+  },
+};
 ```
 
 ### Core Functionality
@@ -202,17 +215,17 @@ export const drpConfig = {
 #### Connecting to Network
 
 ```typescript
-import { DRPClient } from '@drp/sdk'
+import { DRPClient } from "@drp/sdk";
 
-const client = new DRPClient(drpConfig)
+const client = new DRPClient(drpConfig);
 
 try {
-  await client.connect()
-  console.log('Connected to DRP network')
-  console.log('Network:', client.network)
-  console.log('Chain ID:', client.chainId)
+  await client.connect();
+  console.log("Connected to DRP network");
+  console.log("Network:", client.network);
+  console.log("Chain ID:", client.chainId);
 } catch (error) {
-  console.error('Connection failed:', error)
+  console.error("Connection failed:", error);
 }
 ```
 
@@ -225,15 +238,15 @@ const registration = await client.rights.register({
   owner: client.account.address,
   royaltyRate: 10,
   metadata: {
-    title: 'Digital Art #1',
-    creator: 'Artist Name',
-    type: 'image',
-    format: 'png'
-  }
-})
+    title: "Digital Art #1",
+    creator: "Artist Name",
+    type: "image",
+    format: "png",
+  },
+});
 
-console.log('Rights registered:', registration.rightsId)
-console.log('Transaction hash:', registration.txHash)
+console.log("Rights registered:", registration.rightsId);
+console.log("Transaction hash:", registration.txHash);
 ```
 
 #### Creating Activity Proofs
@@ -241,35 +254,35 @@ console.log('Transaction hash:', registration.txHash)
 ```typescript
 // Generate activity proof
 const proof = await client.activity.createProof({
-  type: 'content_creation',
+  type: "content_creation",
   contentHash: contentHash,
   timestamp: Date.now(),
   metadata: {
     duration: 180, // seconds
-    quality: 'high'
-  }
-})
+    quality: "high",
+  },
+});
 
 // Submit proof
-const submission = await client.activity.submit(proof)
-console.log('Proof submitted:', submission.proofId)
+const submission = await client.activity.submit(proof);
+console.log("Proof submitted:", submission.proofId);
 ```
 
 #### Listening to Events
 
 ```typescript
 // Listen for rights registrations
-client.rights.on('Registered', (event) => {
-  console.log('New rights registered:', event.rightsId)
-  console.log('Owner:', event.owner)
-  console.log('Content hash:', event.contentHash)
-})
+client.rights.on("Registered", (event) => {
+  console.log("New rights registered:", event.rightsId);
+  console.log("Owner:", event.owner);
+  console.log("Content hash:", event.contentHash);
+});
 
 // Listen for royalty distributions
-client.royalty.on('Distributed', (event) => {
-  console.log('Royalty distributed:', event.amount)
-  console.log('Recipient:', event.recipient)
-})
+client.royalty.on("Distributed", (event) => {
+  console.log("Royalty distributed:", event.amount);
+  console.log("Recipient:", event.recipient);
+});
 ```
 
 ## Visual Explanation
@@ -346,34 +359,36 @@ Developer Application
 ### 1. Music Streaming Platform
 
 **Requirements**:
+
 - Register songs
 - Track plays
 - Distribute royalties
 
 **Implementation**:
+
 ```typescript
 class MusicPlatform {
   constructor(private client: DRPClient) {}
 
   async registerSong(songData: SongData) {
-    const contentHash = await this.hashContent(songData.file)
+    const contentHash = await this.hashContent(songData.file);
     return await this.client.rights.register({
       contentHash,
       royaltyRate: songData.royaltyRate,
       metadata: {
         title: songData.title,
         artist: songData.artist,
-        type: 'music'
-      }
-    })
+        type: "music",
+      },
+    });
   }
 
   async recordPlay(songHash: string) {
     return await this.client.activity.createProof({
-      type: 'consumption',
+      type: "consumption",
       contentHash: songHash,
-      metadata: { duration: 180 }
-    })
+      metadata: { duration: 180 },
+    });
   }
 }
 ```
@@ -381,11 +396,13 @@ class MusicPlatform {
 ### 2. Digital Art Marketplace
 
 **Requirements**:
+
 - Mint NFTs
 - Track ownership
 - Royalty on resales
 
 **Implementation**:
+
 ```typescript
 class ArtMarketplace {
   constructor(private client: DRPClient) {}
@@ -397,14 +414,14 @@ class ArtMarketplace {
       metadata: {
         title: artwork.title,
         artist: artwork.artist,
-        type: 'art'
-      }
-    })
-    return rights
+        type: "art",
+      },
+    });
+    return rights;
   }
 
   async transferOwnership(rightsId: string, to: string) {
-    return await this.client.rights.transfer(rightsId, to)
+    return await this.client.rights.transfer(rightsId, to);
   }
 }
 ```
@@ -412,11 +429,13 @@ class ArtMarketplace {
 ### 3. Content Licensing Platform
 
 **Requirements**:
+
 - License content
 - Track usage
 - Automated payments
 
 **Implementation**:
+
 ```typescript
 class LicensingPlatform {
   constructor(private client: DRPClient) {}
@@ -426,23 +445,23 @@ class LicensingPlatform {
       contentHash,
       terms,
       duration: terms.duration,
-      fee: terms.fee
-    })
+      fee: terms.fee,
+    });
   }
 
   async useContent(licenseId: string) {
     // Record usage
     await this.client.activity.createProof({
-      type: 'usage',
+      type: "usage",
       licenseId,
-      timestamp: Date.now()
-    })
-    
+      timestamp: Date.now(),
+    });
+
     // Trigger payment
     await this.client.royalty.distribute({
       licenseId,
-      amount: license.fee
-    })
+      amount: license.fee,
+    });
   }
 }
 ```
@@ -452,30 +471,30 @@ class LicensingPlatform {
 ### Unit Testing
 
 ```typescript
-import { DRPClient } from '@drp/sdk'
-import { MockProvider } from '@drp/sdk/testing'
+import { DRPClient } from "@drp/sdk";
+import { MockProvider } from "@drp/sdk/testing";
 
-describe('Rights Management', () => {
-  let client: DRPClient
-  let mockProvider: MockProvider
+describe("Rights Management", () => {
+  let client: DRPClient;
+  let mockProvider: MockProvider;
 
   beforeEach(() => {
-    mockProvider = new MockProvider()
+    mockProvider = new MockProvider();
     client = new DRPClient({
-      provider: mockProvider
-    })
-  })
+      provider: mockProvider,
+    });
+  });
 
-  it('should register rights', async () => {
+  it("should register rights", async () => {
     const rights = await client.rights.register({
-      contentHash: '0xabc...',
-      royaltyRate: 10
-    })
-    
-    expect(rights.rightsId).toBeDefined()
-    expect(rights.owner).toBe(client.account.address)
-  })
-})
+      contentHash: "0xabc...",
+      royaltyRate: 10,
+    });
+
+    expect(rights.rightsId).toBeDefined();
+    expect(rights.owner).toBe(client.account.address);
+  });
+});
 ```
 
 ### Integration Testing
@@ -496,13 +515,13 @@ describe('Integration Tests', () => {
 
   it('should handle full rights lifecycle', async () => {
     const client = testNetwork.getClient()
-    
+
     // Register
     const rights = await client.rights.register({...})
-    
+
     // Transfer
     await client.rights.transfer(rights.id, otherAddress)
-    
+
     // Verify
     const owner = await client.rights.getOwner(rights.id)
     expect(owner).toBe(otherAddress)
@@ -515,19 +534,21 @@ describe('Integration Tests', () => {
 ### Common Errors
 
 **Connection Errors**:
+
 ```typescript
 try {
-  await client.connect()
+  await client.connect();
 } catch (error) {
-  if (error.code === 'NETWORK_ERROR') {
-    console.error('Network unreachable')
-  } else if (error.code === 'INVALID_RPC') {
-    console.error('Invalid RPC endpoint')
+  if (error.code === "NETWORK_ERROR") {
+    console.error("Network unreachable");
+  } else if (error.code === "INVALID_RPC") {
+    console.error("Invalid RPC endpoint");
   }
 }
 ```
 
 **Transaction Errors**:
+
 ```typescript
 try {
   await client.rights.register({...})
@@ -553,52 +574,57 @@ try {
 ## Quiz
 
 ### Question 1
+
 What is the primary purpose of the DRP SDK?
 
 A) To mine blocks  
 B) To provide developers with tools and libraries to build applications on DRP  
 C) To store blockchain data  
-D) To encrypt transactions  
+D) To encrypt transactions
 
 **Correct Answer: B** - The DRP SDK provides developers with comprehensive tools, libraries, and APIs to simplify building decentralized applications on the DRP protocol.
 
 ### Question 2
+
 Which component of the SDK handles digital rights registration?
 
 A) ActivityProof  
 B) RightsManager  
 C) RoyaltyEngine  
-D) NetworkClient  
+D) NetworkClient
 
 **Correct Answer: B** - RightsManager (or client.rights) handles registering, transferring, and managing digital rights on DRP.
 
 ### Question 3
+
 How do you listen for events in the DRP SDK?
 
 A) Using webhooks  
 B) Using the event listener methods like client.rights.on()  
 C) Polling the blockchain  
-D) Using external services  
+D) Using external services
 
 **Correct Answer: B** - The SDK provides event listeners like `client.rights.on('Registered', callback)` to react to blockchain events in real-time.
 
 ### Question 4
+
 What is required before using the DRP SDK?
 
 A) Nothing, it works out of the box  
 B) Node.js/Python, network access, and a wallet with $DeRi tokens  
 C) Only a web browser  
-D) Only an internet connection  
+D) Only an internet connection
 
 **Correct Answer: B** - You need Node.js 18+ or Python 3.9+, access to the DRP network, and a wallet with $DeRi tokens for transactions.
 
 ### Question 5
+
 What testing utilities does the DRP SDK provide?
 
 A) No testing support  
 B) Mock providers and test networks for unit and integration testing  
 C) Only manual testing  
-D) Only production testing  
+D) Only production testing
 
 **Correct Answer: B** - The SDK includes MockProvider for unit testing and TestNetwork for integration testing, making it easy to test DRP applications.
 

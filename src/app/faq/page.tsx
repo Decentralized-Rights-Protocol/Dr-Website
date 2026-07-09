@@ -1,64 +1,68 @@
-import Link from 'next/link'
-import { buildPageMetadata } from '@/lib/seo/seo'
-import { StructuredData } from '@/components/seo/StructuredData'
-import { FAQ } from '@/components/seo/FAQ'
-import { PremiumHero, PremiumPage, PremiumSection } from '@/components/site/PremiumPage'
-import { ArrowRight, HelpCircle } from 'lucide-react'
+import Link from "next/link";
+import { buildPageMetadata } from "@/lib/seo/seo";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { FAQ } from "@/components/seo/FAQ";
+import {
+  PremiumHero,
+  PremiumPage,
+  PremiumSection,
+} from "@/components/site/PremiumPage";
+import { ArrowRight, HelpCircle } from "lucide-react";
 
 export const metadata = buildPageMetadata({
-  title: 'FAQ | Decentralized Rights Protocol (DRP)',
+  title: "FAQ | Decentralized Rights Protocol (DRP)",
   description:
-    'Frequently asked questions about the Decentralized Rights Protocol (DRP): what DRP is, how PoST and PoAT work, what AI Elders do, and why DRP is focused on rights, dignity, and sustainability.',
-  canonical: '/faq',
-})
+    "Frequently asked questions about the Decentralized Rights Protocol (DRP): what DRP is, how PoST and PoAT work, what AI Elders do, and why DRP is focused on rights, dignity, and sustainability.",
+  canonical: "/faq",
+});
 
 const faqItems = [
   {
-    question: 'What is DRP?',
+    question: "What is DRP?",
     answer:
-      'DRP (Decentralized Rights Protocol) is a human-rights-centered blockchain that uses AI-verified consensus mechanisms (Proof of Status and Proof of Activity) to create a trust-based, sustainable, and secure decentralized network.',
+      "DRP (Decentralized Rights Protocol) is a human-rights-centered blockchain that uses AI-verified consensus mechanisms (Proof of Status and Proof of Activity) to create a trust-based, sustainable, and secure decentralized network.",
   },
   {
-    question: 'How does DRP work (high level)?',
+    question: "How does DRP work (high level)?",
     answer:
-      'DRP verifies credentials and participation through PoST (identity/status) and PoAT (activity/contribution). AI Elders help validate integrity and produce explainable outputs that support rights-aligned governance and transparent decisions.',
+      "DRP verifies credentials and participation through PoST (identity/status) and PoAT (activity/contribution). AI Elders help validate integrity and produce explainable outputs that support rights-aligned governance and transparent decisions.",
   },
   {
-    question: 'What is Proof of Status (PoST)?',
+    question: "What is Proof of Status (PoST)?",
     answer:
-      'PoST verifies user identity and reputation by encoding verified credentials without exposing private data. PoST supports governance weighting and access control based on verifiable status.',
+      "PoST verifies user identity and reputation by encoding verified credentials without exposing private data. PoST supports governance weighting and access control based on verifiable status.",
   },
   {
-    question: 'What is Proof of Activity (PoAT)?',
+    question: "What is Proof of Activity (PoAT)?",
     answer:
-      'PoAT validates and records real-world contributions. Participants submit cryptographic evidence of activity, and AI Elders and validators verify authenticity and integrity before rewards and records are finalized.',
+      "PoAT validates and records real-world contributions. Participants submit cryptographic evidence of activity, and AI Elders and validators verify authenticity and integrity before rewards and records are finalized.",
   },
   {
-    question: 'What are AI Elders?',
+    question: "What are AI Elders?",
     answer:
-      'AI Elders are autonomous AI agents integrated into DRP’s core layer. They verify activities, detect fraud, optimize network integrity workflows, and produce reviewable summaries for human governance.',
+      "AI Elders are autonomous AI agents integrated into DRP’s core layer. They verify activities, detect fraud, optimize network integrity workflows, and produce reviewable summaries for human governance.",
   },
   {
-    question: 'What makes DRP different from other blockchains?',
+    question: "What makes DRP different from other blockchains?",
     answer:
-      'DRP prioritizes human dignity, privacy-preserving verification, AI-assisted integrity checks, and sustainability-first governance. Instead of centering incentives only on transaction behavior, DRP ties participation and governance to verifiable status and activity.',
+      "DRP prioritizes human dignity, privacy-preserving verification, AI-assisted integrity checks, and sustainability-first governance. Instead of centering incentives only on transaction behavior, DRP ties participation and governance to verifiable status and activity.",
   },
   {
-    question: 'Is DRP quantum-safe?',
+    question: "Is DRP quantum-safe?",
     answer:
-      'Yes. DRP is designed to use NIST-approved post-quantum cryptographic algorithms for long-term security.',
+      "Yes. DRP is designed to use NIST-approved post-quantum cryptographic algorithms for long-term security.",
   },
   {
-    question: 'How can I run or participate in DRP?',
+    question: "How can I run or participate in DRP?",
     answer:
-      'Start with the Learn and Docs sections to understand node setup, consensus basics, and verification workflows. The Getting Started guide shows how to run a DRP testnet node.',
+      "Start with the Learn and Docs sections to understand node setup, consensus basics, and verification workflows. The Getting Started guide shows how to run a DRP testnet node.",
   },
   {
-    question: 'What tokens does DRP use?',
+    question: "What tokens does DRP use?",
     answer:
-      'DRP uses a dual-token model: $RIGHTS for governance and voting, and $DeRi for utility, rewards, and network participation.',
+      "DRP uses a dual-token model: $RIGHTS for governance and voting, and $DeRi for utility, rewards, and network participation.",
   },
-] as const
+] as const;
 
 export default function FAQRootPage() {
   return (
@@ -99,8 +103,13 @@ export default function FAQRootPage() {
         </PremiumSection>
       </PremiumPage>
 
-      <FAQ items={faqItems as unknown as Array<{ question: string; answer: string }>} title="Frequently Asked Questions" className="pt-0" />
+      <FAQ
+        items={
+          faqItems as unknown as Array<{ question: string; answer: string }>
+        }
+        title="Frequently Asked Questions"
+        className="pt-0"
+      />
     </>
-  )
+  );
 }
-

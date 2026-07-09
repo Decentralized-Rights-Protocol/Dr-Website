@@ -1,17 +1,19 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { Mail, Sparkles } from 'lucide-react'
+import { useEffect } from "react";
+import { Mail, Sparkles } from "lucide-react";
 
 export default function NewsletterTally() {
   useEffect(() => {
-    if (!document.querySelector('script[src="https://tally.so/widgets/embed.js"]')) {
-      const script = document.createElement('script')
-      script.src = 'https://tally.so/widgets/embed.js'
-      script.async = true
-      document.body.appendChild(script)
+    if (
+      !document.querySelector('script[src="https://tally.so/widgets/embed.js"]')
+    ) {
+      const script = document.createElement("script");
+      script.src = "https://tally.so/widgets/embed.js";
+      script.async = true;
+      document.body.appendChild(script);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="relative overflow-hidden border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-[#0a0a14] p-8 sm:p-10">
@@ -24,11 +26,14 @@ export default function NewsletterTally() {
           </div>
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="text-sm font-bold tracking-wide text-foreground uppercase">Stay in the Loop</h3>
+              <h3 className="text-sm font-bold tracking-wide text-foreground uppercase">
+                Stay in the Loop
+              </h3>
               <Sparkles className="w-3 h-3 text-[#00e5cc]" />
             </div>
             <p className="text-sm text-gray-500 dark:text-foreground/35 leading-relaxed max-w-sm">
-              Protocol updates, launches, and human-rights milestones — straight to your inbox.
+              Protocol updates, launches, and human-rights milestones — straight
+              to your inbox.
             </p>
           </div>
         </div>
@@ -40,11 +45,12 @@ export default function NewsletterTally() {
           data-tally-overlay="1"
           data-tally-emoji-text="👋"
           data-tally-emoji-animation="wave"
-          className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#00e5cc] text-background text-sm font-bold tracking-wide hover:bg-[#00bfff] transition-all whitespace-nowrap">
+          className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#00e5cc] text-background text-sm font-bold tracking-wide hover:bg-[#00bfff] transition-all whitespace-nowrap"
+        >
           <Mail className="w-4 h-4" />
           Subscribe
         </button>
       </div>
     </div>
-  )
+  );
 }

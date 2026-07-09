@@ -25,6 +25,7 @@ Blockchain ecosystems face fragmentation:
 - **Scalability Limits**: Single chain capacity constraints
 
 Cross-chain interoperability solves these by:
+
 - **Unified Experience**: Use DRP across multiple chains
 - **Asset Portability**: Move assets between chains
 - **Liquidity Aggregation**: Access liquidity from all chains
@@ -40,11 +41,13 @@ Cross-chain interoperability solves these by:
 **Purpose**: Transfer assets and data between chains
 
 **Types**:
+
 - **Lock & Mint**: Lock assets on source, mint on destination
 - **Burn & Mint**: Burn on source, mint on destination
 - **Atomic Swaps**: Direct peer-to-peer exchange
 
 **Architecture**:
+
 ```
 Chain A (Source)          Bridge          Chain B (Destination)
 ┌──────────┐                            ┌──────────┐
@@ -58,6 +61,7 @@ Chain A (Source)          Bridge          Chain B (Destination)
 **Purpose**: Send messages and trigger actions across chains
 
 **Flow**:
+
 ```
 Chain A                    Message Relay              Chain B
 ┌──────────┐                                        ┌──────────┐
@@ -71,6 +75,7 @@ Chain A                    Message Relay              Chain B
 **Purpose**: Work across multiple chains natively
 
 **Examples**:
+
 - **Polkadot**: Parachain architecture
 - **Cosmos**: IBC protocol
 - **LayerZero**: Omnichain protocol
@@ -101,11 +106,12 @@ Chain A                    Message Relay              Chain B
 ### Bridge Implementation
 
 **Lock & Mint Bridge**:
+
 ```solidity
 // Source Chain Contract
 contract DRPBridgeSource {
     mapping(bytes32 => bool) public processed;
-    
+
     function lockAndBridge(
         address token,
         uint256 amount,
@@ -113,7 +119,7 @@ contract DRPBridgeSource {
     ) external {
         // Lock tokens
         IERC20(token).transferFrom(msg.sender, address(this), amount);
-        
+
         // Emit bridge event
         emit BridgeInitiated(
             msg.sender,
@@ -137,9 +143,9 @@ contract DRPBridgeDestination {
         // Verify proof from source chain
         require(verifyBridgeProof(sourceTxHash, proof), "Invalid proof");
         require(!processed[sourceTxHash], "Already processed");
-        
+
         processed[sourceTxHash] = true;
-        
+
         // Mint tokens
         IERC20(token).mint(recipient, amount);
     }
@@ -149,41 +155,43 @@ contract DRPBridgeDestination {
 ### Cross-Chain Rights Management
 
 **Rights Registration Across Chains**:
+
 ```typescript
 // Register rights on multiple chains
 const rights = await drpClient.crossChain.registerRights({
-  contentHash: '0xabc123...',
-  chains: ['ethereum', 'polygon', 'avalanche'],
+  contentHash: "0xabc123...",
+  chains: ["ethereum", "polygon", "avalanche"],
   royaltyRate: 10,
   metadata: {
-    title: 'Cross-Chain Content',
-    creator: '0xCreator...'
-  }
-})
+    title: "Cross-Chain Content",
+    creator: "0xCreator...",
+  },
+});
 
 // Rights registered on all chains
 // Can be accessed from any connected chain
 ```
 
 **Cross-Chain Royalty Distribution**:
+
 ```typescript
 // Distribute royalties across chains
 await drpClient.crossChain.distributeRoyalties({
-  contentHash: '0xabc123...',
+  contentHash: "0xabc123...",
   recipients: [
     {
-      chain: 'ethereum',
-      address: '0xEthRecipient...',
-      share: 50
+      chain: "ethereum",
+      address: "0xEthRecipient...",
+      share: 50,
     },
     {
-      chain: 'polygon',
-      address: '0xPolyRecipient...',
-      share: 50
-    }
+      chain: "polygon",
+      address: "0xPolyRecipient...",
+      share: 50,
+    },
   ],
-  totalAmount: parseEther('100')
-})
+  totalAmount: parseEther("100"),
+});
 ```
 
 ## Visual Explanation
@@ -253,19 +261,21 @@ Content Created
 **Scenario**: Content creator wants to distribute on multiple chains
 
 **Benefits**:
+
 - Reach users on all chains
 - Unified rights management
 - Cross-chain royalty collection
 - Single registration, multiple chains
 
 **Implementation**:
+
 ```typescript
 // Register once, available everywhere
 const rights = await drpClient.crossChain.registerRights({
   contentHash: contentHash,
-  chains: ['ethereum', 'polygon', 'avalanche', 'bsc'],
-  royaltyRate: 10
-})
+  chains: ["ethereum", "polygon", "avalanche", "bsc"],
+  royaltyRate: 10,
+});
 
 // Content accessible from any chain
 // Royalties collected from all chains
@@ -277,6 +287,7 @@ const rights = await drpClient.crossChain.registerRights({
 **Scenario**: NFT created on Ethereum, rights managed on DRP
 
 **Flow**:
+
 ```
 1. NFT minted on Ethereum
 2. Rights registered on DRP (Ethereum)
@@ -290,6 +301,7 @@ const rights = await drpClient.crossChain.registerRights({
 **Scenario**: Aggregate liquidity from multiple chains
 
 **Benefits**:
+
 - Access to all chain liquidity
 - Better prices
 - Reduced slippage
@@ -300,19 +312,20 @@ const rights = await drpClient.crossChain.registerRights({
 **Scenario**: Activity on one chain, proof on another
 
 **Implementation**:
+
 ```typescript
 // Activity occurs on Polygon
 const activity = await polygonClient.activity.createProof({
-  type: 'content_consumption',
-  contentHash: '0xabc...'
-})
+  type: "content_consumption",
+  contentHash: "0xabc...",
+});
 
 // Proof relayed to Ethereum
 await drpClient.crossChain.relayProof({
-  sourceChain: 'polygon',
-  targetChain: 'ethereum',
-  proof: activity
-})
+  sourceChain: "polygon",
+  targetChain: "ethereum",
+  proof: activity,
+});
 
 // Proof available on both chains
 ```
@@ -322,12 +335,14 @@ await drpClient.crossChain.relayProof({
 ### Bridge Security
 
 **Risks**:
+
 - Bridge hacks
 - Validator collusion
 - Replay attacks
 - Double-spending
 
 **Mitigations**:
+
 - Multi-signature validators
 - Time locks
 - Proof verification
@@ -336,6 +351,7 @@ await drpClient.crossChain.relayProof({
 ### Message Verification
 
 **Verification Methods**:
+
 - Merkle proofs
 - Light client verification
 - Oracle networks
@@ -346,40 +362,43 @@ await drpClient.crossChain.relayProof({
 ### 1. LayerZero
 
 **Omnichain Protocol**:
+
 ```typescript
 // Send message across chains
 await layerZero.send({
-  destinationChain: 'polygon',
+  destinationChain: "polygon",
   payload: {
-    action: 'registerRights',
-    data: rightsData
-  }
-})
+    action: "registerRights",
+    data: rightsData,
+  },
+});
 ```
 
 ### 2. Wormhole
 
 **Cross-Chain Messaging**:
+
 ```typescript
 // Lock and bridge
 const sequence = await wormhole.lockAndBridge({
-  token: '0xDeRi...',
-  amount: parseEther('100'),
-  targetChain: 'polygon'
-})
+  token: "0xDeRi...",
+  amount: parseEther("100"),
+  targetChain: "polygon",
+});
 ```
 
 ### 3. IBC (Cosmos)
 
 **Inter-Blockchain Communication**:
+
 ```typescript
 // IBC packet for cross-chain rights
 await ibc.sendPacket({
-  sourcePort: 'drp',
-  destinationPort: 'drp',
-  channel: 'channel-0',
-  data: rightsData
-})
+  sourcePort: "drp",
+  destinationPort: "drp",
+  channel: "channel-0",
+  data: rightsData,
+});
 ```
 
 ## Key Takeaways
@@ -395,52 +414,57 @@ await ibc.sendPacket({
 ## Quiz
 
 ### Question 1
+
 What is the primary benefit of cross-chain interoperability for DRP?
 
 A) Slower transactions  
 B) Enabling DRP to work across multiple blockchain networks, providing unified rights management  
 C) Higher costs  
-D) Less security  
+D) Less security
 
 **Correct Answer: B** - Cross-chain interoperability allows DRP features to work across multiple chains, providing a unified experience for users regardless of which chain they're on.
 
 ### Question 2
+
 How does a lock-and-mint bridge work?
 
 A) It destroys tokens  
 B) It locks tokens on the source chain and mints equivalent tokens on the destination chain  
 C) It only works on one chain  
-D) It requires passwords  
+D) It requires passwords
 
 **Correct Answer: B** - Lock-and-mint bridges lock tokens on the source chain (preventing double-spending) and mint equivalent tokens on the destination chain.
 
 ### Question 3
+
 What is cross-chain messaging used for?
 
 A) Only sending emails  
 B) Triggering actions on one chain based on events from another chain  
 C) Only storing data  
-D) Encrypting messages  
+D) Encrypting messages
 
 **Correct Answer: B** - Cross-chain messaging allows events or actions on one chain to trigger corresponding actions on another chain.
 
 ### Question 4
+
 Why is bridge security important?
 
 A) Bridges are never attacked  
 B) Bridges are targets for hacks, so multi-signature validators, proof verification, and other security measures are essential  
 C) Bridges don't need security  
-D) Security slows down bridges  
+D) Security slows down bridges
 
 **Correct Answer: B** - Bridges are high-value targets, so security measures like multi-signature validators, proof verification, and time locks are critical.
 
 ### Question 5
+
 What does multi-chain rights management enable?
 
 A) Rights only on one chain  
 B) Rights registered once but accessible and manageable across all connected chains  
 C) No rights management  
-D) Slower rights registration  
+D) Slower rights registration
 
 **Correct Answer: B** - Multi-chain rights management allows rights to be registered once but accessed, queried, and managed from any connected blockchain.
 

@@ -1,39 +1,57 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
-import { Zap, Link as LinkIcon, Award, Building2, Sparkles, Shield } from 'lucide-react'
+import { ReactNode } from "react";
+import {
+  Zap,
+  Link as LinkIcon,
+  Award,
+  Building2,
+  Sparkles,
+  Shield,
+} from "lucide-react";
 
 interface TokenCardProps {
-  name: string
-  symbol: string
-  description: string
-  icon: ReactNode
+  name: string;
+  symbol: string;
+  description: string;
+  icon: ReactNode;
   features: {
-    icon: ReactNode
-    label: string
-  }[]
-  variant: 'deri' | 'rights'
-  glowColor: string
+    icon: ReactNode;
+    label: string;
+  }[];
+  variant: "deri" | "rights";
+  glowColor: string;
 }
 
-export function TokenCard({ name, symbol, description, icon, features, variant, glowColor }: TokenCardProps) {
+export function TokenCard({
+  name,
+  symbol,
+  description,
+  icon,
+  features,
+  variant,
+  glowColor,
+}: TokenCardProps) {
   return (
     <div className="group relative">
       {/* Glowing ring effect */}
-      <div 
+      <div
         className={`
           absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100
           transition-opacity duration-500 blur-xl
-          ${variant === 'deri' ? 'bg-blue-500/50' : 'bg-amber-500/50'}
+          ${variant === "deri" ? "bg-blue-500/50" : "bg-amber-500/50"}
         `}
       />
-      
+
       {/* Card */}
       <div className="relative bg-gradient-to-br from-neutral-900/90 to-neutral-950/90 backdrop-blur-xl border border-neutral-800 rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] hover:border-primary-500/50">
         {/* Rotating ring for $DeRi */}
-        {variant === 'deri' && (
+        {variant === "deri" && (
           <div className="absolute -top-2 -right-2 w-32 h-32 opacity-30 group-hover:opacity-60 transition-opacity">
-            <svg className="w-full h-full animate-spin-slow" viewBox="0 0 128 128">
+            <svg
+              className="w-full h-full animate-spin-slow"
+              viewBox="0 0 128 128"
+            >
               <circle
                 cx="64"
                 cy="64"
@@ -49,7 +67,7 @@ export function TokenCard({ name, symbol, description, icon, features, variant, 
         )}
 
         {/* Golden AI-governance circuit halo for $RIGHTS */}
-        {variant === 'rights' && (
+        {variant === "rights" && (
           <div className="absolute -top-4 -right-4 w-40 h-40 opacity-40 group-hover:opacity-70 transition-opacity">
             <svg className="w-full h-full" viewBox="0 0 160 160">
               <path
@@ -59,8 +77,24 @@ export function TokenCard({ name, symbol, description, icon, features, variant, 
                 strokeWidth="1.5"
                 className="text-amber-400"
               />
-              <circle cx="80" cy="80" r="40" fill="none" stroke="currentColor" strokeWidth="1" className="text-amber-300" />
-              <circle cx="80" cy="80" r="20" fill="none" stroke="currentColor" strokeWidth="1" className="text-amber-400" />
+              <circle
+                cx="80"
+                cy="80"
+                r="40"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                className="text-amber-300"
+              />
+              <circle
+                cx="80"
+                cy="80"
+                r="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                className="text-amber-400"
+              />
             </svg>
           </div>
         )}
@@ -69,14 +103,17 @@ export function TokenCard({ name, symbol, description, icon, features, variant, 
         <div className="relative z-10">
           {/* Header */}
           <div className="flex items-center gap-4 mb-6">
-            <div className={`
+            <div
+              className={`
               w-16 h-16 rounded-2xl flex items-center justify-center
-              ${variant === 'deri' 
-                ? 'bg-gradient-to-br from-blue-500 to-blue-700' 
-                : 'bg-gradient-to-br from-amber-500 to-amber-700'
+              ${
+                variant === "deri"
+                  ? "bg-gradient-to-br from-blue-500 to-blue-700"
+                  : "bg-gradient-to-br from-amber-500 to-amber-700"
               }
               group-hover:scale-110 transition-transform duration-300
-            `}>
+            `}
+            >
               {icon}
             </div>
             <div>
@@ -96,13 +133,14 @@ export function TokenCard({ name, symbol, description, icon, features, variant, 
                 className="flex items-center gap-3 p-3 bg-neutral-800/50 rounded-lg border border-neutral-700/50 group-hover:border-primary-500/30 transition-colors"
               >
                 <div className="text-primary-400">{feature.icon}</div>
-                <span className="text-neutral-300 text-sm">{feature.label}</span>
+                <span className="text-neutral-300 text-sm">
+                  {feature.label}
+                </span>
               </div>
             ))}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

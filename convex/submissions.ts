@@ -1,7 +1,12 @@
 import { v } from "convex/values";
 import { mutation, query, internalMutation } from "./_generated/server";
 import { internal } from "./_generated/api";
-import { appendAudit, createNotification, ensureUserForWallet, requireReviewer } from "./lib/domain";
+import {
+  appendAudit,
+  createNotification,
+  ensureUserForWallet,
+  requireReviewer,
+} from "./lib/domain";
 import { nowIso } from "./lib/time";
 import { PolicyEngine } from "./lib/drp/elders";
 import { ActivityClaim, ActivityCategory, ActivityType } from "./lib/drp/types";
@@ -38,7 +43,7 @@ export const triggerAIReview = internalMutation({
       .query("proofRecords")
       .withIndex("by_submission", (q) => q.eq("submissionId", submission._id))
       .unique();
-    
+
     if (proof) {
       await ctx.db.patch(proof._id, {
         recordStatus: result.verdict === "approved" ? "verified" : "rejected",
@@ -105,13 +110,17 @@ export const createSubmission = mutation({
     });
 
     // Trigger AI Review asynchronously
-    await ctx.scheduler.runAfter(0, internal.submissions.triggerAIReview, { submissionId });
+    await ctx.scheduler.runAfter(0, internal.submissions.triggerAIReview, {
+      submissionId,
+    });
 
     await createNotification(
       ctx,
       actor.user._id,
       "submission",
-      args.kind === "activity" ? "Proof of Activity submitted" : "Proof of Status submitted",
+      args.kind === "activity"
+        ? "Proof of Activity submitted"
+        : "Proof of Status submitted",
       "Your submission is now in the review queue. AI is performing initial assessment.",
       args.kind === "activity" ? "/proofs/activities" : "/proofs/status",
     );
@@ -146,24 +155,35 @@ export const listSubmissions = query({
   },
   handler: async (ctx, args) => {
     let submissions = args.status
-      ? await ctx.db.query("activitySubmissions").withIndex("by_status", (q) => q.eq("submissionStatus", args.status!)).collect()
+      ? await ctx.db
+          .query("activitySubmissions")
+          .withIndex("by_status", (q) => q.eq("submissionStatus", args.status!))
+          .collect()
       : await ctx.db.query("activitySubmissions").collect();
 
     if (args.walletAddress) {
       const normalized = args.walletAddress.trim().toLowerCase();
-      submissions = submissions.filter((submission) => submission.walletAddress === normalized);
+      submissions = submissions.filter(
+        (submission) => submission.walletAddress === normalized,
+      );
     }
     if (args.kind) {
-      submissions = submissions.filter((submission) => submission.kind === args.kind);
+      submissions = submissions.filter(
+        (submission) => submission.kind === args.kind,
+      );
     }
 
-    const sorted = submissions.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    const sorted = submissions.sort((a, b) =>
+      b.createdAt.localeCompare(a.createdAt),
+    );
 
     return await Promise.all(
       sorted.map(async (submission) => {
         const proof = await ctx.db
           .query("proofRecords")
-          .withIndex("by_submission", (q) => q.eq("submissionId", submission._id))
+          .withIndex("by_submission", (q) =>
+            q.eq("submissionId", submission._id),
+          )
           .unique();
         return {
           ...submission,
@@ -199,7 +219,11 @@ export const updateSubmissionReviewStatus = mutation({
   args: {
     reviewerWallet: v.string(),
     submissionId: v.id("activitySubmissions"),
-    nextStatus: v.union(v.literal("approved"), v.literal("rejected"), v.literal("needs_info")),
+    nextStatus: v.union(
+      v.literal("approved"),
+      v.literal("rejected"),
+      v.literal("needs_info"),
+    ),
     reviewNote: v.string(),
     confidenceScore: v.optional(v.number()),
     chainEventRef: v.optional(v.string()),
@@ -226,7 +250,10 @@ export const updateSubmissionReviewStatus = mutation({
     await ctx.db.patch(submission._id, {
       submissionStatus: args.nextStatus,
       reviewNote: args.reviewNote,
-      chainMirrorStatus: args.nextStatus === "approved" ? "queued" : submission.chainMirrorStatus,
+      chainMirrorStatus:
+        args.nextStatus === "approved"
+          ? "queued"
+          : submission.chainMirrorStatus,
       updatedAt,
     });
 
@@ -250,13 +277,24 @@ export const updateSubmissionReviewStatus = mutation({
     }
 
     if (submission.kind === "status") {
-      const profile = await ctx.db.query("profiles").withIndex("by_user", (q) => q.eq("userId", submission.userId)).unique();
+      const profile = await ctx.db
+        .query("profiles")
+        .withIndex("by_user", (q) => q.eq("userId", submission.userId))
+        .unique();
       if (profile) {
         const verified = args.nextStatus === "approved";
         await ctx.db.patch(profile._id, {
-          verificationStatus: verified ? "verified" : args.nextStatus === "needs_info" ? "pending" : "rejected",
-          statusScore: verified ? profile.statusScore + 20 : profile.statusScore,
-          governanceWeight: verified ? Math.max(profile.governanceWeight, 2) : profile.governanceWeight,
+          verificationStatus: verified
+            ? "verified"
+            : args.nextStatus === "needs_info"
+              ? "pending"
+              : "rejected",
+          statusScore: verified
+            ? profile.statusScore + 20
+            : profile.statusScore,
+          governanceWeight: verified
+            ? Math.max(profile.governanceWeight, 2)
+            : profile.governanceWeight,
           updatedAt,
         });
       }
@@ -266,7 +304,9 @@ export const updateSubmissionReviewStatus = mutation({
       ctx,
       submission.userId,
       "review",
-      args.nextStatus === "approved" ? "Submission approved" : "Submission reviewed",
+      args.nextStatus === "approved"
+        ? "Submission approved"
+        : "Submission reviewed",
       args.reviewNote,
       submission.kind === "activity" ? "/proofs/activities" : "/proofs/status",
     );

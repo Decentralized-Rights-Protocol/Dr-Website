@@ -4,21 +4,21 @@ on:
   push:
     branches: [main]
     paths:
-      - 'src/**'
-      - 'public/**'
-      - 'api/**'
-      - 'app-portal/**'
-      - 'explorer/**'
-      - '.github/workflows/deploy-vercel.yml'
-      - 'package.json'
-      - 'next.config.js'
+      - "src/**"
+      - "public/**"
+      - "api/**"
+      - "app-portal/**"
+      - "explorer/**"
+      - ".github/workflows/deploy-vercel.yml"
+      - "package.json"
+      - "next.config.js"
 
 jobs:
   deploy-app-portal:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy app-portal to Vercel
         uses: amondnet/vercel-action@v25
         with:
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy explorer to Vercel
         uses: amondnet/vercel-action@v25
         with:
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy main site to Vercel
         uses: amondnet/vercel-action@v25
         with:
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy API to Vercel
         uses: amondnet/vercel-action@v25
         with:
@@ -68,4 +68,3 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_API_PROJECT_ID }}
           working-directory: ./api
           scope: ${{ secrets.VERCEL_ORG_ID }}
-

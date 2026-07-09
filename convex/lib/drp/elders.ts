@@ -7,7 +7,10 @@ export class PolicyEngine {
   static assessActivity(claim: ActivityClaim): VerificationResult {
     let score = 50; // Base score
     const rationaleParts: string[] = [];
-    const categoryWeights: Record<ActivityCategory, { deri: number, rights: number }> = {
+    const categoryWeights: Record<
+      ActivityCategory,
+      { deri: number; rights: number }
+    > = {
       learning: { deri: 10, rights: 2 },
       developer: { deri: 50, rights: 10 },
       content: { deri: 25, rights: 5 },
@@ -34,9 +37,10 @@ export class PolicyEngine {
     switch (claim.category) {
       case "learning":
         if (claim.metadata.url) score += 10;
-        if (claim.metadata.duration && claim.metadata.duration > 300) score += 10; // 5+ mins
+        if (claim.metadata.duration && claim.metadata.duration > 300)
+          score += 10; // 5+ mins
         break;
-      
+
       case "developer":
         if (claim.metadata.repo) score += 15;
         if (claim.type === "pr" || claim.type === "contribution") score += 20;
@@ -72,7 +76,7 @@ export class PolicyEngine {
     // 4. Calculate Rewards
     const weights = categoryWeights[claim.category];
     const rewardMultiplier = score / 100;
-    
+
     const reward = {
       deri: Math.floor(weights.deri * rewardMultiplier),
       rights: Math.floor(weights.rights * rewardMultiplier),

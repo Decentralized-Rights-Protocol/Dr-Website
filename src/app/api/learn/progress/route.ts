@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   // Mock user progress data - in production, this would come from a database
@@ -10,21 +10,21 @@ export async function GET(request: NextRequest) {
     streak: 5,
     achievements: [
       {
-        id: 'first_lesson',
-        title: 'First Steps',
-        description: 'Complete your first lesson',
+        id: "first_lesson",
+        title: "First Steps",
+        description: "Complete your first lesson",
         earned: true,
-        earnedAt: '2024-01-15'
+        earnedAt: "2024-01-15",
       },
       {
-        id: 'level_2',
-        title: 'Level Up',
-        description: 'Reach Level 2',
+        id: "level_2",
+        title: "Level Up",
+        description: "Reach Level 2",
         earned: true,
-        earnedAt: '2024-01-18'
-      }
-    ]
+        earnedAt: "2024-01-18",
+      },
+    ],
   };
-  
+
   return NextResponse.json(progress);
 }

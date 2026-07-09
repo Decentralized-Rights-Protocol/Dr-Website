@@ -4,21 +4,23 @@
 
 ### Deployment Summary
 
-| Project | Status | Production URL |
-|---------|--------|----------------|
-| **Main Site** (`src/`) | ✅ Deployed | https://src-cgv9c6fwe-decentralized-rights-projects.vercel.app |
-| **App Portal** (`app-portal/`) | ✅ Deployed | https://app-portal-niisrm0qx-decentralized-rights-projects.vercel.app |
-| **Explorer** (`explorer/`) | ✅ Deployed | https://explorer-qvjqs4dn0-decentralized-rights-projects.vercel.app |
-| **API Docs** (`api/`) | ✅ Deployed | https://api-ck4lvo73g-decentralized-rights-projects.vercel.app |
+| Project                                      | Status      | Production URL                                                         |
+| -------------------------------------------- | ----------- | ---------------------------------------------------------------------- |
+| **Main Site** (`src/`)                       | ✅ Deployed | https://src-cgv9c6fwe-decentralized-rights-projects.vercel.app         |
+| **App Portal** (`app-portal/`)               | ✅ Deployed | https://app-portal-niisrm0qx-decentralized-rights-projects.vercel.app  |
+| **Explorer** (`explorer/`)                   | ✅ Deployed | https://explorer-qvjqs4dn0-decentralized-rights-projects.vercel.app    |
+| **API Docs** (`api/`)                        | ✅ Deployed | https://api-ck4lvo73g-decentralized-rights-projects.vercel.app         |
 | **Backend API** (`backend/drp-website-api/`) | ✅ Deployed | https://drp-website-7l6m4wmb1-decentralized-rights-projects.vercel.app |
 
 ## ✅ Completed Tasks
 
 ### Code Cleanup
+
 - [x] Removed redundant deployment markdown files
 - [x] Kept essential guides only
 
 ### Build Fixes
+
 - [x] Fixed module resolution issues
 - [x] Fixed ESLint errors (apostrophe escaping)
 - [x] Fixed TypeScript errors in app-portal
@@ -28,6 +30,7 @@
 - [x] Fixed backend API structure for Vercel
 
 ### Deployment
+
 - [x] Logged into Vercel
 - [x] Deployed Main Site
 - [x] Deployed App Portal
@@ -42,6 +45,7 @@
 Go to Vercel Dashboard for each project and add environment variables:
 
 **Main Site** (`src/`):
+
 ```
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 NEXT_PUBLIC_BLOCKCHAIN_RPC=https://rpc.decentralizedrights.com
@@ -50,6 +54,7 @@ NEXT_PUBLIC_IPFS_URL=https://ipfs.decentralizedrights.com
 ```
 
 **App Portal** (`app-portal/`):
+
 ```
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 NEXT_PUBLIC_BLOCKCHAIN_RPC=https://rpc.decentralizedrights.com
@@ -60,6 +65,7 @@ NEXT_PUBLIC_IPFS_URL=https://ipfs.decentralizedrights.com
 ```
 
 **Explorer** (`explorer/`):
+
 ```
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 NEXT_PUBLIC_BLOCKCHAIN_RPC=https://rpc.decentralizedrights.com
@@ -68,11 +74,13 @@ NEXT_PUBLIC_IPFS_URL=https://ipfs.decentralizedrights.com
 ```
 
 **API Docs** (`api/`):
+
 ```
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 ```
 
 **Backend API** (`backend/drp-website-api/`):
+
 ```
 BLOCKCHAIN_RPC_URL=https://rpc.decentralizedrights.com
 DATABASE_URL=[your-database-url]
@@ -98,6 +106,7 @@ In Vercel Dashboard for each project:
 ### 3. Verify Deployments
 
 Test each deployed URL:
+
 ```bash
 curl -I https://src-cgv9c6fwe-decentralized-rights-projects.vercel.app
 curl -I https://app-portal-niisrm0qx-decentralized-rights-projects.vercel.app
@@ -142,4 +151,3 @@ curl -I https://drp-website-7l6m4wmb1-decentralized-rights-projects.vercel.app/h
 **Date**: 2024-11-30  
 **Deployment Time**: ~45 minutes  
 **Next**: Configure environment variables and custom domains
-

@@ -1,6 +1,11 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { appendAudit, createNotification, ensureUserForWallet, findProfileByWallet } from "./lib/domain";
+import {
+  appendAudit,
+  createNotification,
+  ensureUserForWallet,
+  findProfileByWallet,
+} from "./lib/domain";
 import { nowIso } from "./lib/time";
 
 export const saveLearnProgress = mutation({
@@ -8,7 +13,11 @@ export const saveLearnProgress = mutation({
     walletAddress: v.string(),
     moduleSlug: v.string(),
     lessonSlug: v.string(),
-    completionStatus: v.union(v.literal("not_started"), v.literal("in_progress"), v.literal("completed")),
+    completionStatus: v.union(
+      v.literal("not_started"),
+      v.literal("in_progress"),
+      v.literal("completed"),
+    ),
     score: v.optional(v.number()),
     xpEarned: v.optional(v.number()),
   },
@@ -17,7 +26,9 @@ export const saveLearnProgress = mutation({
     const existing = (
       await ctx.db
         .query("learnProgress")
-        .withIndex("by_user_lesson", (q) => q.eq("userId", actor.user._id).eq("lessonSlug", args.lessonSlug))
+        .withIndex("by_user_lesson", (q) =>
+          q.eq("userId", actor.user._id).eq("lessonSlug", args.lessonSlug),
+        )
         .collect()
     )[0];
     const updatedAt = nowIso();
@@ -29,7 +40,10 @@ export const saveLearnProgress = mutation({
         score: args.score,
         xpEarned: args.xpEarned ?? existing.xpEarned,
         lastViewedAt: updatedAt,
-        completedAt: args.completionStatus === "completed" ? updatedAt : existing.completedAt,
+        completedAt:
+          args.completionStatus === "completed"
+            ? updatedAt
+            : existing.completedAt,
         updatedAt,
       });
     } else {
@@ -41,7 +55,8 @@ export const saveLearnProgress = mutation({
         score: args.score,
         xpEarned: args.xpEarned ?? 0,
         lastViewedAt: updatedAt,
-        completedAt: args.completionStatus === "completed" ? updatedAt : undefined,
+        completedAt:
+          args.completionStatus === "completed" ? updatedAt : undefined,
         createdAt: updatedAt,
         updatedAt,
       });
@@ -65,7 +80,10 @@ export const saveLearnProgress = mutation({
       entityType: "learnProgress",
       entityId: `${actor.user._id}:${args.lessonSlug}`,
       message: `Learn progress saved as ${args.completionStatus}`,
-      metadata: JSON.stringify({ moduleSlug: args.moduleSlug, score: args.score }),
+      metadata: JSON.stringify({
+        moduleSlug: args.moduleSlug,
+        score: args.score,
+      }),
     });
 
     return { ok: true };

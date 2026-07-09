@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { ArrowLeft, TrendingUp, Globe } from 'lucide-react'
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ArrowLeft, TrendingUp, Globe } from "lucide-react";
 
 export function MicroMacroNav() {
-  const pathname = usePathname()
-  
-  const isMicro = pathname?.includes('/micro')
-  const isMacro = pathname?.includes('/macro')
+  const pathname = usePathname();
+
+  const isMicro = pathname?.includes("/micro");
+  const isMacro = pathname?.includes("/macro");
 
   return (
     <nav className="border-b border-white/20 bg-transparent">
@@ -21,14 +21,14 @@ export function MicroMacroNav() {
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Economics Overview
           </Link>
-          
+
           <div className="flex items-center gap-4">
             <Link
               href="/economics/micro"
               className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 isMicro
-                  ? 'bg-blue-600 text-foreground'
-                  : 'bg-white/10 text-neutral-300 hover:bg-white/20'
+                  ? "bg-blue-600 text-foreground"
+                  : "bg-white/10 text-neutral-300 hover:bg-white/20"
               }`}
             >
               <TrendingUp className="mr-2 h-4 w-4" />
@@ -38,8 +38,8 @@ export function MicroMacroNav() {
               href="/economics/macro"
               className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 isMacro
-                  ? 'bg-blue-600 text-foreground'
-                  : 'bg-white/10 text-neutral-300 hover:bg-white/20'
+                  ? "bg-blue-600 text-foreground"
+                  : "bg-white/10 text-neutral-300 hover:bg-white/20"
               }`}
             >
               <Globe className="mr-2 h-4 w-4" />
@@ -49,5 +49,5 @@ export function MicroMacroNav() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

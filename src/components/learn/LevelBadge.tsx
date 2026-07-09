@@ -1,36 +1,36 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { getGamificationEngine } from '@/lib/gamification'
-import { TrophyIcon } from '@heroicons/react/24/solid'
+import { useEffect, useState } from "react";
+import { getGamificationEngine } from "@/lib/gamification";
+import { TrophyIcon } from "@heroicons/react/24/solid";
 
 interface LevelBadgeProps {
-  size?: 'sm' | 'md' | 'lg'
-  className?: string
+  size?: "sm" | "md" | "lg";
+  className?: string;
 }
 
-export function LevelBadge({ size = 'md', className = '' }: LevelBadgeProps) {
-  const [level, setLevel] = useState(1)
+export function LevelBadge({ size = "md", className = "" }: LevelBadgeProps) {
+  const [level, setLevel] = useState(1);
 
   useEffect(() => {
-    const engine = getGamificationEngine()
-    const state = engine.getState()
-    setLevel(state.level)
-    
+    const engine = getGamificationEngine();
+    const state = engine.getState();
+    setLevel(state.level);
+
     const handleUpdate = () => {
-      const newState = engine.getState()
-      setLevel(newState.level)
-    }
-    
-    window.addEventListener('xp-updated', handleUpdate)
-    return () => window.removeEventListener('xp-updated', handleUpdate)
-  }, [])
+      const newState = engine.getState();
+      setLevel(newState.level);
+    };
+
+    window.addEventListener("xp-updated", handleUpdate);
+    return () => window.removeEventListener("xp-updated", handleUpdate);
+  }, []);
 
   const sizeClasses = {
-    sm: 'w-12 h-12 text-lg',
-    md: 'w-16 h-16 text-2xl',
-    lg: 'w-24 h-24 text-4xl'
-  }
+    sm: "w-12 h-12 text-lg",
+    md: "w-16 h-16 text-2xl",
+    lg: "w-24 h-24 text-4xl",
+  };
 
   return (
     <div className={`relative ${className}`}>
@@ -41,6 +41,5 @@ export function LevelBadge({ size = 'md', className = '' }: LevelBadgeProps) {
       </div>
       <TrophyIcon className="absolute -top-1 -right-1 w-6 h-6 text-yellow-400 animate-pulse" />
     </div>
-  )
+  );
 }
-

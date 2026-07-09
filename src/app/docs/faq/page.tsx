@@ -1,54 +1,65 @@
-import { Metadata } from 'next'
-import Link from 'next/link'
-import { ArrowLeft, HelpCircle } from 'lucide-react'
+import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft, HelpCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'FAQ - DRP Documentation',
-  description: 'Frequently asked questions about the Decentralized Rights Protocol.',
-}
+  title: "FAQ - DRP Documentation",
+  description:
+    "Frequently asked questions about the Decentralized Rights Protocol.",
+};
 
 const faqs = [
   {
-    question: 'What is DRP?',
-    answer: 'DRP (Decentralized Rights Protocol) is a human-rights-centered blockchain that uses AI-verified consensus mechanisms (Proof of Status and Proof of Activity) to create a trust-based, sustainable, and secure decentralized network.',
+    question: "What is DRP?",
+    answer:
+      "DRP (Decentralized Rights Protocol) is a human-rights-centered blockchain that uses AI-verified consensus mechanisms (Proof of Status and Proof of Activity) to create a trust-based, sustainable, and secure decentralized network.",
   },
   {
-    question: 'How does DRP differ from other blockchains?',
-    answer: 'DRP is unique in its focus on human rights and sustainability, use of AI at the core layer, post-quantum cryptography, and dual consensus mechanism. It\'s designed to align with UN Sustainable Development Goals and prioritize environmental responsibility.',
+    question: "How does DRP differ from other blockchains?",
+    answer:
+      "DRP is unique in its focus on human rights and sustainability, use of AI at the core layer, post-quantum cryptography, and dual consensus mechanism. It's designed to align with UN Sustainable Development Goals and prioritize environmental responsibility.",
   },
   {
-    question: 'What is Proof of Status and Proof of Activity?',
-    answer: 'Proof of Status verifies user identity and reputation, while Proof of Activity validates contributions to the network. Both are verified by AI Elders to ensure authenticity and prevent fraud.',
+    question: "What is Proof of Status and Proof of Activity?",
+    answer:
+      "Proof of Status verifies user identity and reputation, while Proof of Activity validates contributions to the network. Both are verified by AI Elders to ensure authenticity and prevent fraud.",
   },
   {
-    question: 'Is DRP quantum-resistant?',
-    answer: 'Yes, DRP uses NIST-approved post-quantum cryptographic algorithms (CRYSTALS-Kyber for key exchange and CRYSTALS-Dilithium for digital signatures) to protect against both classical and quantum computer attacks.',
+    question: "Is DRP quantum-resistant?",
+    answer:
+      "Yes, DRP uses NIST-approved post-quantum cryptographic algorithms (CRYSTALS-Kyber for key exchange and CRYSTALS-Dilithium for digital signatures) to protect against both classical and quantum computer attacks.",
   },
   {
-    question: 'How do I run a DRP node?',
-    answer: 'Clone the repository, install dependencies with pip, and run `python src/node.py`. See the Getting Started guide for detailed instructions.',
+    question: "How do I run a DRP node?",
+    answer:
+      "Clone the repository, install dependencies with pip, and run `python src/node.py`. See the Getting Started guide for detailed instructions.",
   },
   {
-    question: 'What are AI Elders?',
-    answer: 'AI Elders are autonomous AI agents integrated into DRP\'s core layer. They verify activities, detect fraud, optimize network performance, and facilitate features like automated asset recovery (Project Lazarus).',
+    question: "What are AI Elders?",
+    answer:
+      "AI Elders are autonomous AI agents integrated into DRP's core layer. They verify activities, detect fraud, optimize network performance, and facilitate features like automated asset recovery (Project Lazarus).",
   },
   {
-    question: 'How energy-efficient is DRP?',
-    answer: 'DRP achieves 99% less energy consumption compared to traditional proof-of-work systems through AI-optimized consensus and incentives for renewable energy usage.',
+    question: "How energy-efficient is DRP?",
+    answer:
+      "DRP achieves 99% less energy consumption compared to traditional proof-of-work systems through AI-optimized consensus and incentives for renewable energy usage.",
   },
   {
-    question: 'Can I contribute to DRP?',
-    answer: 'Yes! DRP is open source and welcomes contributions. You can contribute code, documentation, testing, or research. See the Contributing guide for more information.',
+    question: "Can I contribute to DRP?",
+    answer:
+      "Yes! DRP is open source and welcomes contributions. You can contribute code, documentation, testing, or research. See the Contributing guide for more information.",
   },
   {
-    question: 'What tokens does DRP use?',
-    answer: 'DRP uses a dual-token model: $RIGHTS for governance and voting, and $DeRi for utility, transactions, and rewards.',
+    question: "What tokens does DRP use?",
+    answer:
+      "DRP uses a dual-token model: $RIGHTS for governance and voting, and $DeRi for utility, transactions, and rewards.",
   },
   {
-    question: 'Is DRP interoperable with other blockchains?',
-    answer: 'Yes, DRP features AI-automated cross-chain interoperability using Web3.js libraries and Multi-Party Computation (MPC) protocols, enabling seamless communication with other blockchains.',
+    question: "Is DRP interoperable with other blockchains?",
+    answer:
+      "Yes, DRP features AI-automated cross-chain interoperability using Web3.js libraries and Multi-Party Computation (MPC) protocols, enabling seamless communication with other blockchains.",
   },
-]
+];
 
 export default function FAQPage() {
   return (
@@ -70,7 +81,8 @@ export default function FAQPage() {
             </h1>
           </div>
           <p className="text-xl text-neutral-600 dark:text-neutral-400">
-            Find answers to common questions about the Decentralized Rights Protocol.
+            Find answers to common questions about the Decentralized Rights
+            Protocol.
           </p>
         </div>
 
@@ -93,9 +105,12 @@ export default function FAQPage() {
 
         {/* Still Have Questions */}
         <div className="mt-16 p-6 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-200 dark:border-primary-800">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Still Have Questions?</h3>
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
+            Still Have Questions?
+          </h3>
           <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-            Can&rsquo;t find the answer you&rsquo;re looking for? Reach out to our community:
+            Can&rsquo;t find the answer you&rsquo;re looking for? Reach out to
+            our community:
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
@@ -114,6 +129,5 @@ export default function FAQPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

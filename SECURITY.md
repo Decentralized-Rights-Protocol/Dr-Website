@@ -64,7 +64,3 @@ This repository is configured to:
 - Use Dependabot to keep dependencies up to date
 
 If you see a place where we can strengthen our security posture (hardening headers, stricter CSP, rate limiting, etc.), please open a suggestion issue or include it in a private report.
-
-
-
-

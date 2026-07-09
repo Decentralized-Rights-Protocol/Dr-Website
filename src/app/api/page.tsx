@@ -1,49 +1,60 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
-import { BookOpen, Code, Cpu, Globe, Key, ShieldCheck, Sparkles } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import Link from "next/link";
+import { useState } from "react";
+import {
+  BookOpen,
+  Code,
+  Cpu,
+  Globe,
+  Key,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const endpointCards = [
   {
-    id: 'status',
-    title: 'Proof of Status',
-    description: 'Verify human status attestations, civic credentials, and DAO voting eligibility.',
-    path: '/v1/proof-of-status',
-    latency: '<180ms',
-    icon: ShieldCheck
+    id: "status",
+    title: "Proof of Status",
+    description:
+      "Verify human status attestations, civic credentials, and DAO voting eligibility.",
+    path: "/v1/proof-of-status",
+    latency: "<180ms",
+    icon: ShieldCheck,
   },
   {
-    id: 'activity',
-    title: 'Proof of Activity',
-    description: 'Record contributions, stewardship verifications, and sustainability audits.',
-    path: '/v1/proof-of-activity',
-    latency: '<240ms',
-    icon: Globe
+    id: "activity",
+    title: "Proof of Activity",
+    description:
+      "Record contributions, stewardship verifications, and sustainability audits.",
+    path: "/v1/proof-of-activity",
+    latency: "<240ms",
+    icon: Globe,
   },
   {
-    id: 'elder',
-    title: 'AI Elder Verification',
-    description: 'Request AI elder review for sensitive attestations or dispute resolution.',
-    path: '/v1/ai-elder/verify',
-    latency: '<320ms',
-    icon: Cpu
-  }
-]
+    id: "elder",
+    title: "AI Elder Verification",
+    description:
+      "Request AI elder review for sensitive attestations or dispute resolution.",
+    path: "/v1/ai-elder/verify",
+    latency: "<320ms",
+    icon: Cpu,
+  },
+];
 
 const codeSamples: Record<
   string,
   {
-    label: string
-    language: 'javascript' | 'python' | 'cpp'
-    snippet: string
+    label: string;
+    language: "javascript" | "python" | "cpp";
+    snippet: string;
   }[]
 > = {
   status: [
     {
-      label: 'JavaScript',
-      language: 'javascript',
+      label: "JavaScript",
+      language: "javascript",
       snippet: `import fetch from 'node-fetch';
 
 const res = await fetch('https://api.decentralizedrights.com/v1/proof-of-status', {
@@ -59,11 +70,11 @@ const res = await fetch('https://api.decentralizedrights.com/v1/proof-of-status'
 });
 
 const data = await res.json();
-console.log(data.status, data.attestations);`
+console.log(data.status, data.attestations);`,
     },
     {
-      label: 'Python',
-      language: 'python',
+      label: "Python",
+      language: "python",
       snippet: `import os
 import requests
 
@@ -79,11 +90,11 @@ resp = requests.post(
     timeout=12
 )
 
-print(resp.json()["verdict"])`
+print(resp.json()["verdict"])`,
     },
     {
-      label: 'C++',
-      language: 'cpp',
+      label: "C++",
+      language: "cpp",
       snippet: `#include <cpr/cpr.h>
 #include <nlohmann/json.hpp>
 
@@ -101,13 +112,13 @@ int main() {
   );
 
   std::cout << res.text << std::endl;
-}`
-    }
+}`,
+    },
   ],
   activity: [
     {
-      label: 'JavaScript',
-      language: 'javascript',
+      label: "JavaScript",
+      language: "javascript",
       snippet: `const res = await fetch('https://api.decentralizedrights.com/v1/proof-of-activity', {
   method: 'POST',
   headers: {
@@ -124,11 +135,11 @@ int main() {
 });
 
 const receipt = await res.json();
-console.log(receipt.hash);`
+console.log(receipt.hash);`,
     },
     {
-      label: 'Python',
-      language: 'python',
+      label: "Python",
+      language: "python",
       snippet: `payload = {
     "activityType": "sustainability_audit",
     "metadata": {
@@ -142,11 +153,11 @@ r = requests.post(
     headers={"Authorization": f"Bearer {API_KEY}"},
     json=payload
 )
-print(r.json()["status"])`
+print(r.json()["status"])`,
     },
     {
-      label: 'C++',
-      language: 'cpp',
+      label: "C++",
+      language: "cpp",
       snippet: `nlohmann::json body = {
   {"activityType", "rights_report"},
   {"metadata", {
@@ -159,13 +170,13 @@ auto res = cpr::Post(
   cpr::Url{"https://api.decentralizedrights.com/v1/proof-of-activity"},
   cpr::Header{{"Authorization", "Bearer " + apiKey}},
   cpr::Body{body.dump()}
-);`
-    }
+);`,
+    },
   ],
   elder: [
     {
-      label: 'JavaScript',
-      language: 'javascript',
+      label: "JavaScript",
+      language: "javascript",
       snippet: `const res = await fetch('https://api.decentralizedrights.com/v1/ai-elder/verify', {
   method: 'POST',
   headers: {
@@ -180,11 +191,11 @@ auto res = cpr::Post(
 });
 
 const review = await res.json();
-console.log(review.decision, review.reviewer);`
+console.log(review.decision, review.reviewer);`,
     },
     {
-      label: 'Python',
-      language: 'python',
+      label: "Python",
+      language: "python",
       snippet: `payload = {
     "caseFile": "case-8742",
     "priority": "urgent",
@@ -199,11 +210,11 @@ resp = requests.post(
     headers={"Authorization": f"Bearer {API_KEY}"},
     json=payload
 )
-print(resp.json()["projection"]["integrityScore"])`
+print(resp.json()["projection"]["integrityScore"])`,
     },
     {
-      label: 'C++',
-      language: 'cpp',
+      label: "C++",
+      language: "cpp",
       snippet: `nlohmann::json payload = {
   {"caseFile", "case-8742"},
   {"priority", "standard"},
@@ -216,18 +227,18 @@ auto res = cpr::Post(
   cpr::Body{payload.dump()}
 );
 
-std::cout << res.text << std::endl;`
-    }
-  ]
-}
+std::cout << res.text << std::endl;`,
+    },
+  ],
+};
 
 export default function ApiLandingPage() {
-  const [activeEndpoint, setActiveEndpoint] = useState('status')
+  const [activeEndpoint, setActiveEndpoint] = useState("status");
   const [activeLanguage, setActiveLanguage] = useState<Record<string, string>>({
-    status: 'JavaScript',
-    activity: 'JavaScript',
-    elder: 'JavaScript'
-  })
+    status: "JavaScript",
+    activity: "JavaScript",
+    elder: "JavaScript",
+  });
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -238,8 +249,12 @@ export default function ApiLandingPage() {
               <Key className="h-4 w-4" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">DRP Developer API</p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">Human-rights-aligned infrastructure</p>
+              <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">
+                DRP Developer API
+              </p>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                Human-rights-aligned infrastructure
+              </p>
             </div>
           </div>
           <nav className="hidden items-center gap-6 text-sm text-neutral-600 dark:text-neutral-300 md:flex">
@@ -265,11 +280,14 @@ export default function ApiLandingPage() {
           <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr]">
             <div>
               <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-5xl">
-                Build rights-aware infrastructure with composable verification APIs
+                Build rights-aware infrastructure with composable verification
+                APIs
               </h1>
               <p className="mt-6 max-w-2xl text-lg text-neutral-600 dark:text-neutral-300">
-                The DRP API provides fast, verifiable endpoints for Proof of Status (PoST), Proof of Activity (PoAT), and AI Elder reviews.
-                Launch applications that respect human rights, sustainability metrics, and transparent governance.
+                The DRP API provides fast, verifiable endpoints for Proof of
+                Status (PoST), Proof of Activity (PoAT), and AI Elder reviews.
+                Launch applications that respect human rights, sustainability
+                metrics, and transparent governance.
               </p>
               <div className="mt-8 flex flex-wrap gap-3 text-sm">
                 <span className="rounded-full border border-primary-500/40 bg-primary-500/10 px-4 py-1 text-primary-700 dark:border-primary-400/40 dark:bg-primary-500/15 dark:text-primary-200">
@@ -285,62 +303,86 @@ export default function ApiLandingPage() {
             </div>
 
             <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
-              <p className="text-sm font-semibold text-primary-600 dark:text-primary-300">Trusted by cooperatives & civic labs</p>
+              <p className="text-sm font-semibold text-primary-600 dark:text-primary-300">
+                Trusted by cooperatives & civic labs
+              </p>
               <ul className="mt-4 space-y-4 text-sm text-neutral-600 dark:text-neutral-300">
                 <li className="flex items-start gap-3">
                   <span className="mt-1 h-2 w-2 rounded-full bg-primary-500" />
-                  Zero-knowledge attestations ensure contributors control disclosure.
+                  Zero-knowledge attestations ensure contributors control
+                  disclosure.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-1 h-2 w-2 rounded-full bg-primary-500" />
-                  AI Elder quorum delivers transparent, explainable decisions for sensitive cases.
+                  AI Elder quorum delivers transparent, explainable decisions
+                  for sensitive cases.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-1 h-2 w-2 rounded-full bg-primary-500" />
-                  Webhooks, signed receipts, and governance-grade audit trails available out-of-the-box.
+                  Webhooks, signed receipts, and governance-grade audit trails
+                  available out-of-the-box.
                 </li>
               </ul>
             </div>
           </div>
         </section>
 
-        <section id="overview" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <section
+          id="overview"
+          className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8"
+        >
           <div className="grid gap-6 lg:grid-cols-3">
             {[
               {
-                title: 'Global reach',
-                description: 'Edge deployments in 14 regions keep verification latency low even during civic events.',
-                icon: Globe
+                title: "Global reach",
+                description:
+                  "Edge deployments in 14 regions keep verification latency low even during civic events.",
+                icon: Globe,
               },
               {
-                title: 'Granular scopes',
-                description: 'Issue scoped API tokens for teams, auditors, or AI elder partners with custom TTLs.',
-                icon: Key
+                title: "Granular scopes",
+                description:
+                  "Issue scoped API tokens for teams, auditors, or AI elder partners with custom TTLs.",
+                icon: Key,
               },
               {
-                title: 'Native analytics',
-                description: 'Track verification success, dispute rates, and sustainability adjustments in real time.',
-                icon: BookOpen
-              }
+                title: "Native analytics",
+                description:
+                  "Track verification success, dispute rates, and sustainability adjustments in real time.",
+                icon: BookOpen,
+              },
             ].map((card) => (
-              <div key={card.title} className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-md dark:border-neutral-800 dark:bg-neutral-900">
+              <div
+                key={card.title}
+                className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+              >
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-200">
                   <card.icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-neutral-900 dark:text-neutral-50">{card.title}</h3>
-                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{card.description}</p>
+                <h3 className="mt-4 text-lg font-semibold text-neutral-900 dark:text-neutral-50">
+                  {card.title}
+                </h3>
+                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">
+                  {card.description}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="endpoints" className="mx-auto mt-16 max-w-6xl px-4 sm:px-6 lg:px-8">
+        <section
+          id="endpoints"
+          className="mx-auto mt-16 max-w-6xl px-4 sm:px-6 lg:px-8"
+        >
           <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">Core endpoints</h2>
+                <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">
+                  Core endpoints
+                </h2>
                 <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-                  Designed for resilient civic tech, cooperative governance, and human-rights verification workflows.
+                  Designed for resilient civic tech, cooperative governance, and
+                  human-rights verification workflows.
                 </p>
               </div>
               <Link
@@ -359,10 +401,10 @@ export default function ApiLandingPage() {
                     key={endpoint.id}
                     onClick={() => setActiveEndpoint(endpoint.id)}
                     className={cn(
-                      'w-full rounded-2xl border px-4 py-4 text-left transition',
+                      "w-full rounded-2xl border px-4 py-4 text-left transition",
                       activeEndpoint === endpoint.id
-                        ? 'border-primary-500 bg-primary-500/10 text-primary-700 dark:border-primary-400 dark:bg-primary-500/20 dark:text-primary-200'
-                        : 'border-neutral-200 bg-white text-neutral-700 hover:border-primary-200 dark:border-neutral-800 dark:bg-neutral-950/40 dark:text-neutral-300'
+                        ? "border-primary-500 bg-primary-500/10 text-primary-700 dark:border-primary-400 dark:bg-primary-500/20 dark:text-primary-200"
+                        : "border-neutral-200 bg-white text-neutral-700 hover:border-primary-200 dark:border-neutral-800 dark:bg-neutral-950/40 dark:text-neutral-300",
                     )}
                   >
                     <div className="flex items-center justify-between gap-4">
@@ -370,10 +412,16 @@ export default function ApiLandingPage() {
                         <endpoint.icon className="h-5 w-5" />
                         <span className="font-semibold">{endpoint.title}</span>
                       </div>
-                      <span className="text-xs text-neutral-500 dark:text-neutral-400">{endpoint.latency}</span>
+                      <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                        {endpoint.latency}
+                      </span>
                     </div>
-                    <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">{endpoint.description}</p>
-                    <p className="mt-2 text-xs font-mono text-neutral-500 dark:text-neutral-400">{endpoint.path}</p>
+                    <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">
+                      {endpoint.description}
+                    </p>
+                    <p className="mt-2 text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                      {endpoint.path}
+                    </p>
                   </button>
                 ))}
               </div>
@@ -381,7 +429,10 @@ export default function ApiLandingPage() {
               <div className="rounded-2xl border border-neutral-200 bg-neutral-50/80 p-5 dark:border-neutral-800 dark:bg-neutral-900/60">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                    {endpointCards.find((card) => card.id === activeEndpoint)?.title}
+                    {
+                      endpointCards.find((card) => card.id === activeEndpoint)
+                        ?.title
+                    }
                   </p>
                   <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
                     <Code className="h-4 w-4" />
@@ -396,14 +447,14 @@ export default function ApiLandingPage() {
                       onClick={() =>
                         setActiveLanguage((prev) => ({
                           ...prev,
-                          [activeEndpoint]: sample.label
+                          [activeEndpoint]: sample.label,
                         }))
                       }
                       className={cn(
-                        'rounded-full border px-3 py-1 transition',
+                        "rounded-full border px-3 py-1 transition",
                         activeLanguage[activeEndpoint] === sample.label
-                          ? 'border-primary-500 bg-primary-500/10 text-primary-600 dark:border-primary-400 dark:bg-primary-500/20 dark:text-primary-200'
-                          : 'border-neutral-300 text-neutral-600 hover:border-primary-200 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-primary-400'
+                          ? "border-primary-500 bg-primary-500/10 text-primary-600 dark:border-primary-400 dark:bg-primary-500/20 dark:text-primary-200"
+                          : "border-neutral-300 text-neutral-600 hover:border-primary-200 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-primary-400",
                       )}
                     >
                       {sample.label}
@@ -415,7 +466,8 @@ export default function ApiLandingPage() {
                   <code>
                     {
                       codeSamples[activeEndpoint].find(
-                        (sample) => sample.label === activeLanguage[activeEndpoint]
+                        (sample) =>
+                          sample.label === activeLanguage[activeEndpoint],
                       )?.snippet
                     }
                   </code>
@@ -425,94 +477,117 @@ export default function ApiLandingPage() {
           </div>
         </section>
 
-        <section id="sdk" className="mx-auto mt-16 max-w-6xl px-4 sm:px-6 lg:px-8">
+        <section
+          id="sdk"
+          className="mx-auto mt-16 max-w-6xl px-4 sm:px-6 lg:px-8"
+        >
           <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
-            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">SDK & tooling</h2>
+            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">
+              SDK & tooling
+            </h2>
             <ul className="mt-4 grid gap-4 text-sm text-neutral-600 dark:text-neutral-300 md:grid-cols-3">
               <li className="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800">
-                <p className="font-semibold text-neutral-900 dark:text-neutral-100">JavaScript SDK</p>
+                <p className="font-semibold text-neutral-900 dark:text-neutral-100">
+                  JavaScript SDK
+                </p>
                 <p className="mt-2 text-sm">
-                  `npm install @drp/sdk` with built-in helpers for retries, signed receipts, and webhooks.
+                  `npm install @drp/sdk` with built-in helpers for retries,
+                  signed receipts, and webhooks.
                 </p>
               </li>
               <li className="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800">
-                <p className="font-semibold text-neutral-900 dark:text-neutral-100">Python client</p>
+                <p className="font-semibold text-neutral-900 dark:text-neutral-100">
+                  Python client
+                </p>
                 <p className="mt-2 text-sm">
-                  Publish civic reports with async requests, pydantic schemas, and audit logging.
+                  Publish civic reports with async requests, pydantic schemas,
+                  and audit logging.
                 </p>
               </li>
               <li className="rounded-2xl border border-neutral-200 p-5 dark:border-neutral-800">
-                <p className="font-semibold text-neutral-900 dark:text-neutral-100">C++ bindings</p>
+                <p className="font-semibold text-neutral-900 dark:text-neutral-100">
+                  C++ bindings
+                </p>
                 <p className="mt-2 text-sm">
-                  Integrate PoAT receipts directly inside validators, guardian nodes, or IoT proof devices.
+                  Integrate PoAT receipts directly inside validators, guardian
+                  nodes, or IoT proof devices.
                 </p>
               </li>
             </ul>
           </div>
         </section>
 
-        <section id="all-endpoints" className="mx-auto mt-16 max-w-6xl px-4 sm:px-6 lg:px-8">
+        <section
+          id="all-endpoints"
+          className="mx-auto mt-16 max-w-6xl px-4 sm:px-6 lg:px-8"
+        >
           <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
-            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">All Dr-Blockchain Endpoints</h2>
+            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">
+              All Dr-Blockchain Endpoints
+            </h2>
             <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300 mb-6">
-              Complete reference of all available API endpoints from the Dr-Blockchain backend.
+              Complete reference of all available API endpoints from the
+              Dr-Blockchain backend.
             </p>
             <div className="space-y-4">
               {[
                 {
-                  method: 'POST',
-                  path: '/api/activity/submit',
-                  description: 'Submit a new activity proof to the blockchain',
-                  category: 'Activity'
+                  method: "POST",
+                  path: "/api/activity/submit",
+                  description: "Submit a new activity proof to the blockchain",
+                  category: "Activity",
                 },
                 {
-                  method: 'GET',
-                  path: '/api/status/profile?id={user}',
-                  description: 'Get user status and PoST score',
-                  category: 'Status'
+                  method: "GET",
+                  path: "/api/status/profile?id={user}",
+                  description: "Get user status and PoST score",
+                  category: "Status",
                 },
                 {
-                  method: 'GET',
-                  path: '/api/transactions',
-                  description: 'Get blockchain transactions with pagination and filters',
-                  category: 'Explorer'
+                  method: "GET",
+                  path: "/api/transactions",
+                  description:
+                    "Get blockchain transactions with pagination and filters",
+                  category: "Explorer",
                 },
                 {
-                  method: 'GET',
-                  path: '/api/activity/feed',
-                  description: 'Get activity feed with verification status and AI summaries',
-                  category: 'Activity'
+                  method: "GET",
+                  path: "/api/activity/feed",
+                  description:
+                    "Get activity feed with verification status and AI summaries",
+                  category: "Activity",
                 },
                 {
-                  method: 'GET',
-                  path: '/api/ai/summary?activity_id={id}',
-                  description: 'Get AI verification summary for a specific activity',
-                  category: 'AI'
+                  method: "GET",
+                  path: "/api/ai/summary?activity_id={id}",
+                  description:
+                    "Get AI verification summary for a specific activity",
+                  category: "AI",
                 },
                 {
-                  method: 'GET',
-                  path: '/api/rewards/claim?user_id={id}&submission_id={id}',
-                  description: 'Claim rewards for verified activities',
-                  category: 'Rewards'
+                  method: "GET",
+                  path: "/api/rewards/claim?user_id={id}&submission_id={id}",
+                  description: "Claim rewards for verified activities",
+                  category: "Rewards",
                 },
                 {
-                  method: 'GET',
-                  path: '/api/status/rankings',
-                  description: 'Get status rankings leaderboard',
-                  category: 'Status'
+                  method: "GET",
+                  path: "/api/status/rankings",
+                  description: "Get status rankings leaderboard",
+                  category: "Status",
                 },
                 {
-                  method: 'GET',
-                  path: '/api/health/orbitdb',
-                  description: 'Check OrbitDB connection health',
-                  category: 'Health'
+                  method: "GET",
+                  path: "/api/health/orbitdb",
+                  description: "Check OrbitDB connection health",
+                  category: "Health",
                 },
                 {
-                  method: 'GET',
-                  path: '/api/health/ipfs',
-                  description: 'Check IPFS pinning service health',
-                  category: 'Health'
-                }
+                  method: "GET",
+                  path: "/api/health/ipfs",
+                  description: "Check IPFS pinning service health",
+                  category: "Health",
+                },
               ].map((endpoint) => (
                 <div
                   key={endpoint.path}
@@ -523,22 +598,26 @@ export default function ApiLandingPage() {
                       <div className="flex items-center gap-3 mb-2">
                         <span
                           className={cn(
-                            'px-2 py-1 rounded text-xs font-semibold',
-                            endpoint.method === 'GET'
-                              ? 'bg-blue-500/20 text-blue-700 dark:text-blue-300'
-                              : endpoint.method === 'POST'
-                              ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300'
-                              : 'bg-purple-500/20 text-purple-700 dark:text-purple-300'
+                            "px-2 py-1 rounded text-xs font-semibold",
+                            endpoint.method === "GET"
+                              ? "bg-blue-500/20 text-blue-700 dark:text-blue-300"
+                              : endpoint.method === "POST"
+                                ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300"
+                                : "bg-purple-500/20 text-purple-700 dark:text-purple-300",
                           )}
                         >
                           {endpoint.method}
                         </span>
-                        <code className="text-sm font-mono text-neutral-900 dark:text-neutral-50">{endpoint.path}</code>
+                        <code className="text-sm font-mono text-neutral-900 dark:text-neutral-50">
+                          {endpoint.path}
+                        </code>
                         <span className="px-2 py-1 rounded text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
                           {endpoint.category}
                         </span>
                       </div>
-                      <p className="text-sm text-neutral-600 dark:text-neutral-300">{endpoint.description}</p>
+                      <p className="text-sm text-neutral-600 dark:text-neutral-300">
+                        {endpoint.description}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -547,21 +626,41 @@ export default function ApiLandingPage() {
           </div>
         </section>
 
-        <section id="docs" className="mx-auto mt-16 max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
+        <section
+          id="docs"
+          className="mx-auto mt-16 max-w-6xl px-4 pb-16 sm:px-6 lg:px-8"
+        >
           <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
-            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">Docs & governance</h2>
+            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
+              Docs & governance
+            </h2>
             <div className="mt-4 grid gap-4 text-sm text-neutral-600 dark:text-neutral-300 md:grid-cols-3">
               {[
-                { title: 'API Reference', href: 'https://docs.decentralizedrights.com/api', description: 'Endpoints, webhooks, schema definitions.' },
-                { title: 'Governance Playbook', href: 'https://docs.decentralizedrights.com/governance', description: 'How DRP manages PoST/PoAT attesters.' },
-                { title: 'Compliance Center', href: 'https://docs.decentralizedrights.com/compliance', description: 'Data retention, encryption standards, and audit readiness.' }
+                {
+                  title: "API Reference",
+                  href: "https://docs.decentralizedrights.com/api",
+                  description: "Endpoints, webhooks, schema definitions.",
+                },
+                {
+                  title: "Governance Playbook",
+                  href: "https://docs.decentralizedrights.com/governance",
+                  description: "How DRP manages PoST/PoAT attesters.",
+                },
+                {
+                  title: "Compliance Center",
+                  href: "https://docs.decentralizedrights.com/compliance",
+                  description:
+                    "Data retention, encryption standards, and audit readiness.",
+                },
               ].map((doc) => (
                 <Link
                   key={doc.title}
                   href={doc.href}
                   className="rounded-2xl border border-neutral-200 p-5 transition hover:border-primary-400 dark:border-neutral-800 dark:hover:border-primary-400"
                 >
-                  <p className="font-semibold text-neutral-900 dark:text-neutral-100">{doc.title}</p>
+                  <p className="font-semibold text-neutral-900 dark:text-neutral-100">
+                    {doc.title}
+                  </p>
                   <p className="mt-2 text-sm">{doc.description}</p>
                 </Link>
               ))}
@@ -571,9 +670,9 @@ export default function ApiLandingPage() {
       </main>
 
       <footer className="border-t border-neutral-200 bg-white/90 py-6 text-center text-sm text-neutral-500 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80 dark:text-neutral-400">
-        © {new Date().getFullYear()} Decentralized Rights Protocol. Crafted for human rights and transparent AI.
+        © {new Date().getFullYear()} Decentralized Rights Protocol. Crafted for
+        human rights and transparent AI.
       </footer>
     </div>
-  )
+  );
 }
-

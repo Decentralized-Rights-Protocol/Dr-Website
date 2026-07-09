@@ -10,6 +10,7 @@ docker-compose up -d
 ```
 
 This will start:
+
 - DRP API on port 8000
 - PostgreSQL database on port 5432
 - Redis cache on port 6379
@@ -68,6 +69,7 @@ curl http://localhost:8000/health
 ```
 
 Expected response:
+
 ```json
 {
   "status": "healthy",
@@ -96,6 +98,7 @@ docker-compose -f docker-compose.prod.yml up -d
 ### Using Docker Swarm or Kubernetes
 
 The Dockerfile is production-ready and can be used in:
+
 - Docker Swarm
 - Kubernetes
 - AWS ECS
@@ -105,11 +108,13 @@ The Dockerfile is production-ready and can be used in:
 ## Monitoring
 
 View logs:
+
 ```bash
 docker-compose logs -f api
 ```
 
 View container status:
+
 ```bash
 docker-compose ps
 ```
@@ -117,6 +122,7 @@ docker-compose ps
 ## Troubleshooting
 
 ### Port Already in Use
+
 ```bash
 # Find process using port 8000
 lsof -i :8000
@@ -124,18 +130,20 @@ lsof -i :8000
 ```
 
 ### Database Connection Failed
+
 - Check DATABASE_URL in .env
 - Ensure PostgreSQL is running
 - Check firewall settings
 
 ### Redis Connection Failed
+
 - Redis is optional (caching will be disabled)
 - Check REDIS_URL in .env
 
 ## API Documentation
 
 Once running, access:
+
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
 - Health: http://localhost:8000/health
-

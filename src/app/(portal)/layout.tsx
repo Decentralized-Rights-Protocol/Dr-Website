@@ -1,31 +1,37 @@
-import type { Metadata, Viewport } from 'next'
-import './globals.css'
-import { AppProviders } from '@/components/providers'
-import { AppShell } from '@/components/layout/AppShell'
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+import { AppProviders } from "@/components/providers";
+import { AppShell } from "@/components/layout/AppShell";
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#3b82f6' },
-    { media: '(prefers-color-scheme: dark)', color: '#1e40af' }
-  ]
-}
+    { media: "(prefers-color-scheme: light)", color: "#3b82f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#1e40af" },
+  ],
+};
 
 export const metadata: Metadata = {
-  title: 'DRP App - Decentralized Rights Protocol',
-  description: 'Document and verify activities that advance human rights. Earn rewards for your contributions to social justice.',
-  keywords: 'human rights, blockchain, verification, rewards, social justice, activism',
+  title: "DRP App - Decentralized Rights Protocol",
+  description:
+    "Document and verify activities that advance human rights. Earn rewards for your contributions to social justice.",
+  keywords:
+    "human rights, blockchain, verification, rewards, social justice, activism",
   openGraph: {
-    title: 'DRP App - Decentralized Rights Protocol',
-    description: 'Your Rights, Your Proof, Your Impact',
-    type: 'website',
-    siteName: 'DRP App'
-  }
-}
+    title: "DRP App - Decentralized Rights Protocol",
+    description: "Your Rights, Your Proof, Your Impact",
+    type: "website",
+    siteName: "DRP App",
+  },
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50">
@@ -34,5 +40,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </AppProviders>
       </body>
     </html>
-  )
+  );
 }

@@ -38,10 +38,10 @@ async function main() {
   console.log("\n💰 Reward Rates:");
   const activities = [
     "lesson_completion",
-    "quiz_perfect", 
+    "quiz_perfect",
     "achievement_unlock",
     "level_completion",
-    "streak_bonus"
+    "streak_bonus",
   ];
 
   for (const activity of activities) {
@@ -53,33 +53,41 @@ async function main() {
   console.log("\n📊 Daily Limits:");
   const dailyCap = await deriToken.rewardCap();
   const maxPerTx = await deriToken.MAX_REWARD_PER_TX();
-  console.log("Daily Reward Cap:", ethers.utils.formatEther(dailyCap), "tokens");
-  console.log("Max Reward Per Transaction:", ethers.utils.formatEther(maxPerTx), "tokens");
+  console.log(
+    "Daily Reward Cap:",
+    ethers.utils.formatEther(dailyCap),
+    "tokens",
+  );
+  console.log(
+    "Max Reward Per Transaction:",
+    ethers.utils.formatEther(maxPerTx),
+    "tokens",
+  );
 
   // Save deployment info
   const deploymentInfo = {
     network: {
       name: network.name,
       chainId: network.chainId.toString(),
-      rpcUrl: process.env.RPC_URL || "Not set"
+      rpcUrl: process.env.RPC_URL || "Not set",
     },
     contract: {
       address: deriToken.address,
       name: name,
       symbol: symbol,
       totalSupply: totalSupply.toString(),
-      owner: owner
+      owner: owner,
     },
     deployment: {
       deployer: deployer.address,
       timestamp: new Date().toISOString(),
-      blockNumber: await ethers.provider.getBlockNumber()
+      blockNumber: await ethers.provider.getBlockNumber(),
     },
     rewardRates: {},
     limits: {
       dailyCap: dailyCap.toString(),
-      maxPerTx: maxPerTx.toString()
-    }
+      maxPerTx: maxPerTx.toString(),
+    },
   };
 
   // Get all reward rates
@@ -94,7 +102,10 @@ async function main() {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  const outputFile = path.join(outputDir, `deri-testnet-${network.chainId}.json`);
+  const outputFile = path.join(
+    outputDir,
+    `deri-testnet-${network.chainId}.json`,
+  );
   fs.writeFileSync(outputFile, JSON.stringify(deploymentInfo, null, 2));
 
   console.log(`\n💾 Deployment info saved to: ${outputFile}`);
@@ -149,7 +160,9 @@ LEARN_DB_PATH=learn_progress.db
 
   console.log("\n🔗 Contract Verification:");
   console.log("To verify the contract on Etherscan, run:");
-  console.log(`npx hardhat verify --network ${network.name} ${deriToken.address}`);
+  console.log(
+    `npx hardhat verify --network ${network.name} ${deriToken.address}`,
+  );
 
   console.log("\n✅ Deployment completed successfully!");
 }

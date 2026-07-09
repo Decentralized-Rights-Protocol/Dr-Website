@@ -109,6 +109,7 @@ For **EACH** project in Vercel Dashboard:
 3. Add these variables:
 
 ### Main Site (`src/`)
+
 ```
 NEXT_PUBLIC_API_URL = https://api.decentralizedrights.com
 NEXT_PUBLIC_BLOCKCHAIN_RPC = https://rpc.decentralizedrights.com
@@ -118,6 +119,7 @@ NEXT_PUBLIC_LEARN_URL = https://decentralizedrights.com/learn
 ```
 
 ### App Portal (`app-portal/`)
+
 ```
 NEXT_PUBLIC_API_URL = https://api.decentralizedrights.com
 NEXT_PUBLIC_BLOCKCHAIN_RPC = https://rpc.decentralizedrights.com
@@ -129,6 +131,7 @@ NEXT_PUBLIC_LEARN_URL = https://decentralizedrights.com/learn
 ```
 
 ### Explorer (`explorer/`)
+
 ```
 NEXT_PUBLIC_API_URL = https://api.decentralizedrights.com
 NEXT_PUBLIC_BLOCKCHAIN_RPC = https://rpc.decentralizedrights.com
@@ -137,11 +140,13 @@ NEXT_PUBLIC_IPFS_URL = https://ipfs.decentralizedrights.com
 ```
 
 ### API Docs (`api/`)
+
 ```
 NEXT_PUBLIC_API_URL = https://api.decentralizedrights.com
 ```
 
 ### Backend API (`backend/drp-website-api/`)
+
 ```
 BLOCKCHAIN_RPC_URL = https://rpc.decentralizedrights.com
 DATABASE_URL = [your-database-url]
@@ -151,7 +156,8 @@ AI_PROVIDER = huggingface
 ALLOWED_ORIGINS = https://decentralizedrights.com,https://app.decentralizedrights.com,https://explorer.decentralizedrights.com
 ```
 
-**Important**: 
+**Important**:
+
 - Set for **Production**, **Preview**, and **Development**
 - After adding variables, **Redeploy** each project
 
@@ -174,6 +180,7 @@ For **EACH** project:
 ### Check Deployment Status
 
 Visit each project's deployment page in Vercel Dashboard and verify:
+
 - ✅ Build succeeded
 - ✅ Deployment successful
 - ✅ No errors in logs
@@ -221,5 +228,3 @@ Once all checkboxes are complete:
 **GitHub**: ✅ Pushed successfully  
 **Vercel**: 🔄 Ready to deploy  
 **Status**: 🚀 **DEPLOY NOW!**
-
-

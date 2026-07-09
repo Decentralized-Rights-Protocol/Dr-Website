@@ -24,6 +24,7 @@ Traditional blockchain systems struggle with:
 - **Gaming the System**: Fake activities can be difficult to detect
 
 Activity Proofs solve these by:
+
 - **Real-World Connection**: Links blockchain rewards to actual activities
 - **Value Verification**: Cryptographic proof of genuine contributions
 - **Fair Rewards**: Contributors receive compensation for real work
@@ -49,12 +50,14 @@ An Activity Proof is a cryptographically signed record that demonstrates:
 **Purpose**: Prove original content was created
 
 **Components**:
+
 - Content hash (unique fingerprint)
 - Creator's digital signature
 - Timestamp
 - Metadata (type, format, etc.)
 
 **Example Flow**:
+
 ```
 Artist creates song
       ↓
@@ -76,12 +79,14 @@ Artist receives $DeRi reward
 **Purpose**: Prove content was shared or distributed
 
 **Components**:
+
 - Original content reference
 - Distribution channel information
 - Reach/engagement metrics
 - Distributor's signature
 
 **Use Cases**:
+
 - Sharing content on social media
 - Streaming content to audiences
 - Promoting DRP content
@@ -92,12 +97,14 @@ Artist receives $DeRi reward
 **Purpose**: Prove content was consumed
 
 **Components**:
+
 - Content identifier
 - Consumer address
 - Consumption duration
 - Engagement metrics
 
 **Applications**:
+
 - Tracking content views
 - Measuring engagement
 - Calculating creator revenue
@@ -108,12 +115,14 @@ Artist receives $DeRi reward
 **Purpose**: Prove network validation activities
 
 **Components**:
+
 - Validation actions performed
 - Blocks validated
 - Transactions processed
 - Validator signature
 
 **Rewards**:
+
 - Network security contributions
 - Consistent validation
 - Uptime and reliability
@@ -310,12 +319,14 @@ Activity Proof Submitted
 **Scenario**: Independent artist creates and registers song
 
 **Activity Proof**:
+
 - Content hash of audio file
 - Artist's digital signature
 - Timestamp of creation
 - Metadata (genre, duration, etc.)
 
 **Result**:
+
 - Song registered on DRP
 - Artist receives initial $DeRi reward
 - Rights ownership established
@@ -326,11 +337,13 @@ Activity Proof Submitted
 **Scenario**: Music platform streams DRP-registered songs
 
 **Activity Proofs Generated**:
+
 - Consumption proofs for each stream
 - Distribution proofs for platform
 - Engagement metrics recorded
 
 **Result**:
+
 - Artists receive royalties automatically
 - Platform earns distribution rewards
 - Transparent revenue tracking
@@ -341,12 +354,14 @@ Activity Proof Submitted
 **Scenario**: Influencer promotes DRP content
 
 **Activity Proof**:
+
 - Content being promoted
 - Promotion reach metrics
 - Engagement generated
 - Promoter's signature
 
 **Result**:
+
 - Promoter receives activity rewards
 - Content gains visibility
 - Network growth incentivized
@@ -357,12 +372,14 @@ Activity Proof Submitted
 **Scenario**: Developer creates tool for DRP ecosystem
 
 **Activity Proof**:
+
 - Code repository hash
 - Developer's signature
 - Tool functionality proof
 - Community adoption metrics
 
 **Result**:
+
 - Developer rewarded for contribution
 - Tool integrated into ecosystem
 - Network utility increased
@@ -373,16 +390,19 @@ Activity Proof Submitted
 ### Cryptographic Security
 
 **Digital Signatures**:
+
 - Prevent proof forgery
 - Verify activity authenticity
 - Ensure non-repudiation
 
 **Hash Functions**:
+
 - Create unique content fingerprints
 - Detect content modifications
 - Enable duplicate detection
 
 **Public Key Cryptography**:
+
 - Verify signatures without private keys
 - Maintain privacy
 - Enable trustless verification
@@ -390,21 +410,25 @@ Activity Proof Submitted
 ### Fraud Prevention Mechanisms
 
 **Duplicate Detection**:
+
 - Blockchain records all proofs
 - Same content hash = duplicate
 - Prevents double-rewarding
 
 **Content Verification**:
+
 - Verify content actually exists
 - Check content originality
 - Prevent fake activity claims
 
 **Multi-Validator Verification**:
+
 - Multiple validators verify each proof
 - Consensus required for acceptance
 - Reduces fraud risk
 
 **Reputation System**:
+
 - Track proof history
 - Identify suspicious patterns
 - Penalize fraudulent activities
@@ -414,23 +438,27 @@ Activity Proof Submitted
 ### Factors Considered
 
 **1. Activity Type**:
+
 - Content creation: Higher base reward
 - Distribution: Based on reach
 - Consumption: Lower individual reward
 - Validation: Consistent rewards
 
 **2. Activity Value**:
+
 - Content quality metrics
 - Engagement levels
 - Network impact
 - Community contribution
 
 **3. Network Needs**:
+
 - Incentivize needed activities
 - Balance reward distribution
 - Prevent over-rewarding
 
 **Example Calculation**:
+
 ```
 Content Creation Proof:
 Base Reward: 100 $DeRi
@@ -452,52 +480,57 @@ Final Reward: 100 × 1.5 × 1.2 = 180 $DeRi
 ## Quiz
 
 ### Question 1
+
 What is the primary purpose of Activity Proofs in DRP?
 
 A) To encrypt transaction data  
 B) To provide cryptographic evidence of real-world activities that contribute value  
 C) To mine new blocks  
-D) To store blockchain data  
+D) To store blockchain data
 
 **Correct Answer: B** - Activity Proofs create cryptographic evidence that real-world activities (content creation, distribution, etc.) have occurred, enabling DRP to reward genuine contributions.
 
 ### Question 2
+
 What cryptographic technique is used to ensure Activity Proofs cannot be forged?
 
 A) Encryption  
 B) Digital signatures  
 C) Hashing only  
-D) Random numbers  
+D) Random numbers
 
 **Correct Answer: B** - Digital signatures, created using the activity performer's private key, ensure that proofs cannot be forged and can be verified by anyone using the corresponding public key.
 
 ### Question 3
+
 How does DRP prevent the same activity from being rewarded multiple times?
 
 A) By limiting rewards per user  
 B) Through duplicate detection using content hashes recorded on the blockchain  
 C) By requiring manual approval  
-D) By using passwords  
+D) By using passwords
 
 **Correct Answer: B** - Each activity proof includes a content hash, and the blockchain records all proofs, enabling the network to detect and reject duplicate submissions.
 
 ### Question 4
+
 What types of activities can generate Activity Proofs?
 
 A) Only content creation  
 B) Content creation, distribution, consumption, and validation activities  
 C) Only financial transactions  
-D) Only network validation  
+D) Only network validation
 
 **Correct Answer: B** - Activity Proofs can be generated for various activities including content creation, distribution, consumption, and network validation, each contributing value to the ecosystem.
 
 ### Question 5
+
 How are Activity Proof rewards calculated?
 
 A) Fixed amount for all activities  
 B) Based on activity type, value, and network impact  
 C) Randomly determined  
-D) Based only on stake amount  
+D) Based only on stake amount
 
 **Correct Answer: B** - Rewards consider multiple factors including activity type (creation vs. distribution), the value/quality of the activity, and its impact on the network ecosystem.
 

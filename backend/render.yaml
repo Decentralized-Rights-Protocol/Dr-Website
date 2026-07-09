@@ -14,7 +14,7 @@ services:
       - key: POST_QUANTUM_ENABLED
         value: false
       - key: DB_URL
-        sync: false  # Set in Render dashboard
+        sync: false # Set in Render dashboard
       - key: JWT_SECRET
         sync: false
       - key: ELDER_REGISTRY_ADMIN_KEY
@@ -51,4 +51,3 @@ services:
 databases:
   - name: drp-db
     plan: free
-

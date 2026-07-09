@@ -1,11 +1,11 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from "react";
 
 interface PremiumSectionProps {
-  id?: string
-  eyebrow?: string
-  title: string
-  description?: string
-  children?: ReactNode
+  id?: string;
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  children?: ReactNode;
 }
 
 export function PremiumPage({ children }: { children: ReactNode }) {
@@ -17,15 +17,25 @@ export function PremiumPage({ children }: { children: ReactNode }) {
       </div>
       <div className="relative z-10">{children}</div>
     </div>
-  )
+  );
 }
 
 export function PremiumContainer({ children }: { children: ReactNode }) {
-  return <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">{children}</div>
+  return (
+    <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">{children}</div>
+  );
 }
 
-export function PremiumHero({ badge, title, description, actions }: {
-  badge: string; title: string; description: string; actions?: ReactNode
+export function PremiumHero({
+  badge,
+  title,
+  description,
+  actions,
+}: {
+  badge: string;
+  title: string;
+  description: string;
+  actions?: ReactNode;
 }) {
   return (
     <section className="pt-40 pb-20 border-b border-gray-100 dark:border-foreground/5">
@@ -34,28 +44,52 @@ export function PremiumHero({ badge, title, description, actions }: {
           <span className="inline-flex items-center border border-[#00e5cc]/30 bg-[#00e5cc]/8 px-5 py-1.5 text-[10px] font-bold tracking-widest text-[#00e5cc] uppercase mb-8">
             {badge}
           </span>
-          <h1 className="text-balance text-4xl md:text-6xl font-black tracking-tight text-foreground mb-8">{title}</h1>
-          <p className="mx-auto max-w-3xl text-xl text-gray-500 dark:text-foreground/45 leading-relaxed mb-12">{description}</p>
-          {actions && <div className="flex flex-wrap items-center justify-center gap-6">{actions}</div>}
+          <h1 className="text-balance text-4xl md:text-6xl font-black tracking-tight text-foreground mb-8">
+            {title}
+          </h1>
+          <p className="mx-auto max-w-3xl text-xl text-gray-500 dark:text-foreground/45 leading-relaxed mb-12">
+            {description}
+          </p>
+          {actions && (
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              {actions}
+            </div>
+          )}
         </div>
       </PremiumContainer>
     </section>
-  )
+  );
 }
 
-export function PremiumSection({ id, eyebrow, title, description, children }: PremiumSectionProps) {
+export function PremiumSection({
+  id,
+  eyebrow,
+  title,
+  description,
+  children,
+}: PremiumSectionProps) {
   return (
     <section id={id} className="py-12">
       <PremiumContainer>
         <div className="border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-[#0a0a14] p-8 lg:p-12 hover:border-gray-200 dark:hover:border-white/12 transition-all">
           <div className="max-w-4xl">
-            {eyebrow && <p className="text-[10px] font-bold tracking-widest uppercase text-[#00e5cc] mb-4">{eyebrow}</p>}
-            <h2 className="text-2xl md:text-4xl font-black text-foreground mb-4">{title}</h2>
-            {description && <p className="text-base text-gray-500 dark:text-foreground/45 leading-relaxed">{description}</p>}
+            {eyebrow && (
+              <p className="text-[10px] font-bold tracking-widest uppercase text-[#00e5cc] mb-4">
+                {eyebrow}
+              </p>
+            )}
+            <h2 className="text-2xl md:text-4xl font-black text-foreground mb-4">
+              {title}
+            </h2>
+            {description && (
+              <p className="text-base text-gray-500 dark:text-foreground/45 leading-relaxed">
+                {description}
+              </p>
+            )}
           </div>
           {children && <div className="mt-10">{children}</div>}
         </div>
       </PremiumContainer>
     </section>
-  )
+  );
 }

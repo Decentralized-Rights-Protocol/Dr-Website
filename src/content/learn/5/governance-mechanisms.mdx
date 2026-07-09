@@ -25,12 +25,14 @@ Effective governance is critical for:
 - **Sustainability**: Long-term protocol health
 
 Poor governance leads to:
+
 - **Centralization**: Few entities control the protocol
 - **Stagnation**: Protocol fails to evolve
 - **Security Risks**: Harmful changes get approved
 - **Community Discontent**: Stakeholders feel excluded
 
 DRP's governance addresses these by:
+
 - **Multi-Stakeholder Participation**: Various groups involved
 - **Transparent Processes**: All decisions are public
 - **Security Checks**: Multiple validation layers
@@ -79,12 +81,14 @@ DRP's governance addresses these by:
 **Purpose**: Major protocol changes
 
 **Categories**:
+
 - **Core**: Fundamental protocol changes
 - **Networking**: P2P and network layer changes
 - **Interface**: API and interface standards
 - **Application**: Application-level standards
 
 **Process**:
+
 ```
 1. Draft Proposal
       ↓
@@ -106,6 +110,7 @@ DRP's governance addresses these by:
 **Purpose**: Adjust protocol parameters
 
 **Examples**:
+
 - Staking requirements
 - Reward rates
 - Fee structures
@@ -124,12 +129,13 @@ DRP's governance addresses these by:
 #### Weighted Voting
 
 **Vote Weight Calculation**:
+
 ```typescript
 interface VoteWeight {
-  stake: number // 40% weight
-  participation: number // 30% weight
-  expertise: number // 20% weight
-  reputation: number // 10% weight
+  stake: number; // 40% weight
+  participation: number; // 30% weight
+  expertise: number; // 20% weight
+  reputation: number; // 10% weight
 }
 
 function calculateVoteWeight(voter: Voter): number {
@@ -138,35 +144,39 @@ function calculateVoteWeight(voter: Voter): number {
     voter.participation * 0.3 +
     voter.expertise * 0.2 +
     voter.reputation * 0.1
-  )
+  );
 }
 ```
 
 #### Voting Options
 
 **Standard Voting**:
+
 - **Yes**: Approve proposal
 - **No**: Reject proposal
 - **Abstain**: No opinion
 
 **Ranked Choice** (for complex proposals):
+
 - Rank multiple options
 - Instant runoff calculation
 
 #### Quorum Requirements
 
 **Quorum Types**:
+
 - **Participation Quorum**: Minimum voters required
 - **Approval Quorum**: Minimum approval percentage
 - **Stake Quorum**: Minimum stake participation
 
 **Example**:
+
 ```typescript
 const quorumRequirements = {
-  participation: 0.20, // 20% of eligible voters
+  participation: 0.2, // 20% of eligible voters
   approval: 0.67, // 67% approval required
-  stake: 0.15 // 15% of total stake
-}
+  stake: 0.15, // 15% of total stake
+};
 ```
 
 ### Elder Quorum Deep Dive
@@ -174,39 +184,43 @@ const quorumRequirements = {
 #### Selection Process
 
 **Selection Criteria**:
+
 ```typescript
 interface ElderCandidate {
-  stake: number
-  participationTime: number
-  activity: number
-  expertise: number
-  communityContribution: number
+  stake: number;
+  participationTime: number;
+  activity: number;
+  expertise: number;
+  communityContribution: number;
 }
 
 function calculateElderScore(candidate: ElderCandidate): number {
   return (
-    candidate.stake * 0.30 +
+    candidate.stake * 0.3 +
     candidate.participationTime * 0.25 +
     candidate.activity * 0.25 +
-    candidate.expertise * 0.20
-  )
+    candidate.expertise * 0.2
+  );
 }
 ```
 
 #### Elder Responsibilities
 
 **1. Proposal Review**:
+
 - Technical evaluation
 - Security analysis
 - Impact assessment
 - Feasibility study
 
 **2. Community Representation**:
+
 - Represent stakeholder interests
 - Provide expert opinions
 - Guide discussions
 
 **3. Implementation Oversight**:
+
 - Monitor implementation
 - Verify correctness
 - Ensure compliance
@@ -214,11 +228,13 @@ function calculateElderScore(candidate: ElderCandidate): number {
 #### Term Limits and Rotation
 
 **Term Structure**:
+
 - Standard term: 6-12 months
 - Maximum consecutive: 2-3 terms
 - Staggered rotation
 
 **Rotation Benefits**:
+
 - Fresh perspectives
 - Prevents stagnation
 - Maintains accountability
@@ -229,12 +245,14 @@ function calculateElderScore(candidate: ElderCandidate): number {
 #### Phase 1: Ideation
 
 **Community Discussion**:
+
 - Forum posts
 - Discord discussions
 - GitHub issues
 - Community calls
 
 **Initial Feedback**:
+
 - Gather input
 - Refine ideas
 - Build consensus
@@ -242,40 +260,50 @@ function calculateElderScore(candidate: ElderCandidate): number {
 #### Phase 2: Drafting
 
 **Proposal Document**:
+
 ```markdown
 # DRIP-XXX: Title
 
 ## Summary
+
 Brief overview
 
 ## Motivation
+
 Why this change is needed
 
 ## Specification
+
 Detailed technical specification
 
 ## Implementation
+
 Implementation plan
 
 ## Security Considerations
+
 Security analysis
 
 ## Backward Compatibility
+
 Impact assessment
 
 ## References
+
 Related discussions, issues
 ```
 
 #### Phase 3: Review
 
 **Technical Review**:
+
 - Code review
 - Security audit
 - Performance analysis
 - Economic impact
 
 **Community Review**:
+
 - Public comments
 - Expert opinions
 - Stakeholder feedback
@@ -283,32 +311,36 @@ Related discussions, issues
 #### Phase 4: Voting
 
 **Voting Period**:
+
 - Typically 7-14 days
 - Public voting interface
 - Real-time results
 - Transparent process
 
 **Vote Counting**:
+
 ```typescript
 interface VoteResult {
-  yes: number
-  no: number
-  abstain: number
-  totalWeight: number
-  quorumMet: boolean
-  passed: boolean
+  yes: number;
+  no: number;
+  abstain: number;
+  totalWeight: number;
+  quorumMet: boolean;
+  passed: boolean;
 }
 ```
 
 #### Phase 5: Implementation
 
 **If Approved**:
+
 - Code development
 - Testing
 - Deployment schedule
 - Monitoring
 
 **If Rejected**:
+
 - Feedback collection
 - Potential revision
 - Future consideration
@@ -379,6 +411,7 @@ Total Vote Weight
 **Proposal**: Upgrade to new consensus mechanism
 
 **Process**:
+
 1. Developer proposes DRIP
 2. Community discusses for 2 weeks
 3. Elder Quorum reviews technical details
@@ -392,6 +425,7 @@ Total Vote Weight
 **Proposal**: Increase minimum stake requirement
 
 **Process**:
+
 1. Community member proposes change
 2. Economic analysis provided
 3. Elder Quorum evaluates impact
@@ -403,6 +437,7 @@ Total Vote Weight
 **Proposal**: Patch critical vulnerability
 
 **Process**:
+
 1. Security researcher reports issue
 2. Emergency proposal created
 3. Expedited Elder Quorum review
@@ -448,52 +483,57 @@ Total Vote Weight
 ## Quiz
 
 ### Question 1
+
 What is the primary role of the Elder Quorum in DRP governance?
 
 A) To mine blocks  
 B) To review proposals, provide technical evaluation, and represent community interests in governance decisions  
 C) To store data  
-D) To encrypt transactions  
+D) To encrypt transactions
 
 **Correct Answer: B** - The Elder Quorum reviews proposals, conducts technical and security evaluations, and represents various stakeholder interests in the governance process.
 
 ### Question 2
+
 What are DRIPs?
 
 A) A type of cryptocurrency  
 B) DRP Improvement Proposals that formalize protocol changes and upgrades  
 C) A testing framework  
-D) A deployment tool  
+D) A deployment tool
 
 **Correct Answer: B** - DRIPs (DRP Improvement Proposals) are formal documents that propose and specify protocol changes, upgrades, and improvements.
 
 ### Question 3
+
 How does weighted voting work in DRP governance?
 
 A) All votes are equal  
 B) Votes are weighted based on stake, participation, activity, and expertise  
 C) Only the wealthiest vote  
-D) Voting is random  
+D) Voting is random
 
 **Correct Answer: B** - Weighted voting considers multiple factors including stake (40%), participation (30%), activity (25%), and expertise (5%) to balance different stakeholder interests.
 
 ### Question 4
+
 Why are quorum requirements important in governance?
 
 A) To slow down decisions  
 B) To ensure sufficient participation and prevent decisions by small minorities  
 C) To require unanimous votes  
-D) To make voting optional  
+D) To make voting optional
 
 **Correct Answer: B** - Quorum requirements ensure that a sufficient portion of eligible voters participate and that decisions have broad support, preventing small groups from making major changes.
 
 ### Question 5
+
 What is the purpose of term limits for Elders?
 
 A) To make governance slower  
 B) To prevent centralization, ensure fresh perspectives, and maintain accountability  
 C) To reduce participation  
-D) To limit expertise  
+D) To limit expertise
 
 **Correct Answer: B** - Term limits prevent the same group from controlling governance indefinitely, ensure fresh perspectives, and maintain accountability through regular rotation.
 

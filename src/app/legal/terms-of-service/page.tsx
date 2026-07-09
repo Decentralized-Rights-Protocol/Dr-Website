@@ -1,34 +1,46 @@
-import * as React from 'react'
-import Link from 'next/link'
-import { ShieldCheck, FileText } from 'lucide-react'
-import { readFileSync } from 'fs'
-import { join } from 'path'
-import ReactMarkdown from 'react-markdown'
+import * as React from "react";
+import Link from "next/link";
+import { ShieldCheck, FileText } from "lucide-react";
+import { readFileSync } from "fs";
+import { join } from "path";
+import ReactMarkdown from "react-markdown";
 
 export const metadata = {
-  title: 'Terms of Service | Decentralized Rights Protocol',
+  title: "Terms of Service | Decentralized Rights Protocol",
   description:
-    'Terms of Service for using the Decentralized Rights Protocol (DRP) websites, apps, smart contracts, APIs, and services.',
+    "Terms of Service for using the Decentralized Rights Protocol (DRP) websites, apps, smart contracts, APIs, and services.",
   openGraph: {
-    title: 'Terms of Service | Decentralized Rights Protocol',
+    title: "Terms of Service | Decentralized Rights Protocol",
     description:
-      'Terms of Service for using the Decentralized Rights Protocol (DRP) websites, apps, smart contracts, APIs, and services.',
-    images: ['/DRP.png'],
+      "Terms of Service for using the Decentralized Rights Protocol (DRP) websites, apps, smart contracts, APIs, and services.",
+    images: ["/DRP.png"],
   },
-}
+};
 
 export default function TermsOfServicePage() {
-  const content = readFileSync(join(process.cwd(), 'legal', 'terms-of-service.mdx'), 'utf-8')
+  const content = readFileSync(
+    join(process.cwd(), "legal", "terms-of-service.mdx"),
+    "utf-8",
+  );
   return (
-    <div className="min-h-screen py-12" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
+    <div
+      className="min-h-screen py-12"
+      style={{
+        background:
+          "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)",
+      }}
+    >
       <div className="container mx-auto px-4 max-w-4xl">
         <section className="mb-10 text-center">
           <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-primary-600 to-secondary-600 text-foreground shadow-lg">
             <ShieldCheck className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-neutral-900 dark:text-foreground">Terms of Service</h1>
+          <h1 className="text-4xl font-bold text-neutral-900 dark:text-foreground">
+            Terms of Service
+          </h1>
           <p className="mt-3 text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
-            The terms that govern your use of DRP websites, applications, smart contracts, and services.
+            The terms that govern your use of DRP websites, applications, smart
+            contracts, and services.
           </p>
         </section>
 
@@ -37,19 +49,26 @@ export default function TermsOfServicePage() {
         </article>
 
         <nav className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Link href="/legal/privacy-policy" className="flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+          <Link
+            href="/legal/privacy-policy"
+            className="flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition"
+          >
             <FileText className="h-5 w-5" /> DRP Privacy Policy
           </Link>
-          <Link href="/legal/eldercore-terms" className="flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+          <Link
+            href="/legal/eldercore-terms"
+            className="flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition"
+          >
             <ShieldCheck className="h-5 w-5" /> ElderCore Terms of Service
           </Link>
-          <Link href="/legal/eldercore-privacy" className="flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+          <Link
+            href="/legal/eldercore-privacy"
+            className="flex items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition"
+          >
             <FileText className="h-5 w-5" /> ElderCore Privacy Policy
           </Link>
         </nav>
       </div>
     </div>
-  )
+  );
 }
-
-

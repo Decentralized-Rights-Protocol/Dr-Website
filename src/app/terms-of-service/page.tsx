@@ -1,21 +1,25 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import ReactMarkdown from 'react-markdown';
+import { Metadata } from "next";
+import Link from "next/link";
+import { readFileSync } from "fs";
+import { join } from "path";
+import ReactMarkdown from "react-markdown";
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Decentralized Rights Protocol',
-  description: 'Terms of Service for using the Decentralized Rights Protocol platform and services.',
+  title: "Terms of Service | Decentralized Rights Protocol",
+  description:
+    "Terms of Service for using the Decentralized Rights Protocol platform and services.",
   openGraph: {
-    title: 'Terms of Service | DRP',
-    description: 'Legal terms and conditions for DRP platform usage',
-    images: ['/DRP.png'],
+    title: "Terms of Service | DRP",
+    description: "Legal terms and conditions for DRP platform usage",
+    images: ["/DRP.png"],
   },
 };
 
 export default function TermsOfServicePage() {
-  const content = readFileSync(join(process.cwd(), 'legal', 'terms-of-service.mdx'), 'utf-8');
+  const content = readFileSync(
+    join(process.cwd(), "legal", "terms-of-service.mdx"),
+    "utf-8",
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -29,7 +33,12 @@ export default function TermsOfServicePage() {
             Decentralized Rights Protocol
           </p>
           <p className="text-sm text-muted-foreground mt-2">
-            Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            Last updated:{" "}
+            {new Date().toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
           </p>
         </div>
 
@@ -47,14 +56,18 @@ export default function TermsOfServicePage() {
               className="p-4 rounded-lg border border-border hover:border-primary transition-colors"
             >
               <h3 className="font-semibold mb-2">Privacy Policy</h3>
-              <p className="text-sm text-muted-foreground">How we handle your data</p>
+              <p className="text-sm text-muted-foreground">
+                How we handle your data
+              </p>
             </Link>
             <Link
               href="/eldercore-terms"
               className="p-4 rounded-lg border border-border hover:border-primary transition-colors"
             >
               <h3 className="font-semibold mb-2">ElderCore Terms</h3>
-              <p className="text-sm text-muted-foreground">ElderCore platform terms</p>
+              <p className="text-sm text-muted-foreground">
+                ElderCore platform terms
+              </p>
             </Link>
           </div>
         </div>

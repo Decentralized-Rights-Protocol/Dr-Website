@@ -17,12 +17,14 @@ Consensus mechanisms are the protocols that enable distributed blockchain networ
 ## Why It Matters
 
 Without consensus, a blockchain network would have:
+
 - **No agreement** on valid transactions
 - **Conflicting versions** of the ledger
 - **Double-spending** attacks
 - **Network fragmentation**
 
 Consensus mechanisms ensure:
+
 - **Agreement**: All honest nodes agree on the ledger state
 - **Security**: Protection against malicious actors
 - **Liveness**: Network continues to process transactions
@@ -47,6 +49,7 @@ General D ──────┘
 ```
 
 **Blockchain Equivalent**: Nodes must agree on transaction validity despite:
+
 - Network delays
 - Malicious nodes
 - Node failures
@@ -57,12 +60,14 @@ General D ──────┘
 #### 1. Proof of Work (PoW)
 
 **How It Works:**
+
 1. Miners compete to solve cryptographic puzzles
 2. First to solve creates next block
 3. Solution requires significant computational work
 4. Network verifies solution is correct
 
 **Visual Representation:**
+
 ```
 Miner 1: Trying nonce 1, 2, 3... → Hash: 0x7a3f...
 Miner 2: Trying nonce 1, 2, 3... → Hash: 0x9b2e...
@@ -76,6 +81,7 @@ Miner 3: Trying nonce 1, 2, 3... → Hash: 0x4c1d...
 ```
 
 **Characteristics:**
+
 - ✅ Highly secure (Bitcoin has never been 51% attacked)
 - ✅ Truly decentralized
 - ❌ High energy consumption
@@ -87,12 +93,14 @@ Miner 3: Trying nonce 1, 2, 3... → Hash: 0x4c1d...
 #### 2. Proof of Stake (PoS)
 
 **How It Works:**
+
 1. Validators "stake" cryptocurrency as collateral
 2. Validators are randomly selected based on stake amount
 3. Selected validator creates next block
 4. Malicious behavior results in stake slashing
 
 **Visual Representation:**
+
 ```
 Validator Pool:
 ┌─────────────┐
@@ -114,6 +122,7 @@ If invalid: Stake slashed
 ```
 
 **Characteristics:**
+
 - ✅ Energy efficient
 - ✅ Faster transactions
 - ✅ Lower barriers to entry
@@ -125,11 +134,13 @@ If invalid: Stake slashed
 #### 3. Delegated Proof of Stake (DPoS)
 
 **How It Works:**
+
 1. Token holders vote for "delegates" (block producers)
 2. Top N delegates (e.g., 21) produce blocks in rotation
 3. Delegates can be voted out if they misbehave
 
 **Visual Representation:**
+
 ```
 Token Holders Vote:
 Alice → Delegate A
@@ -146,6 +157,7 @@ Rotation: A → B → C → A → B → C...
 ```
 
 **Characteristics:**
+
 - ✅ Very fast (EOS: 0.5s blocks)
 - ✅ Energy efficient
 - ✅ Scalable
@@ -157,11 +169,13 @@ Rotation: A → B → C → A → B → C...
 #### 4. Proof of Authority (PoA)
 
 **How It Works:**
+
 1. Pre-approved validators (authorities) create blocks
 2. Authorities are known entities (companies, organizations)
 3. Reputation-based: Misbehavior damages reputation
 
 **Characteristics:**
+
 - ✅ Very fast and efficient
 - ✅ Low energy consumption
 - ✅ Suitable for private/consortium blockchains
@@ -232,6 +246,7 @@ When two blocks are created simultaneously:
 ```
 
 **Resolution:**
+
 - PoW: Longest chain (most cumulative work) wins
 - PoS: Chain with highest stake backing wins
 - Eventually, one chain becomes canonical
@@ -243,6 +258,7 @@ When two blocks are created simultaneously:
 **Challenge**: Secure a global payment network without central authority
 
 **Solution**: PoW makes attacks prohibitively expensive
+
 - 51% attack would require >$10 billion in hardware
 - Energy cost makes attacks unprofitable
 - Network has processed $10+ trillion in transactions securely
@@ -252,6 +268,7 @@ When two blocks are created simultaneously:
 **Challenge**: Reduce energy consumption (Bitcoin uses ~0.5% of global electricity)
 
 **Solution**: Migrated from PoW to PoS (The Merge, 2022)
+
 - Reduced energy consumption by 99.95%
 - Maintained security through economic incentives
 - Enabled faster block times
@@ -261,6 +278,7 @@ When two blocks are created simultaneously:
 **Challenge**: Combine security, efficiency, and real-world activity validation
 
 **Solution**: PoST (Proof of Stake + Time) + PoAT (Proof of Activity)
+
 - PoST: Energy-efficient validation based on stake and participation time
 - PoAT: Validates real-world activities and contributions
 - Combines best of both: security + real-world integration
@@ -313,52 +331,57 @@ Low Decentralization, High Speed
 ## Quiz
 
 ### Question 1
+
 What problem do consensus mechanisms solve in blockchain networks?
 
 A) Encrypting transaction data  
 B) Enabling distributed nodes to agree on valid transactions  
 C) Storing blockchain data  
-D) Generating cryptographic keys  
+D) Generating cryptographic keys
 
 **Correct Answer: B** - Consensus mechanisms enable independent nodes in a distributed network to agree on which transactions are valid and in what order.
 
 ### Question 2
+
 In Proof of Work, what do miners compete to do?
 
 A) Stake the most cryptocurrency  
 B) Solve cryptographic puzzles to create blocks  
 C) Vote for block producers  
-D) Verify the most transactions  
+D) Verify the most transactions
 
 **Correct Answer: B** - Miners compete to solve computationally difficult puzzles, and the first to solve creates the next block.
 
 ### Question 3
+
 What is a key advantage of Proof of Stake over Proof of Work?
 
 A) Higher security  
 B) Lower energy consumption  
 C) More decentralization  
-D) Faster puzzle solving  
+D) Faster puzzle solving
 
 **Correct Answer: B** - Proof of Stake is significantly more energy-efficient than Proof of Work while maintaining security through economic incentives.
 
 ### Question 4
+
 In Delegated Proof of Stake, how are block producers selected?
 
 A) Random selection  
 B) Token holders vote for delegates  
 C) First-come-first-served  
-D) Based on computational power  
+D) Based on computational power
 
 **Correct Answer: B** - Token holders vote to select delegates (block producers), who then take turns creating blocks.
 
 ### Question 5
+
 What happens when two blocks are created simultaneously in a blockchain network?
 
 A) Both blocks are rejected  
 B) A fork occurs, and the network resolves it through consensus rules  
 C) The network splits permanently  
-D) The first block always wins  
+D) The first block always wins
 
 **Correct Answer: B** - Simultaneous blocks create a temporary fork, which is resolved through consensus rules (longest chain in PoW, highest stake in PoS, etc.).
 

@@ -47,12 +47,17 @@ export const listAuditEntries = query({
     entityId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const entries = args.entityType && args.entityId
-      ? await ctx.db
-          .query("auditLog")
-          .withIndex("by_entity", (q) => q.eq("entityType", args.entityType!).eq("entityId", args.entityId!))
-          .collect()
-      : await ctx.db.query("auditLog").collect();
+    const entries =
+      args.entityType && args.entityId
+        ? await ctx.db
+            .query("auditLog")
+            .withIndex("by_entity", (q) =>
+              q
+                .eq("entityType", args.entityType!)
+                .eq("entityId", args.entityId!),
+            )
+            .collect()
+        : await ctx.db.query("auditLog").collect();
     return entries.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   },
 });

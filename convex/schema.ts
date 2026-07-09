@@ -5,7 +5,11 @@ export default defineSchema({
   users: defineTable({
     primaryWallet: v.string(),
     displayName: v.string(),
-    role: v.union(v.literal("member"), v.literal("reviewer"), v.literal("admin")),
+    role: v.union(
+      v.literal("member"),
+      v.literal("reviewer"),
+      v.literal("admin"),
+    ),
     createdAt: v.string(),
     updatedAt: v.string(),
     lastSeenAt: v.string(),
@@ -16,8 +20,17 @@ export default defineSchema({
     displayName: v.string(),
     bio: v.string(),
     organizationName: v.string(),
-    role: v.union(v.literal("member"), v.literal("reviewer"), v.literal("admin")),
-    verificationStatus: v.union(v.literal("unverified"), v.literal("pending"), v.literal("verified"), v.literal("rejected")),
+    role: v.union(
+      v.literal("member"),
+      v.literal("reviewer"),
+      v.literal("admin"),
+    ),
+    verificationStatus: v.union(
+      v.literal("unverified"),
+      v.literal("pending"),
+      v.literal("verified"),
+      v.literal("rejected"),
+    ),
     statusScore: v.number(),
     governanceWeight: v.number(),
     regions: v.array(v.string()),
@@ -57,7 +70,12 @@ export default defineSchema({
       v.literal("needs_info"),
     ),
     reviewNote: v.optional(v.string()),
-    chainMirrorStatus: v.union(v.literal("not_started"), v.literal("queued"), v.literal("mirrored"), v.literal("failed")),
+    chainMirrorStatus: v.union(
+      v.literal("not_started"),
+      v.literal("queued"),
+      v.literal("mirrored"),
+      v.literal("failed"),
+    ),
     createdAt: v.string(),
     updatedAt: v.string(),
   })
@@ -70,8 +88,16 @@ export default defineSchema({
     submissionId: v.id("activitySubmissions"),
     userId: v.id("users"),
     proofKind: v.union(v.literal("poat"), v.literal("post")),
-    recordStatus: v.union(v.literal("pending"), v.literal("verified"), v.literal("rejected")),
-    verifierMode: v.union(v.literal("ai_assist"), v.literal("human_review"), v.literal("protocol_sync")),
+    recordStatus: v.union(
+      v.literal("pending"),
+      v.literal("verified"),
+      v.literal("rejected"),
+    ),
+    verifierMode: v.union(
+      v.literal("ai_assist"),
+      v.literal("human_review"),
+      v.literal("protocol_sync"),
+    ),
     confidenceScore: v.optional(v.number()),
     rationale: v.optional(v.string()),
     attestationRef: v.optional(v.string()),
@@ -121,7 +147,11 @@ export default defineSchema({
     weight: v.number(),
     rationale: v.optional(v.string()),
     isSimulated: v.boolean(),
-    source: v.union(v.literal("app"), v.literal("mock"), v.literal("protocol_sync")),
+    source: v.union(
+      v.literal("app"),
+      v.literal("mock"),
+      v.literal("protocol_sync"),
+    ),
     createdAt: v.string(),
   })
     .index("by_proposal", ["proposalId"])
@@ -132,7 +162,11 @@ export default defineSchema({
     userId: v.id("users"),
     moduleSlug: v.string(),
     lessonSlug: v.string(),
-    completionStatus: v.union(v.literal("not_started"), v.literal("in_progress"), v.literal("completed")),
+    completionStatus: v.union(
+      v.literal("not_started"),
+      v.literal("in_progress"),
+      v.literal("completed"),
+    ),
     score: v.optional(v.number()),
     xpEarned: v.number(),
     lastViewedAt: v.string(),
@@ -146,7 +180,11 @@ export default defineSchema({
 
   docsSections: defineTable({
     slug: v.string(),
-    sectionType: v.union(v.literal("whitepaper"), v.literal("docs"), v.literal("learn")),
+    sectionType: v.union(
+      v.literal("whitepaper"),
+      v.literal("docs"),
+      v.literal("learn"),
+    ),
     title: v.string(),
     summary: v.string(),
     href: v.string(),
@@ -160,7 +198,13 @@ export default defineSchema({
 
   notifications: defineTable({
     userId: v.id("users"),
-    category: v.union(v.literal("submission"), v.literal("governance"), v.literal("learn"), v.literal("system"), v.literal("review")),
+    category: v.union(
+      v.literal("submission"),
+      v.literal("governance"),
+      v.literal("learn"),
+      v.literal("system"),
+      v.literal("review"),
+    ),
     title: v.string(),
     message: v.string(),
     href: v.optional(v.string()),
@@ -170,7 +214,11 @@ export default defineSchema({
 
   adminReviewQueue: defineTable({
     submissionId: v.id("activitySubmissions"),
-    queueStatus: v.union(v.literal("pending"), v.literal("in_review"), v.literal("resolved")),
+    queueStatus: v.union(
+      v.literal("pending"),
+      v.literal("in_review"),
+      v.literal("resolved"),
+    ),
     priority: v.union(v.literal("low"), v.literal("normal"), v.literal("high")),
     reviewType: v.union(v.literal("poat"), v.literal("post")),
     assignedReviewerWallet: v.optional(v.string()),
@@ -229,9 +277,14 @@ export default defineSchema({
       v.object({
         ed_sig: v.string(),
         pq_sig: v.optional(v.string()),
-      })
+      }),
     ),
-    status: v.union(v.literal("pending"), v.literal("approved"), v.literal("rejected"), v.literal("flagged")),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("approved"),
+      v.literal("rejected"),
+      v.literal("flagged"),
+    ),
     score: v.number(),
     reward: v.any(),
     chainTxHash: v.optional(v.string()),
@@ -284,7 +337,11 @@ export default defineSchema({
     metadata: v.optional(v.any()),
     timestamp: v.string(),
     txHash: v.string(),
-    status: v.union(v.literal("Pending"), v.literal("Processing"), v.literal("Verified")),
+    status: v.union(
+      v.literal("Pending"),
+      v.literal("Processing"),
+      v.literal("Verified"),
+    ),
   })
     .index("by_proof_hash", ["proofHash"])
     .index("by_wallet", ["walletAddress"])

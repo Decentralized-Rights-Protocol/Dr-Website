@@ -1,39 +1,39 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { getGamificationEngine } from '@/lib/gamification'
+import { useEffect, useState } from "react";
+import { getGamificationEngine } from "@/lib/gamification";
 
 interface XPProgressBarProps {
-  className?: string
+  className?: string;
 }
 
-export function XPProgressBar({ className = '' }: XPProgressBarProps) {
-  const [progress, setProgress] = useState(0)
-  const [xp, setXP] = useState(0)
-  const [level, setLevel] = useState(1)
-  const [nextLevelXP, setNextLevelXP] = useState(1000)
+export function XPProgressBar({ className = "" }: XPProgressBarProps) {
+  const [progress, setProgress] = useState(0);
+  const [xp, setXP] = useState(0);
+  const [level, setLevel] = useState(1);
+  const [nextLevelXP, setNextLevelXP] = useState(1000);
 
   useEffect(() => {
-    const engine = getGamificationEngine()
-    const state = engine.getState()
-    
-    setXP(state.xp)
-    setLevel(state.level)
-    setProgress(engine.getXPProgress())
-    setNextLevelXP(state.level * 1000)
-    
+    const engine = getGamificationEngine();
+    const state = engine.getState();
+
+    setXP(state.xp);
+    setLevel(state.level);
+    setProgress(engine.getXPProgress());
+    setNextLevelXP(state.level * 1000);
+
     // Listen for XP updates
     const handleXPUpdate = () => {
-      const newState = engine.getState()
-      setXP(newState.xp)
-      setLevel(newState.level)
-      setProgress(engine.getXPProgress())
-      setNextLevelXP(newState.level * 1000)
-    }
-    
-    window.addEventListener('xp-updated', handleXPUpdate)
-    return () => window.removeEventListener('xp-updated', handleXPUpdate)
-  }, [])
+      const newState = engine.getState();
+      setXP(newState.xp);
+      setLevel(newState.level);
+      setProgress(engine.getXPProgress());
+      setNextLevelXP(newState.level * 1000);
+    };
+
+    window.addEventListener("xp-updated", handleXPUpdate);
+    return () => window.removeEventListener("xp-updated", handleXPUpdate);
+  }, []);
 
   return (
     <div className={`w-full ${className}`}>
@@ -50,7 +50,7 @@ export function XPProgressBar({ className = '' }: XPProgressBarProps) {
           {nextLevelXP.toLocaleString()} XP to next level
         </span>
       </div>
-      
+
       <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
         <div
           className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
@@ -60,6 +60,5 @@ export function XPProgressBar({ className = '' }: XPProgressBarProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

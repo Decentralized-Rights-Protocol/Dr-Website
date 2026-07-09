@@ -1,28 +1,42 @@
-import Link from 'next/link'
-import { Download, Eye, ExternalLink, BookOpenText, ShieldCheck, Brain, Scale, Quote, ArrowRight } from 'lucide-react'
-import { StructuredData } from '@/components/seo/StructuredData'
-import { PremiumPage, PremiumHero, PremiumSection } from '@/components/site/PremiumPage'
-import { buildPageMetadata } from '@/lib/seo/seo'
-import { WhitepaperActions } from '@/components/whitepaper/WhitepaperActions'
+import Link from "next/link";
+import {
+  Download,
+  Eye,
+  ExternalLink,
+  BookOpenText,
+  ShieldCheck,
+  Brain,
+  Scale,
+  Quote,
+  ArrowRight,
+} from "lucide-react";
+import { StructuredData } from "@/components/seo/StructuredData";
+import {
+  PremiumPage,
+  PremiumHero,
+  PremiumSection,
+} from "@/components/site/PremiumPage";
+import { buildPageMetadata } from "@/lib/seo/seo";
+import { WhitepaperActions } from "@/components/whitepaper/WhitepaperActions";
 
 export const metadata = buildPageMetadata({
-  title: 'DRP Whitepaper | Quantum-Safe Human Rights Protocol',
+  title: "DRP Whitepaper | Quantum-Safe Human Rights Protocol",
   description:
-    'Read the Decentralized Rights Protocol (DRP) whitepaper: architecture, AI-verified consensus (PoST/PoAT), token economics, rights-centered governance, and quantum-safe security.',
-  canonical: '/whitepaper',
-})
+    "Read the Decentralized Rights Protocol (DRP) whitepaper: architecture, AI-verified consensus (PoST/PoAT), token economics, rights-centered governance, and quantum-safe security.",
+  canonical: "/whitepaper",
+});
 
 export default function WhitepaperPage() {
   const sections = [
-    'Executive Summary',
-    'Problem Statement',
-    'Protocol Architecture',
-    'Consensus & Verification',
-    'Token Economics',
-    'Governance and Rights',
-    'Security and Quantum Resilience',
-    'Roadmap and Risk',
-  ]
+    "Executive Summary",
+    "Problem Statement",
+    "Protocol Architecture",
+    "Consensus & Verification",
+    "Token Economics",
+    "Governance and Rights",
+    "Security and Quantum Resilience",
+    "Roadmap and Risk",
+  ];
 
   return (
     <>
@@ -42,13 +56,29 @@ export default function WhitepaperPage() {
         >
           <div className="grid gap-6 md:grid-cols-3">
             {[
-              { title: 'The Protocol', body: 'A proof-based trust and governance layer for human rights.' },
-              { title: 'Consensus', body: 'Verified status and activity become auditable reality proofs.' },
-              { title: 'Dignity', body: 'Governance evaluated against rights baselines and sustainability.' },
+              {
+                title: "The Protocol",
+                body: "A proof-based trust and governance layer for human rights.",
+              },
+              {
+                title: "Consensus",
+                body: "Verified status and activity become auditable reality proofs.",
+              },
+              {
+                title: "Dignity",
+                body: "Governance evaluated against rights baselines and sustainability.",
+              },
             ].map((item) => (
-              <article key={item.title} className="rounded-2xl border border-foreground/5 bg-white/[0.03] p-8 transition-all hover:bg-white/5">
-                <strong className="text-drp-cyan font-cinematic text-[10px] block mb-4 tracking-widest">{item.title}</strong>
-                <p className="text-sm text-drp-gray leading-relaxed">{item.body}</p>
+              <article
+                key={item.title}
+                className="rounded-2xl border border-foreground/5 bg-white/[0.03] p-8 transition-all hover:bg-white/5"
+              >
+                <strong className="text-drp-cyan font-cinematic text-[10px] block mb-4 tracking-widest">
+                  {item.title}
+                </strong>
+                <p className="text-sm text-drp-gray leading-relaxed">
+                  {item.body}
+                </p>
               </article>
             ))}
           </div>
@@ -66,7 +96,7 @@ export default function WhitepaperPage() {
                 className="rounded-2xl border border-foreground/5 bg-black/40 px-8 py-6 text-sm text-foreground transition-all hover:border-drp-cyan/40 hover:bg-drp-cyan/5 group"
               >
                 <span className="mr-4 text-drp-cyan opacity-40 group-hover:opacity-100 transition-opacity font-cinematic">
-                  {String(index + 1).padStart(2, '0')}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
                 {item}
               </div>
@@ -91,15 +121,24 @@ export default function WhitepaperPage() {
         <section className="pb-32 pt-16">
           <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
             <div className="rounded-[3rem] border border-foreground/5 bg-gradient-to-br from-drp-cyan/10 via-drp-blue/5 to-transparent p-16 text-center backdrop-blur-xl">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8">Deep Dive into Economics</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8">
+                Deep Dive into Economics
+              </h2>
               <p className="mx-auto max-w-2xl text-lg text-drp-gray mb-12">
-                After the whitepaper, explore the protocol implementation details and incentive structures.
+                After the whitepaper, explore the protocol implementation
+                details and incentive structures.
               </p>
               <div className="flex flex-wrap justify-center gap-6">
-                <Link href="/docs" className="px-10 py-4 rounded-full border border-foreground/10 text-foreground font-cinematic text-xs hover:bg-white/5 transition-colors">
+                <Link
+                  href="/docs"
+                  className="px-10 py-4 rounded-full border border-foreground/10 text-foreground font-cinematic text-xs hover:bg-white/5 transition-colors"
+                >
                   Explore Docs
                 </Link>
-                <Link href="/economics" className="px-10 py-4 rounded-full bg-drp-cyan text-drp-bg font-cinematic text-xs font-bold hover:scale-105 transition-transform">
+                <Link
+                  href="/economics"
+                  className="px-10 py-4 rounded-full bg-drp-cyan text-drp-bg font-cinematic text-xs font-bold hover:scale-105 transition-transform"
+                >
                   Review Economics
                 </Link>
               </div>
@@ -108,5 +147,5 @@ export default function WhitepaperPage() {
         </section>
       </PremiumPage>
     </>
-  )
+  );
 }

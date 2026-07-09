@@ -25,6 +25,7 @@ Advanced concepts enable:
 - **Innovation**: Cutting-edge blockchain features
 
 Understanding advanced concepts enables you to:
+
 - Build sophisticated DRP applications
 - Implement privacy-preserving features
 - Optimize for scale and performance
@@ -55,22 +56,25 @@ Understanding advanced concepts enables you to:
    - Medium proof sizes
 
 **Application in DRP**:
+
 ```typescript
 // Prove activity without revealing details
 const zkProof = await drpClient.zk.createProof({
   privateInputs: {
-    contentHash: '0xabc...',
-    activityDetails: { /* private data */ }
+    contentHash: "0xabc...",
+    activityDetails: {
+      /* private data */
+    },
   },
   publicInputs: {
-    statement: 'activity_occurred',
-    timestamp: Date.now()
+    statement: "activity_occurred",
+    timestamp: Date.now(),
   },
-  circuit: 'activityVerification'
-})
+  circuit: "activityVerification",
+});
 
 // Verify proof without seeing private data
-const isValid = await drpClient.zk.verifyProof(zkProof)
+const isValid = await drpClient.zk.verifyProof(zkProof);
 ```
 
 ### Advanced Rights Structures
@@ -78,79 +82,82 @@ const isValid = await drpClient.zk.verifyProof(zkProof)
 #### Hierarchical Rights
 
 **Nested Rights Structure**:
+
 ```typescript
 interface HierarchicalRights {
-  parent: string // Parent rights ID
-  children: string[] // Child rights IDs
+  parent: string; // Parent rights ID
+  children: string[]; // Child rights IDs
   permissions: {
-    canModify: boolean
-    canTransfer: boolean
-    canLicense: boolean
-  }
+    canModify: boolean;
+    canTransfer: boolean;
+    canLicense: boolean;
+  };
   inheritance: {
-    royalties: boolean
-    permissions: boolean
-  }
+    royalties: boolean;
+    permissions: boolean;
+  };
 }
 
 // Create hierarchical rights
 const parentRights = await drpClient.rights.register({
-  contentHash: 'album-hash',
-  type: 'album'
-})
+  contentHash: "album-hash",
+  type: "album",
+});
 
 const childRights = await drpClient.rights.register({
-  contentHash: 'song-hash',
+  contentHash: "song-hash",
   parent: parentRights.id,
-  type: 'song'
-})
+  type: "song",
+});
 ```
 
 #### Fractional Rights
 
 **Shared Ownership**:
+
 ```typescript
 interface FractionalRights {
-  rightsId: string
+  rightsId: string;
   owners: Array<{
-    address: string
-    fraction: number // 0-100
-    votingWeight: number
-  }>
-  threshold: number // Required for decisions
+    address: string;
+    fraction: number; // 0-100
+    votingWeight: number;
+  }>;
+  threshold: number; // Required for decisions
 }
 
 // Create fractional rights
 const fractionalRights = await drpClient.rights.createFractional({
-  contentHash: '0xabc...',
+  contentHash: "0xabc...",
   owners: [
-    { address: '0x1', fraction: 40 },
-    { address: '0x2', fraction: 35 },
-    { address: '0x3', fraction: 25 }
+    { address: "0x1", fraction: 40 },
+    { address: "0x2", fraction: 35 },
+    { address: "0x3", fraction: 25 },
   ],
-  threshold: 51 // Majority required
-})
+  threshold: 51, // Majority required
+});
 ```
 
 #### Time-Locked Rights
 
 **Rights with Temporal Conditions**:
+
 ```typescript
 interface TimeLockedRights {
-  rightsId: string
+  rightsId: string;
   lockConditions: {
-    unlockTime: number
-    conditions: string[]
-  }
-  lockedPermissions: string[]
+    unlockTime: number;
+    conditions: string[];
+  };
+  lockedPermissions: string[];
 }
 
 // Create time-locked rights
 const lockedRights = await drpClient.rights.createTimeLocked({
-  contentHash: '0xabc...',
-  unlockTime: Date.now() + (365 * 24 * 60 * 60 * 1000), // 1 year
-  lockedPermissions: ['transfer', 'license']
-})
+  contentHash: "0xabc...",
+  unlockTime: Date.now() + 365 * 24 * 60 * 60 * 1000, // 1 year
+  lockedPermissions: ["transfer", "license"],
+});
 ```
 
 ### Layer 2 Scaling Solutions
@@ -158,34 +165,36 @@ const lockedRights = await drpClient.rights.createTimeLocked({
 #### State Channels
 
 **Off-Chain Transactions**:
+
 ```typescript
 // Open state channel
 const channel = await drpClient.layer2.openChannel({
-  counterparty: '0xCounterparty...',
-  deposit: parseEther('1000')
-})
+  counterparty: "0xCounterparty...",
+  deposit: parseEther("1000"),
+});
 
 // Execute off-chain transactions
 for (let i = 0; i < 100; i++) {
   await channel.update({
-    recipient: '0xRecipient...',
-    amount: parseEther('10')
-  })
+    recipient: "0xRecipient...",
+    amount: parseEther("10"),
+  });
 }
 
 // Close channel and settle on-chain
-await channel.close()
+await channel.close();
 ```
 
 #### Optimistic Rollups
 
 **Batch Processing**:
+
 ```typescript
 // Submit transaction to rollup
 await drpClient.layer2.submitToRollup({
-  action: 'registerRights',
-  data: rightsData
-})
+  action: "registerRights",
+  data: rightsData,
+});
 
 // Transactions batched and submitted to mainnet
 // Faster and cheaper than mainnet transactions
@@ -194,6 +203,7 @@ await drpClient.layer2.submitToRollup({
 #### zk-Rollups
 
 **Zero-Knowledge Batch Verification**:
+
 ```typescript
 // Submit to zk-rollup
 await drpClient.layer2.submitToZKRollup({
@@ -210,25 +220,27 @@ await drpClient.layer2.submitToZKRollup({
 #### Threshold Signatures
 
 **Multi-Party Signing**:
+
 ```typescript
 // Create threshold signature scheme
 const thresholdSig = await drpClient.consensus.createThreshold({
-  participants: ['0x1', '0x2', '0x3', '0x4', '0x5'],
-  threshold: 3 // 3 of 5 required
-})
+  participants: ["0x1", "0x2", "0x3", "0x4", "0x5"],
+  threshold: 3, // 3 of 5 required
+});
 
 // Participants generate shares
-const share1 = await thresholdSig.generateShare('0x1')
-const share2 = await thresholdSig.generateShare('0x2')
-const share3 = await thresholdSig.generateShare('0x3')
+const share1 = await thresholdSig.generateShare("0x1");
+const share2 = await thresholdSig.generateShare("0x2");
+const share3 = await thresholdSig.generateShare("0x3");
 
 // Combine shares to create signature
-const signature = await thresholdSig.combineShares([share1, share2, share3])
+const signature = await thresholdSig.combineShares([share1, share2, share3]);
 ```
 
 #### BFT Consensus Variants
 
 **Byzantine Fault Tolerance**:
+
 - **PBFT**: Practical Byzantine Fault Tolerance
 - **Tendermint**: BFT with proof-of-stake
 - **HotStuff**: Linear BFT protocol
@@ -238,32 +250,34 @@ const signature = await thresholdSig.combineShares([share1, share2, share3])
 #### Aggregate Proofs
 
 **Batch Verification**:
+
 ```typescript
 // Create aggregate proof for multiple activities
 const aggregateProof = await drpClient.activity.createAggregate({
   activities: [
-    { type: 'creation', contentHash: '0x1' },
-    { type: 'distribution', contentHash: '0x2' },
-    { type: 'consumption', contentHash: '0x3' }
-  ]
-})
+    { type: "creation", contentHash: "0x1" },
+    { type: "distribution", contentHash: "0x2" },
+    { type: "consumption", contentHash: "0x3" },
+  ],
+});
 
 // Single verification for all activities
-const isValid = await drpClient.activity.verifyAggregate(aggregateProof)
+const isValid = await drpClient.activity.verifyAggregate(aggregateProof);
 ```
 
 #### Recursive Proofs
 
 **Proof of Proofs**:
+
 ```typescript
 // Create recursive proof structure
 const recursiveProof = await drpClient.activity.createRecursive({
   baseProofs: [proof1, proof2, proof3],
-  aggregation: 'merkle'
-})
+  aggregation: "merkle",
+});
 
 // Verify entire proof tree efficiently
-const isValid = await drpClient.activity.verifyRecursive(recursiveProof)
+const isValid = await drpClient.activity.verifyRecursive(recursiveProof);
 ```
 
 ## Visual Explanation
@@ -343,15 +357,16 @@ Inheritance:
 **Scenario**: Verify rights without revealing content details
 
 **Implementation**:
+
 ```typescript
 // Create ZK proof of rights ownership
 const ownershipProof = await drpClient.zk.proveOwnership({
-  rightsId: 'rights-123',
-  reveal: false // Don't reveal content details
-})
+  rightsId: "rights-123",
+  reveal: false, // Don't reveal content details
+});
 
 // Service verifies ownership without seeing content
-const hasRights = await service.verifyOwnership(ownershipProof)
+const hasRights = await service.verifyOwnership(ownershipProof);
 ```
 
 ### 2. High-Volume Content Platform
@@ -359,6 +374,7 @@ const hasRights = await service.verifyOwnership(ownershipProof)
 **Scenario**: Process millions of transactions per day
 
 **Solution**: Layer 2 rollups
+
 ```typescript
 // All transactions on rollup
 await rollupClient.rights.register({...}) // Fast, cheap
@@ -374,12 +390,13 @@ await rollupClient.royalty.distribute({...}) // Fast, cheap
 **Scenario**: Movie with multiple rights holders
 
 **Implementation**:
+
 ```typescript
 // Movie rights (parent)
 const movieRights = await drpClient.rights.register({
   contentHash: movieHash,
-  type: 'movie'
-})
+  type: "movie",
+});
 
 // Fractional ownership
 const ownership = await drpClient.rights.createFractional({
@@ -387,16 +404,16 @@ const ownership = await drpClient.rights.createFractional({
   owners: [
     { address: studio, fraction: 50 },
     { address: director, fraction: 20 },
-    { address: actors, fraction: 30 }
-  ]
-})
+    { address: actors, fraction: 30 },
+  ],
+});
 
 // Child rights for soundtrack
 const soundtrackRights = await drpClient.rights.register({
   parent: movieRights.id,
   contentHash: soundtrackHash,
-  type: 'soundtrack'
-})
+  type: "soundtrack",
+});
 ```
 
 ## Key Takeaways
@@ -412,52 +429,57 @@ const soundtrackRights = await drpClient.rights.register({
 ## Quiz
 
 ### Question 1
+
 What is the primary benefit of zero-knowledge proofs in DRP?
 
 A) Faster transactions  
 B) Proving statements (like rights ownership) without revealing private data  
 C) Lower costs  
-D) Simpler code  
+D) Simpler code
 
 **Correct Answer: B** - Zero-knowledge proofs allow proving statements (like "I own these rights") without revealing the underlying private data (content details, identity, etc.).
 
 ### Question 2
+
 What are Layer 2 solutions used for?
 
 A) To slow down transactions  
 B) To scale DRP by processing transactions off-chain or in batches while maintaining mainnet security  
 C) To increase costs  
-D) To reduce security  
+D) To reduce security
 
 **Correct Answer: B** - Layer 2 solutions (rollups, state channels) process transactions off-chain or in batches, achieving high throughput and low costs while maintaining the security of the mainnet.
 
 ### Question 3
+
 What is hierarchical rights management?
 
 A) Rights only on one level  
 B) Rights organized in parent-child relationships where child rights can inherit properties from parents  
 C) No rights structure  
-D) Only flat rights  
+D) Only flat rights
 
 **Correct Answer: B** - Hierarchical rights allow organizing rights in parent-child relationships, where child rights (like songs) can inherit properties from parent rights (like albums).
 
 ### Question 4
+
 What are threshold signatures used for?
 
 A) Single-party signing  
 B) Multi-party signing where a threshold of participants must sign  
 C) No signing required  
-D) Only two-party signing  
+D) Only two-party signing
 
 **Correct Answer: B** - Threshold signatures enable multi-party operations where a threshold number of participants (e.g., 3 of 5) must sign for an action to be valid.
 
 ### Question 5
+
 What is an aggregate proof?
 
 A) A single proof  
 B) A proof that combines multiple activity proofs for efficient batch verification  
 C) No proof  
-D) Only one activity  
+D) Only one activity
 
 **Correct Answer: B** - Aggregate proofs combine multiple activity proofs into a single proof that can be verified efficiently, reducing computational cost.
 

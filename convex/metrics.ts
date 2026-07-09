@@ -20,33 +20,54 @@ export const getDashboardMetrics = query({
       userId = record?.user._id ?? null;
     }
 
-    const scopedSubmissions = userId ? submissions.filter((submission) => submission.userId === userId) : submissions;
-    const scopedLearn = userId ? learn.filter((entry) => entry.userId === userId) : learn;
-    const scopedProofs = userId ? proofs.filter((entry) => entry.userId === userId) : proofs;
+    const scopedSubmissions = userId
+      ? submissions.filter((submission) => submission.userId === userId)
+      : submissions;
+    const scopedLearn = userId
+      ? learn.filter((entry) => entry.userId === userId)
+      : learn;
+    const scopedProofs = userId
+      ? proofs.filter((entry) => entry.userId === userId)
+      : proofs;
 
     // --- INTEGRATE DRP LEDGER DATA ---
     const drpActivities = await ctx.db.query("drpActivities").collect();
     const drpTransactions = await ctx.db.query("drpTransactions").collect();
     const drpBlocks = await ctx.db.query("drpBlocks").collect();
 
-    const scopedDrpActivities = userId ? drpActivities.filter((act) => act.userId === userId) : drpActivities;
-    const scopedDrpTransactions = userId ? drpTransactions.filter((tx) => tx.userId === userId) : drpTransactions;
+    const scopedDrpActivities = userId
+      ? drpActivities.filter((act) => act.userId === userId)
+      : drpActivities;
+    const scopedDrpTransactions = userId
+      ? drpTransactions.filter((tx) => tx.userId === userId)
+      : drpTransactions;
 
-    const monthlyMap = new Map<string, { month: string; activities: number; rewards: number }>();
+    const monthlyMap = new Map<
+      string,
+      { month: string; activities: number; rewards: number }
+    >();
     for (const submission of scopedSubmissions) {
       const month = toMonthBucket(submission.createdAt);
-      const entry = monthlyMap.get(month) ?? { month, activities: 0, rewards: 0 };
+      const entry = monthlyMap.get(month) ?? {
+        month,
+        activities: 0,
+        rewards: 0,
+      };
       entry.activities += 1;
       if (submission.submissionStatus === "approved") {
         entry.rewards += submission.kind === "activity" ? 35 : 15;
       }
       monthlyMap.set(month, entry);
     }
-    
+
     // Add new DRP ledger activities to monthly map
     for (const act of scopedDrpActivities) {
       const month = toMonthBucket(act.createdAt);
-      const entry = monthlyMap.get(month) ?? { month, activities: 0, rewards: 0 };
+      const entry = monthlyMap.get(month) ?? {
+        month,
+        activities: 0,
+        rewards: 0,
+      };
       entry.activities += 1;
       if (act.status === "approved") {
         entry.rewards += act.reward.deri;
@@ -54,17 +75,33 @@ export const getDashboardMetrics = query({
       monthlyMap.set(month, entry);
     }
 
-    const approvedActivities = scopedSubmissions.filter((submission) => submission.kind === "activity" && submission.submissionStatus === "approved").length 
-                             + scopedDrpActivities.filter(act => act.status === "approved").length;
-    const approvedStatuses = scopedSubmissions.filter((submission) => submission.kind === "status" && submission.submissionStatus === "approved").length;
-    const completedModules = scopedLearn.filter((entry) => entry.completionStatus === "completed").length;
+    const approvedActivities =
+      scopedSubmissions.filter(
+        (submission) =>
+          submission.kind === "activity" &&
+          submission.submissionStatus === "approved",
+      ).length +
+      scopedDrpActivities.filter((act) => act.status === "approved").length;
+    const approvedStatuses = scopedSubmissions.filter(
+      (submission) =>
+        submission.kind === "status" &&
+        submission.submissionStatus === "approved",
+    ).length;
+    const completedModules = scopedLearn.filter(
+      (entry) => entry.completionStatus === "completed",
+    ).length;
 
-    const totalDeri = scopedDrpTransactions.reduce((sum, tx) => sum + tx.reward.deri, 0) 
-                    + scopedSubmissions.filter(s => s.kind === "activity" && s.submissionStatus === "approved").length * 35 
-                    + completedModules * 12;
+    const totalDeri =
+      scopedDrpTransactions.reduce((sum, tx) => sum + tx.reward.deri, 0) +
+      scopedSubmissions.filter(
+        (s) => s.kind === "activity" && s.submissionStatus === "approved",
+      ).length *
+        35 +
+      completedModules * 12;
 
-    const totalRights = scopedDrpTransactions.reduce((sum, tx) => sum + tx.reward.rights, 0)
-                      + approvedStatuses * 15;
+    const totalRights =
+      scopedDrpTransactions.reduce((sum, tx) => sum + tx.reward.rights, 0) +
+      approvedStatuses * 15;
 
     return {
       cards: {
@@ -72,14 +109,23 @@ export const getDashboardMetrics = query({
         statusApprovals: approvedStatuses,
         deriIssued: totalDeri,
         rightsIssued: totalRights,
-        openProposals: proposals.filter((proposal) => proposal.proposalStatus === "active" || proposal.proposalStatus === "review").length,
-        reviewBacklog: queue.filter((item) => item.queueStatus !== "resolved").length,
+        openProposals: proposals.filter(
+          (proposal) =>
+            proposal.proposalStatus === "active" ||
+            proposal.proposalStatus === "review",
+        ).length,
+        reviewBacklog: queue.filter((item) => item.queueStatus !== "resolved")
+          .length,
         activeLearners: scopedLearn.length,
-        proofsPending: scopedProofs.filter((proof) => proof.recordStatus === "pending").length,
+        proofsPending: scopedProofs.filter(
+          (proof) => proof.recordStatus === "pending",
+        ).length,
         blockchainBlocks: drpBlocks.length,
         totalTransactions: drpTransactions.length,
       },
-      activityHistory: Array.from(monthlyMap.values()).sort((a, b) => a.month.localeCompare(b.month)).slice(-6),
+      activityHistory: Array.from(monthlyMap.values())
+        .sort((a, b) => a.month.localeCompare(b.month))
+        .slice(-6),
       rewardBreakdown: [
         { label: "$DeRi", amount: totalDeri },
         { label: "$RIGHTS", amount: totalRights },
@@ -99,11 +145,25 @@ export const listLeaderboard = query({
 
     const rows = await Promise.all(
       profiles.map(async (profile) => {
-        const wallet = await ctx.db.query("linkedWallets").withIndex("by_user", (q) => q.eq("userId", profile.userId)).unique();
-        const approved = submissions.filter((submission) => submission.userId === profile.userId && submission.submissionStatus === "approved").length;
-        const learning = learn.filter((entry) => entry.userId === profile.userId && entry.completionStatus === "completed").length;
-        const voting = votes.filter((vote) => vote.userId === profile.userId).length;
-        const impactScore = profile.statusScore + approved * 25 + learning * 15 + voting * 10;
+        const wallet = await ctx.db
+          .query("linkedWallets")
+          .withIndex("by_user", (q) => q.eq("userId", profile.userId))
+          .unique();
+        const approved = submissions.filter(
+          (submission) =>
+            submission.userId === profile.userId &&
+            submission.submissionStatus === "approved",
+        ).length;
+        const learning = learn.filter(
+          (entry) =>
+            entry.userId === profile.userId &&
+            entry.completionStatus === "completed",
+        ).length;
+        const voting = votes.filter(
+          (vote) => vote.userId === profile.userId,
+        ).length;
+        const impactScore =
+          profile.statusScore + approved * 25 + learning * 15 + voting * 10;
         return {
           address: wallet?.address ?? "unknown",
           displayName: profile.displayName,
@@ -127,7 +187,12 @@ export const getRewardHistory = query({
   handler: async (ctx, args) => {
     if (!args.walletAddress) {
       return {
-        summary: { deri: 0, rights: 0, boosts: 0, lastUpdated: new Date().toISOString() },
+        summary: {
+          deri: 0,
+          rights: 0,
+          boosts: 0,
+          lastUpdated: new Date().toISOString(),
+        },
         logs: [],
       };
     }
@@ -135,17 +200,28 @@ export const getRewardHistory = query({
     const record = await findProfileByWallet(ctx, args.walletAddress);
     if (!record) {
       return {
-        summary: { deri: 0, rights: 0, boosts: 0, lastUpdated: new Date().toISOString() },
+        summary: {
+          deri: 0,
+          rights: 0,
+          boosts: 0,
+          lastUpdated: new Date().toISOString(),
+        },
         logs: [],
       };
     }
 
-    const submissions = (await ctx.db.query("activitySubmissions").withIndex("by_user", (q) => q.eq("userId", record.user._id)).collect()).filter(
-      (submission) => submission.submissionStatus === "approved",
-    );
-    const learn = (await ctx.db.query("learnProgress").withIndex("by_user", (q) => q.eq("userId", record.user._id)).collect()).filter(
-      (entry) => entry.completionStatus === "completed",
-    );
+    const submissions = (
+      await ctx.db
+        .query("activitySubmissions")
+        .withIndex("by_user", (q) => q.eq("userId", record.user._id))
+        .collect()
+    ).filter((submission) => submission.submissionStatus === "approved");
+    const learn = (
+      await ctx.db
+        .query("learnProgress")
+        .withIndex("by_user", (q) => q.eq("userId", record.user._id))
+        .collect()
+    ).filter((entry) => entry.completionStatus === "completed");
 
     const submissionLogs = submissions.map((submission) => ({
       id: `${submission._id}`,
@@ -153,7 +229,10 @@ export const getRewardHistory = query({
       token: submission.kind === "activity" ? "$DeRi" : "$RIGHTS",
       amount: submission.kind === "activity" ? 35 : 15,
       createdAt: submission.updatedAt,
-      txHash: submission.chainMirrorStatus === "mirrored" ? submission.payloadHash : undefined,
+      txHash:
+        submission.chainMirrorStatus === "mirrored"
+          ? submission.payloadHash
+          : undefined,
     }));
 
     const learningLogs = learn.map((entry) => ({
@@ -165,12 +244,20 @@ export const getRewardHistory = query({
       txHash: undefined,
     }));
 
-    const logs = [...submissionLogs, ...learningLogs].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    const logs = [...submissionLogs, ...learningLogs].sort((a, b) =>
+      b.createdAt.localeCompare(a.createdAt),
+    );
 
     return {
       summary: {
-        deri: submissionLogs.filter((entry) => entry.token === "$DeRi").reduce((sum, entry) => sum + entry.amount, 0) + learningLogs.length * 12,
-        rights: submissionLogs.filter((entry) => entry.token === "$RIGHTS").reduce((sum, entry) => sum + entry.amount, 0),
+        deri:
+          submissionLogs
+            .filter((entry) => entry.token === "$DeRi")
+            .reduce((sum, entry) => sum + entry.amount, 0) +
+          learningLogs.length * 12,
+        rights: submissionLogs
+          .filter((entry) => entry.token === "$RIGHTS")
+          .reduce((sum, entry) => sum + entry.amount, 0),
         boosts: Math.round(record.profile.statusScore / 5),
         lastUpdated: new Date().toISOString(),
       },
@@ -188,10 +275,20 @@ export const getEcosystemSnapshot = query({
     const learn = await ctx.db.query("learnProgress").collect();
 
     return {
-      verifiedActivities: submissions.filter((submission) => submission.kind === "activity" && submission.submissionStatus === "approved").length,
+      verifiedActivities: submissions.filter(
+        (submission) =>
+          submission.kind === "activity" &&
+          submission.submissionStatus === "approved",
+      ).length,
       activeUsers: profiles.length,
-      rewardedActions: submissions.filter((submission) => submission.submissionStatus === "approved").length + learn.filter((entry) => entry.completionStatus === "completed").length,
-      activeProposals: proposals.filter((proposal) => proposal.proposalStatus === "active").length,
+      rewardedActions:
+        submissions.filter(
+          (submission) => submission.submissionStatus === "approved",
+        ).length +
+        learn.filter((entry) => entry.completionStatus === "completed").length,
+      activeProposals: proposals.filter(
+        (proposal) => proposal.proposalStatus === "active",
+      ).length,
     };
   },
 });

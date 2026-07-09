@@ -26,6 +26,7 @@ Building DApps requires understanding:
 - **Deployment**: Getting applications to users
 
 Mastering DApp development enables you to:
+
 - Create innovative digital rights solutions
 - Build user-friendly blockchain applications
 - Contribute to the DRP ecosystem
@@ -64,12 +65,14 @@ A typical DRP DApp follows this architecture:
 #### 1. Frontend Application
 
 **Technologies**:
+
 - React, Vue, or Next.js for UI
 - Web3 libraries for wallet connection
 - State management (Redux, Zustand, etc.)
 - UI frameworks (Tailwind, Material-UI)
 
 **Key Features**:
+
 - Wallet connection
 - Transaction signing
 - Real-time updates
@@ -80,6 +83,7 @@ A typical DRP DApp follows this architecture:
 **Purpose**: Connect users' wallets to DApp
 
 **Implementation**:
+
 ```typescript
 import { useWallet } from '@drp/sdk/react'
 
@@ -106,6 +110,7 @@ function App() {
 **Purpose**: Interact with DRP smart contracts
 
 **Implementation**:
+
 ```typescript
 import { useDRPClient } from '@drp/sdk/react'
 
@@ -156,18 +161,18 @@ npm install @web3modal/ethereum @web3modal/react
 
 ```typescript
 // lib/drp-config.ts
-import { DRPClient } from '@drp/sdk'
+import { DRPClient } from "@drp/sdk";
 
 export const drpConfig = {
-  network: process.env.NEXT_PUBLIC_DRP_NETWORK || 'testnet',
+  network: process.env.NEXT_PUBLIC_DRP_NETWORK || "testnet",
   rpcUrl: process.env.NEXT_PUBLIC_DRP_RPC_URL,
   contracts: {
     rightsRegistry: process.env.NEXT_PUBLIC_RIGHTS_REGISTRY,
-    royaltyEngine: process.env.NEXT_PUBLIC_ROYALTY_ENGINE
-  }
-}
+    royaltyEngine: process.env.NEXT_PUBLIC_ROYALTY_ENGINE,
+  },
+};
 
-export const client = new DRPClient(drpConfig)
+export const client = new DRPClient(drpConfig);
 ```
 
 #### 3. Provider Setup
@@ -257,12 +262,14 @@ User Action
 ### 1. Music Streaming DApp
 
 **Features**:
+
 - Artist registration
 - Song upload and rights registration
 - Streaming with consumption tracking
 - Automatic royalty distribution
 
 **Implementation**:
+
 ```typescript
 // components/MusicPlayer.tsx
 export function MusicPlayer({ songHash }: { songHash: string }) {
@@ -271,7 +278,7 @@ export function MusicPlayer({ songHash }: { songHash: string }) {
 
   const handlePlay = async () => {
     setPlaying(true)
-    
+
     // Record consumption
     await client.activity.createProof({
       type: 'consumption',
@@ -293,12 +300,14 @@ export function MusicPlayer({ songHash }: { songHash: string }) {
 ### 2. Digital Art Marketplace
 
 **Features**:
+
 - Artwork minting
 - NFT creation with DRP rights
 - Marketplace listings
 - Royalty on resales
 
 **Implementation**:
+
 ```typescript
 // components/ArtworkCard.tsx
 export function ArtworkCard({ artwork }: { artwork: Artwork }) {
@@ -318,8 +327,8 @@ export function ArtworkCard({ artwork }: { artwork: Artwork }) {
       <img src={artwork.image} alt={artwork.title} />
       <h3>{artwork.title}</h3>
       <p>Creator: {artwork.creator}</p>
-      <input 
-        value={price} 
+      <input
+        value={price}
         onChange={(e) => setPrice(e.target.value)}
         placeholder="Price in $DeRi"
       />
@@ -332,12 +341,14 @@ export function ArtworkCard({ artwork }: { artwork: Artwork }) {
 ### 3. Content Licensing Platform
 
 **Features**:
+
 - License creation
 - Usage tracking
 - Automated payments
 - License marketplace
 
 **Implementation**:
+
 ```typescript
 // components/LicenseManager.tsx
 export function LicenseManager() {
@@ -374,11 +385,13 @@ export function LicenseManager() {
 ### 1. User Experience
 
 **Loading States**:
+
 - Show loading indicators during transactions
 - Display transaction hashes for tracking
 - Provide clear error messages
 
 **Optimistic Updates**:
+
 - Update UI immediately
 - Revert if transaction fails
 - Provide feedback on status
@@ -386,6 +399,7 @@ export function LicenseManager() {
 ### 2. Error Handling
 
 **Comprehensive Error Handling**:
+
 ```typescript
 try {
   await client.rights.register({...})
@@ -403,11 +417,13 @@ try {
 ### 3. Gas Optimization
 
 **Batch Operations**:
+
 - Group multiple operations
 - Reduce transaction count
 - Lower total gas costs
 
 **Efficient Queries**:
+
 - Cache on-chain data
 - Use event listeners instead of polling
 - Optimize contract calls
@@ -415,11 +431,13 @@ try {
 ### 4. Security
 
 **Input Validation**:
+
 - Validate all user inputs
 - Sanitize data before submission
 - Check contract states before actions
 
 **Wallet Security**:
+
 - Never store private keys
 - Use wallet connection libraries
 - Verify transaction details before signing
@@ -453,23 +471,23 @@ test('plays song and records consumption', async () => {
 ### Integration Testing
 
 ```typescript
-describe('Music Streaming DApp', () => {
-  it('handles complete streaming flow', async () => {
+describe("Music Streaming DApp", () => {
+  it("handles complete streaming flow", async () => {
     // Register song
-    const rights = await registerSong(songData)
-    
+    const rights = await registerSong(songData);
+
     // Play song
-    await playSong(rights.contentHash)
-    
+    await playSong(rights.contentHash);
+
     // Verify consumption recorded
-    const proofs = await getConsumptionProofs(rights.contentHash)
-    expect(proofs.length).toBeGreaterThan(0)
-    
+    const proofs = await getConsumptionProofs(rights.contentHash);
+    expect(proofs.length).toBeGreaterThan(0);
+
     // Check royalties distributed
-    const royalties = await getRoyalties(rights.contentHash)
-    expect(royalties.length).toBeGreaterThan(0)
-  })
-})
+    const royalties = await getRoyalties(rights.contentHash);
+    expect(royalties.length).toBeGreaterThan(0);
+  });
+});
 ```
 
 ## Deployment
@@ -517,52 +535,57 @@ netlify deploy --prod
 ## Quiz
 
 ### Question 1
+
 What are the main layers in a typical DRP DApp architecture?
 
 A) Only smart contracts  
 B) Frontend, SDK Layer, Smart Contracts, and Blockchain Network  
 C) Only frontend and backend  
-D) Only wallet and contracts  
+D) Only wallet and contracts
 
 **Correct Answer: B** - A typical DApp has frontend (UI), SDK layer (DRP SDK), smart contracts (DRP protocol), and the blockchain network.
 
 ### Question 2
+
 What is the purpose of wallet integration in a DApp?
 
 A) To store private keys  
 B) To connect users' wallets so they can sign transactions  
 C) To mine blocks  
-D) To encrypt data  
+D) To encrypt data
 
 **Correct Answer: B** - Wallet integration allows users to connect their wallets (like MetaMask) to sign transactions and interact with the DApp.
 
 ### Question 3
+
 What is an "optimistic update" in DApp development?
 
 A) Updating the UI immediately and reverting if the transaction fails  
 B) Waiting for blockchain confirmation before updating UI  
 C) Never updating the UI  
-D) Only showing errors  
+D) Only showing errors
 
 **Correct Answer: A** - Optimistic updates improve UX by updating the UI immediately, then reverting if the transaction fails.
 
 ### Question 4
+
 Why is error handling important in DApps?
 
 A) To hide errors from users  
 B) To provide clear feedback about transaction failures and guide users  
 C) To prevent all errors  
-D) To slow down the app  
+D) To slow down the app
 
 **Correct Answer: B** - Good error handling provides clear, user-friendly messages about what went wrong and how to fix it.
 
 ### Question 5
+
 What should you do before deploying a DApp to production?
 
 A) Nothing, deploy immediately  
 B) Test thoroughly, configure environment variables, and build for production  
 C) Only test on mainnet  
-D) Skip testing  
+D) Skip testing
 
 **Correct Answer: B** - Before deployment, you should thoroughly test, configure all environment variables, and build the production version of your DApp.
 

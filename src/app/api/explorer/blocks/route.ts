@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -8,12 +8,12 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.toString();
 
-  const apiUrl = `${NEXT_PUBLIC_API_URL}/api/v1/explorer/blocks${query ? `?${query}` : ''}`;
+  const apiUrl = `${NEXT_PUBLIC_API_URL}/api/v1/explorer/blocks${query ? `?${query}` : ""}`;
 
   try {
     const response = await fetch(apiUrl, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -25,6 +25,8 @@ export async function GET(request: Request) {
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error: any) {
-    return new NextResponse('Internal Server Error: ' + error.message, { status: 500 });
+    return new NextResponse("Internal Server Error: " + error.message, {
+      status: 500,
+    });
   }
 }

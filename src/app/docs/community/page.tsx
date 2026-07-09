@@ -1,11 +1,18 @@
-import { Metadata } from 'next'
-import Link from 'next/link'
-import { ArrowLeft, Users, MessageCircle, Github, HelpCircle } from 'lucide-react'
+import { Metadata } from "next";
+import Link from "next/link";
+import {
+  ArrowLeft,
+  Users,
+  MessageCircle,
+  Github,
+  HelpCircle,
+} from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'Community - DRP Documentation',
-  description: 'Join the DRP community and connect with developers, researchers, and contributors.',
-}
+  title: "Community - DRP Documentation",
+  description:
+    "Join the DRP community and connect with developers, researchers, and contributors.",
+};
 
 export default function CommunityPage() {
   return (
@@ -24,7 +31,8 @@ export default function CommunityPage() {
             Community
           </h1>
           <p className="text-xl text-neutral-600 dark:text-neutral-400">
-            Join the DRP community and connect with developers, researchers, and contributors worldwide.
+            Join the DRP community and connect with developers, researchers, and
+            contributors worldwide.
           </p>
         </div>
 
@@ -36,7 +44,8 @@ export default function CommunityPage() {
               <h2 className="text-3xl font-bold">Join Our Community</h2>
             </div>
             <p className="text-primary-100 text-lg">
-              Connect with the DRP community through various channels and platforms.
+              Connect with the DRP community through various channels and
+              platforms.
             </p>
           </div>
 
@@ -44,10 +53,13 @@ export default function CommunityPage() {
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
               <div className="flex items-center gap-3 mb-4">
                 <MessageCircle className="h-6 w-6 text-purple-500" />
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground">Discord</h3>
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground">
+                  Discord
+                </h3>
               </div>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
-                Join our Discord server for real-time discussions, support, and announcements.
+                Join our Discord server for real-time discussions, support, and
+                announcements.
               </p>
               <a
                 href="https://discord.gg/k8auUAqF"
@@ -62,10 +74,13 @@ export default function CommunityPage() {
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
               <div className="flex items-center gap-3 mb-4">
                 <Github className="h-6 w-6 text-neutral-900 dark:text-foreground" />
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground">GitHub</h3>
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground">
+                  GitHub
+                </h3>
               </div>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
-                Contribute to the codebase, report issues, and track development progress.
+                Contribute to the codebase, report issues, and track development
+                progress.
               </p>
               <a
                 href="https://github.com/Decentralized-Rights-Protocol/Dr-Blockchain"
@@ -81,12 +96,17 @@ export default function CommunityPage() {
 
         {/* Ways to Contribute */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">Ways to Contribute</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">
+            Ways to Contribute
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">Code Contributions</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">
+                Code Contributions
+              </h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
-                Submit pull requests, fix bugs, or add new features to the DRP codebase.
+                Submit pull requests, fix bugs, or add new features to the DRP
+                codebase.
               </p>
               <Link
                 href="/docs/contributing"
@@ -97,9 +117,12 @@ export default function CommunityPage() {
             </div>
 
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">Documentation</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">
+                Documentation
+              </h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
-                Help improve documentation, write tutorials, or translate content.
+                Help improve documentation, write tutorials, or translate
+                content.
               </p>
               <Link
                 href="/docs/contributing"
@@ -110,16 +133,22 @@ export default function CommunityPage() {
             </div>
 
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">Testing</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">
+                Testing
+              </h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
-                Run nodes, test features, and report bugs or issues you encounter.
+                Run nodes, test features, and report bugs or issues you
+                encounter.
               </p>
             </div>
 
             <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">Research</h3>
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-3">
+                Research
+              </h3>
               <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">
-                Contribute research, propose improvements, or analyze protocol performance.
+                Contribute research, propose improvements, or analyze protocol
+                performance.
               </p>
             </div>
           </div>
@@ -127,14 +156,19 @@ export default function CommunityPage() {
 
         {/* Getting Help */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">Getting Help</h2>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-foreground mb-6">
+            Getting Help
+          </h2>
           <div className="bg-white dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
             <div className="flex items-start gap-3">
               <HelpCircle className="h-6 w-6 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0" />
               <div>
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">Need Help?</h3>
+                <h3 className="text-lg font-semibold text-neutral-900 dark:text-foreground mb-2">
+                  Need Help?
+                </h3>
                 <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
-                  If you&rsquo;re stuck or have questions, check out our FAQ or reach out to the community:
+                  If you&rsquo;re stuck or have questions, check out our FAQ or
+                  reach out to the community:
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
@@ -158,6 +192,5 @@ export default function CommunityPage() {
         </section>
       </div>
     </div>
-  )
+  );
 }
-

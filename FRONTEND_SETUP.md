@@ -32,6 +32,7 @@ All API URLs read from `process.env.NEXT_PUBLIC_API_URL`.
 **Purpose**: Blockchain explorer and activity feed viewer
 
 **Features**:
+
 - ✅ Transaction feed with real-time updates
 - ✅ Activity feed with verification status
 - ✅ AI verification summaries
@@ -42,12 +43,14 @@ All API URLs read from `process.env.NEXT_PUBLIC_API_URL`.
 - ✅ Copy-to-clipboard for hashes
 
 **Tech Stack**:
+
 - Next.js 14 (App Router)
 - TypeScript
 - Tailwind CSS
 - Lucide React icons
 
 **Environment Variables**:
+
 ```bash
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 ```
@@ -57,6 +60,7 @@ NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 **Purpose**: User dashboard and activity submission interface
 
 **Features**:
+
 - ✅ Dashboard with stats and charts
 - ✅ Status score display
 - ✅ Activity log
@@ -68,6 +72,7 @@ NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 - ✅ Profile page with quantum-secure ID
 
 **Tech Stack**:
+
 - Next.js 14 (App Router)
 - TypeScript
 - Tailwind CSS
@@ -77,6 +82,7 @@ NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 - Ethers.js for wallet integration
 
 **Environment Variables**:
+
 ```bash
 NEXT_PUBLIC_API_URL=https://api.decentralizedrights.com
 NEXT_PUBLIC_RPC_URL=https://rpc.decentralizedrights.com
@@ -91,6 +97,7 @@ NEXT_PUBLIC_LEARN_URL=https://decentralizedrights.com/learn
 **Purpose**: Developer-facing API documentation site
 
 **Features**:
+
 - ✅ Auto-generated endpoint documentation
 - ✅ Request/response examples
 - ✅ Code samples in multiple languages (JavaScript, Python, C++)
@@ -100,6 +107,7 @@ NEXT_PUBLIC_LEARN_URL=https://decentralizedrights.com/learn
 - ✅ Complete Dr-Blockchain endpoint reference
 
 **Tech Stack**:
+
 - Next.js 14 (App Router)
 - TypeScript
 - Tailwind CSS
@@ -109,6 +117,7 @@ NEXT_PUBLIC_LEARN_URL=https://decentralizedrights.com/learn
 **Purpose**: System health monitoring dashboard
 
 **Features**:
+
 - ✅ Blockchain node status
 - ✅ RPC endpoint status
 - ✅ OrbitDB health check
@@ -127,12 +136,14 @@ NEXT_PUBLIC_LEARN_URL=https://decentralizedrights.com/learn
 Each sub-project should be deployed as a separate Vercel project:
 
 #### 1. Explorer (`explorer.decentralizedrights.com`)
+
 - **Root Directory**: `explorer`
 - **Build Command**: `npm run build`
 - **Output Directory**: `.next`
 - **Framework**: Next.js
 
 #### 2. App Portal (`app.decentralizedrights.com`)
+
 - **Root Directory**: `app-portal`
 - **Build Command**: `npm run build`
 - **Output Directory**: `.next`
@@ -140,12 +151,14 @@ Each sub-project should be deployed as a separate Vercel project:
 - **Environment Variables**: See above
 
 #### 3. API Docs (`api.decentralizedrights.com`)
+
 - **Root Directory**: `api`
 - **Build Command**: `npm run build`
 - **Output Directory**: `.next`
 - **Framework**: Next.js
 
 #### 4. Main Website (`decentralizedrights.com`)
+
 - **Root Directory**: `src` (or root if configured)
 - **Build Command**: `npm run build`
 - **Output Directory**: `.next`
@@ -201,4 +214,3 @@ Both use the same base URL from `process.env.NEXT_PUBLIC_API_URL`.
 - App Portal: `https://app.decentralizedrights.com`
 - API Docs: `https://api.decentralizedrights.com`
 - Health Status: `https://decentralizedrights.com/status`
-

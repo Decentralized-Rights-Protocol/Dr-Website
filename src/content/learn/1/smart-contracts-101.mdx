@@ -30,6 +30,7 @@ Smart contracts revolutionize how agreements are made and enforced:
 ### What is a Smart Contract?
 
 A smart contract is essentially a program that:
+
 1. Lives on the blockchain
 2. Contains predefined rules and conditions
 3. Executes automatically when conditions are met
@@ -50,6 +51,7 @@ END IF
 ```
 
 **Smart Contract Equivalent:**
+
 ```solidity
 if (msg.value >= itemPrice && items[itemId] > 0) {
     items[itemId]--;
@@ -158,6 +160,7 @@ Event Emitted (if applicable)
 ### Smart Contract vs Traditional Contract
 
 **Traditional Contract:**
+
 ```
 Party A ──────┐
               │
@@ -167,6 +170,7 @@ Party B ──────┘
 ```
 
 **Smart Contract:**
+
 ```
 Party A ──────┐
               │
@@ -190,6 +194,7 @@ Transaction Components:
 ```
 
 **Gas Optimization:**
+
 - Simple operations: 3-5 gas
 - Storage writes: 20,000 gas
 - Complex calculations: Variable
@@ -200,6 +205,7 @@ Transaction Components:
 ### 1. Decentralized Finance (DeFi)
 
 **Automated Market Makers (AMMs):**
+
 ```solidity
 // Simplified AMM logic
 function swap(uint amountIn) {
@@ -211,6 +217,7 @@ function swap(uint amountIn) {
 ```
 
 **Examples:**
+
 - Uniswap: Automated token swaps
 - Aave: Lending and borrowing
 - Compound: Interest-bearing accounts
@@ -218,10 +225,11 @@ function swap(uint amountIn) {
 ### 2. Non-Fungible Tokens (NFTs)
 
 **Digital Ownership:**
+
 ```solidity
 contract NFT {
     mapping(uint => address) public ownerOf;
-    
+
     function transfer(uint tokenId, address to) {
         require(ownerOf[tokenId] == msg.sender);
         ownerOf[tokenId] = to;
@@ -231,6 +239,7 @@ contract NFT {
 ```
 
 **Examples:**
+
 - Digital art ownership
 - In-game assets
 - Collectibles
@@ -238,6 +247,7 @@ contract NFT {
 ### 3. Supply Chain Management
 
 **Product Tracking:**
+
 ```solidity
 struct Product {
     string origin;
@@ -253,6 +263,7 @@ function verifyProduct(uint productId) {
 ```
 
 **Benefits:**
+
 - Immutable product history
 - Transparent supply chain
 - Automated verification
@@ -260,6 +271,7 @@ function verifyProduct(uint productId) {
 ### 4. Voting Systems
 
 **Decentralized Voting:**
+
 ```solidity
 mapping(address => bool) public hasVoted;
 uint public yesVotes;
@@ -274,6 +286,7 @@ function vote(bool choice) {
 ```
 
 **Benefits:**
+
 - Transparent and auditable
 - Tamper-proof
 - Automatic tallying
@@ -281,17 +294,18 @@ function vote(bool choice) {
 ### 5. Escrow Services
 
 **Automated Escrow:**
+
 ```solidity
 contract Escrow {
     address buyer;
     address seller;
     uint amount;
-    
+
     function release() {
         require(msg.sender == buyer);
         payable(seller).transfer(amount);
     }
-    
+
     function refund() {
         require(block.timestamp > deadline);
         payable(buyer).transfer(amount);
@@ -313,9 +327,9 @@ contract DigitalRights {
         uint royaltyRate;
         bool isActive;
     }
-    
+
     mapping(string => Right) public rights;
-    
+
     function createRight(string memory contentHash, uint royaltyRate) {
         rights[contentHash] = Right({
             owner: msg.sender,
@@ -324,7 +338,7 @@ contract DigitalRights {
             isActive: true
         });
     }
-    
+
     function distributeRoyalty(string memory contentHash) payable {
         Right storage right = rights[contentHash];
         uint royalty = (msg.value * right.royaltyRate) / 100;
@@ -345,7 +359,7 @@ contract ActivityProof {
         uint timestamp;
         bool verified;
     }
-    
+
     function submitProof(bytes32 activityHash) {
         proofs[activityHash] = Proof({
             creator: msg.sender,
@@ -364,6 +378,7 @@ contract ActivityProof {
 **Problem**: Bugs cannot be fixed after deployment
 
 **Solutions:**
+
 - Extensive testing before deployment
 - Code audits
 - Upgradeable contract patterns (with governance)
@@ -374,6 +389,7 @@ contract ActivityProof {
 **Problem**: Complex operations can be expensive
 
 **Solutions:**
+
 - Gas optimization techniques
 - Layer 2 solutions
 - Batch processing
@@ -384,6 +400,7 @@ contract ActivityProof {
 **Problem**: Blockchain throughput limitations
 
 **Solutions:**
+
 - Layer 2 scaling (rollups, sidechains)
 - Sharding
 - State channels
@@ -402,52 +419,57 @@ contract ActivityProof {
 ## Quiz
 
 ### Question 1
+
 What is a smart contract?
 
 A) A legal document stored on blockchain  
 B) A self-executing program that runs on blockchain  
 C) A cryptocurrency wallet  
-D) A blockchain node  
+D) A blockchain node
 
 **Correct Answer: B** - Smart contracts are programs that execute automatically on the blockchain when predetermined conditions are met.
 
 ### Question 2
+
 What is "gas" in the context of smart contracts?
 
 A) A type of cryptocurrency  
 B) The fee paid to execute smart contract operations  
 C) A smart contract programming language  
-D) A blockchain consensus mechanism  
+D) A blockchain consensus mechanism
 
 **Correct Answer: B** - Gas is the fee paid to execute operations on the blockchain, including smart contract function calls.
 
 ### Question 3
+
 Why are smart contracts considered "trustless"?
 
 A) They don't require trust because code is transparent and executes automatically  
 B) They don't need any security measures  
 C) They can't be hacked  
-D) They don't use cryptography  
+D) They don't use cryptography
 
 **Correct Answer: A** - Smart contracts are trustless because the code is transparent, auditable, and executes automatically according to predefined rules, eliminating the need to trust intermediaries.
 
 ### Question 4
+
 What happens once a smart contract is deployed to the blockchain?
 
 A) It can be easily modified  
 B) It becomes immutable and cannot be changed  
 C) Only the creator can modify it  
-D) It can be deleted  
+D) It can be deleted
 
 **Correct Answer: B** - Once deployed, smart contracts are immutable and cannot be altered, which is why thorough testing and auditing are crucial before deployment.
 
 ### Question 5
+
 Which of the following is a common use case for smart contracts?
 
 A) Storing large files  
 B) Automated token swaps in DeFi  
 C) Mining cryptocurrency  
-D) Creating blockchain nodes  
+D) Creating blockchain nodes
 
 **Correct Answer: B** - Automated token swaps in DeFi (like Uniswap) are a common use case, along with lending, NFTs, voting, and supply chain management.
 

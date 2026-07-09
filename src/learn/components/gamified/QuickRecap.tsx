@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { motion } from 'framer-motion'
-import { BookOpenIcon } from '@heroicons/react/24/outline'
+import React from "react";
+import { motion } from "framer-motion";
+import { BookOpenIcon } from "@heroicons/react/24/outline";
 
 interface QuickRecapProps {
-  points: string[]
-  className?: string
+  points: string[];
+  className?: string;
 }
 
 /**
  * QuickRecap - Summary block with key points
  * Helps reinforce learning before moving forward
  */
-export function QuickRecap({ points, className = '' }: QuickRecapProps) {
+export function QuickRecap({ points, className = "" }: QuickRecapProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -30,13 +30,14 @@ export function QuickRecap({ points, className = '' }: QuickRecapProps) {
             {points.map((point, index) => (
               <li key={index} className="flex items-start gap-2">
                 <span className="text-blue-400 mt-1">•</span>
-                <span className="text-neutral-200 leading-relaxed">{point}</span>
+                <span className="text-neutral-200 leading-relaxed">
+                  {point}
+                </span>
               </li>
             ))}
           </ul>
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
-

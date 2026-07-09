@@ -25,6 +25,7 @@ Traditional supply chains face critical challenges:
 - **Trust Gaps**: Multiple parties without trusted intermediaries
 
 DRP addresses these by:
+
 - **Immutable Records**: Tamper-proof product history
 - **Transparent Tracking**: All parties can verify product journey
 - **Automated Compliance**: Smart contracts enforce regulations
@@ -64,104 +65,108 @@ DRP addresses these by:
 ### Product Registration
 
 **Initial Registration**:
+
 ```typescript
 interface ProductRegistration {
-  productId: string
-  manufacturer: string
+  productId: string;
+  manufacturer: string;
   origin: {
-    location: string
-    coordinates: [number, number]
-    timestamp: number
-  }
+    location: string;
+    coordinates: [number, number];
+    timestamp: number;
+  };
   specifications: {
-    type: string
-    batch: string
-    serialNumber: string
-  }
+    type: string;
+    batch: string;
+    serialNumber: string;
+  };
   metadata: {
-    images: string[]
-    documents: string[]
-    certifications: string[]
-  }
+    images: string[];
+    documents: string[];
+    certifications: string[];
+  };
 }
 
 // Register product on DRP
 const registration = await drpClient.supplyChain.registerProduct({
-  productId: 'PROD-12345',
-  manufacturer: '0xManufacturerAddress',
+  productId: "PROD-12345",
+  manufacturer: "0xManufacturerAddress",
   origin: {
-    location: 'Factory A, Country X',
-    coordinates: [40.7128, -74.0060],
-    timestamp: Date.now()
+    location: "Factory A, Country X",
+    coordinates: [40.7128, -74.006],
+    timestamp: Date.now(),
   },
   specifications: {
-    type: 'Electronics',
-    batch: 'BATCH-2024-01',
-    serialNumber: 'SN-123456789'
+    type: "Electronics",
+    batch: "BATCH-2024-01",
+    serialNumber: "SN-123456789",
   },
   metadata: {
-    images: ['ipfs://...'],
-    documents: ['ipfs://...'],
-    certifications: ['ipfs://...']
-  }
-})
+    images: ["ipfs://..."],
+    documents: ["ipfs://..."],
+    certifications: ["ipfs://..."],
+  },
+});
 ```
 
 ### Transfer Tracking
 
 **Recording Transfers**:
+
 ```typescript
 // Record product transfer
 const transfer = await drpClient.supplyChain.recordTransfer({
-  productId: 'PROD-12345',
-  from: '0xManufacturerAddress',
-  to: '0xDistributorAddress',
+  productId: "PROD-12345",
+  from: "0xManufacturerAddress",
+  to: "0xDistributorAddress",
   location: {
-    name: 'Warehouse B',
-    coordinates: [40.7580, -73.9855],
-    timestamp: Date.now()
+    name: "Warehouse B",
+    coordinates: [40.758, -73.9855],
+    timestamp: Date.now(),
   },
   conditions: {
     temperature: 20, // Celsius
     humidity: 50, // Percentage
-    handling: 'careful'
+    handling: "careful",
   },
   documentation: {
-    shippingDocuments: 'ipfs://...',
-    inspectionReport: 'ipfs://...'
-  }
-})
+    shippingDocuments: "ipfs://...",
+    inspectionReport: "ipfs://...",
+  },
+});
 ```
 
 ### Quality Verification
 
 **Inspection Records**:
+
 ```typescript
 // Record quality inspection
 const inspection = await drpClient.supplyChain.recordInspection({
-  productId: 'PROD-12345',
-  inspector: '0xInspectorAddress',
-  inspectionType: 'quality_check',
+  productId: "PROD-12345",
+  inspector: "0xInspectorAddress",
+  inspectionType: "quality_check",
   results: {
     passed: true,
-    notes: 'All quality standards met',
+    notes: "All quality standards met",
     measurements: {
       weight: 1.5, // kg
       dimensions: { length: 10, width: 5, height: 3 },
-      qualityScore: 95
-    }
+      qualityScore: 95,
+    },
   },
-  certifications: ['ISO-9001', 'CE-Marking'],
-  timestamp: Date.now()
-})
+  certifications: ["ISO-9001", "CE-Marking"],
+  timestamp: Date.now(),
+});
 ```
 
 ### Provenance Verification
 
 **Complete Product History**:
+
 ```typescript
 // Retrieve complete product history
-const history = await drpClient.supplyChain.getProductHistory('PROD-12345')
+const history = await drpClient.supplyChain.getProductHistory("PROD-12345");
 
 // History includes:
 // - Initial registration
@@ -170,11 +175,13 @@ const history = await drpClient.supplyChain.getProductHistory('PROD-12345')
 // - All certifications
 // - Complete chain of custody
 
-console.log('Product Journey:')
+console.log("Product Journey:");
 history.events.forEach((event, index) => {
-  console.log(`${index + 1}. ${event.type} at ${event.location} on ${event.timestamp}`)
-  console.log(`   From: ${event.from} → To: ${event.to}`)
-})
+  console.log(
+    `${index + 1}. ${event.type} at ${event.location} on ${event.timestamp}`,
+  );
+  console.log(`   From: ${event.from} → To: ${event.to}`);
+});
 ```
 
 ## Visual Explanation
@@ -256,36 +263,38 @@ Block 3: Inspection
 **Problem**: Foodborne illness outbreaks are hard to trace
 
 **DRP Solution**:
+
 - Register all food products at origin
 - Track through processing, distribution, retail
 - Record temperature and storage conditions
 - Enable instant recall if contamination detected
 
 **Example**:
+
 ```typescript
 // Register food product
 await drpClient.supplyChain.registerProduct({
-  productId: 'FOOD-APPLE-001',
-  type: 'Fresh Produce',
+  productId: "FOOD-APPLE-001",
+  type: "Fresh Produce",
   origin: {
-    farm: 'Organic Farm A',
-    harvestDate: '2024-01-10',
-    location: 'Region X'
+    farm: "Organic Farm A",
+    harvestDate: "2024-01-10",
+    location: "Region X",
   },
   safety: {
-    certifications: ['Organic', 'Non-GMO'],
-    batchNumber: 'BATCH-2024-01-10',
-    expiryDate: '2024-02-10'
-  }
-})
+    certifications: ["Organic", "Non-GMO"],
+    batchNumber: "BATCH-2024-01-10",
+    expiryDate: "2024-02-10",
+  },
+});
 
 // Track temperature during transport
 await drpClient.supplyChain.recordCondition({
-  productId: 'FOOD-APPLE-001',
+  productId: "FOOD-APPLE-001",
   temperature: 4, // Celsius
   timestamp: Date.now(),
-  location: 'In Transit'
-})
+  location: "In Transit",
+});
 ```
 
 ### 2. Pharmaceutical Tracking
@@ -293,12 +302,14 @@ await drpClient.supplyChain.recordCondition({
 **Problem**: Counterfeit drugs enter supply chains
 
 **DRP Solution**:
+
 - Unique serial numbers for each package
 - Track from manufacturer to pharmacy
 - Verify authenticity at each step
 - Prevent counterfeit entry
 
 **Benefits**:
+
 - Patient safety
 - Regulatory compliance
 - Counterfeit prevention
@@ -309,30 +320,33 @@ await drpClient.supplyChain.recordCondition({
 **Problem**: Counterfeit luxury items
 
 **DRP Solution**:
+
 - Register authentic items at manufacture
 - Track ownership transfers
 - Verify authenticity before purchase
 - Permanent ownership history
 
 **Example**:
+
 ```typescript
 // Register luxury watch
 await drpClient.supplyChain.registerProduct({
-  productId: 'WATCH-ROLEX-12345',
-  manufacturer: 'Rolex',
+  productId: "WATCH-ROLEX-12345",
+  manufacturer: "Rolex",
   specifications: {
-    model: 'Submariner',
-    serialNumber: '1234567890',
-    materials: ['Stainless Steel', 'Ceramic']
+    model: "Submariner",
+    serialNumber: "1234567890",
+    materials: ["Stainless Steel", "Ceramic"],
   },
   authenticity: {
-    certificateHash: '0xabc...',
-    hologramCode: 'HOLO-12345'
-  }
-})
+    certificateHash: "0xabc...",
+    hologramCode: "HOLO-12345",
+  },
+});
 
 // Verify authenticity
-const isAuthentic = await drpClient.supplyChain.verifyAuthenticity('WATCH-ROLEX-12345')
+const isAuthentic =
+  await drpClient.supplyChain.verifyAuthenticity("WATCH-ROLEX-12345");
 ```
 
 ### 4. Ethical Sourcing Verification
@@ -340,6 +354,7 @@ const isAuthentic = await drpClient.supplyChain.verifyAuthenticity('WATCH-ROLEX-
 **Problem**: Difficult to verify ethical sourcing claims
 
 **DRP Solution**:
+
 - Record origin and sourcing practices
 - Track through entire supply chain
 - Verify certifications (Fair Trade, Organic, etc.)
@@ -350,6 +365,7 @@ const isAuthentic = await drpClient.supplyChain.verifyAuthenticity('WATCH-ROLEX-
 ### Automated Compliance
 
 **Compliance Checking**:
+
 ```solidity
 contract SupplyChainCompliance {
     struct Product {
@@ -359,19 +375,19 @@ contract SupplyChainCompliance {
         bool meetsStandards;
         string[] certifications;
     }
-    
+
     mapping(string => Product) public products;
-    
+
     function checkCompliance(string memory productId) public view returns (bool) {
         Product memory product = products[productId];
-        
+
         // Check if product meets required standards
         require(product.meetsStandards, "Product does not meet standards");
         require(product.certifications.length > 0, "No certifications");
-        
+
         return true;
     }
-    
+
     function recordTransfer(
         string memory productId,
         address from,
@@ -386,19 +402,20 @@ contract SupplyChainCompliance {
 ### Recall Management
 
 **Automated Recalls**:
+
 ```typescript
 // Initiate product recall
 const recall = await drpClient.supplyChain.initiateRecall({
-  productId: 'PROD-12345',
-  reason: 'Safety concern detected',
-  affectedBatch: 'BATCH-2024-01',
-  action: 'immediate_recall',
+  productId: "PROD-12345",
+  reason: "Safety concern detected",
+  affectedBatch: "BATCH-2024-01",
+  action: "immediate_recall",
   notification: {
     allParties: true,
     consumers: true,
-    regulators: true
-  }
-})
+    regulators: true,
+  },
+});
 
 // All parties automatically notified
 // Affected products can be tracked instantly
@@ -409,29 +426,30 @@ const recall = await drpClient.supplyChain.initiateRecall({
 ### Sensor Data Integration
 
 **Real-Time Monitoring**:
+
 ```typescript
 // IoT sensor data
 const sensorData = {
-  productId: 'PROD-12345',
+  productId: "PROD-12345",
   temperature: 4.2,
   humidity: 45,
   location: {
     lat: 40.7128,
-    lng: -74.0060
+    lng: -74.006,
   },
-  timestamp: Date.now()
-}
+  timestamp: Date.now(),
+};
 
 // Record on blockchain
-await drpClient.supplyChain.recordSensorData(sensorData)
+await drpClient.supplyChain.recordSensorData(sensorData);
 
 // Automated alerts if conditions exceed thresholds
 if (sensorData.temperature > 5) {
   await drpClient.supplyChain.triggerAlert({
-    productId: 'PROD-12345',
-    alertType: 'temperature_exceeded',
-    severity: 'high'
-  })
+    productId: "PROD-12345",
+    alertType: "temperature_exceeded",
+    severity: "high",
+  });
 }
 ```
 
@@ -448,52 +466,57 @@ if (sensorData.temperature > 5) {
 ## Quiz
 
 ### Question 1
+
 What is the primary benefit of using DRP for supply chain management?
 
 A) Faster shipping  
 B) Immutable, tamper-proof records of product history and transparent tracking  
 C) Lower costs  
-D) Smaller packages  
+D) Smaller packages
 
 **Correct Answer: B** - DRP provides immutable records that cannot be altered and transparent tracking that all parties can verify.
 
 ### Question 2
+
 How does DRP help prevent counterfeiting in supply chains?
 
 A) By using encryption  
 B) By registering authentic products with unique IDs and tracking them through the entire supply chain  
 C) By using passwords  
-D) By hiding product information  
+D) By hiding product information
 
 **Correct Answer: B** - Products are registered with unique IDs at origin, and all transfers are tracked, making it impossible for counterfeits to enter the legitimate supply chain.
 
 ### Question 3
+
 What is provenance verification?
 
 A) Checking product price  
 B) Verifying the complete origin and history of a product  
 C) Checking product weight  
-D) Verifying product color  
+D) Verifying product color
 
 **Correct Answer: B** - Provenance verification confirms the complete origin and history of a product, ensuring authenticity and ethical sourcing.
 
 ### Question 4
+
 How can IoT sensors enhance supply chain tracking on DRP?
 
 A) By making products heavier  
 B) By providing real-time data on conditions (temperature, location) that is recorded on blockchain  
 C) By slowing down shipments  
-D) By increasing costs  
+D) By increasing costs
 
 **Correct Answer: B** - IoT sensors provide real-time data on temperature, humidity, location, etc., which can be automatically recorded on the blockchain.
 
 ### Question 5
+
 What makes product recalls more efficient with DRP?
 
 A) Slower processing  
 B) Instant tracking of all affected products and automated notifications to all parties  
 C) Manual tracking only  
-D) No tracking capability  
+D) No tracking capability
 
 **Correct Answer: B** - DRP enables instant identification of all affected products and automated notifications to manufacturers, distributors, retailers, and consumers.
 

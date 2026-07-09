@@ -40,7 +40,7 @@ export const _createActivityRecord = internalMutation({
     // If approved, create a transaction and update balance
     if (args.status === "approved") {
       const txId = args.chainTxHash || `tx_${args.hash.slice(0, 16)}`; // Use chainTxHash if available
-      
+
       await ctx.db.insert("drpTransactions", {
         txId,
         userId: args.userId,
@@ -72,7 +72,10 @@ export const _createActivityRecord = internalMutation({
       }
 
       // Check if we should mint a block (simplified: every N transactions)
-      const pendingTxs = await ctx.db.query("drpTransactions").filter(q => q.eq(q.field("blockIndex"), undefined)).collect();
+      const pendingTxs = await ctx.db
+        .query("drpTransactions")
+        .filter((q) => q.eq(q.field("blockIndex"), undefined))
+        .collect();
       if (pendingTxs.length >= 5) {
         await ctx.scheduler.runAfter(0, internal.blockchain.mintBlock, {});
       }
@@ -107,7 +110,9 @@ export const submitActivity = mutation({
 
     const user = await ctx.db
       .query("users")
-      .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", identity.address!))
+      .withIndex("by_primary_wallet", (q) =>
+        q.eq("primaryWallet", identity.address!),
+      )
       .unique();
     if (!user) throw new Error("User not found");
 
@@ -120,24 +125,28 @@ export const submitActivity = mutation({
 });
 
 export const getActivities = query({
-  args: { 
+  args: {
     limit: v.optional(v.number()),
     walletAddress: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     let userId;
     const identity = await ctx.auth.getUserIdentity();
-    
+
     if (identity) {
       const user = await ctx.db
         .query("users")
-        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", normalizeWallet(identity.address!)))
+        .withIndex("by_primary_wallet", (q) =>
+          q.eq("primaryWallet", normalizeWallet(identity.address!)),
+        )
         .unique();
       if (user) userId = user._id;
     } else if (args.walletAddress) {
       const user = await ctx.db
         .query("users")
-        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", normalizeWallet(args.walletAddress!)))
+        .withIndex("by_primary_wallet", (q) =>
+          q.eq("primaryWallet", normalizeWallet(args.walletAddress!)),
+        )
         .unique();
       if (user) userId = user._id;
     }
@@ -159,17 +168,21 @@ export const getUserBalance = query({
   handler: async (ctx, args) => {
     let userId;
     const identity = await ctx.auth.getUserIdentity();
-    
+
     if (identity) {
       const user = await ctx.db
         .query("users")
-        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", normalizeWallet(identity.address!)))
+        .withIndex("by_primary_wallet", (q) =>
+          q.eq("primaryWallet", normalizeWallet(identity.address!)),
+        )
         .unique();
       if (user) userId = user._id;
     } else if (args.walletAddress) {
       const user = await ctx.db
         .query("users")
-        .withIndex("by_primary_wallet", (q) => q.eq("primaryWallet", normalizeWallet(args.walletAddress!)))
+        .withIndex("by_primary_wallet", (q) =>
+          q.eq("primaryWallet", normalizeWallet(args.walletAddress!)),
+        )
         .unique();
       if (user) userId = user._id;
     }

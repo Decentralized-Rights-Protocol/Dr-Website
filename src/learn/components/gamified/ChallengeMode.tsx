@@ -1,21 +1,25 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { AcademicCapIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { AcademicCapIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 
 interface ChallengeModeProps {
-  challenge: string
-  solution?: string
-  className?: string
+  challenge: string;
+  solution?: string;
+  className?: string;
 }
 
 /**
  * ChallengeMode - Interactive challenge block
  * Encourages active thinking and problem-solving
  */
-export function ChallengeMode({ challenge, solution, className = '' }: ChallengeModeProps) {
-  const [showSolution, setShowSolution] = useState(false)
+export function ChallengeMode({
+  challenge,
+  solution,
+  className = "",
+}: ChallengeModeProps) {
+  const [showSolution, setShowSolution] = useState(false);
 
   return (
     <motion.div
@@ -30,13 +34,13 @@ export function ChallengeMode({ challenge, solution, className = '' }: Challenge
         <div className="flex-1">
           <h4 className="font-semibold text-purple-300 mb-2">Challenge Mode</h4>
           <p className="text-neutral-200 leading-relaxed mb-4">{challenge}</p>
-          
+
           {solution && (
             <button
               onClick={() => setShowSolution(!showSolution)}
               className="text-sm text-purple-300 hover:text-purple-200 underline"
             >
-              {showSolution ? 'Hide Solution' : 'Show Solution'}
+              {showSolution ? "Hide Solution" : "Show Solution"}
             </button>
           )}
         </div>
@@ -46,7 +50,7 @@ export function ChallengeMode({ challenge, solution, className = '' }: Challenge
         {showSolution && solution && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="mt-4 pt-4 border-t border-purple-400/30"
           >
@@ -61,6 +65,5 @@ export function ChallengeMode({ challenge, solution, className = '' }: Challenge
         )}
       </AnimatePresence>
     </motion.div>
-  )
+  );
 }
-

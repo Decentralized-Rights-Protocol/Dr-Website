@@ -1,52 +1,117 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { ArrowLeft, Target, Leaf, Brain, Users, CheckCircle } from 'lucide-react'
-import { EconomicsHero } from '@/components/economics/EconomicsHero'
-import { PillarCard } from '@/components/economics/PillarCard'
+import { motion } from "framer-motion";
+import Link from "next/link";
+import {
+  ArrowLeft,
+  Target,
+  Leaf,
+  Brain,
+  Users,
+  CheckCircle,
+} from "lucide-react";
+import { EconomicsHero } from "@/components/economics/EconomicsHero";
+import { PillarCard } from "@/components/economics/PillarCard";
 
 const sdgGoals = [
-  { number: 1, name: 'No Poverty', description: 'Rights-based distribution ensures basic needs are met' },
-  { number: 2, name: 'Zero Hunger', description: 'Food security through verified contribution' },
-  { number: 3, name: 'Good Health', description: 'Healthcare access based on human rights' },
-  { number: 4, name: 'Quality Education', description: 'Learning-to-earn model incentivizes education' },
-  { number: 7, name: 'Affordable Energy', description: 'Renewable energy usage rewarded' },
-  { number: 8, name: 'Decent Work', description: 'Verified work receives fair compensation' },
-  { number: 9, name: 'Innovation', description: 'Infrastructure supports sustainable development' },
-  { number: 10, name: 'Reduced Inequality', description: 'Rights-based allocation reduces disparities' },
-  { number: 11, name: 'Sustainable Cities', description: 'Community-driven urban development' },
-  { number: 12, name: 'Responsible Consumption', description: 'Quality goods, not waste' },
-  { number: 16, name: 'Peace & Justice', description: 'Transparent governance and accountability' },
-  { number: 17, name: 'Partnerships', description: 'Global collaboration for rights protection' },
-]
+  {
+    number: 1,
+    name: "No Poverty",
+    description: "Rights-based distribution ensures basic needs are met",
+  },
+  {
+    number: 2,
+    name: "Zero Hunger",
+    description: "Food security through verified contribution",
+  },
+  {
+    number: 3,
+    name: "Good Health",
+    description: "Healthcare access based on human rights",
+  },
+  {
+    number: 4,
+    name: "Quality Education",
+    description: "Learning-to-earn model incentivizes education",
+  },
+  {
+    number: 7,
+    name: "Affordable Energy",
+    description: "Renewable energy usage rewarded",
+  },
+  {
+    number: 8,
+    name: "Decent Work",
+    description: "Verified work receives fair compensation",
+  },
+  {
+    number: 9,
+    name: "Innovation",
+    description: "Infrastructure supports sustainable development",
+  },
+  {
+    number: 10,
+    name: "Reduced Inequality",
+    description: "Rights-based allocation reduces disparities",
+  },
+  {
+    number: 11,
+    name: "Sustainable Cities",
+    description: "Community-driven urban development",
+  },
+  {
+    number: 12,
+    name: "Responsible Consumption",
+    description: "Quality goods, not waste",
+  },
+  {
+    number: 16,
+    name: "Peace & Justice",
+    description: "Transparent governance and accountability",
+  },
+  {
+    number: 17,
+    name: "Partnerships",
+    description: "Global collaboration for rights protection",
+  },
+];
 
 const pillars = [
   {
     icon: Users,
-    title: 'Human Development',
-    description: 'The Sustainable Rights Economy prioritizes human dignity, capability development, and rights fulfillment. Every economic decision is evaluated through the lens of human development: Does this action enhance human capabilities? Does it respect fundamental rights? Does it contribute to human flourishing?',
+    title: "Human Development",
+    description:
+      "The Sustainable Rights Economy prioritizes human dignity, capability development, and rights fulfillment. Every economic decision is evaluated through the lens of human development: Does this action enhance human capabilities? Does it respect fundamental rights? Does it contribute to human flourishing?",
   },
   {
     icon: Leaf,
-    title: 'Sustainability',
-    description: 'Environmental sustainability is not an afterthought but a core economic principle. Renewable energy usage, low carbon footprints, and sustainable practices are directly rewarded in the SRE. The economy operates within planetary boundaries, recognizing that long-term human rights depend on a healthy planet.',
+    title: "Sustainability",
+    description:
+      "Environmental sustainability is not an afterthought but a core economic principle. Renewable energy usage, low carbon footprints, and sustainable practices are directly rewarded in the SRE. The economy operates within planetary boundaries, recognizing that long-term human rights depend on a healthy planet.",
   },
   {
     icon: Brain,
-    title: 'AI Trust Layer',
-    description: 'AI serves as a transparent auditor and verifier, not a controller. The AI Trust Layer ensures that activity verification is fair, transparent, and auditable. AI scoring systems are open-source, explainable, and subject to human oversight. This creates trust without surveillance.',
+    title: "AI Trust Layer",
+    description:
+      "AI serves as a transparent auditor and verifier, not a controller. The AI Trust Layer ensures that activity verification is fair, transparent, and auditable. AI scoring systems are open-source, explainable, and subject to human oversight. This creates trust without surveillance.",
   },
   {
     icon: Target,
-    title: 'Blockchain Transparency',
-    description: 'All economic transactions, distributions, and governance decisions are recorded on a quantum-safe blockchain. This ensures transparency, prevents corruption, and enables auditability. The blockchain serves as an immutable record of rights fulfillment and economic justice.',
+    title: "Blockchain Transparency",
+    description:
+      "All economic transactions, distributions, and governance decisions are recorded on a quantum-safe blockchain. This ensures transparency, prevents corruption, and enables auditability. The blockchain serves as an immutable record of rights fulfillment and economic justice.",
   },
-]
+];
 
 export default function SREPage() {
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
+    <div
+      className="min-h-screen"
+      style={{
+        background:
+          "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)",
+      }}
+    >
       {/* Hero */}
       <EconomicsHero
         title="Sustainable Rights Economy (SRE)"
@@ -81,14 +146,19 @@ export default function SREPage() {
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-xl text-neutral-300 mb-6">
-                The Sustainable Rights Economy (SRE) is an economic paradigm that replaces extraction with 
-                verification, surveillance with transparency, and inequality with rights-based distribution. 
-                It is built on the principle that economic value should flow to those who create it through 
-                verified human activity, sustainable contribution, and community service.
+                The Sustainable Rights Economy (SRE) is an economic paradigm
+                that replaces extraction with verification, surveillance with
+                transparency, and inequality with rights-based distribution. It
+                is built on the principle that economic value should flow to
+                those who create it through verified human activity, sustainable
+                contribution, and community service.
               </p>
               <p className="text-lg text-neutral-300 mb-6">
-                In the SRE, distribution is not based on ownership of capital or extraction of resources, 
-                but on <strong className="text-foreground">verified contribution</strong> 
+                In the SRE, distribution is not based on ownership of capital or
+                extraction of resources, but on{" "}
+                <strong className="text-foreground">
+                  verified contribution
+                </strong>
                 to human development, sustainability, and community well-being.
               </p>
             </div>
@@ -111,20 +181,34 @@ export default function SREPage() {
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-lg text-neutral-300 mb-6">
-                Rights-backed distribution means that economic resources are allocated based on fundamental 
-                human rights rather than market power or capital ownership. The system recognizes that every 
+                Rights-backed distribution means that economic resources are
+                allocated based on fundamental human rights rather than market
+                power or capital ownership. The system recognizes that every
                 human being has inherent rights to:
               </p>
               <ul className="list-disc pl-6 space-y-3 text-neutral-300 mb-6">
-                <li><strong className="text-foreground">Basic Needs:</strong> Food, water, shelter, healthcare, education</li>
-                <li><strong className="text-foreground">Dignity:</strong> Recognition of human worth and contribution</li>
-                <li><strong className="text-foreground">Participation:</strong> Voice in economic and governance decisions</li>
-                <li><strong className="text-foreground">Development:</strong> Opportunity to develop capabilities and flourish</li>
+                <li>
+                  <strong className="text-foreground">Basic Needs:</strong>{" "}
+                  Food, water, shelter, healthcare, education
+                </li>
+                <li>
+                  <strong className="text-foreground">Dignity:</strong>{" "}
+                  Recognition of human worth and contribution
+                </li>
+                <li>
+                  <strong className="text-foreground">Participation:</strong>{" "}
+                  Voice in economic and governance decisions
+                </li>
+                <li>
+                  <strong className="text-foreground">Development:</strong>{" "}
+                  Opportunity to develop capabilities and flourish
+                </li>
               </ul>
               <p className="text-lg text-neutral-300">
-                Distribution algorithms prioritize these rights, ensuring that even those who cannot 
-                contribute economically (due to age, disability, or circumstances) receive basic support 
-                as a matter of right, not charity.
+                Distribution algorithms prioritize these rights, ensuring that
+                even those who cannot contribute economically (due to age,
+                disability, or circumstances) receive basic support as a matter
+                of right, not charity.
               </p>
             </div>
           </motion.div>
@@ -142,30 +226,35 @@ export default function SREPage() {
             className="max-w-4xl mx-auto"
           >
             <h2 className="text-4xl font-bold text-foreground mb-6">
-              AI Scoring: Contribution, Sustainability, Learning, Community Service
+              AI Scoring: Contribution, Sustainability, Learning, Community
+              Service
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-lg text-neutral-300 mb-6">
-                AI in the SRE serves as a transparent scoring system that evaluates multiple dimensions 
-                of contribution:
+                AI in the SRE serves as a transparent scoring system that
+                evaluates multiple dimensions of contribution:
               </p>
               <div className="grid md:grid-cols-2 gap-6 mt-8">
                 {[
                   {
-                    title: 'Contribution Score',
-                    description: 'Measures verified work, learning, and productive activity. Open-source algorithms ensure fairness.',
+                    title: "Contribution Score",
+                    description:
+                      "Measures verified work, learning, and productive activity. Open-source algorithms ensure fairness.",
                   },
                   {
-                    title: 'Sustainability Score',
-                    description: 'Rewards renewable energy usage, low carbon footprint, and sustainable practices.',
+                    title: "Sustainability Score",
+                    description:
+                      "Rewards renewable energy usage, low carbon footprint, and sustainable practices.",
                   },
                   {
-                    title: 'Learning Score',
-                    description: 'Incentivizes education, skill development, and knowledge sharing through the learn-to-earn model.',
+                    title: "Learning Score",
+                    description:
+                      "Incentivizes education, skill development, and knowledge sharing through the learn-to-earn model.",
                   },
                   {
-                    title: 'Community Service Score',
-                    description: 'Recognizes volunteer work, community building, and civic engagement.',
+                    title: "Community Service Score",
+                    description:
+                      "Recognizes volunteer work, community building, and civic engagement.",
                   },
                 ].map((item, index) => (
                   <motion.div
@@ -179,9 +268,7 @@ export default function SREPage() {
                     <h3 className="text-xl font-bold text-foreground mb-3">
                       {item.title}
                     </h3>
-                    <p className="text-neutral-300">
-                      {item.description}
-                    </p>
+                    <p className="text-neutral-300">{item.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -205,25 +292,28 @@ export default function SREPage() {
             </h2>
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-lg text-neutral-300 mb-6">
-                The SRE creates positive feedback loops by directly rewarding behaviors that benefit 
-                individuals, communities, and the planet:
+                The SRE creates positive feedback loops by directly rewarding
+                behaviors that benefit individuals, communities, and the planet:
               </p>
               <ul className="space-y-4">
                 {[
                   {
                     icon: Leaf,
-                    title: 'Renewable Energy Usage',
-                    description: 'Households and businesses using solar, wind, or other renewable sources receive higher sustainability scores and economic rewards.',
+                    title: "Renewable Energy Usage",
+                    description:
+                      "Households and businesses using solar, wind, or other renewable sources receive higher sustainability scores and economic rewards.",
                   },
                   {
                     icon: CheckCircle,
-                    title: 'Good Behavior',
-                    description: 'Community service, civic engagement, and positive social contributions are verified and rewarded.',
+                    title: "Good Behavior",
+                    description:
+                      "Community service, civic engagement, and positive social contributions are verified and rewarded.",
                   },
                   {
                     icon: Target,
-                    title: 'Verified Effort',
-                    description: 'Work, learning, and productive activity are verified through the Activity-Based Economy, ensuring fair compensation.',
+                    title: "Verified Effort",
+                    description:
+                      "Work, learning, and productive activity are verified through the Activity-Based Economy, ensuring fair compensation.",
                   },
                 ].map((item, index) => (
                   <motion.li
@@ -243,9 +333,7 @@ export default function SREPage() {
                       <h3 className="text-xl font-bold text-foreground mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-neutral-300">
-                        {item.description}
-                      </p>
+                      <p className="text-neutral-300">{item.description}</p>
                     </div>
                   </motion.li>
                 ))}
@@ -270,10 +358,12 @@ export default function SREPage() {
                 SDG Integration: Mapping DRP Mechanisms to UN Goals
               </h2>
               <p className="text-xl text-neutral-300 mb-2">
-                The Sustainable Rights Economy directly addresses 12 of the 17 UN Sustainable Development Goals
+                The Sustainable Rights Economy directly addresses 12 of the 17
+                UN Sustainable Development Goals
               </p>
               <p className="text-lg text-neutral-400">
-                Through rights-based distribution, verified activity, and AI-driven resource allocation
+                Through rights-based distribution, verified activity, and
+                AI-driven resource allocation
               </p>
             </div>
 
@@ -282,11 +372,21 @@ export default function SREPage() {
               <table className="w-full border-collapse bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-lg">
                 <thead>
                   <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-foreground">
-                    <th className="px-6 py-4 text-left font-semibold">SDG Goal</th>
-                    <th className="px-6 py-4 text-left font-semibold">DRP Mechanism</th>
-                    <th className="px-6 py-4 text-left font-semibold">Input Metrics</th>
-                    <th className="px-6 py-4 text-left font-semibold">Economic Output</th>
-                    <th className="px-6 py-4 text-center font-semibold">Impact Level</th>
+                    <th className="px-6 py-4 text-left font-semibold">
+                      SDG Goal
+                    </th>
+                    <th className="px-6 py-4 text-left font-semibold">
+                      DRP Mechanism
+                    </th>
+                    <th className="px-6 py-4 text-left font-semibold">
+                      Input Metrics
+                    </th>
+                    <th className="px-6 py-4 text-left font-semibold">
+                      Economic Output
+                    </th>
+                    <th className="px-6 py-4 text-center font-semibold">
+                      Impact Level
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700">
@@ -296,7 +396,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 text-foreground font-bold flex items-center justify-center">
                           1
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">No Poverty</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          No Poverty
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -320,7 +422,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 text-foreground font-bold flex items-center justify-center">
                           2
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Zero Hunger</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Zero Hunger
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -344,7 +448,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 text-foreground font-bold flex items-center justify-center">
                           3
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Good Health</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Good Health
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -368,7 +474,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-pink-500 text-foreground font-bold flex items-center justify-center">
                           4
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Quality Education</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Quality Education
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -392,7 +500,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 text-foreground font-bold flex items-center justify-center">
                           7
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Affordable Energy</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Affordable Energy
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -416,7 +526,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-600 to-pink-600 text-foreground font-bold flex items-center justify-center">
                           8
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Decent Work</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Decent Work
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -440,7 +552,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 text-foreground font-bold flex items-center justify-center">
                           9
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Innovation</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Innovation
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -464,7 +578,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 text-foreground font-bold flex items-center justify-center">
                           10
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Reduced Inequality</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Reduced Inequality
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -488,7 +604,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-amber-500 text-foreground font-bold flex items-center justify-center">
                           11
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Sustainable Cities</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Sustainable Cities
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -512,7 +630,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 text-foreground font-bold flex items-center justify-center">
                           12
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Responsible Consumption</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Responsible Consumption
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -536,7 +656,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-500 text-foreground font-bold flex items-center justify-center">
                           16
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Peace & Justice</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Peace & Justice
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -560,7 +682,9 @@ export default function SREPage() {
                         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 text-foreground font-bold flex items-center justify-center">
                           17
                         </div>
-                        <span className="font-semibold text-neutral-900 dark:text-foreground">Partnerships</span>
+                        <span className="font-semibold text-neutral-900 dark:text-foreground">
+                          Partnerships
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-neutral-700 dark:text-neutral-300">
@@ -598,7 +722,9 @@ export default function SREPage() {
                   {/* Input Layer */}
                   <div className="text-center">
                     <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 mb-3 shadow-md">
-                      <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">Inputs</h4>
+                      <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">
+                        Inputs
+                      </h4>
                       <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1 text-left">
                         <li>• Verified Activities</li>
                         <li>• Rights Claims</li>
@@ -618,7 +744,9 @@ export default function SREPage() {
                   {/* DRP Mechanisms */}
                   <div className="text-center">
                     <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 mb-3 shadow-md">
-                      <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">DRP Mechanisms</h4>
+                      <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">
+                        DRP Mechanisms
+                      </h4>
                       <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1 text-left">
                         <li>• AI Scoring</li>
                         <li>• Rights-Based Distribution</li>
@@ -638,7 +766,9 @@ export default function SREPage() {
                   {/* Output Layer */}
                   <div className="text-center">
                     <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 mb-3 shadow-md">
-                      <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">Economic Outputs</h4>
+                      <h4 className="font-semibold text-neutral-900 dark:text-foreground mb-2">
+                        Economic Outputs
+                      </h4>
                       <ul className="text-sm text-neutral-600 dark:text-neutral-400 space-y-1 text-left">
                         <li>• Wealth Distribution</li>
                         <li>• Access to Resources</li>
@@ -652,16 +782,28 @@ export default function SREPage() {
                 {/* SDG Impact Metrics */}
                 <div className="mt-8 grid md:grid-cols-3 gap-4">
                   <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 text-center shadow-md">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">12</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-400">SDGs Addressed</div>
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">
+                      12
+                    </div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">
+                      SDGs Addressed
+                    </div>
                   </div>
                   <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 text-center shadow-md">
-                    <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">70%</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-400">High Impact Goals</div>
+                    <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">
+                      70%
+                    </div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">
+                      High Impact Goals
+                    </div>
                   </div>
                   <div className="bg-white dark:bg-neutral-800 rounded-lg p-4 text-center shadow-md">
-                    <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">100%</div>
-                    <div className="text-sm text-neutral-600 dark:text-neutral-400">Rights-Based</div>
+                    <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">
+                      100%
+                    </div>
+                    <div className="text-sm text-neutral-600 dark:text-neutral-400">
+                      Rights-Based
+                    </div>
                   </div>
                 </div>
               </div>
@@ -709,7 +851,8 @@ export default function SREPage() {
               Ready to Learn More?
             </h2>
             <p className="text-xl text-blue-100 mb-8">
-              Explore how the Activity-Based Economy and Tokenomics support the SRE
+              Explore how the Activity-Based Economy and Tokenomics support the
+              SRE
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -729,6 +872,5 @@ export default function SREPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
-

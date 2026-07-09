@@ -1,15 +1,29 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { ArrowLeft, Globe, Building, Users, Briefcase, Sparkles, Leaf } from 'lucide-react'
-import { EconomicsHero } from '@/components/economics/EconomicsHero'
+import { motion } from "framer-motion";
+import Link from "next/link";
+import {
+  ArrowLeft,
+  Globe,
+  Building,
+  Users,
+  Briefcase,
+  Sparkles,
+  Leaf,
+} from "lucide-react";
+import { EconomicsHero } from "@/components/economics/EconomicsHero";
 
 export default function GlobalEconomicsPage() {
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)' }}>
+    <div
+      className="min-h-screen"
+      style={{
+        background:
+          "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)",
+      }}
+    >
       <EconomicsHero
-        title="DRP&apos;s Impact on Global Economics"
+        title="DRP's Impact on Global Economics"
         subtitle="From Ghana testnets to WEF-level policy conversations"
       />
 
@@ -39,8 +53,9 @@ export default function GlobalEconomicsPage() {
               A New Global Economy for All Stakeholders
             </h2>
             <p className="text-lg text-neutral-300 mb-8">
-              DRP&apos;s Sustainable Rights Economy proposes a post-capitalist model where verified contribution, 
-              sustainability, and human dignity replace extraction, speculation, and systemic inequality.
+              DRP&apos;s Sustainable Rights Economy proposes a post-capitalist
+              model where verified contribution, sustainability, and human
+              dignity replace extraction, speculation, and systemic inequality.
             </p>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
@@ -48,8 +63,9 @@ export default function GlobalEconomicsPage() {
                   For Governments
                 </h3>
                 <p className="text-neutral-300">
-                  Rights-based distribution, transparent welfare systems, and AI-verified impact reporting 
-                  enable smarter social policy and reduced corruption.
+                  Rights-based distribution, transparent welfare systems, and
+                  AI-verified impact reporting enable smarter social policy and
+                  reduced corruption.
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
@@ -57,8 +73,9 @@ export default function GlobalEconomicsPage() {
                   For Communities
                 </h3>
                 <p className="text-neutral-300">
-                  Local-first distribution, community councils, and learn-to-earn models empower communities 
-                  to co-govern resources and opportunities.
+                  Local-first distribution, community councils, and
+                  learn-to-earn models empower communities to co-govern
+                  resources and opportunities.
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
@@ -66,8 +83,9 @@ export default function GlobalEconomicsPage() {
                   For Businesses
                 </h3>
                 <p className="text-neutral-300">
-                  New markets for rights-backed services, quality goods, and sustainability-linked products, 
-                  with transparent impact metrics.
+                  New markets for rights-backed services, quality goods, and
+                  sustainability-linked products, with transparent impact
+                  metrics.
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
@@ -75,8 +93,9 @@ export default function GlobalEconomicsPage() {
                   For the Global South
                 </h3>
                 <p className="text-neutral-300">
-                  Direct access to a global economic fabric that values contribution over capital, with 
-                  local testbeds (such as in Ghana) informing global policy.
+                  Direct access to a global economic fabric that values
+                  contribution over capital, with local testbeds (such as in
+                  Ghana) informing global policy.
                 </p>
               </div>
             </div>
@@ -101,10 +120,22 @@ export default function GlobalEconomicsPage() {
               At a World Economic Forum (WEF) or World Bank level, DRP offers:
             </p>
             <ul className="space-y-3 text-neutral-700 dark:text-neutral-200">
-              <li>• A concrete blueprint for moving beyond GDP toward human development metrics</li>
-              <li>• An operational model for rights-based economics, not just theory</li>
-              <li>• A way to align AI, blockchain, and sustainability under a single, auditable framework</li>
-              <li>• A demonstration that global south pilots can inform global north policy, not the reverse</li>
+              <li>
+                • A concrete blueprint for moving beyond GDP toward human
+                development metrics
+              </li>
+              <li>
+                • An operational model for rights-based economics, not just
+                theory
+              </li>
+              <li>
+                • A way to align AI, blockchain, and sustainability under a
+                single, auditable framework
+              </li>
+              <li>
+                • A demonstration that global south pilots can inform global
+                north policy, not the reverse
+              </li>
             </ul>
           </motion.div>
         </div>
@@ -124,17 +155,26 @@ export default function GlobalEconomicsPage() {
               From Broken Capitalism to Verified Contribution
             </h2>
             <p className="text-lg text-neutral-300 mb-6">
-              DRP does not propose a minor reform of capitalism. It proposes a new base layer where:
+              DRP does not propose a minor reform of capitalism. It proposes a
+              new base layer where:
             </p>
             <ul className="space-y-3 text-neutral-700 dark:text-neutral-200 mb-6">
               <li>• Capital is no longer the sole gatekeeper of opportunity</li>
-              <li>• Contribution is measured, verified, and rewarded transparently</li>
-              <li>• Environmental externalities are priced into the system, not ignored</li>
-              <li>• Human dignity is a first-order variable, not an afterthought</li>
+              <li>
+                • Contribution is measured, verified, and rewarded transparently
+              </li>
+              <li>
+                • Environmental externalities are priced into the system, not
+                ignored
+              </li>
+              <li>
+                • Human dignity is a first-order variable, not an afterthought
+              </li>
             </ul>
             <p className="text-lg text-neutral-300">
-              This is not a utopian fantasy—it is an architecture, implementable step by step, starting with 
-              local pilots and expanding into global networks of rights-backed, AI-verified economic collaboration.
+              This is not a utopian fantasy—it is an architecture, implementable
+              step by step, starting with local pilots and expanding into global
+              networks of rights-backed, AI-verified economic collaboration.
             </p>
           </motion.div>
         </div>
@@ -160,7 +200,8 @@ export default function GlobalEconomicsPage() {
                   Human Development
                 </h3>
                 <p className="text-neutral-300">
-                  Capabilities, education, health, and dignity are explicit economic objectives, not side effects.
+                  Capabilities, education, health, and dignity are explicit
+                  economic objectives, not side effects.
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
@@ -169,7 +210,8 @@ export default function GlobalEconomicsPage() {
                   Rights-Based Economics
                 </h3>
                 <p className="text-neutral-300">
-                  Allocation algorithms are constrained by rights charters and human dignity metrics.
+                  Allocation algorithms are constrained by rights charters and
+                  human dignity metrics.
                 </p>
               </div>
               <div className="p-6 rounded-xl bg-transparent-800 border border-neutral-200 dark:border-neutral-700">
@@ -178,7 +220,8 @@ export default function GlobalEconomicsPage() {
                   Green Incentives
                 </h3>
                 <p className="text-neutral-300">
-                  Renewable energy use, low-carbon lifestyles, and ecosystem restoration are rewarded as primary contributions.
+                  Renewable energy use, low-carbon lifestyles, and ecosystem
+                  restoration are rewarded as primary contributions.
                 </p>
               </div>
             </div>
@@ -199,7 +242,8 @@ export default function GlobalEconomicsPage() {
               Connect Economics to Reality
             </h2>
             <p className="text-xl text-blue-100 mb-8">
-              Visit the DRP explorer to see how blocks, transactions, and proofs form the fabric of the new economy.
+              Visit the DRP explorer to see how blocks, transactions, and proofs
+              form the fabric of the new economy.
             </p>
             <Link
               href="/explorer"
@@ -211,6 +255,5 @@ export default function GlobalEconomicsPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
-
