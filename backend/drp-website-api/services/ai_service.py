@@ -18,24 +18,49 @@ class AIService:
         huggingface_key: Optional[str] = None,
         openai_key: Optional[str] = None,
         google_key: Optional[str] = None,
-        langchain_key: Optional[str] = None
+        langchain_key: Optional[str] = None,
+        nvidia_nim_key: Optional[str] = None,
+        use_ethical_ai: bool = True
     ):
         """
         Initialize AI service.
         
         Args:
-            provider: AI provider ('huggingface', 'openai', 'google', 'llama')
+            provider: AI provider ('huggingface', 'openai', 'google', 'llama', 'nvidia')
             huggingface_key: HuggingFace API key
             openai_key: OpenAI API key
             google_key: Google AI API key
             langchain_key: LangChain API key
+            nvidia_nim_key: NVIDIA NIM API key
+            use_ethical_ai: Whether to use Ethical LangChain Service for enhanced AI
         """
         self.provider = provider
         self.huggingface_key = huggingface_key
         self.openai_key = openai_key
         self.google_key = google_key
         self.langchain_key = langchain_key
+        self.nvidia_nim_key = nvidia_nim_key
         self.client = httpx.AsyncClient(timeout=60.0)
+        
+        # Initialize Ethical LangChain Service if enabled
+        self.ethical_ai_service = None
+        if use_ethical_ai:
+            try:
+                from api.services.ethical_langchain_service import EthicalLangChainService
+                self.ethical_ai_service = EthicalLangChainService(
+                    provider=provider,
+                    huggingface_key=huggingface_key,
+                    openai_key=openai_key,
+                    nvidia_nim_key=nvidia_nim_key
+                )
+                logger.info(f"Ethical AI service initialized with provider: {provider}")
+            except ImportError as e:
+                logger.warning(f"Ethical AI service not available: {e}")
+                self.ethical_ai_service = None
+            except Exception as e:
+                logger.error(f"Failed to initialize Ethical AI service: {e}")
+                self.ethical_ai_service = None
+        
         logger.info(f"AIService initialized with provider: {provider}")
     
     async def assess_activity(self, submission_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -45,12 +70,19 @@ class AIService:
         Returns assessment with score, verdict, rationale, etc.
         """
         try:
+            # Use Ethical AI Service if available
+            if self.ethical_ai_service:
+                return await self.ethical_ai_service.assess_activity(submission_data)
+            
+            # Fallback to specific provider implementations
             if self.provider == "huggingface":
                 return await self._assess_with_huggingface(submission_data)
             elif self.provider == "openai":
                 return await self._assess_with_openai(submission_data)
             elif self.provider == "google":
                 return await self._assess_with_google(submission_data)
+            elif self.provider == "nvidia":
+                return await self._assess_with_nvidia(submission_data)
             else:
                 # Default rule-based assessment
                 return self._rule_based_assessment(submission_data)
@@ -84,6 +116,18 @@ class AIService:
             return self._rule_based_assessment(data)
         except Exception as e:
             logger.error(f"Google AI assessment error: {e}")
+            return self._rule_based_assessment(data)
+    
+    async def _assess_with_nvidia(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Assess using NVIDIA NIM."""
+        try:
+            # Use Ethical AI Service if available
+            if self.ethical_ai_service:
+                return await self.ethical_ai_service.assess_activity(data)
+            # In production, call NVIDIA NIM API
+            return self._rule_based_assessment(data)
+        except Exception as e:
+            logger.error(f"NVIDIA NIM assessment error: {e}")
             return self._rule_based_assessment(data)
     
     def _rule_based_assessment(self, data: Dict[str, Any]) -> Dict[str, Any]:
@@ -123,6 +167,18 @@ class AIService:
         Uses RAG (Retrieval Augmented Generation) for context-aware responses.
         """
         try:
+            # Use Ethical AI Service if available for knowledge queries
+            if self.ethical_ai_service and query:
+                knowledge_result = await self.ethical_ai_service.query_knowledge(query, context)
+                if knowledge_result.get("results"):
+                    return {
+                        "answer": f"Based on human rights knowledge: {query}",
+                        "sources": knowledge_result.get("sources", []),
+                        "confidence": 0.9,
+                        "reasoning": "Human rights knowledge base query",
+                        "knowledge_results": knowledge_result.get("results", [])
+                    }
+            
             # In production, use LangChain for RAG
             # For now, return a simple response
             return {
@@ -163,6 +219,9 @@ class AIService:
     async def explain_concept(self, concept: str, user_level: str = "beginner") -> str:
         """Get AI-powered explanation of a concept."""
         try:
+            # Use Ethical AI Service if available
+            if self.ethical_ai_service:
+                return await self.ethical_ai_service.explain_concept(concept, user_level)
             # In production, use AI to generate explanations
             return f"This is an explanation of {concept} at {user_level} level."
         except Exception as e:

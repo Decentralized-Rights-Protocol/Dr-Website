@@ -31,7 +31,8 @@ try:
         notifications,
         ai_service,
         explorer,
-        users
+        users,
+        ethical_ai
     )
     from services.blockchain_service import BlockchainService
     from services.ai_service import AIService
@@ -50,6 +51,7 @@ except ImportError:
     from .services.blockchain_service import BlockchainService
     from .services.ai_service import AIService
     from .services.cache_service import CacheService
+    from .routers.ethical_ai import router as ethical_ai_router
 
 # Configure logging
 logging.basicConfig(
@@ -72,11 +74,13 @@ class Settings(BaseSettings):
     
     # AI Settings
     AI_ENABLED: bool = os.getenv("AI_ENABLED", "true").lower() == "true"
-    AI_PROVIDER: str = os.getenv("AI_PROVIDER", "huggingface")  # huggingface, openai, google, llama
+    AI_PROVIDER: str = os.getenv("AI_PROVIDER", "huggingface")  # huggingface, openai, google, llama, nvidia
     HUGGINGFACE_API_KEY: str = os.getenv("HUGGINGFACE_API_KEY", "")
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
     GOOGLE_AI_API_KEY: str = os.getenv("GOOGLE_AI_API_KEY", "")
     LANGCHAIN_API_KEY: str = os.getenv("LANGCHAIN_API_KEY", "")
+    NVIDIA_NIM_API_KEY: str = os.getenv("NVIDIA_NIM_API_KEY", "")
+    NVIDIA_NIM_MODEL: str = os.getenv("NVIDIA_NIM_MODEL", "mistralai/Mixtral-8x7B-Instruct-v0.1")
     
     # Database
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./drp.db")
@@ -124,7 +128,9 @@ async def lifespan(app: FastAPI):
                 huggingface_key=settings.HUGGINGFACE_API_KEY,
                 openai_key=settings.OPENAI_API_KEY,
                 google_key=settings.GOOGLE_AI_API_KEY,
-                langchain_key=settings.LANGCHAIN_API_KEY
+                langchain_key=settings.LANGCHAIN_API_KEY,
+                nvidia_nim_key=settings.NVIDIA_NIM_API_KEY,
+                use_ethical_ai=True
             )
             app.state.ai_service = ai_service
             logger.info(f"AI service initialized with provider: {settings.AI_PROVIDER}")
@@ -213,6 +219,7 @@ app.include_router(activities.router, prefix=f"{settings.API_PREFIX}/activities"
 app.include_router(governance.router, prefix=f"{settings.API_PREFIX}/governance", tags=["Governance"])
 app.include_router(notifications.router, prefix=f"{settings.API_PREFIX}/notifications", tags=["Notifications"])
 app.include_router(ai_service.router, prefix=f"{settings.API_PREFIX}/ai", tags=["AI"])
+app.include_router(ethical_ai.router, prefix=f"{settings.API_PREFIX}/ethical-ai", tags=["Ethical AI"])
 app.include_router(explorer.router, prefix=f"{settings.API_PREFIX}/explorer", tags=["Explorer"])
 app.include_router(users.router, prefix=f"{settings.API_PREFIX}/users", tags=["Users"])
 
@@ -232,6 +239,7 @@ async def root():
             "governance": f"{settings.API_PREFIX}/governance",
             "notifications": f"{settings.API_PREFIX}/notifications",
             "ai": f"{settings.API_PREFIX}/ai",
+            "ethical_ai": f"{settings.API_PREFIX}/ethical-ai",
             "explorer": f"{settings.API_PREFIX}/explorer",
             "users": f"{settings.API_PREFIX}/users"
         }
