@@ -45,6 +45,7 @@ ENV/
 .env.local
 .env.*.local
 .env.*
+.env.local.backup
 !.env.example
 
 # Logs

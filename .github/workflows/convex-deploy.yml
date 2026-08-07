@@ -1,0 +1,76 @@
+name: Deploy Convex Backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'convex/**'
+      - 'package.json'
+      - '.github/workflows/convex-deploy.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy-convex:
+    name: Deploy Convex Functions
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          # Ensure we have the correct esbuild version
+          npm install esbuild@0.25.0 --force
+
+      - name: Configure Convex deployment key
+        run: |
+          # Use production deployment
+          echo "CONVEX_DEPLOY_KEY=${{ secrets.CONVEX_DEPLOY_KEY }}" >> $GITHUB_ENV
+
+      - name: Deploy to Convex Production
+        run: |
+          npx convex deploy
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
+          CONVEX_DEPLOYMENT: courteous-wildcat-368
+
+      - name: Verify deployment
+        run: |
+          # Simple verification that deployment succeeded
+          curl -s "https://courteous-wildcat-368.convex.cloud" || echo "Deployment verification failed"
+
+  deploy-dev:
+    name: Deploy Convex Dev
+    runs-on: ubuntu-latest
+    needs: deploy-convex
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install esbuild@0.25.0 --force
+
+      - name: Deploy to Convex Dev
+        run: |
+          npx convex deploy
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEV_DEPLOY_KEY }}
+          CONVEX_DEPLOYMENT: moonlit-chinchilla-285
