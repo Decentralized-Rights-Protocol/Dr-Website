@@ -393,9 +393,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 text-foreground font-bold flex items-center justify-center">
-                          1
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-01.png" alt="SDG Goal 1: No Poverty" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           No Poverty
                         </span>
@@ -419,9 +417,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 text-foreground font-bold flex items-center justify-center">
-                          2
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-02.png" alt="SDG Goal 2: Zero Hunger" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Zero Hunger
                         </span>
@@ -445,9 +441,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 text-foreground font-bold flex items-center justify-center">
-                          3
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-03.png" alt="SDG Goal 3: Good Health" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Good Health
                         </span>
@@ -471,9 +465,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-500 to-pink-500 text-foreground font-bold flex items-center justify-center">
-                          4
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-04.png" alt="SDG Goal 4: Quality Education" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Quality Education
                         </span>
@@ -497,9 +489,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 text-foreground font-bold flex items-center justify-center">
-                          7
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-07.png" alt="SDG Goal 7: Affordable Energy" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Affordable Energy
                         </span>
@@ -523,9 +513,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-600 to-pink-600 text-foreground font-bold flex items-center justify-center">
-                          8
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-08.png" alt="SDG Goal 8: Decent Work" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Decent Work
                         </span>
@@ -549,9 +537,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 text-foreground font-bold flex items-center justify-center">
-                          9
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-09.png" alt="SDG Goal 9: Innovation" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Innovation
                         </span>
@@ -575,9 +561,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 text-foreground font-bold flex items-center justify-center">
-                          10
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-10.png" alt="SDG Goal 10: Reduced Inequality" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Reduced Inequality
                         </span>
@@ -601,9 +585,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-amber-500 text-foreground font-bold flex items-center justify-center">
-                          11
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-11.png" alt="SDG Goal 11: Sustainable Cities" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Sustainable Cities
                         </span>
@@ -627,9 +609,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-400 to-amber-500 text-foreground font-bold flex items-center justify-center">
-                          12
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-12.png" alt="SDG Goal 12: Responsible Consumption" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Responsible Consumption
                         </span>
@@ -653,9 +633,7 @@ export default function SREPage() {
                   <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-500 text-foreground font-bold flex items-center justify-center">
-                          16
-                        </div>
+                        <img src="/src/app/economics/sre/E SDG Icons WEB/E-WEB-Goal-16.png" alt="SDG Goal 16: Peace & Justice" className="w-10 h-10" />
                         <span className="font-semibold text-neutral-900 dark:text-foreground">
                           Peace & Justice
                         </span>
