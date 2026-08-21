@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { submitReadingProof } from "@/lib/drp-api";
+import { submitReadingProof } from "@/lib/drp-api-client";
 
 export const useProofSubmission = (userId: string, walletAddress: string) => {
   const [loading, setLoading] = useState(false);

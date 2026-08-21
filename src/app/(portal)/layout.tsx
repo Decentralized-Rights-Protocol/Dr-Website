@@ -2,14 +2,15 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AppProviders } from "@/components/providers";
 import { AppShell } from "@/components/layout/AppShell";
+import { ThemeProvider } from "@/components/portal/theme-provider";
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#3b82f6" },
-    { media: "(prefers-color-scheme: dark)", color: "#1e40af" },
+    { media: "(prefers-color-scheme: light)", color: "#00c4af" },
+    { media: "(prefers-color-scheme: dark)", color: "#030308" },
   ],
 };
 
@@ -34,10 +35,29 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50">
-        <AppProviders>
-          <AppShell>{children}</AppShell>
-        </AppProviders>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+        >
+          <AppProviders>
+            <div className="noise-overlay" aria-hidden="true" />
+            <AppShell>{children}</AppShell>
+          </AppProviders>
+        </ThemeProvider>
       </body>
     </html>
   );

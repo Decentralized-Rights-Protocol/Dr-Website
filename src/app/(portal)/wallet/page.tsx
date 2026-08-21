@@ -28,14 +28,14 @@ export default function WalletPage() {
 
   return (
     <div className="space-y-10">
-      <header className="rounded-3xl border border-neutral-200/80 bg-white/90 p-8 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
-        <p className="text-sm font-semibold text-primary-600 dark:text-primary-300">
+      <header className="border border-foreground/10 bg-background/90 p-8 shadow-sm">
+        <p className="text-sm font-semibold text-[#00e5cc]">
           Stewardship Assets
         </p>
-        <h1 className="mt-3 text-3xl font-bold text-neutral-900 dark:text-neutral-50">
+        <h1 className="mt-3 text-3xl font-bold text-foreground">
           Stewardship Wallet
         </h1>
-        <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">
+        <p className="mt-2 text-sm text-foreground/50">
           Manage your $DeRi utility credits and $RIGHTS governance weight earned
           through verified activities.
         </p>
@@ -47,10 +47,10 @@ export default function WalletPage() {
           <div className="grid gap-4 md:grid-cols-2">
             <motion.div
               whileHover={{ y: -5 }}
-              className="rounded-3xl bg-gradient-to-br from-primary-600 to-indigo-700 p-8 text-foreground shadow-xl"
+              className="bg-gradient-to-br from-[#00e5cc] to-[#8b5cf6] p-8 text-foreground shadow-xl"
             >
               <div className="flex items-center justify-between">
-                <div className="rounded-xl bg-white/20 p-2">
+                <div className="bg-background/20 p-2">
                   <Award className="h-6 w-6" />
                 </div>
                 <span className="text-xs font-bold uppercase tracking-widest opacity-70">
@@ -66,11 +66,11 @@ export default function WalletPage() {
 
             <motion.div
               whileHover={{ y: -5 }}
-              className="rounded-3xl bg-gradient-to-br from-neutral-800 to-neutral-950 p-8 text-foreground shadow-xl"
+              className="bg-gradient-to-br from-[#0a0a14] to-[#030308] p-8 text-foreground shadow-xl"
             >
               <div className="flex items-center justify-between">
-                <div className="rounded-xl bg-white/10 p-2">
-                  <ShieldCheck className="h-6 w-6 text-primary-400" />
+                <div className="bg-background/10 p-2">
+                  <ShieldCheck className="h-6 w-6 text-[#00e5cc]" />
                 </div>
                 <span className="text-xs font-bold uppercase tracking-widest opacity-70">
                   Governance Weight
@@ -86,9 +86,9 @@ export default function WalletPage() {
             </motion.div>
           </div>
 
-          <section className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
-            <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
-              <History className="h-5 w-5 text-primary-500" />
+          <section className="border border-foreground/10 bg-background/80 p-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+              <History className="h-5 w-5 text-[#00e5cc]" />
               Recent Rewards
             </h3>
             <div className="mt-6 space-y-4">
@@ -96,11 +96,11 @@ export default function WalletPage() {
                 Array.from({ length: 3 }).map((_, i) => (
                   <div
                     key={i}
-                    className="h-16 animate-pulse rounded-xl bg-neutral-100 dark:bg-neutral-800"
+                    className="h-16 animate-pulse bg-foreground/[0.04]"
                   />
                 ))
               ) : activities.length === 0 ? (
-                <p className="text-center py-8 text-sm text-neutral-500">
+                <p className="text-center py-8 text-sm text-foreground/40">
                   No rewards earned yet. Submit an activity to start earning.
                 </p>
               ) : (
@@ -109,26 +109,26 @@ export default function WalletPage() {
                   .map((act: any) => (
                     <div
                       key={act._id}
-                      className="flex items-center justify-between rounded-2xl border border-neutral-100 p-4 dark:border-neutral-800"
+                      className="flex items-center justify-between border border-foreground/5 p-4"
                     >
                       <div className="flex items-center gap-4">
                         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
                           <ArrowDownLeft className="h-5 w-5" />
                         </div>
                         <div>
-                          <p className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
+                          <p className="text-sm font-bold text-foreground">
                             {(act.metadata as any).title}
                           </p>
-                          <p className="text-xs text-neutral-500">
+                          <p className="text-xs text-foreground/40">
                             {new Date(act.createdAt).toLocaleDateString()}
                           </p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm font-bold text-primary-600">
+                        <p className="text-sm font-bold text-[#00e5cc]">
                           +{act.reward.deri} $DeRi
                         </p>
-                        <p className="text-[10px] text-neutral-400">
+                        <p className="text-[10px] text-foreground/30">
                           +{act.reward.rights} $RIGHTS
                         </p>
                       </div>
@@ -142,30 +142,30 @@ export default function WalletPage() {
         <div className="space-y-8">
           <WalletPanel />
 
-          <section className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
-            <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+          <section className="border border-foreground/10 bg-background/80 p-6 shadow-sm">
+            <h3 className="text-base font-semibold text-foreground">
               Asset Utility
             </h3>
             <div className="mt-4 space-y-4">
               <div className="flex items-start gap-3">
-                <div className="mt-1 rounded-lg bg-primary-500/10 p-1.5 text-primary-600">
+                <div className="mt-1 bg-[#00e5cc]/10 p-1.5 text-[#00e5cc]">
                   <CreditCard className="h-4 w-4" />
                 </div>
                 <div>
                   <p className="text-sm font-bold">$DeRi Credits</p>
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-xs text-foreground/40">
                     Spend on protocol services, ecosystem tools, and partner
                     humanitarian resources.
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="mt-1 rounded-lg bg-emerald-500/10 p-1.5 text-emerald-600">
+                <div className="mt-1 bg-emerald-500/10 p-1.5 text-emerald-600">
                   <TrendingUp className="h-4 w-4" />
                 </div>
                 <div>
                   <p className="text-sm font-bold">$RIGHTS Weight</p>
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-xs text-foreground/40">
                     Directly influences your voting power in the DRP Cooperative
                     governance proposals.
                   </p>

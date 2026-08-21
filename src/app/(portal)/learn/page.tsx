@@ -87,7 +87,7 @@ export default function LearnHubPage() {
         </div>
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-xl bg-drp-cyan/20 border border-drp-cyan/30">
+            <div className="p-2 bg-drp-cyan/20 border border-drp-cyan/30">
               <Sparkles className="h-5 w-5 text-drp-cyan" />
             </div>
             <p className="text-xs font-cinematic text-drp-cyan tracking-[0.4em]">
@@ -170,13 +170,7 @@ export default function LearnHubPage() {
                   >
                     <div>
                       <div className="flex items-center justify-between mb-6">
-                        <div
-                          className={cn(
-                            "p-3 rounded-xl",
-                            level.bg,
-                            level.color,
-                          )}
-                        >
+                        <div className={cn("p-3", level.bg, level.color)}>
                           <level.icon className="h-5 w-5" />
                         </div>
                         <div className="flex items-center gap-1.5 text-[10px] font-medium text-drp-gray">
@@ -234,7 +228,7 @@ export default function LearnHubPage() {
               ))}
             </ul>
           </div>
-          <div className="bg-card/40 rounded-3xl p-8 border border-border">
+          <div className="bg-card/40 p-8 border border-border">
             <h4 className="text-xl font-bold text-foreground mb-4">
               Start your journey today
             </h4>
@@ -244,7 +238,7 @@ export default function LearnHubPage() {
             </p>
             <Link
               href="/lessons/what-is-blockchain"
-              className="block w-full text-center py-4 rounded-2xl bg-foreground text-background font-bold hover:bg-drp-cyan transition-colors"
+              className="block w-full text-center py-4 bg-foreground text-background font-bold hover:bg-drp-cyan transition-colors"
             >
               Take First Lesson
             </Link>

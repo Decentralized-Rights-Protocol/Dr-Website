@@ -1,37 +1,145 @@
 @import "tailwindcss";
 @config "../../../tailwind.config.js";
 
+/* DRP Design Tokens — kept in sync with src/app/globals.css (marketing site) */
 :root {
   color-scheme: light dark;
+
+  --drp-void: #030308;
+  --drp-cyan: #00f2ff;
+  --drp-gold: #ffd700;
+  --drp-purple: #8b5cf6;
+  --drp-green: #00ff88;
+  --drp-red: #ff4040;
+  --font-display: "Syne", system-ui, sans-serif;
+
+  /* Light mode (default) */
+  --background: #ffffff;
+  --foreground: #0a0a14;
+  --card: #ffffff;
+  --card-foreground: #0a0a14;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a14;
+  --primary: #00c4af;
+  --primary-foreground: #ffffff;
+  --secondary: #f8f9fa;
+  --secondary-foreground: #0a0a14;
+  --muted: #f8f9fa;
+  --muted-foreground: rgba(10, 10, 20, 0.6);
+  --accent: #00c4af;
+  --accent-foreground: #ffffff;
+  --destructive: #ff4040;
+  --destructive-foreground: #ffffff;
+  --border: rgba(10, 10, 20, 0.08);
+  --input: rgba(10, 10, 20, 0.08);
+  --ring: #00c4af;
+  --radius: 0.5rem;
+
+  --bg: var(--background);
+  --text: var(--foreground);
+}
+
+.dark {
+  --background: #030308;
+  --foreground: #ffffff;
+  --card: #0a0a14;
+  --card-foreground: #ffffff;
+  --popover: #0a0a14;
+  --popover-foreground: #ffffff;
+  --primary: #00e5cc;
+  --primary-foreground: #030308;
+  --secondary: #0a0a14;
+  --secondary-foreground: #ffffff;
+  --muted: #0a0a14;
+  --muted-foreground: rgba(255, 255, 255, 0.45);
+  --accent: #00e5cc;
+  --accent-foreground: #030308;
+  --destructive: #ff4040;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.06);
+  --input: rgba(255, 255, 255, 0.06);
+  --ring: #00e5cc;
 }
 
 @layer base {
-  body {
-    @apply bg-white text-neutral-900 antialiased selection:bg-drp-blue/20;
-    font-family: var(
-      --font-sans,
-      "Inter",
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif
-    );
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 
-  .dark body {
-    @apply bg-drp-dark text-neutral-50;
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-[#00e5cc]/20;
+    font-family:
+      "Syne",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(0, 229, 204, 0.2);
+    color: var(--foreground);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 }
 
+/* Glass Components — mirrors marketing site */
 @layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+  }
+  html:not(.dark) .glass {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+  html:not(.dark) .glass-hover:hover {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+
+  /* Portal-specific alias, sharp-cornered to match brand (was rounded-2xl/blue) */
   .glass-card {
-    @apply border border-white/20 bg-white/10 backdrop-blur-xl dark:border-white/5 dark:bg-white/5;
+    @apply border border-foreground/10 bg-foreground/[0.02] backdrop-blur-xl;
   }
 
   .drp-button {
-    @apply relative flex items-center justify-center gap-2 overflow-hidden rounded-2xl bg-drp-blue px-6 py-3 font-bold text-white transition-all hover:scale-105 active:scale-95;
+    @apply relative flex items-center justify-center gap-2 overflow-hidden bg-[#00e5cc] px-6 py-3 text-sm font-bold uppercase tracking-widest text-background transition-all hover:bg-[#00bfff] active:scale-[0.98];
   }
+}
+
+/* Glow Effects */
+.glow-cyan {
+  text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+}
+.glow-gold {
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+/* Gradient Text */
+.text-gradient-cyan {
+  background: linear-gradient(to right, var(--drp-cyan), var(--drp-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Custom scrollbar */
@@ -45,7 +153,26 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-200 dark:bg-neutral-800 rounded-full hover:bg-neutral-300 dark:hover:bg-neutral-700;
+  background: rgba(0, 229, 204, 0.3);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 229, 204, 0.55);
+}
+
+/* Noise Overlay — mirrors marketing site */
+.noise-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+html:not(.dark) .noise-overlay {
+  opacity: 0.008;
 }
 
 /* Animations */
@@ -61,6 +188,21 @@
   50% {
     opacity: 0.5;
   }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animate-gradient {
+  animation: gradient 6s ease infinite;
 }
 
 * {

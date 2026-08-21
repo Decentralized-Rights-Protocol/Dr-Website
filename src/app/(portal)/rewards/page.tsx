@@ -8,13 +8,13 @@ export default function RewardsPage() {
   return (
     <div className="space-y-6">
       <header className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-300">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#00e5cc]">
           Rewards
         </p>
-        <h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-50">
+        <h1 className="text-2xl font-black text-foreground">
           Track $DeRi utility credits and $RIGHTS governance weight
         </h1>
-        <p className="text-sm text-neutral-600 dark:text-neutral-300">
+        <p className="text-sm text-foreground/40 leading-relaxed max-w-2xl">
           Every verified activity and confirmed status funnels rewards directly
           to your wallet. Review history, monitor sustainability boosts, and
           export transaction logs.

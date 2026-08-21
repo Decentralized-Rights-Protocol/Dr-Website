@@ -144,22 +144,22 @@ export default function ActivitiesPage() {
 
   return (
     <div className="space-y-10">
-      <header className="rounded-3xl border border-neutral-200/80 bg-white/90 p-8 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
-        <p className="text-sm font-semibold text-primary-600 dark:text-primary-300">
+      <header className="border border-foreground/10 bg-background/90 p-8 shadow-sm">
+        <p className="text-sm font-semibold text-[#00e5cc]">
           Activity Verification Engine
         </p>
-        <h1 className="mt-3 text-3xl font-bold text-neutral-900 dark:text-neutral-50">
+        <h1 className="mt-3 text-3xl font-bold text-foreground">
           Proof of Activity (PoAT)
         </h1>
-        <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">
+        <p className="mt-2 text-sm text-foreground/50">
           Submit your digital contributions to be verified by DRP Elders and
           earn $DeRi and $RIGHTS rewards.
         </p>
       </header>
 
       <div className="grid gap-8 lg:grid-cols-[0.6fr_0.4fr]">
-        <section className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
-          <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+        <section className="border border-foreground/10 bg-background/80 p-6 shadow-sm">
+          <h3 className="text-lg font-semibold text-foreground">
             Submit New Activity
           </h3>
 
@@ -173,10 +173,10 @@ export default function ActivitiesPage() {
                     setSelectedCategory(cat.id);
                     setSelectedType(TYPES[cat.id][0].id);
                   }}
-                  className={`flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-medium transition ${
+                  className={`flex items-center gap-2 border px-4 py-2 text-sm font-medium transition ${
                     selectedCategory === cat.id
-                      ? "border-primary-500 bg-primary-500/10 text-primary-600 dark:text-primary-300"
-                      : "border-neutral-200 bg-neutral-50 text-neutral-600 hover:bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-400"
+                      ? "border-[#00e5cc] bg-[#00e5cc] text-background"
+                      : "border-foreground/10 bg-foreground/[0.02] text-foreground/50 hover:bg-foreground/[0.04]"
                   }`}
                 >
                   <cat.icon
@@ -189,13 +189,13 @@ export default function ActivitiesPage() {
 
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-neutral-500">
+                <label className="text-xs font-bold uppercase tracking-wider text-foreground/40">
                   Activity Type
                 </label>
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm dark:border-neutral-800 dark:bg-neutral-950"
+                  className="w-full border border-foreground/10 bg-background px-4 py-2 text-sm"
                 >
                   {TYPES[selectedCategory].map((t) => (
                     <option key={t.id} value={t.id}>
@@ -205,7 +205,7 @@ export default function ActivitiesPage() {
                 </select>
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-neutral-500">
+                <label className="text-xs font-bold uppercase tracking-wider text-foreground/40">
                   Title
                 </label>
                 <input
@@ -214,43 +214,43 @@ export default function ActivitiesPage() {
                   placeholder="What did you do?"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm dark:border-neutral-800 dark:bg-neutral-950"
+                  className="w-full border border-foreground/10 bg-background px-4 py-2 text-sm"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-neutral-500">
+              <label className="text-xs font-bold uppercase tracking-wider text-foreground/40">
                 URL / Reference
               </label>
               <div className="relative">
-                <LinkIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+                <LinkIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground/30" />
                 <input
                   type="url"
                   placeholder="Link to your work (GitHub, YouTube, Blog...)"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  className="w-full rounded-xl border border-neutral-200 bg-white py-2 pl-10 pr-4 text-sm dark:border-neutral-800 dark:bg-neutral-950"
+                  className="w-full border border-foreground/10 bg-background py-2 pl-10 pr-4 text-sm"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-neutral-500">
+              <label className="text-xs font-bold uppercase tracking-wider text-foreground/40">
                 Proof Details / Narrative
               </label>
               <textarea
                 placeholder="Describe your activity in detail for the DRP Elders..."
                 value={proof}
                 onChange={(e) => setProof(e.target.value)}
-                className="h-32 w-full rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm dark:border-neutral-800 dark:bg-neutral-950"
+                className="h-32 w-full border border-foreground/10 bg-background px-4 py-2 text-sm"
               />
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting || !normalizedAddress}
-              className="w-full rounded-xl bg-primary-600 px-6 py-3 text-sm font-bold text-foreground transition hover:bg-primary-700 disabled:opacity-50"
+              className="w-full bg-[#00e5cc] px-6 py-3 text-sm font-bold text-background transition hover:bg-[#00bfff] disabled:opacity-50"
             >
               {!normalizedAddress
                 ? "Connect Wallet to Submit"
@@ -266,7 +266,7 @@ export default function ActivitiesPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className={`mt-6 rounded-2xl border p-4 ${
+                className={`mt-6 border p-4 ${
                   lastVerdict.verdict === "approved"
                     ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
                     : "border-amber-500/50 bg-amber-500/10 text-amber-700 dark:text-amber-300"
@@ -287,8 +287,8 @@ export default function ActivitiesPage() {
                     </p>
                     {lastVerdict.verdict === "approved" && (
                       <p className="mt-1 text-sm">
-                        Rewarding{" "}
-                        <strong>{lastVerdict.reward.deri} $DeRi</strong> and{" "}
+                        Rewarding{""}
+                        <strong>{lastVerdict.reward.deri} $DeRi</strong> and{""}
                         <strong>{lastVerdict.reward.rights} $RIGHTS</strong>.
                       </p>
                     )}
@@ -300,8 +300,8 @@ export default function ActivitiesPage() {
         </section>
 
         <section className="space-y-6">
-          <div className="rounded-3xl border border-neutral-200/80 bg-white/80 p-6 shadow-sm dark:border-neutral-800/80 dark:bg-neutral-900/60">
-            <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+          <div className="border border-foreground/10 bg-background/80 p-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-foreground">
               Recent Activities
             </h3>
             <div className="mt-4 space-y-4">
@@ -309,27 +309,27 @@ export default function ActivitiesPage() {
                 Array.from({ length: 3 }).map((_, i) => (
                   <div
                     key={i}
-                    className="h-16 animate-pulse rounded-xl bg-neutral-100 dark:bg-neutral-800"
+                    className="h-16 animate-pulse bg-foreground/[0.04]"
                   />
                 ))
               ) : activities.length === 0 ? (
-                <p className="text-center py-8 text-sm text-neutral-500">
+                <p className="text-center py-8 text-sm text-foreground/40">
                   No activities submitted yet.
                 </p>
               ) : (
                 activities.map((act: any) => (
                   <div
                     key={act._id}
-                    className="group relative flex items-start gap-3 rounded-xl border border-neutral-100 p-3 transition hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-950"
+                    className="group relative flex items-start gap-3 border border-foreground/5 p-3 transition hover:bg-foreground/[0.02]"
                   >
                     <div
                       className={`mt-1 h-2 w-2 rounded-full ${act.status === "approved" ? "bg-emerald-500" : act.status === "rejected" ? "bg-rose-500" : "bg-amber-500"}`}
                     />
                     <div className="flex-1 overflow-hidden">
-                      <p className="truncate text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                      <p className="truncate text-sm font-semibold text-foreground">
                         {(act.metadata as any).title}
                       </p>
-                      <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider text-neutral-500">
+                      <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider text-foreground/40">
                         <span className="font-bold">{act.category}</span>
                         <span>•</span>
                         <span>
@@ -339,10 +339,10 @@ export default function ActivitiesPage() {
                     </div>
                     {act.status === "approved" && (
                       <div className="text-right">
-                        <p className="text-xs font-bold text-primary-600">
+                        <p className="text-xs font-bold text-[#00e5cc]">
                           +{act.reward.deri}
                         </p>
-                        <p className="text-[10px] text-neutral-400">$DeRi</p>
+                        <p className="text-[10px] text-foreground/30">$DeRi</p>
                       </div>
                     )}
                   </div>
@@ -351,18 +351,18 @@ export default function ActivitiesPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-neutral-200/80 bg-gradient-to-br from-primary-600 to-indigo-700 p-6 text-foreground shadow-lg">
+          <div className="border border-foreground/10 bg-gradient-to-br from-[#00e5cc] to-[#8b5cf6] p-6 text-foreground shadow-lg">
             <h4 className="font-bold">Elders Verification</h4>
             <p className="mt-2 text-sm opacity-90">
               Every activity is hashed using SHA3-512 and signed with a
               post-quantum resistant simulation (Dilithium).
             </p>
             <div className="mt-4 flex items-center gap-4">
-              <div className="flex items-center gap-2 rounded-lg bg-white/10 px-3 py-1 text-xs">
+              <div className="flex items-center gap-2 bg-background/10 px-3 py-1 text-xs">
                 <Hash className="h-3 w-3" />
                 SHA3-512
               </div>
-              <div className="flex items-center gap-2 rounded-lg bg-white/10 px-3 py-1 text-xs">
+              <div className="flex items-center gap-2 bg-background/10 px-3 py-1 text-xs">
                 <Shield className="h-3 w-3" />
                 Dilithium
               </div>
