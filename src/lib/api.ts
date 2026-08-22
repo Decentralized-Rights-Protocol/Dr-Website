@@ -1,381 +1,624 @@
 /**
- * DRP Explorer API Client - Connects to Dr-Blockchain backend
- * All API URLs read from process.env.NEXT_PUBLIC_API_URL
+ * API client for the DRP dual-token economy
+ * 
+ * This file provides TypeScript interfaces and functions for interacting with
+ * the DRP blockchain and backend services.
  */
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://api.decentralizedrights.com";
-
-export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
-
-interface ApiRequestOptions<TBody> {
-  path: string;
-  method?: HttpMethod;
-  body?: TBody;
-  headers?: Record<string, string>;
-}
-
-interface ApiResponse<TData> {
-  data: TData;
-  status: number;
-}
-
-async function parseResponse<TData>(
-  response: Response,
-): Promise<ApiResponse<TData>> {
-  const contentType = response.headers.get("content-type") ?? "";
-  const isJson = contentType.includes("application/json");
-  const payload = (
-    isJson ? await response.json() : await response.text()
-  ) as TData;
-  if (!response.ok) {
-    const error = new Error(
-      `API request failed with status ${response.status}`,
-    );
-    (error as Error & { payload?: unknown }).payload = payload;
-    throw error;
-  }
-  return { data: payload, status: response.status };
-}
-
-export async function apiRequest<TData = unknown, TBody = unknown>({
-  path,
-  method = "GET",
-  body,
-  headers,
-}: ApiRequestOptions<TBody>): Promise<ApiResponse<TData>> {
-  const requestHeaders = new Headers();
-  requestHeaders.set("Content-Type", "application/json");
-
-  Object.entries(headers ?? {}).forEach(([key, value]) => {
-    if (value !== undefined) {
-      requestHeaders.set(key, value);
-    }
-  });
-
-  const payload = body ? JSON.stringify(body) : undefined;
-
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    method,
-    headers: requestHeaders,
-    body: payload as BodyInit | undefined,
-    credentials: "include",
-  });
-
-  return parseResponse<TData>(response);
-}
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 // ============================================================================
-// Transactions API
+// TYPE DEFINITIONS
 // ============================================================================
 
-export interface Transaction {
-  tx_hash: string;
-  block_number: number;
-  timestamp: string;
+/** Token types in the DRP dual-token economy */
+export type TokenType = 'uderi' | 'rights';
+
+/** Activity types that can generate rewards */
+export type ActivityType = 
+  | 'poat'              // Proof of Activity
+  | 'post'              // Proof of Status
+  | 'verification'      // Verification tasks
+  | 'ai_elder_duty'     // AI Elder tasks
+  | 'content_creation'  // Content creation
+  | 'community_engagement' // Community engagement
+  | 'humanitarian_work'; // Humanitarian activities
+
+/** Verification status */
+export type VerificationStatus = 'pending' | 'verified' | 'rejected' | 'expired';
+
+/** Reward status */
+export type RewardStatus = 'pending' | 'distributed' | 'failed';
+
+// ============================================================================
+// INTERFACES
+// ============================================================================
+
+/** Activity record */
+export interface ActivityRecord {
+  activity_id: string;
+  user_id: string;
+  activity_type: ActivityType;
+  data: Record<string, unknown>;
+  timestamp: number; // Unix timestamp
+  verification_status: VerificationStatus;
+  verification_confidence: number; // 0-100
+  verification_timestamp?: number;
+  verifier_id?: string;
+  metadata: Record<string, unknown>;
+}
+
+/** Token balance */
+export interface TokenBalance {
+  user_id: string;
+  token_type: TokenType;
+  balance: string; // In base units (uderi or rights)
+  locked?: string;
+  delegated?: string;
+  last_updated?: number;
+}
+
+/** Reward calculation */
+export interface RewardCalculation {
+  activity_id: string;
+  base_reward: string; // In uderi
+  activity_score: number; // Multiplier (e.g., 100 = 1.00x)
+  verification_confidence: number; // Multiplier (e.g., 100 = 1.00x)
+  reputation_multiplier: number; // Multiplier (e.g., 100 = 1.00x)
+  network_factor: number; // Multiplier (e.g., 100 = 1.00x)
+  final_reward: string; // In uderi (deterministic result)
+  calculation_hash: string; // Hash of all inputs for verification
+}
+
+/** Transaction request */
+export interface TransactionRequest {
   from: string;
-  to: string;
-  value: string;
-  gas_used: number;
-  status: "success" | "failed" | "pending";
-  type: "activity" | "status" | "reward" | "governance";
-  metadata?: Record<string, unknown>;
+  to?: string;
+  amount: string; // In base units
+  token_type?: TokenType;
+  reason?: string;
+  signer?: string;
 }
 
-export interface TransactionsResponse {
-  transactions: Transaction[];
-  total: number;
-  page: number;
-  page_size: number;
+/** Transaction response */
+export interface TransactionResponse {
+  success: boolean;
+  error?: string;
+  tx_hash?: string;
+  tx_url?: string;
 }
 
-export async function getTransactions(params?: {
-  page?: number;
-  page_size?: number;
-  type?: Transaction["type"];
-  status?: Transaction["status"];
-}): Promise<TransactionsResponse> {
-  const searchParams = new URLSearchParams();
-  if (params?.page) searchParams.set("page", params.page.toString());
-  if (params?.page_size)
-    searchParams.set("page_size", params.page_size.toString());
-  if (params?.type) searchParams.set("type", params.type);
-  if (params?.status) searchParams.set("status", params.status);
-
-  const query = searchParams.toString();
-  const response = await apiRequest<Transaction[]>({
-    path: `/api/v1/explorer/transactions${query ? `?${query}` : ""}`,
-    method: "GET",
-  });
-
-  // Transform to match expected format
-  const transactions = response.data || [];
-  return {
-    transactions: transactions.map((tx: any) => ({
-      tx_hash: tx.tx_hash,
-      block_number: tx.block_number || 0,
-      timestamp: tx.timestamp,
-      from: tx.from_address,
-      to: tx.to_address,
-      value: tx.value,
-      gas_used: tx.gas_used || 0,
-      status:
-        tx.status === "confirmed"
-          ? "success"
-          : tx.status === "failed"
-            ? "failed"
-            : "pending",
-      type: tx.type,
-      metadata: tx.metadata,
-    })),
-    total: transactions.length,
-    page: params?.page || 1,
-    page_size: params?.page_size || 50,
-  };
+/** Network stats */
+export interface NetworkStats {
+  total_users: number;
+  total_activities: number;
+  total_rewards_distributed: string;
+  current_epoch: number;
+  current_block: number;
+  deri_total_supply: string;
+  rights_total_supply: string;
+  last_updated: number;
 }
 
-// ============================================================================
-// Activity Feed API
-// ============================================================================
+/** Emission limits */
+export interface EmissionLimits {
+  max_per_block: string;    // 1M uderi per block
+  max_per_epoch: string;    // 100M uderi per epoch
+  max_per_activity: string; // 10K uderi per activity
+  max_per_identity: string;  // 1M uderi per identity
+}
 
-export type VerificationStatus =
-  | "pending"
-  | "approved"
-  | "rejected"
-  | "requires-info";
-
-export interface ActivityFeedItem {
-  id: string;
-  actor_id: string;
+/** Proposal */
+export interface Proposal {
+  id: number;
+  creator: string;
   title: string;
   description: string;
-  location?: string;
-  timestamp: string;
-  media_cid?: string;
-  hash: string;
-  verification_status: VerificationStatus;
-  ai_summary?: string;
-  orbitdb_cid?: string;
-  rewards?: {
-    deri: number;
-    rights: number;
-  };
+  type: string;
+  status: 'open' | 'passed' | 'rejected' | 'executed';
+  changes: string[];
+  created_at: number;
+  voting_end: number;
 }
 
-export interface ActivityFeedResponse {
-  activities: ActivityFeedItem[];
-  total: number;
-  page: number;
-  page_size: number;
-}
-
-export async function getActivityFeed(params?: {
-  page?: number;
-  page_size?: number;
-  actor_id?: string;
-}): Promise<ActivityFeedResponse> {
-  const searchParams = new URLSearchParams();
-  if (params?.page) searchParams.set("page", params.page.toString());
-  if (params?.page_size)
-    searchParams.set("page_size", params.page_size.toString());
-  if (params?.actor_id) searchParams.set("actor_id", params.actor_id);
-
-  const query = searchParams.toString();
-  const path = `/api/v1/explorer/activity?${query}${query ? "&" : ""}limit=${params?.page_size || 50}`;
-  const response = await apiRequest<any[]>({
-    path,
-    method: "GET",
-  });
-
-  // Transform to match expected format
-  const activities = response.data || [];
-  return {
-    activities: activities.map((act: any) => ({
-      id: act.id,
-      actor_id: act.actor,
-      title: act.title,
-      description: act.description || "",
-      location: act.metadata?.location,
-      timestamp: act.timestamp,
-      media_cid: act.metadata?.media_cid,
-      hash: act.metadata?.hash || "",
-      verification_status:
-        act.metadata?.ai_verdict === "approved" ? "approved" : "pending",
-      ai_summary: act.metadata?.ai_summary,
-      rewards: act.metadata?.rewards,
-    })),
-    total: activities.length,
-    page: params?.page || 1,
-    page_size: params?.page_size || 50,
-  };
-}
-
-// ============================================================================
-// AI Verification Summary API
-// ============================================================================
-
-export interface AISummary {
-  activity_id: string;
-  summary: string;
-  confidence_score: number;
-  verification_status: VerificationStatus;
-  key_points: string[];
-  generated_at: string;
-  elder_review?: {
-    elder_id: string;
-    decision: string;
-    reasoning: string;
-  };
-}
-
-export async function getAISummary(activityId: string): Promise<AISummary> {
-  const response = await apiRequest<AISummary>({
-    path: `/api/ai/summary?activity_id=${encodeURIComponent(activityId)}`,
-    method: "GET",
-  });
-  return response.data;
-}
-
-// ============================================================================
-// Status Rankings API
-// ============================================================================
-
-export interface StatusRanking {
-  rank: number;
-  user_id: string;
-  display_name?: string;
-  post_score: number;
-  total_attestations: number;
-  verified_status: boolean;
-  last_updated: string;
-}
-
-export interface StatusRankingsResponse {
-  rankings: StatusRanking[];
-  total: number;
-  updated_at: string;
-}
-
-export async function getStatusRankings(params?: {
-  limit?: number;
-  offset?: number;
-}): Promise<StatusRankingsResponse> {
-  const searchParams = new URLSearchParams();
-  if (params?.limit) searchParams.set("limit", params.limit.toString());
-  if (params?.offset) searchParams.set("offset", params.offset.toString());
-
-  const query = searchParams.toString();
-  const response = await apiRequest<StatusRankingsResponse>({
-    path: `/api/status/rankings${query ? `?${query}` : ""}`,
-    method: "GET",
-  });
-  return response.data;
-}
-
-// ============================================================================
-// Blocks API
-// ============================================================================
-
-export interface Block {
-  number: number;
-  hash: string;
+/** Vote */
+export interface Vote {
+  proposal_id: number;
+  voter: string;
+  vote: 'yes' | 'no' | 'abstain' | 'veto';
   timestamp: number;
-  transactions: number;
-  poat_score: number; // Renamed from elderSignatures to PoAT score
-  consensusType: "PoST" | "PoAT" | "Hybrid";
-  status: "verified" | "pending" | "failed";
 }
 
-export interface BlocksResponse {
-  blocks: Block[];
-  total_blocks: number;
-  total_transactions: number;
-  page: number;
-  page_size: number;
+/** Delegation */
+export interface Delegation {
+  delegator: string;
+  delegatee: string;
+  amount: string; // In $RIGHTS tokens
 }
 
-export async function getBlocks(params?: {
-  page?: number;
-  page_size?: number;
-}): Promise<BlocksResponse> {
-  const searchParams = new URLSearchParams();
-  if (params?.page) searchParams.set("page", params.page.toString());
-  if (params?.page_size)
-    searchParams.set("page_size", params.page_size.toString());
-
-  const query = searchParams.toString();
-  const response = await apiRequest<any[]>({
-    path: `/api/explorer/blocks${query ? `?${query}` : ""}`,
-    method: "GET",
-  });
-
-  const blocks = response.data || [];
-  return {
-    blocks: blocks.map((block: any) => ({
-      number: block.block_number,
-      hash: block.block_hash,
-      timestamp: block.timestamp,
-      transactions: block.transactions_count,
-      poat_score: block.poat_score,
-      consensusType: block.consensus_type,
-      status: block.status,
-    })),
-    total_blocks: blocks.length, // Placeholder, API should return actual total
-    total_transactions: blocks.reduce(
-      (sum, block) => sum + block.transactions_count,
-      0,
-    ), // Placeholder
-    page: (params as any)?.page || 1,
-    page_size: (params as any)?.page_size || 50,
-  };
+/** AI Elder */
+export interface AIElder {
+  elder_id: string;
+  name: string;
+  role: string;
+  capabilities: string[];
+  status: 'active' | 'inactive' | 'revoked';
+  created_at: number;
+  last_activity: number;
+  reputation_score: number;
 }
 
 // ============================================================================
-// Elders API
+// API CLIENT
 // ============================================================================
 
-export interface Elder {
-  address: string;
-  reputation: number;
-  status: "active" | "inactive";
-  lastSeen: number; // Timestamp
-  verificationCount: number;
+/** API endpoint configuration */
+export interface ApiConfig {
+  baseUrl: string;
+  chainId?: string;
+  timeout?: number;
 }
 
-export interface EldersResponse {
-  elders: Elder[];
-  total: number;
-  active_elders: number;
-  page: number;
-  page_size: number;
+/** Default API configuration */
+export const defaultApiConfig: ApiConfig = {
+  baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api',
+  timeout: 10000,
+};
+
+/** Create API client */
+export class ApiClient {
+  private config: ApiConfig;
+
+  constructor(config: ApiConfig = defaultApiConfig) {
+    this.config = config;
+  }
+
+  /** Fetch with timeout and error handling */
+  private async fetchWithTimeout(
+    endpoint: string,
+    options?: RequestInit
+  ): Promise<Response> {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(
+      () => controller.abort(),
+      this.config.timeout || 10000
+    );
+
+    try {
+      const response = await fetch(`${this.config.baseUrl}${endpoint}`, {
+        ...options,
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+          ...options?.headers,
+        },
+      });
+      return response;
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
+
+  // ==========================================================================
+  // READ OPERATIONS
+  // ==========================================================================
+
+  /** Get activity by ID */
+  async getActivity(activityId: string): Promise<ActivityRecord | null> {
+    const response = await this.fetchWithTimeout(`/activities/${activityId}`);
+    if (!response.ok) {
+      if (response.status === 404) return null;
+      throw new Error(`Failed to fetch activity: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** List activities with filters */
+  async listActivities(params: {
+    userId?: string;
+    activityType?: ActivityType;
+    status?: VerificationStatus;
+    limit?: number;
+    offset?: number;
+  } = {}): Promise<ActivityRecord[]> {
+    const query = new URLSearchParams();
+    if (params.userId) query.set('user_id', params.userId);
+    if (params.activityType) query.set('activity_type', params.activityType);
+    if (params.status) query.set('status', params.status);
+    if (params.limit) query.set('limit', params.limit.toString());
+    if (params.offset) query.set('offset', params.offset.toString());
+
+    const response = await this.fetchWithTimeout(`/activities?${query.toString()}`);
+    if (!response.ok) {
+      throw new Error(`Failed to list activities: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Get user balance */
+  async getUserBalance(userId: string, tokenType: TokenType): Promise<TokenBalance> {
+    const response = await this.fetchWithTimeout(
+      `/balances/${userId}?token_type=${tokenType}`
+    );
+    if (!response.ok) {
+      throw new Error(`Failed to fetch balance: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Get reward calculation */
+  async getRewardCalculation(activityId: string): Promise<RewardCalculation | null> {
+    const response = await this.fetchWithTimeout(`/rewards/calculation/${activityId}`);
+    if (!response.ok) {
+      if (response.status === 404) return null;
+      throw new Error(`Failed to fetch reward calculation: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Get network stats */
+  async getNetworkStats(): Promise<NetworkStats> {
+    const response = await this.fetchWithTimeout('/network/stats');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch network stats: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Get emission limits */
+  async getEmissionLimits(): Promise<EmissionLimits> {
+    const response = await this.fetchWithTimeout('/network/emission-limits');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch emission limits: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Get AI Elder by ID */
+  async getAIElder(elderId: string): Promise<AIElder | null> {
+    const response = await this.fetchWithTimeout(`/ai-elders/${elderId}`);
+    if (!response.ok) {
+      if (response.status === 404) return null;
+      throw new Error(`Failed to fetch AI Elder: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** List AI Elders */
+  async listAIElders(params: {
+    status?: string;
+    role?: string;
+    limit?: number;
+  } = {}): Promise<AIElder[]> {
+    const query = new URLSearchParams();
+    if (params.status) query.set('status', params.status);
+    if (params.role) query.set('role', params.role);
+    if (params.limit) query.set('limit', params.limit.toString());
+
+    const response = await this.fetchWithTimeout(`/ai-elders?${query.toString()}`);
+    if (!response.ok) {
+      throw new Error(`Failed to list AI Elders: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  // ==========================================================================
+  // WRITE OPERATIONS
+  // ==========================================================================
+
+  /** Submit activity */
+  async submitActivity(request: {
+    userId: string;
+    activityType: ActivityType;
+    data: Record<string, unknown>;
+    metadata?: Record<string, unknown>;
+  }): Promise<{ activity_id: string }> {
+    const response = await this.fetchWithTimeout('/activities', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to submit activity: ${error || response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Submit verification */
+  async submitVerification(request: {
+    activityId: string;
+    elderId: string;
+    status: VerificationStatus;
+    confidence: number; // 0-100
+    notes?: string;
+  }): Promise<{ success: boolean }> {
+    const response = await this.fetchWithTimeout('/verifications', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to submit verification: ${error || response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Request reward calculation */
+  async requestRewardCalculation(request: {
+    activityId: string;
+    baseReward: string; // In uderi
+    activityScore: number;
+    verificationConfidence: number;
+    reputationMultiplier: number;
+    networkFactor: number;
+  }): Promise<RewardCalculation> {
+    const response = await this.fetchWithTimeout('/rewards/calculate', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to request reward calculation: ${error || response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Submit reward distribution */
+  async submitRewardDistribution(request: {
+    calculation: RewardCalculation;
+    recipientId: string;
+  }): Promise<{ distribution_id: string }> {
+    const response = await this.fetchWithTimeout('/rewards/distribute', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to submit reward distribution: ${error || response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Transfer tokens */
+  async transferTokens(request: TransactionRequest): Promise<TransactionResponse> {
+    const response = await this.fetchWithTimeout('/transactions/transfer', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+    if (!response.ok) {
+      const error = await response.text();
+      return {
+        success: false,
+        error: error || response.statusText,
+      };
+    }
+    return response.json();
+  }
+
+  /** Create proposal */
+  async createProposal(request: {
+    creatorId: string;
+    title: string;
+    description: string;
+    proposalType: string;
+    changes: string[];
+  }): Promise<{ proposal_id: number }> {
+    const response = await this.fetchWithTimeout('/governance/proposals', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to create proposal: ${error || response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Cast vote */
+  async castVote(request: {
+    voterId: string;
+    proposalId: number;
+    vote: 'yes' | 'no' | 'abstain' | 'veto';
+  }): Promise<{ success: boolean }> {
+    const response = await this.fetchWithTimeout('/governance/votes', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to cast vote: ${error || response.statusText}`);
+    }
+    return response.json();
+  }
+
+  /** Delegate voting power */
+  async delegateVotingPower(request: {
+    delegatorId: string;
+    delegateeId: string;
+    amount: string; // In $RIGHTS tokens
+  }): Promise<{ success: boolean }> {
+    const response = await this.fetchWithTimeout('/governance/delegations', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    });
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Failed to delegate voting power: ${error || response.statusText}`);
+    }
+    return response.json();
+  }
 }
 
-export async function getElders(params?: {
-  limit?: number;
-  offset?: number;
-}): Promise<EldersResponse> {
-  const searchParams = new URLSearchParams();
-  if (params?.limit) searchParams.set("limit", params.limit.toString());
-  if (params?.offset) searchParams.set("offset", params.offset.toString());
+// ============================================================================
+// REACT QUERY HOOKS
+// ============================================================================
 
-  const query = searchParams.toString();
-  const response = await apiRequest<any[]>({
-    path: `/api/v1/explorer/elders${query ? `?${query}` : ""}`,
-    method: "GET",
+/** API client instance */
+export const apiClient = new ApiClient();
+
+/** Hook for fetching user's $DeRi balance */
+export function useDeRiBalance(userId: string) {
+  return useQuery({
+    queryKey: ['deri', 'balance', userId],
+    queryFn: () => apiClient.getUserBalance(userId, 'uderi'),
+    staleTime: 30000, // 30 seconds
   });
-
-  const elders = response.data || [];
-  return {
-    elders: elders.map((elder: any) => ({
-      address: elder.elder_address,
-      reputation: elder.reputation_score,
-      status: elder.is_active ? "active" : "inactive",
-      lastSeen: elder.last_seen_timestamp,
-      verificationCount: elder.verification_count,
-    })),
-    total: elders.length, // Placeholder, API should return actual total
-    active_elders: elders.filter((e: any) => e.is_active).length, // Placeholder
-    page: (params as any)?.page || 1,
-    page_size: (params as any)?.page_size || 50,
-  };
 }
+
+/** Hook for fetching user's $RIGHTS balance */
+export function useRightsBalance(userId: string) {
+  return useQuery({
+    queryKey: ['rights', 'balance', userId],
+    queryFn: () => apiClient.getUserBalance(userId, 'rights'),
+    staleTime: 30000, // 30 seconds
+  });
+}
+
+/** Hook for fetching network stats */
+export function useNetworkStats() {
+  return useQuery({
+    queryKey: ['network', 'stats'],
+    queryFn: () => apiClient.getNetworkStats(),
+    staleTime: 60000, // 1 minute
+  });
+}
+
+/** Hook for fetching emission limits */
+export function useEmissionLimits() {
+  return useQuery({
+    queryKey: ['network', 'emission-limits'],
+    queryFn: () => apiClient.getEmissionLimits(),
+    staleTime: 300000, // 5 minutes
+  });
+}
+
+/** Hook for fetching user activities */
+export function useUserActivities(userId: string, status?: VerificationStatus) {
+  return useQuery({
+    queryKey: ['activities', userId, status],
+    queryFn: () => apiClient.listActivities({ userId, status }),
+    staleTime: 15000, // 15 seconds
+  });
+}
+
+/** Hook for submitting an activity */
+export function useSubmitActivity() {
+  return useMutation({
+    mutationFn: (request: {
+      userId: string;
+      activityType: ActivityType;
+      data: Record<string, unknown>;
+      metadata?: Record<string, unknown>;
+    }) => apiClient.submitActivity(request),
+  });
+}
+
+/** Hook for transferring tokens */
+export function useTransferTokens() {
+  return useMutation({
+    mutationFn: (request: TransactionRequest) => apiClient.transferTokens(request),
+  });
+}
+
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
+/** Format token amount for display (from base units to human-readable) */
+export function formatTokenAmount(amount: string, decimals: number = 6): string {
+  // For $DeRi: 1 deri = 1,000,000 uderi (6 decimals)
+  // For $RIGHTS: similar or as configured
+  const divisor = Math.pow(10, decimals);
+  const numericAmount = parseInt(amount, 10) || 0;
+  return (numericAmount / divisor).toFixed(decimals);
+}
+
+/** Parse token amount for transaction (from human-readable to base units) */
+export function parseTokenAmount(amount: string, decimals: number = 6): string {
+  const divisor = Math.pow(10, decimals);
+  const numericAmount = parseFloat(amount) || 0;
+  return Math.round(numericAmount * divisor).toString();
+}
+
+/** Calculate reward using deterministic formula */
+export function calculateReward(
+  baseReward: string,
+  activityScore: number,
+  verificationConfidence: number,
+  reputationMultiplier: number,
+  networkFactor: number
+): string {
+  // Parse base reward
+  const base = parseInt(baseReward, 10) || 0;
+  
+  // Use integer arithmetic to match the Go implementation
+  // Scale: 10^12 for 6 decimal places of precision
+  const scale = 1000000000000;
+  
+  // Scale each component (they're already percentages, e.g., 100 = 1.00x)
+  let result = base * scale;
+  result = Math.floor((result * activityScore) / scale);
+  result = Math.floor((result * verificationConfidence) / scale);
+  result = Math.floor((result * reputationMultiplier) / scale);
+  result = Math.floor((result * networkFactor) / scale);
+  
+  return result.toString();
+}
+
+/** Generate calculation hash for verification */
+export function generateCalculationHash(
+  activityId: string,
+  baseReward: string,
+  activityScore: number,
+  verificationConfidence: number,
+  reputationMultiplier: number,
+  networkFactor: number
+): string {
+  const data = `${activityId}:${baseReward}:${activityScore}:${verificationConfidence}:${reputationMultiplier}:${networkFactor}`;
+  // Simple hash for demonstration (in production, use crypto library)
+  let hash = 0;
+  for (let i = 0; i < data.length; i++) {
+    const char = data.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash.toString(16);
+}
+
+// ============================================================================
+// EXPORTS
+// ============================================================================
+
+export {
+  ApiClient,
+  defaultApiConfig,
+  // Types
+  TokenType,
+  ActivityType,
+  VerificationStatus,
+  RewardStatus,
+  ActivityRecord,
+  TokenBalance,
+  RewardCalculation,
+  TransactionRequest,
+  TransactionResponse,
+  NetworkStats,
+  EmissionLimits,
+  Proposal,
+  Vote,
+  Delegation,
+  AIElder,
+  // Hooks
+  useDeRiBalance,
+  useRightsBalance,
+  useNetworkStats,
+  useEmissionLimits,
+  useUserActivities,
+  useSubmitActivity,
+  useTransferTokens,
+  // Utilities
+  formatTokenAmount,
+  parseTokenAmount,
+  calculateReward,
+  generateCalculationHash,
+};
