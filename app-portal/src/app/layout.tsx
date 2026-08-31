@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: 'Decentralized Rights Protocol',
     images: [{ url: 'https://decentralizedrights.com/08_IFOPE_20x30.jpg', width: 1200, height: 1500, alt: 'Decentralized Rights Protocol' }],
   },
-  icons: { icon: '/favicon.ico' },
+  icons: { icon: '/drp-icon.svg' },
   themeColor: '#030308',
 }
 
