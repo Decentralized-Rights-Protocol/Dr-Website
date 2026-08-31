@@ -10,30 +10,33 @@ interface SubmitActivityInput {
   location?: string
   file: File
   timestamp: string
-  hash: string
+}
+
+async function sha256(file: File): Promise<string> {
+  const bytes = await file.arrayBuffer()
+  const digest = await crypto.subtle.digest('SHA-256', bytes)
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('')
 }
 
 export function usePoAT() {
   const address = useAppStore((state) => state.address)
-  
+
   return useMutation({
-    mutationFn: async ({ file, hash, ...rest }: SubmitActivityInput): Promise<SubmissionResponse> => {
-      if (!address) {
-        throw new Error('Wallet not connected')
-      }
+    mutationFn: async ({ file, ...rest }: SubmitActivityInput): Promise<SubmissionResponse> => {
+      if (!address) throw new Error('Wallet not connected')
 
-      // TODO: Upload file to IPFS and get CID (for now, use placeholder)
-      // In production, this would call IPFS API or backend endpoint
-      const mediaCid = `QmPlaceholder${Date.now()}` // Placeholder CID
-
+      // The browser creates an integrity commitment over the submitted evidence.
+      // A real IPFS CID is only claimed once the backend has actually stored the file.
+      const hash = await sha256(file)
       const claim: ActivityClaim = {
         ...rest,
-        media_cid: mediaCid,
         hash,
-        actor_id: address
+        actor_id: address,
       }
 
       return submitActivity(claim)
-    }
+    },
   })
 }
