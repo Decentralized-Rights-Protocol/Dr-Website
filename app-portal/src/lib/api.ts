@@ -37,8 +37,8 @@ export interface ActivityClaim { title: string; description: string; location?: 
 export interface StatusClaim { category: string; issuer: string; reference_code?: string; credential_cid: string; actor_id: string }
 
 export async function submitActivity(claim: ActivityClaim): Promise<SubmissionResponse> {
-  const body: ActivityClaim = { ...claim, activity_type: 'poat' }
-  const response = await apiRequest<SubmissionResponse, ActivityClaim>({ path: '/api/v1/activities/submit', method: 'POST', body })
+  const body: ActivityClaim & { activity_type: 'poat' } = { ...claim, activity_type: 'poat' }
+  const response = await apiRequest<SubmissionResponse, ActivityClaim & { activity_type: 'poat' }>({ path: '/api/v1/activities/submit', method: 'POST', body })
   return response.data
 }
 
