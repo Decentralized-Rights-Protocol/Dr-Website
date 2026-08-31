@@ -9,7 +9,6 @@ import { ElderAssistant } from "@/components/dashboard/ElderAssistant";
 import { useWallet } from "@/hooks/useWallet";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { useQuery } from "convex/react";
 
 export default function DashboardPage() {
   const { address } = useWallet();
