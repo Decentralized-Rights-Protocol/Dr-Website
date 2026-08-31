@@ -282,9 +282,7 @@ export default function ActivitiesPage() {
                     <p className="font-bold capitalize">
                       Result: {lastVerdict.verdict}
                     </p>
-                    <p className="text-xs opacity-90">
-                      Score: {lastVerdict.score}/100
-                    </p>
+                    <p className="text-xs opacity-90">Score: {lastVerdict.score}/100 · {lastVerdict.rationale}</p>
                     {lastVerdict.verdict === "approved" && (
                       <p className="mt-1 text-sm">
                         Rewarding{""}
@@ -354,8 +352,9 @@ export default function ActivitiesPage() {
           <div className="border border-foreground/10 bg-gradient-to-br from-[#00e5cc] to-[#8b5cf6] p-6 text-foreground shadow-lg">
             <h4 className="font-bold">Elders Verification</h4>
             <p className="mt-2 text-sm opacity-90">
-              Every activity is hashed using SHA3-512 and signed with a
-              post-quantum resistant simulation (Dilithium).
+              The server-side policy engine scores the claim, records the
+              verification result, and derives rewards. The browser cannot set
+              its own verdict or token amount.
             </p>
             <div className="mt-4 flex items-center gap-4">
               <div className="flex items-center gap-2 bg-background/10 px-3 py-1 text-xs">
