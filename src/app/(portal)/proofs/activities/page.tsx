@@ -117,18 +117,12 @@ export default function ActivitiesPage() {
 
     setIsSubmitting(true);
     try {
-      // Note: The backend expects certain fields, make sure they match
-      // This is a simplified submission for the frontend demo
       const result = await submitActivity({
-        category: selectedCategory,
-        type: selectedType,
+        walletAddress: normalizedAddress,
+        category: selectedCategory as any,
+        type: selectedType as any,
         metadata: { title, url },
-        proof: proof || url,
-        hash: Math.random().toString(36).substring(7), // In production, this would be a real hash
-        signature: "0x...", // In production, this would be a real signature
-        status: "pending",
-        score: 0,
-        reward: { deri: 0, rights: 0 },
+        proof: proof || url || title,
       });
       setLastVerdict(result);
       setTitle("");
