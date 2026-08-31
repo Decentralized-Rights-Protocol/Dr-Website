@@ -1,6 +1,5 @@
 import { v } from "convex/values";
-import { internal } from "./_generated/api";
-import { internalMutation, mutation, query } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { ensureUserForWallet, normalizeWallet } from "./lib/domain";
 import { PolicyEngine } from "./lib/drp/elders";
 import { ActivityCategory, ActivityMetadata, ActivityType } from "./lib/drp/types";
@@ -24,92 +23,9 @@ const typeValidator = v.union(
 );
 
 /**
- * Final ledger write. Rewards are derived by the server-side policy engine;
- * clients never submit their own score, verdict, or token amounts.
- */
-export const _createActivityRecord = internalMutation({
-  args: {
-    userId: v.id("users"),
-    type: v.string(),
-    category: v.string(),
-    metadata: v.any(),
-    proof: v.string(),
-    hash: v.string(),
-    status: v.union(v.literal("approved"), v.literal("rejected"), v.literal("flagged")),
-    score: v.number(),
-    reward: v.object({ deri: v.number(), rights: v.number() }),
-    chainTxHash: v.optional(v.string()),
-  },
-  handler: async (ctx, args) => {
-    const createdAt = nowIso();
-    const activityId = await ctx.db.insert("drpActivities", {
-      userId: args.userId,
-      type: args.type,
-      category: args.category,
-      metadata: args.metadata,
-      proof: args.proof,
-      hash: args.hash,
-      signature: "server_policy_attestation",
-      status: args.status,
-      score: args.score,
-      reward: args.reward,
-      chainTxHash: args.chainTxHash,
-      createdAt,
-    });
-
-    if (args.status !== "approved") {
-      return {
-        activityId,
-        verdict: args.status,
-        score: args.score,
-        reward: { deri: 0, rights: 0 },
-        chainTxHash: args.chainTxHash,
-      };
-    }
-
-    const txId = args.chainTxHash ?? `tx_${args.hash.slice(0, 20)}`;
-    await ctx.db.insert("drpTransactions", {
-      txId,
-      userId: args.userId,
-      activityHash: args.hash,
-      category: args.category,
-      reward: args.reward,
-      timestamp: createdAt,
-    });
-
-    const balance = await ctx.db
-      .query("drpBalances")
-      .withIndex("by_user", (q) => q.eq("userId", args.userId))
-      .unique();
-
-    if (balance) {
-      await ctx.db.patch(balance._id, {
-        deri: balance.deri + args.reward.deri,
-        rights: balance.rights + args.reward.rights,
-        updatedAt: createdAt,
-      });
-    } else {
-      await ctx.db.insert("drpBalances", {
-        userId: args.userId,
-        deri: args.reward.deri,
-        rights: args.reward.rights,
-        updatedAt: createdAt,
-      });
-    }
-
-    return {
-      activityId,
-      verdict: args.status,
-      score: args.score,
-      reward: args.reward,
-      chainTxHash: args.chainTxHash,
-    };
-  },
-});
-
-/**
- * Submit an activity claim. The wallet identifies the application actor,
- * while the policy engine independently decides score, verdict and reward.
+ * Submit an activity claim. The wallet identifies the application actor;
+ * the server-side policy engine independently derives score, verdict and reward.
+ * No client-supplied verdict, score or reward is accepted.
  */
 export const submitActivity = mutation({
   args: {
@@ -142,19 +58,73 @@ export const submitActivity = mutation({
       timestamp,
     });
 
-    const ledger = await ctx.runMutation(internal.activities._createActivityRecord, {
+    const createdAt = timestamp;
+    const activityId = await ctx.db.insert("drpActivities", {
       userId: actor.user._id,
       type: args.type,
       category: args.category,
       metadata,
       proof: args.proof,
       hash,
+      signature: "server_policy_attestation",
       status: result.verdict,
       score: result.score,
       reward: result.reward,
+      createdAt,
     });
 
-    return { ...ledger, rationale: result.rationale, hash };
+    if (result.verdict !== "approved") {
+      return {
+        activityId,
+        verdict: result.verdict,
+        score: result.score,
+        reward: { deri: 0, rights: 0 },
+        rationale: result.rationale,
+        hash,
+      };
+    }
+
+    // Ledger writes are performed in this server mutation so the return type
+    // is inferred without a circular reference through the generated API.
+    const txId = `tx_${hash.slice(0, 20)}`;
+    await ctx.db.insert("drpTransactions", {
+      txId,
+      userId: actor.user._id,
+      activityHash: hash,
+      category: args.category,
+      reward: result.reward,
+      timestamp: createdAt,
+    });
+
+    const balance = await ctx.db
+      .query("drpBalances")
+      .withIndex("by_user", (q) => q.eq("userId", actor.user._id))
+      .unique();
+
+    if (balance) {
+      await ctx.db.patch(balance._id, {
+        deri: balance.deri + result.reward.deri,
+        rights: balance.rights + result.reward.rights,
+        updatedAt: createdAt,
+      });
+    } else {
+      await ctx.db.insert("drpBalances", {
+        userId: actor.user._id,
+        deri: result.reward.deri,
+        rights: result.reward.rights,
+        updatedAt: createdAt,
+      });
+    }
+
+    return {
+      activityId,
+      verdict: result.verdict,
+      score: result.score,
+      reward: result.reward,
+      rationale: result.rationale,
+      hash,
+      chainTxHash: undefined,
+    };
   },
 });
 
