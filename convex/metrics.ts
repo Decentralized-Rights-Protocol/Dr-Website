@@ -75,13 +75,9 @@ export const getDashboardMetrics = query({
       monthlyMap.set(month, entry);
     }
 
-    const approvedActivities =
-      scopedSubmissions.filter(
-        (submission) =>
-          submission.kind === "activity" &&
-          submission.submissionStatus === "approved",
-      ).length +
-      scopedDrpActivities.filter((act) => act.status === "approved").length;
+    const approvedActivities = scopedDrpActivities.filter(
+      (act) => act.status === "approved",
+    ).length;
     const approvedStatuses = scopedSubmissions.filter(
       (submission) =>
         submission.kind === "status" &&
@@ -91,12 +87,10 @@ export const getDashboardMetrics = query({
       (entry) => entry.completionStatus === "completed",
     ).length;
 
+    // Rewards are ledger-derived. Workflow submissions are not counted again,
+    // preventing double-counting when a verified submission creates a ledger entry.
     const totalDeri =
       scopedDrpTransactions.reduce((sum, tx) => sum + tx.reward.deri, 0) +
-      scopedSubmissions.filter(
-        (s) => s.kind === "activity" && s.submissionStatus === "approved",
-      ).length *
-        35 +
       completedModules * 12;
 
     const totalRights =

@@ -17,11 +17,31 @@ export const triggerAIReview = internalMutation({
     const submission = await ctx.db.get(args.submissionId);
     if (!submission) return;
 
-    // Minimal mapping from submission to ActivityClaim
+    const proof = await ctx.db
+      .query("proofRecords")
+      .withIndex("by_submission", (q) => q.eq("submissionId", submission._id))
+      .unique();
+    if (!proof) return;
+
+    // Status claims are intentionally not auto-approved by the activity
+    // PolicyEngine. Identity/status claims remain in the human review queue.
+    if (submission.kind === "status") {
+      await ctx.db.patch(proof._id, {
+        verifierMode: "human_review",
+        rationale: "Status claims require human review before a rights-bearing attestation is issued.",
+        updatedAt: nowIso(),
+      });
+      return;
+    }
+
     const claim: ActivityClaim = {
       userId: submission.userId,
-      type: "contribution" as ActivityType, // Default
-      category: "learning" as ActivityCategory, // Default
+      type: "contribution" as ActivityType,
+      category: (["learning", "developer", "content", "productivity", "web3"].includes(
+        submission.location ?? "",
+      )
+        ? submission.location
+        : "learning") as ActivityCategory,
       metadata: {
         title: submission.title,
         url: submission.location,
@@ -31,25 +51,83 @@ export const triggerAIReview = internalMutation({
     };
 
     const result = PolicyEngine.assessActivity(claim);
+    const updatedAt = nowIso();
 
-    // Update status based on result
     await ctx.db.patch(submission._id, {
-      submissionStatus: result.verdict === "approved" ? "approved" : "rejected",
+      submissionStatus:
+        result.verdict === "approved"
+          ? "approved"
+          : result.verdict === "rejected"
+            ? "rejected"
+            : "needs_info",
       reviewNote: result.rationale,
-      updatedAt: nowIso(),
+      chainMirrorStatus: result.verdict === "approved" ? "queued" : "not_started",
+      updatedAt,
     });
 
-    const proof = await ctx.db
-      .query("proofRecords")
-      .withIndex("by_submission", (q) => q.eq("submissionId", submission._id))
+    await ctx.db.patch(proof._id, {
+      recordStatus: result.verdict === "approved" ? "verified" : "rejected",
+      verifierMode: "ai_assist",
+      confidenceScore: result.score / 100,
+      rationale: result.rationale,
+      attestationRef: submission.payloadHash,
+      updatedAt,
+    });
+
+    if (result.verdict !== "approved") {
+      return;
+    }
+
+    const existingActivity = await ctx.db
+      .query("drpActivities")
+      .withIndex("by_user", (q) => q.eq("userId", submission.userId))
+      .order("desc")
+      .take(20);
+    if (existingActivity.some((activity) => activity.hash === submission.payloadHash)) {
+      return;
+    }
+
+    const txId = `tx_${submission.payloadHash.slice(0, 20)}`;
+    await ctx.db.insert("drpActivities", {
+      userId: submission.userId,
+      type: claim.type,
+      category: claim.category,
+      metadata: claim.metadata,
+      proof: claim.proof,
+      hash: submission.payloadHash,
+      signature: "server_policy_attestation",
+      status: "approved",
+      score: result.score,
+      reward: result.reward,
+      createdAt: updatedAt,
+    });
+
+    await ctx.db.insert("drpTransactions", {
+      txId,
+      userId: submission.userId,
+      activityHash: submission.payloadHash,
+      category: claim.category,
+      reward: result.reward,
+      timestamp: updatedAt,
+    });
+
+    const balance = await ctx.db
+      .query("drpBalances")
+      .withIndex("by_user", (q) => q.eq("userId", submission.userId))
       .unique();
 
-    if (proof) {
-      await ctx.db.patch(proof._id, {
-        recordStatus: result.verdict === "approved" ? "verified" : "rejected",
-        verifierMode: "ai_assist",
-        rationale: result.rationale,
-        updatedAt: nowIso(),
+    if (balance) {
+      await ctx.db.patch(balance._id, {
+        deri: balance.deri + result.reward.deri,
+        rights: balance.rights + result.reward.rights,
+        updatedAt,
+      });
+    } else {
+      await ctx.db.insert("drpBalances", {
+        userId: submission.userId,
+        deri: result.reward.deri,
+        rights: result.reward.rights,
+        updatedAt,
       });
     }
   },

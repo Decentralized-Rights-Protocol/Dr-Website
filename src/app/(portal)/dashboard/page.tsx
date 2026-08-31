@@ -13,6 +13,7 @@ import { api } from "@/convex/_generated/api";
 export default function DashboardPage() {
   const { address } = useWallet();
   const normalizedAddress = address?.toLowerCase();
+  const profile = useQuery(api.users.getProfileByWallet, { walletAddress: normalizedAddress ?? null });
   const metrics = useQuery(api.metrics.getDashboardMetrics, {
     walletAddress: normalizedAddress ?? null,
   });
@@ -26,7 +27,7 @@ export default function DashboardPage() {
     },
     {
       title: "Rights Status",
-      value: "UNVERIFIED",
+      value: profile?.verificationStatus?.toUpperCase() ?? "UNVERIFIED",
       icon: <Shield className="w-10 h-10" />,
       accent: "#00bfff",
     },

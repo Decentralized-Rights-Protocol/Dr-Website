@@ -42,13 +42,19 @@ export function usePoST() {
       }
 
       try {
+        const bytes = await credentialFile.arrayBuffer();
+        const digest = await crypto.subtle.digest("SHA-256", bytes);
+        const payloadHash = Array.from(new Uint8Array(digest))
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join("");
+
         const result = await createSubmission({
           walletAddress: address,
           kind: "status",
           title: `${category} credential`,
           description: `Status verification request from ${issuer}${referenceCode ? ` (${referenceCode})` : ""}.`,
           occurredAt: new Date().toISOString(),
-          payloadHash: `${credentialFile.name}:${credentialFile.size}:${credentialFile.lastModified}`,
+          payloadHash,
           attachmentName: credentialFile.name,
           attachmentMimeType: credentialFile.type,
           attachmentSizeBytes: credentialFile.size,
