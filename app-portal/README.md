@@ -68,6 +68,8 @@ npm run dev
 The app runs on `http://localhost:3000`. React Query DevTools are pre-configured for debugging (toggle bottom-right panel).
 
 ## Deployment (Vercel)
+
+Canonical production surface: `app.decentralizedrights.com`. This portal is deployed independently from the repository root using the `app-portal/` root directory.
 1. Create a Vercel project with root set to `app-portal/`.
 2. Configure the environment variables listed above for Production & Preview.
 3. Build output: `.next`. Framework preset: Next.js.
