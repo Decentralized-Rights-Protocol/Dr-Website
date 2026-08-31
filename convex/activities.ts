@@ -1,10 +1,31 @@
 import { v } from "convex/values";
-import { mutation, query, internalMutation } from "./_generated/server";
-import { api, internal } from "./_generated/api";
-import { normalizeWallet } from "./lib/domain";
+import { internal } from "./_generated/api";
+import { internalMutation, mutation, query } from "./_generated/server";
+import { ensureUserForWallet, normalizeWallet } from "./lib/domain";
+import { PolicyEngine } from "./lib/drp/elders";
+import { ActivityCategory, ActivityMetadata, ActivityType } from "./lib/drp/types";
+import { hashData } from "./lib/drp/crypto";
+import { nowIso } from "./lib/time";
+
+const categoryValidator = v.union(
+  v.literal("learning"),
+  v.literal("developer"),
+  v.literal("content"),
+  v.literal("productivity"),
+  v.literal("web3"),
+);
+
+const typeValidator = v.union(
+  v.literal("reading"), v.literal("video"), v.literal("course"), v.literal("notes"),
+  v.literal("commit"), v.literal("pr"), v.literal("repo"), v.literal("contribution"),
+  v.literal("blog"), v.literal("social"), v.literal("video_upload"), v.literal("design"),
+  v.literal("task"), v.literal("document"), v.literal("time_track"),
+  v.literal("wallet_tx"), v.literal("contract_call"),
+);
 
 /**
- * Submit a digital activity for verification and reward.
+ * Final ledger write. Rewards are derived by the server-side policy engine;
+ * clients never submit their own score, verdict, or token amounts.
  */
 export const _createActivityRecord = internalMutation({
   args: {
@@ -14,14 +35,13 @@ export const _createActivityRecord = internalMutation({
     metadata: v.any(),
     proof: v.string(),
     hash: v.string(),
-    signature: v.any(),
-    status: v.string(), // Corresponds to PolicyEngine.verdict
-    score: v.number(), // Corresponds to PolicyEngine.score
-    reward: v.any(), // Corresponds to PolicyEngine.reward
-    chainTxHash: v.optional(v.string()), // New field for the blockchain transaction hash
+    status: v.union(v.literal("approved"), v.literal("rejected"), v.literal("flagged")),
+    score: v.number(),
+    reward: v.object({ deri: v.number(), rights: v.number() }),
+    chainTxHash: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    // Store Activity Record
+    const createdAt = nowIso();
     const activityId = await ctx.db.insert("drpActivities", {
       userId: args.userId,
       type: args.type,
@@ -29,56 +49,52 @@ export const _createActivityRecord = internalMutation({
       metadata: args.metadata,
       proof: args.proof,
       hash: args.hash,
-      signature: args.signature,
-      status: args.status as any,
+      signature: "server_policy_attestation",
+      status: args.status,
       score: args.score,
       reward: args.reward,
-      chainTxHash: args.chainTxHash, // Store the chain transaction hash
-      createdAt: new Date().toISOString(),
+      chainTxHash: args.chainTxHash,
+      createdAt,
     });
 
-    // If approved, create a transaction and update balance
-    if (args.status === "approved") {
-      const txId = args.chainTxHash || `tx_${args.hash.slice(0, 16)}`; // Use chainTxHash if available
+    if (args.status !== "approved") {
+      return {
+        activityId,
+        verdict: args.status,
+        score: args.score,
+        reward: { deri: 0, rights: 0 },
+        chainTxHash: args.chainTxHash,
+      };
+    }
 
-      await ctx.db.insert("drpTransactions", {
-        txId,
-        userId: args.userId,
-        activityHash: args.hash,
-        category: args.category,
-        reward: args.reward,
-        timestamp: new Date().toISOString(),
+    const txId = args.chainTxHash ?? `tx_${args.hash.slice(0, 20)}`;
+    await ctx.db.insert("drpTransactions", {
+      txId,
+      userId: args.userId,
+      activityHash: args.hash,
+      category: args.category,
+      reward: args.reward,
+      timestamp: createdAt,
+    });
+
+    const balance = await ctx.db
+      .query("drpBalances")
+      .withIndex("by_user", (q) => q.eq("userId", args.userId))
+      .unique();
+
+    if (balance) {
+      await ctx.db.patch(balance._id, {
+        deri: balance.deri + args.reward.deri,
+        rights: balance.rights + args.reward.rights,
+        updatedAt: createdAt,
       });
-
-      // Update User Balance
-      const balance = await ctx.db
-        .query("drpBalances")
-        .withIndex("by_user", (q) => q.eq("userId", args.userId))
-        .unique();
-
-      if (balance) {
-        await ctx.db.patch(balance._id, {
-          deri: balance.deri + args.reward.deri,
-          rights: balance.rights + args.reward.rights,
-          updatedAt: new Date().toISOString(),
-        });
-      } else {
-        await ctx.db.insert("drpBalances", {
-          userId: args.userId,
-          deri: args.reward.deri,
-          rights: args.reward.rights,
-          updatedAt: new Date().toISOString(),
-        });
-      }
-
-      // Check if we should mint a block (simplified: every N transactions)
-      const pendingTxs = await ctx.db
-        .query("drpTransactions")
-        .filter((q) => q.eq(q.field("blockIndex"), undefined))
-        .collect();
-      if (pendingTxs.length >= 5) {
-        await ctx.scheduler.runAfter(0, internal.blockchain.mintBlock, {});
-      }
+    } else {
+      await ctx.db.insert("drpBalances", {
+        userId: args.userId,
+        deri: args.reward.deri,
+        rights: args.reward.rights,
+        updatedAt: createdAt,
+      });
     }
 
     return {
@@ -91,36 +107,54 @@ export const _createActivityRecord = internalMutation({
   },
 });
 
+/**
+ * Submit an activity claim. The wallet identifies the application actor,
+ * while the policy engine independently decides score, verdict and reward.
+ */
 export const submitActivity = mutation({
   args: {
-    type: v.string(),
-    category: v.string(),
+    walletAddress: v.string(),
+    type: typeValidator,
+    category: categoryValidator,
     metadata: v.any(),
     proof: v.string(),
-    hash: v.string(),
-    signature: v.any(),
-    status: v.string(), // Corresponds to FastAPI's verdict
-    score: v.number(), // Corresponds to FastAPI's score
-    reward: v.any(), // Corresponds to FastAPI's reward (e.g., { deri: number, rights: number })
-    chainTxHash: v.optional(v.string()), // From FastAPI
   },
-  handler: async (ctx, args): Promise<any> => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) throw new Error("Unauthorized");
+  handler: async (ctx, args) => {
+    const actor = await ensureUserForWallet(ctx, args.walletAddress);
+    const timestamp = nowIso();
+    const metadata = args.metadata as ActivityMetadata;
+    const claim = {
+      userId: String(actor.user._id),
+      type: args.type as ActivityType,
+      category: args.category as ActivityCategory,
+      metadata,
+      proof: args.proof,
+      timestamp,
+    };
 
-    const user = await ctx.db
-      .query("users")
-      .withIndex("by_primary_wallet", (q) =>
-        q.eq("primaryWallet", identity.address!),
-      )
-      .unique();
-    if (!user) throw new Error("User not found");
-
-    // Call the internal mutation to create the activity record
-    return await ctx.runMutation(internal.activities._createActivityRecord, {
-      userId: user._id,
-      ...args,
+    const result = PolicyEngine.assessActivity(claim);
+    const hash = hashData({
+      actor: normalizeWallet(args.walletAddress),
+      type: args.type,
+      category: args.category,
+      metadata,
+      proof: args.proof,
+      timestamp,
     });
+
+    const ledger = await ctx.runMutation(internal.activities._createActivityRecord, {
+      userId: actor.user._id,
+      type: args.type,
+      category: args.category,
+      metadata,
+      proof: args.proof,
+      hash,
+      status: result.verdict,
+      score: result.score,
+      reward: result.reward,
+    });
+
+    return { ...ledger, rationale: result.rationale, hash };
   },
 });
 
@@ -133,7 +167,7 @@ export const getActivities = query({
     let userId;
     const identity = await ctx.auth.getUserIdentity();
 
-    if (identity) {
+    if (identity?.address) {
       const user = await ctx.db
         .query("users")
         .withIndex("by_primary_wallet", (q) =>
@@ -157,19 +191,17 @@ export const getActivities = query({
       .query("drpActivities")
       .withIndex("by_user", (q) => q.eq("userId", userId))
       .order("desc")
-      .take(args.limit || 50);
+      .take(Math.min(args.limit ?? 50, 100));
   },
 });
 
 export const getUserBalance = query({
-  args: {
-    walletAddress: v.optional(v.string()),
-  },
+  args: { walletAddress: v.optional(v.string()) },
   handler: async (ctx, args) => {
     let userId;
     const identity = await ctx.auth.getUserIdentity();
 
-    if (identity) {
+    if (identity?.address) {
       const user = await ctx.db
         .query("users")
         .withIndex("by_primary_wallet", (q) =>
