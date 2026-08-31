@@ -4,30 +4,26 @@ import { AppProviders } from '@/components/providers'
 import { AppShell } from '@/components/layout/AppShell'
 
 export const metadata: Metadata = {
-  title: 'DRP App - Decentralized Rights Protocol',
-  description: 'Document and verify activities that advance human rights. Earn rewards for your contributions to social justice.',
-  keywords: 'human rights, blockchain, verification, rewards, social justice, activism',
+  title: 'DRP Portal | Infrastructure for Verified Rights',
+  description: 'The Decentralized Rights Protocol application portal for submitting activity, committing evidence, reviewing claims, and participating in a rights-first verification network.',
+  keywords: ['Decentralized Rights Protocol', 'DRP', 'Proof of Activity', 'Proof of Status', 'verified rights', 'human rights infrastructure'],
+  metadataBase: new URL('https://app.decentralizedrights.com'),
   openGraph: {
-    title: 'DRP App - Decentralized Rights Protocol',
-    description: 'Your Rights, Your Proof, Your Impact',
+    title: 'DRP Portal | Infrastructure for Verified Rights',
+    description: 'Your rights. Your proof. Your impact.',
+    url: 'https://app.decentralizedrights.com',
     type: 'website',
-    siteName: 'DRP App'
+    siteName: 'Decentralized Rights Protocol',
+    images: [{ url: 'https://decentralizedrights.com/08_IFOPE_20x30.jpg', width: 1200, height: 1500, alt: 'Decentralized Rights Protocol' }],
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5
-  },
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#3b82f6' },
-    { media: '(prefers-color-scheme: dark)', color: '#1e40af' }
-  ]
+  icons: { icon: '/favicon.ico' },
+  themeColor: '#030308',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50">
+      <body>
         <AppProviders>
           <AppShell>{children}</AppShell>
         </AppProviders>
