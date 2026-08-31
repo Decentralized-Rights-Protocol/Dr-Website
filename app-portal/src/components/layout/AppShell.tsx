@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { Menu, Wallet, Heart, User } from 'lucide-react'
+import { Menu, Wallet, ArrowUpRight } from 'lucide-react'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useWallet } from '@/hooks/useWallet'
 import { cn } from '@/lib/utils'
@@ -15,167 +15,67 @@ const navigationLinks = [
   { href: '/wallet', label: 'Wallet' },
   { href: '/rewards', label: 'Rewards' },
   { href: '/leaderboard', label: 'Community' },
-  { href: '/learn', label: 'Learn' }
+  { href: '/learn', label: 'Learn' },
 ]
 
-interface AppShellProps {
-  children: React.ReactNode
+function DRPMark() {
+  return (
+    <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#00e5cc]/30 bg-[#00e5cc]/10 shadow-[0_0_28px_rgba(0,229,204,.12)]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,229,204,.28),transparent_55%)]" />
+      <span className="relative text-[11px] font-black tracking-[-.08em] text-[#00e5cc]">DRP</span>
+    </div>
+  )
 }
 
-export function AppShell({ children }: AppShellProps) {
+export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
   const { address, connect, isConnecting } = useWallet()
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-br from-white via-neutral-50 to-primary-50/40 text-neutral-900 dark:from-neutral-950 dark:via-neutral-900 dark:to-primary-950/20 dark:text-neutral-50">
-      <header className="sticky top-0 z-50 border-b border-neutral-200/80 bg-white/90 backdrop-blur-lg dark:border-neutral-800/80 dark:bg-neutral-950/80">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 text-white shadow-lg">
-              <Heart className="h-5 w-5" />
-            </div>
-            <div className="hidden sm:block">
-              <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-100">DRP App</p>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">Human Rights · Verified Impact</p>
+    <div className="min-h-screen bg-[#030308] text-white">
+      <header className="sticky top-0 z-50 border-b border-white/[.07] bg-[#030308]/80 backdrop-blur-xl">
+        <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <Link href="/" className="group flex items-center gap-3">
+            <DRPMark />
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-extrabold tracking-[.08em]">DRP</span>
+                <span className="rounded-full border border-[#00e5cc]/20 bg-[#00e5cc]/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-[#00e5cc]">Portal</span>
+              </div>
+              <p className="hidden text-[10px] text-white/35 sm:block">Infrastructure for verified rights</p>
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-1 lg:flex">
             {navigationLinks.map((link) => {
-              const isActive = pathname === link.href
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    'text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-300',
-                    isActive ? 'text-primary-600 dark:text-primary-200' : 'text-neutral-600 dark:text-neutral-300'
-                  )}
-                >
-                  {link.label}
-                </Link>
-              )
+              const active = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+              return <Link key={link.href} href={link.href} className={cn('rounded-lg px-3 py-2 text-xs font-semibold transition', active ? 'bg-white/[.07] text-[#00e5cc]' : 'text-white/55 hover:bg-white/[.04] hover:text-white')}>{link.label}</Link>
             })}
           </nav>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2">
+            <a href="https://decentralizedrights.com" target="_blank" rel="noreferrer" className="hidden items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold text-white/45 transition hover:text-white md:flex">Protocol <ArrowUpRight className="h-3.5 w-3.5" /></a>
             <ThemeToggle />
-            {address ? (
-              <Link
-                href="/dashboard"
-                className="hidden items-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-medium text-white transition-all hover:shadow-lg sm:inline-flex"
-              >
-                <User className="h-4 w-4" />
-                <span className="hidden lg:inline">Dashboard</span>
-              </Link>
-            ) : (
-              <button
-                onClick={async () => {
-                  try {
-                    await connect()
-                  } catch (error) {
-                    console.error('Failed to connect wallet:', error)
-                  }
-                }}
-                disabled={isConnecting}
-                className="hidden items-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-medium text-white transition-all hover:shadow-lg disabled:opacity-50 sm:inline-flex"
-              >
-                <Wallet className="h-4 w-4" />
-                {isConnecting ? 'Connecting...' : <span className="hidden lg:inline">Connect Wallet</span>}
-              </button>
-            )}
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-lg border border-neutral-200 p-2 text-neutral-700 transition hover:bg-neutral-100 dark:border-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800 md:hidden"
-              onClick={() => setIsMobileNavOpen((prev) => !prev)}
-              aria-expanded={isMobileNavOpen}
-              aria-controls="mobile-navigation"
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle navigation</span>
-            </button>
+            {address ? <Link href="/dashboard" className="hidden rounded-lg bg-[#00e5cc] px-4 py-2 text-xs font-bold text-[#030308] sm:block">Open Console</Link> : <button onClick={() => connect()} disabled={isConnecting} className="hidden rounded-lg bg-[#00e5cc] px-4 py-2 text-xs font-bold text-[#030308] sm:block">{isConnecting ? 'Connecting…' : 'Connect Wallet'}</button>}
+            <button type="button" className="rounded-lg border border-white/10 p-2 text-white/70 lg:hidden" onClick={() => setIsMobileNavOpen(v => !v)} aria-expanded={isMobileNavOpen}><Menu className="h-5 w-5" /><span className="sr-only">Toggle navigation</span></button>
           </div>
         </div>
 
-        {isMobileNavOpen && (
-          <div id="mobile-navigation" className="border-t border-neutral-200 bg-white px-4 py-4 dark:border-neutral-800 dark:bg-neutral-950 md:hidden">
-            <nav className="flex flex-col gap-2">
-              {navigationLinks.map((link) => {
-                const isActive = pathname === link.href
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsMobileNavOpen(false)}
-                    className={cn(
-                      'rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-900',
-                      isActive ? 'bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-200' : 'text-neutral-600 dark:text-neutral-300'
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              })}
-              {address ? (
-                <Link
-                  href="/dashboard"
-                  onClick={() => setIsMobileNavOpen(false)}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-medium text-white"
-                >
-                  <User className="h-4 w-4" />
-                  Dashboard
-                </Link>
-              ) : (
-                <button
-                  onClick={async () => {
-                    try {
-                      await connect()
-                      setIsMobileNavOpen(false)
-                    } catch (error) {
-                      console.error('Failed to connect wallet:', error)
-                    }
-                  }}
-                  disabled={isConnecting}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-                >
-                  <Wallet className="h-4 w-4" />
-                  {isConnecting ? 'Connecting...' : 'Connect Wallet'}
-                </button>
-              )}
-            </nav>
-          </div>
-        )}
+        {isMobileNavOpen && <div className="border-t border-white/[.07] bg-[#030308] px-4 py-4 lg:hidden"><nav className="mx-auto flex max-w-7xl flex-col gap-1">
+          {navigationLinks.map(link => <Link key={link.href} href={link.href} onClick={() => setIsMobileNavOpen(false)} className={cn('rounded-xl px-4 py-3 text-sm font-semibold', pathname === link.href ? 'bg-[#00e5cc]/10 text-[#00e5cc]' : 'text-white/65 hover:bg-white/[.04]')}>{link.label}</Link>)}
+          {!address && <button onClick={() => connect()} disabled={isConnecting} className="mt-2 rounded-xl bg-[#00e5cc] px-4 py-3 text-sm font-bold text-[#030308]">{isConnecting ? 'Connecting…' : 'Connect Wallet'}</button>}
+        </nav></div>}
       </header>
 
-      <main className="flex-1">
-        <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">{children}</div>
-      </main>
+      <main>{children}</main>
 
-      <footer className="border-t border-neutral-200/80 bg-white/80 py-6 text-center text-sm text-neutral-500 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80 dark:text-neutral-400">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 sm:flex-row sm:px-6 lg:px-8">
-          <p>© {new Date().getFullYear()} Decentralized Rights Protocol. Engineered for human rights.</p>
-          <div className="flex flex-wrap items-center gap-4 text-xs">
-            <Link href="/docs" className="transition hover:text-primary-600 dark:hover:text-primary-300">
-              Docs
-            </Link>
-            <Link href="/roadmap" className="transition hover:text-primary-600 dark:hover:text-primary-300">
-              Roadmap
-            </Link>
-            <Link href="/privacy" className="transition hover:text-primary-600 dark:hover:text-primary-300">
-              Privacy
-            </Link>
-            <Link href="/terms" className="transition hover:text-primary-600 dark:hover:text-primary-300">
-              Terms
-            </Link>
-            <a href="https://x.com/drp" className="transition hover:text-primary-600 dark:hover:text-primary-300" target="_blank" rel="noreferrer">
-              X
-            </a>
-            <a href="https://linkedin.com/company/decentralizedrights" className="transition hover:text-primary-600 dark:hover:text-primary-300" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-          </div>
+      <footer className="border-t border-white/[.07] bg-[#030308]">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+          <div className="flex items-center gap-3"><DRPMark /><div><p className="text-xs font-bold tracking-widest">DECENTRALIZED RIGHTS PROTOCOL</p><p className="mt-1 text-[11px] text-white/35">Engineered for human rights. Built for a verified world.</p></div></div>
+          <div className="flex flex-wrap gap-4 text-xs text-white/40"><Link href="/learn" className="hover:text-[#00e5cc]">Learn</Link><Link href="/roadmap" className="hover:text-[#00e5cc]">Roadmap</Link><Link href="/privacy" className="hover:text-[#00e5cc]">Privacy</Link><a href="https://decentralizedrights.com" target="_blank" rel="noreferrer" className="hover:text-[#00e5cc]">Protocol website ↗</a></div>
         </div>
+        <div className="border-t border-white/[.05] px-4 py-4 text-center text-[10px] text-white/25">© {new Date().getFullYear()} Decentralized Rights Protocol · Your rights. Your proof. Your impact.</div>
       </footer>
     </div>
   )
