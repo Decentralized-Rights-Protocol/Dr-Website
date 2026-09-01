@@ -275,12 +275,3 @@ export function useMultipleDeRiBalances(addresses: string[]) {
   });
 }
 
-// ============================================================================
-// EXPORTS
-// ============================================================================
-
-export {
-  useDeRiBalance,
-  useTransferDeRi,
-  useMultipleDeRiBalances,
-};
