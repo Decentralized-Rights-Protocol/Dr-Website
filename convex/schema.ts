@@ -261,6 +261,30 @@ export default defineSchema({
 
   // --- DRP CORE TABLES ---
 
+  decentralizedRecords: defineTable({
+    entityType: v.string(),
+    entityId: v.string(),
+    walletAddress: v.optional(v.string()),
+    payloadHash: v.string(),
+    evidenceCid: v.optional(v.string()),
+    orbitDbHash: v.optional(v.string()),
+    orbitDbAddress: v.optional(v.string()),
+    chainTxHash: v.optional(v.string()),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("evidence_stored"),
+      v.literal("orbitdb_recorded"),
+      v.literal("anchored"),
+      v.literal("failed"),
+    ),
+    error: v.optional(v.string()),
+    createdAt: v.string(),
+    updatedAt: v.string(),
+  })
+    .index("by_entity", ["entityType", "entityId"])
+    .index("by_status", ["status"])
+    .index("by_wallet", ["walletAddress"]),
+
   drpActivities: defineTable({
     userId: v.id("users"),
     type: v.string(),
