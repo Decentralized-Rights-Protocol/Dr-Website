@@ -6,7 +6,7 @@
 
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -197,7 +197,7 @@ export default function TransferPage() {
   } | null>(null);
 
   // Check if wallet is connected
-  useCallback(() => {
+  useEffect(() => {
     if (!connected) {
       toast({
         title: 'Wallet not connected',

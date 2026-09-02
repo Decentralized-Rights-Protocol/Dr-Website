@@ -19,14 +19,14 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies (root)
-        run: npm ci
+        run: npm install --legacy-peer-deps
 
       - name: Lint (root)
         run: npm run lint || true
 
       - name: Install dependencies (app-portal)
         working-directory: app-portal
-        run: npm ci
+        run: npm install --legacy-peer-deps
 
       - name: Lint (app-portal)
         working-directory: app-portal
@@ -75,5 +75,5 @@ jobs:
           NEXT_PUBLIC_AI_API: https://ai.decentralizedrights.com
           NEXT_PUBLIC_LEARN_URL: https://decentralizedrights.com/learn
         run: |
-          npm ci
+          npm install --legacy-peer-deps
           npm run build

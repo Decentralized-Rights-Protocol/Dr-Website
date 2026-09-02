@@ -351,14 +351,3 @@ export function useDelegateVotingPower() {
   });
 }
 
-// ============================================================================
-// EXPORTS
-// ============================================================================
-
-export {
-  useRightsBalance,
-  useProposals,
-  useProposal,
-  useCastVote,
-  useDelegateVotingPower,
-};

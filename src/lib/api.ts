@@ -454,6 +454,34 @@ export class ApiClient {
 // ============================================================================
 
 /** API client instance */
+
+export interface Transaction {
+  tx_hash: string;
+  block_number: number;
+  status: string;
+  type: string;
+  from: string;
+  to: string;
+  timestamp: string | number;
+}
+
+export async function apiRequest<T>(options: {
+  path: string;
+  method?: string;
+  body?: unknown;
+  headers?: Record<string, string>;
+}): Promise<{ data: T }> {
+  const baseUrl = defaultApiConfig.baseUrl;
+  const response = await fetch(`${baseUrl}${options.path}`, {
+    method: options.method ?? "GET",
+    headers: { "Content-Type": "application/json", ...(options.headers ?? {}) },
+    body: options.body === undefined ? undefined : JSON.stringify(options.body),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data?.detail ?? data?.message ?? `Request failed: ${response.status}`);
+  return { data: data as T };
+}
+
 export const apiClient = new ApiClient();
 
 /** Hook for fetching user's $DeRi balance */
@@ -585,9 +613,6 @@ export function generateCalculationHash(
   return hash.toString(16);
 }
 
-// ============================================================================
-// EXPORTS
-// ============================================================================
 
 export {
   ApiClient,
