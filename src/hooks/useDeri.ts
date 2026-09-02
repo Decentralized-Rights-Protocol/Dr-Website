@@ -221,16 +221,6 @@ export function useDeri() {
 // SPECIFIC HOOKS
 // ============================================================================
 
-/** Hook for fetching a specific user's $DeRi balance */
-export function useDeRiBalance(address: string) {
-  return useQuery({
-    queryKey: ['deri', 'balance', address],
-    queryFn: () => apiClient.getUserBalance(address, 'uderi'),
-    enabled: !!address,
-    staleTime: 30000,
-  });
-}
-
 /** Hook for transferring $DeRi tokens */
 export function useTransferDeRi() {
   const { address } = useWallet();
