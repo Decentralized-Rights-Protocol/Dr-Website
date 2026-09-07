@@ -9,8 +9,8 @@ import { useWallet } from '@/hooks/useWallet'
 import { cn } from '@/lib/utils'
 
 const navigationLinks = [
-  { href: '/', label: 'Home' }, { href: '/dashboard', label: 'Dashboard' }, { href: '/proofs/activities', label: 'Proofs' },
-  { href: '/wallet', label: 'Wallet' }, { href: '/rewards', label: 'Rewards' }, { href: '/leaderboard', label: 'Community' }, { href: '/learn', label: 'Learn' },
+  { href: '/', label: 'Home' }, { href: '/dashboard', label: 'Dashboard' }, { href: '/verify', label: 'Verify' }, { href: '/connect', label: 'Connect Sources' },
+  { href: '/proofs/activities', label: 'Proofs' }, { href: '/attestations', label: 'Attestations' }, { href: '/wallet', label: 'Wallet' }, { href: '/rewards', label: 'Rewards' }, { href: '/leaderboard', label: 'Community' }, { href: '/learn', label: 'Learn' },
 ]
 
 function DRPMark() { return <div aria-hidden="true" className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#00e5cc]/30 bg-[#00e5cc]/10 shadow-[0_0_28px_rgba(0,229,204,.12)]"><div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,229,204,.28),transparent_55%)]" /><span className="relative text-[11px] font-black tracking-[-.08em] text-[#00e5cc]">DRP</span></div> }
