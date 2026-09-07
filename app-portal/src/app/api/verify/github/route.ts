@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { decryptSecret } from '@/lib/secure-cookie'
 
 const GITHUB_API = 'https://api.github.com'
 
 export async function GET(request: NextRequest) {
   const repository = request.nextUrl.searchParams.get('repository')?.trim()
-  if (!repository || !/^[^/]+\/[^/]+$/.test(repository)) {
-    return NextResponse.json({ error: 'Repository must use owner/repository format.' }, { status: 400 })
-  }
+  if (!repository || !/^[^/]+\/[^/]+$/.test(repository)) return NextResponse.json({ error: 'Repository must use owner/repository format.' }, { status: 400 })
 
-  const token = request.cookies.get('drp_github_token')?.value
-  if (!token) {
-    return NextResponse.json({ error: 'Connect GitHub before starting a verification session.', code: 'GITHUB_NOT_CONNECTED' }, { status: 401 })
-  }
+  const encryptedToken = request.cookies.get('drp_github_token')?.value
+  if (!encryptedToken) return NextResponse.json({ error: 'Connect GitHub before starting a verification session.', code: 'GITHUB_NOT_CONNECTED' }, { status: 401 })
+
+  let token: string
+  try { token = decryptSecret(encryptedToken) } catch { return NextResponse.json({ error: 'GitHub session could not be decrypted. Reconnect GitHub.', code: 'GITHUB_SESSION_INVALID' }, { status: 401 }) }
 
   const headers = { Accept: 'application/vnd.github+json', Authorization: `Bearer ${token}`, 'X-GitHub-Api-Version': '2022-11-28' }
   const userResponse = await fetch(`${GITHUB_API}/user`, { headers, cache: 'no-store' })
@@ -30,13 +30,5 @@ export async function GET(request: NextRequest) {
   const pullRequestCount = Number(prs.total_count || 0)
   const verified = commitCount > 0 || pullRequestCount > 0
 
-  return NextResponse.json({
-    result: verified ? 'verified' : 'not_verified',
-    repository,
-    identity: user.login,
-    commits: commitCount,
-    pullRequests: pullRequestCount,
-    verificationMethod: 'github-public-contribution-v1',
-    verifiedAt: new Date().toISOString(),
-  })
+  return NextResponse.json({ result: verified ? 'verified' : 'not_verified', repository, identity: user.login, commits: commitCount, pullRequests: pullRequestCount, verificationMethod: 'github-public-contribution-v1', verifiedAt: new Date().toISOString() })
 }
