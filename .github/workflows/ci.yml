@@ -19,7 +19,8 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies (root)
-        run: npm ci
+        # Temporary bridge for the existing Next.js 14 / WorkOS peer-range mismatch.
+        run: npm ci --legacy-peer-deps
 
       - name: Lint (root)
         run: npm run lint || true
