@@ -19,6 +19,21 @@ export default function ActivityVerificationPage() {
   const [evidenceNotes, setEvidenceNotes] = useState('')
   const [result, setResult] = useState<Result | null>(null)
   const [busy, setBusy] = useState(false)
+  const [mcpBusy, setMcpBusy] = useState(false)
+  const [mcpStatus, setMcpStatus] = useState<{ connected: boolean; tools?: Array<{ name: string; description?: string }>; error?: string } | null>(null)
+
+  async function checkMcpConnection() {
+    setMcpBusy(true)
+    try {
+      const response = await fetch('/api/mcp/tools', { cache: 'no-store' })
+      const payload = await response.json() as { connected: boolean; tools?: Array<{ name: string; description?: string }>; error?: string }
+      setMcpStatus(payload)
+    } catch {
+      setMcpStatus({ connected: false, error: 'Could not reach the DRP MCP gateway.' })
+    } finally {
+      setMcpBusy(false)
+    }
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -59,9 +74,14 @@ export default function ActivityVerificationPage() {
         <p className="text-sm leading-6 text-white/55 sm:text-base">Submit a GitHub contribution reference or a community activity report. DRP applies the same claim format, records evidence commitments, and can forward the request to the DRP Verification Network.</p>
       </header>
 
+      <section className="rounded-2xl border border-white/10 bg-white/[.025] p-5">
+        <div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-sm font-bold">MCP source connection</h2><p className="mt-1 text-xs text-white/45">Checks the configured remote MCP server and lists only explicitly allowlisted tools.</p></div><button type="button" onClick={checkMcpConnection} disabled={mcpBusy} className="rounded-lg border border-white/15 px-4 py-2 text-xs font-bold text-white/80 disabled:opacity-40">{mcpBusy ? 'Checking…' : 'Check connection'}</button></div>
+        {mcpStatus && <div aria-live="polite" className="mt-4 rounded-xl border border-white/10 bg-black/20 p-3 text-xs">{mcpStatus.connected ? <><p className="font-semibold text-emerald-300">MCP server reachable · {mcpStatus.tools?.length ?? 0} allowlisted tools</p>{mcpStatus.tools?.length ? <ul className="mt-2 space-y-1 text-white/55">{mcpStatus.tools.map(tool => <li key={tool.name}><code>{tool.name}</code>{tool.description ? ` — ${tool.description}` : ''}</li>)}</ul> : <p className="mt-1 text-white/45">No tools are allowlisted. Configure DRP_MCP_ALLOWED_TOOLS on the server.</p>}</> : <p className="text-amber-200/80">MCP not connected: {mcpStatus.error}</p>}</div>}
+      </section>
+
       <div className="grid gap-3 sm:grid-cols-3">
         {[
-          ['01', 'Connect a source', 'MCP tools are configured server-side and restricted by an explicit allowlist.'],
+          ['01', 'Connect a source', 'MCP source tools are configured server-side and restricted by an explicit allowlist.'],
           ['02', 'Prepare evidence', 'DRP hashes the supplied evidence payload and flags claims that need independent checks.'],
           ['03', 'Verify and attest', 'Network acceptance is not a verified decision; verifier attestations and review still matter.'],
         ].map(([number, title, text]) => (
