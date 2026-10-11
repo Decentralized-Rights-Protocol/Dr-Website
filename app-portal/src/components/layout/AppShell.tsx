@@ -9,7 +9,7 @@ import { useWallet } from '@/hooks/useWallet'
 import { cn } from '@/lib/utils'
 
 const navigationLinks = [
-  { href: '/', label: 'Home' }, { href: '/dashboard', label: 'Dashboard' }, { href: '/proofs/activities', label: 'Proofs' },
+  { href: '/', label: 'Home' }, { href: '/dashboard', label: 'Dashboard' }, { href: '/activity-verification', label: 'Verify Activity' }, { href: '/proofs/activities', label: 'Proofs' },
   { href: '/wallet', label: 'Wallet' }, { href: '/rewards', label: 'Rewards' }, { href: '/leaderboard', label: 'Community' }, { href: '/learn', label: 'Learn' },
 ]
 
