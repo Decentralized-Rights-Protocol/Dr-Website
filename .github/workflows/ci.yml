@@ -19,7 +19,9 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies (root)
-        run: npm ci
+        # The current lockfile includes a Next.js 14 / WorkOS peer-range mismatch.
+        # Keep CI aligned with the repository's existing Vercel install strategy while that dependency set is upgraded.
+        run: npm ci --legacy-peer-deps
 
       - name: Lint (root)
         run: npm run lint || true

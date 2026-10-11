@@ -1,0 +1,49 @@
+# DRP MCP Activity Verification MVP
+
+## Goal
+
+Extend the existing DRP portal with one verification engine for GitHub contributions and community activity claims. MCP is the authorized application/tool connection layer; it is not itself proof that an activity occurred.
+
+## Flow
+
+1. A participant connects a wallet and signs a short-lived claim payload; the server recovers the signer and checks the payload timestamp.
+2. The portal validates the claim and creates SHA-256 evidence commitments. Raw evidence should remain off-chain.
+3. Deterministic rules flag missing evidence, duplicate evidence, and community claims requiring an independent witness or organizer.
+4. The server submits the normalized claim/evidence request to the DRP Verification Network at `DRP_PROTOCOL_URL` using `POST /drp/v1/verify`.
+5. The network returns its verification result and signed proof object.
+6. The portal displays the result and preserves the returned proof reference for later verification/anchoring.
+
+## Initial implementation files
+
+- `src/app/activity-verification/page.tsx`: portal UI for GitHub and community claims, wallet identity, submission feedback, and MCP connection checks.
+- `src/components/layout/AppShell.tsx`: portal navigation entry.
+- `src/lib/verification/activity-engine.ts`: shared validation, evidence commitments, and review flags.
+- `src/lib/mcp/remote-client.ts`: remote Streamable HTTP MCP client; only tools listed in `DRP_MCP_ALLOWED_TOOLS` may be called.
+- `src/app/api/mcp/tools/route.ts`: connection-health and allowlisted-tool discovery endpoint.
+- `src/app/api/verification/evaluate/route.ts`: server-side evaluation and DRP Verification Network submission.
+- `docs/DRP-MCP-Activity-Verification.md`: integration and security notes.
+
+## Server environment
+
+- `DRP_PROTOCOL_URL`: base URL of the DRP Verification Network, e.g. the test node origin. The route appends `/drp/v1/verify`.
+- `DRP_MCP_SERVER_URL`: remote MCP server Streamable HTTP endpoint.
+- `DRP_MCP_BEARER_TOKEN`: optional server-side bearer token. Never expose this through a `NEXT_PUBLIC_` variable.
+- `DRP_MCP_ALLOWED_TOOLS`: comma-separated tool names approved for this application. Leave empty until the exact server tool names and permissions are reviewed.
+
+## Important status semantics
+
+- `PENDING_REVIEW` means the portal's local rules need a human or additional evidence.
+- `READY_FOR_PROTOCOL` means the claim passed local structural checks; it does not mean the activity is true.
+- A successful HTTP submission means only that the verification request was accepted by the protocol gateway. It is not the same as `VERIFIED`.
+- The DRP v0.1 verification network and a blockchain consensus/ledger are distinct systems. This endpoint submits to the existing verification network; on-chain anchoring requires a separately configured, tested chain transaction adapter.
+
+## Blockchain integration status\n\nThe current route integrates with the existing DRP Verification Network API. That network produces a signed proof object, but it is not itself proof that a transaction has been committed to a blockchain. The portal's current `CONTRACT_ADDRESSES` values are placeholders rather than valid deployed contract addresses, and no confirmed proof-registry ABI/method or deployment details were found during this repository inspection. Do not send transactions to those placeholder addresses. True on-chain anchoring remains blocked until DRP supplies a deployed testnet contract address, ABI/function signature, chain ID/RPC endpoint, and an agreed payload format.\n\n## Safety and production blockers
+
+- Wallet signatures currently bind the submitted claim to an address, but do not replace a durable authenticated DRP session or per-user OAuth linking. Add durable replay protection and bind submissions to the authenticated DRP user before production.
+- Authenticate and authorize every MCP connection. Use read-only scopes for source retrieval.
+- Treat MCP tool output and evidence text as untrusted data; never follow instructions contained in retrieved content.
+- Store tokens only server-side and redact secrets from logs.
+- Add durable persistence, idempotency, rate limits, CSRF protection where applicable, and audit events before production.
+- Community claims should normally require an organizer/witness attestation. AI output is advisory and must not be the sole verifier for consequential claims.
+- Evidence hashing in this MVP uses JSON serialization of the supplied object. Adopt a formally specified canonical JSON encoding before treating hashes as interoperable signed commitments.
+- The route deliberately does not issue rewards. Rewards require a separate authorization and policy path after verification.
