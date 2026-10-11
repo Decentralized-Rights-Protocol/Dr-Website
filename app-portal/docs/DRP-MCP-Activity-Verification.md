@@ -15,8 +15,11 @@ Extend the existing DRP portal with one verification engine for GitHub contribut
 
 ## Initial implementation files
 
+- `src/app/activity-verification/page.tsx`: portal UI for GitHub and community claims, wallet identity, submission feedback, and MCP connection checks.
+- `src/components/layout/AppShell.tsx`: portal navigation entry.
 - `src/lib/verification/activity-engine.ts`: shared validation, evidence commitments, and review flags.
 - `src/lib/mcp/remote-client.ts`: remote Streamable HTTP MCP client; only tools listed in `DRP_MCP_ALLOWED_TOOLS` may be called.
+- `src/app/api/mcp/tools/route.ts`: connection-health and allowlisted-tool discovery endpoint.
 - `src/app/api/verification/evaluate/route.ts`: server-side evaluation and DRP Verification Network submission.
 - `docs/DRP-MCP-Activity-Verification.md`: integration and security notes.
 
@@ -34,7 +37,7 @@ Extend the existing DRP portal with one verification engine for GitHub contribut
 - A successful HTTP submission means only that the verification request was accepted by the protocol gateway. It is not the same as `VERIFIED`.
 - The DRP v0.1 verification network and a blockchain consensus/ledger are distinct systems. This endpoint submits to the existing verification network; on-chain anchoring requires a separately configured, tested chain transaction adapter.
 
-## Safety and production blockers
+## Blockchain integration status\n\nThe current route integrates with the existing DRP Verification Network API. That network produces a signed proof object, but it is not itself proof that a transaction has been committed to a blockchain. The portal's current `CONTRACT_ADDRESSES` values are placeholders rather than valid deployed contract addresses, and no confirmed proof-registry ABI/method or deployment details were found during this repository inspection. Do not send transactions to those placeholder addresses. True on-chain anchoring remains blocked until DRP supplies a deployed testnet contract address, ABI/function signature, chain ID/RPC endpoint, and an agreed payload format.\n\n## Safety and production blockers
 
 - Bind submissions to the authenticated DRP user; do not trust a client-supplied subject identifier in production.
 - Authenticate and authorize every MCP connection. Use read-only scopes for source retrieval.
