@@ -47,7 +47,8 @@ function sha256(value: unknown): string {
   // JSON.stringify is sufficient for this initial commitment format only when
   // the caller supplies a stable object shape. A canonical JSON scheme is a
   // follow-up requirement before signatures are treated as portable proofs.
-  const serialized = JSON.stringify(value)\n  return createHash('sha256').update(serialized ?? 'null').digest('hex')
+  const serialized = JSON.stringify(value)
+  return createHash('sha256').update(serialized ?? 'null').digest('hex')
 }
 
 export function prepareActivityClaim(input: ActivityClaimInput): PreparedActivity {
