@@ -89,6 +89,7 @@ export function prepareActivityClaim(input: ActivityClaimInput): PreparedActivit
   const uniqueEvidence = new Set(evidence.map((item) => item.contentHash))
   if (evidence.length === 0) reasons.push('No source evidence supplied')
   if (uniqueEvidence.size !== evidence.length) reasons.push('Duplicate evidence detected')
+  if (input.source === 'github') reasons.push('GitHub reference has not yet been fetched and authenticated through an authorized MCP source')
   if (input.source === 'community') reasons.push('Community activity requires an organizer or independent witness attestation')
   if (input.humanReviewRequired) reasons.push('Human review was explicitly requested')
 
