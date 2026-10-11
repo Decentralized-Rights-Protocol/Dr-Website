@@ -35,7 +35,7 @@ async function rpc(
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ jsonrpc: '2.0', id, method, ...(params ? { params } : {}) }),
+    body: JSON.stringify({ jsonrpc: '2.0', ...(id === undefined ? {} : { id }), method, ...(params ? { params } : {}) }),
     cache: 'no-store',
     signal: AbortSignal.timeout(10_000),
   })
@@ -54,7 +54,7 @@ async function rpc(
     for (const item of data) {
       try {
         const candidate = JSON.parse(item) as JsonRpcResponse
-        if (candidate.id === id || candidate.error) payload = candidate
+        if ((id !== undefined && candidate.id === id) || candidate.error) payload = candidate
       } catch {
         // Ignore non-JSON SSE keepalives and unrelated events.
       }
@@ -82,7 +82,7 @@ async function withMcpSession<T>(
   sessionId = initialized.sessionId
   if (!initialized.response?.result) throw new Error('MCP server returned no initialize result')
 
-  await rpc(config.endpoint, config.token, 'notifications/initialized', undefined, sessionId, nextId++)
+  await rpc(config.endpoint, config.token, 'notifications/initialized', undefined, sessionId)
   const result = await action(async (method, params) => {
     const reply = await rpc(config.endpoint, config.token, method, params, sessionId, nextId++)
     sessionId = reply.sessionId
