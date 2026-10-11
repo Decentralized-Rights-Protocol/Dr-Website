@@ -1,5 +1,6 @@
 'use client'
 
+import { ethers } from 'ethers'
 import { FormEvent, useState } from 'react'
 import { useWallet } from '@/hooks/useWallet'
 
@@ -40,22 +41,25 @@ export default function ActivityVerificationPage() {
     setBusy(true)
     setResult(null)
     try {
+      if (!address || !window.ethereum) throw new Error('Connect a compatible wallet before submitting')
+      const signedPayload = {
+        subjectId: address,
+        source,
+        activityType,
+        statement,
+        sourceId,
+        sourceUrl: sourceUrl || undefined,
+        evidenceNotes,
+        issuedAt: new Date().toISOString(),
+      }
+      const message = JSON.stringify(signedPayload)
+      const provider = new ethers.BrowserProvider(window.ethereum as ethers.Eip1193Provider)
+      const signer = await provider.getSigner()
+      const signature = await signer.signMessage(message)
       const response = await fetch('/api/verification/evaluate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          subjectId: address,
-          source,
-          activityType,
-          statement,
-          humanReviewRequired: source === 'community',
-          evidence: [{
-            sourceId,
-            evidenceType: source === 'github' ? 'github_reference' : 'community_activity_report',
-            sourceUrl: sourceUrl || undefined,
-            content: { notes: evidenceNotes, sourceId, sourceUrl: sourceUrl || null },
-          }],
-        }),
+        body: JSON.stringify({ message, signature }),
       })
       const payload = await response.json() as Result
       setResult(payload)
