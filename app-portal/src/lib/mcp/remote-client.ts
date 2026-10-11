@@ -23,7 +23,7 @@ async function rpc(
   method: string,
   params: Record<string, unknown> | undefined,
   sessionId?: string,
-  id = 1,
+  id?: number,
 ): Promise<{ response: JsonRpcResponse | null; sessionId?: string }> {
   const headers: Record<string, string> = {
     Accept: 'application/json, text/event-stream',
