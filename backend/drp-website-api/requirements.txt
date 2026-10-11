@@ -1,0 +1,2 @@
+# Vercel FastAPI deployment dependencies are maintained alongside the API package.
+-r api/requirements.txt
