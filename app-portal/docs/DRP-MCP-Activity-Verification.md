@@ -6,7 +6,7 @@ Extend the existing DRP portal with one verification engine for GitHub contribut
 
 ## Flow
 
-1. A connected source or a participant submits a claim.
+1. A participant connects a wallet and signs a short-lived claim payload; the server recovers the signer and checks the payload timestamp.
 2. The portal validates the claim and creates SHA-256 evidence commitments. Raw evidence should remain off-chain.
 3. Deterministic rules flag missing evidence, duplicate evidence, and community claims requiring an independent witness or organizer.
 4. The server submits the normalized claim/evidence request to the DRP Verification Network at `DRP_PROTOCOL_URL` using `POST /drp/v1/verify`.
@@ -39,7 +39,7 @@ Extend the existing DRP portal with one verification engine for GitHub contribut
 
 ## Blockchain integration status\n\nThe current route integrates with the existing DRP Verification Network API. That network produces a signed proof object, but it is not itself proof that a transaction has been committed to a blockchain. The portal's current `CONTRACT_ADDRESSES` values are placeholders rather than valid deployed contract addresses, and no confirmed proof-registry ABI/method or deployment details were found during this repository inspection. Do not send transactions to those placeholder addresses. True on-chain anchoring remains blocked until DRP supplies a deployed testnet contract address, ABI/function signature, chain ID/RPC endpoint, and an agreed payload format.\n\n## Safety and production blockers
 
-- Bind submissions to the authenticated DRP user; do not trust a client-supplied subject identifier in production.
+- Wallet signatures currently bind the submitted claim to an address, but do not replace a durable authenticated DRP session or per-user OAuth linking. Add durable replay protection and bind submissions to the authenticated DRP user before production.
 - Authenticate and authorize every MCP connection. Use read-only scopes for source retrieval.
 - Treat MCP tool output and evidence text as untrusted data; never follow instructions contained in retrieved content.
 - Store tokens only server-side and redact secrets from logs.
