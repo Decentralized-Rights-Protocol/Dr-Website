@@ -3,7 +3,8 @@ export const dynamic = "force-dynamic";
 type ApiRecord = Record<string, unknown>;
 type ApiResult<T> = { data: T | null; error: string | null };
 
-const API_BASE = (process.env.DRP_EXPLORER_API_URL || "https://api.decentralizedrights.com/api/v1/explorer").replace(/\/$/, "");
+const API_URL = (process.env.DRP_EXPLORER_API_URL || process.env.NEXT_PUBLIC_API_URL || "https://api.decentralizedrights.com").replace(/\/+$/, "");
+const API_BASE = API_URL.endsWith("/api/v1/explorer") ? API_URL : `${API_URL}/api/v1/explorer`;
 
 async function load<T>(path: string): Promise<ApiResult<T>> {
   try {
