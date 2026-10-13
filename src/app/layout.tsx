@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AppProviders } from "@/components/providers";
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -119,6 +120,7 @@ export default function RootLayout({
               <main className="flex-1">{children}</main>
               <Footer />
             </div>
+            <Toaster />
           </AppProviders>
         </ThemeProvider>
         <Analytics />

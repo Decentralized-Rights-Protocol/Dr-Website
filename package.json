@@ -59,7 +59,7 @@
     "media-chrome": "^4.18.3",
     "motion": "^12.38.0",
     "nanoid": "^5.1.7",
-    "next": "14.2.3",
+    "next": "14.2.35",
     "next-i18next": "^15.2.0",
     "next-themes": "^0.2.1",
     "npm-run-all2": "^8.0.4",
@@ -106,7 +106,7 @@
     "typescript": "^5.9.3"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "22.x"
   },
   "overrides": {
     "convex": {

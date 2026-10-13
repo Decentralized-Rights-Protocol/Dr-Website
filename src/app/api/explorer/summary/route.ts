@@ -3,5 +3,5 @@ import { createProxyRoute } from "@/lib/api/proxy";
 export const dynamic = "force-dynamic";
 
 export const GET = createProxyRoute({
-  pathPrefix: "/api/ai/summary",
+  pathPrefix: "/api/v1/explorer/stats",
 });
