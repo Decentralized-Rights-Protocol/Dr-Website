@@ -9,9 +9,9 @@ This repository is a monorepo. Keep build validation in GitHub Actions and let e
 | `dr-website` | `.` | `decentralizedrights.com` | Vercel Git integration |
 | `app-portal` | `app-portal` | `app.decentralizedrights.com` | Vercel Git integration |
 | `explorer` | `explorer` | `explorer.decentralizedrights.com` | Vercel Git integration |
-| `drp-backend-api` | Verify against the actual backend package before changing | `api.decentralizedrights.com` | Vercel project; API root/health needs separate validation |
+| `drp-website-api` | Not linked to a Git repository in the current Vercel inventory; verify its deployment source before changing | `api.decentralizedrights.com` | API project exists, but its source/root and runtime health need separate validation |
 
-`main` is the production branch. Pull requests should receive preview deployments from Vercel. GitHub Actions should validate code and builds, not create duplicate Vercel deployments.
+`main` is the production branch. Pull requests should receive preview deployments from Vercel. GitHub Actions should validate code and builds, not create duplicate Vercel deployments. The Render service currently connected to `Decentralized-Rights-Protocol/Dr-Blockchain` has native auto-deploy enabled for `main`; the old Render workflow in this repository only printed instructions and did not trigger a deployment, so it has been removed.
 
 ## Environment variables and secrets
 
@@ -23,7 +23,7 @@ This repository is a monorepo. Keep build validation in GitHub Actions and let e
 
 ## GitHub deployment environments
 
-The repository has legacy GitHub environment entries named for previous project layouts, including `drp-frontend` and `drp-blockchain-explorer`. Treat these as historical until workflow references and deployment records are checked. Do not bulk-delete them: deleting environments can remove protection rules or environment secrets and may erase useful audit context. Vercel project settings are the source of truth for web deployment roots and domains.
+The repository previously had environment entries for obsolete Vercel project names (`drp-backend-api`, `drp-blockchain-explorer`, `drp-frontend`, and `drp-web-ecosystem`). These were reviewed against the active Vercel project list and GitHub Actions references; the entries had no environment secrets or protection rules and are being removed. Keep `github-pages`, the current `dr-website`, `app-portal`, and `explorer` entries, and the generic `Production` entry. Vercel project settings remain the source of truth for web deployment roots and domains.
 
 ## Release checklist
 
