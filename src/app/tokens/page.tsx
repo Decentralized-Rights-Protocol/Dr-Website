@@ -244,7 +244,7 @@ export default function TokensPage() {
 
         {/* Connect Wallet Button */}
         {!connected && (
-          <Button onClick={connect} className="mb-6">
+          <Button onClick={() => connect()} className="mb-6">
             <Coins className="h-4 w-4 mr-2" />
             Connect Wallet
           </Button>

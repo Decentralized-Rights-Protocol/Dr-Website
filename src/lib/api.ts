@@ -454,6 +454,39 @@ export class ApiClient {
 // ============================================================================
 
 /** API client instance */
+/** Options for the shared JSON API request helper. */
+export interface ApiRequestOptions {
+  path: string;
+  method?: string;
+  body?: unknown;
+  headers?: Record<string, string>;
+}
+
+/**
+ * Perform a typed JSON request against the configured DRP API origin.
+ * Returns the response body under `data` for callers that use the shared
+ * `{ data }` response convention.
+ */
+export async function apiRequest<T>(options: ApiRequestOptions): Promise<{ data: T }> {
+  const baseUrl = defaultApiConfig.baseUrl.replace(/\/+$/, '');
+  const path = options.path.startsWith('/') ? options.path : `/${options.path}`;
+  const response = await fetch(`${baseUrl}${path}`, {
+    method: options.method ?? 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+    body: options.body === undefined ? undefined : JSON.stringify(options.body),
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(detail || `DRP API request failed (${response.status})`);
+  }
+
+  return { data: (await response.json()) as T };
+}
+
 export const apiClient = new ApiClient();
 
 /** Hook for fetching user's $DeRi balance */
