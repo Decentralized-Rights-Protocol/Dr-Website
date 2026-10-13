@@ -8,7 +8,6 @@ on:
       - 'convex.json'
       - 'convex.config.ts'
       - 'convex.config.js'
-      - '.github/workflows/convex-deploy.yml'
   workflow_dispatch:
 
 jobs:
