@@ -23,7 +23,7 @@ This repository is a monorepo. Keep build validation in GitHub Actions and let e
 
 ## GitHub deployment environments
 
-The repository previously had environment entries for obsolete Vercel project names (`drp-backend-api`, `drp-blockchain-explorer`, `drp-frontend`, and `drp-web-ecosystem`). These were reviewed against the active Vercel project list and GitHub Actions references; the entries had no environment secrets or protection rules and are being removed. Keep `github-pages`, the current `dr-website`, `app-portal`, and `explorer` entries, and the generic `Production` entry. Vercel project settings remain the source of truth for web deployment roots and domains.
+The repository previously had environment entries for obsolete Vercel project names (`drp-backend-api`, `drp-blockchain-explorer`, `drp-frontend`, and `drp-web-ecosystem`). These were reviewed against the active Vercel project list and GitHub Actions references; the entries had no environment secrets or protection rules and have been removed. Keep `github-pages`, the current `dr-website`, `app-portal`, and `explorer` entries, and the generic `Production` entry. Vercel project settings remain the source of truth for web deployment roots and domains.
 
 ## Release checklist
 

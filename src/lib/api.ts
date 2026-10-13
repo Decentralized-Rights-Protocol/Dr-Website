@@ -88,6 +88,17 @@ export interface TransactionResponse {
   tx_url?: string;
 }
 
+/** Transaction record displayed by the network explorer. */
+export interface Transaction {
+  tx_hash: string;
+  block_number: number;
+  type: string;
+  status: string;
+  from: string;
+  to: string;
+  timestamp: number | string;
+}
+
 /** Network stats */
 export interface NetworkStats {
   total_users: number;
