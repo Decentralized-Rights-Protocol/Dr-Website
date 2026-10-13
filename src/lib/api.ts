@@ -586,38 +586,3 @@ export function generateCalculationHash(
 }
 
 // ============================================================================
-// EXPORTS
-// ============================================================================
-
-export {
-  defaultApiConfig,
-  // Types
-  TokenType,
-  ActivityType,
-  VerificationStatus,
-  RewardStatus,
-  ActivityRecord,
-  TokenBalance,
-  RewardCalculation,
-  TransactionRequest,
-  TransactionResponse,
-  NetworkStats,
-  EmissionLimits,
-  Proposal,
-  Vote,
-  Delegation,
-  AIElder,
-  // Hooks
-  useDeRiBalance,
-  useRightsBalance,
-  useNetworkStats,
-  useEmissionLimits,
-  useUserActivities,
-  useSubmitActivity,
-  useTransferTokens,
-  // Utilities
-  formatTokenAmount,
-  parseTokenAmount,
-  calculateReward,
-  generateCalculationHash,
-};

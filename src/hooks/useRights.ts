@@ -352,12 +352,3 @@ export function useDelegateVotingPower() {
 }
 
 // ============================================================================
-// EXPORTS
-// ============================================================================
-
-export {
-  useProposals,
-  useProposal,
-  useCastVote,
-  useDelegateVotingPower,
-};
