@@ -31,5 +31,5 @@ The repository previously had environment entries for obsolete Vercel project na
 2. Resolve failed checks; do not mask lint failures with `|| true`.
 3. Merge to `main` only after the checks pass.
 4. Confirm the Vercel deployment for each changed app is `Ready` and verify its custom hostname.
-5. Deploy Convex only when Convex source/config changes, and only after both required deployment keys are configured.
+5. Deploy Convex only when Convex source/config changes, and only after both required deployment keys are configured. Changes to the workflow YAML itself require a deliberate manual dispatch so workflow maintenance cannot accidentally deploy production.
 6. Verify API health separately; a successful frontend build does not mean `api.decentralizedrights.com` is healthy.
