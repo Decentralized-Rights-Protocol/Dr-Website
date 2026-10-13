@@ -590,7 +590,6 @@ export function generateCalculationHash(
 // ============================================================================
 
 export {
-  ApiClient,
   defaultApiConfig,
   // Types
   TokenType,

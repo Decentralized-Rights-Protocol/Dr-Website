@@ -356,7 +356,6 @@ export function useDelegateVotingPower() {
 // ============================================================================
 
 export {
-  useRightsBalance,
   useProposals,
   useProposal,
   useCastVote,

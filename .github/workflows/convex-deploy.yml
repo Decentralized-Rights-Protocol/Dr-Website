@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - 'convex/**'
-      - 'package.json'
+      - 'convex.json'
+      - 'convex.config.ts'
+      - 'convex.config.js'
       - '.github/workflows/convex-deploy.yml'
   workflow_dispatch:
 
@@ -21,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -30,10 +32,14 @@ jobs:
           # Ensure we have the correct esbuild version
           npm install esbuild@0.25.0 --force
 
-      - name: Configure Convex deployment key
+      - name: Validate Convex production key
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
         run: |
-          # Use production deployment
-          echo "CONVEX_DEPLOY_KEY=${{ secrets.CONVEX_DEPLOY_KEY }}" >> $GITHUB_ENV
+          if [ -z "$CONVEX_DEPLOY_KEY" ]; then
+            echo "::error::Missing required GitHub Actions secret CONVEX_DEPLOY_KEY. Add it in repository Settings > Secrets and variables > Actions."
+            exit 1
+          fi
 
       - name: Deploy to Convex Production
         run: |
@@ -41,11 +47,6 @@ jobs:
         env:
           CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
           CONVEX_DEPLOYMENT: courteous-wildcat-368
-
-      - name: Verify deployment
-        run: |
-          # Simple verification that deployment succeeded
-          curl -s "https://courteous-wildcat-368.convex.cloud" || echo "Deployment verification failed"
 
   deploy-dev:
     name: Deploy Convex Dev
@@ -60,13 +61,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
         run: |
           npm install
           npm install esbuild@0.25.0 --force
+
+      - name: Validate Convex development key
+        env:
+          CONVEX_DEV_DEPLOY_KEY: ${{ secrets.CONVEX_DEV_DEPLOY_KEY }}
+        run: |
+          if [ -z "$CONVEX_DEV_DEPLOY_KEY" ]; then
+            echo "::error::Missing required GitHub Actions secret CONVEX_DEV_DEPLOY_KEY. Add it in repository Settings > Secrets and variables > Actions."
+            exit 1
+          fi
 
       - name: Deploy to Convex Dev
         run: |
