@@ -85,6 +85,7 @@ export function useWallet() {
 
   return {
     address,
+    connected: Boolean(address),
     isConnecting,
     connect: connectMutation.mutateAsync,
     disconnect: disconnectWallet,

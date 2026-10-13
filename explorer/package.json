@@ -20,5 +20,8 @@
   },
   "postcss": {
     "plugins": {}
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
