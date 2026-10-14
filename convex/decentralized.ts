@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { action, internalMutation, query } from "./_generated/server";
 import { internal } from "./_generated/api";
+import type { Id } from "./_generated/dataModel";
 
 const API_URL = () => process.env.DRP_STORAGE_API_URL || process.env.NEXT_PUBLIC_API_URL || "https://api.decentralizedrights.com";
 
@@ -59,7 +60,7 @@ export const syncRecord = action({
     evidenceCid: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const id = await ctx.runMutation(internal.decentralized.createRecord, {
+    const id: Id<"decentralizedRecords"> = await ctx.runMutation(internal.decentralized.createRecord, {
       entityType: args.entityType,
       entityId: args.entityId,
       walletAddress: args.walletAddress,
