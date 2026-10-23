@@ -19,13 +19,13 @@ export function EconomicsHero({
       className="relative overflow-hidden py-24 sm:py-32"
       style={{
         background:
-          "linear-gradient(to bottom right, #1e3a8a, #312e81, #581c87)",
+          "linear-gradient(135deg, #050914 0%, #0a1b2b 52%, #06313a 100%)",
       }}
     >
       {/* Animated Background */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#00bfff]/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#00e5cc]/15 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
@@ -39,10 +39,10 @@ export function EconomicsHero({
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00e5cc]/10 border border-[#00e5cc]/25 mb-6"
           >
-            <Sparkles className="h-4 w-4 text-blue-400" />
-            <span className="text-sm font-medium text-blue-300">
+            <Sparkles className="h-4 w-4 text-[#00e5cc]" />
+            <span className="text-sm font-medium text-[#00e5cc]">
               DRP Economics
             </span>
           </motion.div>
@@ -51,12 +51,12 @@ export function EconomicsHero({
             {title}
           </h1>
 
-          <p className="text-xl sm:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl sm:text-2xl text-slate-100 mb-8 max-w-3xl mx-auto">
             {subtitle}
           </p>
 
           {description && (
-            <p className="text-lg text-blue-200/80 max-w-2xl mx-auto">
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
               {description}
             </p>
           )}
@@ -82,7 +82,7 @@ export function EconomicsHero({
                 className="flex flex-col items-center gap-2 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-foreground/10"
               >
                 <Icon className="h-8 w-8 text-blue-400" />
-                <span className="text-sm text-blue-200 text-center">
+                <span className="text-sm text-slate-300 text-center">
                   {label}
                 </span>
               </motion.div>

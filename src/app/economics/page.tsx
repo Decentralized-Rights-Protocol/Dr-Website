@@ -214,7 +214,7 @@ export default function EconomicsPage() {
                   className="group relative overflow-hidden rounded-2xl border border-foreground/10 bg-black/30 p-8 backdrop-blur-sm hover:border-cyan-300/40 hover:bg-cyan-400/10 transition-all duration-500 cursor-pointer"
                 >
                   <Link href={page.href} className="block h-full">
-                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${page.color} group-hover:scale-105 transition-transform duration-300">
+                    <div className={`mb-6 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${page.color} group-hover:scale-105 transition-transform duration-300`}>
                       <page.icon className="h-8 w-8 text-foreground" />
                     </div>
                     <h3 className="mb-3 text-xl font-semibold text-foreground group-hover:text-cyan-200 transition-colors duration-300">
