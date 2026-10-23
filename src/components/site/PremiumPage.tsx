@@ -13,7 +13,7 @@ export function PremiumPage({ children }: { children: ReactNode }) {
     <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#00bfff]/5 blur-[180px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#a855f7]/5 blur-[180px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#00e5cc]/5 blur-[180px]" />
       </div>
       <div className="relative z-10">{children}</div>
     </div>
